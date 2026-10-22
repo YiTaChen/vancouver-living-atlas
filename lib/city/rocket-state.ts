@@ -1,0 +1,691 @@
+/**
+ * Deterministic, renderer-independent rocket game simulation.
+ *
+ * Units: metres, seconds, kilograms and radians. +y is up; +x/+z are horizontal.
+ * position is the nozzle/base, not the centre. pitch leans towards +z, roll
+ * towards +x. altitude is height gained from the original launch surface.
+ * This is deliberately a playable ascent, not an orbital flight predictor.
+ * Call stepRocket at a fixed timestep (1/60 recommended). It returns a new
+ * snapshot and never mutates its arguments. Delays > 0.25s are capped to avoid
+ * a background-tab pause teleporting a rocket through the city.
+ */
+
+export type RocketKind = 'small' | 'large';
+export type RocketMode = 'auto' | 'manual';
+export type RocketPhase =
+  | 'building'
+  | 'ready'
+  | 'countdown'
+  | 'ignition'
+  | 'flight'
+  | 'space'
+  | 'sinking'
+  | 'crashed'
+  | 'aborted';
+export type RocketSupportKind =
+  | 'ground'
+  | 'platform'
+  | 'roof-small'
+  | 'roof-large'
+  | 'ocean'
+  | 'river'
+  | 'lake';
+export interface RocketVector {
+  x: number;
+  y: number;
+  z: number;
+}
+export interface RocketAttitude {
+  pitch: number;
+  roll: number;
+}
+export interface RocketSupport {
+  kind: RocketSupportKind;
+  /** Optional structural capacity, 0..1; a reinforced platform is 1. */
+  strength?: number;
+  /** Ground collision height below a roof; defaults to the placement height. */
+  groundY?: number;
+  /** Stable numeric seed, if replaying a placement. Otherwise derived from x/z. */
+  seed?: number;
+}
+export interface RocketConfig {
+  label: string;
+  height: number;
+  radius: number;
+  dryMass: number;
+  fuelMass: number;
+  maxThrust: number;
+  fuelPerSecond: number;
+  buildDuration: number;
+  countdownDuration: number;
+  ignitionDuration: number;
+  dragCoefficient: number;
+  angularAcceleration: number;
+  angularDamping: number;
+  windTorque: number;
+  blastRadius: number;
+  heatRadius: number;
+  cameraDistance: number;
+}
+export const ROCKET_CONFIGS: Readonly<
+  Record<RocketKind, Readonly<RocketConfig>>
+> = {
+  small: {
+    label: 'Scout',
+    height: 18,
+    radius: 1.1,
+    dryMass: 7_000,
+    fuelMass: 20_000,
+    maxThrust: 470_000,
+    fuelPerSecond: 20_000 / 155,
+    buildDuration: 6,
+    countdownDuration: 5,
+    ignitionDuration: 1.6,
+    dragCoefficient: 0.42,
+    angularAcceleration: 1.35,
+    angularDamping: 0.32,
+    windTorque: 0.055,
+    blastRadius: 35,
+    heatRadius: 17,
+    cameraDistance: 48,
+  },
+  large: {
+    label: 'Atlas',
+    height: 48,
+    radius: 3.5,
+    dryMass: 100_000,
+    fuelMass: 310_000,
+    maxThrust: 6_800_000,
+    fuelPerSecond: 2_000,
+    buildDuration: 10,
+    countdownDuration: 5,
+    ignitionDuration: 2.4,
+    dragCoefficient: 0.38,
+    angularAcceleration: 0.46,
+    angularDamping: 0.62,
+    windTorque: 0.012,
+    blastRadius: 100,
+    heatRadius: 45,
+    cameraDistance: 110,
+  },
+};
+export const SPACE_ALTITUDE = 100_000;
+export const ROCKET_FIXED_STEP = 1 / 60;
+export const ROCKET_SUPPORT_STRENGTH: Readonly<
+  Record<RocketSupportKind, number>
+> = {
+  ground: 1,
+  platform: 1,
+  'roof-small': 0.38,
+  'roof-large': 0.8,
+  ocean: 0,
+  river: 0,
+  lake: 0.22,
+};
+export type RocketEventType =
+  | 'ready'
+  | 'countdown'
+  | 'ignition'
+  | 'liftoff'
+  | 'support-collapsed'
+  | 'fuel-empty'
+  | 'mission-complete'
+  | 'impact'
+  | 'abort'
+  | 'sinking';
+export interface RocketEvent {
+  id: number;
+  type: RocketEventType;
+  time: number;
+  position: RocketVector;
+  /** Impact speed for impact events; 0 otherwise. */
+  magnitude: number;
+}
+export interface RocketState {
+  kind: RocketKind;
+  mode: RocketMode;
+  stabilize: boolean;
+  phase: RocketPhase;
+  position: RocketVector;
+  velocity: RocketVector;
+  origin: RocketVector;
+  attitude: RocketAttitude;
+  angularVelocity: RocketAttitude;
+  support: RocketSupport;
+  supportIntegrity: number;
+  supportCollapsed: boolean;
+  fuel: number;
+  throttle: number;
+  targetThrottle: number;
+  integrity: number;
+  elapsed: number;
+  phaseElapsed: number;
+  flightElapsed: number;
+  buildProgress: number;
+  countdown: number;
+  altitude: number;
+  maxAltitude: number;
+  speed: number;
+  acceleration: RocketVector;
+  dynamicPressure: number;
+  wind: RocketVector;
+  seed: number;
+  /** A bounded persistent event log; consume IDs, so render-rate gaps lose none. */
+  events: RocketEvent[];
+  nextEventId: number;
+  failureReason: string | null;
+}
+export type RocketSnapshot = RocketState;
+export interface RocketInput {
+  mode?: RocketMode;
+  auto?: boolean;
+  /** Absolute throttle command 0..1. Auto supplies its own command. */
+  throttle?: number;
+  /** Manual gimbal commands -1..1; release to stop applying torque. */
+  pitch?: number;
+  roll?: number;
+  /** Physical rate damping assist, available in manual mode without steering. */
+  stabilize?: boolean;
+  /** Multiplier for deterministic gusts, defaults to 1 (0 disables wind). */
+  windScale?: number;
+  launch?: boolean;
+  /** Engine shutdown. Vehicle continues falling until it hits the ground. */
+  abort?: boolean;
+}
+export interface RocketEnvironmentEffects {
+  nozzle: RocketVector;
+  direction: RocketVector;
+  /** Engine power, 0..1, independent of the nozzle's altitude. */
+  engine: number;
+  /** Ground exposure includes plume height/direction falloff, 0..1. */
+  groundExposure: number;
+  blastRadius: number;
+  heatRadius: number;
+  /** Radius and heat are game-scaled city effects, not engineering estimates. */
+  debrisImpulse: number;
+  shake: number;
+}
+
+const clamp = (value: number, min: number, max: number) =>
+  Math.max(min, Math.min(max, value));
+const finite = (value: number | undefined, fallback: number) =>
+  typeof value === 'number' && Number.isFinite(value) ? value : fallback;
+const length = (v: RocketVector) => Math.hypot(v.x, v.y, v.z);
+const wrapAngle = (a: number) => Math.atan2(Math.sin(a), Math.cos(a));
+const isRoof = (kind: RocketSupportKind) =>
+  kind === 'roof-small' || kind === 'roof-large';
+const hasEngine = (s: RocketState) =>
+  (s.phase === 'ignition' || s.phase === 'flight') && s.fuel > 0;
+
+export function rocketDirection(attitude: RocketAttitude): RocketVector {
+  return {
+    x: Math.sin(attitude.roll) * Math.cos(attitude.pitch),
+    y: Math.cos(attitude.roll) * Math.cos(attitude.pitch),
+    z: Math.sin(attitude.pitch),
+  };
+}
+
+function addEvent(s: RocketState, type: RocketEventType, magnitude = 0) {
+  s.events.push({
+    id: s.nextEventId++,
+    type,
+    time: s.elapsed,
+    position: { ...s.position },
+    magnitude,
+  });
+  if (s.events.length > 32) s.events.shift();
+}
+function setPhase(s: RocketState, phase: RocketPhase, event?: RocketEventType) {
+  s.phase = phase;
+  s.phaseElapsed = 0;
+  if (event) addEvent(s, event);
+}
+function cloneState(s: RocketState): RocketState {
+  return {
+    ...s,
+    position: { ...s.position },
+    velocity: { ...s.velocity },
+    origin: { ...s.origin },
+    attitude: { ...s.attitude },
+    angularVelocity: { ...s.angularVelocity },
+    support: { ...s.support },
+    acceleration: { ...s.acceleration },
+    wind: { ...s.wind },
+    events: [...s.events],
+  };
+}
+export function createRocket(
+  kind: RocketKind,
+  x: number,
+  y: number,
+  z: number,
+  support: RocketSupport = { kind: 'ground' },
+): RocketState {
+  const config = ROCKET_CONFIGS[kind];
+  const position = { x: finite(x, 0), y: finite(y, 0), z: finite(z, 0) };
+  const groundY = finite(
+    support.groundY,
+    isRoof(support.kind)
+      ? position.y - (support.kind === 'roof-small' ? 8 : 30)
+      : position.y,
+  );
+  const seed = finite(
+    support.seed,
+    Math.abs(Math.sin(position.x * 0.017 + position.z * 0.039)) * 10_000,
+  );
+  const state: RocketState = {
+    kind,
+    mode: 'auto',
+    stabilize: false,
+    phase: 'building',
+    position,
+    velocity: { x: 0, y: 0, z: 0 },
+    origin: { ...position },
+    attitude: { pitch: 0, roll: 0 },
+    angularVelocity: { pitch: 0, roll: 0 },
+    support: {
+      ...support,
+      groundY,
+      strength: clamp(
+        finite(support.strength, ROCKET_SUPPORT_STRENGTH[support.kind]),
+        0,
+        1,
+      ),
+    },
+    supportIntegrity: 1,
+    supportCollapsed: false,
+    fuel: config.fuelMass,
+    throttle: 0,
+    targetThrottle: 1,
+    integrity: 1,
+    elapsed: 0,
+    phaseElapsed: 0,
+    flightElapsed: 0,
+    buildProgress: 0,
+    countdown: config.countdownDuration,
+    altitude: 0,
+    maxAltitude: 0,
+    speed: 0,
+    acceleration: { x: 0, y: 0, z: 0 },
+    dynamicPressure: 0,
+    wind: { x: 0, y: 0, z: 0 },
+    seed,
+    events: [],
+    nextEventId: 1,
+    failureReason: null,
+  };
+  if (support.kind === 'ocean' || support.kind === 'river') {
+    state.failureReason = 'Water cannot support a launch vehicle.';
+    setPhase(state, 'sinking', 'sinking');
+  }
+  return state;
+}
+
+/** Request launch when construction has finished. Unsafe placement is allowed. */
+export function launchRocket(
+  state: RocketState,
+  mode: RocketMode = state.mode,
+): RocketState {
+  const s = cloneState(state);
+  if (s.phase !== 'ready') return s;
+  s.mode = mode;
+  s.targetThrottle = 1;
+  setPhase(s, 'countdown', 'countdown');
+  return s;
+}
+
+/** Deterministic wind: no Math.random, so identical inputs produce replayable flights. */
+function sampleWind(s: RocketState, scale: number): RocketVector {
+  const time = s.elapsed;
+  const seed = s.seed;
+  const altitude = Math.max(0, s.position.y - s.origin.y);
+  const jetStream = 1 + 1.4 * Math.exp(-(((altitude - 11_000) / 5_000) ** 2));
+  const taper = Math.exp(-altitude / 35_000);
+  return {
+    x:
+      scale *
+      taper *
+      jetStream *
+      (7 +
+        5 * Math.sin(time * 0.71 + seed) +
+        3 * Math.sin(time * 1.91 + seed * 0.4)),
+    y: 0,
+    z:
+      scale *
+      taper *
+      jetStream *
+      (5 * Math.cos(time * 0.49 + seed * 0.7) +
+        4 * Math.sin(time * 1.37 + seed)),
+  };
+}
+
+function updateSupport(s: RocketState, dt: number) {
+  if (s.supportCollapsed || s.position.y - s.origin.y > 12) return;
+  const config = ROCKET_CONFIGS[s.kind];
+  const strength = s.support.strength ?? 1;
+  const thrustExposure =
+    s.throttle *
+    Math.exp(-Math.max(0, s.position.y - s.origin.y) / config.heatRadius);
+  const minimumStrength = s.kind === 'large' ? 0.93 : 0.28;
+  const overload = Math.max(0, minimumStrength - strength);
+  // Roof damage happens while the engine spools up: a small roof fails under a
+  // large rocket before lift-off, but supports a small rocket long enough to go.
+  let damage = isRoof(s.support.kind)
+    ? thrustExposure * (0.06 + overload * (s.kind === 'large' ? 5 : 1.3))
+    : thrustExposure * overload * 0.6;
+  if (s.support.kind === 'lake') {
+    damage +=
+      (s.kind === 'large' ? 0.018 : 0.009) +
+      thrustExposure * (s.kind === 'large' ? 1.25 : 0.44);
+    const wobble = (1 - s.supportIntegrity) * (s.kind === 'large' ? 0.9 : 0.5);
+    s.attitude.pitch += Math.sin(s.elapsed * 0.8 + s.seed) * wobble * dt;
+    s.attitude.roll += Math.cos(s.elapsed * 0.7 + s.seed) * wobble * dt;
+  }
+  s.supportIntegrity = clamp(s.supportIntegrity - damage * dt, 0, 1);
+  if (s.supportIntegrity > 0) return;
+  s.supportCollapsed = true;
+  s.failureReason =
+    s.support.kind === 'lake'
+      ? 'The lake bed gave way.'
+      : 'The launch structure collapsed under the exhaust.';
+  // A real impulse, not an immediate crash or teleport. Recovery remains
+  // physically possible if a pilot acts before the falling vehicle impacts.
+  const sign = Math.sin(s.seed + 0.5) < 0 ? -1 : 1;
+  s.angularVelocity.roll +=
+    sign * (s.kind === 'large' ? 1.1 + overload * 3 : 1.1);
+  s.angularVelocity.pitch += 0.65;
+  s.velocity.y = -2;
+  s.velocity.x += sign * 2.5;
+  addEvent(s, 'support-collapsed');
+  if (s.phase === 'ignition') setPhase(s, 'flight', 'liftoff');
+  else if (
+    s.phase === 'building' ||
+    s.phase === 'ready' ||
+    s.phase === 'countdown'
+  ) {
+    s.throttle = 0;
+    s.targetThrottle = 0;
+    setPhase(s, 'aborted');
+  }
+}
+
+function updateAttitude(
+  s: RocketState,
+  input: RocketInput,
+  densityRatio: number,
+  dt: number,
+) {
+  const config = ROCKET_CONFIGS[s.kind];
+  let pitchCommand: number;
+  let rollCommand: number;
+  if (s.mode === 'auto') {
+    // A gentle, time-varying gravity turn visibly curves the ascent. The
+    // autopilot uses the same bounded gimbal torque as manual steering.
+    const turn = clamp(s.altitude / 14_000, 0, 1);
+    const targetPitch =
+      turn * (0.055 + Math.sin(s.flightElapsed * 0.035) * 0.025);
+    const targetRoll =
+      turn * Math.sin(s.flightElapsed * 0.047 + s.seed) * 0.035;
+    const proportional = s.kind === 'small' ? 3.6 : 2.8;
+    const damping = s.kind === 'small' ? 3.2 : 3.6;
+    pitchCommand = clamp(
+      wrapAngle(targetPitch - s.attitude.pitch) * proportional -
+        s.angularVelocity.pitch * damping,
+      -1,
+      1,
+    );
+    rollCommand = clamp(
+      wrapAngle(targetRoll - s.attitude.roll) * proportional -
+        s.angularVelocity.roll * damping,
+      -1,
+      1,
+    );
+  } else {
+    pitchCommand = clamp(finite(input.pitch, 0), -1, 1);
+    rollCommand = clamp(finite(input.roll, 0), -1, 1);
+    if (s.stabilize) {
+      pitchCommand = clamp(pitchCommand - s.angularVelocity.pitch * 2.5, -1, 1);
+      rollCommand = clamp(rollCommand - s.angularVelocity.roll * 2.5, -1, 1);
+    }
+  }
+  const engineAuthority = s.throttle * (s.fuel > 0 ? 1 : 0);
+  const damp = config.angularDamping * (0.25 + densityRatio * 0.75);
+  const gust = config.windTorque * densityRatio;
+  s.angularVelocity.pitch +=
+    (pitchCommand * config.angularAcceleration * engineAuthority +
+      (s.wind.z / 10) * gust -
+      s.angularVelocity.pitch * damp) *
+    dt;
+  s.angularVelocity.roll +=
+    (rollCommand * config.angularAcceleration * engineAuthority +
+      (s.wind.x / 10) * gust -
+      s.angularVelocity.roll * damp) *
+    dt;
+  s.attitude.pitch = wrapAngle(s.attitude.pitch + s.angularVelocity.pitch * dt);
+  s.attitude.roll = wrapAngle(s.attitude.roll + s.angularVelocity.roll * dt);
+}
+
+function crash(
+  s: RocketState,
+  impactSpeed: number,
+  reason: string,
+  grounded = true,
+) {
+  if (grounded) s.position.y = s.support.groundY ?? s.origin.y;
+  s.velocity = { x: 0, y: 0, z: 0 };
+  s.throttle = 0;
+  s.targetThrottle = 0;
+  s.integrity = 0;
+  s.failureReason = reason;
+  setPhase(s, 'crashed');
+  addEvent(s, 'impact', impactSpeed);
+}
+
+/** External swept city/body collision, preserving the actual impact location. */
+export function crashRocket(
+  state: RocketState,
+  reason = 'The rocket collided with the city.',
+): RocketState {
+  const s = cloneState(state);
+  if (s.phase === 'crashed' || s.phase === 'space' || s.phase === 'sinking')
+    return s;
+  crash(s, length(s.velocity), reason, false);
+  return s;
+}
+
+function substep(s: RocketState, input: RocketInput, dt: number) {
+  const config = ROCKET_CONFIGS[s.kind];
+  s.elapsed += dt;
+  s.phaseElapsed += dt;
+  if (s.phase === 'space' || s.phase === 'crashed') return;
+  if (s.phase === 'sinking') {
+    s.velocity.y = -Math.min(4.5, 0.4 + s.phaseElapsed * 0.8);
+    s.position.y = Math.max(
+      s.origin.y - config.height * 1.4,
+      s.position.y + s.velocity.y * dt,
+    );
+    s.attitude.roll = Math.min(0.6, s.phaseElapsed * 0.035);
+    s.attitude.pitch = Math.min(0.25, s.phaseElapsed * 0.017);
+    s.speed = Math.abs(s.velocity.y);
+    return;
+  }
+  if (input.mode) s.mode = input.mode;
+  if (input.auto !== undefined) s.mode = input.auto ? 'auto' : 'manual';
+  if (input.stabilize !== undefined) s.stabilize = input.stabilize;
+  if (input.abort && s.phase !== 'aborted') {
+    s.targetThrottle = 0;
+    s.throttle = 0;
+    s.failureReason = 'Flight aborted: engines shut down.';
+    setPhase(s, 'aborted', 'abort');
+  }
+  if (s.phase === 'aborted' && s.flightElapsed === 0 && !s.supportCollapsed)
+    return;
+  if (s.phase === 'building') {
+    s.buildProgress = clamp(s.phaseElapsed / config.buildDuration, 0, 1);
+    updateSupport(s, dt);
+    if (s.phase === 'building' && s.buildProgress >= 1)
+      setPhase(s, 'ready', 'ready');
+    return;
+  }
+  if (s.phase === 'ready') {
+    updateSupport(s, dt);
+    if (s.phase === 'ready' && input.launch) {
+      s.targetThrottle = 1;
+      setPhase(s, 'countdown', 'countdown');
+    }
+    return;
+  }
+  if (s.phase === 'countdown') {
+    s.countdown = Math.max(0, config.countdownDuration - s.phaseElapsed);
+    updateSupport(s, dt);
+    if (s.phase === 'countdown' && s.phaseElapsed >= config.countdownDuration)
+      setPhase(s, 'ignition', 'ignition');
+    return;
+  }
+  const densityRatio = Math.exp(-Math.max(0, s.altitude) / 8_500);
+  const density = 1.225 * densityRatio;
+  s.wind = sampleWind(s, clamp(finite(input.windScale, 1), 0, 5));
+  if (s.mode === 'manual' && input.throttle !== undefined) {
+    s.targetThrottle = clamp(finite(input.throttle, s.targetThrottle), 0, 1);
+  } else if (s.mode === 'auto') {
+    s.targetThrottle = 1;
+  }
+  if (s.phase === 'aborted') s.targetThrottle = 0;
+  if (s.phase === 'ignition') {
+    // Hold-down bolts restrain a safe pad during the spool-up sequence.
+    s.throttle =
+      clamp(s.phaseElapsed / config.ignitionDuration, 0, 1) * s.targetThrottle;
+  } else {
+    s.throttle += clamp(s.targetThrottle - s.throttle, -dt * 1.8, dt * 0.9);
+  }
+  if (s.fuel <= 0) s.throttle = 0;
+  const fuelUsed = Math.min(s.fuel, config.fuelPerSecond * s.throttle * dt);
+  const previousFuel = s.fuel;
+  s.fuel -= fuelUsed;
+  if (previousFuel > 0 && s.fuel <= 0) addEvent(s, 'fuel-empty');
+  const mass = config.dryMass + s.fuel;
+  updateSupport(s, dt);
+  if (s.phase === 'ignition') {
+    if (s.phaseElapsed < config.ignitionDuration) return;
+    setPhase(s, 'flight', 'liftoff');
+  }
+  s.flightElapsed += dt;
+  updateAttitude(s, input, densityRatio, dt);
+  const direction = rocketDirection(s.attitude);
+  const relative = {
+    x: s.velocity.x - s.wind.x,
+    y: s.velocity.y,
+    z: s.velocity.z - s.wind.z,
+  };
+  const airspeed = length(relative);
+  s.dynamicPressure = 0.5 * density * airspeed * airspeed;
+  const forwardFraction =
+    airspeed > 1
+      ? Math.abs(
+          (relative.x * direction.x +
+            relative.y * direction.y +
+            relative.z * direction.z) /
+            airspeed,
+        )
+      : 1;
+  const sideFraction = Math.sqrt(
+    Math.max(0, 1 - forwardFraction * forwardFraction),
+  );
+  const area =
+    Math.PI * config.radius ** 2 +
+    sideFraction * config.height * config.radius * 2;
+  const dragFactor =
+    airspeed > 0
+      ? (0.5 * density * config.dragCoefficient * area * airspeed) / mass
+      : 0;
+  const thrust = hasEngine(s)
+    ? (config.maxThrust * s.throttle * (1 + (1 - densityRatio) * 0.08)) / mass
+    : 0;
+  const gravity =
+    9.80665 * (6_371_000 / (6_371_000 + Math.max(0, s.altitude))) ** 2;
+  s.acceleration = {
+    x: direction.x * thrust - relative.x * dragFactor,
+    y: direction.y * thrust - gravity - relative.y * dragFactor,
+    z: direction.z * thrust - relative.z * dragFactor,
+  };
+  s.velocity.x += s.acceleration.x * dt;
+  s.velocity.y += s.acceleration.y * dt;
+  s.velocity.z += s.acceleration.z * dt;
+  s.position.x += s.velocity.x * dt;
+  s.position.y += s.velocity.y * dt;
+  s.position.z += s.velocity.z * dt;
+  s.altitude = Math.max(0, s.position.y - s.origin.y);
+  s.maxAltitude = Math.max(s.maxAltitude, s.altitude);
+  s.speed = length(s.velocity);
+  // Tumbling broadside through dense air damages the vehicle. Ordinary ascent
+  // and a recoverable steering mistake are below this threshold.
+  s.integrity = clamp(
+    s.integrity -
+      (Math.max(0, s.dynamicPressure - 85_000) / 800_000) *
+        sideFraction ** 2 *
+        dt,
+    0,
+    1,
+  );
+  if (s.integrity <= 0) {
+    crash(s, s.speed, 'Aerodynamic loads destroyed the vehicle.', false);
+    return;
+  }
+  const groundY = s.support.groundY ?? s.origin.y;
+  if (s.position.y <= groundY && (s.velocity.y < 0 || s.supportCollapsed)) {
+    crash(
+      s,
+      s.speed,
+      s.supportCollapsed
+        ? 'The falling rocket struck the ground after the platform collapsed.'
+        : 'The rocket struck the ground.',
+    );
+    return;
+  }
+  if (s.altitude >= SPACE_ALTITUDE && s.phase !== 'aborted') {
+    s.throttle = 0;
+    s.targetThrottle = 0;
+    setPhase(s, 'space', 'mission-complete');
+  }
+}
+
+export function stepRocket(
+  state: RocketState,
+  input: RocketInput = {},
+  dt = ROCKET_FIXED_STEP,
+): RocketState {
+  const s = cloneState(state);
+  let remaining = clamp(finite(dt, 0), 0, 0.25);
+  while (remaining > 1e-9) {
+    const step = Math.min(ROCKET_FIXED_STEP, remaining);
+    substep(s, input, step);
+    remaining -= step;
+  }
+  return s;
+}
+
+/** Sample every simulation step to accumulate irreversible city damage. */
+export function sampleRocketEffects(s: RocketState): RocketEnvironmentEffects {
+  const config = ROCKET_CONFIGS[s.kind];
+  const direction = rocketDirection(s.attitude);
+  const engine = hasEngine(s) ? s.throttle : 0;
+  const nozzleHeight = Math.max(
+    0,
+    s.position.y - (s.support.groundY ?? s.origin.y),
+  );
+  const downwardFraction = Math.max(0, direction.y);
+  const groundExposure =
+    engine *
+    downwardFraction *
+    Math.exp(-nozzleHeight / (config.heatRadius * 1.8));
+  return {
+    nozzle: { ...s.position },
+    direction: { x: -direction.x, y: -direction.y, z: -direction.z },
+    engine,
+    groundExposure,
+    blastRadius: config.blastRadius * Math.sqrt(groundExposure),
+    heatRadius: config.heatRadius * Math.sqrt(groundExposure),
+    debrisImpulse: groundExposure * (s.kind === 'large' ? 48 : 18),
+    shake: groundExposure * (s.kind === 'large' ? 1 : 0.4),
+  };
+}
