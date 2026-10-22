@@ -354,6 +354,48 @@ function disposeSource(scene: THREE.Object3D) {
   bitmaps.forEach((bitmap) => bitmap.close());
 }
 
+async function loadBusAsset(
+  url: string,
+  signal?: AbortSignal,
+): Promise<BusGLTF> {
+  let imageFailed = false;
+  const manager = new THREE.LoadingManager();
+  manager.onError = (resource) => {
+    imageFailed = true;
+    // GLTFLoader revokes successful embedded images, but not failed ones.
+    if (resource.startsWith('blob:')) URL.revokeObjectURL(resource);
+  };
+  const loader = new GLTFLoader(manager);
+  loader.register((parser) => ({
+    name: 'atlas-bus-image-decoder',
+    beforeRoot() {
+      // Embedded PNGs are image resources under img-src. ImageBitmapLoader
+      // instead fetches their object URLs through the stricter connect-src.
+      parser.textureLoader = new THREE.TextureLoader(parser.options.manager)
+        .setCrossOrigin(parser.options.crossOrigin)
+        .setRequestHeader(parser.options.requestHeader);
+      return null;
+    },
+  }));
+  let gltf: BusGLTF;
+  if (signal) {
+    const response = await fetch(url, { signal });
+    if (!response.ok) throw new Error('Bus reference GLB request failed');
+    const bytes = await response.arrayBuffer();
+    signal.throwIfAborted();
+    gltf = await loader.parseAsync(
+      bytes,
+      url.slice(0, url.lastIndexOf('/') + 1),
+    );
+  } else gltf = await loader.loadAsync(url);
+  // GLTFLoader otherwise accepts a failed image as a null material map.
+  if (imageFailed) {
+    disposeSource(gltf.scene);
+    throw new Error('Bus texture decode failed');
+  }
+  return gltf;
+}
+
 function textureDimensions(texture: THREE.Texture) {
   const image = texture.image as
     | { width?: number; height?: number }
@@ -714,21 +756,7 @@ export class CityBusAssets {
       if (reference && signal) this.templateSignals.set(key, signal);
       promise = Promise.resolve()
         .then(() =>
-          (
-            this.options.load ??
-            (async (url, activeSignal) => {
-              if (!activeSignal) return new GLTFLoader().loadAsync(url);
-              const response = await fetch(url, { signal: activeSignal });
-              if (!response.ok)
-                throw new Error('Bus reference GLB request failed');
-              const bytes = await response.arrayBuffer();
-              activeSignal.throwIfAborted();
-              return new GLTFLoader().parseAsync(
-                bytes,
-                url.slice(0, url.lastIndexOf('/') + 1),
-              );
-            })
-          )(
+          (this.options.load ?? loadBusAsset)(
             `${descriptor.url}?v=${descriptor.sha256.slice(0, 12)}`,
             reference ? signal : undefined,
           ),
