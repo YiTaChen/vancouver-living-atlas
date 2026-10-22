@@ -21,6 +21,13 @@ export interface StationPoint {
   /** Local heading; +Z is zero. Add the station world's yaw for camera facing. */
   yaw: number;
 }
+export interface StationSeat {
+  id: string;
+  position: StationVector;
+  seatHeight: number;
+  yaw: number;
+  stand: StationPoint;
+}
 interface StationFloor {
   id: string;
   level: string;
@@ -465,6 +472,7 @@ export class SkyTrainStationOwner {
   );
   private readonly boardingMarker = new THREE.Group();
   private disposed = false;
+  private benchSeatCache: readonly StationSeat[] | null = null;
   constructor(
     data: RuntimeStationData,
     heightAt: (x: number, z: number) => number,
@@ -565,6 +573,9 @@ export class SkyTrainStationOwner {
         a.carIndex - b.carIndex ||
         Math.abs(a.carDoor[2]) - Math.abs(b.carDoor[2]),
     )[0];
+  }
+  passengerDoor(line: LineId, direction?: SkyTrainDirection): StationVector {
+    return [...this.chosenDoor(this.platform(line, direction)).carDoor];
   }
   private point(
     position: StationVector,
@@ -677,6 +688,94 @@ export class SkyTrainStationOwner {
   }
   trainStop(line: LineId, direction?: SkyTrainDirection): StationTrainStop {
     return trainStopFor(this.data, line, direction);
+  }
+  /** Seats originate only from the station's rendered bench parts. Each front
+   * has a verified clear floor point; tracks, stacked levels and prop-only
+   * geometry can never become a stand location. */
+  benchSeats(): readonly StationSeat[] {
+    if (this.disposed) return [];
+    if (this.benchSeatCache) return this.benchSeatCache;
+    const result: StationSeat[] = [];
+    for (const part of this.data.parts) {
+      if (
+        !/bench/i.test(part.id) ||
+        part.role !== 'static' ||
+        part.size[1] > 0.35
+      )
+        continue;
+      const alongX = part.size[0] > part.size[2];
+      const length = alongX ? part.size[0] : part.size[2];
+      const slots = Math.max(1, Math.floor(length / 0.6));
+      const angle = (part.yaw * Math.PI) / 180;
+      const rotate = (x: number, z: number): [number, number] => [
+        x * Math.cos(angle) + z * Math.sin(angle),
+        -x * Math.sin(angle) + z * Math.cos(angle),
+      ];
+      for (let slot = 0; slot < slots; slot++) {
+        const along = (slot - (slots - 1) / 2) * 0.58;
+        const [sx, sz] = rotate(alongX ? along : 0, alongX ? 0 : along);
+        const floor = this.floorAt([
+          part.position[0] + sx,
+          part.position[1] - 0.46,
+          part.position[2] + sz,
+        ]);
+        if (!floor) continue;
+        const seatHeight =
+          part.position[1] + part.size[1] / 2 - floor.position[1];
+        if (seatHeight < 0.3 || seatHeight > 0.7) continue;
+        for (const side of [-1, 1]) {
+          const [fx, fz] = rotate(alongX ? 0 : side, alongX ? side : 0);
+          const offset = (alongX ? part.size[2] : part.size[0]) / 2 + 0.45;
+          const stand = this.floorAt(
+            [
+              floor.position[0] + fx * offset,
+              floor.position[1],
+              floor.position[2] + fz * offset,
+            ],
+            floor.surfaceId,
+          );
+          if (!stand || !this.supported(stand)) continue;
+          const yaw = Math.atan2(fx, fz);
+          stand.yaw = yaw;
+          result.push({
+            id: `${part.id}:${slot}:${side}`,
+            position: [...floor.position],
+            seatHeight,
+            yaw,
+            stand,
+          });
+        }
+      }
+    }
+    this.benchSeatCache = result;
+    return result;
+  }
+  canApproachSeat(seat: StationSeat, from: StationPoint) {
+    if (
+      seat.stand.surfaceId !== from.surfaceId ||
+      seat.stand.layer !== from.layer ||
+      new THREE.Vector3(...seat.stand.position).distanceTo(
+        new THREE.Vector3(...from.position),
+      ) >= 1.1
+    )
+      return false;
+    const end = this.walk(
+      from,
+      seat.stand.position[0] - from.position[0],
+      seat.stand.position[2] - from.position[2],
+    );
+    return (
+      end.surfaceId === seat.stand.surfaceId &&
+      new THREE.Vector3(...end.position).distanceTo(
+        new THREE.Vector3(...seat.stand.position),
+      ) < 0.08
+    );
+  }
+  isClearFoot(point: StationPoint) {
+    const floor = this.floorAt(point.position, point.surfaceId);
+    return Boolean(
+      floor && floor.layer === point.layer && this.supported(floor),
+    );
   }
   floorAt(position: StationVector, surfaceId?: string): StationPoint | null {
     if (!finiteVector(position) || this.disposed) return null;

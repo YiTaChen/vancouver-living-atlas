@@ -633,3 +633,43 @@ test('loaded consumer owns exactly eight geometries, eight instance buffers and 
   assert.equal(materials, 2);
   assert.equal(e.landmarks.children.length, 0);
 });
+
+test('occupied bench keeps one existing pool slot and range coverage when the seated camera moves far away', async () => {
+  const e = host('balanced');
+  const entries = Array.from({ length: 80 }, (_, i) =>
+    placement(i, 'cedar-bench', i * 0.4, 5),
+  );
+  const furniture = new StreetFurniture(e, entries, loader);
+  try {
+    await settle(furniture, e);
+    await tick(furniture, e, 500);
+    assert.equal(furniture.hasVisiblePlacement('0'), true);
+    const before = furniture.stats();
+    furniture.setOccupied('0');
+    e.camera.position.set(1000, 500, 1000);
+    await tick(furniture, e);
+    assert.deepEqual(furniture.stats().visibleIds, ['0']);
+    assert(furniture.stats().visible <= 24);
+    const material = furniture.group.children[0].material;
+    const shader = {
+      uniforms: {},
+      vertexShader: '#include <common>\n#include <project_vertex>',
+      fragmentShader: '#include <common>\n#include <clipping_planes_fragment>',
+    };
+    material.onBeforeCompile(shader, {});
+    assert(
+      shader.uniforms.furnitureOccupied.value.equals(
+        new THREE.Vector3(0, 7.25, 5),
+      ),
+    );
+    assert(shader.fragmentShader.includes('max(furnitureOccupiedCoverage,'));
+    assert.equal(furniture.stats().assetBytes, before.assetBytes);
+    assert.equal(furniture.stats().geometries, before.geometries);
+    assert.equal(furniture.stats().materials, before.materials);
+    furniture.setOccupied(null);
+    await tick(furniture, e);
+    assert.equal(furniture.stats().visible, 0);
+  } finally {
+    furniture.dispose();
+  }
+});

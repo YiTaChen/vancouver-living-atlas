@@ -53,6 +53,8 @@ import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaController } from '@/lib/city/tesla-controller';
 import { DriftHoldButton, TravelJoystick } from '@/components/travel-joystick';
+import { CityInteractionOverlay } from '@/components/city-interaction-overlay';
+import type { CityInteractions } from '@/lib/city/city-interactions';
 import { BusVisitPanel } from '@/components/bus-visit-panel';
 import { SkyTrainCabinPanel } from '@/components/skytrain-cabin-panel';
 import { SkyTrainTravelPanel, skyTrainTravelText } from '@/components/skytrain-travel-panel';
@@ -259,13 +261,20 @@ function Home() {
     distance: 0,
     elevation: 0,
   });
+  const [interactionController, setInteractionController] = useState<CityInteractions | null>(null);
+  const interactionInput = ready && settings.mode === 'walk' && !clean &&
+    !placing && !flight.placing && !about && !panel && !discoveryModal &&
+    !stats.busVisit?.aboard && (!mobilePanel || mobilePanel === 'map') &&
+    !(touchUI && mobileHudHidden);
   const driveDriftEnabled = ready && settings.mode === 'drive' && !placing &&
     !about && !panel && !discoveryModal && !stats.busVisit?.aboard &&
     (!mobilePanel || mobilePanel === 'map');
   const skyTrainState = stats.skyTrainTravel ?? EMPTY_SKYTRAIN_TRAVEL;
   const skyTrainActive = ['loading', 'station', 'riding'].includes(skyTrainState.phase);
-  const skyTrainInput = ready && !about && !panel && !discoveryModal &&
-    (!mobilePanel || mobilePanel === 'map');
+  const skyTrainInput = ready && !clean && !placing && !flight.placing &&
+    !about && !panel && !discoveryModal && settings.mode !== 'tesla' &&
+    settings.mode !== 'flight' && !stats.busVisit?.aboard &&
+    (!mobilePanel || mobilePanel === 'map') && !(touchUI && mobileHudHidden);
   useEffect(() => {
     const travel = engine.current?.skyTrainTravel;
     travel?.setInputEnabled(skyTrainInput);
@@ -346,6 +355,7 @@ function Home() {
   useEffect(() => {
     const city = engine.current;
     if (!ready || !city) return;
+    setInteractionController(city.interactions);
     if (city.flight) {
       city.flight.onChange = setFlight;
       setFlight(city.flight.snapshot);
@@ -581,6 +591,8 @@ function Home() {
   };
   const finishBusVisit = () => {
     if (engine.current?.skyTrainTravel?.active) return false;
+    const nav = engine.current?.navigation;
+    if (nav?.walkSeat && !nav.leaveWalkSeat()) return false;
     if (engine.current && !engine.current.closeBusVisit()) {
       setNotice('busVisitExitBlocked');
       return false;
@@ -835,6 +847,10 @@ function Home() {
         </div>
       )}
       <div className="scene" ref={host} />
+      <CityInteractionOverlay
+        interactions={interactionController}
+        enabled={interactionInput} locale={locale} touch={touchUI}
+      />
       <BusVisitPanel
         city={engine.current}
         snapshot={stats.busVisit ?? null}

@@ -91,6 +91,53 @@ export function installStreetFurnitureQA(
   for (const kind of ['cedar-bench', 'garbage-bin', 'bicycle-rack'] as const)
     button(`Furniture: focus ${kind}`, () => focus(kind));
   button('Furniture: focus Robson bench', () => focus('cedar-bench', 'ROBSON'));
+  button('Seats: approach visible bench', () => {
+    const nav = e.navigation;
+    const p =
+      e.streetFurniture?.placements.find(
+        (p) => p.id === focused && p.kind === 'cedar-bench',
+      ) ?? e.streetFurniture?.placements.find((p) => p.kind === 'cedar-bench');
+    if (!nav || !p || e.skyTrainTravel?.active) return;
+    const x = p.x + Math.sin(p.yaw) * 1.2,
+      z = p.z + Math.cos(p.yaw) * 1.2;
+    if (!nav.clearGround(x, z, 'walk', true)) return;
+    e.applySettings({
+      ...e.settings,
+      mode: 'walk',
+      autoRotate: false,
+      labels: false,
+    });
+    nav.cameraDistances.walk = 3.6;
+    nav.startAt('walk', {
+      x,
+      z,
+      y: p.y + 0.02,
+      yaw: p.yaw + Math.PI,
+      surface: 'ground',
+      name: '',
+      snappedDistance: 0,
+    });
+    e.onTravelResume('walk');
+    e.streetFurniture?.update(true);
+    status.textContent = `Approaching seat ${p.id}; use real F/tap to sit`;
+  });
+  button('Seats: inspect current state', () => {
+    status.textContent = JSON.stringify({
+      worldSeat: e.navigation?.walkSeat?.id ?? null,
+      position: e.navigation?.position.toArray(),
+      avatar: {
+        visible: e.navigation?.walker.group.visible,
+        position: e.navigation?.walker.group.position.toArray(),
+        pose: e.navigation?.walker.group.userData,
+      },
+      selected: e.interactions?.controller.snapshot(),
+      camera: { position: e.camera.position.toArray(), quaternion: e.camera.quaternion.toArray(), fov: e.camera.fov, aspect: e.camera.aspect },
+      skytrain: e.skyTrainTravel?.snapshot(),
+      origin: e.skyTrainTravel?.interactionOrigin,
+      furniture: e.streetFurniture?.stats(),
+    });
+  });
+
   button('Furniture: save checkpoint', () => {
     if (!lease.begin()) return;
     const screenshot = e.screenshot();

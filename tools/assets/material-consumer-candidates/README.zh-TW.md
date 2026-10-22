@@ -45,6 +45,23 @@ python tools/assets/material-consumer-candidates/validate.py
 
 `--record-fixtures` 只供明確審閱 upstream source 變更後重新記錄，不能用來掩蓋回歸失敗。常規 validator 絕不更新 regression fixtures。Node v24.19.0、Three r185；Blender 4.3.2、Cycles CPU、固定 2 threads。此 Blender build 無 OIDN，預覽以 20 samples、不去噪；噪點不是材質。每次只有一個 Blender process。額外完整視角／四光照contact sheets使用12 samples、2 threads；每tile記錄原GLB hash、camera、light及像素hash。
 
+### 2026-10-22 上游座位互動的相容檢查
+
+`qa/current-source-fixtures.json` 與原有 QA 收據保持原值。其 navigation／interiors source hashes 仍對應 `53bb3c6` 基準；新互動功能在這兩個來源新增坐姿、移動鎖定、安全起身、座位高度及室內長椅登記，故整個檔案的 hash 會改變。
+
+`adapters/seating-source-compatibility.mjs` 僅在記憶體扣除逐段審閱的座位差異，再要求剩餘**每個 byte** 的 SHA-256 等於原 fixture。允許的差異包括坐姿合約與方法、指定模式／放置入口的起身 guard、步行鎖定、座面眼睛／腳底高度、只影響人物的座椅朝向與殘留乘客傾斜歸零，以及室內長椅的明確 metadata 登記。其餘 14 個來源仍要求原始 byte hash 完全相同。任意新增、移動或更改座位實作，也會因精確 anchor 或剩餘 hash 不符而拒絕。
+
+這不投影、替換或重新製作任何 runtime 幾何。實際目前來源的 `clearGround` land／water／polygon 查詢、Roadster 頂點／法線／車輪、室內完整三角形／bounds／doors／obstacles／entry、16,422 個 walk／drive／height 查詢，以及 58 件傢具 × 2 LOD 的 fitting 仍沿用原始嚴格比對。新增反例確認 driving 速度、未坐下的 walking 速度、碰撞、driver camera、長椅幾何及未審閱座高變化均被拒絕；沒有更新基準 hash 來讓測試通過。
+
+兩個 Node validator 現在預設唯讀。若經審閱後需要重新產生本地稽核輸出，顯式執行：
+
+```sh
+node tools/assets/material-consumer-candidates/validate-consumers.mjs --write-evidence
+node tools/assets/material-consumer-candidates/validate-furniture.mjs --write-evidence
+```
+
+此選項會覆寫相應輸出，需自行保留其來源版本與驗收範圍；不會改 `current-source-fixtures.json`。原有 `--record-fixtures` 仍保留為顯式重設基準的入口，不能拿來處理一般座位更新。2026-10-22 的相容性驗證已跑完 10 項單元／反例及兩個 validator，並確認 30 份現存 QA 檔案在預設執行前後 byte-identical；這是 CPU preservation gate，沒有重做或延伸歷史 WebGL／Blender 視覺驗收。
+
 ## UV 與 shared-map 契約
 
 `metre-uv.mjs` 不改 positions、normals 或 transform；原本刪除 UV 的 merge 位置改為產生／保留公尺 UV。每 UV 單位等於 1 m。水平 floor 使用共同 XZ 投影，使相鄰平面 phase 一致；坡面與曲面使用逐 triangle 的等距 chart，三條 UV 邊長均等於實體邊長。這是有測試的最小候選，**不宣稱曲面 UV 無接縫**：per-triangle charts 可能有法線方向或 grain seams，不應用於方向性長木紋、大標誌或 decals。家具來源另外使用一致的 box-axis metre charts。

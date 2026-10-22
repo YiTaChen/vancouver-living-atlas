@@ -5,6 +5,7 @@ import { project, inPolygon } from './geo';
 import type { CityEngine } from './engine';
 import type { PlacementPoint } from './placement-geometry';
 import { LightLabExhibit } from './light-lab-exhibit';
+import type { WorldSeat } from './world-seats';
 import type { LightLevels } from './light-lab';
 export type InteriorId = 'science' | 'canada' | 'waterfront';
 type P = [number, number, number];
@@ -375,6 +376,12 @@ export class PublicInteriors {
     const bench = (x: number, z: number, w = 3) => {
       obstacle(x, z, w, 0.7, 0.48, 0x8d6e4e);
       parts.box([w, 0.55, 0.12], [x, f + 0.78, z - 0.32], 0x8d6e4e);
+      const seats = (this.e.data.walkSeats ??= []) as WorldSeat[];
+      const point = group.localToWorld(new THREE.Vector3(x, f, z));
+      seats.push({ id: `interior-seat:${id}:${x}:${z}`, floor: point.toArray(),
+        yaw: site.yaw, height: 0.48,
+        visible: () => group.visible && this.e.landmarks.visible,
+      });
     };
     if (id === 'science') {
       // A central stage, demonstration islands and an open circulation ring.

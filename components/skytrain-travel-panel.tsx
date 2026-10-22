@@ -11,6 +11,7 @@ import {
 } from '@/lib/city/skytrain-network';
 import type { SkyTrainTravelSnapshot } from '@/lib/city/skytrain-travel-types';
 import messages from '@/lib/i18n/skytrain-travel.json';
+import interactions from '@/lib/i18n/interactions.json';
 import { TravelJoystick } from './travel-joystick';
 import './skytrain-travel-panel.css';
 
@@ -93,7 +94,24 @@ export function SkyTrainTravelPanel({
     snapshot.canExit &&
     snapshot.canLeave !== false;
   const walking =
-    visible && controlsEnabled && !loading && snapshot.phase === 'station';
+    visible &&
+    controlsEnabled &&
+    !loading &&
+    !snapshot.seated &&
+    (snapshot.phase === 'station' ||
+      (snapshot.phase === 'riding' && snapshot.canWalkCabin));
+  const movementHint = snapshot.seated
+    ? touch
+      ? interactions[locale].stand
+      : interactions[locale].shortcut.replace(
+          '{action}',
+          interactions[locale].stand,
+        )
+    : snapshot.phase === 'riding'
+      ? snapshot.canWalkCabin
+        ? interactions[locale].cabinHint
+        : t('stayAboard')
+      : t(touch ? 'touchHint' : 'desktopHint');
   const move = useCallback((x: number, y: number) => onMove(x, y), [onMove]);
   useEffect(() => {
     if (!walking) onMove(0, 0);
@@ -386,9 +404,7 @@ export function SkyTrainTravelPanel({
                   {t('exit')}
                 </button>
               </div>
-              <p className="skytrain-travel-hint">
-                {t(touch ? 'touchHint' : 'desktopHint')}
-              </p>
+              <p className="skytrain-travel-hint">{movementHint}</p>
             </>
           )}
         </div>
@@ -397,7 +413,11 @@ export function SkyTrainTravelPanel({
         <div className="skytrain-travel-walk-controls">
           <TravelJoystick
             mode="walk"
-            label={t('move')}
+            label={
+              snapshot.phase === 'riding'
+                ? interactions[locale].walkCabin
+                : t('move')
+            }
             brakeLabel={t('stop')}
             onMove={move}
             onBrake={noop}

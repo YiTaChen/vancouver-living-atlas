@@ -19,6 +19,8 @@ export interface SkyTrainTravelSnapshot {
   travelProgress: number;
   error: string | null;
   busy?: boolean;
+  seated?: boolean;
+  canWalkCabin?: boolean;
   transferAt?: StationId | null;
   availableLines?: readonly LineId[];
   hint?:

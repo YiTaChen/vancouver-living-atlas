@@ -5,6 +5,10 @@ import type { LineId } from './skytrain-network';
 import type { VisualQuality } from './quality';
 import { openSkyTrainDoorApertures } from './skytrain-door-aperture';
 import type { SkyTrainRidePath } from './skytrain-ride-path';
+import {
+  SkyTrainPassengerSpace,
+  type CabinPoint,
+} from './skytrain-passenger-space';
 
 const EXPO_OFFSETS = [26.85, 8.95, -8.95, -26.85] as const;
 const CANADA_OFFSETS = [10.5, -10.5] as const;
@@ -44,6 +48,10 @@ export class SkyTrainRideTrain {
   private doorAmount = 0;
   private side: 'left' | 'right' = 'left';
   readonly eye = new THREE.Vector3();
+  passengerSpace: SkyTrainPassengerSpace | null = null;
+  private passengerEyeHeight = 1.65;
+  private passengerEyeXZ: readonly [number, number] = [0, 0];
+  private passengerLocal: CabinPoint | null = null;
   facingYaw = Math.PI;
   get ready() {
     return this.owner !== null;
@@ -118,6 +126,13 @@ export class SkyTrainRideTrain {
     this.eye.fromArray(view.positionM).add(owner.group.position);
     this.eye.z += this.carOffset;
     this.eye.y = this.floorAboveRail + 1.65;
+    this.passengerSpace = new SkyTrainPassengerSpace(
+      owner,
+      this.floorAboveRail,
+    );
+    this.passengerLocal = null;
+    this.passengerEyeHeight = 1.65;
+    this.passengerEyeXZ = [0, 0];
     this.syncPassengerAnchor();
     // Local, shadow-free cabin lamps preserve the authored PBR materials. Their
     // small range does not raise the city's night-time ambient illumination.
@@ -146,9 +161,31 @@ export class SkyTrainRideTrain {
     this.syncPassengerAnchor();
   }
   private syncPassengerAnchor() {
+    if (this.passengerLocal) {
+      this.passenger.position.fromArray(this.passengerLocal);
+      return;
+    }
     this.passenger.position.copy(this.eye);
     this.passenger.position.y -= 1.65;
     this.passenger.position.z -= this.carOffset;
+  }
+  setPassengerLocal(
+    position: CabinPoint,
+    eyeHeight = 1.65,
+    eyeOffsetXZ: readonly [number, number] = [0, 0],
+  ) {
+    this.passengerLocal = [...position];
+    this.passengerEyeHeight = eyeHeight;
+    this.passengerEyeXZ = eyeOffsetXZ;
+    this.ensureCarFrames();
+    this.syncPassengerAnchor();
+  }
+  passengerPointToWorld(point: readonly number[]): CabinPoint {
+    this.ensureCarFrames();
+    this.cars[0].updateWorldMatrix(true, false);
+    return new THREE.Vector3(...point)
+      .applyMatrix4(this.cars[0].matrixWorld)
+      .toArray();
   }
   /** Reestablish the exact authored straight consist for a station stop. */
   resetCarFrames() {
@@ -202,10 +239,15 @@ export class SkyTrainRideTrain {
    * reference root's rigid offset while other cars negotiate a curve. */
   passengerWorldPose(position: THREE.Vector3, quaternion: THREE.Quaternion) {
     this.ensureCarFrames();
-    this.group.updateWorldMatrix(true, true);
     this.passenger.getWorldPosition(position);
     this.cars[0].getWorldQuaternion(quaternion);
-    this.eyeOffset.set(0, 1.65, 0).applyQuaternion(quaternion);
+    this.eyeOffset
+      .set(
+        this.passengerEyeXZ[0],
+        this.passengerEyeHeight,
+        this.passengerEyeXZ[1],
+      )
+      .applyQuaternion(quaternion);
     position.add(this.eyeOffset);
   }
   private updateInstances() {
@@ -361,6 +403,10 @@ export class SkyTrainRideTrain {
     }
   }
   private releaseVisuals() {
+    this.passengerSpace = null;
+    this.passengerLocal = null;
+    this.passengerEyeHeight = 1.65;
+    this.passengerEyeXZ = [0, 0];
     // Clones share the asset owner's immutable buffers. Only that owner releases
     // those resources; procedural exterior buffers are independently owned.
     this.group.clear();

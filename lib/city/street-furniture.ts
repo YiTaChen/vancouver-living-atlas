@@ -158,6 +158,7 @@ export function flattenStreetFurniture(
 type FadeUniforms = {
   furnitureNow: { value: number };
   furnitureRange: { value: number };
+  furnitureOccupied: { value: THREE.Vector3 };
 };
 
 /** Opaque ordered dithering keeps normal depth writing and one pass per role.
@@ -200,6 +201,7 @@ vFurnitureLevel = furnitureLevel;
         `#include <common>
 uniform float furnitureNow;
 uniform float furnitureRange;
+uniform vec3 furnitureOccupied;
 varying vec3 vFurnitureWorld;
 varying float vFurnitureAdmission;
 varying float vFurnitureLevel;`,
@@ -208,7 +210,8 @@ varying float vFurnitureLevel;`,
         '#include <clipping_planes_fragment>',
         `#include <clipping_planes_fragment>
 float furnitureDistance = distance(cameraPosition, vFurnitureWorld);
-float furnitureCoverage = (1.0 - smoothstep(furnitureRange - 24.0, furnitureRange, furnitureDistance))
+float furnitureOccupiedCoverage = 1.0 - step(2.2, distance(furnitureOccupied, vFurnitureWorld));
+float furnitureCoverage = max(furnitureOccupiedCoverage, (1.0 - smoothstep(furnitureRange - 24.0, furnitureRange, furnitureDistance)))
   * smoothstep(0.0, 0.3, furnitureNow - vFurnitureAdmission);
 vec2 furniturePixel = mod(floor(gl_FragCoord.xy), 4.0);
 float furnitureThreshold = (4.0 * mod(2.0 * furniturePixel.x + 3.0 * furniturePixel.y, 4.0)
@@ -235,6 +238,7 @@ export class StreetFurniture {
   private readonly uniforms: FadeUniforms = {
     furnitureNow: { value: 0 },
     furnitureRange: { value: 120 },
+    furnitureOccupied: { value: new THREE.Vector3(1e20, 1e20, 1e20) },
   };
   private readonly transform = new THREE.Object3D();
   private readonly previous = new Map<string, Selection>();
@@ -247,6 +251,7 @@ export class StreetFurniture {
   private motionPolicy = '';
   private selectionAt = -Infinity;
   private version = '';
+  private occupied: string | null = null;
   private updates = 0;
   private uploads = 0;
   private failures = 0;
@@ -281,6 +286,37 @@ export class StreetFurniture {
 
   get ready() {
     return this.state === 'ready' && !this.disposed;
+  }
+
+  setOccupied(id: string | null) {
+    if (this.occupied === id) return;
+    this.occupied = id;
+    const p = this.placements.find((placement) => placement.id === id);
+    this.uniforms.furnitureOccupied.value.set(
+      p?.x ?? 1e20,
+      p?.y ?? 1e20,
+      p?.z ?? 1e20,
+    );
+    this.selectionAt = -Infinity;
+  }
+
+  hasVisiblePlacement(id: string) {
+    const selection = this.previous.get(id);
+    return (
+      this.ready &&
+      this.group.visible &&
+      this.e.landmarks.visible &&
+      !!selection &&
+      this.uniforms.furnitureNow.value - selection.admitted >= 0.3 &&
+      this.e.camera.position.distanceTo(
+        new THREE.Vector3(
+          selection.placement.x,
+          selection.placement.y,
+          selection.placement.z,
+        ),
+      ) <
+        this.uniforms.furnitureRange.value - 1
+    );
   }
 
   private allowance(work: () => void) {
@@ -396,9 +432,14 @@ export class StreetFurniture {
         // to another street only updates bounded instance matrices; stopping
         // those updates would leave static physical furniture invisible ahead.
         // Motion admission still gates every request and preparation below.
-        .filter(({ distance }) => distance < range)
+        .filter(
+          ({ placement, distance }) =>
+            placement.id === this.occupied || distance < range,
+        )
         .sort(
           (a, b) =>
+            Number(b.placement.id === this.occupied) -
+              Number(a.placement.id === this.occupied) ||
             a.distance -
               (a.previous ? 6 : 0) -
               (b.distance - (b.previous ? 6 : 0)) ||
