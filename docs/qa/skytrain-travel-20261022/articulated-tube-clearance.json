@@ -1,0 +1,286 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "runtime": "v24.22.1",
+  "releaseIdentifier": "translink-gtfs-26SEP_20261002-regional-skytrain",
+  "sourceGtfsSha256": "4e40f326c64146cda8dd6ece93ebab29e4ab58271311116029e819e0c1585301",
+  "sourceStationPackageSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+  "sources": {
+    "lib/city/skytrain-ride-path.ts": "a0e28ed0367979d6ba036e7c5f90ec5d085908e422ba850114210a1973138a0d",
+    "lib/city/skytrain-ride-train.ts": "b6de83b0acbe84867bed12f9edd3c97b60b0894a43245f64735e0cef3a69de9e",
+    "lib/city/skytrain-stations.ts": "07ac6a9e44b5ea2e265e5b3252948aac9c58ebf478e3e9b920ea6fd1dd01815a",
+    "lib/city/skytrain-cabin-assets.ts": "23f3019521581c1f40e01200bf379b392c2d331159ae8ac93c99eb8c4f910cc2",
+    "lib/city/skytrain-door-aperture.ts": "44aa5014f2c8acfe7d3785f2c8c782b1e1d6739b279b591f44eaab9939a1b7fa",
+    "lib/city/engine.ts": "7bf44a99eadb6efb4d0a9eb1abebda89600b7971241d152bce4ea4219d711363",
+    "lib/city/geo.ts": "60c01edb97732574f980770a2f0499f2eb9021a0d8075eb272ea18785570494e",
+    "lib/city/beach-ground.ts": "bc7184a1b222ce138e3b9bad11263676bd9166dd06773b5bc91ecc9b5e5c48d7",
+    "public/data/terrain.json": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908",
+    "public/data/beach-coast.json": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459",
+    "public/models/skytrain-routes.json": "04941b1e7d3295c7e4ffacfe8ae63e4830aef2a055a8cf8a620b24d4143529d4",
+    "public/models/skytrain-stations/manifest.json": "54248990bd2b52710a084c4974b909fc1767382206bff621ae4d605247d3aa4d",
+    "public/models/blender/metro/manifest.json": "6cdea396c16ef19e68b3718a02196f072fa89545237ff0c8785450c07afd7512",
+    "public/models/blender/metro/mark-v-a-car-interior.lod1.glb": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+    "public/models/blender/metro/canada-line-shared-interior.lod1.glb": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724",
+    "tests/skytrain-articulated-clearance.test.mjs": "26c65480a86effc85f67aa0c678d14b0d5d3baab5bc9a58ed06f4e0455682ecd",
+    "tests/helpers/skytrain-geometry.mjs": "3839a4e01ef1309b25fdfbe58d1c60778529a84508287cc7117f5ed184171a19",
+    "tests/helpers/city-elevation.mjs": "2143356bce0c6358d5ed270bc14604dbbf4f91f08c05a038b5d5044667926ea3"
+  },
+  "selectedSourceMethods": {
+    "lib/city/skytrain-travel.ts#SkyTrainTravel.buildTunnel": "795f192a4e520e86ff46fad4f320c90c9e32a04e0e0bc1dad8c807c65125e691"
+  },
+  "stationModelHashes": {
+    "public/models/skytrain-stations/waterfront.json": "9547d43082a57211a00305a700c6694f67f599bf3a6554d2a8b5c5ca608bf746",
+    "public/models/skytrain-stations/burrard.json": "ab50104b558d2faacbcbe073db33517449ed9ebc3238d163ee9f29f0af30a9fb",
+    "public/models/skytrain-stations/granville.json": "d2da8dfd508ed5a0d1594e0c1f3e1108282bc5e209a706ff04d2a9443b57af7b",
+    "public/models/skytrain-stations/stadium-chinatown.json": "d52147b9bbe8670471c2905f6124ad7e684dec2553bb0389cee2f03ab707a9b7",
+    "public/models/skytrain-stations/main-street-science-world.json": "6fb6337234c3cb388272a8a12363fecad596db6070bdb6c464b1aeaf769c37b7",
+    "public/models/skytrain-stations/vancouver-city-centre.json": "27bcc231a14048742cf1a64561e8354dd1995d1a2057c9c0fead9264166ce103",
+    "public/models/skytrain-stations/yaletown-roundhouse.json": "d9ede81de2e90a631bf79a226197efe853eb386b2e5f1d3c8adf7700bafe5806"
+  },
+  "permanentRegression": {
+    "file": "tests/skytrain-articulated-clearance.test.mjs",
+    "tests": 2,
+    "passed": 2,
+    "failed": 0,
+    "maximumRootSampleSpacingMetres": 2,
+    "strictLint": "pass",
+    "productTunnelMethod": "Direct SkyTrainTravel.prototype.buildTunnel invocation; no duplicate builder in the permanent tests.",
+    "resourceDisposal": "Exact-once geometry/material/texture/instance releases after double-disposal of real train, station and tunnel fixtures.",
+    "testLogSha256": "eb3c4545301522f83777e5c8761e03ee06493b327e6829c4f5a82d246db1a131"
+  },
+  "renderingLimitations": [
+    "The bounded coarse-GIS guideway opening and source303 station replacement affect the beauty shader only. Existing shadow/depth and SSAO-normal override passes retain that coarse City geometry, so extra shadow or AO may remain. Native color acceptance is separate.",
+    "These station/tunnel geometry receipts do not assert clearance against every ordinary City source extrusion. The identified Main Street source133436 overlap and its bounded visual opening are covered separately by guideway-clearance.json."
+  ],
+  "scope": "Deterministic CPU replay of every car on the ten underground directed regional segments. Representative gameplay geometry; not a surveyed rail alignment, continuous collision proof, browser/GPU acceptance or frame-rate measurement.",
+  "method": {
+    "terrain": "Exact trusted CityEngine.elevation/rawElevation AST methods with terrain.json and BeachGround beach-coast.json; no replacement height algorithm.",
+    "vehicle": "Actual current LOD1 GLBs loaded through GLTFLoader; only browser texture decoding substituted. Actual production setPathPose, carFrames and passengerWorldPose; four Expo cars/two Canada cars each sample.",
+    "rootSpacingMetresAtMost": 0.5,
+    "upperCabinEnvelope": {
+      "halfWidthMetres": 1.3,
+      "bottomAboveFloorMetres": 0.15,
+      "topAboveRailMetres": 3.5,
+      "expoHalfLengthMetres": 8.5,
+      "canadaHalfLengthMetres": 10
+    },
+    "tunnel": "Exact buildTunnel output: root every8m,32m endpoint cuts,centre+1.4m,CatmullRomCurve3,TubeGeometry(radius3.5,8radial,segments=max8/runPoints*2).",
+    "intersection": "Every sampled upper cabin box is checked against actual emitted tunnel triangles using THREE.Box3.intersectsTriangle after transforming triangle vertices into the actual car frame. Spatial grids only reject nonoverlapping broad-phase bounds.",
+    "radiusDiagnostic": "Nearest0.25m centreline sample is measured independently for the actual occupied eye and all cabin corners, excluding nearest-axis open endpoints; radius diagnostics do not replace triangle intersection checks.",
+    "limits": "Upper passenger-cabin boxes only; excludes bogies/undercarriage, intercar traversal, continuous sub0.5m motion and GPU pixels."
+  },
+  "summary": {
+    "directedSegments": 10,
+    "rootSamples": 15145,
+    "carFrameSamples": 46272,
+    "actualTunnelTriangleUpperCabinIntersectionSamples": 0,
+    "passengerOutsideCircumradiusSamples": 0,
+    "maximumPassengerDistanceToAxisMetres": 1.6357542320784608,
+    "maximumCabinCornerDistanceToAxisMetres": 3.102504804573092,
+    "referenceOctagonInradiusMetres": 3.2335783637895035
+  },
+  "rows": [
+    {
+      "line": "expo",
+      "from": "waterfront",
+      "to": "burrard",
+      "lengthMetres": 952.4483508144428,
+      "rootSamples": 1906,
+      "carCount": 4,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.2141547782611173,
+      "maximumCabinCornerDistanceToAxisMetres": 2.860316346712883,
+      "worstCabinCarIndex": 1,
+      "worstCabinProgress": 0.8587926509186352
+    },
+    {
+      "line": "expo",
+      "from": "burrard",
+      "to": "granville",
+      "lengthMetres": 358.54234667126974,
+      "rootSamples": 719,
+      "carCount": 4,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.2199798123232963,
+      "maximumCabinCornerDistanceToAxisMetres": 2.5235670711727773,
+      "worstCabinCarIndex": 2,
+      "worstCabinProgress": 0.2966573816155989
+    },
+    {
+      "line": "expo",
+      "from": "granville",
+      "to": "stadium-chinatown",
+      "lengthMetres": 684.0963125465626,
+      "rootSamples": 1370,
+      "carCount": 4,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.2066706627656332,
+      "maximumCabinCornerDistanceToAxisMetres": 2.5762704759428283,
+      "worstCabinCarIndex": 0,
+      "worstCabinProgress": 0.7720964207450693
+    },
+    {
+      "line": "expo",
+      "from": "stadium-chinatown",
+      "to": "granville",
+      "lengthMetres": 682.5808510831387,
+      "rootSamples": 1367,
+      "carCount": 4,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.2070403985765963,
+      "maximumCabinCornerDistanceToAxisMetres": 2.5333971802399375,
+      "worstCabinCarIndex": 2,
+      "worstCabinProgress": 0.36383601756954614
+    },
+    {
+      "line": "expo",
+      "from": "granville",
+      "to": "burrard",
+      "lengthMetres": 358.5423466712707,
+      "rootSamples": 719,
+      "carCount": 4,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.2199798123228265,
+      "maximumCabinCornerDistanceToAxisMetres": 2.5235670711749965,
+      "worstCabinCarIndex": 2,
+      "worstCabinProgress": 0.7033426183844012
+    },
+    {
+      "line": "expo",
+      "from": "burrard",
+      "to": "waterfront",
+      "lengthMetres": 954.2961185334458,
+      "rootSamples": 1910,
+      "carCount": 4,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.2105964440555363,
+      "maximumCabinCornerDistanceToAxisMetres": 2.864639620699933,
+      "worstCabinCarIndex": 0,
+      "worstCabinProgress": 0.15976951283394447
+    },
+    {
+      "line": "canada",
+      "from": "yaletown-roundhouse",
+      "to": "vancouver-city-centre",
+      "lengthMetres": 1079.097074246377,
+      "rootSamples": 2160,
+      "carCount": 2,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.6324143499137342,
+      "maximumCabinCornerDistanceToAxisMetres": 3.087919558492864,
+      "worstCabinCarIndex": 1,
+      "worstCabinProgress": 0.4210282538212135
+    },
+    {
+      "line": "canada",
+      "from": "vancouver-city-centre",
+      "to": "waterfront",
+      "lengthMetres": 708.605762699165,
+      "rootSamples": 1419,
+      "carCount": 2,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.4537238531349803,
+      "maximumCabinCornerDistanceToAxisMetres": 2.587633385776995,
+      "worstCabinCarIndex": 1,
+      "worstCabinProgress": 0.1071932299012694
+    },
+    {
+      "line": "canada",
+      "from": "waterfront",
+      "to": "vancouver-city-centre",
+      "lengthMetres": 710.4824879466457,
+      "rootSamples": 1422,
+      "carCount": 2,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.4547034290466914,
+      "maximumCabinCornerDistanceToAxisMetres": 2.5848193173090284,
+      "worstCabinCarIndex": 1,
+      "worstCabinProgress": 0.8930330752990852
+    },
+    {
+      "line": "canada",
+      "from": "vancouver-city-centre",
+      "to": "yaletown-roundhouse",
+      "lengthMetres": 1075.5370871962211,
+      "rootSamples": 2153,
+      "carCount": 2,
+      "tunnelRuns": 1,
+      "upperCabinTriangleIntersectionSamples": 0,
+      "perCarIntersectionSamples": [
+        0,
+        0
+      ],
+      "passengerOutsideCircumradiusSamples": 0,
+      "maximumPassengerDistanceToAxisMetres": 1.6357542320784608,
+      "maximumCabinCornerDistanceToAxisMetres": 3.102504804573092,
+      "worstCabinCarIndex": 1,
+      "worstCabinProgress": 0.5757434944237918
+    }
+  ]
+}

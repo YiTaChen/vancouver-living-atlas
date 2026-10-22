@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-22T15:02:10.735569+00:00",
+  "scope": "One foreground 1280x720 Mac desktop-browser capture of the final visual source, Auto Balanced, after boarding Expo Main Street\u2013Science World toward Stadium\u2013Chinatown. This first 2400-frame window is not mobile, cross-device, every quality level or the complete route.",
+  "capture": {
+    "path": "work/visual-qa/skytrain-articulated-release-20261022/auto-walk-auto-balanced-cruise.json",
+    "sha256": "47e3b212fecbc9941c1164aaf0d0139a6f31149d2bb8a6c1db7994f067ccb8ed",
+    "capabilitiesPath": "work/visual-qa/skytrain-articulated-release-20261022/capabilities.json",
+    "capabilitiesSha256": "3cb03e2c3d7850e896f012d02bf1abdd88bd7ef7338fbd60d79b5377c4b86fd3",
+    "sourceFingerprint": "0bf215e2c8b4db9a43870f8b5224664798d0869592b5301222cc47245ebd1f5e",
+    "parentRevision": "3fcb71c71011f47e7732de04ae39beb42285d24e",
+    "name": "walk-auto-balanced-cruise",
+    "foregroundValid": true,
+    "frameCount": 2400,
+    "sampleElapsedMs": 52874.5,
+    "sumRecordedFrameMs": 52874.5,
+    "recorderWindow": "The foreground recorder retains the first completed 2400-frame or 60-second window. This file contains the first 2400 frames after the operator began capture following boarding: 52.8745 seconds, not the last2400 frames of the trip.",
+    "journeyContext": "Native final-source Expo Main Street\u2013Science World to Stadium\u2013Chinatown ride, per the release operator. The scene setting/frame label remains walk while SkyTrain owns the passenger; it is not evidence of a walking benchmark.",
+    "operatorReportedIsolation": "No CPU build or test processes ran during this captured window. This operator observation is separate from the recorded per-frame telemetry.",
+    "frameModeMix": {
+      "walk": 2400
+    },
+    "firstCameraPosition": [
+      2034.8227673542858,
+      14.640292026666613,
+      1442.7899370834705
+    ],
+    "lastCameraPosition": [
+      1739.649318672355,
+      6.714935413597725,
+      939.2713946798973
+    ],
+    "capabilitiesCreatedAt": "2026-10-22T14:57:01.277Z"
+  },
+  "device": {
+    "rendererGPU": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": [
+      1280,
+      720
+    ],
+    "renderSizeAtSave": [
+      1024,
+      576
+    ],
+    "pixelRatioAtSave": 0.8
+  },
+  "method": {
+    "frameTime": "Adjacent performance.now timestamps after foreground renderScene calls, as recorded by the local visual-QA recorder. These are wall-clock frame intervals including browser scheduling and recording overhead, not isolated GPU execution times.",
+    "filtering": "Every one of the 2400 saved frame intervals is included; no outlier removal, winsorization, averaging bins or substitution from the auto-quality rolling window.",
+    "median": "Arithmetic median: the mean of sorted indices 1199 and 1200 (zero-based).",
+    "medianMiddlePairMs": [
+      20.600000001490116,
+      20.600000001490116
+    ],
+    "percentiles": "Nearest-rank: sorted[ceil(p*N)-1]. P95 uses index 2279, P99 index 2375 (zero-based).",
+    "speed": "Recorded speedMps is sceneryMotion camera-motion telemetry, not an independent measurement of train or real-service speed.",
+    "separation": "The top-level auto/motion snapshot was saved later and has different rolling windows/counters. Only the per-frame array supplies these statistics.",
+    "durableIntervals": {
+      "path": "docs/qa/skytrain-travel-20261022/performance-frame-intervals.json",
+      "sha256": "51ed22107d7ded9341f16c5b7d93351495a988c5d2996e44ae818d1852e22198",
+      "bytes": 38522,
+      "encoding": "Compact lossless JSON array in original frame order; all original floating-point frameMs values retained. Common quality, scale and mode are stored once."
+    }
+  },
+  "frameTimeMs": {
+    "median": 20.600000001490116,
+    "p95": 30.30000000447035,
+    "p99": 42.5,
+    "maximum": 1214.2000000029802,
+    "mean": 22.031041666666667,
+    "over33_333Ms": 77,
+    "over50Ms": 20,
+    "over100Ms": 7,
+    "threshold33_333Ms": 33.333333333333336
+  },
+  "observedWindowThroughputFps": 45.39050014657349,
+  "largestHitch": {
+    "frameIndexZeroBased": 863,
+    "elapsedMs": 20771.40000000596,
+    "frameMs": 1214.2000000029802,
+    "recordedSpeedMps": 10.571096103422544,
+    "cameraPosition": [
+      1948.6185113930726,
+      14.640292026666616,
+      1421.2396759331243
+    ],
+    "detailWorkMs": 0,
+    "cause": "Not established by this telemetry. The 1.2142-second foreground interval remains in all statistics; no causal attribution to shaders, geometry, JavaScript, GC or the browser can be made without a timing trace."
+  },
+  "allIntervalsOver100Ms": [
+    {
+      "frameIndexZeroBased": 359,
+      "elapsedMs": 8458.20000000298,
+      "frameMs": 105.20000000298023,
+      "recordedSpeedMps": 3.327865346141542,
+      "detailWorkMs": 0
+    },
+    {
+      "frameIndexZeroBased": 863,
+      "elapsedMs": 20771.40000000596,
+      "frameMs": 1214.2000000029802,
+      "recordedSpeedMps": 10.571096103422544,
+      "detailWorkMs": 0
+    },
+    {
+      "frameIndexZeroBased": 1067,
+      "elapsedMs": 25124.20000000298,
+      "frameMs": 123.5,
+      "recordedSpeedMps": 13.466743819067588,
+      "detailWorkMs": 0
+    },
+    {
+      "frameIndexZeroBased": 1139,
+      "elapsedMs": 27173,
+      "frameMs": 316.29999999701977,
+      "recordedSpeedMps": 14.625327916571385,
+      "detailWorkMs": 0
+    },
+    {
+      "frameIndexZeroBased": 2265,
+      "elapsedMs": 49582.20000000298,
+      "frameMs": 102.89999999850988,
+      "recordedSpeedMps": 21.48324419620245,
+      "detailWorkMs": 0
+    },
+    {
+      "frameIndexZeroBased": 2342,
+      "elapsedMs": 51435,
+      "frameMs": 167.69999999552965,
+      "recordedSpeedMps": 21.28891518213181,
+      "detailWorkMs": 0
+    },
+    {
+      "frameIndexZeroBased": 2371,
+      "elapsedMs": 52199.60000000149,
+      "frameMs": 117.60000000149012,
+      "recordedSpeedMps": 21.16971774028071,
+      "detailWorkMs": 0
+    }
+  ],
+  "maximumRecordedScenerySpeed": {
+    "frameIndexZeroBased": 2173,
+    "metresPerSecond": 21.56249909087641,
+    "kilometresPerHour": 77.62499672715508
+  },
+  "capturedQualityMix": {
+    "qualityModeAtSave": "auto",
+    "frameQualityCounts": {
+      "balanced": 2400
+    },
+    "resolutionScaleCounts": {
+      "0.8": 2400
+    },
+    "interpretation": "Every captured frame uses Balanced at automatic resolution scale 0.8; 1280x720 viewport renders 1024x576. A separate mobile/High screenshot is not a mobile/High performance benchmark."
+  },
+  "captureToRelease": {
+    "sameFinalVisualSourceFingerprintVerified": true,
+    "recomputedFingerprint": "0bf215e2c8b4db9a43870f8b5224664798d0869592b5301222cc47245ebd1f5e",
+    "fingerprintedVisualFileCount": 710,
+    "fingerprintMethod": "Exact tools/serve-visual-qa.mjs sorted visual-file inventory; SHA256 over each relative path, NUL, then full source/data bytes. Recomputed after capture and matched the artifact.",
+    "releaseSourceHashes": {
+      "lib/city/skytrain-network.ts": "3d021d5e79a966cf5126fb076813fab2db8b4cf1d96dac598b45d2e945eaf03d",
+      "lib/city/skytrain-stations.ts": "07ac6a9e44b5ea2e265e5b3252948aac9c58ebf478e3e9b920ea6fd1dd01815a",
+      "lib/city/skytrain-ride-path.ts": "a0e28ed0367979d6ba036e7c5f90ec5d085908e422ba850114210a1973138a0d",
+      "lib/city/skytrain-ride-train.ts": "b6de83b0acbe84867bed12f9edd3c97b60b0894a43245f64735e0cef3a69de9e",
+      "lib/city/skytrain-travel.ts": "0948545e047d46ee8c20185277e1eb27b305e62dffeb585dcbc5f9264b38bf2c",
+      "lib/city/skytrain-guideway-clearance.ts": "6fd293e484b60233eaaddd871b0f16d4d06b39dd40eb31666b6729ab77ec81e7",
+      "lib/city/building-bodies.ts": "cae3eb6f5cdb23bb0d8eb611ff5206ac30f72aefaeb6f466ebf4aeee91c685b1",
+      "lib/city/engine.ts": "7bf44a99eadb6efb4d0a9eb1abebda89600b7971241d152bce4ea4219d711363",
+      "public/models/skytrain-routes.json": "04941b1e7d3295c7e4ffacfe8ae63e4830aef2a055a8cf8a620b24d4143529d4",
+      "public/models/skytrain-stations/main-street-science-world.json": "6fb6337234c3cb388272a8a12363fecad596db6070bdb6c464b1aeaf769c37b7",
+      "public/data/terrain.json": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908",
+      "public/data/buildings.geojson": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+      "tools/serve-visual-qa.mjs": "34016faf6e490da29771064a60ff2a6c192c8ec59615d1f1cc127dff8b1d8a18",
+      "package.json": "1bb6a336d3fdbe9713bff8757537873045aa8142d967b6107d0b942c81cb174f",
+      "package-lock.json": "cd1829de641b78abf19acf374ea99b8f7ced60d4d4a161e83e0764b8715de0d7"
+    },
+    "qualification": "The parent revision identifies the commit before these frozen working-source changes. Visual source/data identity is verified by the fingerprint and hashes; this does not assert byte identity between an instrumented local QA bundle and a production build."
+  },
+  "historicalComparison": {
+    "path": "docs/qa/skytrain-travel-20261022/performance-before-approach-fix.json",
+    "interpretation": "The earlier report describes a different route/capture/source window. It is retained as history; this is not a controlled before/after comparison and establishes no causal performance improvement or regression."
+  },
+  "limitations": [
+    "One Radeon Pro 560X Mac desktop browser does not establish mobile or other-device performance.",
+    "Seven intervals exceed 100 ms, including a 1.2142-second hitch. This capture therefore does not establish hitch-free travel.",
+    "The first 52.8745-second window covers only part of Main Street\u2013Science World to Stadium\u2013Chinatown, not every station, both lines, the whole trip, every lighting condition or every quality level.",
+    "Foreground interval telemetry includes browser scheduling and local QA recording overhead; a dedicated timing trace is needed to attribute long intervals."
+  ]
+}
