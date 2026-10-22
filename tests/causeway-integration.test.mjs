@@ -107,6 +107,13 @@ test('canonical preparation validates City datum/source and preserves central no
       '1785:0',
       '561:0',
       '819:0',
+      '1585:0',
+      '1599:0',
+      '1713:0',
+      '1693:0',
+      '1778:0',
+      '1812:0',
+      '1819:0',
     ].sort(),
   );
 });

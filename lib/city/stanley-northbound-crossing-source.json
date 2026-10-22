@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "retrievedAt": "2026-10-22",
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "scope": "Mapped at-grade zebra/cycle crossing and its connected bike-route ground approach at the existing northbound Causeway exit. Conform only actual asphalt intersections; preserve outside path planes, unrelated sources and existing permissions. No regional datum change.",
+  "sourceUrl": "https://api.openstreetmap.org/api/0.6/map.json?bbox=-123.165,49.292,-123.111,49.316",
+  "way": {
+    "id": 918813454,
+    "version": 7,
+    "timestamp": "2026-07-08T05:15:36Z",
+    "apiUrl": "https://api.openstreetmap.org/api/0.6/way/918813454/full.json",
+    "sourceUrl": "https://www.openstreetmap.org/way/918813454",
+    "tags": {
+      "bicycle": "yes",
+      "crossing": "uncontrolled",
+      "crossing:island": "no",
+      "crossing:markings": "zebra",
+      "crossing:signals": "no",
+      "cycleway": "crossing",
+      "foot": "designated",
+      "highway": "cycleway",
+      "segregated": "no",
+      "surface": "asphalt",
+      "tactile_paving": "no"
+    },
+    "nodeIds": [12482619450, 3678410852, 12482619449],
+    "coordinates": [
+      [-123.1360137, 49.2964603],
+      [-123.136053, 49.2964582],
+      [-123.1360726, 49.2964571]
+    ]
+  },
+  "sharedMotorNodeId": 3678410852,
+  "motorWayIds": [604336388, 1299818249],
+  "bundledSourceGeometry": {
+    "type": "LineString",
+    "coordinates": [
+      [-123.1360137, 49.2964603],
+      [-123.1360726, 49.2964571]
+    ]
+  },
+  "model": {
+    "inputTriangleCap": 128,
+    "outputTriangleCap": 1024,
+    "heightStatus": "Actual existing Float32 northbound asphalt triangle planes, not surveyed elevations. Source XY and source path permissions stay intact.",
+    "shoulderNumericalOverlapM": 0.002
+  },
+  "adjacentProtectedWalk": {
+    "id": 363686510,
+    "version": 8,
+    "timestamp": "2025-01-08T02:31:49Z",
+    "apiUrl": "https://api.openstreetmap.org/api/0.6/way/363686510/full.json",
+    "sourceUrl": "https://www.openstreetmap.org/way/363686510",
+    "tags": {
+      "bicycle": "designated",
+      "foot": "designated",
+      "highway": "cycleway",
+      "name": "NB Stanley Park Causeway Bike Route",
+      "oneway": "yes",
+      "oneway:foot": "no",
+      "segregated": "no",
+      "surface": "concrete"
+    },
+    "nodeIds": [
+      12482619447, 1309734986, 3678410831, 1309735146, 1309735761, 1309734934,
+      1309735462, 845618424
+    ],
+    "coordinates": [
+      [-123.1360888, 49.2964143],
+      [-123.1361107, 49.296442],
+      [-123.1361206, 49.2964549],
+      [-123.1361856, 49.2966403],
+      [-123.1362379, 49.2967675],
+      [-123.1363679, 49.2969733],
+      [-123.1364271, 49.2970433],
+      [-123.1364968, 49.2971147]
+    ],
+    "runtimeScope": {
+      "routeId": "lions:south:walk-entry",
+      "surfaceId": "lions:east-walk",
+      "layer": 1,
+      "allowedModes": ["walk"]
+    },
+    "physicalPolicy": "Only actual new northbound exit asphalt overlap: conform walk road top, subtract raised shoulder/curb inside the finite motor ribbon, retain original outer planes and walk permissions.",
+    "bundledSourceGeometry": {
+      "type": "LineString",
+      "coordinates": [
+        [-123.1360888, 49.2964143],
+        [-123.1361206, 49.2964549],
+        [-123.1361856, 49.2966403],
+        [-123.1362379, 49.2967675],
+        [-123.1363679, 49.2969733],
+        [-123.1364271, 49.2970433],
+        [-123.1364968, 49.2971147]
+      ]
+    }
+  },
+  "groundApproach": {
+    "id": 116061622,
+    "version": 9,
+    "timestamp": "2025-01-08T02:31:49Z",
+    "apiUrl": "https://api.openstreetmap.org/api/0.6/way/116061622/full.json",
+    "sourceUrl": "https://www.openstreetmap.org/way/116061622",
+    "tags": {
+      "highway": "cycleway",
+      "name": "NB Stanley Park Causeway Bike Route",
+      "oneway": "yes",
+      "surface": "asphalt"
+    },
+    "nodeIds": [1309735266, 3678410845, 12482619448, 3678410839, 12482619447],
+    "coordinates": [
+      [-123.136055, 49.2963264],
+      [-123.1360694, 49.2963396],
+      [-123.1360826, 49.2963617],
+      [-123.136082, 49.2964016],
+      [-123.1360888, 49.2964143]
+    ],
+    "bundledSourceGeometry": {
+      "type": "LineString",
+      "coordinates": [
+        [-123.136055, 49.2963264],
+        [-123.1360694, 49.2963396],
+        [-123.1360826, 49.2963617],
+        [-123.136082, 49.2964016],
+        [-123.1360888, 49.2964143]
+      ]
+    },
+    "sharedMotorNodeId": 1309735266,
+    "connectedProtectedWalkNodeId": 12482619447,
+    "physicalPolicy": "Only actual NB exit asphalt overlap is at grade; preserve original outer planes and all ground path/source permissions."
+  }
+}

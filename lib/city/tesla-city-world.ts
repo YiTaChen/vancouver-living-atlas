@@ -19,7 +19,8 @@ import type {
   TeslaGroundDepartureQuery,
   TeslaWorld as TeslaWorldContract,
 } from './tesla-state';
-import type { TravelSurfaceIndex } from './travel-surfaces';
+import { TravelSurfaceIndex } from './travel-surfaces';
+import type { SurfaceConnection } from './surface-reachability';
 import type { WaterSurface, WaterWorld } from './water-world';
 import {
   TeslaRenderedRoofDetailsWorld,
@@ -49,6 +50,311 @@ export interface TeslaRoadSpawn {
     surfaceId: string;
     layer: number;
     allowedModes: readonly ('walk' | 'drive')[];
+  };
+}
+export interface TeslaRoadSeam {
+  groups: readonly [string, string];
+  a: readonly [number, number];
+  b: readonly [number, number];
+  drive: boolean;
+  heightDeltaM: number;
+  maxSeamStep: number;
+}
+/** A physical peer relation exists only while the real tyre rectangle straddles
+ * the finite, source-validated seam. It grants no persistent floor identity. */
+export function teslaRoadSeamConnections(
+  pose: TeslaPose,
+  shape: TeslaShape,
+  seams: readonly TeslaRoadSeam[],
+): readonly (readonly [string, string])[] {
+  if (
+    !shape.groundSupport ||
+    seams.length > 16 ||
+    ![...pose.position, ...pose.quaternion].every(Number.isFinite)
+  )
+    return [];
+  const axes = [new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 1)].map(
+    (v) =>
+      v.applyQuaternion(new THREE.Quaternion(...pose.quaternion).normalize()),
+  );
+  const wheels = shape.groundSupport.wheelContacts.map((w) =>
+    new THREE.Vector3(...w)
+      .applyQuaternion(new THREE.Quaternion(...pose.quaternion).normalize())
+      .add(vector(pose.position)),
+  );
+  const result: (readonly [string, string])[] = [];
+  for (const seam of seams) {
+    if (
+      !seam.drive ||
+      ![...seam.a, ...seam.b, seam.heightDeltaM, seam.maxSeamStep].every(
+        Number.isFinite,
+      ) ||
+      seam.maxSeamStep < 0 ||
+      seam.maxSeamStep > 0.05 ||
+      Math.abs(seam.heightDeltaM) > seam.maxSeamStep + 1e-7
+    )
+      continue;
+    const dx = seam.b[0] - seam.a[0],
+      dz = seam.b[1] - seam.a[1],
+      length = Math.hypot(dx, dz);
+    if (length < 0.1 || length > 16) continue;
+    const normal = new THREE.Vector3(-dz / length, 0, dx / length);
+    const signs = wheels.map(
+      (w) => (w.x - seam.a[0]) * normal.x + (w.z - seam.a[1]) * normal.z,
+    );
+    if (Math.min(...signs) > 1e-6 || Math.max(...signs) < -1e-6) continue;
+    if (
+      axes.some((axis) => {
+        const wheel = wheels.map((w) => w.x * axis.x + w.z * axis.z),
+          a = seam.a[0] * axis.x + seam.a[1] * axis.z,
+          b = seam.b[0] * axis.x + seam.b[1] * axis.z;
+        return (
+          Math.max(...wheel) < Math.min(a, b) - 1e-6 ||
+          Math.min(...wheel) > Math.max(a, b) + 1e-6
+        );
+      })
+    )
+      continue;
+    result.push(seam.groups);
+    if (result.length > 4) return [];
+  }
+  return result;
+}
+export interface TeslaRoadOverlap {
+  groups: readonly [string, string];
+  center: readonly [number, number];
+  radiusM: number;
+  maxSeamStepM: number;
+  floor: (group: string, x: number, z: number) => number | undefined;
+  /** Spatially bounded edges of the actual source paving; never inferred road widths. */
+  edges?: (
+    x: number,
+    z: number,
+    radiusM: number,
+  ) => readonly {
+    a: readonly [number, number];
+    b: readonly [number, number];
+  }[];
+  /** Exact source seam; stripHalfWidthM is physical paving, not suspension tolerance. */
+  seam?: {
+    a: readonly [number, number];
+    b: readonly [number, number];
+    stripHalfWidthM: number;
+  };
+}
+/** A real source-owned junction can share physical paving beyond its source
+ * graph node. Prove the locally overlapping tops before using body envelopes. */
+export function teslaRoadOverlapConnections(
+  pose: TeslaPose,
+  shape: TeslaShape,
+  overlaps: readonly TeslaRoadOverlap[],
+): readonly (readonly [string, string])[] {
+  if (
+    !shape.groundSupport ||
+    overlaps.length > 8 ||
+    ![...pose.position, ...pose.quaternion].every(Number.isFinite)
+  )
+    return [];
+  const quaternion = new THREE.Quaternion(...pose.quaternion).normalize(),
+    right = new THREE.Vector3(1, 0, 0).applyQuaternion(quaternion),
+    forward = new THREE.Vector3(0, 0, 1).applyQuaternion(quaternion);
+  const pairs: (readonly [string, string])[] = [];
+  for (const overlap of overlaps) {
+    if (
+      ![...overlap.center, overlap.radiusM, overlap.maxSeamStepM].every(
+        Number.isFinite,
+      ) ||
+      overlap.radiusM <= 0 ||
+      overlap.radiusM > 36 ||
+      overlap.maxSeamStepM < 0 ||
+      overlap.maxSeamStepM > 0.025 ||
+      Math.hypot(
+        pose.position[0] - overlap.center[0],
+        pose.position[2] - overlap.center[1],
+      ) >
+        overlap.radiusM + Math.hypot(shape.halfExtents[0], shape.halfExtents[2])
+    )
+      continue;
+    let shared = 0,
+      valid = true;
+    const probes: THREE.Vector3[] = [];
+    const determinant = right.x * forward.z - right.z * forward.x;
+    if (Math.abs(determinant) <= 0.5) continue;
+    const up = new THREE.Vector3(0, 1, 0).applyQuaternion(quaternion),
+      local = (x: number, z: number) => [
+        (x * forward.z - z * forward.x) / determinant,
+        (z * right.x - x * right.z) / determinant,
+      ],
+      upLocal = local(up.x, up.z),
+      extents = [
+        shape.halfExtents[0] +
+          shape.clearance +
+          Math.abs(upLocal[0]) * shape.halfExtents[1],
+        shape.halfExtents[2] +
+          shape.clearance +
+          Math.abs(upLocal[1]) * shape.halfExtents[1],
+      ];
+    const appendSegment = (
+      a: readonly [number, number],
+      b: readonly [number, number],
+    ) => {
+      if (![...a, ...b].every(Number.isFinite)) return false;
+      const dx = b[0] - a[0],
+        dz = b[1] - a[1],
+        length = Math.hypot(dx, dz);
+      if (length < 1e-8 || length > 128) return false;
+      const start = local(a[0] - pose.position[0], a[1] - pose.position[2]),
+        delta = local(dx, dz);
+      let lo = 0,
+        hi = 1;
+      for (let axis = 0; axis < 2; axis++) {
+        if (Math.abs(delta[axis]) < 1e-12) {
+          if (Math.abs(start[axis]) > extents[axis]) hi = -1;
+        } else {
+          const t0 = (-extents[axis] - start[axis]) / delta[axis],
+            t1 = (extents[axis] - start[axis]) / delta[axis];
+          lo = Math.max(lo, Math.min(t0, t1));
+          hi = Math.min(hi, Math.max(t0, t1));
+        }
+      }
+      if (lo <= hi)
+        for (const t of [lo, (lo + hi) / 2, hi])
+          probes.push(
+            new THREE.Vector3(a[0] + dx * t, pose.position[1], a[1] + dz * t),
+          );
+      return true;
+    };
+    // A diagonal road junction or an 8cm cap can enter one bumper corner
+    // between the grid points. Probe actual source edges clipped to this OBB.
+    const seam = overlap.seam;
+    if (
+      seam &&
+      [...seam.a, ...seam.b, seam.stripHalfWidthM].every(Number.isFinite) &&
+      seam.stripHalfWidthM >= 0 &&
+      seam.stripHalfWidthM <= 0.08
+    ) {
+      const dx = seam.b[0] - seam.a[0],
+        dz = seam.b[1] - seam.a[1],
+        length = Math.hypot(dx, dz);
+      if (length >= 0.1 && length <= 16)
+        for (const offset of [-seam.stripHalfWidthM, 0, seam.stripHalfWidthM])
+          appendSegment(
+            [
+              seam.a[0] - (dz / length) * offset,
+              seam.a[1] + (dx / length) * offset,
+            ],
+            [
+              seam.b[0] - (dz / length) * offset,
+              seam.b[1] + (dx / length) * offset,
+            ],
+          );
+    }
+    const edges =
+      overlap.edges?.(
+        pose.position[0],
+        pose.position[2],
+        Math.hypot(...extents),
+      ) ?? [];
+    if (
+      edges.length > 1024 ||
+      edges.some((edge) => !appendSegment(edge.a, edge.b))
+    )
+      continue;
+    for (const x of [-1, 0, 1])
+      for (const z of [-1, 0, 1]) {
+        const point = vector(pose.position)
+          .addScaledVector(right, x * shape.halfExtents[0])
+          .addScaledVector(forward, z * shape.halfExtents[2]);
+        probes.push(point);
+      }
+    for (const point of probes) {
+      if (
+        Math.hypot(point.x - overlap.center[0], point.z - overlap.center[1]) >
+        overlap.radiusM
+      )
+        continue;
+      const a = overlap.floor(overlap.groups[0], point.x, point.z),
+        b = overlap.floor(overlap.groups[1], point.x, point.z);
+      if (a === undefined || b === undefined) continue;
+      shared++;
+      if (
+        !Number.isFinite(a) ||
+        !Number.isFinite(b) ||
+        Math.abs(a - b) > overlap.maxSeamStepM + 1e-7
+      )
+        valid = false;
+    }
+    if (valid && shared) pairs.push(overlap.groups);
+  }
+  return pairs;
+}
+/** Build once; an individual car query visits at most four 8m source cells. */
+function roadOverlapEdges(
+  surfaces: TravelSurfaceIndex['surfaces'],
+): NonNullable<TeslaRoadOverlap['edges']> {
+  const cells = new Map<
+      string,
+      Set<{ a: readonly [number, number]; b: readonly [number, number] }>
+    >(),
+    unique = new Map<
+      string,
+      { a: readonly [number, number]; b: readonly [number, number] }
+    >();
+  for (const surface of surfaces)
+    for (let n = 0; n < surface.triangles.length; n += 9)
+      for (let edge = 0; edge < 3; edge++) {
+        const i = n + edge * 3,
+          j = n + ((edge + 1) % 3) * 3,
+          a: readonly [number, number] = [
+            surface.triangles[i],
+            surface.triangles[i + 2],
+          ],
+          b: readonly [number, number] = [
+            surface.triangles[j],
+            surface.triangles[j + 2],
+          ],
+          key = [a.join(','), b.join(',')].sort().join('|');
+        if (unique.has(key)) continue;
+        if (
+          ![...a, ...b].every(Number.isFinite) ||
+          Math.hypot(b[0] - a[0], b[1] - a[1]) < 1e-8
+        )
+          continue;
+        const record = { a, b };
+        unique.set(key, record);
+        const x0 = Math.floor(Math.min(a[0], b[0]) / 8),
+          x1 = Math.floor(Math.max(a[0], b[0]) / 8),
+          z0 = Math.floor(Math.min(a[1], b[1]) / 8),
+          z1 = Math.floor(Math.max(a[1], b[1]) / 8);
+        if ((x1 - x0 + 1) * (z1 - z0 + 1) > 64)
+          return () => Array.from({ length: 1025 }, () => record);
+        for (let x = x0; x <= x1; x++)
+          for (let z = z0; z <= z1; z++) {
+            const k = `${x},${z}`,
+              cell = cells.get(k) ?? new Set();
+            cell.add(record);
+            cells.set(k, cell);
+          }
+      }
+  return (x, z, radius) => {
+    if (![x, z, radius].every(Number.isFinite) || radius < 0 || radius > 4)
+      return [];
+    const result = new Set<{
+      a: readonly [number, number];
+      b: readonly [number, number];
+    }>();
+    for (
+      let cx = Math.floor((x - radius) / 8);
+      cx <= Math.floor((x + radius) / 8);
+      cx++
+    )
+      for (
+        let cz = Math.floor((z - radius) / 8);
+        cz <= Math.floor((z + radius) / 8);
+        cz++
+      )
+        for (const edge of cells.get(`${cx},${cz}`) ?? []) result.add(edge);
+    return [...result];
   };
 }
 export interface TeslaPrism {
@@ -170,9 +476,11 @@ export function teslaPrismSource(prism: TeslaPrism): TeslaGeometrySource {
         shapes[0],
         shapes.slice(1),
       ).entries()) {
-        const vertices = triangle.map(
-          (j): TeslaVec3 => [flat[j].x, prism.maxY, flat[j].y],
-        ) as [TeslaVec3, TeslaVec3, TeslaVec3];
+        const vertices = triangle.map((j): TeslaVec3 => [
+          flat[j].x,
+          prism.maxY,
+          flat[j].y,
+        ]) as [TeslaVec3, TeslaVec3, TeslaVec3];
         add(
           `${prism.id}:roof`,
           `${prism.id}:roof:${i}`,
@@ -368,7 +676,7 @@ export function teslaMeshSource(
           if (!box.setFromPoints([a, b, c]).intersectsBox(region)) continue;
           const normal = b.clone().sub(a).cross(c.clone().sub(a)).normalize();
           if (normal.lengthSq() < 0.5) continue;
-          if (kind === 'ground' && normal.y < 0) normal.negate();
+          if (kind === 'ground' && adherable && normal.y < 0) normal.negate();
           const surfaceId = `${id}:face:${i / 3}`;
           const face = triangleFace(
             surfaceId,
@@ -646,8 +954,253 @@ export class CityTeslaWorld extends TeslaWorld {
     e.terrain?.traverse(collectGround);
     sources.push(...groundSources);
     const index = e.data.travelSurfaces as TravelSurfaceIndex | undefined;
+    const prospectRampGroup = 'protected:prospect:east-exit:1585:1';
+    const prospectEntryGroup = 'protected:prospect:entry-main:1';
+    const westEntryGroup = 'protected:stanley:west-entry-main:1';
+    const northRampGroup = 'protected:stanley:northbound-motor-ramp:1';
+    const northEntryGroup = 'protected:stanley:northbound-entry-main:1';
+    const entry = e.data.prospectOverpass?.rampEntry as
+      | {
+          center: readonly [number, number];
+          radiusM: number;
+          lowerSourceIds: readonly number[];
+          rampRouteId: string;
+          maxSeamStepM: number;
+        }
+      | undefined;
+    const atRoadEntry = (
+      surface: TravelSurfaceIndex['surfaces'][number],
+      metadata: typeof entry,
+      routeId: string,
+      maxRadiusM: number,
+    ) => {
+      if (
+        !metadata ||
+        metadata.rampRouteId !== routeId ||
+        !Number.isFinite(metadata.radiusM) ||
+        metadata.radiusM <= 0 ||
+        metadata.radiusM > maxRadiusM ||
+        surface.surfaceId !== 'lions:road' ||
+        surface.layer !== 1 ||
+        !metadata.lowerSourceIds.includes(
+          (surface as { sourceId?: number }).sourceId ?? -1,
+        )
+      )
+        return false;
+      const radius = metadata.radiusM + 4;
+      let minX = Infinity,
+        maxX = -Infinity,
+        minZ = Infinity,
+        maxZ = -Infinity;
+      for (let i = 0; i < surface.triangles.length; i += 3) {
+        minX = Math.min(minX, surface.triangles[i]);
+        maxX = Math.max(maxX, surface.triangles[i]);
+        minZ = Math.min(minZ, surface.triangles[i + 2]);
+        maxZ = Math.max(maxZ, surface.triangles[i + 2]);
+      }
+      return (
+        minX <= metadata.center[0] + radius &&
+        maxX >= metadata.center[0] - radius &&
+        minZ <= metadata.center[1] + radius &&
+        maxZ >= metadata.center[1] - radius
+      );
+    };
+    const west = e.data.stanleyWestRamp as
+      | {
+          rampEntry?: NonNullable<typeof entry>;
+          connections?: readonly SurfaceConnection[];
+        }
+      | undefined;
+    const northbound = e.data.stanleyNorthboundRamp as
+      | {
+          rampEntry?: NonNullable<typeof entry>;
+          groundEntry?: {
+            center: readonly [number, number];
+            radiusM: number;
+            gateId: string;
+          };
+          connections?: readonly SurfaceConnection[];
+        }
+      | undefined;
+    const atNorthEntry = (surface: TravelSurfaceIndex['surfaces'][number]) =>
+      atRoadEntry(
+        surface,
+        northbound?.rampEntry,
+        'stanley:northbound-motor-ramp',
+        20,
+      );
+    const atEntry = (surface: TravelSurfaceIndex['surfaces'][number]) =>
+      atRoadEntry(surface, entry, 'prospect:east-exit', 12);
+    const atWestEntry = (surface: TravelSurfaceIndex['surfaces'][number]) =>
+      atRoadEntry(surface, west?.rampEntry, 'stanley:west-motor-ramp', 20);
+    const southModelGroup = 'protected:stanley:south-main:1';
+    const south = e.data.stanleySouthRamp as
+      | {
+          connections?: readonly SurfaceConnection[];
+          merge?: readonly [number, number];
+          geometry?: { surfaces: TravelSurfaceIndex['surfaces'] };
+        }
+      | undefined;
+    type MainSection = {
+      sourceId: number;
+      routeId: string;
+      surfaceId: string;
+      layer: number;
+      s0: number;
+      s1: number;
+      a: readonly [number, number];
+      b: readonly [number, number];
+      width: number;
+    };
+    const westSections = (
+      (e.data.causeway?.segments ?? []) as MainSection[]
+    ).filter(
+      (s) =>
+        s.routeId === 'causeway-south-west' &&
+        s.surfaceId === 'lions:road' &&
+        s.layer === 1,
+    );
+    const mainSections = westSections.filter((s) =>
+      [363687651, 74233349].includes(s.sourceId),
+    );
+    let mergeStation: number | undefined;
+    if (south?.merge)
+      for (const segment of mainSections) {
+        const dx = segment.b[0] - segment.a[0],
+          dz = segment.b[1] - segment.a[1],
+          l2 = dx * dx + dz * dz;
+        if (l2 < 1e-9) continue;
+        const t = Math.max(
+          0,
+          Math.min(
+            1,
+            ((south.merge[0] - segment.a[0]) * dx +
+              (south.merge[1] - segment.a[1]) * dz) /
+              l2,
+          ),
+        );
+        if (
+          Math.hypot(
+            south.merge[0] - segment.a[0] - dx * t,
+            south.merge[1] - segment.a[1] - dz * t,
+          ) <= 0.001
+        )
+          mergeStation = segment.s0 + (segment.s1 - segment.s0) * t;
+      }
+    const modeledMain =
+      mergeStation === undefined
+        ? []
+        : mainSections
+            .filter(
+              (segment) =>
+                segment.s1 >= mergeStation! - 35 &&
+                segment.s0 <= mergeStation! + 35,
+            )
+            .sort((a, b) => a.s0 - b.s0);
+    const modeledInputs = new Set(
+      modeledMain.map((section) =>
+        (e.data.causeway.segments as MainSection[]).indexOf(section),
+      ),
+    );
+    const boundaryInputs = new Set(
+      modeledMain.length
+        ? westSections
+            .filter((section) =>
+              [modeledMain[0].s0, modeledMain.at(-1)!.s1].some(
+                (station) =>
+                  section.s0 <= station + 3 && section.s1 >= station - 3,
+              ),
+            )
+            .map((section) =>
+              (e.data.causeway.segments as MainSection[]).indexOf(section),
+            )
+        : [],
+    );
+    // The actual merge also reaches the adjacent central main way. Select
+    // only complete original sections whose every road vertex lies inside the
+    // declared 20m entry; their real outer section seams stay explicit below.
+    const northCentralInputs = new Set<number>();
+    if (northbound?.rampEntry?.rampRouteId === 'stanley:northbound-motor-ramp')
+      for (const surface of index?.surfaces ?? []) {
+        if (
+          surface.routeId !== 'causeway-central' ||
+          surface.surfaceId !== 'lions:road' ||
+          surface.layer !== 1 ||
+          (surface as { sourceId?: number }).sourceId !== 257712148 ||
+          !surface.allowedModes.includes('drive')
+        )
+          continue;
+        let inside = surface.triangles.length > 0;
+        for (let n = 0; n < surface.triangles.length; n += 3)
+          if (
+            Math.hypot(
+              surface.triangles[n] - northbound.rampEntry.center[0],
+              surface.triangles[n + 2] - northbound.rampEntry.center[1],
+            ) > northbound.rampEntry.radiusM
+          )
+            inside = false;
+        const input = (surface as { inputIndex?: number }).inputIndex;
+        if (inside && input !== undefined) northCentralInputs.add(input);
+      }
+    const surfaceGroup = (surface: TravelSurfaceIndex['surfaces'][number]) =>
+      atEntry(surface)
+        ? prospectEntryGroup
+        : atWestEntry(surface)
+          ? westEntryGroup
+          : atNorthEntry(surface) ||
+              (surface.routeId === 'causeway-central' &&
+                (surface as { sourceId?: number }).sourceId === 257712148 &&
+                northCentralInputs.has(
+                  (surface as { inputIndex?: number }).inputIndex ?? -1,
+                ))
+            ? northEntryGroup
+            : surface.routeId === 'causeway-south-west' &&
+                surface.surfaceId === 'lions:road' &&
+                surface.layer === 1 &&
+                modeledInputs.has(
+                  (surface as { inputIndex?: number }).inputIndex ?? -1,
+                )
+              ? southModelGroup
+              : ((surface.routeId === 'prospect:east-exit' &&
+                    surface.surfaceId === 'lions:road') ||
+                    (surface.routeId === 'causeway-east-path' &&
+                      surface.surfaceId === 'lions:east-walk' &&
+                      (surface as { sourceId?: number }).sourceId ===
+                        1252160599)) &&
+                  surface.layer === 1
+                ? prospectRampGroup
+                : surface.routeId === 'causeway-west-path' &&
+                    surface.surfaceId === 'lions:west-upper' &&
+                    surface.layer === 1 &&
+                    (surface as { sourceId?: number }).sourceId === 1074018477
+                  ? 'protected:park:prospect-overpass:2'
+                  : surface.layer === 1 &&
+                      ((surface.routeId === 'stanley:northbound-motor-ramp' &&
+                        surface.surfaceId === 'lions:road') ||
+                        (surface.routeId === 'causeway-east-path' &&
+                          surface.surfaceId === 'lions:east-walk' &&
+                          (surface as { sourceId?: number }).sourceId ===
+                            1252160597))
+                    ? northRampGroup
+                    : `protected:${surface.surfaceId}:${surface.layer}`;
+    const approachGroups = new Map<number, string>();
+    for (const surface of index?.surfaces ?? []) {
+      const group = surfaceGroup(surface),
+        input = (surface as { inputIndex?: number }).inputIndex;
+      if (
+        input !== undefined &&
+        [prospectEntryGroup, westEntryGroup, northEntryGroup].includes(group) &&
+        surface.allowedModes.includes('drive')
+      ) {
+        approachGroups.set(input, group);
+        for (const neighbor of [input - 1, input + 1])
+          if (neighbor >= 0) boundaryInputs.add(neighbor);
+      }
+    }
+    const northJunctionSurfaces: TravelSurfaceIndex['surfaces'][number][] = [];
     for (const [i, surface] of (index?.surfaces ?? []).entries()) {
-      const faces: TeslaFace[] = [];
+      const faces: TeslaFace[] = [],
+        northJunctionTriangles: number[] = [];
       for (let n = 0; n < surface.triangles.length; n += 9) {
         const p = surface.triangles.slice(n, n + 9),
           id = `protected:${i}:face:${n / 9}`;
@@ -656,6 +1209,23 @@ export class CityTeslaWorld extends TeslaWorld {
           [p[3], p[4], p[5]],
           [p[6], p[7], p[8]],
         ];
+        // The builder batches unrelated junctions in one surface. Scope this
+        // exact North merge cap per physical triangle, never by surface alone.
+        const northJunction =
+          northbound?.rampEntry?.rampRouteId ===
+            'stanley:northbound-motor-ramp' &&
+          surface.routeId === 'junction' &&
+          surface.surfaceId === 'lions:road' &&
+          surface.layer === 1 &&
+          (surface as { sourceId?: number }).sourceId === 363651505 &&
+          vertices.every(
+            (v) =>
+              Math.hypot(
+                v[0] - northbound.rampEntry!.center[0],
+                v[2] - northbound.rampEntry!.center[1],
+              ) <= northbound.rampEntry!.radiusM,
+          );
+        if (northJunction) northJunctionTriangles.push(...p);
         const normal = new THREE.Triangle(
           ...(vertices.map(vector) as [
             THREE.Vector3,
@@ -671,11 +1241,16 @@ export class CityTeslaWorld extends TeslaWorld {
             surface.allowedModes.includes('drive') ? 'ground' : 'obstacle',
             vertices,
             surface.allowedModes.includes('drive') && normal.y >= 0.92,
-            `protected:${surface.surfaceId}:${surface.layer}`,
+            northJunction ? northEntryGroup : surfaceGroup(surface),
             triple(normal),
           ),
         );
       }
+      if (northJunctionTriangles.length)
+        northJunctionSurfaces.push({
+          ...surface,
+          triangles: northJunctionTriangles,
+        });
       sources.push({
         id: `protected:${i}`,
         bounds: new THREE.Box3().setFromPoints(
@@ -698,6 +1273,22 @@ export class CityTeslaWorld extends TeslaWorld {
           new THREE.Matrix4().fromArray(bridge.matrix),
         ),
       );
+    // These are the actual continuous road slab boundaries, never support.
+    // Only a complete upper-road tyre proof lets the authored body sections
+    // clear a buried end cap; air and all other floors retain the full hull.
+    for (const [i, mesh] of (
+      (e.data.prospectSlabMeshes ?? []) as THREE.Mesh[]
+    ).entries())
+      if (mesh.userData.prospectSlab === true)
+        sources.push(
+          teslaMeshSource(
+            mesh,
+            `prospect-slab:${i}`,
+            'ground',
+            false,
+            'protected:park:prospect-overpass:2',
+          ),
+        );
     for (const [i, detail] of e.landmarkDetails.entries()) {
       detail.holder.updateWorldMatrix(true, true);
       let part = 0;
@@ -713,8 +1304,11 @@ export class CityTeslaWorld extends TeslaWorld {
           );
       });
     }
-    if(e.vehicleImpacts) sources.push(...e.vehicleImpacts.sources);
-    for (const [i, tree] of (e.vehicleImpacts ? [] : (e.detailedTrees?.trees ?? [])).entries()) {
+    if (e.vehicleImpacts) sources.push(...e.vehicleImpacts.sources);
+    for (const [i, tree] of (e.vehicleImpacts
+      ? []
+      : (e.detailedTrees?.trees ?? [])
+    ).entries()) {
       const base = tree.y ?? e.elevation(tree.x, tree.z),
         radius = Math.max(0.18, tree.h * TESLA_TREE_ENVELOPE.trunkRadius),
         crownRadius = tree.h * TESLA_TREE_ENVELOPE.crownRadius,
@@ -738,7 +1332,10 @@ export class CityTeslaWorld extends TeslaWorld {
         ),
       );
     }
-    for (const [i, [x, z]] of (e.vehicleImpacts ? [] : (e.data.streetLampPoints ?? [])).entries()) {
+    for (const [i, [x, z]] of (e.vehicleImpacts
+      ? []
+      : (e.data.streetLampPoints ?? [])
+    ).entries()) {
       const base = e.elevation(x, z) + 1;
       sources.push(
         boxSource(
@@ -771,8 +1368,401 @@ export class CityTeslaWorld extends TeslaWorld {
     const low = project([-123.225, 49.334]),
       high = project([-123.089, 49.26]);
     if (e.waterWorld) sources.push(waterSource(e, low, high));
+    const prospect = e.data.prospectOverpass as
+      | {
+          gates: readonly SurfaceConnection[];
+          rampSegments: {
+            a: readonly [number, number];
+            b: readonly [number, number];
+            width: number;
+          }[];
+        }
+      | undefined;
+    const upperGroup = 'protected:park:prospect-overpass:2';
+    const floorIndices = new Map<string, TravelSurfaceIndex>();
+    for (const group of [
+      upperGroup,
+      prospectRampGroup,
+      'protected:lions:road:1',
+      southModelGroup,
+      prospectEntryGroup,
+      westEntryGroup,
+      northEntryGroup,
+      northRampGroup,
+    ])
+      floorIndices.set(
+        group,
+        new TravelSurfaceIndex([
+          ...(index?.surfaces ?? []).filter(
+            (surface) =>
+              surfaceGroup(surface) === group &&
+              (group !== 'protected:lions:road:1' ||
+                boundaryInputs.has(
+                  (surface as { inputIndex?: number }).inputIndex ?? -1,
+                )) &&
+              surface.allowedModes.includes('drive'),
+          ),
+          ...(group === northEntryGroup ? northJunctionSurfaces : []),
+        ]),
+      );
+    const seams: TeslaRoadSeam[] = [];
+    for (const [section, point] of modeledMain.length
+      ? ([
+          [modeledMain[0], modeledMain[0].a],
+          [modeledMain.at(-1)!, modeledMain.at(-1)!.b],
+        ] as const)
+      : []) {
+      const dx = section.b[0] - section.a[0],
+        dz = section.b[1] - section.a[1],
+        length = Math.hypot(dx, dz);
+      const before = floorIndices
+          .get('protected:lions:road:1')
+          ?.lookup(...point)[0]?.y,
+        after = floorIndices.get(southModelGroup)?.lookup(...point)[0]?.y;
+      if (length < 1e-6 || before === undefined || after === undefined)
+        continue;
+      seams.push({
+        groups: ['protected:lions:road:1', southModelGroup],
+        a: [
+          point[0] - ((dz / length) * section.width) / 2,
+          point[1] + ((dx / length) * section.width) / 2,
+        ],
+        b: [
+          point[0] + ((dz / length) * section.width) / 2,
+          point[1] - ((dx / length) * section.width) / 2,
+        ],
+        drive: true,
+        heightDeltaM: after - before,
+        maxSeamStep: 0.025,
+      });
+    }
+    // Each bounded lower approach is an exact subset of the original source
+    // sections. Its only outside peers are the real adjacent section seams.
+    const causewaySections = (e.data.causeway?.segments ?? []) as MainSection[];
+    for (let i = 1; i < causewaySections.length; i++) {
+      const before = causewaySections[i - 1],
+        after = causewaySections[i],
+        g0 =
+          approachGroups.get(i - 1) ??
+          (modeledInputs.has(i - 1)
+            ? southModelGroup
+            : 'protected:lions:road:1'),
+        g1 =
+          approachGroups.get(i) ??
+          (modeledInputs.has(i) ? southModelGroup : 'protected:lions:road:1');
+      if (
+        g0 === g1 ||
+        (!approachGroups.has(i - 1) && !approachGroups.has(i)) ||
+        before.routeId !== after.routeId ||
+        before.surfaceId !== 'lions:road' ||
+        after.surfaceId !== 'lions:road' ||
+        before.layer !== 1 ||
+        after.layer !== 1 ||
+        Math.hypot(before.b[0] - after.a[0], before.b[1] - after.a[1]) > 0.001
+      )
+        continue;
+      const point = after.a,
+        y0 = floorIndices.get(g0)?.lookup(...point)[0]?.y,
+        y1 = floorIndices.get(g1)?.lookup(...point)[0]?.y,
+        dx = after.b[0] - after.a[0],
+        dz = after.b[1] - after.a[1],
+        length = Math.hypot(dx, dz),
+        width = Math.min(before.width, after.width);
+      if (
+        y0 === undefined ||
+        y1 === undefined ||
+        length < 1e-6 ||
+        Math.abs(y1 - y0) > 0.025
+      )
+        continue;
+      seams.push({
+        groups: [g0, g1],
+        a: [
+          point[0] - ((dz / length) * width) / 2,
+          point[1] + ((dx / length) * width) / 2,
+        ],
+        b: [
+          point[0] + ((dz / length) * width) / 2,
+          point[1] - ((dx / length) * width) / 2,
+        ],
+        drive: true,
+        heightDeltaM: y1 - y0,
+        maxSeamStep: 0.025,
+      });
+    }
+    const sourceGates = [
+      ...(prospect?.gates ?? []),
+      ...(south?.connections ?? []),
+      ...(west?.connections ?? []),
+      ...(northbound?.connections ?? []),
+    ];
+    for (const gate of sourceGates.length <= 16 ? sourceGates : []) {
+      let groups: [string, string],
+        a: readonly [number, number],
+        b: readonly [number, number];
+      if (
+        gate.geometry.kind === 'gate' &&
+        ['prospect:north-ground', 'prospect:south-ground'].includes(gate.id) &&
+        gate.from.surfaceId === 'ground' &&
+        gate.from.layer === 0 &&
+        gate.to.surfaceId === 'park:prospect-overpass' &&
+        gate.to.layer === 2
+      ) {
+        groups = ['ground:0', upperGroup];
+        a = gate.geometry.a;
+        b = gate.geometry.b;
+      } else if (
+        gate.id === 'stanley-northbound-legal-motor-ramp' &&
+        gate.geometry.kind === 'gate' &&
+        gate.from.surfaceId === 'ground' &&
+        gate.from.layer === 0 &&
+        gate.to.surfaceId === 'lions:road' &&
+        gate.to.layer === 1
+      ) {
+        groups = ['ground:0', northRampGroup];
+        a = gate.geometry.a;
+        b = gate.geometry.b;
+      } else if (
+        gate.id === 'stanley-west-legal-motor-exit' &&
+        gate.geometry.kind === 'gate' &&
+        gate.from.surfaceId === 'lions:road' &&
+        gate.from.layer === 1 &&
+        gate.to.surfaceId === 'park:prospect-overpass' &&
+        gate.to.layer === 2
+      ) {
+        groups = [westEntryGroup, upperGroup];
+        a = gate.geometry.a;
+        b = gate.geometry.b;
+      } else if (
+        gate.id === 'stanley-south-legal-motor-ramp' &&
+        gate.geometry.kind === 'gate' &&
+        gate.from.surfaceId === 'ground' &&
+        gate.from.layer === 0 &&
+        gate.to.surfaceId === 'lions:road' &&
+        gate.to.layer === 1
+      ) {
+        groups = ['ground:0', southModelGroup];
+        a = gate.geometry.a;
+        b = gate.geometry.b;
+      } else if (
+        gate.geometry.kind === 'junction' &&
+        prospect?.rampSegments.length &&
+        ((gate.id === 'prospect:east-exit-main-junction' &&
+          gate.from.surfaceId === 'lions:road' &&
+          gate.from.layer === 1 &&
+          gate.to.surfaceId === 'park:prospect-overpass' &&
+          gate.to.layer === 2) ||
+          (gate.id === 'prospect:causeway-east-exit' &&
+            gate.from.surfaceId === 'lions:road' &&
+            gate.from.layer === 1 &&
+            gate.to.surfaceId === 'lions:road' &&
+            gate.to.layer === 1))
+      ) {
+        const main = gate.id === 'prospect:east-exit-main-junction';
+        const segment = main
+          ? prospect.rampSegments.at(-1)!
+          : prospect.rampSegments[0];
+        const dx = segment.b[0] - segment.a[0],
+          dz = segment.b[1] - segment.a[1],
+          length = Math.hypot(dx, dz),
+          point = gate.geometry.center;
+        if (
+          length < 1e-6 ||
+          Math.hypot(
+            point[0] - (main ? segment.b[0] : segment.a[0]),
+            point[1] - (main ? segment.b[1] : segment.a[1]),
+          ) > 0.001
+        )
+          continue;
+        a = [
+          point[0] - ((dz / length) * segment.width) / 2,
+          point[1] + ((dx / length) * segment.width) / 2,
+        ];
+        b = [
+          point[0] + ((dz / length) * segment.width) / 2,
+          point[1] - ((dx / length) * segment.width) / 2,
+        ];
+        groups = main
+          ? [prospectRampGroup, upperGroup]
+          : [prospectEntryGroup, prospectRampGroup];
+      } else continue;
+      const point: [number, number] = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      const floor = (group: string) =>
+        floorIndices.get(group)?.lookup(...point)[0]?.y;
+      let y0 = floor(groups[0]);
+      const y1 = floor(groups[1]);
+      if (groups[0] === 'ground:0' && y1 !== undefined)
+        y0 = e.data.roadSurface?.sample(...point, y1);
+      if (y0 === undefined || y1 === undefined) continue;
+      seams.push({
+        groups,
+        a,
+        b,
+        drive: gate.allowedModes.includes('drive'),
+        heightDeltaM: y1 - y0,
+        maxSeamStep: gate.maxSeamStep ?? 0.025,
+      });
+    }
+    const overlaps: TeslaRoadOverlap[] =
+      entry && entry.rampRouteId === 'prospect:east-exit'
+        ? [
+            {
+              groups: [prospectEntryGroup, prospectRampGroup],
+              center: entry.center,
+              radiusM: entry.radiusM,
+              maxSeamStepM: entry.maxSeamStepM,
+              edges: roadOverlapEdges(
+                floorIndices.get(prospectEntryGroup)!.surfaces,
+              ),
+              floor: (group, x, z) =>
+                floorIndices.get(group)?.lookup(x, z)[0]?.y,
+            },
+          ]
+        : [];
+    if (west?.rampEntry?.rampRouteId === 'stanley:west-motor-ramp')
+      overlaps.push({
+        groups: [westEntryGroup, upperGroup],
+        center: west.rampEntry.center,
+        radiusM: west.rampEntry.radiusM,
+        maxSeamStepM: west.rampEntry.maxSeamStepM,
+        edges: roadOverlapEdges(floorIndices.get(westEntryGroup)!.surfaces),
+        floor: (group, x, z) => floorIndices.get(group)?.lookup(x, z)[0]?.y,
+      });
+    if (northbound?.rampEntry?.rampRouteId === 'stanley:northbound-motor-ramp')
+      overlaps.push({
+        groups: [northEntryGroup, northRampGroup],
+        center: northbound.rampEntry.center,
+        radiusM: northbound.rampEntry.radiusM,
+        maxSeamStepM: northbound.rampEntry.maxSeamStepM,
+        // Either source can end in a small bumper-corner overlap inside a
+        // larger face of its peer. Index both actual edges for that proof.
+        edges: roadOverlapEdges([
+          ...floorIndices.get(northEntryGroup)!.surfaces,
+          ...floorIndices.get(northRampGroup)!.surfaces,
+        ]),
+        floor: (group, x, z) => floorIndices.get(group)?.lookup(x, z)[0]?.y,
+      });
+    if (
+      northbound?.groundEntry?.gateId === 'stanley-northbound-legal-motor-ramp'
+    )
+      overlaps.push({
+        groups: ['ground:0', northRampGroup],
+        center: northbound.groundEntry.center,
+        radiusM: northbound.groundEntry.radiusM,
+        maxSeamStepM: 0.025,
+        edges: roadOverlapEdges(floorIndices.get(northRampGroup)!.surfaces),
+        floor: (group, x, z) => {
+          const upper = floorIndices.get(northRampGroup)?.lookup(x, z)[0]?.y;
+          return group === northRampGroup
+            ? upper
+            : upper === undefined
+              ? undefined
+              : e.data.roadSurface?.sample(x, z, upper);
+        },
+      });
+    for (const seam of seams.filter(
+      (seam) =>
+        seam.drive &&
+        seam.groups.includes('ground:0') &&
+        seam.groups.includes(upperGroup) &&
+        Math.abs(seam.heightDeltaM) <= seam.maxSeamStep,
+    )) {
+      overlaps.push({
+        groups: ['ground:0', upperGroup],
+        center: [(seam.a[0] + seam.b[0]) / 2, (seam.a[1] + seam.b[1]) / 2],
+        radiusM: 3.5,
+        maxSeamStepM: seam.maxSeamStep,
+        seam: { a: seam.a, b: seam.b, stripHalfWidthM: 0.04 },
+        floor: (group, x, z) => {
+          const upper = floorIndices.get(upperGroup)?.lookup(x, z)[0]?.y;
+          return group === upperGroup
+            ? upper
+            : upper === undefined
+              ? undefined
+              : e.data.roadSurface?.sample(x, z, upper);
+        },
+      });
+    }
+    for (const gate of prospect?.gates ?? []) {
+      if (
+        gate.id !== 'prospect:east-exit-main-junction' ||
+        gate.geometry.kind !== 'junction' ||
+        !gate.allowedModes.includes('drive') ||
+        gate.geometry.radius > 6.1
+      )
+        continue;
+      const seam = seams.find(
+        (s) =>
+          s.groups.includes(prospectRampGroup) && s.groups.includes(upperGroup),
+      );
+      if (!seam || Math.abs(seam.heightDeltaM) > 0.025) continue;
+      overlaps.push({
+        groups: [prospectRampGroup, upperGroup],
+        center: gate.geometry.center,
+        radiusM: gate.geometry.radius,
+        maxSeamStepM: 0.025,
+        edges: roadOverlapEdges(floorIndices.get(prospectRampGroup)!.surfaces),
+        seam: { a: seam.a, b: seam.b, stripHalfWidthM: 0 },
+        floor: (group, x, z) => floorIndices.get(group)?.lookup(x, z)[0]?.y,
+      });
+    }
+    if (south?.merge && south.geometry && modeledMain.length) {
+      const terminal = new TravelSurfaceIndex(
+        south.geometry.surfaces.filter(
+          (surface) =>
+            (surface as { sourceId?: number }).sourceId === 116061617 &&
+            surface.allowedModes.includes('drive'),
+        ),
+      );
+      overlaps.push({
+        groups: ['ground:0', southModelGroup],
+        center: south.merge,
+        radiusM: 35,
+        maxSeamStepM: 0.025,
+        edges: roadOverlapEdges(terminal.surfaces),
+        floor: (group, x, z) =>
+          group === 'ground:0'
+            ? terminal.lookup(x, z)[0]?.y
+            : floorIndices.get(southModelGroup)?.lookup(x, z)[0]?.y,
+      });
+    }
+    // A movement substep repeatedly proves the same two immutable road poses.
+    // Keep only exact inputs, so physical edge intersections are computed once.
+    const connectionCache = new Map<
+      string,
+      readonly (readonly [string, string])[]
+    >();
+    const roadConnections = (pose: TeslaPose, shape: TeslaShape) => {
+      const key = [
+        ...pose.position,
+        ...pose.quaternion,
+        ...shape.halfExtents,
+        shape.clearance,
+        ...(shape.groundSupport?.wheelContacts.flat() ?? []),
+      ].join(',');
+      const known = connectionCache.get(key);
+      if (known) return known;
+      const pairs = [
+        ...teslaRoadSeamConnections(pose, shape, seams),
+        ...teslaRoadOverlapConnections(pose, shape, overlaps),
+      ];
+      if (connectionCache.size >= 16)
+        connectionCache.delete(connectionCache.keys().next().value!);
+      connectionCache.set(key, pairs);
+      return pairs;
+    };
     super({
       sources,
+      modelGroundConnections: roadConnections,
+      modelGroundGroups: [
+        'protected:park:prospect-overpass:2',
+        prospectRampGroup,
+        southModelGroup,
+        prospectEntryGroup,
+        westEntryGroup,
+        northRampGroup,
+        northEntryGroup,
+      ],
       validPosition: ([x, y, z]) =>
         x >= low[0] &&
         x <= high[0] &&
@@ -791,15 +1781,23 @@ export class CityTeslaWorld extends TeslaWorld {
         });
   }
   override sweep(query: TeslaSweepQuery) {
-    const original=super.sweep(query), debris=this.e.vehicleImpacts?.sweepDebris(query);
-    const base=debris && (!original || debris.fraction<original.fraction)?debris:original;
+    const original = super.sweep(query),
+      debris = this.e.vehicleImpacts?.sweepDebris(query);
+    const base =
+      debris && (!original || debris.fraction < original.fraction)
+        ? debris
+        : original;
     return base?.fraction === 0
       ? base
       : nearestTeslaRoofDetailHit(base, this.roofDetails.sweep(query));
   }
   override sweepGroundDeparture(query: TeslaGroundDepartureQuery) {
-    const original=super.sweepGroundDeparture(query), debris=this.e.vehicleImpacts?.sweepDebris(query);
-    const base=debris && (!original || debris.fraction<original.fraction)?debris:original;
+    const original = super.sweepGroundDeparture(query),
+      debris = this.e.vehicleImpacts?.sweepDebris(query);
+    const base =
+      debris && (!original || debris.fraction < original.fraction)
+        ? debris
+        : original;
     return base?.fraction === 0
       ? base
       : nearestTeslaRoofDetailHit(base, this.roofDetails.sweep(query));

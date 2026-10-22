@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "source": "OpenStreetMap direct API area snapshot",
+  "sourceUrl": "https://api.openstreetmap.org/api/0.6/map.json?bbox=-123.165,49.292,-123.111,49.316",
+  "fetchedAt": "2026-10-22T09:46:25.550Z",
+  "sourceSha256": "59143148ea23bafc16c3c0b09356c538246185c3e837d4f2459dcbb167f73cee",
+  "attribution": {
+    "owner": "OpenStreetMap contributors",
+    "license": "ODbL 1.0",
+    "url": "https://www.openstreetmap.org/copyright"
+  },
+  "route": {
+    "wayIds": [41998502, 877408900, 256879277],
+    "startNode": 520753183,
+    "endNode": 520753195,
+    "citySourceId": 1713,
+    "crossingWayId": 1074018477,
+    "lowerWayIds": [70954678, 1252160596],
+    "upperWayId": 120254680,
+    "citySourceCoordinates": [
+      [-123.1435953, 49.3100405],
+      [-123.1437575, 49.3099883],
+      [-123.1439742, 49.3099505],
+      [-123.1442037, 49.3099668],
+      [-123.1444144, 49.3100499],
+      [-123.1445553, 49.3102166],
+      [-123.1445366, 49.3104043],
+      [-123.1444222, 49.3105336],
+      [-123.1440149, 49.3107885],
+      [-123.1436903, 49.3110099],
+      [-123.1433213, 49.3112856],
+      [-123.1429334, 49.311628],
+      [-123.142809, 49.3117615]
+    ]
+  },
+  "model": {
+    "widthM": 4.5,
+    "widthStatus": "Game estimate for the mapped one-way single motor lane; not surveyed engineering width.",
+    "startBlendStartM": 12,
+    "startBlendEndM": 42,
+    "endBlendLengthM": 140,
+    "endBlendReserveM": 20,
+    "shoulderNumericalOverlapM": 0.002,
+    "railClearanceMarginM": 0.15,
+    "heightStatus": "Game vertical profile follows existing groundRoadTop initially, then a smooth source-chainage Hermite grade joins the unchanged upper endpoint triangle plane. Both existing asphalt datums and exact source XY are preserved; no engineering elevation survey is claimed."
+  },
+  "ways": [
+    {
+      "id": 41998502,
+      "version": 16,
+      "timestamp": "2024-02-19T00:12:08Z",
+      "nodeIds": [520753183, 845618609],
+      "coordinates": [
+        [-123.1435543, 49.3099393],
+        [-123.1437491, 49.3098928]
+      ],
+      "tags": {
+        "bicycle": "no",
+        "destination": "Stanley Park Drive;Prospect Point;Ferguson Point",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed:advisory": "30",
+        "motor_vehicle": "yes",
+        "oneway": "yes",
+        "turn": "right"
+      },
+      "sourceUrl": "https://api.openstreetmap.org/api/0.6/way/41998502/full.json"
+    },
+    {
+      "id": 877408900,
+      "version": 3,
+      "timestamp": "2024-02-19T00:12:08Z",
+      "nodeIds": [845618609, 520753185, 2625030392, 6313339392, 630163063],
+      "coordinates": [
+        [-123.1437491, 49.3098928],
+        [-123.1438139, 49.3098717],
+        [-123.1439005, 49.3098503],
+        [-123.1439756, 49.3098452],
+        [-123.1440582, 49.3098485]
+      ],
+      "tags": {
+        "bicycle": "yes",
+        "destination": "Stanley Park Drive;Prospect Point;Ferguson Point",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed:advisory": "30",
+        "motor_vehicle": "yes",
+        "oneway": "yes",
+        "turn": "right"
+      },
+      "sourceUrl": "https://api.openstreetmap.org/api/0.6/way/877408900/full.json"
+    },
+    {
+      "id": 256879277,
+      "version": 11,
+      "timestamp": "2025-09-01T17:43:54Z",
+      "nodeIds": [
+        630163063, 11639243852, 520753187, 11639243853, 630163065, 11639243854,
+        520753189, 11639243855, 11639243856, 630163067, 11639243857, 520753191,
+        520753192, 520753193, 520753194, 11639243858, 520753195
+      ],
+      "coordinates": [
+        [-123.1440582, 49.3098485],
+        [-123.1441795, 49.309867],
+        [-123.1442826, 49.3099016],
+        [-123.1443738, 49.3099517],
+        [-123.1444323, 49.3100132],
+        [-123.144461, 49.3100736],
+        [-123.144468, 49.3101369],
+        [-123.1444653, 49.3102212],
+        [-123.1444507, 49.3102858],
+        [-123.1444268, 49.3103313],
+        [-123.1443501, 49.3104189],
+        [-123.1442455, 49.3105027],
+        [-123.1435922, 49.3108856],
+        [-123.1431913, 49.3112076],
+        [-123.1429735, 49.3114183],
+        [-123.1428952, 49.3114966],
+        [-123.1427903, 49.3116023]
+      ],
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "residential",
+        "lit": "no",
+        "maxspeed": "30",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "sidewalk:both": "no",
+        "surface": "asphalt"
+      },
+      "sourceUrl": "https://api.openstreetmap.org/api/0.6/way/256879277/full.json"
+    }
+  ],
+  "relatedWays": [
+    {
+      "id": 1074018477,
+      "version": 4,
+      "timestamp": "2025-01-07T06:58:18Z",
+      "nodeIds": [1348815650, 845618609, 1348815649],
+      "coordinates": [
+        [-123.143735, 49.3099344],
+        [-123.1437491, 49.3098928],
+        [-123.1437637, 49.3098498]
+      ],
+      "tags": {
+        "bicycle": "designated",
+        "crossing": "uncontrolled",
+        "crossing:island": "no",
+        "crossing:markings": "dots;surface:colour=green",
+        "cycleway": "crossing",
+        "foot": "no",
+        "highway": "cycleway",
+        "name": "SB Stanley Park Causeway Bike Route",
+        "oneway": "yes",
+        "segregated": "yes",
+        "smoothness": "good",
+        "surface": "asphalt",
+        "surface:colour": "green",
+        "tactile_paving": "no"
+      },
+      "sourceUrl": "https://api.openstreetmap.org/api/0.6/way/1074018477/full.json"
+    },
+    {
+      "id": 70954678,
+      "version": 26,
+      "timestamp": "2026-04-03T03:10:14Z",
+      "nodeIds": [520753181, 10916919689, 520753183],
+      "coordinates": [
+        [-123.1437529, 49.3096637],
+        [-123.1436736, 49.3097777],
+        [-123.1435543, 49.3099393]
+      ],
+      "tags": {
+        "bicycle": "no",
+        "foot": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "3",
+        "lanes:backward": "1",
+        "lanes:forward": "1",
+        "lanes:reversible": "1",
+        "maxspeed": "60",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "parking:both": "no",
+        "ref": "BC 99;BC 1A",
+        "sidewalk:both": "separate"
+      },
+      "sourceUrl": "https://api.openstreetmap.org/api/0.6/way/70954678/full.json"
+    },
+    {
+      "id": 1252160596,
+      "version": 4,
+      "timestamp": "2026-04-03T03:10:14Z",
+      "nodeIds": [520753183, 10916919686, 6308098676],
+      "coordinates": [
+        [-123.1435543, 49.3099393],
+        [-123.1433393, 49.310218],
+        [-123.1432599, 49.3103154]
+      ],
+      "tags": {
+        "bicycle": "no",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "4",
+        "lanes:backward": "2",
+        "lanes:forward": "1",
+        "lanes:reversible": "1",
+        "maxheight": "default",
+        "maxspeed": "60",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "parking:both": "no",
+        "ref": "BC 99;BC 1A",
+        "sidewalk:both": "separate",
+        "surface": "asphalt",
+        "turn:lanes:backward": "none|right"
+      },
+      "sourceUrl": "https://api.openstreetmap.org/api/0.6/way/1252160596/full.json"
+    },
+    {
+      "id": 120254680,
+      "version": 24,
+      "timestamp": "2025-01-11T23:33:01Z",
+      "nodeIds": [
+        268528397, 6313527937, 9644733169, 3675732809, 3675732808, 3675732807,
+        520753195, 8255415600
+      ],
+      "coordinates": [
+        [-123.1426913, 49.3112023],
+        [-123.1427287, 49.31127],
+        [-123.1427443, 49.3113122],
+        [-123.1427563, 49.3113425],
+        [-123.1427669, 49.3114158],
+        [-123.1427771, 49.3115066],
+        [-123.1427903, 49.3116023],
+        [-123.1428324, 49.3118752]
+      ],
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "30",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "parking:both": "no",
+        "shoulder": "no",
+        "surface": "asphalt"
+      },
+      "sourceUrl": "https://api.openstreetmap.org/api/0.6/way/120254680/full.json"
+    }
+  ]
+}

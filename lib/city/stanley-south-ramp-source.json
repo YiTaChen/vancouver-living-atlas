@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "source": "OpenStreetMap direct API area snapshot",
+  "sourceUrl": "https://api.openstreetmap.org/api/0.6/map.json?bbox=-123.165,49.292,-123.111,49.316",
+  "fetchedAt": "2026-10-22T09:46:25.550Z",
+  "sourceSha256": "59143148ea23bafc16c3c0b09356c538246185c3e837d4f2459dcbb167f73cee",
+  "attribution": {
+    "owner": "OpenStreetMap contributors",
+    "license": "ODbL 1.0",
+    "url": "https://www.openstreetmap.org/copyright"
+  },
+  "route": {
+    "id": "north-lagoon-to-southbound-causeway",
+    "startNode": 481754635,
+    "endNode": 3678153480,
+    "wayIds": [42000574, 116061627, 604336387, 116061617]
+  },
+  "model": {
+    "widthM": 4.5,
+    "widthStatus": "Game estimate for one motor lane plus mapped cycle lane, not surveyed width. The actual Drive collision body is 2.0m wide.",
+    "railClearanceMarginM": 0.15,
+    "shoulderNumericalOverlapM": 0.002,
+    "maxSeamStepM": 0.25,
+    "heightStatus": "Existing groundRoadTop with an actual-vertex merge field. New ramp faces are clipped to unchanged canonical South West triangle edges and share its exact asphalt planes wherever the two roads overlap."
+  },
+  "ways": [
+    {
+      "id": 42000574,
+      "nodeIds": [481754635, 520825287, 559821545],
+      "tags": {
+        "cycleway:left": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "coordinates": [
+        [-123.1369458, 49.2971462],
+        [-123.1369586, 49.2970539],
+        [-123.1369497, 49.2969827]
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/way/42000574",
+      "version": 19,
+      "timestamp": "2025-01-11T23:33:20Z",
+      "fullSourceUrl": "https://api.openstreetmap.org/api/0.6/way/42000574/full.json"
+    },
+    {
+      "id": 116061627,
+      "nodeIds": [
+        559821545, 11123514867, 1309735392, 6313337108, 520825289, 6313337105,
+        559821544
+      ],
+      "tags": {
+        "busway": "lane",
+        "cycleway:left": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "2",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "coordinates": [
+        [-123.1369497, 49.2969827],
+        [-123.1369266, 49.2969324],
+        [-123.136887, 49.2968849],
+        [-123.1367078, 49.2967045],
+        [-123.1366616, 49.2966561],
+        [-123.1366214, 49.2966079],
+        [-123.13658, 49.2965529]
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/way/116061627",
+      "version": 15,
+      "timestamp": "2025-06-03T19:47:29Z",
+      "fullSourceUrl": "https://api.openstreetmap.org/api/0.6/way/116061627/full.json"
+    },
+    {
+      "id": 604336387,
+      "nodeIds": [559821544, 11123514865, 11123514866, 520825291, 559821534],
+      "tags": {
+        "bicycle": "designated",
+        "cycleway": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk": "no",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "coordinates": [
+        [-123.13658, 49.2965529],
+        [-123.1365377, 49.2964892],
+        [-123.1365027, 49.2964323],
+        [-123.1364763, 49.2963781],
+        [-123.1364563, 49.2963268]
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/way/604336387",
+      "version": 7,
+      "timestamp": "2025-06-03T19:47:29Z",
+      "fullSourceUrl": "https://api.openstreetmap.org/api/0.6/way/604336387/full.json"
+    },
+    {
+      "id": 116061617,
+      "nodeIds": [559821534, 6308099692, 6308098670, 559821535, 3678153480],
+      "tags": {
+        "bicycle": "designated",
+        "cycleway:left": "no",
+        "cycleway:right": "lane",
+        "foot": "no",
+        "highway": "trunk_link",
+        "horse": "no",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk": "no",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "coordinates": [
+        [-123.1364563, 49.2963268],
+        [-123.1364382, 49.2962536],
+        [-123.1364328, 49.2961843],
+        [-123.1364372, 49.2961041],
+        [-123.136475, 49.295873]
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/way/116061617",
+      "version": 16,
+      "timestamp": "2025-06-03T19:47:30Z",
+      "fullSourceUrl": "https://api.openstreetmap.org/api/0.6/way/116061617/full.json"
+    }
+  ]
+}

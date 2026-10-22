@@ -8,6 +8,7 @@ import { trimRoad } from './road-trim';
 import {
   resolveSurfaceStep,
   sampleKnownSurface,
+  type SurfaceConnection,
   type SurfaceHit,
 } from './surface-reachability';
 import type { TravelSurfaceIndex } from './travel-surfaces';
@@ -543,6 +544,51 @@ export class StreetNavigation {
           ? this.groundHeight(this.position.x, this.position.z)
           : this.roadHeight(this.position.x, this.position.z) - 0.2
         : this.position.y;
+    const connections = (
+      (this.e.data.causewayConnections as
+        | readonly SurfaceConnection[]
+        | undefined) || []
+    ).filter((c) => {
+      // A pedestrian entrance can cross an ordinary paved road in plan view.
+      // Its gate cannot select that floor for a car which is still completely
+      // supported by the original road. All other gates retain their priority.
+      if (
+        this.mode !== 'drive' ||
+        identity.surfaceId !== 'ground' ||
+        c.allowedModes.includes('drive') ||
+        !c.allowedModes.includes('walk') ||
+        c.geometry.kind !== 'gate'
+      )
+        return true;
+      const forward = c.from.surfaceId === 'ground' && c.from.layer === 0;
+      const reverse =
+        !forward &&
+        c.to.surfaceId === 'ground' &&
+        c.to.layer === 0 &&
+        c.twoWay !== false;
+      if (!forward && !reverse) return true;
+      const target = forward ? c.to : c.from;
+      if (target.surfaceId === 'ground') return true;
+      const g = c.geometry,
+        dx = g.b[0] - g.a[0],
+        dz = g.b[1] - g.a[1],
+        length = Math.hypot(dx, dz);
+      if (![...g.a, ...g.b, g.fromSide].every(Number.isFinite) || length < 1e-8)
+        return true;
+      const sign = g.fromSide * (reverse ? -1 : 1);
+      const d0 =
+        ((dx * (this.position.z - g.a[1]) - dz * (this.position.x - g.a[0])) /
+          length) *
+        sign;
+      const d1 = ((dx * (z - g.a[1]) - dz * (x - g.a[0])) / length) * sign;
+      if (d0 < -1e-8 || d1 > 1e-8 || d0 - d1 <= 1e-8) return true;
+      const t = THREE.MathUtils.clamp(d0 / (d0 - d1), 0, 1);
+      const xx = this.position.x + (x - this.position.x) * t,
+        zz = this.position.z + (z - this.position.z) * t;
+      const u = ((xx - g.a[0]) * dx + (zz - g.a[1]) * dz) / (length * length);
+      if (u < -1e-8 || u > 1 + 1e-8) return true;
+      return !this.pavedDriveContinuation(x, z, currentY, t);
+    });
     const result = resolveSurfaceStep({
       current: {
         ...identity,
@@ -553,14 +599,108 @@ export class StreetNavigation {
       to: [x, z],
       mode: this.mode,
       lookup,
-      connections: this.e.data.causewayConnections || [],
+      connections,
     });
     return result.ok ? result.hit : undefined;
   }
-  clearGround(x: number, z: number, mode: string = this.mode, pendingFurniture = false) {
+  /** Only a crossed walk-only ground gate asks for this bounded road proof.
+   * It grants no new floor identity, ground permission or collision exception. */
+  private pavedDriveContinuation(
+    x: number,
+    z: number,
+    currentY: number,
+    gateT: number,
+  ) {
+    const road = this.e.data.roadSurface;
+    if (
+      !road ||
+      typeof road.coversSegment !== 'function' ||
+      this.e.interiors?.height(this.position.x, this.position.z) !==
+        undefined ||
+      this.e.interiors?.height(x, z) !== undefined
+    )
+      return false;
+    const first = road.sample(this.position.x, this.position.z, currentY);
+    const last = road.sample(x, z, this.e.elevation(x, z) + 1.05);
+    if (
+      first === undefined ||
+      last === undefined ||
+      Math.abs(first - (this.position.y - 0.2)) > 0.08 ||
+      Math.abs(first - currentY) > 0.08
+    )
+      return false;
+    const distance = Math.hypot(x - this.position.x, z - this.position.z);
+    // moveGround already splits ordinary motion into <=1.5m permission legs.
+    // Distant placement/inspection queries must not create unbounded work or
+    // receive this local gate exception.
+    if (!Number.isFinite(distance) || distance > 1.500001) return false;
+    const fromYaw = this.car.rotation.y;
+    const angle = Math.atan2(
+      Math.sin(this.yaw - fromYaw),
+      Math.cos(this.yaw - fromYaw),
+    );
+    if (!Number.isFinite(angle)) return false;
+    const steps = Math.max(
+      1,
+      Math.ceil(distance / 0.3),
+      Math.ceil(Math.abs(angle) / 0.1),
+    );
+    const fractions = [
+      ...new Set([
+        gateT,
+        ...Array.from({ length: steps + 1 }, (_, i) => i / steps),
+      ]),
+    ].sort((a, b) => a - b);
+    let previous: { x: number; z: number; y: number }[] | undefined;
+    for (const t of fractions) {
+      const cx = this.position.x + (x - this.position.x) * t,
+        cz = this.position.z + (z - this.position.z) * t;
+      const height = road.sample(cx, cz, first + (last - first) * t);
+      if (
+        height === undefined ||
+        Math.abs(height - first - (last - first) * t) > 0.2
+      )
+        return false;
+      const yaw = fromYaw + angle * t,
+        sin = Math.sin(yaw),
+        cos = Math.cos(yaw);
+      const probes: { x: number; z: number; y: number }[] = [];
+      // Fifteen support tracks across the 4.8m x 2m car, rather than a claim
+      // about every point in its continuous footprint or arbitrary potholes.
+      for (const longitudinal of [-2.4, -1.2, 0, 1.2, 2.4])
+        for (const lateral of [-1, 0, 1]) {
+          const px = cx + sin * longitudinal + cos * lateral,
+            pz = cz + cos * longitudinal - sin * lateral;
+          // These are already offset body probes. Expanding each by the full
+          // vehicle radius again would turn a clear roadside object into a wall.
+          if (!this.clearGround(px, pz, 'drive', false, true)) return false;
+          const surfaceY = road.sample(px, pz, height);
+          if (surfaceY === undefined || Math.abs(surfaceY - height) > 1)
+            return false;
+          probes.push({ x: px, z: pz, y: surfaceY });
+        }
+      if (previous)
+        for (let i = 0; i < probes.length; i++) {
+          const a = previous[i],
+            b = probes[i];
+          if (
+            !road.coversSegment(
+              [a.x, a.z],
+              [b.x, b.z],
+              (a.y + b.y) / 2,
+              Math.min(4, Math.abs(a.y - b.y) / 2 + 0.2),
+            )
+          )
+            return false;
+        }
+      previous = probes;
+    }
+    return true;
+  }
+  clearGround(x: number, z: number, mode: string = this.mode, pendingFurniture = false, pointProbe = false) {
     const interior = this.e.interiors?.clear(x,z,mode);
     if(interior !== undefined) return interior;
-    if (this.e.streetFurniture?.blocked(x, z, mode === 'drive' ? 1.1 : 0.35, pendingFurniture))
+    if (this.e.streetFurniture?.blocked(x, z, pointProbe ? 0 : mode === 'drive' ? 1.1 : 0.35, pendingFurniture))
       return false;
     if (!this.e.onLand(x, z)) return false;
     if (this.e.data.waterPolys?.some((p: number[][][]) => inPolygon([x, z], p)))

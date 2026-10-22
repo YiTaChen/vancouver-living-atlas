@@ -251,6 +251,13 @@ export function createFixture({ harmonize = true } = {}) {
         mesh.geometry = draper.drape(original);
         original.dispose();
       }
+      const crossing = load(
+        'lib/city/stanley-northbound-crossing.ts',
+      ).conformStanleyNorthboundCrossing(e, f, mesh.geometry);
+      if (crossing !== mesh.geometry) {
+        mesh.geometry.dispose();
+        mesh.geometry = crossing;
+      }
       mesh.userData.walkSurface = true;
       mesh.userData.groundPath = true;
       mesh.userData.auditPathId = Number(
@@ -285,12 +292,33 @@ export function createFixture({ harmonize = true } = {}) {
   globalThis.window = { addEventListener() {}, removeEventListener() {} };
   const nav = new (load('lib/city/navigation.ts').StreetNavigation)(e);
   e.navigation = nav;
+  // Independent source-owned ramps may build geometry during preparation. Match
+  // the original road/path contracts explicitly instead of silently changing
+  // their meaning whenever another build call is inserted earlier in runtime.
+  const roadCaptures = captures.filter(
+    (c) =>
+      c.options?.retainingRouteIds?.has('causeway-north') &&
+      c.input.some((s) => s.routeId === 'causeway-north'),
+  );
+  const pathCaptures = captures.filter(
+    (c) =>
+      c.options?.junctionFills === false &&
+      c.input.some((s) => s.routeId === 'causeway-east-path'),
+  );
+  if (roadCaptures.length !== 1 || pathCaptures.length !== 1)
+    throw new Error(
+      'Canonical Causeway road/path geometry captures must each have exactly one source-owned match',
+    );
   return {
     e,
     nav,
     index: e.data.travelSurfaces,
-    road: captures[0],
-    paths: captures[1],
+    road: roadCaptures[0],
+    paths: pathCaptures[0],
+    geometryCaptures: captures.map((c) => ({
+      routeIds: [...new Set(c.input.map((s) => s.routeId))],
+      segmentCount: c.input.length,
+    })),
     groundPathMeshes,
     geo,
     THREE,

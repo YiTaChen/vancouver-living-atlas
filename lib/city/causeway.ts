@@ -1,5 +1,5 @@
 import type { CityEngine } from './engine';
-import { project } from './geo';
+import { project, unproject } from './geo';
 import { gridHeightField } from './surface-meshing';
 import {
   bakeSurface,
@@ -13,6 +13,13 @@ import cityCuts from './causeway-city-cuts.json';
 import type { Point } from './road-graph';
 import { buildMainRoadGeometry } from './main-road-geometry';
 import mainCrossSection from './main-cross-section-data.json';
+import { prepareProspectOverpass } from './prospect-overpass';
+import { prepareStanleyDriveCorrections } from './stanley-drive-corrections';
+import { prepareStanleyRoadAccess } from './stanley-road-access';
+import { prepareStanleyWestRamp } from './stanley-west-ramp';
+import westSource from './stanley-west-ramp-source.json';
+import { prepareStanleyNorthboundRamp } from './stanley-northbound-ramp';
+import northboundSource from './stanley-northbound-ramp-source.json';
 
 export const CAUSEWAY_ROAD = 'lions:road';
 export interface CausewayData {
@@ -108,6 +115,70 @@ export function prepareCauseway(e: CityEngine) {
         : source.centrelineInNewRoadFootprint.map((r) => [r.startM, r.endM]),
     );
   }
+  const prospect = prepareProspectOverpass({
+    roads: e.data.roads,
+    project,
+    groundRoadTop: (x, z) => e.data.roadRelief(x, z) + 1.05,
+    lowerSegments: segments.filter((s) => s.routeId === 'causeway-north'),
+  });
+  for (const [id, intervals] of prospect.cuts)
+    cuts.set(id, [...(cuts.get(id) ?? []), ...intervals]);
+  e.data.prospectOverpass = prospect;
+  e.data.stanleyDriveCorrections = prepareStanleyDriveCorrections({
+    roads: e.data.roads,
+    project,
+  });
+  e.data.stanleyRoadAccess = prepareStanleyRoadAccess(e.data.roads);
+  const west = prepareStanleyWestRamp({
+    project,
+    lowerSegments: segments,
+    upperGeometry: prospect.geometry,
+    groundRoadTop: (x, z) => e.data.roadRelief(x, z) + 1.05,
+  });
+  const westRoad = e.data.roads.features[westSource.route.citySourceId];
+  if (
+    JSON.stringify(westRoad.geometry.coordinates) !==
+    JSON.stringify(westSource.route.citySourceCoordinates)
+  )
+    throw new Error('West motor exit City source changed');
+  e.data.roads.features[westSource.route.citySourceId] = {
+    ...westRoad,
+    properties: { ...westRoad.properties },
+    geometry: {
+      type: 'LineString',
+      coordinates: west.points.map((p) => unproject(...p)),
+    },
+  };
+  cuts.set(`${westSource.route.citySourceId}:0`, [[0, west.length]]);
+  prospect.setAccessOpenings({
+    railAllowed: west.railAllowed,
+    shoulderOpenings: west.shoulderOpenings,
+  });
+  e.data.stanleyWestRamp = west;
+  const northboundRamp = prepareStanleyNorthboundRamp({
+    project,
+    lowerSegments: segments,
+    groundRoadTop: (x, z) => e.data.roadRelief(x, z) + 1.05,
+  });
+  const northboundRoad =
+    e.data.roads.features[northboundSource.route.citySourceId];
+  if (
+    JSON.stringify(northboundRoad.geometry.coordinates) !==
+    JSON.stringify(northboundSource.route.citySourceCoordinates)
+  )
+    throw new Error('Northbound motor ramp City source changed');
+  e.data.roads.features[northboundSource.route.citySourceId] = {
+    ...northboundRoad,
+    properties: { ...northboundRoad.properties },
+    geometry: {
+      type: 'LineString',
+      coordinates: northboundRamp.points.map((p) => unproject(...p)),
+    },
+  };
+  cuts.set(`${northboundSource.route.citySourceId}:0`, [
+    [0, northboundRamp.length],
+  ]);
+  e.data.stanleyNorthboundRamp = northboundRamp;
   const masks = south.segments
     .filter((s) => s.routeId !== 'causeway-south-bike-exit')
     .map((s) => {

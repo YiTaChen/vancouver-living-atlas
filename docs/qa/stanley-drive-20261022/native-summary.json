@@ -1,0 +1,108 @@
+{
+  "method": "Real W throttle and Space brake in ordinary Drive; each capture states the stationary entry; local partial runs, not a complete human-driven lap.",
+  "viewport": [
+    1280,
+    720
+  ],
+  "cases": [
+    {
+      "capture": "after-east-shore-tree",
+      "entry": 1670,
+      "maxKph": 207.35424000000003,
+      "displacementM": 118.78471546888669,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 65
+    },
+    {
+      "capture": "after-northwest-straight",
+      "entry": 1275,
+      "maxKph": 155.58336000000034,
+      "displacementM": 68.09230684216277,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 51
+    },
+    {
+      "capture": "after-prospect-bridge",
+      "entry": "bridge",
+      "maxKph": 80.25646198088342,
+      "displacementM": 20.29836026956388,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 39
+    },
+    {
+      "capture": "after-east-off-ramp",
+      "entry": "ramp",
+      "maxKph": 124.83648000000015,
+      "displacementM": 46.03832881691716,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 47
+    },
+    {
+      "capture": "after-causeway-underpass",
+      "entry": "lower",
+      "maxKph": 143.0726399999996,
+      "displacementM": 58.31609174505257,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 49
+    },
+    {
+      "capture": "after-south-ramp-rail",
+      "entry": "southRail",
+      "maxKph": 63.36576000000033,
+      "displacementM": 13.682891639751773,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 36
+    },
+    {
+      "capture": "after-retail-curve",
+      "entry": "retailCurve",
+      "maxKph": 73.94111999999981,
+      "displacementM": 17.846596299862096,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 37
+    },
+    {
+      "capture": "after-north-entry-short",
+      "entry": "northEntry",
+      "maxKph": 54.52345587365796,
+      "displacementM": 10.467310223667528,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 34
+    },
+    {
+      "capture": "after-north-entry",
+      "entry": "northEntry",
+      "maxKph": 89.21663999999966,
+      "displacementM": 27.606364250193955,
+      "finalDamage": 0,
+      "valid": true,
+      "policeActive": false,
+      "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+      "samples": 43
+    }
+  ]
+}

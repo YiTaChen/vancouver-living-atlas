@@ -1,0 +1,440 @@
+{
+  "retrievedAt": "2026-10-22",
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "scope": "Bounded Prospect Point bridge and east Causeway off-ramp correction. Heights and cross-section dimensions are gameplay estimates, not surveyed elevations. City ROW labels do not establish motor access or a grade-separated connection.",
+  "ways": [
+    {
+      "sourceId": 41998497,
+      "version": 16,
+      "timestamp": "2025-10-21T18:18:27Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/41998497",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/41998497/full.json",
+      "tags": {
+        "bicycle": "yes",
+        "bridge": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "2",
+        "layer": "1",
+        "maxspeed": "30",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:both": "separate",
+        "surface": "asphalt"
+      },
+      "sourceNodeIds": [520753179, 6313528003, 268528397],
+      "coordinates": [
+        [-123.1424574, 49.310922],
+        [-123.1426401, 49.3111361],
+        [-123.1426913, 49.3112023]
+      ]
+    },
+    {
+      "sourceId": 41998501,
+      "version": 16,
+      "timestamp": "2025-09-01T17:43:54Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/41998501",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/41998501/full.json",
+      "tags": {
+        "destination": "Stanley Park Drive;Prospect Point;Ferguson Point",
+        "highway": "trunk_link",
+        "motor_vehicle": "yes",
+        "oneway": "yes",
+        "sidewalk:both": "no",
+        "turn": "right"
+      },
+      "sourceNodeIds": [
+        845618477, 520753196, 520753197, 11639264098, 3672582064, 268528394
+      ],
+      "coordinates": [
+        [-123.143603, 49.3096778],
+        [-123.1433821, 49.3096957],
+        [-123.1432292, 49.3097084],
+        [-123.1430231, 49.3097279],
+        [-123.1429437, 49.3097355],
+        [-123.1428403, 49.3097454]
+      ]
+    },
+    {
+      "sourceId": 877408902,
+      "version": 3,
+      "timestamp": "2025-09-01T17:43:54Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/877408902",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/877408902/full.json",
+      "tags": {
+        "bicycle": "no",
+        "destination": "Stanley Park Drive;Prospect Point;Ferguson Point",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "motor_vehicle": "yes",
+        "oneway": "yes",
+        "sidewalk:both": "no",
+        "surface": "asphalt",
+        "turn": "right"
+      },
+      "sourceNodeIds": [520753181, 845618477],
+      "coordinates": [
+        [-123.1437529, 49.3096637],
+        [-123.143603, 49.3096778]
+      ]
+    },
+    {
+      "sourceId": 1252160599,
+      "version": 3,
+      "timestamp": "2025-04-04T20:32:58Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/1252160599",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1252160599/full.json",
+      "tags": {
+        "bicycle": "designated",
+        "crossing": "uncontrolled",
+        "crossing:island": "no",
+        "crossing:markings": "yes",
+        "cycleway": "crossing",
+        "cycleway:crossing:priority": "dots;surface:colour=green",
+        "cycleway:surface:colour": "green",
+        "foot": "designated",
+        "footway:crossing:markings": "lines",
+        "footway:surface": "asphalt",
+        "highway": "cycleway",
+        "name": "NB Stanley Park Causeway Bike Route",
+        "oneway": "yes",
+        "oneway:foot": "no",
+        "segregated": "yes",
+        "smoothness": "excellent",
+        "surface": "asphalt",
+        "tactile_paving": "no"
+      },
+      "sourceNodeIds": [1348815643, 845618477, 11639243851],
+      "coordinates": [
+        [-123.143608, 49.3096482],
+        [-123.143603, 49.3096778],
+        [-123.143599, 49.3097072]
+      ]
+    },
+    {
+      "sourceId": 120254680,
+      "version": 24,
+      "timestamp": "2025-01-11T23:33:01Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/120254680",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/120254680/full.json",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "30",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "parking:both": "no",
+        "shoulder": "no",
+        "surface": "asphalt"
+      },
+      "sourceNodeIds": [
+        268528397, 6313527937, 9644733169, 3675732809, 3675732808, 3675732807,
+        520753195, 8255415600
+      ],
+      "coordinates": [
+        [-123.1426913, 49.3112023],
+        [-123.1427287, 49.31127],
+        [-123.1427443, 49.3113122],
+        [-123.1427563, 49.3113425],
+        [-123.1427669, 49.3114158],
+        [-123.1427771, 49.3115066],
+        [-123.1427903, 49.3116023],
+        [-123.1428324, 49.3118752]
+      ]
+    },
+    {
+      "sourceId": 1044497045,
+      "version": 7,
+      "timestamp": "2025-01-11T23:33:01Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/1044497045",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1044497045/full.json",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "20",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "parking:both": "no",
+        "surface": "asphalt"
+      },
+      "sourceNodeIds": [
+        8255415600, 268528398, 1348815708, 6313539530, 3675732806, 6313539507,
+        630163107, 268528399, 1348815721
+      ],
+      "coordinates": [
+        [-123.1428324, 49.3118752],
+        [-123.1428735, 49.3121283],
+        [-123.1428915, 49.3121883],
+        [-123.142922, 49.3122433],
+        [-123.142963, 49.312293],
+        [-123.1430106, 49.3123348],
+        [-123.143075, 49.3123763],
+        [-123.1431396, 49.3124097],
+        [-123.1431901, 49.3124259]
+      ]
+    },
+    {
+      "sourceId": 363404510,
+      "version": 16,
+      "timestamp": "2025-01-11T23:33:01Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/363404510",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/363404510/full.json",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "cycleway:right": "lane",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "20",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "shoulder": "no",
+        "surface": "asphalt"
+      },
+      "sourceNodeIds": [
+        1348815721, 630163105, 6313539538, 268528400, 6313539534, 268528401
+      ],
+      "coordinates": [
+        [-123.1431901, 49.3124259],
+        [-123.1432733, 49.3124421],
+        [-123.1433589, 49.312453],
+        [-123.1437995, 49.3124962],
+        [-123.1442038, 49.312533],
+        [-123.1442897, 49.312537]
+      ]
+    },
+    {
+      "sourceId": 887923788,
+      "version": 9,
+      "timestamp": "2026-07-07T19:06:15Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/887923788",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/887923788/full.json",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "20",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "sidewalk": "right",
+        "surface": "asphalt"
+      },
+      "sourceNodeIds": [
+        268528401, 6313539527, 630163103, 12040979323, 268528402, 6313539519
+      ],
+      "coordinates": [
+        [-123.1442897, 49.312537],
+        [-123.1443787, 49.3125312],
+        [-123.1444489, 49.3125189],
+        [-123.1445185, 49.3124983],
+        [-123.1445908, 49.3124724],
+        [-123.1446587, 49.3124408]
+      ]
+    },
+    {
+      "sourceId": 1299847009,
+      "version": 4,
+      "timestamp": "2026-07-07T19:06:39Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/1299847009",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1299847009/full.json",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "30",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "parking:left": "no",
+        "parking:right": "lane",
+        "parking:right:fee": "yes",
+        "parking:right:orientation": "parallel",
+        "shoulder": "no",
+        "sidewalk": "right",
+        "surface": "asphalt"
+      },
+      "sourceNodeIds": [
+        6313539519, 6313539532, 6313539516, 6313539536, 268528403, 6313539505,
+        6313539528, 911583135, 6313539525, 6313539521, 6313539518, 268528404,
+        6313539515, 268528405, 630163055, 268528406, 268528407
+      ],
+      "coordinates": [
+        [-123.1446587, 49.3124408],
+        [-123.1447197, 49.3123977],
+        [-123.1447774, 49.312343],
+        [-123.1448341, 49.3122922],
+        [-123.144894, 49.3122494],
+        [-123.145123, 49.3121161],
+        [-123.145221, 49.3120664],
+        [-123.1453239, 49.312024],
+        [-123.145454, 49.3119712],
+        [-123.145591, 49.3119197],
+        [-123.145737, 49.3118708],
+        [-123.1458779, 49.3118285],
+        [-123.1466203, 49.3116127],
+        [-123.1467733, 49.3115625],
+        [-123.1472263, 49.3114011],
+        [-123.1479584, 49.3111136],
+        [-123.1487965, 49.3107813]
+      ]
+    },
+    {
+      "sourceId": 41998494,
+      "version": 31,
+      "timestamp": "2026-08-13T22:05:04Z",
+      "sourceUrl": "https://www.openstreetmap.org/way/41998494",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/41998494/full.json",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "30",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "parking:both": "no",
+        "shoulder": "no",
+        "surface": "asphalt"
+      },
+      "sourceNodeIds": [
+        630163097, 11639282030, 12040389971, 1309735233, 30353317, 11639282032,
+        30353318, 11639282034, 11639282033, 3672588381, 3672588367, 11639282035,
+        30353320, 3672588361, 30353321, 30353322, 11639264091, 630163093,
+        11639264090, 630163089, 630163091, 30353324, 11639264092, 11639264093,
+        630163095, 13382253456, 30353327, 9811023412, 11639282040, 30353333,
+        30353334, 13382253457, 13382253458, 30353336, 11639264088, 30353337,
+        13382253459, 30353339, 30353340, 2144339335, 630821328, 630821329,
+        11639264084, 30353341, 11639264083, 11639264082, 630821327, 11639264081,
+        11639264080, 30353342, 11639264079, 11639264078, 3672582085, 3672582068,
+        11639264094, 630163061, 11639264095, 11639264096, 3672582065,
+        11639264097, 11639264099, 268528393, 268528394, 9810977994, 2710166553,
+        11639243860, 268528395, 11639243859, 630163069, 14093187489, 3672582083,
+        268528396, 6313527936, 6313527939, 1348815653, 520753179
+      ],
+      "coordinates": [
+        [-123.1374735, 49.3100977],
+        [-123.1375422, 49.3101328],
+        [-123.137604, 49.3101552],
+        [-123.1377524, 49.3101957],
+        [-123.1378097, 49.3102107],
+        [-123.1382489, 49.3102797],
+        [-123.1383857, 49.3103128],
+        [-123.1385241, 49.3103611],
+        [-123.1386505, 49.310412],
+        [-123.138773, 49.3104857],
+        [-123.13897, 49.3106293],
+        [-123.1390801, 49.3107531],
+        [-123.1391741, 49.310886],
+        [-123.1393266, 49.31112],
+        [-123.1394618, 49.3113459],
+        [-123.1396386, 49.3117048],
+        [-123.1396937, 49.3117621],
+        [-123.13977, 49.311811],
+        [-123.1398426, 49.3118346],
+        [-123.1399136, 49.3118447],
+        [-123.1399932, 49.3118415],
+        [-123.140068, 49.3118288],
+        [-123.1401353, 49.3118038],
+        [-123.1401801, 49.3117707],
+        [-123.1402119, 49.3117255],
+        [-123.1402543, 49.311605],
+        [-123.140297, 49.3114454],
+        [-123.1403804, 49.3110853],
+        [-123.1404241, 49.310919],
+        [-123.140483, 49.310639],
+        [-123.1405362, 49.3103054],
+        [-123.1405725, 49.3101424],
+        [-123.1406146, 49.3099804],
+        [-123.1406799, 49.309732],
+        [-123.1407625, 49.3094209],
+        [-123.1408589, 49.3091603],
+        [-123.1409827, 49.3089413],
+        [-123.1411684, 49.3085554],
+        [-123.1412159, 49.3084973],
+        [-123.1413344, 49.3083854],
+        [-123.1413687, 49.3083547],
+        [-123.1414698, 49.3082873],
+        [-123.1415221, 49.3082579],
+        [-123.1415917, 49.3082407],
+        [-123.1416578, 49.3082323],
+        [-123.1417405, 49.3082299],
+        [-123.141833, 49.3082314],
+        [-123.1419043, 49.3082412],
+        [-123.1420062, 49.3082595],
+        [-123.1420937, 49.3082883],
+        [-123.1422052, 49.308336],
+        [-123.1425338, 49.3085045],
+        [-123.142738, 49.3086419],
+        [-123.1428616, 49.3087486],
+        [-123.1429831, 49.3088926],
+        [-123.1430441, 49.3089989],
+        [-123.1430849, 49.3091204],
+        [-123.1430998, 49.309235],
+        [-123.1430969, 49.309328],
+        [-123.1430737, 49.3094285],
+        [-123.1430497, 49.3094905],
+        [-123.1430016, 49.3095714],
+        [-123.1428403, 49.3097454],
+        [-123.142613, 49.3099057],
+        [-123.142529, 49.3099821],
+        [-123.1424654, 49.3100596],
+        [-123.1423955, 49.3101484],
+        [-123.1423466, 49.3102316],
+        [-123.1423082, 49.3103222],
+        [-123.1422888, 49.3104068],
+        [-123.1422804, 49.3105156],
+        [-123.1422877, 49.3105729],
+        [-123.1423213, 49.3106792],
+        [-123.1423516, 49.3107619],
+        [-123.1423972, 49.3108415],
+        [-123.1424574, 49.310922]
+      ]
+    }
+  ],
+  "parkOnrampJunctionCorrection": {
+    "sharedNodeId": 3672582085,
+    "mainWayId": 41998494,
+    "citySourceIds": [1812, 1784],
+    "originalCityCoordinates": {
+      "1812": [
+        [-123.1428544, 49.309866],
+        [-123.1430597, 49.3096656],
+        [-123.1431271, 49.3095326],
+        [-123.1431604, 49.3093441],
+        [-123.1431346, 49.3092001],
+        [-123.1430325, 49.309023],
+        [-123.1428022, 49.3087795]
+      ],
+      "1784": [
+        [-123.1428022, 49.3087795],
+        [-123.1426079, 49.3086524],
+        [-123.1423958, 49.3085253],
+        [-123.1421752, 49.3084203],
+        [-123.1419887, 49.3083651],
+        [-123.1417853, 49.3083431],
+        [-123.141616, 49.30836],
+        [-123.141489, 49.3083934],
+        [-123.1414202, 49.3084342]
+      ]
+    },
+    "farEndBlendM": 40,
+    "maxFarEndOffsetM": 15,
+    "scope": "Follow the verified main-road source through its shared legal northbound-ramp node; preserve City1784 exterior endpoint. No surveyed width/elevation claim."
+  }
+}

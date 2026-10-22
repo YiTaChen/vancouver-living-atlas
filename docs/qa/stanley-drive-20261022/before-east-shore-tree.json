@@ -1,0 +1,3878 @@
+{
+  "revision": "b051ea7214482760e9ed7084121dcefdc8435c2d",
+  "sourceFingerprint": "94754d7a1e280387fe0cf964a14432453e1d7026c13b0aafc6921da84168ab6a",
+  "kind": "stanley-drive-native-v1",
+  "entry": {
+    "edgeId": 1652,
+    "sourceIds": [
+      "1705:0"
+    ],
+    "a": [
+      -331.060866658655,
+      -2148.854487999811
+    ],
+    "b": [
+      -256.226719053476,
+      -2008.4910999999956
+    ],
+    "x": -328.70856976818595,
+    "y": 10.854496847910067,
+    "z": -2144.44237973515,
+    "yaw": 0.489811293779659,
+    "reverse": false,
+    "width": 6
+  },
+  "viewport": [
+    1280,
+    720
+  ],
+  "valid": true,
+  "samples": [
+    {
+      "t": 122019.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 122301.5,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 122394.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 122675.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 122750.19999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 122844.19999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 122964,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 122998.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 123346.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 123424.19999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 123709.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 123863.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 123909.19999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 124067.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 124130.69999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 124330.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 124420,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 124602.69999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 124707.19999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 124793.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 124980.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 125008.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 125229.5,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 125300.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 125444,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 125516.29999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 125730.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 125841.29999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 125960.79999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126065.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126121.69999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126192,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126454,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126528.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126636.19999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126726.19999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126848.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 126920,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 127096.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 127239,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 127336.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 127455.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 127519.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 127708.29999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 127891.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 128083,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 128092.79999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 128352.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 128461.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 128492.79999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 128653.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 128702.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 128958.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129031.39999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129092.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129334.5,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129451,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129524.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129629.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129712.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129862.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 129962.79999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130029.69999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130096.89999999851,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130226.29999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130326,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130404.79999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130504.5,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130603.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130704,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130801.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 130915.5,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131011.79999999702,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42388435335984104,
+        "point": [
+          -327.51204755259374,
+          11.554496847910066,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131131.3999999985,
+      "position": [
+        -328.706445248908,
+        10.855044348496467,
+        -2144.438394860153
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.9676800000010057,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.42313171335986344,
+        "point": [
+          -327.5120475525937,
+          11.555044348496466,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131212.69999999925,
+      "position": [
+        -328.6626555674565,
+        10.866329196096071,
+        -2144.3562603233854
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 5.76,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.407618620026553,
+        "point": [
+          -327.51204755259363,
+          11.56632919609607,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131330.79999999702,
+      "position": [
+        -328.5141404993388,
+        10.904602365811098,
+        -2144.077696608863
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 12.481920000000672,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.3550051266931977,
+        "point": [
+          -327.51204755259363,
+          11.604602365811097,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131430.3999999985,
+      "position": [
+        -328.30548724874416,
+        10.958373483939559,
+        -2143.6863341345393
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 18.23616000000034,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.2810868600264698,
+        "point": [
+          -327.5120475525938,
+          11.658373483939558,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131510.79999999702,
+      "position": [
+        -328.07350418104716,
+        11.018156827363889,
+        -2143.2512128646035
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 23.03423999999967,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.19890368669320008,
+        "point": [
+          -327.51204755259363,
+          11.718156827363888,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131609.09999999776,
+      "position": [
+        -327.72605126249675,
+        11.107697401853777,
+        -2142.599509459422
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 28.800000000000008,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.07581374002651398,
+        "point": [
+          -327.5120475525937,
+          11.807697401853776,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131809.59999999776,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 131896.69999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132010.3999999985,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132104.69999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132201.79999999702,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132295.09999999776,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132404.69999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132492.79999999702,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132599.59999999776,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132705,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132792.19999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132894.8999999985,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 132995.59999999776,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133097.29999999702,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133198.29999999702,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133298.09999999776,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133401,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133499.79999999702,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133614.3999999985,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133697.19999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133797.69999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133896.3999999985,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 133997.5,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134096.29999999702,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134195.19999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134315.59999999776,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134415.19999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134504.3999999985,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134597.79999999702,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134720,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134811.3999999985,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 134895,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 135061.69999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 135117,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 135199.69999999925,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 135299.3999999985,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "t": 135365.59999999776,
+      "position": [
+        -327.5129884713497,
+        11.16260488342357,
+        -2142.1998761879927
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0,
+      "throttle": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0.16344864166023088,
+      "lastHit": {
+        "zone": "right",
+        "localPoint": [
+          -1,
+          0,
+          2.3015951116661846
+        ],
+        "amount": 0.1634486416602309,
+        "scrape": 0.21718079628521011
+      },
+      "ahead": {
+        "surfaceId": "tree:20463:trunk:side:0",
+        "fraction": 0.00033333333333324745,
+        "point": [
+          -327.51204755259346,
+          11.86260488342357,
+          -2139.589839999556
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  ],
+  "broken": [],
+  "damage": {
+    "zones": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0.16344864166023088,
+      "roof": 0
+    },
+    "scratches": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0.21718079628521014,
+      "roof": 0
+    },
+    "overall": 0.16344864166023088,
+    "severity": 0.16344864166023088,
+    "revision": 1,
+    "lastHit": {
+      "zone": "right",
+      "localPoint": [
+        -1,
+        0,
+        2.3015951116661846
+      ],
+      "amount": 0.1634486416602309,
+      "scrape": 0.21718079628521011
+    },
+    "recentEventIds": [
+      "tree:20463:0"
+    ]
+  }
+}

@@ -1,0 +1,829 @@
+{
+  "revision": "b051ea7214482760e9ed7084121dcefdc8435c2d",
+  "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+  "kind": "stanley-drive-native-v1",
+  "entry": {
+    "edgeId": "bridge",
+    "sourceIds": [
+      1599
+    ],
+    "osmSourceIds": [
+      41998497
+    ],
+    "a": [
+      -1066.767817503609,
+      -2805.520035999618
+    ],
+    "b": [
+      -1049.783820681557,
+      -2774.317039999617
+    ],
+    "points": [
+      [
+        -1066.767817503609,
+        -2805.520035999618
+      ],
+      [
+        -1063.0500721537915,
+        -2798.150651999715
+      ],
+      [
+        -1049.783820681557,
+        -2774.317039999617
+      ]
+    ],
+    "x": -1064.5157458788588,
+    "y": 70.67247772216797,
+    "z": -2801.0559377259465,
+    "yaw": 0.4672293481835349,
+    "reverse": false,
+    "width": 6,
+    "surfaceId": "park:prospect-overpass",
+    "surfaceLayer": 2,
+    "initialDamage": 0,
+    "initialBrokenCount": 0
+  },
+  "viewport": [
+    1280,
+    720
+  ],
+  "quality": "balanced",
+  "qualityMode": "manual",
+  "carModel": "roadster",
+  "treeClearance": {
+    "complete": true,
+    "candidates": 35989,
+    "retained": 35535,
+    "excluded": 454,
+    "municipalExcluded": 246,
+    "generatedExcluded": 208,
+    "triangles": 55670,
+    "heightAwareTriangles": 2154
+  },
+  "valid": true,
+  "samples": [
+    {
+      "t": 68307.69999999925,
+      "position": [
+        -1064.5157458788588,
+        70.67247772216797,
+        -2801.0559377259465
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0,
+      "throttle": false,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 68359.89999999851,
+      "position": [
+        -1064.5157458788588,
+        70.67247772216797,
+        -2801.0559377259465
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0,
+      "throttle": false,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 68445.89999999851,
+      "position": [
+        -1064.5097104710371,
+        70.67247772216797,
+        -2801.0439742282756
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 1.9238399999996647,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 68547.19999999925,
+      "position": [
+        -1064.4418596967955,
+        70.67247772216797,
+        -2800.9094791612306
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 7.666559999999496,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 68643.30000000075,
+      "position": [
+        -1064.3028725739935,
+        70.67247772216797,
+        -2800.6339763006
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 13.397759999999495,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 68743.60000000149,
+      "position": [
+        -1064.0905899965232,
+        70.67247772216797,
+        -2800.213185826087
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 19.169280000000168,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 68845.69999999925,
+      "position": [
+        -1063.8047087814944,
+        70.67247772216797,
+        -2799.6465067629256
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 24.963839999999667,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 68944,
+      "position": [
+        -1063.4448084941591,
+        70.67247772216797,
+        -2798.9331057175373
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 30.775680000000172,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69034.19999999925,
+      "position": [
+        -1063.0915987693063,
+        70.67247772216797,
+        -2798.232966829577
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 35.579519999999846,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69135,
+      "position": [
+        -1062.612937340547,
+        70.67247772216797,
+        -2797.2841552401433
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 41.224319999999835,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69239.19999999925,
+      "position": [
+        -1061.9509760187689,
+        70.67247772216797,
+        -2795.972003192531
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 47.94623999999967,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69347.60000000149,
+      "position": [
+        -1061.3063074361523,
+        70.67247772216797,
+        -2794.6941291342096
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 53.712,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69445.89999999851,
+      "position": [
+        -1060.585816466405,
+        70.67247772216797,
+        -2793.265958529466
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 59.506559999999496,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69559.60000000149,
+      "position": [
+        -1059.7949232874141,
+        70.67247772216797,
+        -2791.6982353557482
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 65.28383999999966,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69647.80000000075,
+      "position": [
+        -1058.9315177260835,
+        70.67247772216797,
+        -2789.986776788687
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 71.06111999999982,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69733,
+      "position": [
+        -1058.1523807933713,
+        70.67247772216797,
+        -2788.4423570650656
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 75.8995199999998,
+      "throttle": true,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69834.69999999925,
+      "position": [
+        -1057.1821232149139,
+        70.67247772216797,
+        -2786.5190944417077
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 80.25646198088342,
+      "throttle": false,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 69941.10000000149,
+      "position": [
+        -1056.3599556945826,
+        70.67247772216797,
+        -2784.889378686736
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 43.556473204738275,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70044.80000000075,
+      "position": [
+        -1055.9561847797877,
+        70.67247772216797,
+        -2784.0890164673974
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 25.774366905225154,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70147.60000000149,
+      "position": [
+        -1055.7207706536794,
+        70.67247772216797,
+        -2783.6223742068187
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 15.387571295062545,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70248.89999999851,
+      "position": [
+        -1055.5777978832512,
+        70.67247772216797,
+        -2783.338970921312
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 9.058213859385862,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70348.80000000075,
+      "position": [
+        -1055.4945523355375,
+        70.67247772216797,
+        -2783.1739600478763
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 5.3797467788267435,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70449.5,
+      "position": [
+        -1055.445910468251,
+        70.67247772216797,
+        -2783.077541233575
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 3.2285440270478567,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70534,
+      "position": [
+        -1055.4200624842556,
+        70.67247772216797,
+        -2783.026304878806
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 2.0809040380133346,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70633.19999999925,
+      "position": [
+        -1055.4011089485716,
+        70.67247772216797,
+        -2782.9887348277484
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 1.2423218525931046,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70737.19999999925,
+      "position": [
+        -1055.3895541238103,
+        70.67247772216797,
+        -2782.9658306391325
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.7305569133196581,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70839.30000000075,
+      "position": [
+        -1055.3821695773079,
+        70.67247772216797,
+        -2782.951192853668
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.40168329441408224,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 70939.19999999925,
+      "position": [
+        -1055.3784677807641,
+        70.67247772216797,
+        -2782.943855083688
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.23843870464439348,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71040.60000000149,
+      "position": [
+        -1055.3762665567442,
+        70.67247772216797,
+        -2782.9394917764826
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.14161068320650866,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71146.30000000075,
+      "position": [
+        -1055.374965731739,
+        70.67247772216797,
+        -2782.936913256956
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.08414756691171991,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71248.80000000075,
+      "position": [
+        -1055.3741840374319,
+        70.67247772216797,
+        -2782.935363767957
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.04958686092125801,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71333.80000000075,
+      "position": [
+        -1055.373788067018,
+        70.67247772216797,
+        -2782.9345788680357
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.032043751842849355,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71435.80000000075,
+      "position": [
+        -1055.3734961915961,
+        70.67247772216797,
+        -2782.9340003071443
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.01916038686406046,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71539.80000000075,
+      "position": [
+        -1055.3733014465051,
+        70.67247772216797,
+        -2782.9336142798015
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.01046932351265968,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71641.19999999925,
+      "position": [
+        -1055.3732049342666,
+        70.67247772216797,
+        -2782.9334229714464
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.006214577433455124,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71745.19999999925,
+      "position": [
+        -1055.3731475568363,
+        70.67247772216797,
+        -2782.933309236836
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.0036812851953745038,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71844.5,
+      "position": [
+        -1055.3731137070909,
+        70.67247772216797,
+        -2782.933242139241
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.0021886246688521947,
+      "throttle": false,
+      "brake": true,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71946.19999999925,
+      "position": [
+        -1055.3730863110004,
+        70.67247772216797,
+        -2782.9331878342005
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.0021340672529515108,
+      "throttle": false,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 71989.5,
+      "position": [
+        -1055.3730736404514,
+        70.67247772216797,
+        -2782.9331627184024
+      ],
+      "yaw": 0.4672293481835349,
+      "speedKph": 0.0021088196180870837,
+      "throttle": false,
+      "brake": false,
+      "surface": "bridge",
+      "surfaceId": "park:prospect-overpass",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    }
+  ],
+  "broken": [],
+  "damage": {
+    "zones": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "scratches": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "overall": 0,
+    "severity": 0,
+    "revision": 0,
+    "lastHit": null,
+    "recentEventIds": []
+  }
+}

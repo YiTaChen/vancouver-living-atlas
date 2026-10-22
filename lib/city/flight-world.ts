@@ -45,6 +45,13 @@ export class FlightWorld {
         bounds: local.clone().applyMatrix4(matrix),
       });
     }
+    // New source-owned bridge floors use their exact rendered outside faces,
+    // without hidden internal caps from a chain of closed coarse boxes.
+    for (const mesh of (e.data.flightBridgeSurfaceMeshes ??
+      []) as THREE.Mesh[]) {
+      mesh.updateWorldMatrix(true, false);
+      this.add({ mesh, bounds: new THREE.Box3().setFromObject(mesh) });
+    }
     // Stable medium landmark geometry, independent of optional Ultra streaming.
     for (const detail of e.landmarkDetails) {
       detail.holder.updateWorldMatrix(true, true);

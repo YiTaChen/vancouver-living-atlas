@@ -1,8 +1,14 @@
 import * as THREE from 'three';
 import { prepareParkPaths } from './park-paths';
+import { conformStanleyNorthboundCrossing } from './stanley-northbound-crossing';
 import { createBuses, updateBuses, type BusRoute } from './city-buses';
 import { CityBusAssets } from './bus-assets';
 import { DetailedTrees, registerTree, type ForestTree } from './detailed-trees';
+import {
+  clearParkAsphaltTrees,
+  type TreeRoadSurface,
+  type TreeRoadPolygon,
+} from './park-tree-road-clearance';
 import { createCanopyGeometry } from './assets/tree-canopy';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
@@ -79,6 +85,55 @@ export function createStreetLampDamage(
     return true;
   };
 }
+/** Reconcile both tree sources with ordinary asphalt and height-aware Prospect
+ * decks before any LOD/collider registration. Raw municipal data is unchanged. */
+export function reconcileParkRoadTrees(e: CityEngine, trees: ForestTree[]) {
+  const scope = e.parkPolys
+    .filter((p) => p.name === 'Stanley Park')
+    .map((p) => p.poly as unknown as TreeRoadPolygon);
+  const surfaces: TreeRoadSurface[] = [];
+  e.roads.traverse((object) => {
+    if (
+      !(object instanceof THREE.Mesh) ||
+      !object.userData.asphaltSurface ||
+      (object.userData.protectedSurface && !object.userData.parkTreeClearance)
+    )
+      return;
+    const geometry = object.geometry,
+      position = geometry.getAttribute('position');
+    if (!position) return;
+    object.updateWorldMatrix(true, false);
+    const interleaved = position instanceof THREE.InterleavedBufferAttribute;
+    surfaces.push({
+      positions: interleaved ? position.data.array : position.array,
+      stride: interleaved ? position.data.stride : position.itemSize,
+      offset: interleaved ? position.offset : 0,
+      vertexCount: position.count,
+      indices: geometry.index?.array,
+      matrix: object.matrixWorld.elements,
+      start: geometry.drawRange.start,
+      count: geometry.drawRange.count,
+      asphaltSurface: true,
+      protectedSurface: !!object.userData.protectedSurface,
+      parkTreeClearance: !!object.userData.parkTreeClearance,
+    });
+  });
+  const result = clearParkAsphaltTrees(
+    trees,
+    surfaces,
+    scope,
+    e.data.trees.trees.length,
+    (x, z) => e.elevation(x, z),
+  );
+  // Keep the array and retained object identities stable for consumers and QA.
+  trees.length = 0;
+  for (const tree of result.retained) trees.push(tree);
+  e.data.stanleyTreeRoadClearance = {
+    ...result.stats,
+    excludedTrees: result.excluded,
+  };
+  return e.data.stanleyTreeRoadClearance;
+}
 export function createNature(e: CityEngine) {
   const woodPolys = e.data.context.features
     .filter((f: Feature) => f.properties.class === 'wood')
@@ -93,7 +148,7 @@ export function createNature(e: CityEngine) {
   e.data.waterPolys = waters;
   e.data.beachPolys = [
     ...e.data.beachCoast.fixtures.beaches.flatMap(
-      (b: any) => b.drySandPolygons || [],
+      (b: { drySandPolygons?: number[][][][] }) => b.drySandPolygons || [],
     ),
     ...e.data.beachCoast.beachOverlays.features.flatMap((f: Feature) =>
       rings(f).map((p) => p.map((r) => r.map(project))),
@@ -231,6 +286,11 @@ export function createNature(e: CityEngine) {
         original.dispose();
         drapedPaths++;
       }
+      const crossing = conformStanleyNorthboundCrossing(e, f, mesh.geometry);
+      if (crossing !== mesh.geometry) {
+        mesh.geometry.dispose();
+        mesh.geometry = crossing;
+      }
       pathGeos.push(mesh.geometry);
       const sourceId = Number(f.properties.sourceId ?? f.properties.id);
       if (groundSourceIds.has(sourceId))
@@ -308,6 +368,7 @@ export function createNature(e: CityEngine) {
   const conifer = createCanopyGeometry(true),
     leaf = createCanopyGeometry(false),
     lowLeaf = createCanopyGeometry(false, 'distant');
+  reconcileParkRoadTrees(e, trees);
   const mats = [
     new THREE.MeshStandardMaterial({
       color: 0xffffff,
