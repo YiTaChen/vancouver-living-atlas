@@ -85,6 +85,58 @@ const button = (html, action) => {
   assert(match, `visible ${action} button`);
   return match[0];
 };
+const driftButton = (html) => {
+  const match = html.match(
+    /<button\b[^>]*data-tesla-hold="drift"[^>]*>[\s\S]*?<\/button>/,
+  );
+  assert(match, 'a visible drift hold button');
+  return match[0];
+};
+
+test('drift is translated, ground-only and separate from the existing recovery, brake and stunt shortcuts', () => {
+  for (const [locale, catalog] of Object.entries(catalogs))
+    for (const touch of [false, true]) {
+      const html = render({}, { locale, touch }),
+        drift = driftButton(html);
+      assert.match(drift, /aria-keyshortcuts="X"/);
+      assert.match(drift, /aria-pressed="false"/);
+      assert(!drift.includes('disabled=""'));
+      assert(text(drift).includes(catalog.drift));
+      assert(
+        text(drift.match(/title="([^"]+)"/)[1]).includes(catalog.driftHint),
+      );
+      assert.match(
+        button(
+          touch ? render({}, { locale, touch, optionsOpen: true }) : html,
+          'recover',
+        ),
+        /<kbd>R<\/kbd>/,
+      );
+      assert.match(button(html, 'vortex'), /aria-keyshortcuts="V"/);
+      const active = render(
+        { drifting: true, driftIntensity: 0.5 },
+        { locale, touch },
+      );
+      assert.match(driftButton(active), /aria-pressed="true"/);
+      assert(text(active).includes(catalog.drifting));
+      for (const patch of [
+        { mode: 'air' },
+        { mode: 'wall' },
+        { onRoof: true },
+        { parked: true },
+        { transitioning: true },
+        { vortexActive: true },
+      ])
+        assert.match(
+          driftButton(render(patch, { locale, touch })),
+          /disabled=""/,
+        );
+    }
+  assert.match(
+    driftButton(render({}, { controlsEnabled: false })),
+    /disabled=""/,
+  );
+});
 
 test('desktop and touch expose the current driving mode and a stable accessible two-mode toggle in all ten locales', () => {
   assert.match(button(render(), 'grip'), /aria-pressed="true"/);
@@ -117,7 +169,7 @@ test('desktop and touch expose the current driving mode and a stable accessible 
             /<div class="touch-drive-controls tesla-touch-controls ui-chrome"[^>]*>([\s\S]*?)<\/div>/,
           );
           assert(cluster);
-          assert.equal((cluster[1].match(/<button\b/g) ?? []).length, 9);
+          assert.equal((cluster[1].match(/<button\b/g) ?? []).length, 10);
         }
       }
 });
@@ -197,7 +249,7 @@ test('inactive vehicles and modal-disabled touch controls expose no driving butt
   );
 });
 
-test('Vortex Jump is the ninth touch action and exposes its real availability, progress and keyboard shortcut in every locale', () => {
+test('Vortex Jump stays beside the touch drift action and exposes its real availability, progress and keyboard shortcut in every locale', () => {
   for (const [locale, catalog] of Object.entries(catalogs))
     for (const touch of [false, true]) {
       const html = render({ vortexAvailable: true }, { locale, touch }),

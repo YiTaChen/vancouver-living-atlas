@@ -52,7 +52,7 @@ import { TeslaControls, teslaText } from '@/components/tesla-controls';
 import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaController } from '@/lib/city/tesla-controller';
-import { TravelJoystick } from '@/components/travel-joystick';
+import { DriftHoldButton, TravelJoystick } from '@/components/travel-joystick';
 import { BusVisitPanel } from '@/components/bus-visit-panel';
 import { SkyTrainCabinPanel } from '@/components/skytrain-cabin-panel';
 import {
@@ -174,6 +174,9 @@ function Home() {
   const touchBrake = useCallback((held: boolean) => {
     if (engine.current?.navigation) engine.current.navigation.touchBrake = held;
   }, []);
+  const touchDrift = useCallback((held: boolean) => {
+    engine.current?.navigation?.setDriftHeld(held);
+  }, []);
   useEffect(() => {
     const query = matchMedia('(any-pointer: coarse), (max-width: 900px)');
     const update = () =>
@@ -251,6 +254,14 @@ function Home() {
     distance: 0,
     elevation: 0,
   });
+  const driveDriftEnabled = ready && settings.mode === 'drive' && !placing &&
+    !about && !panel && !discoveryModal && !stats.busVisit?.aboard &&
+    (!mobilePanel || mobilePanel === 'map');
+  useEffect(() => {
+    const navigation = engine.current?.navigation;
+    navigation?.setDriftInputEnabled(driveDriftEnabled);
+    return () => navigation?.setDriftInputEnabled(false);
+  }, [driveDriftEnabled]);
   const clock = stats.clock || DEFAULT_CLOCK;
   const clockLabel = formatClock(clock.hour);
   const changeClock = (patch: Partial<ClockState>) =>
@@ -1016,6 +1027,7 @@ function Home() {
             !placing &&
             !about &&
             !panel &&
+            !discoveryModal &&
             (mobilePanel === null || mobilePanel === 'map') && (
               <TravelJoystick
                 mode={settings.mode as TravelMode}
@@ -1025,6 +1037,9 @@ function Home() {
                 )}
                 onMove={touchMove}
                 onBrake={touchBrake}
+                driftLabel={tr('drift')}
+                driftHint={tr('driftHelp')}
+                onDrift={driveDriftEnabled ? touchDrift : undefined}
               />
             )}
           {mobilePanel === 'travel' &&
@@ -1098,6 +1113,9 @@ function Home() {
                     settings.mode === 'walk'
                       ? 'touchWalkHint'
                       : 'touchVehicleHint',
+                  )}
+                  {settings.mode === 'drive' && (
+                    <><br />{tr('touchDriftHint')}</>
                   )}
                 </p>
               </section>
@@ -2165,9 +2183,21 @@ function Home() {
                   ? tr('brakeHelp')
                   : tr('speedHelp')}{' '}
               · {tr('lookHelp')}
+              {settings.mode === 'drive' && (
+                <><br />{tr('driftHelp')}</>
+              )}
               <br />
               {tr('travelZoomHelp')}
             </p>
+            {settings.mode === 'drive' && (
+              <DriftHoldButton
+                label={tr('drift')}
+                hint={tr('driftHelp')}
+                onHeld={touchDrift}
+                className="drive-drift-hold"
+                disabled={touchUI || !driveDriftEnabled}
+              />
+            )}
             {settings.mode === 'boat' && (
               <button className="boat-neutral" {...helmControl('neutral')}>
                 {tr('boatNeutral')}

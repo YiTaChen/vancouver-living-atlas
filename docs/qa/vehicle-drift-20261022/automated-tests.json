@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "scope": "Automated local pre-merge CPU/DOM verification. Native browser captures and release CI/deployment are separate checks.",
+  "status": "pass",
+  "recordedAt": "2026-10-22T12:36:01Z",
+  "parentRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+  "runtime": {
+    "node": "v24.22.1",
+    "platform": "darwin-x64",
+    "localBinary": "work/runtime-node24/node-v24.22.1-darwin-x64/bin/node",
+    "binarySha256": "cc6f41f72e3eb4460154952e56a35afdd96b6995cea51cd25e637355a2955a51",
+    "repositoryEngines": "^22.23.4 || ^24.22.1"
+  },
+  "fullSuite": {
+    "id": "supported-full-suite",
+    "status": "pass",
+    "scope": "Entire repository suite after fixture repairs",
+    "tests": 1673,
+    "passed": 1673,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 330415.525731,
+    "localLog": "work/drift-full-tests-final.log",
+    "logSha256": "af8754d8b8f33ab99f37c76ec89c973799e2b0ebef7fc81b1a7e91cc9db550b9",
+    "command": "work/runtime-node24/node-v24.22.1-darwin-x64/bin/node --test --test-reporter=tap --test-concurrency=4 tests/*.test.mjs"
+  },
+  "focusedChecks": [
+    {
+      "id": "shared-handling-and-navigation",
+      "status": "pass",
+      "scope": "12 pure handling, 17 actual StreetNavigation, and 44 existing placement checks",
+      "tests": 73,
+      "passed": 73,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 3855.085388,
+      "localLog": "work/vehicle-drift-dynamics-placement-final-tests.log",
+      "logSha256": "ba9ff3acd8984d3d2f68574f3e5a7d88ada366e7fe284c27ea30a72dedd4b3ec",
+      "command": "work/runtime-node24/node-v24.22.1-darwin-x64/bin/node --test --test-reporter=tap tests/placement.test.mjs tests/vehicle-drift.test.mjs tests/vehicle-drift-navigation.test.mjs"
+    },
+    {
+      "id": "desktop-touch-and-localization",
+      "status": "pass",
+      "scope": "Public drift controls, accessible pointer lifecycle and localized help",
+      "tests": 22,
+      "passed": 22,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 1398.297101,
+      "localLog": "work/drift-ui-focused-tests.log",
+      "logSha256": "aa17543bf70d6021afcdf8a3299214b43bec9e33f676f2b2ce7d5578670e06e0"
+    },
+    {
+      "id": "tesla-handling-regressions",
+      "status": "pass",
+      "scope": "Tesla controller/state handling, collision, contact and existing travel regressions",
+      "tests": 125,
+      "passed": 125,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 4333.042712,
+      "localLog": "work/tesla-drift-focused-final.log",
+      "logSha256": "22c31872cd8cdfcbb970f00e84d9f154c982397cf34cc92ce4624c5ad140a248"
+    },
+    {
+      "id": "tesla-keyboard-focus-regressions",
+      "status": "pass",
+      "scope": "Updated Tesla input focus and autorepeat checks",
+      "tests": 33,
+      "passed": 33,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 3537.510194,
+      "localLog": "work/tesla-drift-focus-input-final.log",
+      "logSha256": "1a350a27b2aae5c95a8cbf43be3747f080cb62be2c15e974ecb2edd070a98a48"
+    },
+    {
+      "id": "tesla-stanley-source-regressions",
+      "status": "pass",
+      "scope": "Tesla drift plus actual Stanley road source replay regressions",
+      "tests": 20,
+      "passed": 20,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 118772.209676,
+      "localLog": "work/tesla-drift-stanley-final.log",
+      "logSha256": "06f7e930af867df8779c86ad742d201e346e4019cfda102f58616d887da9c727"
+    },
+    {
+      "id": "bounded-drift-effects",
+      "status": "pass",
+      "scope": "Bounded skid/smoke effects, disposal and road-gap clipping",
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 578.064011,
+      "localLog": "work/drift-fx-tests-final.log",
+      "logSha256": "3f7f573e000f167481edd37e2ac07a2f444428d4540388cc2e6c156b1a213d90"
+    },
+    {
+      "id": "legacy-fixture-contracts",
+      "status": "pass",
+      "scope": "Model switching reset contract and QA observer installation/disposal",
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 3470.213488,
+      "localLog": "work/drift-existing-fixture-regression-tests.log",
+      "logSha256": "b47c261c873c5796109782418373748a3945d2193e948eeab4c1f46f7ef5de37",
+      "command": "work/runtime-node24/node-v24.22.1-darwin-x64/bin/node --test --test-reporter=tap tests/roadster.test.mjs tests/upgrade-qa-lease.test.mjs"
+    }
+  ],
+  "countingNote": "Focused batches overlap each other and the full suite; their test counts must not be added to the full-suite count.",
+  "initialRun": {
+    "id": "before-fixture-repair",
+    "status": "fail",
+    "scope": "Diagnostic run before legacy test fixtures were updated",
+    "tests": 1673,
+    "passed": 1669,
+    "failed": 4,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 283052.857137,
+    "localLog": "work/drift-full-tests.log",
+    "logSha256": "68f77354eff72b815c26c26a1735ca580da1b5aac20f4daa4db3f3c630622aea",
+    "resolvedFixtureIssues": [
+      {
+        "file": "tests/roadster.test.mjs",
+        "failedCases": 1,
+        "reason": "The extracted model selection fixture lacked the new clearDrift dependency. It now asserts all 40 switches reset stale drift input."
+      },
+      {
+        "file": "tests/upgrade-qa-lease.test.mjs",
+        "failedCases": 3,
+        "reason": "The fake DOM omitted window. It now provides an EventTarget window, dispatches pagehide before global restoration, and asserts all observer intervals and keyboard listeners are disposed."
+      }
+    ]
+  },
+  "currentSourcePins": {
+    "status": "pass",
+    "source": "lib/city/navigation.ts",
+    "sha256": "6f0f78bb67395e0892ab8fff84187161be17657403151415ca0dbe28e3bd2802",
+    "matchingFixtures": [
+      "tools/assets/material-consumer-candidates/qa/consumer-validation.json",
+      "tools/assets/material-consumer-candidates/qa/current-source-fixtures.json",
+      "tools/assets/material-consumer-candidates/qa/harbour-aircraft-gap-audit.json",
+      "tools/assets/roadster-driver-fit/qa/adapter-preservation.json"
+    ]
+  },
+  "sourceHashes": {
+    "app/globals.css": "485f54974af472b3cf08b75522e3d4327db9651fb84de4e70d1dfd46503ea015",
+    "app/page.tsx": "fd03a578596ad4a60d86187e17f2330bc0c053d4aab81c856afa47ac2050bc88",
+    "components/tesla-controls.tsx": "f35e7b1edd11299e440274caa555c6f290ca8a4c65f5861e5737704db24b7dac",
+    "components/travel-joystick.tsx": "3a45855dcbcea4d3cf25f2ec796af7394385b2b3305dca72b69dbdad1671d908",
+    "lib/city/engine.ts": "5f6c7d0168b4c25d51da117dad1c15a19ccc7b3442c0f38cb7793ed4103796c7",
+    "lib/city/navigation.ts": "6f0f78bb67395e0892ab8fff84187161be17657403151415ca0dbe28e3bd2802",
+    "lib/city/tesla-controller.ts": "49082e37f2059f55452b5e3158b3b5daeb53137d8bb0119737429ae8374d09dd",
+    "lib/city/tesla-snapshot.ts": "30773620f699737b70492d56fc8aafaa6a3cc81ac07fd8c4d781d344d9be976e",
+    "lib/city/tesla-state.ts": "ceeb34bf7776b00d0be109c82e1443dbdb080017a3c66bf4b2bc6e442aed39f2",
+    "lib/city/vehicle-drift.ts": "29779b6bfddb6ffe96d69d9b351c4fd09d3b615dfa60c3470d51a6bc6ee4ed4c",
+    "lib/city/vehicle-drift-effects.ts": "35d6fc744736d9356434c33dee65695cb83e1440256804bdda0323d95123e21e",
+    "lib/city/vehicle-drift-qa.ts": "4729495d9ba54e0fe0a7c06df26134d187745848a8459d161928b97c8130e2ab",
+    "lib/city/visual-qa.ts": "abc5dcb490a500a1d5624a86481a99dac454ce2379918098563325c2f3f05a31",
+    "tools/verify-firebase-build.mjs": "f7b215f3ee566f644fb09acb0cd680decf7dd1520d82cdd96c9c57765a6b07be"
+  }
+}

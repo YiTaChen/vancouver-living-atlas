@@ -178,8 +178,10 @@ export async function verifyFirebaseBuild(
   assert(
     !scripts.includes('Impact QA:') &&
       !scripts.includes('Stanley Drive QA:') &&
+      !scripts.includes('Vehicle drift QA ready') &&
+      !scripts.includes('Drift QA: record native input') &&
       !files.some((name) =>
-        /(?:^|\/)(?:vehicle-impact-qa|stanley-drive-qa)[.-]/.test(name),
+        /(?:^|\/)(?:vehicle-impact-qa|stanley-drive-qa|vehicle-drift-qa)[.-]/.test(name),
       ),
     'Vehicle impact and Stanley Drive diagnostics must not ship in the public build',
   );

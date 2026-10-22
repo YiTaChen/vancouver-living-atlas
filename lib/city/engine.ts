@@ -1,6 +1,7 @@
 import { CityStreetFurniture } from './street-furniture-world';
 import { VehicleImpactWorld } from './vehicle-impact-world';
 import { ImpactFeedback } from './vehicle-impact-feedback';
+import { VehicleDriftEffects } from './vehicle-drift-effects';
 import { FlightController } from './flight-controller';
 import { TeslaController } from './tesla-controller';
 import { clearOrbitGesture } from './orbit-lifecycle';
@@ -197,6 +198,7 @@ export class CityEngine {
   navigation: StreetNavigation | null = null;
   vehicleImpacts: VehicleImpactWorld | null = null;
   impactFeedback: ImpactFeedback | null = null;
+  driftEffects: VehicleDriftEffects | null = null;
   busVisit: BusCabinVisit | null = null;
   busVisitDetail: BusVisitDetail = 'auto';
   flight: FlightController | null = null;
@@ -673,6 +675,7 @@ export class CityEngine {
     }
     this.vehicleImpacts = new VehicleImpactWorld(this);
     this.impactFeedback = new ImpactFeedback(this.scene);
+    this.driftEffects = new VehicleDriftEffects(this);
     this.navigation = new StreetNavigation(this);
     this.busVisit = new BusCabinVisit(
       this,
@@ -1752,6 +1755,7 @@ export class CityEngine {
     this.tesla?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.vehicleImpacts?.update(this.lastTime ? (time-this.lastTime)/1000 : 0);
     this.impactFeedback?.update(this.lastTime ? (time-this.lastTime)/1000 : 0,this.camera,this.settings.quality);
+    this.driftEffects?.update(this.lastTime ? (time-this.lastTime)/1000 : 0);
     this.updateAutoQuality(time, this.lastTime ? time - this.lastTime : 0);
     this.pedestrians?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.travelReturn?.update();
@@ -2032,6 +2036,7 @@ export class CityEngine {
     this.streetFurniture?.dispose();
     this.vehicleImpacts?.dispose();
     this.impactFeedback?.dispose();
+    this.driftEffects?.dispose();
     this.streetscapeKit?.dispose();
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh;

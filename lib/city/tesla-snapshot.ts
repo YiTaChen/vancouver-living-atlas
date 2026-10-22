@@ -6,6 +6,8 @@ export interface TeslaSnapshot {
   active: boolean;
   mode: 'ground' | 'wall' | 'air';
   transitioning: boolean;
+  drifting: boolean;
+  driftIntensity: number;
   speedKph: number;
   altitudeM: number;
   parked: boolean;
@@ -27,6 +29,8 @@ export const EMPTY_TESLA: TeslaSnapshot = {
   active: false,
   mode: 'ground',
   transitioning: false,
+  drifting: false,
+  driftIntensity: 0,
   speedKph: 0,
   altitudeM: 0,
   parked: false,
