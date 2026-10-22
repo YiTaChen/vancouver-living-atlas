@@ -16,6 +16,9 @@ import { installVehicleDriftQA } from './vehicle-drift-qa';
 import { installUpgradeEnduranceQA } from './upgrade-endurance-qa';
 
 const cases = [
+  { id: 'jack-poole-plaza', coord: [-123.1176596, 49.2893606], offset: [-28, 18, 32], targetY: 9 },
+  { id: 'coal-harbour-docks', coord: [-123.1253, 49.29143], offset: [45, 35, -50], targetY: 1.6 },
+  { id: 'coal-harbour-dock-detail', coord: [-123.1253, 49.29143], offset: [12, 8, -13], targetY: 1.6 },
   {id:'station-lobby', interiorSite:'waterfront', interiorAt:[0,5], interiorYaw:Math.PI},
   {id:'station-skywalk', interiorSite:'waterfront', interiorAt:[-6,-28], interiorYaw:Math.PI},
   {id:'station-terminal', interiorSite:'waterfront', interiorAt:[29,-202], interiorYaw:Math.PI},
@@ -301,6 +304,25 @@ export function installVisualQA(e: CityEngine) {
     };
     panel.appendChild(b);
   };
+  button('Waterfront proof', () => {
+    output.value = JSON.stringify({
+      waterfront: e.data.waterfrontProof,
+      poolBlocked: e.navigation?.blocked(...project([-123.1176596, 49.2893606])),
+      docks: e.data.harbourDockMesh?.userData,
+      calls: e.renderer.info.render.calls,
+      triangles: e.renderer.info.render.triangles,
+    }, null, 2);
+  });
+  button('Waterfront before', () => {
+    e.data.waterfrontDetailControl?.setEnabled(false);
+    e.data.harbourDockDetailControl?.setEnabled(false);
+    e.renderer.shadowMap.needsUpdate = true;
+  });
+  button('Waterfront after', () => {
+    e.data.waterfrontDetailControl?.setEnabled(true);
+    e.data.harbourDockDetailControl?.setEnabled(true);
+    e.renderer.shadowMap.needsUpdate = true;
+  });
   const apply = (id: string, quality: VisualQuality) => {
     const test = cases.find((c) => c.id === id)!;
     selectedCase = id;
@@ -945,6 +967,8 @@ export function installVisualQA(e: CityEngine) {
     const row = {
       kind: 'visual-check',
       streetFurniture: e.streetFurniture?.stats(),
+      waterfront: e.data.waterfrontProof,
+      docks: e.data.harbourDockMesh?.userData,
       cityNight: {
         field: e.traffic?.streetLighting?.stats(),
         vehicles: e.traffic?.nightLights?.stats,

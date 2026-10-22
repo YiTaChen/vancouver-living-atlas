@@ -1,8 +1,13 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 
 export const SEATING_REVIEW_BASE = '53bb3c6';
 const sha = (value) => createHash('sha256').update(value).digest('hex');
+const dockReview = JSON.parse(readFileSync(
+  new URL('./harbour-dock-source-review.json', import.meta.url), 'utf8',
+));
+const dockSourceURL = new URL('../../../../lib/city/harbour-docks.ts', import.meta.url);
 
 function exact(source, before, after, label) {
   assert.equal(
@@ -11,6 +16,44 @@ function exact(source, before, after, label) {
     `Reviewed seating anchor changed: ${label}`,
   );
   return source.replace(before, after);
+}
+
+/** Reconstruct only the reviewed source relocation, never execute legacy docks.
+ * The full original harbour hash still protects every controller/model callsite.
+ * Separately pin the extracted module so subtracting its import cannot conceal
+ * dependency drift. This compatibility does not adopt its new dock materials
+ * into the offline material consumer candidates or their geometry inventory. */
+export function projectBeforeHarbourDockExtraction(path, source, relatedSources = {}) {
+  assert.equal(path, 'lib/city/harbour.ts', 'No reviewed harbour dock projection');
+  const dependency = dockReview.dependency;
+  const dockSource = relatedSources[dependency.path] ?? readFileSync(dockSourceURL, 'utf8');
+  const dependencyHash = sha(dockSource);
+  assert.equal(dependencyHash, dependency.sha256,
+    `Reviewed harbour dock dependency drift: ${dependency.path}`);
+  const reviewed = [];
+  const restore = (before, after, label) => {
+    source = exact(source, before, after, label);
+    reviewed.push(label);
+  };
+  restore(
+    "import * as THREE from 'three';\nimport type { CityEngine } from './engine';",
+    "import * as THREE from 'three';\nimport { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';\nimport type { CityEngine } from './engine';",
+    'harbour dock merge import extraction',
+  );
+  restore(
+    "import { project } from './geo';\nimport { addDocks, hullPolygon } from './harbour-docks';\nexport { hullPolygon } from './harbour-docks';",
+    "import { project, rings, lines } from './geo';",
+    'harbour dock imports and public hull export extraction',
+  );
+  restore(
+    '  elapsed: number;\n}\nfunction rotor(',
+    '  elapsed: number;\n}\n' + dockReview.legacyHullAndDocksSource + 'function rotor(',
+    'harbour dock and hull implementation extraction',
+  );
+  assert.equal(sha(source), dockReview.baselineHarbourSha256,
+    'Protected harbour source drift beyond reviewed dock extraction');
+  return { source, reviewed, scope: dockReview.scope,
+    relatedSourceHashes: { [dependency.path]: dependencyHash } };
 }
 
 /** Remove only the reviewed character delta; seated-source baselines keep seats. */
@@ -196,7 +239,7 @@ export function projectBeforeSeating(path, source) {
   return { source, reviewed };
 }
 
-export function assertProtectedSources(sources, baselineHashes) {
+export function assertProtectedSources(sources, baselineHashes, relatedSources = {}) {
   assert.deepEqual(
     Object.keys(sources).sort(),
     Object.keys(baselineHashes).sort(),
@@ -208,6 +251,15 @@ export function assertProtectedSources(sources, baselineHashes) {
       baselineHash = baselineHashes[path];
     sourceHashes[path] = actualHash;
     if (actualHash === baselineHash) continue;
+    if (path === 'lib/city/harbour.ts') {
+      const projected = projectBeforeHarbourDockExtraction(path, source, relatedSources);
+      const projectedHash = sha(projected.source);
+      assert.equal(projectedHash, baselineHash, `Protected harbour source drift: ${path}`);
+      compatibility.push({ path, baselineHash, actualHash, projectedHash,
+        reviewed: projected.reviewed, scope: projected.scope,
+        relatedSourceHashes: projected.relatedSourceHashes });
+      continue;
+    }
     // A newer fixture may already include seating. Accept character-only
     // subtraction only when every remaining byte equals that exact baseline;
     // otherwise retain the original pre-seating compatibility gate.

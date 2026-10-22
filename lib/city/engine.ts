@@ -76,6 +76,7 @@ import type { StreetscapeKit } from './streetscape-kit';
 import { createBridgeApproaches } from './bridges';
 import { prepareCauseway } from './causeway';
 import { makeContext } from './context';
+import { createWaterfront } from './waterfront';
 import { StreetNavigation } from './navigation';
 import { MapPlacement } from './placement';
 import { CityClock, type ClockState } from './clock';
@@ -640,6 +641,7 @@ export class CityEngine {
       this.startupQA?.phase('geometry.landmarks-medium-and-ground-plan');
     }
     createLandmarks(this);
+    createWaterfront(this);
     this.interiors = new PublicInteriors(this);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('collision.waterworld-and-footprints');

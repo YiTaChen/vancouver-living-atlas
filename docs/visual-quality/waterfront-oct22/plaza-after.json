@@ -1,0 +1,230 @@
+{
+  "revision": "bb26294067dade837738be62a6cc0faa8a4d9712",
+  "sourceFingerprint": "a300e82ff9e2209a305dc3478d14bb2712f9e5f1a0aceaa56f1d966a67840a75",
+  "kind": "visual-check",
+  "streetFurniture": {
+    "plan": {
+      "paths": 1821,
+      "candidates": 62,
+      "accepted": 32,
+      "rejected": {
+        "slope": 6,
+        "occupied": 13,
+        "junction-crossing": 2,
+        "clearance": 9
+      },
+      "cap": 256,
+      "byKind": {
+        "cedar-bench": 10,
+        "garbage-bin": 14,
+        "bicycle-rack": 8
+      }
+    },
+    "proof": {
+      "sidewalkMeshes": 6,
+      "prefilterMeshes": 41,
+      "obstacleSources": 19373,
+      "approachSources": 277,
+      "buildMs": 74.10000002384186,
+      "floorBuildMs": 9.399999976158142,
+      "exclusionsBuildMs": 11.100000023841858,
+      "planningMs": 53.60000002384186
+    },
+    "renderer": {
+      "status": "idle",
+      "ready": false,
+      "placements": 32,
+      "candidates": 0,
+      "visible": 0,
+      "visibleIds": [],
+      "submittedByLod": [
+        0,
+        0
+      ],
+      "drawCalls": 0,
+      "triangles": 0,
+      "submittedTriangles": 0,
+      "batches": 0,
+      "geometries": 0,
+      "materials": 0,
+      "textures": 0,
+      "assetBytes": 0,
+      "capacity": 64,
+      "pendingLoads": 0,
+      "pendingPreparation": 0,
+      "loadedAssets": 0,
+      "attempts": 0,
+      "failures": 0,
+      "lastError": null,
+      "updates": 7779,
+      "uploads": 0
+    }
+  },
+  "waterfront": {
+    "status": "ready",
+    "sourceMeshes": 2,
+    "sourceTriangles": 17,
+    "foundation": {
+      "centre": [
+        750.839336214084,
+        -374.101992000067
+      ],
+      "low": 3.423756104954411,
+      "high": 3.7154796471017595,
+      "top": 3.7504796471017596,
+      "samples": [
+        3.5774253316618148,
+        3.5908878832028566,
+        3.423756104954411,
+        3.600236775942782,
+        3.7154796471017595,
+        3.502821144450504,
+        3.522718242405727,
+        3.6578582115222704,
+        3.648654378460461
+      ]
+    },
+    "pool": {
+      "id": "lake-1070091596-0",
+      "previousLevel": 4.702459938134001,
+      "level": 3.7954796471017596
+    }
+  },
+  "docks": {
+    "marinaDetailSourceIds": [
+      105690047,
+      105690052,
+      105690059,
+      105690060,
+      105690064
+    ],
+    "dockReferences": [
+      "https://coalharbourmarina.com/annual-moorage/",
+      "https://coalharbourmarina.com/contact-us/",
+      "https://www.openstreetmap.org/way/41742497"
+    ],
+    "detailedSegments": 45,
+    "detailStatus": "Original joints and fittings on existing OSM-derived pier boxes; not surveyed hardware"
+  },
+  "cityNight": {
+    "field": {
+      "size": 512,
+      "textureBytes": 1048576,
+      "textures": 1,
+      "activeTexels": 81249,
+      "lampSources": 1530,
+      "roadSources": 1314,
+      "buildMs": 134.0999999642372,
+      "wrappedMaterials": 169,
+      "disabledLamps": 0,
+      "warmStateBytes": 1073056,
+      "disposed": false,
+      "nightAmount": 0,
+      "activity": 0.43124999999999997
+    },
+    "vehicles": {
+      "vehicles": 0,
+      "headLamps": 0,
+      "tailLamps": 0,
+      "spills": 0,
+      "drawCalls": 0,
+      "triangles": 0,
+      "textures": 0,
+      "pointLights": 0,
+      "capacity": 96,
+      "nightAmount": 0,
+      "disposed": false
+    },
+    "cameraField": {
+      "street": 0.04050656764571336,
+      "warm": 0.018320671314790794,
+      "groundY": 4.948838271730551,
+      "coverage": 1
+    }
+  },
+  "calls": 156,
+  "triangles": 1679997,
+  "geometries": 743,
+  "textures": 46,
+  "qualityMode": "manual",
+  "compatible": false,
+  "skySettings": {
+    "sun": true,
+    "moon": true,
+    "stars": true,
+    "aurora": true,
+    "meteors": true,
+    "moonPhase": "auto",
+    "auroraMode": "auto",
+    "starDensity": 0.45,
+    "auroraIntensity": 0.45,
+    "auroraDensity": 0.45,
+    "meteorFrequency": 0.3
+  },
+  "skyPreviewTime": null,
+  "id": "jack-poole-plaza-14p00h",
+  "quality": "high",
+  "hour": 14,
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1600,
+    900
+  ],
+  "camera": [
+    722.839336214084,
+    27,
+    -342.101992000067
+  ],
+  "target": [
+    750.839336214084,
+    9,
+    -374.101992000067
+  ],
+  "mode": "orbit",
+  "position": [
+    0,
+    0,
+    0
+  ],
+  "pedestrians": {
+    "time": 100.09999999999646,
+    "streetVisible": true,
+    "selected": 4,
+    "rendered": 4,
+    "routes": 20,
+    "actorStates": 40,
+    "attemptedRoutes": 22,
+    "floorIndexedMeshes": 6,
+    "indexedTreeTrunks": 35535,
+    "closestCandidateM": 28.251024765885663,
+    "nearbyCandidates": 4,
+    "safeNearbyCandidates": 4,
+    "renderedIds": [
+      "footway:3507:-1:run0:0",
+      "footway:3507:-1:run0:1",
+      "footway:3911:1:run0:0",
+      "footway:3911:1:run0:1"
+    ],
+    "budget": 32,
+    "renderer": {
+      "activeActors": 4,
+      "visibleActors": 4,
+      "capacity": 32,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 3,
+      "triangles": 980,
+      "geometryBytes": 361632,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  }
+}

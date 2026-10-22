@@ -1,0 +1,65 @@
+{
+  "schema": "vancouver-living-atlas/olympic-cauldron-blender-evidence-v1",
+  "sourceSha256": "6cb9cc05060cbb8d7910a5aa4b34c9382f07d79bdcdc521bc9b91db291c6733f",
+  "blend": "olympic-cauldron.blend",
+  "coordinateConversion": "THREE (x,y,z) -> Blender (x,-z,y)",
+  "runtimeBoundsM": {
+    "min": [
+      -6.001664638519287,
+      0,
+      -6.001664638519287
+    ],
+    "max": [
+      6.001664638519287,
+      10,
+      6.001664638519287
+    ]
+  },
+  "triangles": 4032,
+  "drawCalls": 3,
+  "geometryBytes": 435456,
+  "meshes": [
+    {
+      "name": "olympic-cauldron/frosted-crystal",
+      "vertices": 5568,
+      "triangles": 1856,
+      "geometrySha256": "f6e3f041211125c0662a905237623f8ec06bd562009c93027ec0d30354be6b6f",
+      "positionRoundTripExact": true,
+      "editableVertexGroups": [
+        "crossing-arm-1",
+        "crossing-arm-2",
+        "crossing-arm-3",
+        "crossing-arm-4",
+        "central-crystal"
+      ]
+    },
+    {
+      "name": "olympic-cauldron/steel-edges-and-rims",
+      "vertices": 840,
+      "triangles": 280,
+      "geometrySha256": "96658dc0fc6580362a6bb859cb97831e89bc64f462c0c104830af5b3e2dc3cbf",
+      "positionRoundTripExact": true,
+      "editableVertexGroups": [
+        "crossing-arm-1",
+        "crossing-arm-2",
+        "crossing-arm-3",
+        "crossing-arm-4",
+        "central-crystal"
+      ]
+    },
+    {
+      "name": "olympic-cauldron/joints-and-unlit-burners",
+      "vertices": 5688,
+      "triangles": 1896,
+      "geometrySha256": "775913dc49828f12b9f261e28df4ad082befdbfc37e4a280055969cf436c337b",
+      "positionRoundTripExact": true,
+      "editableVertexGroups": [
+        "crossing-arm-1",
+        "crossing-arm-2",
+        "crossing-arm-3",
+        "crossing-arm-4",
+        "central-crystal"
+      ]
+    }
+  ]
+}

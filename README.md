@@ -113,6 +113,8 @@ coordinated sky, facade glass, fog and environment palette. These are authored
 scene conditions, not live weather. Shared building/street finishes and editable
 Blender modules are documented in the [material inventory and asset workflow](docs/MATERIAL_PIPELINE.md).
 
+**Waterfront details:** Jack Poole Plaza now includes an original, unlit Olympic Cauldron and its mapped reflecting pool. Five Coal Harbour marina piers have concrete-float joints, edge fenders and low mooring fittings, retaining their existing collision footprints. [References, editable Blender source and validation](docs/WATERFRONT_DETAIL_2026_10.md).
+
 **Ten languages:** English (first-visit default), Français, Español, 中文（繁體）, 中文（简体）, Deutsch, 日本語, 한국어, Українська and Русский. Changing language updates controls and map labels without resetting the scene; the browser remembers the selection.
 
 ## Rendering and startup
