@@ -108,3 +108,11 @@ npm run check
 2026-10-22 最終來源指紋 `0bf215e2…bd1f5e` 已以公開按鈕走完 Main Street–Science World → Stadium–Chinatown：進站、走近月台車門、上車、全段行駛、停妥開門、下車、走回通行點、返回大廳及街道。Science World 出站時的[車廂畫面](qa/skytrain-travel-20261022/final-main-guideway-cabin.png)沒有被鄰近 City 外殼擋住。另確認 [390×844](qa/skytrain-travel-20261022/final-mobile-expo-portrait.png)與 [844×390](qa/skytrain-travel-20261022/final-mobile-expo-landscape.png)移動車廂及精簡面板，並以原生 pointer 搖桿在到站月台轉向、持續行走；這是桌面瀏覽器響應式測試，未測實體手機。
 
 [最終效能紀錄](qa/skytrain-travel-20261022/performance.json)保留同一 Mac、1280×720、Auto／Balanced 的首個 2,400 前景 frame，52.8745 秒，實際渲染 1024×576。frame interval 中位數 20.6ms、P95 30.3ms、P99 42.5ms，期間仍有一次 **1,214.2ms** 停頓，7 個 frame 超過 100ms；原因尚未由取樣建立。取樣期間沒有同時執行建置或 CPU 測試，但此紀錄仍包含瀏覽器排程等因素，不能當成純 GPU 時間或全網／所有裝置的保證。全部 interval 以[原順序保存](qa/skytrain-travel-20261022/performance-frame-intervals.json)，沒有移除離群值；與先前樣本不構成同條件前後比較。
+
+## 正式環境內嵌貼圖修正
+
+七站版本 `4caf386` 上線後的原生檢查發現，Mark V 車廂幾何能載入，但三張內嵌 PNG 會失敗。後續小修正讓車廂 GLTF 解析使用圖片解碼途徑，保留原有 PBR、取樣、色彩空間與貼圖方向；不變更既有網站安全設定或六份 GLB。任何圖片失敗時拒絕接受缺少材質的車廂，並清理部分場景及 Object URL。[CSP 的 connect-src 與 img-src 分別約束 script fetch 和圖片讀取](https://www.w3.org/TR/CSP/#directive-connect-src)，此次只調整載入途徑。
+
+新增兩項真實 default-loader／GLTF 解析回歸；相關車廂與列車測試 **25／25**、TypeScript、嚴格 lint 及正式建置通過。原生瀏覽器使用正式建置與完全相同的 HTTP CSP header，完成 Science World 進站、走到開啟車門、上車及移動車廂觀察，沒有再出現 console error。[修正收據與畫面](qa/skytrain-cabin-csp-20261022/acceptance.json)記錄來源雜湊、原始 GLB 保留及驗收限制。完整測試預期為 **1,793**，最終 CI／部署依其實際執行結果判定。
+
+先前幾何收據與 `0bf215e2…bd1f5e` 效能取樣保留在原發布版本的範圍；此次圖片解碼程式變更後，沒有重新宣稱該效能樣本是新來源版本的精確量測。
