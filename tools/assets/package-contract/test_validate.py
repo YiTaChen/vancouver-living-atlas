@@ -51,6 +51,17 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ValueError): v.measure_glb(self.path)
     def test_path_escape(self):
         with self.assertRaises(ValueError): v.inside(Path(self.tmp.name),'../outside')
+    def test_explicit_authoring_export_with_runtime_basename(self):
+        root=Path(self.tmp.name);folder=root/'exports';folder.mkdir()
+        target=folder/'sample.glb';sample(target)
+        self.assertEqual(v.export_path(root,{'file':'sample.glb','export':'exports/sample.glb'}),target.resolve())
+        self.assertEqual(v.export_path(root,{'file':'exports/sample.glb'}),target.resolve())
+    def test_authoring_export_cannot_hide_path_escape_or_name_mismatch(self):
+        root=Path(self.tmp.name)
+        for lod in [{'file':'../sample.glb','export':'exports/../sample.glb'},
+                    {'file':'sample.glb','export':'../sample.glb'},
+                    {'file':'sample.glb','export':'exports/other.glb'}]:
+            with self.assertRaises(ValueError):v.export_path(root,lod)
     def test_negative_matrix(self):
         def change(d):
             d['nodes'][0]={'matrix':[-1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],'children':[1]}

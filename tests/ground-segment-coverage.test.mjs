@@ -117,6 +117,60 @@ test('height-window clipping cannot substitute an upper road layer for a missing
   }
 });
 
+test('curb collision faces cannot supply segment coverage or fill a missing walking floor', () => {
+  const meshes = [];
+  const source = (positions) => {
+    const geometry = new THREE.BufferGeometry().setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(positions, 3),
+    );
+    const mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial());
+    meshes.push(mesh);
+    return mesh;
+  };
+  try {
+    const cap = source(rectangle(0, 0.1, 0, 0.1, 0.2));
+    const obstructionOnly = new GroundSurfaceIndex([], [cap]);
+    assert.equal(obstructionOnly.sample(1, 1, 0.2), undefined);
+    assert.equal(
+      obstructionOnly.coversSegment([1, 1], [2, 1], 0.2, 0.01),
+      false,
+      'a cap elsewhere in the same grid cell cannot cover an unrelated segment',
+    );
+    assert.equal(
+      obstructionOnly.trianglesInBounds(
+        new THREE.Box3(
+          new THREE.Vector3(-0.01, 0.19, -0.01),
+          new THREE.Vector3(0.11, 0.21, 0.11),
+        ),
+      ).length,
+      2,
+      'the cap remains available for exact ramp collision tests',
+    );
+
+    const riser = source([0, 0.2, 0, 0, 0.4, 0, 0, 0.2, 0.1]);
+    assert.equal(
+      new GroundSurfaceIndex([riser]).coversSegment([1, 1], [2, 1], 0.2),
+      false,
+      'a vertical face remains collision-only even in the explicit floor set',
+    );
+
+    const floor = source([
+      ...rectangle(-2, 2, -2, -0.05, 0.2),
+      ...rectangle(-2, 2, 0.05, 2, 0.2),
+    ]);
+    const gapCap = source(rectangle(-2, 2, -0.05, 0.05, 0.2));
+    const mixed = new GroundSurfaceIndex([floor], [gapCap]);
+    assert.equal(mixed.coversSegment([0, -1], [0, 1], 0.2, 0.01), false);
+    assert.equal(mixed.coversSegment([0, -1], [0, -0.2], 0.2, 0.01), true);
+  } finally {
+    for (const mesh of meshes) {
+      mesh.geometry.dispose();
+      mesh.material.dispose();
+    }
+  }
+});
+
 test('coverage uses transformed world triangles and clips a continuous sloping road', () => {
   const positions = rectangle(-4, 4, -4, 4, 0).map((v, i, a) =>
     i % 3 === 1 ? a[i - 1] * 0.1 : v,

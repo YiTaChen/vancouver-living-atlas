@@ -11,8 +11,14 @@ const { TeslaWorld, triangleFace, fixedFacesSource } = await import(
   cityModule('tesla-world')
 );
 const { teslaPrismSource } = await import(cityModule('tesla-city-world'));
-const { teslaFrame, teslaDot, teslaSubtract, teslaScale, teslaAdd } =
-  await import(cityModule('tesla-math'));
+const {
+  teslaFrame,
+  teslaDot,
+  teslaSubtract,
+  teslaScale,
+  teslaAdd,
+  teslaRotate,
+} = await import(cityModule('tesla-math'));
 const saved = JSON.parse(
   readFileSync(
     new URL('./fixtures/tesla-real-departure.json', import.meta.url),
@@ -60,6 +66,34 @@ function renderedCorniceSources(fixture) {
   });
 }
 
+function currentCornicePose(fixture, belowM = 0) {
+  const quaternion = [...fixture.state.quaternion];
+  const normal = fixture.state.contact.normal;
+  const distance = teslaDot(
+    teslaSubtract(fixture.state.position, fixture.state.contact.point),
+    normal,
+  );
+  const position = teslaAdd(
+    fixture.state.position,
+    teslaScale(normal, height - distance),
+  );
+  const axes = [
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+  ].map((axis) => teslaRotate(quaternion, axis));
+  const verticalExtent = (body) =>
+    body.clearance +
+    axes.reduce(
+      (sum, axis, i) => sum + Math.abs(axis[1]) * body.halfExtents[i],
+      0,
+    );
+  // Preserve the capture's exact cornice penetration/clearance while placing
+  // the new car at its measured wall-normal offset. Source masonry stays fixed.
+  position[1] += verticalExtent(fixture.shape) - verticalExtent(shape) - belowM;
+  return { position, quaternion };
+}
+
 test('the actual rendered cornice triggers a swept roof route while the full wall footprint still fits', () => {
   const fixture = JSON.parse(
     readFileSync(
@@ -67,15 +101,13 @@ test('the actual rendered cornice triggers a swept roof route while the full wal
     ),
   );
   const world = physicalWorld(() => true, renderedCorniceSources(fixture));
-  const position = fixture.state.position.map(
-    (v, i) => v - (i === 1 ? 0.001 : 0),
-  );
+  const { position, quaternion } = currentCornicePose(fixture, 0.001);
   const state = createTesla(
     position,
     fixture.state.heading,
     fixture.state.contact,
   );
-  state.quaternion = [...fixture.state.quaternion];
+  state.quaternion = quaternion;
   try {
     const next = {
       position: [position[0], position[1] + 0.002, position[2]],
@@ -124,10 +156,7 @@ test('the tiny existing captured cornice intrusion stays blocked, and a true rou
   );
   const actual = physicalWorld(() => true, renderedCorniceSources(fixture));
   try {
-    const pose = {
-      position: fixture.state.position,
-      quaternion: fixture.state.quaternion,
-    };
+    const pose = currentCornicePose(fixture);
     assert(
       actual.sweep({ from: pose, to: pose, shape, ignoreSurfaceId: sourceId }),
       'captured existing ~0.155 micrometre intrusion is never waived',
@@ -140,7 +169,7 @@ test('the tiny existing captured cornice intrusion stays blocked, and a true rou
     actual.dispose();
   }
   const roofY = fixture.provenance.roofY;
-  const p = fixture.state.position;
+  const p = currentCornicePose(fixture).position;
   const obstruction = teslaPrismSource({
     id: 'true-roof-ceiling',
     polygon: [
@@ -160,7 +189,7 @@ test('the tiny existing captured cornice intrusion stays blocked, and a true rou
     [...renderedCorniceSources(fixture), obstruction],
   );
   const state = createTesla(
-    p.map((v, i) => v - (i === 1 ? 0.001 : 0)),
+    currentCornicePose(fixture, 0.001).position,
     fixture.state.heading,
     fixture.state.contact,
   );

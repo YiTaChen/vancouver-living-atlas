@@ -15,7 +15,7 @@ export function walkableGroundMeshes(root: THREE.Object3D) {
   return meshes;
 }
 
-/** Static, explicitly selected walkable meshes; world metres, Y up.
+/** Static, explicitly selected ground meshes; world metres, Y up.
  * Build after their transforms are final. Bridge decks should use their own
  * surface logic. Vertex positions are shared; cells contain triangle IDs only.
  */
@@ -26,10 +26,13 @@ export class GroundSurfaceIndex {
   private readonly inverseAreas: Float64Array;
   private readonly cells = new Map<string, number[]>();
 
-  constructor(meshes: THREE.Mesh[]) {
+  constructor(meshes: THREE.Mesh[], obstructionMeshes: THREE.Mesh[] = []) {
     // De-duplicate references so shared scene traversal results do not double
     // every road. Separate meshes sharing a geometry still have own transforms.
-    const usable = [...new Set(meshes)].filter((m) =>
+    // The second explicit source set participates in volume queries only, even
+    // if a curb strip includes a sloped or horizontal cap.
+    const sampleable = new Set(meshes);
+    const usable = [...new Set([...meshes, ...obstructionMeshes])].filter((m) =>
       m.geometry?.getAttribute('position'),
     );
     const vertexCount = usable.reduce(
@@ -96,14 +99,16 @@ export class GroundSurfaceIndex {
         const nx = uy * vz - uz * vy,
           nz = ux * vy - uy * vx;
         const normalLength = Math.hypot(nx, area, nz);
-        // Reject zero-area, vertical and numerically vertical triangles.
-        if (
-          !Number.isFinite(normalLength) ||
-          normalLength === 0 ||
-          Math.abs(area) <= normalLength * 1e-6 ||
-          !Number.isFinite(1 / area)
-        )
-          continue;
+        // Keep real vertical faces for volume queries such as ramp/curb sweeps.
+        // They cannot supply a height at XZ, so a zero inverse marks them for
+        // sample() to skip without removing their collision geometry.
+        if (!Number.isFinite(normalLength) || normalLength === 0) continue;
+        const inverseArea =
+          sampleable.has(mesh) &&
+          Math.abs(area) > normalLength * 1e-6 &&
+          Number.isFinite(1 / area)
+            ? 1 / area
+            : 0;
         const x0 = Math.floor(
           (Math.min(ax, bx, cx) - 0.0005) / GroundSurfaceIndex.CELL,
         );
@@ -120,7 +125,7 @@ export class GroundSurfaceIndex {
         if (![x0, x1, z0, z1].every(Number.isSafeInteger)) continue;
         const id = inverseAreas.length;
         triangleIndices.push(...ids);
-        inverseAreas.push(1 / area);
+        inverseAreas.push(inverseArea);
         for (let x = x0; x <= x1; x++)
           for (let z = z0; z <= z1; z++) {
             const key = `${x},${z}`,
@@ -148,6 +153,8 @@ export class GroundSurfaceIndex {
     let highest: number | undefined;
     const vertices = this.vertices;
     for (const id of cell) {
+      const inverse = this.inverseAreas[id];
+      if (inverse === 0) continue;
       const t = id * 3,
         a = this.triangles[t] * 3,
         b = this.triangles[t + 1] * 3,
@@ -162,8 +169,7 @@ export class GroundSurfaceIndex {
         cy = vertices[c + 1],
         cz = vertices[c + 2];
       const dx = x - ax,
-        dz = z - az,
-        inverse = this.inverseAreas[id];
+        dz = z - az;
       const u = (dx * (cz - az) - dz * (cx - ax)) * inverse;
       const v = ((bx - ax) * dz - (bz - az) * dx) * inverse;
       // Half a millimetre in world XZ resolves independently rounded Float32
@@ -184,6 +190,62 @@ export class GroundSurfaceIndex {
         highest = y;
     }
     return highest;
+  }
+
+  /** World-space candidate triangles whose AABBs intersect bounds, including
+   * vertical curb faces. Only overlapping grid cells are read; spanning faces
+   * are returned once. Vectors are independent copies, safe for caller transforms.
+   * The caller performs its exact triangle/volume test on these candidates.
+   */
+  trianglesInBounds(
+    bounds: THREE.Box3,
+  ): [THREE.Vector3, THREE.Vector3, THREE.Vector3][] {
+    const lo = bounds.min,
+      hi = bounds.max;
+    if (
+      bounds.isEmpty() ||
+      ![lo.x, lo.y, lo.z, hi.x, hi.y, hi.z].every(Number.isFinite)
+    )
+      return [];
+    const x0 = Math.floor(lo.x / GroundSurfaceIndex.CELL),
+      x1 = Math.floor(hi.x / GroundSurfaceIndex.CELL),
+      z0 = Math.floor(lo.z / GroundSurfaceIndex.CELL),
+      z1 = Math.floor(hi.z / GroundSurfaceIndex.CELL);
+    if (![x0, x1, z0, z1].every(Number.isSafeInteger)) return [];
+    const result: [THREE.Vector3, THREE.Vector3, THREE.Vector3][] = [],
+      seen = new Set<number>(),
+      vertices = this.vertices;
+    for (let x = x0; x <= x1; x++)
+      for (let z = z0; z <= z1; z++) {
+        const cell = this.cells.get(`${x},${z}`);
+        if (!cell) continue;
+        for (const id of cell) {
+          if (seen.has(id)) continue;
+          seen.add(id);
+          const t = id * 3,
+            a = this.triangles[t] * 3,
+            b = this.triangles[t + 1] * 3,
+            c = this.triangles[t + 2] * 3;
+          if (
+            Math.max(vertices[a], vertices[b], vertices[c]) < lo.x ||
+            Math.min(vertices[a], vertices[b], vertices[c]) > hi.x ||
+            Math.max(vertices[a + 1], vertices[b + 1], vertices[c + 1]) <
+              lo.y ||
+            Math.min(vertices[a + 1], vertices[b + 1], vertices[c + 1]) >
+              hi.y ||
+            Math.max(vertices[a + 2], vertices[b + 2], vertices[c + 2]) <
+              lo.z ||
+            Math.min(vertices[a + 2], vertices[b + 2], vertices[c + 2]) > hi.z
+          )
+            continue;
+          result.push([
+            new THREE.Vector3(vertices[a], vertices[a + 1], vertices[a + 2]),
+            new THREE.Vector3(vertices[b], vertices[b + 1], vertices[b + 2]),
+            new THREE.Vector3(vertices[c], vertices[c + 1], vertices[c + 2]),
+          ]);
+        }
+      }
+    return result;
   }
 
   /** Exact triangle-union coverage of a local XZ segment, within a height
@@ -233,6 +295,8 @@ export class GroundSurfaceIndex {
     const dx = to[0] - from[0],
       dz = to[1] - from[1];
     for (const id of ids) {
+      // Retained curb faces participate in volume queries, never floor coverage.
+      if (this.inverseAreas[id] === 0) continue;
       const ti = id * 3,
         a = this.triangles[ti] * 3,
         b = this.triangles[ti + 1] * 3,

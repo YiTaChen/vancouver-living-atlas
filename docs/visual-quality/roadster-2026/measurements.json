@@ -1,0 +1,379 @@
+{
+  "generatedAt": "2026-10-22T18:22:47.478Z",
+  "baseline": {
+    "ref": "53bb3c619a160627cb9b4394e9876f36c6f2323a",
+    "commit": "53bb3c619a160627cb9b4394e9876f36c6f2323a",
+    "sources": {
+      "lib/city/assets/tesla-roadster.ts": {
+        "sha256": "1f4e2c3a3a0236118daf609410134d41ed3ec336824d78c8dc88db3de2313e4e",
+        "bytes": 11016,
+        "gzipBytes": 3648,
+        "dependencies": [
+          "lib/city/assets/tesla-roadster-contract.ts",
+          "lib/city/assets/tesla-roadster-geometry.ts",
+          "lib/city/assets/tesla-roadster-contract.ts"
+        ]
+      },
+      "lib/city/assets/tesla-roadster-contract.ts": {
+        "sha256": "5f1e4111d38b96b1785e2a1e1cbb3833a5419961fc9ada805c5935340cf1aeb7",
+        "bytes": 5216,
+        "gzipBytes": 2121,
+        "dependencies": []
+      },
+      "lib/city/assets/tesla-roadster-geometry.ts": {
+        "sha256": "bb810bec530363e0929b6e8e23ba6eabc23e7c61ec7dae9d1abbea544ba4fef7",
+        "bytes": 26720,
+        "gzipBytes": 7743,
+        "dependencies": ["lib/city/assets/tesla-roadster-contract.ts"]
+      }
+    },
+    "moduleCount": 3,
+    "sourceBytes": 42952,
+    "independentlyGzippedSourceBytes": 13512,
+    "jsonDependencies": [],
+    "dimensions": {
+      "length": 4.6,
+      "width": 2.04,
+      "height": 1.24,
+      "wheelbase": 2.78,
+      "wheelRadius": 0.35,
+      "contactToCenter": 0.62,
+      "halfExtents": [1.14, 0.62, 2.34]
+    },
+    "anchors": {
+      "driverEye": [0.39, 1.025, -0.45],
+      "driverLookAt": [0.39, 0.96, 3],
+      "seatPelvis": [0.39, 0.49, -0.39],
+      "steeringWheel": [0.39, 0.8, 0.3],
+      "frontChase": [0, 1.6, 5.8],
+      "rearChase": [0, 1.8, -6.2],
+      "chaseTarget": [0, 0.65, 0.3]
+    },
+    "provenance": {
+      "model": "Original source-authored interpretation of the October 15, 2026 Tesla Roadster Rocket",
+      "author": "Vancouver Living Atlas by YiTaChen",
+      "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+      "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+      "referenceDate": "2026-10-17",
+      "references": [
+        "https://www.tesla.com/en_GB/roadster",
+        "https://www.youtube.com/watch?v=7p5LxFdc-Qg",
+        "https://www.youtube.com/watch?v=y7oKy09ALfM&t=444s",
+        "https://www.youtube.com/watch?v=6D5MlPZQFOw&t=204s",
+        "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-03-Carousel-Slide-1-Desktop.jpg",
+        "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-03-Carousel-Slide-2-Desktop.jpg",
+        "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-03-Carousel-Slide-3-Desktop.jpg",
+        "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-03-Carousel-Slide-4-Desktop.jpg",
+        "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-04-World-Desktop.jpg"
+      ],
+      "limitations": [
+        "Not Tesla CAD; dimensions, unseen surfaces and mechanical packaging are modelling estimates.",
+        "Single driver seat follows the Rocket trim description; the second side is a neutral closed cover.",
+        "Four rear fans and 4 rear + 4 down + 2 front yaw nozzles follow the reveal/walkthrough; exact placement, ducts and blades remain illustrative.",
+        "No Tesla image, texture or third-party model is distributed by this source."
+      ]
+    },
+    "qualities": {
+      "low": {
+        "quality": "low",
+        "triangles": 10590,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 1,
+        "disposed": false,
+        "visibleGeometryBatches": 35,
+        "uniqueGeometryBytes": 762480,
+        "uniqueVertices": 31770,
+        "renderedBounds": {
+          "min": [
+            -1.0349842182397841, 5.960464455334602e-9, -2.3294999599456787
+          ],
+          "max": [1.0349842182397841, 1.2380000352859497, 2.331552743911743],
+          "size": [2.0699684364795683, 1.2380000293254851, 4.661052703857422]
+        }
+      },
+      "medium": {
+        "quality": "medium",
+        "triangles": 27140,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 2,
+        "disposed": false,
+        "visibleGeometryBatches": 35,
+        "uniqueGeometryBytes": 1954080,
+        "uniqueVertices": 81420,
+        "renderedBounds": {
+          "min": [
+            -1.0349842182397841, 5.960464455334602e-9, -2.3294999599456787
+          ],
+          "max": [1.0349842182397841, 1.2380000352859497, 2.331552743911743],
+          "size": [2.0699684364795683, 1.2380000293254851, 4.661052703857422]
+        }
+      },
+      "high": {
+        "quality": "high",
+        "triangles": 58922,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 3,
+        "disposed": false,
+        "visibleGeometryBatches": 35,
+        "uniqueGeometryBytes": 4242384,
+        "uniqueVertices": 176766,
+        "renderedBounds": {
+          "min": [
+            -1.0349842182397841, 5.960464455334602e-9, -2.3294999599456787
+          ],
+          "max": [1.0349842182397841, 1.2380000352859497, 2.3321902751922607],
+          "size": [2.0699684364795683, 1.2380000293254851, 4.6616902351379395]
+        }
+      }
+    }
+  },
+  "candidate": {
+    "commit": "53bb3c619a160627cb9b4394e9876f36c6f2323a",
+    "dirtyFiles": "M lib/city/assets/tesla-roadster-contract.ts\n M lib/city/assets/tesla-roadster-geometry.ts\n M lib/city/assets/tesla-roadster.ts\n M lib/city/tesla-controller.ts\n M tests/tesla-camera-quality.test.mjs\n M tests/tesla-controller.test.mjs\n M tests/tesla-curb-travel.test.mjs\n M tests/tesla-ground-fit-state.test.mjs\n M tests/tesla-ground-refinement.test.mjs\n M tests/tesla-ground-travel.test.mjs\n M tests/tesla-roadster-model.test.mjs\n M tests/tesla-robson-route.test.mjs\n M tests/tesla-roof-details-world.test.mjs\n M tests/tesla-roof-state.test.mjs\n M tests/tesla-stanley-park.test.mjs\n M tools/verify-firebase-build.mjs\n?? docs/visual-quality/roadster-2026/\n?? lib/city/assets/tesla-roadster-detailed-data.json\n?? lib/city/assets/tesla-roadster-detailed-metrics.json\n?? tests/helpers/tesla-historical-capture.mjs\n?? tests/helpers/tesla-historical-shape.mjs\n?? tests/tesla-detailed-assets.test.mjs\n?? tools/assets/tesla-roadster-2026/\n?? tools/preview-tesla-roadster-comparison.mjs",
+    "sources": {
+      "lib/city/assets/tesla-roadster.ts": {
+        "sha256": "4f6c55156b8e0760efa50a6e9a8dd81b6fe0f3f2d2da48740a7d819aeabe26d5",
+        "bytes": 11123,
+        "gzipBytes": 3750,
+        "dependencies": [
+          "lib/city/assets/tesla-roadster-contract.ts",
+          "lib/city/assets/tesla-roadster-geometry.ts",
+          "lib/city/assets/tesla-roadster-contract.ts"
+        ]
+      },
+      "lib/city/assets/tesla-roadster-contract.ts": {
+        "sha256": "d8ddaf8551dd171c9e899a8008c651e62908e2990c97ac9eb3f1a793c2578b46",
+        "bytes": 3708,
+        "gzipBytes": 1460,
+        "dependencies": ["lib/city/assets/tesla-roadster-detailed-metrics.json"]
+      },
+      "lib/city/assets/tesla-roadster-detailed-metrics.json": {
+        "sha256": "e40a6d423b6333731ad3568ec2b7d6451485209d6abe9255719329965067c1ca",
+        "bytes": 14292,
+        "gzipBytes": 2054,
+        "dependencies": []
+      },
+      "lib/city/assets/tesla-roadster-geometry.ts": {
+        "sha256": "9016c486a405599e57cc5abc20eef7091cf339daa57a9153c6fb102249dfa065",
+        "bytes": 7578,
+        "gzipBytes": 2664,
+        "dependencies": [
+          "lib/city/assets/tesla-roadster-detailed-data.json",
+          "lib/city/assets/tesla-roadster-contract.ts"
+        ]
+      },
+      "lib/city/assets/tesla-roadster-detailed-data.json": {
+        "sha256": "0348b2fd5f3cc55f42dcb78933f95a5516fcdf7d29c31552229ca0d4af2c4536",
+        "bytes": 2194905,
+        "gzipBytes": 981500,
+        "dependencies": []
+      }
+    },
+    "moduleCount": 5,
+    "sourceBytes": 2231606,
+    "independentlyGzippedSourceBytes": 991428,
+    "jsonDependencies": [
+      {
+        "file": "lib/city/assets/tesla-roadster-detailed-metrics.json",
+        "bytes": 14292,
+        "gzipBytes": 2054,
+        "sha256": "e40a6d423b6333731ad3568ec2b7d6451485209d6abe9255719329965067c1ca"
+      },
+      {
+        "file": "lib/city/assets/tesla-roadster-detailed-data.json",
+        "bytes": 2194905,
+        "gzipBytes": 981500,
+        "sha256": "0348b2fd5f3cc55f42dcb78933f95a5516fcdf7d29c31552229ca0d4af2c4536"
+      }
+    ],
+    "dimensions": {
+      "length": 4.655,
+      "width": 2.0122,
+      "height": 1.1044,
+      "wheelbase": 2.7,
+      "wheelRadius": 0.3505,
+      "contactToCenter": 0.564,
+      "halfExtents": [1.142, 0.564, 2.33]
+    },
+    "anchors": {
+      "driverEye": [0.36, 0.8805, -0.68],
+      "driverLookAt": [0.36, 0.8805, 3],
+      "seatPelvis": [0.36, 0.3155, -0.36],
+      "steeringWheel": [0.36, 0.6355, 0.353],
+      "frontChase": [0, 1.6, 5.8],
+      "rearChase": [0, 1.8, -6.2],
+      "chaseTarget": [0, 0.65, 0.3]
+    },
+    "provenance": {
+      "model": "Original Blender-authored October 2026 Tesla Roadster Rocket, derived into three batched city LODs",
+      "author": "Vancouver Living Atlas by YiTaChen",
+      "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+      "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+      "referenceDate": "2026-10-22",
+      "references": ["https://www.tesla.com/roadster?redirect=no"],
+      "limitations": [
+        "Not Tesla CAD; dimensions, unseen surfaces and mechanical packaging are modelling estimates.",
+        "Single driver seat follows Rocket. Passenger-side vessel packaging is an explicit artist inference from the public two-seat cabin.",
+        "Four rear fan cells and eight observed donor nozzles are separate systems. Two illustrative front yaw ports preserve the existing ten-port gameplay effect.",
+        "No Tesla image, texture or third-party model is distributed by this source."
+      ]
+    },
+    "qualities": {
+      "low": {
+        "quality": "low",
+        "triangles": 10777,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 1,
+        "disposed": false,
+        "visibleGeometryBatches": 35,
+        "uniqueGeometryBytes": 443445,
+        "uniqueVertices": 14029,
+        "renderedBounds": {
+          "min": [
+            -1.0059999936819075, 9.99991893768093e-5, -2.3299999237060547
+          ],
+          "max": [1.0059999936819075, 1.1045000553131104, 2.322000026702881],
+          "size": [2.011999987363815, 1.1044000561237335, 4.6519999504089355]
+        }
+      },
+      "medium": {
+        "quality": "medium",
+        "triangles": 28516,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 2,
+        "disposed": false,
+        "visibleGeometryBatches": 35,
+        "uniqueGeometryBytes": 967434,
+        "uniqueVertices": 29494,
+        "renderedBounds": {
+          "min": [
+            -1.0059999936819075, 9.99991893768093e-5, -2.3299999237060547
+          ],
+          "max": [1.0059999936819075, 1.1045000553131104, 2.325000047683716],
+          "size": [2.011999987363815, 1.1044000561237335, 4.6549999713897705]
+        }
+      },
+      "high": {
+        "quality": "high",
+        "triangles": 54249,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 3,
+        "disposed": false,
+        "visibleGeometryBatches": 35,
+        "uniqueGeometryBytes": 1567062,
+        "uniqueVertices": 45984,
+        "renderedBounds": {
+          "min": [
+            -1.0060999953746794, 9.99991893768093e-5, -2.3299999237060547
+          ],
+          "max": [1.0060999953746794, 1.1045000553131104, 2.325000047683716],
+          "size": [2.012199990749359, 1.1044000561237335, 4.6549999713897705]
+        }
+      }
+    }
+  },
+  "normalization": {
+    "coordinates": "+Y up, +Z front, +X driver left, tyre plane Y=0; no recentering or rescaling",
+    "lighting": "identical hemisphere + two directional lights; no HDRI, shadows, SSAO or city postprocessing",
+    "toneMapping": "ACESFilmic, exposure 1.05, sRGB output",
+    "pixelRatioCap": 1.5,
+    "camera": "shared camera for exterior/section and matched-eye views; native-eye inspection uses each model contract eye/lookAt with identical 70 degree FOV and equal viewports, explicitly labeled",
+    "cameraPresets": {
+      "three": [
+        [8.8, 3.4, 8.8],
+        [0, 0.6, 0]
+      ],
+      "front": [
+        [0, 1.15, 9],
+        [0, 0.6, 0]
+      ],
+      "rear": [
+        [7.6, 2.6, -10.6],
+        [0, 0.6, 0]
+      ],
+      "side": [
+        [10.8, 2.25, 0],
+        [0, 0.6, 0]
+      ],
+      "roof": [
+        [4.4, 4.4, 1.9],
+        [0, 0.5, -0.2]
+      ],
+      "under": [
+        [6, -6, 8],
+        [0, 0.3, 0]
+      ]
+    },
+    "roofSection": "same world-space Y<=0.94m clipping plane; not a physical roof animation",
+    "costs": "CPU geometry counts, not measured FPS or frame time; renderer counters include floor and both views in split mode"
+  },
+  "framingProof": {
+    "viewport": [640, 720],
+    "fov": 36,
+    "conservativeContractBoxes": true,
+    "views": {
+      "three": {
+        "maxNdcX": 0.7227794137598046,
+        "maxNdcY": 0.3303028814069731,
+        "minHorizontalMarginPx": 88.71058759686252,
+        "minVerticalMarginPx": 241.0909626934897
+      },
+      "front": {
+        "maxNdcX": 0.5942584234441689,
+        "maxNdcY": 0.33976589728161993,
+        "minHorizontalMarginPx": 129.83730449786594,
+        "minVerticalMarginPx": 237.6842769786168
+      },
+      "rear": {
+        "maxNdcX": 0.6676675548639261,
+        "maxNdcY": 0.28113704357775154,
+        "minHorizontalMarginPx": 106.34638244354363,
+        "minVerticalMarginPx": 258.7906643120094
+      },
+      "side": {
+        "maxNdcX": 0.8351086151127359,
+        "maxNdcY": 0.23831633547457876,
+        "minHorizontalMarginPx": 52.7652431639245,
+        "minVerticalMarginPx": 274.2061192291516
+      }
+    }
+  },
+  "review": {
+    "visualAssessment": {
+      "reviewer": "coordinating agent through actual browser inspection",
+      "acceptedViews": [
+        "same-condition high-quality exterior",
+        "native-eye cabin"
+      ],
+      "finding": "New exterior and cabin are visually improved; performance was not inferred from visual quality.",
+      "screenshots": "Not embedded in this numeric snapshot; coordinating agent will save browser acceptance screenshots separately."
+    },
+    "routeRegressions": {
+      "files": [
+        "tests/tesla-robson-route.test.mjs",
+        "tests/tesla-stanley-park.test.mjs"
+      ],
+      "passed": 9,
+      "failed": 0,
+      "originalCaptureFilesModified": false,
+      "mapping": "Preserve world mean tyre contact center by local-up chassis datum translation only; current measured shape retains complete physical checks."
+    },
+    "scope": "No browser startup latency, GPU frame time or FPS measured by this artifact.",
+    "finalTyreCorrection": {
+      "dataSha256": "0348b2fd5f3cc55f42dcb78933f95a5516fcdf7d29c31552229ca0d4af2c4536",
+      "nonRubberChunksPreserved": true,
+      "independentAudit": "PASS",
+      "modelAndDetailedTests": {
+        "passed": 20,
+        "failed": 0
+      },
+      "fullSuite": "Running separately; result pending."
+    }
+  }
+}

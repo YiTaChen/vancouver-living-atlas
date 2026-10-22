@@ -9,6 +9,7 @@ import type { BusVisitProfile } from './bus-visit-policy';
 const MANIFEST_URL = '/models/blender/bus/manifest.json';
 const V2_MANIFEST_URL = '/models/blender/bus-v2/manifest.json';
 const REFERENCE_MANIFEST_URL = '/models/blender/bus-closeup/manifest.json';
+const HYBRID_MANIFEST_URL = '/models/blender/bus-hybrid/manifest.json';
 const BUS_ASSET_VERSION = '1.1.0' as const;
 const ROLES = [
   'paint',
@@ -34,6 +35,16 @@ interface BusLod {
   bytes: number;
   triangles: number;
   primitives: number;
+}
+interface HybridExteriorManifest {
+  schemaVersion: 1;
+  contract: 'boardable-bus-hybrid-exterior-v1';
+  packageId: 'boardable-bus-hybrid';
+  version: '1.0.0';
+  units: 'm';
+  assets: { id: 'city-bus-12m-exterior'; lods: BusLod[] }[];
+  accessibility: Record<string, unknown>;
+  [key: string]: unknown;
 }
 export interface BusRuntimeManifest {
   schemaVersion: 1;
@@ -66,11 +77,14 @@ export interface BoardableBusOwner {
   dispose(): void;
 }
 export interface BusAssetsOptions {
-  /** Production stage 2 keeps the pinned exterior and replaces only the cabin. */
+  /** Choose the pinned cabin generation; the original exterior is the default. */
   interiorVersion?: 'v1' | 'v2';
+  /** Opt-in appearance overlay; cabin and passenger metadata stay pinned. */
+  exteriorVersion?: 'hybrid';
   load?: BusAssetLoader;
   fetchManifest?: () => Promise<unknown>;
   fetchReferenceManifest?: () => Promise<unknown>;
+  fetchHybridManifest?: () => Promise<unknown>;
 }
 export interface BusRenderPolicy {
   quality: VisualQuality;
@@ -200,6 +214,116 @@ function manifestContract(
   return value as BusRuntimeManifest;
 }
 
+/** Separate optional overlay: never relax the pinned base projection checks. */
+function hybridContract(value: unknown): HybridExteriorManifest {
+  const m = record(value);
+  if (
+    m.schemaVersion !== 1 ||
+    m.contract !== 'boardable-bus-hybrid-exterior-v1' ||
+    m.packageId !== 'boardable-bus-hybrid' ||
+    m.version !== '1.0.0' ||
+    m.units !== 'm' ||
+    !Array.isArray(m.assets) ||
+    m.assets.length !== 1
+  )
+    throw new Error('Unsupported hybrid bus manifest');
+  const asset = record(m.assets[0]);
+  if (
+    asset.id !== 'city-bus-12m-exterior' ||
+    !Array.isArray(asset.lods) ||
+    asset.lods.length !== 3
+  )
+    throw new Error('Incomplete hybrid bus LOD inventory');
+  for (const [level, value] of asset.lods.entries()) {
+    const lod = record(value),
+      file = `city-bus-12m-exterior.lod${level}.glb`;
+    if (
+      lod.level !== level ||
+      lod.file !== file ||
+      lod.url !== `/models/blender/bus-hybrid/${file}` ||
+      typeof lod.sha256 !== 'string' ||
+      !/^[a-f0-9]{64}$/.test(lod.sha256) ||
+      !Number.isSafeInteger(lod.bytes) ||
+      Number(lod.bytes) <= 0 ||
+      Number(lod.bytes) > 1_000_000 ||
+      !Number.isSafeInteger(lod.triangles) ||
+      Number(lod.triangles) <= 0 ||
+      Number(lod.triangles) > 10_000 ||
+      !Number.isSafeInteger(lod.primitives) ||
+      Number(lod.primitives) <= 0 ||
+      Number(lod.primitives) > 64
+    )
+      throw new Error('Invalid hybrid bus LOD descriptor');
+  }
+  const accessibility = record(m.accessibility),
+    ramp = record(accessibility.ramp);
+  if (accessibility.schemaVersion !== 1 || ramp.nodeId !== 'boarding-ramp')
+    throw new Error('Invalid hybrid bus accessibility metadata');
+  return value as HybridExteriorManifest;
+}
+
+function materialSignature(m: THREE.MeshStandardMaterial): string {
+  return JSON.stringify([
+    ...m.color.toArray(),
+    m.roughness,
+    m.metalness,
+    m.opacity,
+    m.transparent,
+    m.depthWrite,
+    m.side,
+    m.alphaTest,
+    m.blending,
+    ...m.emissive.toArray(),
+    m.emissiveIntensity,
+    m.map
+      ? [
+          m.map.name,
+          m.map.colorSpace,
+          m.map.wrapS,
+          m.map.wrapT,
+          m.map.minFilter,
+          m.map.magFilter,
+          m.map.flipY,
+          m.map.channel,
+          ...m.map.repeat.toArray(),
+          ...m.map.offset.toArray(),
+          m.map.rotation,
+          ...textureDimensions(m.map),
+        ]
+      : null,
+  ]);
+}
+
+function checkHybridExterior(gltf: BusGLTF, vehicle: Record<string, unknown>) {
+  if (!Array.isArray(vehicle.doors) || vehicle.doors.length !== 4)
+    throw new Error('Incomplete hybrid bus door contract');
+  for (const value of vehicle.doors) {
+    const door = record(value),
+      name = String(door.nodeId);
+    const clip = gltf.animations.find(
+      (clip) => clip.name === door.animationClip,
+    );
+    if (
+      !gltf.scene.getObjectByName(name) ||
+      !clip ||
+      !Number.isFinite(clip.duration) ||
+      clip.duration <= 0 ||
+      !clip.tracks.some((track) => track.name === `${name}.position`)
+    )
+      throw new Error('Hybrid bus door node/clip unavailable');
+  }
+  for (const name of [
+    'vehicle',
+    'boarding-ramp',
+    'wheel-front-left',
+    'wheel-front-right',
+    'wheel-rear-left',
+    'wheel-rear-right',
+  ])
+    if (!gltf.scene.getObjectByName(name))
+      throw new Error('Hybrid bus rig node unavailable');
+}
+
 /** A source scene owns each unique resource once, even for multi-primitive nodes. */
 function disposeSource(scene: THREE.Object3D) {
   const geometries = new Set<THREE.BufferGeometry>(),
@@ -319,6 +443,9 @@ export class CityBusAssets {
   private sourceScenes = new Set<THREE.Object3D>();
   private manifest: Promise<BusRuntimeManifest> | null = null;
   private referenceManifest: Promise<BusRuntimeManifest> | null = null;
+  private hybridChoice: Promise<HybridExteriorManifest | null> | null = null;
+  private selectedExterior: 'original' | 'pending' | 'hybrid' = 'original';
+  private hybridPreflightBytes = 0;
   private resolveReady!: () => void;
   private boardableOwner: BoardableBusOwner | null = null;
   private boardablePending: Promise<BoardableBusOwner> | null = null;
@@ -341,6 +468,7 @@ export class CityBusAssets {
     private readonly options: BusAssetsOptions = {},
   ) {
     this.group.name = 'Source boardable buses: bounded near fleet';
+    if (options.exteriorVersion === 'hybrid') this.selectedExterior = 'pending';
     this.group.userData.provenance = {
       packageId:
         options.interiorVersion === 'v2'
@@ -377,9 +505,15 @@ export class CityBusAssets {
           throw new Error(`Bus manifest load failed (${response.status})`);
         return response.json();
       })
-      .then((value) =>
-        manifestContract(value, this.options.interiorVersion ?? 'v1'),
-      );
+      .then((value) => {
+        const manifest = manifestContract(
+          value,
+          this.options.interiorVersion ?? 'v1',
+        );
+        return this.options.exteriorVersion === 'hybrid'
+          ? this.withHybridExterior(manifest)
+          : manifest;
+      });
     const tracked: Promise<BusRuntimeManifest> = requested.catch((error) => {
       if (this.manifest === tracked) this.manifest = null;
       throw error;
@@ -404,13 +538,113 @@ export class CityBusAssets {
           );
         return response.json();
       })
-      .then((value) => manifestContract(value, 'reference'));
+      .then((value) => {
+        const manifest = manifestContract(value, 'reference');
+        return this.options.exteriorVersion === 'hybrid'
+          ? this.withHybridExterior(manifest)
+          : manifest;
+      });
     const tracked = requested.catch((error) => {
       if (this.referenceManifest === tracked) this.referenceManifest = null;
       throw error;
     });
     this.referenceManifest = tracked;
     return tracked;
+  }
+
+  private async withHybridExterior(
+    base: BusRuntimeManifest,
+  ): Promise<BusRuntimeManifest> {
+    if (this.options.exteriorVersion !== 'hybrid') return base;
+    if (!this.hybridChoice) this.hybridChoice = this.chooseHybridExterior(base);
+    const hybrid = await this.hybridChoice;
+    if (!hybrid) return base;
+    return {
+      ...base,
+      assets: base.assets.map((asset) =>
+        asset.id === 'city-bus-12m-exterior' ? hybrid.assets[0] : asset,
+      ),
+      // The cabin, doors, seats and collision stay authoritative in the base.
+      accessibility: hybrid.accessibility,
+      hybridExterior: {
+        packageId: hybrid.packageId,
+        version: hybrid.version,
+        source: hybrid.source,
+      },
+    };
+  }
+
+  private async chooseHybridExterior(
+    base: BusRuntimeManifest,
+  ): Promise<HybridExteriorManifest | null> {
+    let descriptors: BusLod[] = [];
+    let results: PromiseSettledResult<BusGLTF>[] = [];
+    try {
+      if (this.disposed) throw new Error('Bus assets disposed');
+      const value = this.options.fetchHybridManifest
+        ? await this.options.fetchHybridManifest()
+        : await (async () => {
+            const response = await fetch(HYBRID_MANIFEST_URL, {
+              cache: 'no-cache',
+            });
+            if (!response.ok)
+              throw new Error(
+                `Hybrid bus manifest load failed (${response.status})`,
+              );
+            return response.json();
+          })();
+      const hybrid = hybridContract(value);
+      if (this.disposed) throw new Error('Bus assets disposed');
+      descriptors = hybrid.assets[0].lods.filter((lod) => lod.level < 2);
+      // Resolve both passenger-capable exteriors before binding shared paint.
+      // This bounded <=2 MB preflight makes one immutable generation choice,
+      // even when traffic and an inspected visit start at the same time.
+      this.hybridPreflightBytes = descriptors.reduce(
+        (sum, lod) => sum + lod.bytes,
+        0,
+      );
+      results = await Promise.allSettled(
+        descriptors.map((lod) => this.template(lod)),
+      );
+      const signatures = new Map<string, string>();
+      for (const result of results) {
+        if (result.status === 'rejected') throw result.reason;
+        checkHybridExterior(result.value, base.vehicles[0]);
+        result.value.scene.traverse((object) => {
+          if (!(object instanceof THREE.Mesh)) return;
+          for (const material of Array.isArray(object.material)
+            ? object.material
+            : [object.material]) {
+            const key = this.surfaceKey(material),
+              signature = materialSignature(
+                material as THREE.MeshStandardMaterial,
+              );
+            if (signatures.has(key) && signatures.get(key) !== signature)
+              throw new Error('Hybrid bus LOD material factors differ');
+            signatures.set(key, signature);
+          }
+        });
+      }
+      if (this.disposed) throw new Error('Bus assets disposed');
+      this.selectedExterior = 'hybrid';
+      return hybrid;
+    } catch (error) {
+      for (const result of results)
+        if (
+          result.status === 'fulfilled' &&
+          this.sourceScenes.delete(result.value.scene)
+        )
+          disposeSource(result.value.scene);
+      for (const descriptor of descriptors) {
+        const key = this.templateKey(descriptor);
+        this.templates.delete(key);
+        this.templateSignals.delete(key);
+      }
+      if (this.disposed) throw error;
+      this.selectedExterior = 'original';
+      this.report(error);
+      return null;
+    }
   }
 
   private requestNear() {
@@ -461,18 +695,23 @@ export class CityBusAssets {
     return descriptor;
   }
 
+  private templateKey(descriptor: BusLod): string {
+    return `${descriptor.url}#${descriptor.sha256}`;
+  }
+
   private template(descriptor: BusLod, signal?: AbortSignal): Promise<BusGLTF> {
+    const key = this.templateKey(descriptor);
+    const hybrid = descriptor.url.startsWith('/models/blender/bus-hybrid/');
     const reference = descriptor.file.startsWith(
       'city-bus-12m-interior-v2-closeup.',
     );
-    if (this.templateSignals.get(descriptor.file)?.aborted) {
-      this.templates.delete(descriptor.file);
-      this.templateSignals.delete(descriptor.file);
+    if (this.templateSignals.get(key)?.aborted) {
+      this.templates.delete(key);
+      this.templateSignals.delete(key);
     }
-    let promise = this.templates.get(descriptor.file);
+    let promise = this.templates.get(key);
     if (!promise) {
-      if (reference && signal)
-        this.templateSignals.set(descriptor.file, signal);
+      if (reference && signal) this.templateSignals.set(key, signal);
       promise = Promise.resolve()
         .then(() =>
           (
@@ -502,6 +741,7 @@ export class CityBusAssets {
           let triangles = 0,
             primitives = 0;
           const geometries = new Set<THREE.BufferGeometry>();
+          const hybridRoles = new Set<string>();
           try {
             gltf.scene.traverse((object) => {
               if (!(object instanceof THREE.Mesh)) return;
@@ -509,8 +749,45 @@ export class CityBusAssets {
               geometries.add(object.geometry);
               for (const material of Array.isArray(object.material)
                 ? object.material
-                : [object.material])
-                roleOf(material, reference);
+                : [object.material]) {
+                const role = roleOf(material, reference);
+                if (hybrid) {
+                  const surfaces = {
+                    paint: 'automotive-paint',
+                    rubber: 'rubber',
+                    glass: 'transit-glass',
+                    lights: 'transit-lights',
+                  };
+                  if (
+                    !(role in surfaces) ||
+                    material.userData.shared_surface_id !==
+                      surfaces[role as keyof typeof surfaces]
+                  )
+                    throw new Error('Unsupported hybrid bus surface');
+                  hybridRoles.add(role);
+                  if (role === 'paint') {
+                    const color = object.geometry.getAttribute('color');
+                    if (
+                      !(material as THREE.MeshStandardMaterial).color.equals(
+                        new THREE.Color(1, 1, 1),
+                      ) ||
+                      !color ||
+                      ![3, 4].includes(color.itemSize) ||
+                      color.count !==
+                        object.geometry.getAttribute('position').count
+                    )
+                      throw new Error(
+                        'Hybrid bus paint requires white factors and COLOR_0',
+                      );
+                    for (let i = 0; i < color.count; i++)
+                      for (let j = 0; j < color.itemSize; j++) {
+                        const value = color.getComponent(i, j);
+                        if (!Number.isFinite(value) || value < 0 || value > 1)
+                          throw new Error('Invalid hybrid bus vertex color');
+                      }
+                  }
+                }
+              }
               triangles +=
                 (object.geometry.index?.count ??
                   object.geometry.getAttribute('position').count) / 3;
@@ -520,7 +797,8 @@ export class CityBusAssets {
             });
             if (
               triangles !== descriptor.triangles ||
-              primitives !== descriptor.primitives
+              primitives !== descriptor.primitives ||
+              (hybrid && hybridRoles.size !== 4)
             )
               throw new Error('Bus source geometry differs from manifest');
             // Near and parked meshes share vertex-color materials. COLOR_0 is
@@ -539,11 +817,8 @@ export class CityBusAssets {
                 );
             this.sourceScenes.add(gltf.scene);
             this.assetBytes += descriptor.bytes;
-            if (
-              reference &&
-              this.templateSignals.get(descriptor.file) === signal
-            )
-              this.templateSignals.delete(descriptor.file);
+            if (reference && this.templateSignals.get(key) === signal)
+              this.templateSignals.delete(key);
             return gltf;
           } catch (error) {
             disposeSource(gltf.scene);
@@ -552,13 +827,13 @@ export class CityBusAssets {
         });
       const requested = promise;
       promise = requested.catch((error) => {
-        if (this.templates.get(descriptor.file) === promise) {
-          this.templates.delete(descriptor.file);
-          this.templateSignals.delete(descriptor.file);
+        if (this.templates.get(key) === promise) {
+          this.templates.delete(key);
+          this.templateSignals.delete(key);
         }
         throw error;
       });
-      this.templates.set(descriptor.file, promise);
+      this.templates.set(key, promise);
     }
     return promise;
   }
@@ -591,37 +866,10 @@ export class CityBusAssets {
       shared.vertexColors = true;
       pool.set(key, shared);
     } else {
-      const signature = (m: THREE.MeshStandardMaterial) =>
-        JSON.stringify([
-          ...m.color.toArray(),
-          m.roughness,
-          m.metalness,
-          m.opacity,
-          m.transparent,
-          m.depthWrite,
-          m.side,
-          m.alphaTest,
-          m.blending,
-          ...m.emissive.toArray(),
-          m.emissiveIntensity,
-          m.map
-            ? [
-                m.map.name,
-                m.map.colorSpace,
-                m.map.wrapS,
-                m.map.wrapT,
-                m.map.minFilter,
-                m.map.magFilter,
-                m.map.flipY,
-                m.map.channel,
-                ...m.map.repeat.toArray(),
-                ...m.map.offset.toArray(),
-                m.map.rotation,
-                ...textureDimensions(m.map),
-              ]
-            : null,
-        ]);
-      if (signature(shared) !== signature(source as THREE.MeshStandardMaterial))
+      if (
+        materialSignature(shared) !==
+        materialSignature(source as THREE.MeshStandardMaterial)
+      )
         throw new Error(`Bus role ${role} has inconsistent material factors`);
     }
     return shared;
@@ -1024,6 +1272,9 @@ export class CityBusAssets {
       routeActors: this.routes.length,
       nearCapacity: 4,
       interiorVersion: this.options.interiorVersion ?? 'v1',
+      exteriorVersion: this.selectedExterior,
+      /** Declared LOD0+1 preflight payload, including an attempted fallback. */
+      hybridPreflightBytes: this.hybridPreflightBytes,
       allocatedBatches: this.meshes.length,
       /** Main beauty primitive estimate. Double-sided glass may submit twice. */
       populatedBatches: count ? this.meshes.length : 0,

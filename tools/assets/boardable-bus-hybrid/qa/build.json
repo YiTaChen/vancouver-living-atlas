@@ -1,0 +1,34 @@
+{
+  "blenderVersion": "4.5.12 LTS",
+  "levels": [
+    {
+      "level": 0,
+      "source": "source/city-bus-12m-exterior.lod0.blend",
+      "export": "exports/city-bus-12m-exterior.lod0.glb"
+    },
+    {
+      "level": 1,
+      "source": "source/city-bus-12m-exterior.lod1.blend",
+      "export": "exports/city-bus-12m-exterior.lod1.glb"
+    },
+    {
+      "level": 2,
+      "source": "source/city-bus-12m-exterior.lod2.blend",
+      "export": "exports/city-bus-12m-exterior.lod2.glb"
+    }
+  ],
+  "filmReference": {
+    "source": "reference/film-bus-upright-reference.blend",
+    "sourceBytes": 341842,
+    "sourceSha256": "188d4ced34303a7c3548ec155951f398dae41b4b2e85a5de983714594854b626",
+    "evaluatedTriangles": 176242,
+    "evaluatedVertices": 99112,
+    "evaluatedMeshObjects": 416,
+    "descendants": 422,
+    "passengerSeats": 34,
+    "stuntThrusters": 0,
+    "externalFontsPacked": false,
+    "referenceOnly": true,
+    "note": "Isolated neutral film geometry; not part of the runtime hybrid payload."
+  }
+}
