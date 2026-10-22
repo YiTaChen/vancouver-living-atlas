@@ -67,6 +67,10 @@ export class CityInteractions {
       'skytrain',
       () => e.skyTrainTravel?.interactionCandidates() ?? [],
     );
+    this.registerProvider(
+      'bus-seats',
+      () => e.busVisit?.interactionCandidates?.() ?? [],
+    );
     window.addEventListener('keydown', this.keyDown);
   }
 
@@ -108,20 +112,22 @@ export class CityInteractions {
       this.enabled &&
       !this.e.disposed &&
       !this.e.pageSuspended &&
+      !this.e.contextLost &&
       !document.hidden &&
       !this.e.cabinDisplayActive &&
       !this.e.placement?.mode &&
-      this.e.settings.mode === 'walk' &&
-      !this.e.busVisit?.aboard;
-    const origin = travel?.active
-      ? travel.interactionOrigin
-      : nav
-        ? ([nav.position.x, nav.walkingHeight(), nav.position.z] as [
-            number,
-            number,
-            number,
-          ])
-        : null;
+      this.e.settings.mode === 'walk';
+    const origin = this.e.busVisit?.aboard
+      ? this.e.busVisit.interactionOrigin
+      : travel?.active
+        ? travel.interactionOrigin
+        : nav
+          ? ([nav.position.x, nav.walkingHeight(), nav.position.z] as [
+              number,
+              number,
+              number,
+            ])
+          : null;
     const snapshot = this.controller.update(origin ?? null, enabled);
     return {
       snapshot,

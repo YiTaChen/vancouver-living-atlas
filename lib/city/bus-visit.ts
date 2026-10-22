@@ -17,7 +17,11 @@ import {
   passengerContractFromManifest,
   type VehiclePassengerContract,
 } from './city-life/vehicle-profile-adapter';
-import { riderWorldTransform } from './city-life/continuous-path';
+import {
+  BusPassengerSpace,
+  type BusPassengerSeat,
+} from './bus-passenger-space';
+import type { InteractionCandidate } from './proximity-interactions';
 import {
   BusAccessibility,
   rampContainsPoint,
@@ -64,7 +68,7 @@ export interface BusVisitSnapshot {
     kind: 'seat' | 'standing';
     datum: 'pelvis' | 'feet';
   }[];
-  /** Viewing another seat does not move or reserve the passenger's anchor. */
+  /** Physical passenger anchor; seat changes require a nearby interaction. */
   viewAnchor: string | null;
   previewAnchor: string | null;
   passengerAnchor: string | null;
@@ -73,6 +77,12 @@ export interface BusVisitSnapshot {
   requestedProfile: BusVisitProfile | null;
   fallback: boolean;
   accessibility?: BusAccessibilitySnapshot | null;
+  seated: boolean;
+  canWalkCabin: boolean;
+  canRide: boolean;
+  ridePhase: 'parked' | 'closing' | 'moving' | 'opening' | 'complete';
+  speedMps: number;
+  rideProgress: number;
 }
 export interface BusVisitPlacement {
   routeIndex: number;
@@ -251,8 +261,8 @@ export function findBusVisitPlacement(
   return fallback;
 }
 
-/** A parked cabin visit in the city. It has no route, fare or moving service;
- * passenger occupancy and the optional viewing anchor remain separate. */
+/** A boardable cabin with physical seating and a short, verified street ride.
+ * This uses a displayed road segment, not a scheduled TransLink route. */
 export class BusCabinVisit {
   onChange: (snapshot: BusVisitSnapshot) => void = () => {};
   private phase: Phase = 'idle';
@@ -277,6 +287,26 @@ export class BusCabinVisit {
   private yaw = 0;
   private pitch = 0;
   private drag: { id: number; x: number; y: number } | null = null;
+  private space: BusPassengerSpace | null = null;
+  private cabinFoot: Point | null = null;
+  private cabinSeat: BusPassengerSeat | null = null;
+  private cabinStand: Point | null = null;
+  private standingAnchor: string | null = null;
+  private lookYaw = 0;
+  private inputEnabled = true;
+  private keys = new Set<string>();
+  private axes = { x: 0, y: 0 };
+  private walkDistance = 0;
+  private avatarSeated = false;
+  private ridePlan: {
+    points: THREE.Vector3[];
+    length: number;
+    duration: number;
+  } | null = null;
+  private ridePhase: BusVisitSnapshot['ridePhase'] = 'parked';
+  private rideTime = 0;
+  private rideSpeed = 0;
+  private rideProgress = 0;
   constructor(
     private city: CityEngine,
     private busAssets: CityBusAssets,
@@ -291,11 +321,166 @@ export class BusCabinVisit {
       passive: false,
     });
     window.addEventListener('keydown', this.keyDown, true);
+    window.addEventListener('keyup', this.keyUp, true);
     window.addEventListener('blur', this.blur);
     document.addEventListener('visibilitychange', this.visibility);
   }
   get aboard() {
     return this.transfers.state(VISITOR)?.mode === 'riding';
+  }
+  get passengerSeated() {
+    return Boolean(this.cabinSeat);
+  }
+  get speedMps() {
+    return this.rideSpeed;
+  }
+  get interactionOrigin(): Point | null {
+    if (!this.aboard || !this.owner || !this.cabinFoot || this.hidden())
+      return null;
+    return this.owner.interiorRoot
+      .localToWorld(
+        new THREE.Vector3(...(this.cabinSeat?.position ?? this.cabinFoot)),
+      )
+      .toArray() as Point;
+  }
+  setInputEnabled(enabled: boolean) {
+    this.inputEnabled = enabled;
+    if (!enabled) this.clearInput();
+  }
+  setTouchAxes(x: number, y: number) {
+    const axis = (v: number) =>
+      Number.isFinite(v) ? THREE.MathUtils.clamp(v, -1, 1) : 0;
+    this.axes =
+      this.aboard && this.inputEnabled && !this.passengerSeated
+        ? { x: axis(x), y: axis(y) }
+        : { x: 0, y: 0 };
+  }
+  clearInput = () => {
+    this.keys.clear();
+    this.axes = { x: 0, y: 0 };
+    this.drag = null;
+  };
+  interactionCandidates(): readonly InteractionCandidate[] {
+    const origin = this.interactionOrigin;
+    if (
+      !origin ||
+      !this.inputEnabled ||
+      this.disposed ||
+      !this.space ||
+      !this.cabinFoot ||
+      !this.owner
+    )
+      return [];
+    if (this.cabinSeat)
+      return [
+        {
+          id: 'bus:stand',
+          kind: 'seat',
+          action: 'stand',
+          anchor: [origin[0], origin[1] + 1, origin[2]],
+          proximityPoint: origin,
+          range: 1.5,
+          priority: 100,
+          canInteract: () =>
+            this.aboard &&
+            this.inputEnabled &&
+            !this.hidden() &&
+            this.passengerSeated,
+          execute: () => this.stand(),
+        },
+      ];
+    const owner = this.owner,
+      space = this.space;
+    return space.seats
+      .filter((seat) => space.canSit(seat, this.cabinFoot!))
+      .map((seat) => ({
+        id: `bus:seat:${seat.id}`,
+        kind: 'seat' as const,
+        action: 'sit',
+        anchor: owner.interiorRoot
+          .localToWorld(
+            new THREE.Vector3(
+              seat.position[0],
+              seat.position[1] + seat.seatHeight + 1.05,
+              seat.position[2],
+            ),
+          )
+          .toArray() as Point,
+        proximityPoint: owner.interiorRoot
+          .localToWorld(new THREE.Vector3(...seat.position))
+          .toArray() as Point,
+        range: 1.5,
+        canInteract: () =>
+          this.owner === owner &&
+          this.space === space &&
+          this.aboard &&
+          this.inputEnabled &&
+          !this.hidden() &&
+          !this.cabinSeat &&
+          Boolean(this.cabinFoot && space.canSit(seat, this.cabinFoot)),
+        execute: () => this.sit(seat),
+      }));
+  }
+  private sit(seat: BusPassengerSeat) {
+    if (
+      !this.aboard ||
+      !this.owner ||
+      !this.space ||
+      !this.cabinFoot ||
+      this.cabinSeat ||
+      !this.inputEnabled ||
+      this.hidden() ||
+      !this.space.seats.includes(seat) ||
+      !this.space.canSit(seat, this.cabinFoot)
+    )
+      return false;
+    const anchor = this.contract?.anchors.find(
+      (row) => row.anchor.anchorId === seat.id,
+    );
+    const stand = this.space.safeStand(this.cabinFoot);
+    if (
+      !anchor ||
+      !stand ||
+      !this.transfers.changeRideAnchor(VISITOR, anchor.anchor)
+    )
+      return false;
+    this.cabinStand = stand;
+    this.cabinSeat = seat;
+    this.viewAnchor = seat.id;
+    this.previewAnchor = null;
+    this.yaw = seat.yaw;
+    this.lookYaw = 0;
+    this.clearInput();
+    this.updateCamera();
+    this.notify();
+    return true;
+  }
+  stand() {
+    if (
+      !this.aboard ||
+      !this.cabinSeat ||
+      !this.cabinStand ||
+      !this.space ||
+      !this.inputEnabled ||
+      this.hidden() ||
+      !this.space.clear(this.cabinStand)
+    )
+      return false;
+    const anchor = this.contract?.anchors.find(
+      (row) => row.anchor.anchorId === this.standingAnchor,
+    );
+    if (!anchor || !this.transfers.changeRideAnchor(VISITOR, anchor.anchor))
+      return false;
+    this.cabinFoot = [...this.cabinStand];
+    this.cabinSeat = null;
+    this.cabinStand = null;
+    this.viewAnchor = this.standingAnchor;
+    this.previewAnchor = null;
+    this.lookYaw = 0;
+    this.clearInput();
+    this.updateCamera();
+    this.notify();
+    return true;
   }
   get routeIndex() {
     return this.placement?.routeIndex ?? null;
@@ -442,6 +627,13 @@ export class BusCabinVisit {
           !doors.some((d) => d.group === 'rear')
         )
           throw new Error('Incomplete bus door contract');
+        const space = new BusPassengerSpace(
+          owner.interiorRoot,
+          vehicle,
+          contract.anchors,
+          owner.cabinSurfaces,
+        );
+        if (!space.spawn()) throw new Error('Bus has no safe aisle spawn');
         const placement = findBusVisitPlacement(
           this.city,
           this.routes,
@@ -473,7 +665,7 @@ export class BusCabinVisit {
           throw new Error('Invalid entrance floor');
         owner.group.position.copy(placement.position);
         owner.group.quaternion.copy(placement.rotation);
-        owner.group.name = 'Parked city bus cabin visit';
+        owner.group.name = 'Boardable city bus cabin';
         const cabinLight = new THREE.PointLight(0xffecd1, 4, 12, 2);
         cabinLight.position.set(0, 2.45, 0);
         cabinLight.castShadow = false;
@@ -482,6 +674,7 @@ export class BusCabinVisit {
         owner.group.updateWorldMatrix(true, true);
         this.owner = owner;
         this.contract = contract;
+        this.space = space;
         this.doors = doors;
         this.placement = placement;
         this.bodyBounds = bodyBounds;
@@ -489,6 +682,9 @@ export class BusCabinVisit {
         this.elapsed = 0;
         this.doorProgress = 0;
         this.stoppedSeconds = 0;
+        this.ridePhase = 'parked';
+        this.rideSpeed = this.rideTime = this.rideProgress = 0;
+        this.ridePlan = this.planRide();
         this.city.scene.add(owner.group);
         this.accessibility = BusAccessibility.create(
           owner.group,
@@ -522,6 +718,8 @@ export class BusCabinVisit {
         if (generation === this.generation && !this.disposed) {
           this.owner = null;
           this.contract = null;
+          this.space = null;
+          this.ridePlan = null;
           this.placement = null;
           this.bodyBounds = null;
           this.doors = [];
@@ -542,6 +740,200 @@ export class BusCabinVisit {
     this.pending = run();
     return this.pending;
   }
+  private roadStop(position: THREE.Vector3) {
+    if (!this.owner || !this.placement) return null;
+    const vehicle = record(this.owner.vehicle),
+      full = bounds(vehicle.fullBoundsM);
+    const center = groundFloor(this.city, position.x, position.z, 'drive');
+    if (!center) return null;
+    const origin = new THREE.Vector3(center.x, center.y, center.z),
+      rotation = this.placement.rotation;
+    const count = Math.ceil((full.max[2] - full.min[2] + 0.06) / 1.5);
+    for (let i = 0; i <= count; i++)
+      for (const lateral of [
+        full.min[0] - 0.03,
+        (full.min[0] + full.max[0]) / 2,
+        full.max[0] + 0.03,
+      ]) {
+        const sample = worldPoint(origin, rotation, [
+          lateral,
+          0,
+          THREE.MathUtils.lerp(
+            full.min[2] - 0.03,
+            full.max[2] + 0.03,
+            i / count,
+          ),
+        ]);
+        const floor = groundFloor(this.city, sample.x, sample.z, 'drive');
+        if (!floor || Math.abs(floor.y - origin.y) > 0.12) return null;
+      }
+    const outside = (group: 'front' | 'rear') => {
+      const door = this.doors.find((d) => d.group === group);
+      if (!door) return null;
+      const sample = worldPoint(origin, rotation, door.point),
+        floor = groundFloor(this.city, sample.x, sample.z, 'walk');
+      return floor &&
+        Math.abs(floor.y - origin.y) <= 0.12 &&
+        walkClearance(this.city, floor)
+        ? floor
+        : null;
+    };
+    const frontFloor = outside('front'),
+      rearFloor = outside('rear');
+    return frontFloor && rearFloor
+      ? { position: origin, frontFloor, rearFloor }
+      : null;
+  }
+  /** Validate the complete footprint and both eventual exits along one existing
+   * displayed road edge. No wrapping, invented stop, jump or U-turn is used. */
+  private planRide() {
+    if (
+      !this.owner ||
+      !this.placement ||
+      !this.roadStop(this.owner.group.position) ||
+      this.owner.group.position.distanceTo(this.placement.position) > 1e-5 ||
+      Math.abs(this.owner.group.quaternion.dot(this.placement.rotation)) <
+        1 - 1e-8
+    )
+      return null;
+    const route = this.routes[this.placement.routeIndex];
+    if (!route) return null;
+    const dx = route.b[0] - route.a[0],
+      dz = route.b[1] - route.a[1],
+      length = Math.hypot(dx, dz);
+    if (!Number.isFinite(length) || length <= 0) return null;
+    const full = bounds(record(this.owner.vehicle).fullBoundsM);
+    const along =
+      ((this.placement.position.x - route.a[0]) * dx +
+        (this.placement.position.z - route.a[1]) * dz) /
+      length;
+    const available = Math.min(60, length - along - full.max[2] - 1);
+    if (along < full.max[2] || available < 6) return null;
+    const points = [this.placement.position.clone()];
+    let distance = 0;
+    for (let d = 1.5; d <= available + 1.5; d += 1.5) {
+      const nextDistance = Math.min(d, available);
+      const target = this.placement.position
+        .clone()
+        .add(
+          new THREE.Vector3(dx / length, 0, dz / length).multiplyScalar(
+            nextDistance,
+          ),
+        );
+      const stop = this.roadStop(target);
+      if (!stop) break;
+      points.push(stop.position);
+      distance = nextDistance;
+      if (nextDistance === available) break;
+    }
+    return distance >= 6
+      ? { points, length: distance, duration: Math.max(4, distance / 4) }
+      : null;
+  }
+  startRide() {
+    if (
+      this.disposed ||
+      this.hidden() ||
+      !this.inputEnabled ||
+      !this.aboard ||
+      !this.owner ||
+      !this.placement ||
+      this.ridePhase !== 'parked' ||
+      !this.actualDoorsOpen() ||
+      (this.accessibility && !this.accessibility.stowed)
+    )
+      return false;
+    // The preflight cache is for UI availability only. Recheck the world before
+    // departure, retaining the parked owner and passenger on any failure.
+    const plan = this.planRide();
+    if (!plan) {
+      this.ridePlan = null;
+      this.notify();
+      return false;
+    }
+    this.ridePlan = plan;
+    this.ridePhase = 'closing';
+    this.rideTime = this.rideSpeed = this.rideProgress = 0;
+    this.stoppedSeconds = 0;
+    this.error = '';
+    this.clearInput();
+    this.notify();
+    return true;
+  }
+  private updateRide(h: number) {
+    if (!this.owner || !this.placement) return;
+    if (this.ridePhase === 'closing') {
+      this.doorProgress = Math.max(0, this.doorProgress - h);
+      this.stoppedSeconds = 0;
+      if (this.doorProgress === 0) {
+        this.ridePhase = 'moving';
+        this.notify();
+      }
+      return;
+    }
+    if (this.ridePhase === 'moving' && this.ridePlan) {
+      const plan = this.ridePlan;
+      this.rideTime = Math.min(plan.duration, this.rideTime + h);
+      const t = this.rideTime / plan.duration;
+      this.rideProgress = t * t * (3 - 2 * t);
+      this.rideSpeed = (6 * t * (1 - t) * plan.length) / plan.duration;
+      const along = this.rideProgress * plan.length;
+      const index = Math.min(plan.points.length - 2, Math.floor(along / 1.5));
+      const a = plan.points[index],
+        b = plan.points[index + 1];
+      const startDistance = index * 1.5,
+        segment = Math.hypot(b.x - a.x, b.z - a.z);
+      this.owner.group.position
+        .copy(a)
+        .lerp(
+          b,
+          segment > 0
+            ? THREE.MathUtils.clamp((along - startDistance) / segment, 0, 1)
+            : 1,
+        );
+      this.owner.group.updateWorldMatrix(true, true);
+      this.stoppedSeconds = 0;
+      if (t === 1) {
+        this.rideSpeed = 0;
+        const endpoint = this.roadStop(this.owner.group.position);
+        if (
+          endpoint &&
+          (!this.accessibility || this.accessibility.reanchorStowed())
+        ) {
+          this.placement.position.copy(endpoint.position);
+          this.placement.frontFloor = endpoint.frontFloor;
+          this.placement.rearFloor = endpoint.rearFloor;
+        }
+        // Even if an exit changed during motion, door proofs will reject it;
+        // never relocate a passenger to an unverified ground floor.
+        this.ridePhase = 'opening';
+        this.notify();
+      }
+      return;
+    }
+    // Retry a changed arrival surface only in place, without moving the owner or
+    // rider. A temporarily blocked endpoint can become usable when it clears.
+    if (
+      (this.ridePhase === 'opening' || this.ridePhase === 'complete') &&
+      this.owner.group.position.distanceTo(this.placement.position) > 1e-5
+    ) {
+      const endpoint = this.roadStop(this.owner.group.position);
+      if (
+        endpoint &&
+        (!this.accessibility || this.accessibility.reanchorStowed())
+      ) {
+        this.placement.position.copy(endpoint.position);
+        this.placement.frontFloor = endpoint.frontFloor;
+        this.placement.rearFloor = endpoint.rearFloor;
+      }
+    }
+    this.stoppedSeconds += h;
+    this.doorProgress = Math.min(1, this.doorProgress + h);
+    if (this.ridePhase === 'opening' && this.doorProgress === 1) {
+      this.ridePhase = 'complete';
+      this.notify();
+    }
+  }
   update(dt: number) {
     if (this.disposed || !this.owner || this.hidden()) return;
     if (this.resumeAnchor) {
@@ -550,16 +942,42 @@ export class BusCabinVisit {
     }
     const h = Number.isFinite(dt) ? Math.max(0, Math.min(0.05, dt)) : 0;
     this.elapsed += h;
-    this.stoppedSeconds += h;
-    this.doorProgress = Math.min(1, this.doorProgress + h);
+    this.updateRide(h);
     this.applyDoors();
     const accessibilityChanged = this.accessibility?.update(
       h,
       this.frontDoorsOpen(),
     );
     this.transfers.expire(this.elapsed);
-    if (this.aboard) this.updateCamera();
-    else {
+    if (this.aboard) {
+      if (
+        !this.cabinSeat &&
+        this.cabinFoot &&
+        this.space &&
+        this.inputEnabled
+      ) {
+        const left = Number(this.keys.has('a') || this.keys.has('arrowleft')),
+          right = Number(this.keys.has('d') || this.keys.has('arrowright'));
+        this.yaw += (left - right - this.axes.x) * 1.65 * h;
+        const forward = THREE.MathUtils.clamp(
+          Number(this.keys.has('w') || this.keys.has('arrowup')) -
+            Number(this.keys.has('s') || this.keys.has('arrowdown')) +
+            this.axes.y,
+          -1,
+          1,
+        );
+        const previous = this.cabinFoot;
+        this.cabinFoot = this.space.walk(
+          previous,
+          Math.sin(this.yaw) * forward * 1.6 * h,
+          Math.cos(this.yaw) * forward * 1.6 * h,
+        );
+        this.walkDistance += Math.hypot(
+          ...this.cabinFoot.map((v, i) => v - previous[i]),
+        );
+      }
+      this.updateCamera();
+    } else {
       const floor = this.walkingFloor();
       if (floor) this.synchronizeWalkingFloor(floor);
     }
@@ -571,6 +989,8 @@ export class BusCabinVisit {
       this.hidden() ||
       !this.owner ||
       !this.accessibility ||
+      !this.inputEnabled ||
+      (this.ridePhase !== 'parked' && this.ridePhase !== 'complete') ||
       this.stoppedSeconds < 0.5
     )
       return false;
@@ -579,27 +999,49 @@ export class BusCabinVisit {
     return accepted;
   }
   stowRamp() {
-    if (this.disposed || this.hidden() || !this.owner || !this.accessibility)
+    if (
+      this.disposed ||
+      this.hidden() ||
+      !this.inputEnabled ||
+      !this.owner ||
+      !this.accessibility
+    )
       return false;
     const accepted = this.accessibility.stow(this.frontDoorsOpen());
     this.notify();
     return accepted;
   }
-  board(anchorId: string) {
+  /** The optional legacy selection is validated, but boarding always enters the
+   * physical aisle. Choosing a distant seat must not teleport a passenger. */
+  board(anchorId?: string) {
     if (
       this.disposed ||
       this.hidden() ||
       this.accessibility?.moving ||
       this.aboard ||
       !this.owner ||
-      !this.contract
+      !this.contract ||
+      !this.space ||
+      !this.inputEnabled
     )
       return false;
-    const anchor = this.contract.anchors.find(
-      (a) => a.anchor.anchorId === anchorId,
-    );
+    if (
+      anchorId &&
+      !this.contract.anchors.some((a) => a.anchor.anchorId === anchorId)
+    )
+      return false;
+    const spawn = this.space.spawn();
+    const anchor =
+      spawn &&
+      this.contract.anchors
+        .filter((a) => a.datum === 'feet')
+        .sort(
+          (a, b) =>
+            Math.hypot(...a.anchor.translationM.map((v, i) => v - spawn[i])) -
+            Math.hypot(...b.anchor.translationM.map((v, i) => v - spawn[i])),
+        )[0];
     const floor = this.walkingFloor();
-    if (!anchor || !floor)
+    if (!anchor || !spawn || !floor)
       return this.reject('Walk to the front door to board');
     if (!this.synchronizeWalkingFloor(floor))
       return this.reject('Walking floor changed during transfer');
@@ -618,43 +1060,31 @@ export class BusCabinVisit {
     this.city.navigation!.car.visible = false;
     this.city.controls.enabled = false;
     this.city.transition = null;
-    this.viewAnchor = anchorId;
+    this.cabinFoot = [...spawn];
+    this.cabinSeat = null;
+    this.cabinStand = null;
+    this.standingAnchor = anchor.anchor.anchorId;
+    this.viewAnchor = anchor.anchor.anchorId;
     this.previewAnchor = null;
-    this.yaw = this.pitch = 0;
+    this.yaw = Math.PI;
+    this.lookYaw = this.pitch = 0;
+    this.clearInput();
     this.phase = 'aboard';
     this.error = '';
     this.updateCamera();
     this.notify();
     return true;
   }
+  /** Legacy caller compatibility now uses the same physical proximity guard. */
   preview(anchorId: string) {
-    if (
-      !this.aboard ||
-      this.disposed ||
-      this.hidden() ||
-      !this.contract?.anchors.some((a) => a.anchor.anchorId === anchorId)
-    )
+    if (!this.aboard || this.disposed || this.hidden() || !this.inputEnabled)
       return false;
-    const passenger = this.transfers.state(VISITOR);
-    this.viewAnchor = anchorId;
-    this.previewAnchor =
-      passenger?.mode === 'riding' && passenger.anchor.anchorId === anchorId
-        ? null
-        : anchorId;
-    this.yaw = this.pitch = 0;
-    this.updateCamera();
-    this.notify();
-    return true;
+    if (this.cabinSeat) return anchorId === this.cabinSeat.id;
+    const seat = this.space?.seats.find((s) => s.id === anchorId);
+    return seat ? this.sit(seat) : anchorId === this.standingAnchor;
   }
   alight() {
-    if (
-      !this.aboard ||
-      this.disposed ||
-      this.hidden() ||
-      !this.city.navigation ||
-      this.accessibility?.moving
-    )
-      return false;
+    if (!this.canAlight()) return false;
     const floor = this.freshOutside('rear');
     if (!floor) return this.reject('No safe bus exit; visitor stays aboard');
     const token = this.transfers.beginAlight(
@@ -685,7 +1115,8 @@ export class BusCabinVisit {
       restoreNavigation();
       return this.reject('Exit changed; visitor stays aboard');
     }
-    this.drag = null;
+    this.clearInput();
+    this.resetPassenger();
     this.viewAnchor = this.previewAnchor = null;
     this.phase = 'ready';
     this.error = '';
@@ -725,14 +1156,10 @@ export class BusCabinVisit {
         !this.hidden() &&
         !this.accessibility?.moving &&
         !this.aboard &&
+        this.inputEnabled &&
         !!walking &&
         boardingProofValid(this.proof('front', walking)),
-      canAlight:
-        !this.hidden() &&
-        !this.accessibility?.moving &&
-        this.aboard &&
-        !!exit &&
-        boardingProofValid(this.proof('rear', exit)),
+      canAlight: this.canAlight(exit),
       anchors:
         this.contract?.anchors.map((a) => ({
           id: a.anchor.anchorId,
@@ -748,6 +1175,23 @@ export class BusCabinVisit {
       requestedProfile: this.owner?.requestedProfile ?? null,
       fallback: this.owner?.fallback ?? false,
       accessibility: this.accessibility?.snapshot() ?? null,
+      seated: this.passengerSeated,
+      canWalkCabin:
+        this.aboard &&
+        !this.passengerSeated &&
+        this.inputEnabled &&
+        !this.hidden(),
+      canRide:
+        this.aboard &&
+        this.inputEnabled &&
+        !this.hidden() &&
+        this.ridePhase === 'parked' &&
+        this.actualDoorsOpen() &&
+        (!this.accessibility || this.accessibility.stowed) &&
+        Boolean(this.ridePlan),
+      ridePhase: this.ridePhase,
+      speedMps: this.rideSpeed,
+      rideProgress: this.rideProgress,
     };
   }
   /** Static body collision for the host navigation; the doors are approached outside it. */
@@ -779,6 +1223,7 @@ export class BusCabinVisit {
     window.removeEventListener('pointercancel', this.pointerUp, true);
     window.removeEventListener('wheel', this.wheel, true);
     window.removeEventListener('keydown', this.keyDown, true);
+    window.removeEventListener('keyup', this.keyUp, true);
     window.removeEventListener('blur', this.blur);
     document.removeEventListener('visibilitychange', this.visibility);
   }
@@ -797,6 +1242,12 @@ export class BusCabinVisit {
   private release() {
     this.accessibility?.dispose();
     this.accessibility = null;
+    this.resetPassenger();
+    this.clearInput();
+    this.space = null;
+    this.ridePlan = null;
+    this.ridePhase = 'parked';
+    this.rideSpeed = this.rideTime = this.rideProgress = 0;
     this.owner?.dispose();
     this.owner = null;
     this.contract = null;
@@ -974,7 +1425,7 @@ export class BusCabinVisit {
       surfaceId: floor.surfaceId,
       layer: floor.layer,
       floorPointM: [floor.x, floor.y, floor.z],
-      speedMps: 0,
+      speedMps: this.rideSpeed,
       stoppedSeconds: this.stoppedSeconds,
       distanceM: doorPoint
         ? doorPoint.distanceTo(new THREE.Vector3(floor.x, floor.y, floor.z))
@@ -996,48 +1447,93 @@ export class BusCabinVisit {
     };
   }
   private updateCamera() {
-    const a = this.contract?.anchors.find(
-      (anchor) => anchor.anchor.anchorId === this.viewAnchor,
-    );
-    if (!a || !this.owner || !this.aboard) return;
-    const localEye =
-      a.cameraEyePointM ??
-      ([
-        a.anchor.translationM[0],
-        a.anchor.translationM[1] + 1.62,
-        a.anchor.translationM[2],
-      ] as Point);
-    const pose = riderWorldTransform(
-      this.owner.group.position,
-      this.owner.group.quaternion,
-      localEye,
-      a.anchor.rotationQuaternionXYZW,
+    if (!this.owner || !this.aboard || !this.cabinFoot || !this.space) return;
+    const local = this.cabinSeat?.position ?? this.cabinFoot;
+    const localEye = new THREE.Vector3(...local);
+    if (this.cabinSeat) {
+      localEye.y += this.cabinSeat.eyeHeight;
+      localEye.x += this.cabinSeat.eyeOffsetXZ[0];
+      localEye.z += this.cabinSeat.eyeOffsetXZ[1];
+    } else localEye.y += this.space.standingEyeHeight(local);
+    this.owner.interiorRoot.updateWorldMatrix(true, false);
+    const frameRotation = this.owner.interiorRoot.getWorldQuaternion(
+      new THREE.Quaternion(),
     );
     const camera = this.city.camera;
-    camera.position.copy(pose.position);
-    camera.quaternion
-      .copy(pose.rotation)
-      .multiply(
-        new THREE.Quaternion().setFromEuler(
-          new THREE.Euler(-this.pitch, this.yaw, 0, 'YXZ'),
-        ),
-      )
-      .multiply(
-        new THREE.Quaternion().setFromAxisAngle(
-          new THREE.Vector3(0, 1, 0),
-          Math.PI,
-        ),
-      );
+    camera.position.copy(this.owner.interiorRoot.localToWorld(localEye));
+    const direction = new THREE.Vector3(
+      Math.sin(this.yaw + this.lookYaw) * Math.cos(this.pitch),
+      Math.sin(this.pitch),
+      Math.cos(this.yaw + this.lookYaw) * Math.cos(this.pitch),
+    ).applyQuaternion(frameRotation);
     camera.up.set(0, 1, 0);
+    camera.lookAt(camera.position.clone().add(direction));
     if (camera.near !== 0.05 || camera.fov !== 65) {
       camera.near = 0.05;
       camera.fov = 65;
       camera.updateProjectionMatrix();
     }
     this.city.controls.enabled = false;
-    this.city.controls.target
-      .copy(camera.position)
-      .add(camera.getWorldDirection(new THREE.Vector3()));
+    this.city.controls.target.copy(camera.position).add(direction);
+    const nav = this.city.navigation;
+    if (nav) {
+      const foot = this.owner.interiorRoot.localToWorld(
+        new THREE.Vector3(...local),
+      );
+      nav.position.copy(foot);
+      nav.walker.group.position.copy(foot);
+      nav.walker.group.quaternion
+        .copy(frameRotation)
+        .multiply(
+          new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(0, 1, 0),
+            this.yaw,
+          ),
+        );
+      if (this.avatarSeated !== this.passengerSeated) {
+        nav.walker.setSeated?.(
+          this.passengerSeated,
+          this.cabinSeat?.seatHeight ?? 0.46,
+        );
+        this.avatarSeated = this.passengerSeated;
+      }
+      nav.walker.group.visible = false; // Ordinary first-person self hiding.
+      nav.walker.update?.(
+        this.walkDistance,
+        !this.passengerSeated &&
+          (this.keys.has('w') || this.keys.has('s') || this.axes.y !== 0),
+      );
+    }
+  }
+  private resetPassenger() {
+    if (this.avatarSeated) this.city.navigation?.walker.setSeated?.(false);
+    this.avatarSeated = false;
+    this.cabinFoot = this.cabinStand = null;
+    this.cabinSeat = null;
+    this.standingAnchor = null;
+  }
+  private nearRearDoor() {
+    const door = this.doors.find((d) => d.group === 'rear');
+    return Boolean(
+      this.cabinFoot &&
+      door &&
+      Math.hypot(this.cabinFoot[0] + 0.7, this.cabinFoot[2] - door.point[2]) <
+        1.35,
+    );
+  }
+  private canAlight(exit = this.freshOutside('rear')) {
+    return (
+      !this.disposed &&
+      !this.hidden() &&
+      this.inputEnabled &&
+      Boolean(this.city.navigation) &&
+      this.aboard &&
+      !this.passengerSeated &&
+      (!this.accessibility || this.accessibility.stowed) &&
+      this.nearRearDoor() &&
+      (this.ridePhase === 'parked' || this.ridePhase === 'complete') &&
+      Boolean(exit && boardingProofValid(this.proof('rear', exit)))
+    );
   }
   private navigationRollback() {
     const n = this.city.navigation!;
@@ -1056,6 +1552,8 @@ export class BusCabinVisit {
       steering: n.steering,
       steeringPulse: n.steeringPulse,
     };
+    const walkerPosition = n.walker.group.position.clone(),
+      walkerQuaternion = n.walker.group.quaternion.clone();
     const walkerVisible = n.walker.group.visible,
       carVisible = n.car.visible;
     const camera = this.city.camera;
@@ -1070,6 +1568,8 @@ export class BusCabinVisit {
       Object.assign(n, fields);
       n.position.copy(position);
       n.walker.group.visible = walkerVisible;
+      n.walker.group.position.copy(walkerPosition);
+      n.walker.group.quaternion.copy(walkerQuaternion);
       n.car.visible = carVisible;
       camera.position.copy(eye);
       camera.quaternion.copy(rotation);
@@ -1085,6 +1585,7 @@ export class BusCabinVisit {
     if (
       !this.aboard ||
       this.hidden() ||
+      !this.inputEnabled ||
       event.target !== this.city.renderer.domElement ||
       event.button !== 0
     )
@@ -1099,13 +1600,14 @@ export class BusCabinVisit {
     if (
       !this.aboard ||
       this.hidden() ||
+      !this.inputEnabled ||
       !this.drag ||
       this.drag.id !== event.pointerId
     )
       return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    this.yaw -= (event.clientX - this.drag.x) * 0.004;
+    this.lookYaw -= (event.clientX - this.drag.x) * 0.004;
     this.pitch = THREE.MathUtils.clamp(
       this.pitch - (event.clientY - this.drag.y) * 0.004,
       -1.2,
@@ -1133,6 +1635,12 @@ export class BusCabinVisit {
     if (
       !this.aboard ||
       this.hidden() ||
+      !this.inputEnabled ||
+      event.defaultPrevented ||
+      event.isComposing ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
       (event.target instanceof Element &&
         event.target.closest(
           'input, textarea, select, [contenteditable="true"], [role="dialog"]',
@@ -1163,17 +1671,16 @@ export class BusCabinVisit {
       return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    if (key === 'arrowleft') this.yaw += 0.08;
-    if (key === 'arrowright') this.yaw -= 0.08;
-    if (key === 'arrowup') this.pitch = Math.min(1.2, this.pitch + 0.08);
-    if (key === 'arrowdown') this.pitch = Math.max(-1.2, this.pitch - 0.08);
-    this.updateCamera();
+    if (!event.repeat || this.keys.has(key)) this.keys.add(key);
+  };
+  private keyUp = (event: KeyboardEvent) => {
+    this.keys.delete(event.key.toLowerCase());
   };
   private blur = () => {
-    this.drag = null;
+    this.clearInput();
   };
   private visibility = () => {
-    this.drag = null;
+    this.clearInput();
     this.resumeAnchor = true;
   };
   private reject(message: string) {

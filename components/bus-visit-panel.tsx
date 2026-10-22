@@ -1,10 +1,17 @@
 'use client';
-import { useState } from 'react';
-import { BusFront, X } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { BusFront, ChevronDown, ChevronUp, X } from 'lucide-react';
 import type { CityEngine } from '@/lib/city/engine';
 import type { BusVisitSnapshot } from '@/lib/city/bus-visit';
-import { busVisitSelectedAnchor } from '@/lib/city/bus-visit-selection';
 import { translate, type Locale } from '@/lib/i18n';
+import messages from '@/lib/i18n/bus-passenger.json';
+import interactions from '@/lib/i18n/interactions.json';
+import { TravelJoystick } from './travel-joystick';
+
+type TextKey = keyof typeof messages.en;
+export const busPassengerText = (locale: Locale, key: TextKey) =>
+  messages[locale][key];
+const noop = () => {};
 
 export function BusVisitPanel({
   city,
@@ -12,18 +19,24 @@ export function BusVisitPanel({
   locale,
   visible,
   onPrepare,
+  touch = false,
+  controlsEnabled = true,
+  onMove = noop,
 }: {
   city: CityEngine | null;
   snapshot: BusVisitSnapshot | null;
   locale: Locale;
   visible: boolean;
   onPrepare: () => Promise<void>;
+  touch?: boolean;
+  controlsEnabled?: boolean;
+  onMove?: (x: number, y: number) => void;
 }) {
-  const [anchor, setAnchor] = useState<string | null>(null);
   const [detail, setDetail] = useState<'auto' | 'light' | 'detailed'>('auto');
   const [busy, setBusy] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const tr = (key: Parameters<typeof translate>[1]) => translate(locale, key);
-  if (!visible || !city) return null;
+  const t = (key: TextKey) => busPassengerText(locale, key);
   const phase = snapshot?.phase ?? 'idle';
   const ramp = snapshot?.accessibility;
   const rampLocked = !!ramp && ramp.phase !== 'stowed';
@@ -98,6 +111,21 @@ export function BusVisitPanel({
               'bus-moved': 'The bus moved. Prepare a new parked visit.',
             },
           };
+  const aboard = snapshot?.aboard ?? false;
+  const walking =
+    visible &&
+    controlsEnabled &&
+    aboard &&
+    Boolean(snapshot?.canWalkCabin) &&
+    !snapshot?.seated &&
+    !ramp?.moving;
+  const move = useCallback((x: number, y: number) => onMove(x, y), [onMove]);
+  useEffect(() => {
+    if (!walking) onMove(0, 0);
+    return () => onMove(0, 0);
+  }, [walking, onMove]);
+  if (!visible || !city) return null;
+  const locked = busy || phase === 'loading' || (aboard && !controlsEnabled);
   const prepare = async (requested = detail) => {
     if (busy) return;
     city.setBusVisitDetail(requested);
@@ -109,7 +137,7 @@ export function BusVisitPanel({
     }
   };
   const chooseDetail = async (value: 'auto' | 'light' | 'detailed') => {
-    if (busy || phase === 'loading' || snapshot?.aboard || rampLocked) return;
+    if (locked || aboard || rampLocked) return;
     setDetail(value);
     city.setBusVisitDetail(value);
     if (phase !== 'idle') await prepare(value);
@@ -118,7 +146,7 @@ export function BusVisitPanel({
     <select
       aria-label={tr('busVisitDetail')}
       value={detail}
-      disabled={busy || phase === 'loading' || snapshot?.aboard || rampLocked}
+      disabled={locked || aboard || rampLocked}
       onChange={(event) => {
         void chooseDetail(event.target.value as 'auto' | 'light' | 'detailed');
       }}
@@ -138,146 +166,200 @@ export function BusVisitPanel({
         {qualitySelect}
       </div>
     );
-  const selected = busVisitSelectedAnchor(snapshot, anchor);
-  const choose = (id: string) => {
-    if (!snapshot?.anchors.some((option) => option.id === id)) return;
-    setAnchor(id);
-    if (snapshot?.aboard) city.busVisit?.preview(id);
-    city.publishBusVisit();
-  };
-  const label = (id: string, kind: 'seat' | 'standing') =>
-    kind === 'seat'
-      ? translate(locale, 'busVisitSeat', {
-          number: Number(id.replace(/\D/g, '')),
-        })
-      : tr(
-          id === 'wheelchair-stroller'
-            ? 'busVisitOpenArea'
-            : 'busVisitStanding',
-        );
+  const ridePhase = snapshot?.ridePhase ?? 'parked';
+  const status = t(
+    ridePhase === 'moving'
+      ? 'moving'
+      : ridePhase === 'closing'
+        ? 'closing'
+        : ridePhase === 'opening'
+          ? 'opening'
+          : ridePhase === 'complete'
+            ? 'complete'
+            : 'parked',
+  );
+  const stopped =
+    Number.isFinite(snapshot?.speedMps ?? 0) &&
+    Math.abs(snapshot?.speedMps ?? 0) <= 0.05 &&
+    (ridePhase === 'parked' || ridePhase === 'complete');
+  const canAlight =
+    !locked &&
+    !rampLocked &&
+    aboard &&
+    stopped &&
+    !snapshot?.seated &&
+    Boolean(snapshot?.canAlight);
+  const canRide =
+    !locked && !rampLocked && aboard && stopped && Boolean(snapshot?.canRide);
+  const hint = snapshot?.seated
+    ? touch
+      ? interactions[locale].stand
+      : interactions[locale].shortcut.replace(
+          '{action}',
+          interactions[locale].stand,
+        )
+    : t(touch ? 'touchHint' : 'desktopHint');
+  const showBody = !aboard || expanded;
   return (
-    <section
-      className="bus-visit-panel glass ui-chrome"
-      aria-label={tr('busInterior')}
-    >
-      <div className="bus-visit-heading">
-        <strong>
-          <BusFront size={17} /> {tr('busInterior')}
-        </strong>
-        <button
-          aria-label={tr('close')}
-          disabled={rampLocked}
-          onClick={() => city.closeBusVisit()}
-        >
-          <X size={17} />
-        </button>
-      </div>
-      <p>{tr('busVisitDescription')}</p>
-      {ramp && (
-        <div className="bus-visit-accessibility">
-          <button
-            className="bus-visit-accessibility-toggle"
-            disabled={busy || ramp.moving}
-            onClick={() => {
-              if (ramp.phase === 'deployed') city.busVisit?.stowRamp();
-              else city.busVisit?.deployRamp();
-              city.publishBusVisit();
-            }}
-          >
-            {ramp.phase === 'deployed' ? rampCopy.stow : rampCopy.deploy}
-          </button>
-          <output aria-live="polite">
-            {ramp.error
-              ? rampCopy.errors[ramp.error]
-              : rampCopy.phases[ramp.phase]}
-          </output>
-        </div>
-      )}
-      <div className="bus-visit-viewpoint bus-visit-quality">
-        <span>{tr('busVisitDetail')}</span>
-        {qualitySelect}
-      </div>
-      {snapshot?.profile && (
-        <p>
-          {tr(
-            snapshot.profile === 'budget'
-              ? 'busVisitProfileBudget'
-              : snapshot.profile === 'reference-lod0'
-                ? 'busVisitProfileReference0'
-                : 'busVisitProfileReference1',
-          )}
-        </p>
-      )}
-      {snapshot?.fallback && (
-        <output className="bus-visit-quality-note">
-          {tr('busVisitQualityFallback')}
-        </output>
-      )}
-      {snapshot?.aboard && <p>{tr('busVisitQualityLocked')}</p>}
-      {(phase === 'loading' || busy) && (
-        <output>{tr('busVisitLoading')}</output>
-      )}
-      {phase === 'error' && (
-        <>
-          <p role="alert">{tr('busVisitLoadError')}</p>
-          <button onClick={() => void prepare()} disabled={busy}>
-            {tr('busVisitRetry')}
-          </button>
-        </>
-      )}
-      {(phase === 'ready' || phase === 'aboard') && (
-        <>
-          <label className="bus-visit-viewpoint">
-            <span>
-              {tr(
-                snapshot?.aboard
-                  ? 'busVisitViewpoint'
-                  : 'busVisitBoardingPlace',
-              )}
-            </span>
-            <select
-              value={selected ?? ''}
-              disabled={!selected || ramp?.moving}
-              onChange={(event) => choose(event.target.value)}
+    <>
+      <section
+        className={`bus-visit-panel glass ui-chrome${aboard ? ' is-aboard' : ''}`}
+        aria-label={tr('busInterior')}
+      >
+        <div className="bus-visit-heading">
+          <strong>
+            <BusFront size={17} />
+            {tr('busInterior')}
+          </strong>
+          <div className="bus-visit-heading-actions">
+            {aboard && (
+              <button
+                type="button"
+                aria-expanded={expanded}
+                aria-controls="bus-visit-details"
+                aria-label={t(expanded ? 'collapse' : 'expand')}
+                onClick={() => setExpanded(!expanded)}
+              >
+                {expanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              </button>
+            )}
+            <button
+              type="button"
+              aria-label={tr('close')}
+              disabled={rampLocked || (aboard && !canAlight)}
+              onClick={() => city.closeBusVisit()}
             >
-              {snapshot?.anchors.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {label(option.id, option.kind)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <p>{tr(snapshot?.aboard ? 'busVisitLook' : 'busVisitApproach')}</p>
-          {snapshot?.error && (
-            <p role="alert">
-              {tr(snapshot.aboard ? 'busVisitExitBlocked' : 'busVisitApproach')}
+              <X size={17} />
+            </button>
+          </div>
+        </div>
+        {aboard && (
+          <output className="bus-visit-status" aria-live="polite">
+            {status}
+          </output>
+        )}
+        <div id="bus-visit-details" hidden={!showBody}>
+          <p>{aboard ? hint : t('boardHint')}</p>
+          {ramp && (
+            <div className="bus-visit-accessibility">
+              <button
+                className="bus-visit-accessibility-toggle"
+                disabled={locked || ramp.moving || !stopped}
+                onClick={() => {
+                  if (locked || ramp.moving || !stopped) return;
+                  if (ramp.phase === 'deployed') city.busVisit?.stowRamp();
+                  else city.busVisit?.deployRamp();
+                  city.publishBusVisit();
+                }}
+              >
+                {ramp.phase === 'deployed' ? rampCopy.stow : rampCopy.deploy}
+              </button>
+              <output aria-live="polite">
+                {ramp.error
+                  ? rampCopy.errors[ramp.error]
+                  : rampCopy.phases[ramp.phase]}
+              </output>
+            </div>
+          )}
+
+          <div className="bus-visit-viewpoint bus-visit-quality">
+            <span>{tr('busVisitDetail')}</span>
+            {qualitySelect}
+          </div>
+          {snapshot?.profile && (
+            <p>
+              {tr(
+                snapshot.profile === 'budget'
+                  ? 'busVisitProfileBudget'
+                  : snapshot.profile === 'reference-lod0'
+                    ? 'busVisitProfileReference0'
+                    : 'busVisitProfileReference1',
+              )}
             </p>
           )}
-          {snapshot?.aboard ? (
-            <button
-              className="bus-visit-primary"
-              disabled={!snapshot.canAlight}
-              onClick={() => {
-                city.busVisit?.alight();
-                city.publishBusVisit();
-              }}
-            >
-              {tr('busVisitAlight')}
-            </button>
-          ) : (
-            <button
-              className="bus-visit-primary"
-              disabled={!snapshot?.canBoard || !selected}
-              onClick={() => {
-                if (selected) city.busVisit?.board(selected);
-                city.publishBusVisit();
-              }}
-            >
-              {tr('busVisitBoard')}
-            </button>
+          {snapshot?.fallback && (
+            <output className="bus-visit-quality-note">
+              {tr('busVisitQualityFallback')}
+            </output>
           )}
-        </>
+          {aboard && <p>{tr('busVisitQualityLocked')}</p>}
+          {aboard && <p>{t('rideHint')}</p>}
+          {aboard && <p>{t('alightHint')}</p>}
+        </div>
+        {(phase === 'loading' || busy) && (
+          <output>{tr('busVisitLoading')}</output>
+        )}
+        {phase === 'error' && (
+          <>
+            <p role="alert">{tr('busVisitLoadError')}</p>
+            <button onClick={() => void prepare()} disabled={busy}>
+              {tr('busVisitRetry')}
+            </button>
+          </>
+        )}
+        {phase === 'ready' && (
+          <button
+            className="bus-visit-primary"
+            disabled={!snapshot?.canBoard || locked || !!ramp?.moving}
+            onClick={() => {
+              if (snapshot?.canBoard && !locked && !ramp?.moving) {
+                city.busVisit?.board();
+                city.publishBusVisit();
+              }
+            }}
+          >
+            {tr('busVisitBoard')}
+          </button>
+        )}
+        {snapshot?.error && phase !== 'error' && (
+          <p role="alert">
+            {tr(aboard ? 'busVisitExitBlocked' : 'busVisitApproach')}
+          </p>
+        )}
+        {aboard && (
+          <>
+            <div className="bus-visit-actions">
+              <button
+                className="bus-visit-primary"
+                disabled={!canRide}
+                onClick={() => {
+                  if (canRide) {
+                    city.busVisit?.startRide();
+                    city.publishBusVisit();
+                  }
+                }}
+              >
+                {t('ride')}
+              </button>
+              <button
+                className="bus-visit-primary"
+                disabled={!canAlight}
+                onClick={() => {
+                  if (canAlight) {
+                    city.busVisit?.alight();
+                    city.publishBusVisit();
+                  }
+                }}
+              >
+                {tr('busVisitAlight')}
+              </button>
+            </div>
+            {!expanded && <p className="bus-visit-movement-hint">{hint}</p>}
+            {expanded && !snapshot?.canRide && ridePhase === 'parked' && (
+              <p>{t('noRide')}</p>
+            )}
+          </>
+        )}
+      </section>
+      {touch && walking && (
+        <TravelJoystick
+          mode="walk"
+          label={t('walkCabin')}
+          brakeLabel=""
+          onMove={move}
+          onBrake={noop}
+        />
       )}
-    </section>
+    </>
   );
 }

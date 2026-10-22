@@ -2655,13 +2655,19 @@ a {
 @media(max-width:900px){.skytrain-cabin-launcher{top:202px;right:64px;max-width:calc(100% - 76px);}}
 @media(max-height:500px){.skytrain-cabin-launcher{top:154px;}}
 .bus-visit-panel {
-  position: absolute; z-index: 42; left: 50%; top: 164px; transform: translateX(-50%);
-  width: 290px; padding: 16px; border-radius: 16px; color: #e8f1ed;
+  position: absolute; z-index: 37; right: 94px; top: 190px;
+  width: 310px; padding: 16px; border-radius: 16px; color: #e8f1ed;
   max-height:calc(100% - 176px);overflow:auto;
 }
 .bus-visit-heading,.bus-visit-heading strong {display:flex;align-items:center;gap:8px;}
 .bus-visit-heading {justify-content:space-between;}
 .bus-visit-heading button {padding:5px;}
+.bus-visit-heading-actions {display:flex;gap:4px;}
+.bus-visit-heading-actions button {min-width:44px;min-height:44px;display:grid;place-items:center;}
+.bus-visit-status {display:block;font-size:12px;line-height:1.45;margin:8px 0;color:#d6e7d8;}
+.bus-visit-actions {display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.bus-visit-actions button {min-height:48px;}
+.bus-visit-panel [hidden] {display:none;}
 .bus-visit-panel p {font-size:12px;line-height:1.5;color:#bacfc9;margin:10px 0;}
 .bus-visit-viewpoint {display:grid;gap:6px;font-size:12px;}
 .bus-visit-viewpoint select {width:100%;padding:9px;border:1px solid #617e75;border-radius:8px;background:#1d3530;color:#e8f1ed;}
@@ -2674,11 +2680,12 @@ a {
 @media(max-width:900px) {
   .bus-visit-launcher {top:154px;right:64px;max-width:calc(100% - 76px);padding:8px 10px;font-size:12px;}
   .bus-visit-launcher select {max-width:90px;}
-  .bus-visit-panel {top:154px;width:min(290px,calc(100% - 24px));padding:12px;max-height:calc(100% - 166px);}
+  .bus-visit-panel {top:154px;left:12px;right:64px;width:auto;padding:12px;max-height:calc(100% - 166px);}
 }
 @media(max-height:500px) {
   .bus-visit-launcher,.bus-visit-panel {top:106px;}
   .bus-visit-panel {max-height:calc(100% - 118px);overflow:auto;}
+  .bus-visit-panel.is-aboard {left:auto;right:64px;width:min(260px,calc(50vw - 80px));}
 }
 
 /* Independent Tesla cockpit and two-handed mobile controls. */

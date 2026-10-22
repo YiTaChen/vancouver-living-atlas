@@ -217,10 +217,14 @@ function assertFloorTexture(owner, level) {
       if (material.userData.shared_surface_id !== 'bus-v2-floor') continue;
       const map = material.map;
       assert(map instanceof THREE.Texture);
+      assert.equal(material.metalness, 0);
+      assert(Math.abs(material.roughness - 0.92) < 1e-6);
       assert.equal(map.colorSpace, THREE.SRGBColorSpace);
       assert.equal(map.flipY, false);
       assert.equal(map.wrapS, THREE.RepeatWrapping);
       assert.equal(map.wrapT, THREE.RepeatWrapping);
+      assert.equal(map.magFilter, THREE.LinearFilter);
+      assert.equal(map.minFilter, THREE.LinearMipmapLinearFilter);
       assert.equal(map.image.pngSha256, embeddedPngHash(level));
       maps.add(map);
     }
@@ -243,6 +247,18 @@ test('real default bus loading decodes closeup LOD0/1 PNGs through images, retai
         assert(owner.exteriorRoot.getObjectByName('boarding-ramp'));
         assertFloorTexture(owner, level);
         owner.dispose();
+        const requests = fetches.length;
+        const reused = await assets.loadBoardable({
+          profile: `reference-lod${level}`,
+        });
+        assert.notEqual(reused, owner);
+        assertFloorTexture(reused, level);
+        assert.equal(
+          fetches.length,
+          requests,
+          'closing a visit retains reusable source templates',
+        );
+        reused.dispose();
       }
       for (const level of [0, 1]) {
         const request = fetches.find(({ path }) =>
@@ -338,6 +354,52 @@ test('abort during native image decode disposes the late closeup result, and a f
         releaseImages();
         assets.dispose();
         assert([...disposes.values()].every((count) => count === 1));
+      }
+    },
+    { holdImage: true },
+  );
+});
+
+test('disposing bus assets during native image decode releases late private maps without attaching an owner or downloading fallback', async () => {
+  await imageHarness(
+    async ({ imageReady, releaseImages, disposes, urls, fetches, stats }) => {
+      const assets = makeAssets();
+      try {
+        const pending = assets.loadBoardable({ profile: 'reference-lod1' });
+        const rejected = assert.rejects(pending, /Bus assets disposed/);
+        await imageReady;
+        const requestedBeforeDisposal = fetches.length;
+        assets.dispose();
+        releaseImages();
+        await rejected;
+        assert.equal(assets.stats().boardableOwners, 0);
+        assert.equal(assets.stats().boardableStatus, 'disposed');
+        assert.equal(assets.stats().loadedTemplates, 0);
+        assert.equal(assets.stats().textures, 0);
+        assert.equal(
+          fetches.length,
+          requestedBeforeDisposal,
+          'disposed visits do not request fallback assets',
+        );
+        assert(
+          !fetches.some(
+            ({ path }) => path.includes('bus-v2/') && path.endsWith('.glb'),
+          ),
+        );
+        assert.equal(
+          [...disposes.keys()].filter(
+            (resource) => resource instanceof THREE.Texture,
+          ).length,
+          1,
+        );
+        assert.equal(urls.size, 0);
+        assert.equal(stats().created, stats().revoked);
+        assert.equal(stats().bitmapCalls, 0);
+        assets.dispose();
+        assert([...disposes.values()].every((count) => count === 1));
+      } finally {
+        releaseImages();
+        assets.dispose();
       }
     },
     { holdImage: true },

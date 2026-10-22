@@ -213,6 +213,9 @@ function Home() {
   const skyTrainMove = useCallback((x: number, y: number) => {
     engine.current?.skyTrainTravel?.setTouchAxes(x, y);
   }, []);
+  const busMove = useCallback((x: number, y: number) => {
+    engine.current?.busVisit?.setTouchAxes(x, y);
+  }, []);
   useEffect(() => {
     const query = matchMedia('(any-pointer: coarse), (max-width: 900px)');
     const update = () =>
@@ -298,7 +301,7 @@ function Home() {
   const [interactionController, setInteractionController] = useState<CityInteractions | null>(null);
   const interactionInput = ready && settings.mode === 'walk' && !clean &&
     !placing && !flight.placing && !about && !panel && !discoveryModal &&
-    !stats.busVisit?.aboard && (!mobilePanel || mobilePanel === 'map') &&
+    (!mobilePanel || mobilePanel === 'map') &&
     !(touchUI && mobileHudHidden);
   const driveDriftEnabled = ready && settings.mode === 'drive' && !placing &&
     !about && !panel && !discoveryModal && !stats.busVisit?.aboard &&
@@ -309,6 +312,15 @@ function Home() {
     !about && !panel && !discoveryModal && settings.mode !== 'tesla' &&
     settings.mode !== 'flight' && !stats.busVisit?.aboard &&
     (!mobilePanel || mobilePanel === 'map') && !(touchUI && mobileHudHidden);
+  const busInput = ready && !clean && !placing && !flight.placing &&
+    !about && !panel && !discoveryModal && !skyTrainActive &&
+    settings.mode === 'walk' && (!mobilePanel || mobilePanel === 'map') &&
+    !(touchUI && mobileHudHidden);
+  useEffect(() => {
+    const bus = engine.current?.busVisit;
+    bus?.setInputEnabled(busInput);
+    return () => bus?.setInputEnabled(false);
+  }, [busInput, ready]);
   useEffect(() => {
     const travel = engine.current?.skyTrainTravel;
     travel?.setInputEnabled(skyTrainInput);
@@ -889,6 +901,9 @@ function Home() {
         city={engine.current}
         snapshot={stats.busVisit ?? null}
         locale={locale}
+        touch={touchUI}
+        controlsEnabled={busInput}
+        onMove={busMove}
         visible={
           ready && !skyTrainActive &&
           settings.mode !== 'tesla' &&
@@ -897,6 +912,7 @@ function Home() {
           !placing &&
           !flight.placing &&
           !panel &&
+          !discoveryModal &&
           !mobilePanel &&
           !(touchUI && mobileHudHidden)
         }
