@@ -94,6 +94,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     SkyTrainStationOwner,
     SkyTrainConstructionVisuals
   >();
+  private readonly constructionFocus = new THREE.Vector3();
   private readonly lightSources = new WeakMap<
     THREE.Object3D,
     THREE.PointLight[]
@@ -1207,10 +1208,20 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     for (const owner of this.stations.owners)
       owner.group.visible =
         this.city.settings.buildings || (this.active && owner === this.owner);
-    for (const visuals of this.constructionVisuals.values())
+    const constructionOrigin =
+      this.phase === 'station' && this.city.settings.mode === 'walk'
+        ? this.interactionOrigin
+        : null;
+    if (constructionOrigin)
+      this.constructionFocus.fromArray(constructionOrigin);
+    for (const [owner, visuals] of this.constructionVisuals)
       visuals.update(
         dt,
-        this.city.camera.position,
+        // Near-object visibility follows the person inside this station, so a
+        // chase camera cannot hide the portal currently offering F/tap.
+        constructionOrigin && owner === this.owner
+          ? this.constructionFocus
+          : this.city.camera.position,
         this.city.settings.quality,
         this.city.locale ?? 'en',
       );

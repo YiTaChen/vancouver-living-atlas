@@ -16,6 +16,9 @@ const { SkyTrainStationOwner } = await import(cityModule('skytrain-stations'));
 const { TravelCameraCollision } = await import(
   cityModule('travel-camera-collision')
 );
+const { SkyTrainWorldTravel } = await import(
+  cityModule('skytrain-world-travel')
+);
 const messages = JSON.parse(
   readFileSync('lib/i18n/skytrain-construction.json', 'utf8'),
 );
@@ -200,6 +203,109 @@ test('nearest portals alone animate; quality caps particles/draws and far labels
   } finally {
     f.dispose();
   }
+});
+
+test('a supported pedestrian approaching any of34 portals retains its physical F target at balanced quality while the real third-person camera follows behind', () => {
+  const originalDocument = globalThis.document;
+  Reflect.set(globalThis, 'document', {
+    hidden: false,
+    createElement: () => ({ getContext: () => null }),
+  });
+  let checked = 0;
+  try {
+    for (const id of ids) {
+      const f = fixture(id);
+      try {
+        const collision = new TravelCameraCollision();
+        for (const portal of f.placements) {
+          const normal = new THREE.Vector3(
+              Math.sin(portal.point.yaw),
+              0,
+              Math.cos(portal.point.yaw),
+            ),
+            raw = new THREE.Vector3(...portal.point.position).addScaledVector(
+              normal,
+              1,
+            ),
+            foot = f.owner.floorAt(raw.toArray(), portal.point.surfaceId);
+          assert(foot && f.owner.isClearFoot(foot));
+          const camera = new THREE.PerspectiveCamera(65, 1.6, 0.05, 10000),
+            worldFoot = new THREE.Vector3(...f.owner.toWorld(foot)),
+            city = {
+              camera,
+              settings: { mode: 'walk' },
+              controls: { target: new THREE.Vector3() },
+              navigation: {
+                position: new THREE.Vector3(),
+                groundHeight: cityElevation,
+                clearGround: () => true,
+                walker: { group: new THREE.Group(), setSeated() {} },
+              },
+              renderer: { domElement: { setAttribute() {} } },
+            },
+            view = Object.assign(Object.create(SkyTrainWorldTravel.prototype), {
+              city,
+              owner: f.owner,
+              station: id,
+              phase: 'station',
+              occupied: null,
+              foot,
+              stationSeat: null,
+              cabinSeat: null,
+              busy: false,
+              disposed: false,
+              inputEnabled: true,
+              constructionAccess: new Map([[f.owner, f.placements]]),
+              yaw: portal.point.yaw + Math.PI,
+              lookYaw: 0,
+              pitch: -0.03,
+              distanceView: 4,
+              avatarSeated: false,
+              cameraCollision: collision,
+            });
+          const candidates = view
+            .constructionCandidates()
+            .sort(
+              (a, b) =>
+                new THREE.Vector3(...a.proximityPoint).distanceToSquared(
+                  worldFoot,
+                ) -
+                new THREE.Vector3(...b.proximityPoint).distanceToSquared(
+                  worldFoot,
+                ),
+            );
+          assert(
+            candidates[0].id.endsWith(`:${portal.id}`),
+            'the actual F candidate is the portal one metre from supported feet',
+          );
+          view.updateCamera();
+          assert(camera.position.distanceTo(worldFoot) > 1);
+          f.visuals.update(0.016, worldFoot, 'balanced', 'en');
+          const ring = f.visuals.group.children.find(
+              (node) => node.userData.portalId === portal.id,
+            ),
+            sign = f.visuals.group.children.find(
+              (node) => node.name === `Construction A-frame — ${portal.id}`,
+            );
+          assert(
+            ring.visible && sign.visible,
+            `${portal.id}: zooming behind the pedestrian cannot hide the active physical portal`,
+          );
+          assert(
+            renderables(f.visuals.group, true).length <= 16,
+            'the balanced two-portal budget remains intact',
+          );
+          checked++;
+        }
+      } finally {
+        f.dispose();
+      }
+    }
+  } finally {
+    if (originalDocument === undefined) delete globalThis.document;
+    else globalThis.document = originalDocument;
+  }
+  assert.equal(checked, 34);
 });
 
 test('all10 localized signs allocate small nonmipped canvas labels lazily, reuse steady frames, and dispose each owned resource once', () => {
