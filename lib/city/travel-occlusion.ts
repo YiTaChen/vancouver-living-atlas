@@ -67,6 +67,11 @@ export class TravelOcclusion {
   ) => {
     this.unwatch(event.child);
   };
+  private readonly detached = (
+    event: THREE.Event<'removed', THREE.Object3D>,
+  ) => {
+    this.unwatch(event.target);
+  };
 
   constructor(roots: readonly THREE.Object3D[] = []) {
     this.roots = roots;
@@ -81,12 +86,20 @@ export class TravelOcclusion {
       if (allowedAncestors(root)) this.visit(root);
   }
 
+  /** Release a staged/cancelled subtree's listeners and node references only.
+   * Resource disposal remains with its owner; shared material hooks remain
+   * installed. A later attachment to a watched parent enrolls it again. */
+  releaseSubtree(root: THREE.Object3D) {
+    if (!this.disposed) this.unwatch(root);
+  }
+
   private visit(object: THREE.Object3D) {
     if (excluded(object)) return;
     if (!this.watched.has(object)) {
       this.watched.add(object);
       object.addEventListener('childadded', this.added);
       object.addEventListener('childremoved', this.removed);
+      object.addEventListener('removed', this.detached);
     }
     if (object instanceof THREE.Mesh) {
       if (!this.meshes.has(object)) {
@@ -104,6 +117,7 @@ export class TravelOcclusion {
     if (this.watched.delete(object)) {
       object.removeEventListener('childadded', this.added);
       object.removeEventListener('childremoved', this.removed);
+      object.removeEventListener('removed', this.detached);
       if (this.meshes.delete(object)) this.meshCount--;
     }
     for (const child of object.children) this.unwatch(child);
@@ -373,6 +387,7 @@ export class TravelOcclusion {
     for (const object of this.watched) {
       object.removeEventListener('childadded', this.added);
       object.removeEventListener('childremoved', this.removed);
+      object.removeEventListener('removed', this.detached);
     }
     this.watched.clear();
     this.meshCount = 0;

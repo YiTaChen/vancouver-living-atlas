@@ -81,6 +81,7 @@ test('merged page keeps standing bus interactions and gates transit input during
 const actionNames = [
   'change',
   'finishBusVisit',
+  'prepareTravelPlacement',
   'beginPlacement',
   'switchInScene',
   'beginFlight',
@@ -96,30 +97,75 @@ const actionCode = compile(
     .map((node) => `const ${node.getText(source)};`)
     .join('\n'),
 );
-function harness({ exitAllowed = true, trainActive = false } = {}) {
+const engineSource = ts.createSourceFile(
+  'engine.ts',
+  readFileSync(new URL('../lib/city/engine.ts', import.meta.url), 'utf8'),
+  ts.ScriptTarget.Latest,
+  true,
+);
+const engineClass = engineSource.statements.find(
+  (node) => ts.isClassDeclaration(node) && node.name?.text === 'CityEngine',
+);
+const prepareMethod = engineClass.members.find(
+  (node) => node.name?.getText(engineSource) === 'prepareTravelPlacement',
+);
+assert.ok(prepareMethod, 'entry uses the actual engine ownership handoff');
+const EnginePlacementHarness = runInNewContext(
+  compile(
+    `class EnginePlacementHarness { ${prepareMethod.getText(engineSource)} }`,
+  ) + '\nEnginePlacementHarness;',
+);
+function harness({
+  exitAllowed = true,
+  trainActive = false,
+  overviewMoved = false,
+} = {}) {
   const calls = [];
-  let settings = { mode: 'rocket' };
+  let settings = { mode: trainActive ? 'orbit' : 'rocket' };
   const rocket = {
-    active: true,
+    active: !trainActive,
     returnToCity() {
       calls.push('rocket:return');
       this.active = false;
     },
     beginPlacement(kind) {
+      assert.equal(
+        city.skyTrainTravel.active,
+        false,
+        'a rocket cannot retain passenger ownership',
+      );
       calls.push(`rocket:place:${kind}`);
     },
   };
   const start = (name) => {
     assert.equal(rocket.active, false, `${name} starts after rocket cleanup`);
+    assert.equal(
+      city.skyTrainTravel.active,
+      false,
+      `${name} starts after passenger release`,
+    );
     calls.push(name);
     return true;
   };
-  const city = {
+  const city = Object.assign(new EnginePlacementHarness(), {
+    settings,
     rocket,
     closeBusVisit: () => exitAllowed,
     skyTrainTravel: {
       active: trainActive,
-      setOverview: (overview) => calls.push(`train:overview:${overview}`),
+      get canResumeOverview() {
+        return this.active && settings.mode === 'orbit' && !overviewMoved;
+      },
+      setOverview(overview) {
+        calls.push(`train:overview:${overview}`);
+        settings.mode = overview ? 'orbit' : 'walk';
+      },
+      releaseForPlacement() {
+        calls.push('train:release-placement');
+        this.active = false;
+        city.navigation.mode = settings.mode = 'orbit';
+        return true;
+      },
     },
     placement: {
       mode: null,
@@ -134,16 +180,22 @@ function harness({ exitAllowed = true, trainActive = false } = {}) {
     },
     tesla: { active: false, enter: () => start('tesla:enter') },
     navigation: {
-      switchStreetMode: (mode) => start(`street:${mode}`),
+      mode: 'orbit',
+      switchStreetMode(mode) {
+        if (!['walk', 'drive'].includes(this.mode)) return false;
+        this.mode = mode;
+        return start(`street:${mode}`);
+      },
     },
     leaveTravelAtLocation: () => start('city:orbit'),
-  };
+  });
   const bindings = {
     ready: true,
     engine: { current: city },
     teslaEntering: { current: false },
     setSettings: (update) => {
       settings = update(settings);
+      city.settings = settings;
       calls.push(`mode:${settings.mode}`);
     },
     setRocketChoosing: (choosing) => calls.push(`chooser:${choosing}`),
@@ -179,7 +231,7 @@ test('merged page hands active rocket ownership to pointer and keyboard vehicle 
     ['aircraft button', (a) => a.beginFlight(), 'flight:place'],
     ['aircraft drag', (a) => a.dragAircraft(pointer()), 'flight:drag'],
     ['Tesla', (a) => a.beginTesla(), 'tesla:enter'],
-    ['street mode', (a) => a.switchMode('walk'), 'street:walk'],
+    ['street mode', (a) => a.switchMode('walk'), 'placement:walk'],
     ['orbit mode', (a) => a.switchMode('orbit'), 'city:orbit'],
   ]) {
     const { actions, calls } = harness();
@@ -189,28 +241,57 @@ test('merged page hands active rocket ownership to pointer and keyboard vehicle 
   }
 });
 
-test('merged page preserves blocked transit exits and station overview when selecting vehicles or rockets', async () => {
-  for (const options of [{ exitAllowed: false }, { trainActive: true }])
-    for (const invoke of [
-      (a) => a.beginPlacement('drive'),
-      (a) => a.beginFlight(),
-      (a) => a.beginTesla(),
-      (a) => a.dragAircraft(pointer()),
-      (a) => a.chooseRocket(),
-      (a) => a.beginRocket('super-heavy'),
-    ]) {
-      const { actions, calls } = harness(options);
-      await invoke(actions);
-      assert.equal(calls.includes('rocket:return'), false);
-      assert.equal(
-        calls.some((call) => call.startsWith('rocket:place:')),
-        false,
-      );
-      assert.equal(
-        calls.some((call) => call.startsWith('chooser:')),
-        false,
-      );
-    }
+test('merged page preserves blocked bus exits before any vehicle or rocket entry', async () => {
+  for (const invoke of [
+    (a) => a.beginPlacement('drive'),
+    (a) => a.beginFlight(),
+    (a) => a.beginTesla(),
+    (a) => a.dragAircraft(pointer()),
+    (a) => a.chooseRocket(),
+    (a) => a.beginRocket('super-heavy'),
+    (a) => a.switchMode('drive'),
+  ]) {
+    const { actions, calls, city } = harness({ exitAllowed: false });
+    await invoke(actions);
+    assert.equal(
+      city.rocket.active,
+      true,
+      'a blocked bus exit keeps the current owner',
+    );
+    assert.equal(calls.includes('rocket:return'), false);
+    assert.equal(
+      calls.some((call) => call.startsWith('rocket:place:')),
+      false,
+    );
+    assert.equal(
+      calls.some((call) => call.startsWith('chooser:')),
+      false,
+    );
+    assert.equal(calls.includes('notice:busVisitExitBlocked'), true);
+  }
+});
+
+test('merged page releases station ownership for explicit new vehicle or rocket placement while unmoved Walk resumes', async () => {
+  for (const [invoke, expected] of [
+    [(a) => a.beginPlacement('drive'), 'placement:drive'],
+    [(a) => a.beginFlight(), 'flight:place'],
+    [(a) => a.beginTesla(), 'tesla:enter'],
+    [(a) => a.dragAircraft(pointer()), 'flight:drag'],
+    [(a) => a.chooseRocket(), 'chooser:true'],
+    [(a) => a.beginRocket('super-heavy'), 'rocket:place:super-heavy'],
+    [(a) => a.switchMode('drive'), 'placement:drive'],
+  ]) {
+    const { actions, calls, city } = harness({ trainActive: true });
+    await invoke(actions);
+    assert.equal(city.skyTrainTravel.active, false);
+    assert(calls.includes(expected), expected);
+    assert(calls.indexOf('train:release-placement') < calls.indexOf(expected));
+    assert.equal(
+      calls.some((call) => call.startsWith('street:')),
+      false,
+      'a source station foot cannot become an in-scene street vehicle',
+    );
+  }
   const { actions, calls } = harness({ trainActive: true });
   actions.switchMode('orbit');
   actions.switchMode('walk');
@@ -218,6 +299,11 @@ test('merged page preserves blocked transit exits and station overview when sele
   assert.deepEqual(calls, ['train:overview:true', 'train:overview:false']);
   actions.change({ mode: 'orbit' });
   assert.equal(calls.at(-1), 'mode:orbit');
+  const moved = harness({ trainActive: true, overviewMoved: true });
+  moved.actions.switchMode('walk');
+  assert.equal(moved.city.skyTrainTravel.active, false);
+  assert(moved.calls.includes('placement:walk'));
+  assert.equal(moved.calls.includes('train:overview:false'), false);
 });
 
 test('merged rocket chooser cancels pending city placement and aircraft before selecting all three rocket kinds', () => {

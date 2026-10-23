@@ -49,7 +49,11 @@ The opening uses uniforms and shader discard without extra draw calls or lights.
 Its maximum length is 32 m; the station chase boom is at most 14 m. Per-frame work
 updates fixed uniforms; scene traversal happens on initial registration and streamed
 child events. Existing night, geographic-entrance and deformation hooks are chained,
-and disposal restores owned hooks/listeners. No performance claim is inferred from
+and disposal restores owned hooks/listeners. Detached warmup registrations are
+released on success, cancellation and failure; watched city parents re-enroll
+successfully attached geometry. Cancelled decoded night receivers are never
+registered, and a dynamic train root releases its listeners when removed even
+from an unwatched scene parent. No performance claim is inferred from
 CPU tests; GPU appearance is checked separately in the built browser application.
 
 Scene shader preparation now snapshots native program handles through public Three

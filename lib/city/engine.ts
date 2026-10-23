@@ -829,11 +829,21 @@ export class CityEngine {
       unavailable: () => this.disposed || this.contextLost,
     });
     this.prepareLandmark = (group, signal, holder) => {
-      this.skyTrainTravel?.prepareCityGeometry(group);
-      this.prepareTravelOccluders(group);
-      if (!this.landmarkWarmup)
-        return Promise.reject(new Error('GPU preparation unavailable'));
-      return this.landmarkWarmup.prepare(group, signal, holder);
+      const cutaway = this.travelOcclusion;
+      const releaseStaged = () => {
+        if (!group.parent) cutaway?.releaseSubtree(group);
+      };
+      try {
+        this.skyTrainTravel?.prepareCityGeometry(group);
+        this.prepareTravelOccluders(group);
+        if (!this.landmarkWarmup) throw new Error('GPU preparation unavailable');
+        // Staged roots are not yet owned by a watched city parent. Release them
+        // on every settlement; a successful attachment re-enrolls via childadded.
+        return this.landmarkWarmup.prepare(group, signal, holder).finally(releaseStaged);
+      } catch (error) {
+        releaseStaged();
+        return Promise.reject(error);
+      }
     };
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.endPhase();
@@ -1272,7 +1282,13 @@ export class CityEngine {
   prepareNightReceivers(group: THREE.Object3D) {
     if (this.traffic && !this.disposed)
       wrapNightStreetMaterials(group, this.traffic.streetLighting);
-    this.prepareTravelOccluders(group);
+    // Detached loader results may be cancelled before reaching GPU preparation.
+    // Their watched city parent enrolls them only when actually attached.
+    for (let parent: THREE.Object3D | null = group; parent; parent = parent.parent)
+      if (parent === this.scene) {
+        this.prepareTravelOccluders(group);
+        break;
+      }
   }
   prepareTravelOccluders(group: THREE.Object3D) {
     this.travelOcclusion?.refresh([group]);

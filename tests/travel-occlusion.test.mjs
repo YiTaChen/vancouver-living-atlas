@@ -467,6 +467,239 @@ test('streamed nested architecture is enrolled by public child events, with opt-
   dispose(root);
 });
 
+test('cancelled never-attached staged landmark groups release all node listeners without taking resource ownership', async () => {
+  const { disposeDetachedLandmark } = await import(
+    cityModule('landmark-worker-service')
+  );
+  const cityRoot = new THREE.Group(),
+    cutaway = new TravelOcclusion([cityRoot]);
+  const cancelled = [];
+  let geometryDisposals = 0,
+    materialDisposals = 0;
+  for (let i = 0; i < 3; i++) {
+    const staged = new THREE.Group(),
+      wall = mesh();
+    staged.add(wall);
+    cancelled.push(staged);
+    wall.geometry.addEventListener('dispose', () => geometryDisposals++);
+    wall.material.addEventListener('dispose', () => materialDisposals++);
+    cutaway.refresh([staged]);
+  }
+  assert.equal(cutaway.snapshot().watchedObjects, 7);
+  assert.equal(cutaway.snapshot().meshCount, 3);
+  for (const staged of cancelled) {
+    const wall = staged.children[0],
+      patched = wall.material.onBeforeCompile;
+    cutaway.releaseSubtree(staged);
+    cutaway.releaseSubtree(staged);
+    assert.strictEqual(
+      wall.material.onBeforeCompile,
+      patched,
+      'release does not restore shared material hooks',
+    );
+    assert.equal(
+      staged.children.length,
+      1,
+      'release preserves the source hierarchy',
+    );
+    for (const object of [staged, wall])
+      for (const event of ['childadded', 'childremoved', 'removed'])
+        assert.equal(object._listeners?.[event]?.length ?? 0, 0);
+  }
+  assert.equal(geometryDisposals, 0);
+  assert.equal(materialDisposals, 0);
+  assert.equal(cutaway.snapshot().watchedObjects, 1);
+  assert.equal(cutaway.snapshot().meshCount, 0);
+  assert.equal(
+    cutaway.snapshot().materialCount,
+    3,
+    'materials remain borrowed until their owner disposes',
+  );
+  for (const staged of cancelled) disposeDetachedLandmark(staged);
+  assert.equal(geometryDisposals, 3);
+  assert.equal(materialDisposals, 3);
+  assert.equal(cutaway.snapshot().materialCount, 0);
+  assert.equal(
+    cutaway.snapshot().watchedObjects,
+    1,
+    'resource disposal does not require clearing source children',
+  );
+  assert(cancelled.every((group) => group.children.length === 1));
+  cutaway.dispose();
+});
+
+test('successful staged warmup releases node tracking then re-enrolls on watched-parent commit, preserving shared hooks', () => {
+  const cityRoot = new THREE.Group(),
+    shared = new THREE.MeshStandardMaterial();
+  const live = mesh(shared);
+  cityRoot.add(live);
+  const cutaway = new TravelOcclusion([cityRoot]);
+  const staged = new THREE.Group(),
+    nested = new THREE.Group(),
+    wall = mesh(shared);
+  nested.add(wall);
+  staged.add(nested);
+  cutaway.refresh([staged]);
+  const before = shared.onBeforeCompile;
+  assert.equal(cutaway.snapshot().watchedObjects, 5);
+  cutaway.releaseSubtree(staged);
+  assert.equal(cutaway.snapshot().watchedObjects, 2);
+  assert.equal(cutaway.snapshot().materialCount, 1);
+  assert.strictEqual(shared.onBeforeCompile, before);
+  const late = mesh();
+  nested.add(late);
+  assert.equal(
+    cutaway.snapshot().materialCount,
+    1,
+    'released staging nodes do not retain add listeners',
+  );
+  cityRoot.add(staged);
+  assert.equal(cutaway.snapshot().watchedObjects, 6);
+  assert.equal(cutaway.snapshot().meshCount, 3);
+  assert.equal(cutaway.snapshot().materialCount, 2);
+  const afterCommit = mesh();
+  nested.add(afterCommit);
+  assert.equal(cutaway.snapshot().watchedObjects, 7);
+  assert.match(
+    compile(afterCommit.material).fragmentShader,
+    /uTravelCutawayEnabled/,
+  );
+  cutaway.dispose();
+  dispose(cityRoot);
+});
+
+test('explicit dynamic roots under an unwatched scene release themselves on removal, without double-decrementing watched-parent children', () => {
+  const cityRoot = new THREE.Group(),
+    scene = new THREE.Scene();
+  scene.add(cityRoot);
+  const cutaway = new TravelOcclusion([cityRoot]);
+  const train = new THREE.Group(),
+    car = new THREE.Group(),
+    door = mesh();
+  train.add(car);
+  car.add(door);
+  scene.add(train);
+  cutaway.refresh([train]);
+  assert.equal(cutaway.snapshot().watchedObjects, 4);
+  train.removeFromParent();
+  assert.equal(cutaway.snapshot().watchedObjects, 1);
+  assert.equal(cutaway.snapshot().meshCount, 0);
+  for (const object of [train, car, door])
+    for (const event of ['childadded', 'childremoved', 'removed'])
+      assert.equal(object._listeners?.[event]?.length ?? 0, 0);
+  dispose(train);
+  assert.equal(cutaway.snapshot().materialCount, 0);
+  const watchedChild = new THREE.Group(),
+    wall = mesh();
+  watchedChild.add(wall);
+  cityRoot.add(watchedChild);
+  assert.equal(cutaway.snapshot().watchedObjects, 3);
+  watchedChild.removeFromParent();
+  assert.equal(cutaway.snapshot().watchedObjects, 1);
+  assert.equal(
+    cutaway.snapshot().meshCount,
+    0,
+    'self removed and parent childremoved are idempotent',
+  );
+  cityRoot.add(watchedChild);
+  assert.equal(cutaway.snapshot().meshCount, 1);
+  cutaway.dispose();
+  dispose(scene);
+});
+
+test('production landmark preparation releases staged roots on successful, rejected, synchronous and unavailable warmups before commit', async () => {
+  const source = readFileSync(
+    new URL('../lib/city/engine.ts', import.meta.url),
+    'utf8',
+  );
+  const ast = ts.createSourceFile(
+    'engine.ts',
+    source,
+    ts.ScriptTarget.Latest,
+    true,
+  );
+  let assignment;
+  const visit = (node) => {
+    if (
+      ts.isBinaryExpression(node) &&
+      node.left.getText(ast) === 'this.prepareLandmark'
+    )
+      assignment = node;
+    ts.forEachChild(node, visit);
+  };
+  visit(ast);
+  assert(assignment);
+  const code = ts.transpileModule(
+    `export class LandmarkPreparation { install() { ${assignment.getText(ast)}; } }`,
+    {
+      compilerOptions: {
+        module: ts.ModuleKind.ESNext,
+        target: ts.ScriptTarget.ES2022,
+      },
+    },
+  ).outputText;
+  const { LandmarkPreparation } = await import(
+    'data:text/javascript;base64,' + Buffer.from(code).toString('base64')
+  );
+  for (const outcome of ['success', 'rejected', 'synchronous', 'unavailable']) {
+    const holder = new THREE.Group(),
+      staged = new THREE.Group(),
+      wall = mesh();
+    staged.add(wall);
+    const cutaway = new TravelOcclusion([holder]);
+    let finish;
+    const result = new Promise((resolve, reject) => {
+      finish = () =>
+        outcome === 'rejected' ? reject(Error('cancelled')) : resolve();
+    });
+    const engine = Object.assign(Object.create(LandmarkPreparation.prototype), {
+      travelOcclusion: cutaway,
+      prepareTravelOccluders(group) {
+        cutaway.refresh([group]);
+      },
+      landmarkWarmup:
+        outcome === 'unavailable'
+          ? null
+          : {
+              prepare() {
+                if (outcome === 'synchronous')
+                  throw Error('synchronous preparation failure');
+                return result;
+              },
+            },
+    });
+    engine.install();
+    const prepared = engine.prepareLandmark(
+      staged,
+      new AbortController().signal,
+      holder,
+    );
+    if (outcome === 'success' || outcome === 'rejected') {
+      assert.equal(cutaway.snapshot().watchedObjects, 3);
+      finish();
+    }
+    if (outcome === 'success') await prepared;
+    else await assert.rejects(prepared);
+    assert.equal(
+      cutaway.snapshot().watchedObjects,
+      1,
+      `${outcome} releases staged nodes`,
+    );
+    assert.equal(cutaway.snapshot().meshCount, 0);
+    if (outcome === 'success') {
+      holder.add(staged);
+      assert.equal(
+        cutaway.snapshot().watchedObjects,
+        3,
+        'actual commit re-enrolls after prepare finally',
+      );
+      staged.removeFromParent();
+    }
+    cutaway.dispose();
+    dispose(staged);
+  }
+});
+
 test('SSAO override removes foreground depth without mismatched dither and retains standing/seated body normals', () => {
   const normal = new THREE.MeshNormalMaterial();
   const originalCompile = normal.onBeforeCompile,
