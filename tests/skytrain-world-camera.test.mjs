@@ -325,7 +325,7 @@ test('all physical station stair routes retain chase heading on ascent and desce
       owner.dispose();
     }
   }
-  assert.equal(checkedRoutes, 19);
+  assert.equal(checkedRoutes, 20);
   assert(
     heightChanges > 20,
     'the actual route samples include rising and descending station geometry',

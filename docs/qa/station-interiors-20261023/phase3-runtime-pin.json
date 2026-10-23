@@ -1,0 +1,99 @@
+{
+  "schema": "vancouver-living-atlas.station-interior-runtime-pin.v1",
+  "scope": "Phase 3 Stadium\u2013Chinatown and Yaletown\u2013Roundhouse frozen browser client. Waterfront remains its prior published packet; phase 4 future source and root runtime paging edits are excluded.",
+  "capturedAtUtc": "2026-10-23T12:02:17+00:00",
+  "exportRoot": ".cache/phase3-browser",
+  "browserOrigin": "http://127.0.0.1:3204",
+  "nodeVersion": "24.22.1",
+  "algorithm": "SHA-256",
+  "sourcePacketSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+  "runtimeFiles": {
+    "lib/city/skytrain-stations.ts": {
+      "sha256": "c48ed1d0d5985ed095fb8eec1ffbd3fdaa54600b63b771da7fe3156ee8c6ccf6",
+      "bytes": 91098
+    },
+    "lib/city/skytrain-street-access.ts": {
+      "sha256": "0b543c4629529d9024bd86b0f1677888f73ba1185389836217623bcc70099ee8",
+      "bytes": 55678
+    },
+    "lib/city/skytrain-world-travel.ts": {
+      "sha256": "8a73012c9a022b022862ed9206a595103153ab38dfdaa5773360839b0969568f",
+      "bytes": 60947
+    },
+    "lib/city/skytrain-world-openings.ts": {
+      "sha256": "df78dc450e4b5e9b3f0296d17de18eddf25bd936ee9542a61e558433cc83862a",
+      "bytes": 13333
+    },
+    "lib/city/skytrain-station-rail-envelope.ts": {
+      "sha256": "9cb77efe7485009497ac313670b50caeec92934b5ba6b2fbb120fc2e41eef0a7",
+      "bytes": 4174
+    },
+    "lib/city/skytrain-world-path.ts": {
+      "sha256": "44e922ca1577f7bf490d8e459e0c861621a2c274f3d504120ed41ff21fdc11fe",
+      "bytes": 11150
+    },
+    "lib/city/skytrain-ride-path.ts": {
+      "sha256": "19685e3e25740fd5e290fd87b993c9d53b32cab063cfac029020ad671109f0a5",
+      "bytes": 25750
+    },
+    "lib/city/skytrain-ride-train.ts": {
+      "sha256": "b32c2bd3ebd58b58591200d61d72ca34a87cdbca86f4e2a81106cc4eebf710e9",
+      "bytes": 17428
+    },
+    "lib/city/skytrain-service-stock.ts": {
+      "sha256": "5fd6f64163de54afd7ac5eca224e9f54fcf2c21d8f001993114d8e263785f6a2",
+      "bytes": 980
+    },
+    "lib/city/skytrain-travel.ts": {
+      "sha256": "df0b76676a63597c02d6846a43dcc36df9be4b2df11b748bb41034b54c0f3182",
+      "bytes": 46277
+    },
+    "lib/city/travel-camera-collision.ts": {
+      "sha256": "b7fff24f254b5298d85911611403a1fc95c8ca36128aa5a7b4b468ed455e2f40",
+      "bytes": 12088
+    }
+  },
+  "publicFiles": {
+    "public/models/skytrain-stations/stadium-chinatown.json": {
+      "sha256": "afefe5161dec3bdd532607a71d4987253e3b52cc3b0d86bb7524e45842cd5d51",
+      "bytes": 303476
+    },
+    "public/models/skytrain-stations/yaletown-roundhouse.json": {
+      "sha256": "a9309cdf625d2f20446957343f311638e19ab45c6d8e5062a949c63712126c45",
+      "bytes": 444625
+    },
+    "public/models/skytrain-stations/waterfront.json": {
+      "sha256": "34fc50f6c793e89fa355dd0b80abfee7be3d6ff121125e3c57ef29b10589c282",
+      "bytes": 363100
+    },
+    "public/models/skytrain-stations/manifest.json": {
+      "sha256": "509679b7daa4c76dd8877dd9e1db0fdc84d132664d65895c16e7ebcce8b2044d",
+      "bytes": 1603
+    }
+  },
+  "note": "Hashes come only from the frozen browser tree actually served on port 3204. The Waterfront packet hash is a scope guard, not evidence of delivering its future phase 4 reconstruction. Final reports and the resulting commit identity are recorded in phase3-acceptance.md.",
+  "finalCpuCorrection": {
+    "file": "lib/city/skytrain-stations.ts",
+    "sha256": "c3237fe8028d203c8215c84448e224bb35ceace046ab51ad07b01a141ed18096",
+    "change": "Prefer a supported inset platform point before the raw last-tread endpoint; no rendered geometry or native street/lift capture path changes.",
+    "verification": "Native isolated Waterfront line transfer and actual Yaletown hole/inset walking regression: 2/2 pass."
+  },
+  "finalBrowserReports": {
+    "stadium-chinatown": {
+      "file": "game-stadium-chinatown-browser.json",
+      "sha256": "f8aa0ee76bb73e26e6a682a47405e630b0f68558f7d05d0e359c9d1e58f6c540",
+      "capturedAt": "2026-10-23T12:00:54.980Z",
+      "captures": 29,
+      "nativeDoors": 3,
+      "liftTrips": 4
+    },
+    "yaletown-roundhouse": {
+      "file": "game-yaletown-roundhouse-browser.json",
+      "sha256": "872220ecfc08974dea93c79108399e3919334e2924665579030d4b4e4ef74a7b",
+      "capturedAt": "2026-10-23T11:55:32.878Z",
+      "captures": 27,
+      "nativeDoors": 2,
+      "liftTrips": 4
+    }
+  }
+}

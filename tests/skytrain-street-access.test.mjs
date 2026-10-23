@@ -71,7 +71,7 @@ function follow(o, foot, goals, checkFoot = () => {}) {
   );
   return foot;
 }
-test('all map-interpreted street entrances preserve raw platform provenance and hand off at the actual terrain foot height', () => {
+test('all map-interpreted street entrances preserve raw platform provenance and hand off at their actual bounded support height', () => {
   let entries = 0;
   for (const data of catalog) {
     const before = structuredClone(data),
@@ -94,11 +94,19 @@ test('all map-interpreted street entrances preserve raw platform provenance and 
         inner && o.isClearFoot(inner),
         `${data.id}/${e.id}: supported inner handoff`,
       );
+      const worldFoot = o.toWorld(foot);
       assert(
-        new THREE.Vector3(...o.toWorld(foot)).distanceTo(
-          new THREE.Vector3(...e.threshold),
+        Math.hypot(
+          worldFoot[0] - e.threshold[0],
+          worldFoot[2] - e.threshold[2],
         ) < 1e-4,
       );
+      if (data.authoredInterior) {
+        const support = o.floorAt(o.toLocal(e.threshold), e.surfaceId);
+        assert(support && o.isClearFoot(support));
+        assert(Math.abs(worldFoot[1] - o.toWorld(support)[1]) < 1e-9);
+        assert(Math.abs(worldFoot[1] - e.threshold[1]) <= 0.22);
+      } else assert(Math.abs(worldFoot[1] - e.threshold[1]) < 1e-4);
       assert.equal(
         o.tryEnterFromStreet([
           e.threshold[0],
@@ -124,6 +132,67 @@ test('all map-interpreted street entrances preserve raw platform provenance and 
     o.dispose();
   }
   assert.equal(entries, Object.values(SKYTRAIN_STREET_ENTRANCES).flat().length);
+});
+test('extended handoffs require the actual rendered authored apron and keep release outside its entry window', () => {
+  let authored = 0,
+    legacy = 0;
+  for (const data of catalog) {
+    const o = owner(data),
+      mesh = o.group.getObjectByName('station-authored-street-apron-support');
+    try {
+      for (const entry of o.streetEntrances()) {
+        const direction = new THREE.Vector3(
+            ...entry.localDirection,
+          ).applyQuaternion(o.group.quaternion),
+          at = (along) => {
+            const p = new THREE.Vector3(...entry.threshold).addScaledVector(
+              direction,
+              along,
+            );
+            p.y = cityElevation(p.x, p.z);
+            return p.toArray();
+          };
+        if (!data.authoredInterior) {
+          legacy++;
+          assert.equal(
+            o.tryEnterFromStreet(at(-2.8)),
+            null,
+            'an unrendered legacy strip retains its shorter entry window',
+          );
+          continue;
+        }
+        authored++;
+        assert(mesh?.userData.stationFloorIds.includes(entry.surfaceId));
+        const outer = o.tryEnterFromStreet(at(-2.8));
+        assert(outer && o.isClearFoot(outer));
+        assert.equal(
+          o.streetExit(outer),
+          null,
+          'early entry must not immediately release the same foot',
+        );
+        const release = o.floorAt(o.toLocal(at(-3.05)), entry.surfaceId);
+        assert(release && o.isClearFoot(release));
+        const exit = o.streetExit(release);
+        assert(exit);
+        assert.equal(
+          o.tryEnterFromStreet(exit),
+          null,
+          'late release must not immediately reenter',
+        );
+        o.group.remove(mesh);
+        assert.equal(
+          o.tryEnterFromStreet(at(-2.8)),
+          null,
+          'metadata alone cannot authorize the extended handoff without its rendered support',
+        );
+        o.group.add(mesh);
+        assert(o.tryEnterFromStreet(at(-2.8)));
+      }
+    } finally {
+      o.dispose();
+    }
+  }
+  assert(authored > 0 && legacy > 0);
 });
 test('all street-to-platform routes and their reverse exits are continuous supported walking paths', () => {
   let total = 0;
@@ -274,11 +343,21 @@ test('portal material apertures retain previous hooks and use seven coarse rejec
   };
   material.onBeforeCompile(shader, {});
   assert(shader.fragmentShader.includes('retained architecture finish'));
-  assert(shader.fragmentShader.includes('stationRegionIndex<7'));
+  assert(
+    shader.fragmentShader.includes(
+      `stationRegionIndex<${shader.uniforms.uStationRegionBounds.value.length}`,
+    ),
+  );
   assert(shader.fragmentShader.includes('stationDelta.x>stationBounds.z'));
   assert(shader.fragmentShader.includes('stationLocalIndex<48'));
   assert(shader.fragmentShader.includes('vStationOpeningWorld.y>=p.z'));
-  assert.equal(shader.uniforms.uStationRegionCount.value, 7);
+  assert.equal(
+    shader.uniforms.uStationRegionCount.value,
+    owners.reduce(
+      (sum, owner) => sum + Math.ceil(stationCityOpenings(owner).length / 48),
+      0,
+    ),
+  );
   assert.equal(
     shader.uniforms.uStationOpeningCount.value,
     owners.reduce((sum, o) => sum + stationCityOpenings(o).length, 0),
@@ -438,7 +517,11 @@ test('every mapped street approach hands off before building collision and conti
             );
             assert(station.isClearFoot(foot));
           } else {
-            foot = station.tryEnterFromStreet([px, nav.groundHeight(px, pz), pz]);
+            foot = station.tryEnterFromStreet([
+              px,
+              nav.groundHeight(px, pz),
+              pz,
+            ]);
             if (!foot)
               assert(
                 nav.clearGround(px, pz, 'walk'),
@@ -449,6 +532,80 @@ test('every mapped street approach hands off before building collision and conti
         assert(
           foot,
           `${dataId}/${e.id}: mapped doorway must have a supported native ownership handoff`,
+        );
+        // Leave over the same real floor, keep moving outwards after release,
+        // then return. An exit must lie beyond the entry window so the city
+        // cannot immediately hand the unchanged position back to the station.
+        let releaseDistance = null;
+        for (let distance = -0.05; distance >= -3.3; distance -= 0.05) {
+          const previous = foot;
+          foot = station.worldWalk(foot, -dx * 0.05, -dz * 0.05);
+          assert(station.isClearFoot(foot));
+          assert(Math.abs(foot.position[1] - previous.position[1]) <= 0.221);
+          const world = station.toWorld(foot);
+          assert(
+            Math.hypot(
+              world[0] - (x + dx * distance),
+              world[2] - (z + dz * distance),
+            ) < 0.02,
+          );
+          const exit = station.streetExit(foot);
+          if (!exit) continue;
+          assert.equal(
+            station.tryEnterFromStreet(exit),
+            null,
+            'release point is outside the bounded entry window',
+          );
+          assert(
+            nav.clearGround(exit[0], exit[2], 'walk'),
+            `${dataId}/${e.id}: city owns clear ground at the real release point`,
+          );
+          releaseDistance = distance;
+          break;
+        }
+        assert(releaseDistance !== null);
+        const outerDistance = releaseDistance - 0.1;
+        for (
+          let distance = releaseDistance - 0.05;
+          distance >= outerDistance - 1e-6;
+          distance -= 0.05
+        ) {
+          const px = x + dx * distance,
+            pz = z + dz * distance;
+          assert(nav.clearGround(px, pz, 'walk'));
+          assert.equal(
+            station.tryEnterFromStreet([px, nav.groundHeight(px, pz), pz]),
+            null,
+            'continuing outward cannot ping-pong ownership',
+          );
+        }
+        foot = null;
+        for (
+          let distance = outerDistance;
+          distance <= 0.001;
+          distance += 0.05
+        ) {
+          const px = x + dx * distance,
+            pz = z + dz * distance;
+          if (foot) {
+            const previous = foot;
+            foot = station.worldWalk(foot, dx * 0.05, dz * 0.05);
+            assert(station.isClearFoot(foot));
+            assert(Math.abs(foot.position[1] - previous.position[1]) <= 0.221);
+            const world = station.toWorld(foot);
+            assert(Math.hypot(world[0] - px, world[2] - pz) < 0.02);
+          } else {
+            foot = station.tryEnterFromStreet([
+              px,
+              nav.groundHeight(px, pz),
+              pz,
+            ]);
+            if (!foot) assert(nav.clearGround(px, pz, 'walk'));
+          }
+        }
+        assert(
+          foot,
+          `${dataId}/${e.id}: returning through the actual approach reenters continuously`,
         );
       }
     } finally {

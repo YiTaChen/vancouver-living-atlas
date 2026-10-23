@@ -614,7 +614,7 @@ test('Waterfront transfer requires alighting, walking through access and changin
   });
 });
 
-test('the actual Canada Line travel tube overlaps both station buffers without entering the platform envelope', async () => {
+test('the actual Canada Line tube joins source-backed station structures continuously and overlaps legacy buffers outside platforms', async () => {
   await harness(async ({ create }) => {
     const travel = create();
     travel.chooseDestination('vancouver-city-centre');
@@ -657,22 +657,63 @@ test('the actual Canada Line travel tube overlaps both station buffers without e
       .clone()
       .sub(end)
       .dot(destinationAxis);
-    for (const [name, distance] of [
-      ['source', sourceDistance],
-      ['destination', destinationDistance],
+    for (const [name, distance, id, point, side] of [
+      ['source', sourceDistance, 'waterfront', start, 'start'],
+      ['destination', destinationDistance, 'vancouver-city-centre', end, 'end'],
     ]) {
+      const data = travel.metadata.get(id),
+        platform = data.platforms.find(
+          (p) => p.line === 'canada' && p.direction === 'southbound',
+        );
       assert(
-        distance >= 32 && distance <= 40.1,
-        `${name} first tube centre is ${distance}m along the actual station axis`,
-      );
-      assert(
-        distance > 22,
+        distance > platform.length / 2,
         `${name} travel tube starts outside the Canada platform half-length`,
       );
-      assert(
-        distance < 47,
-        `${name} travel tube overlaps the authored47m station buffer`,
-      );
+      if (data.authoredInterior) {
+        const sample = (d) =>
+          path.sampleDistance(side === 'start' ? d : path.length - d);
+        let lo = 0,
+          hi = Math.min(200, path.length / 2);
+        // Locate the actual emitted first ring on the physical path, instead
+        // of assuming an old 47 m synthetic buffer or a straight station axis.
+        for (let iteration = 0; iteration < 60; iteration++) {
+          const a = lo + (hi - lo) / 3,
+            b = hi - (hi - lo) / 3;
+          if (
+            sample(a).position.distanceToSquared(point) <
+            sample(b).position.distanceToSquared(point)
+          )
+            hi = b;
+          else lo = a;
+        }
+        const boundary = (lo + hi) / 2;
+        assert(sample(boundary).position.distanceTo(point) < 0.001);
+        assert(boundary > 32);
+        for (let d = 32; d < boundary - 0.05; d += 0.25) {
+          const p = sample(d);
+          assert(
+            path.hasStationRailStructure(p.position, p.quaternion),
+            `${name} leaves an unrendered structural gap at ${d}m before tube ring ${boundary}m`,
+          );
+        }
+        const inside = sample(boundary - 0.05),
+          outside = sample(boundary + 0.05);
+        assert(
+          path.hasStationRailStructure(inside.position, inside.quaternion),
+        );
+        assert(
+          !path.hasStationRailStructure(outside.position, outside.quaternion),
+        );
+      } else {
+        assert(
+          distance >= 32 && distance <= 40.1,
+          `${name} first tube centre is ${distance}m along the actual station axis`,
+        );
+        assert(
+          distance < 47,
+          `${name} travel tube overlaps the maintained47m station buffer`,
+        );
+      }
     }
     assert(
       [...tubes[0].geometry.attributes.position.array].every(Number.isFinite),

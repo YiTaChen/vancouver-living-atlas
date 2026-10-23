@@ -1033,6 +1033,60 @@
     "waterfront": [
       {
         "type": "node",
+        "id": 1692226746,
+        "version": 8,
+        "timestamp": "2026-08-27T22:16:42Z",
+        "lonlat": [
+          -123.1120035,
+          49.2856425
+        ],
+        "tags": {
+          "entrance": "yes",
+          "name": "West Cordova Street",
+          "railway": "subway_entrance",
+          "source": "survey",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/node/1692226746"
+      },
+      {
+        "type": "node",
+        "id": 3633801257,
+        "version": 9,
+        "timestamp": "2026-05-23T06:08:04Z",
+        "lonlat": [
+          -123.114352,
+          49.2850743
+        ],
+        "tags": {
+          "addr:housenumber": "439",
+          "addr:street": "Granville Street",
+          "description": "Escalator entrance",
+          "entrance": "yes",
+          "level": "0",
+          "name": "Canada Line - Waterfront Station - Granville Street Entrance",
+          "railway": "subway_entrance",
+          "wheelchair": "no"
+        },
+        "url": "https://www.openstreetmap.org/node/3633801257"
+      },
+      {
+        "type": "gtfs-example-stop",
+        "id": 90,
+        "stopName": "Waterfront Station Stairs Entrance on Granville",
+        "lonlat": [
+          -123.114375,
+          49.285054
+        ],
+        "locationType": 2,
+        "parentStation": "12034",
+        "wheelchairBoarding": 2,
+        "attribution": "GTFS.org / MobilityData: Pathways and Physical accessibility documentation example",
+        "accuracy": "Documentation teaching example, not a current operator feed or a surveyed threshold. This stairs entrance is distinct from OSM escalator entrance node3633801257.",
+        "url": "https://gtfs.org/documentation/schedule/examples/pathways/"
+      },
+      {
+        "type": "node",
         "id": 3633792226,
         "version": 8,
         "timestamp": "2023-09-11T20:39:17Z",
@@ -1482,6 +1536,275 @@
           [
             -123.1221658,
             49.2745003
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 988151952,
+        "version": 4,
+        "timestamp": "2023-09-21T02:36:27Z",
+        "tags": {
+          "highway": "footway",
+          "lit": "yes",
+          "smoothness": "good",
+          "surface": "concrete"
+        },
+        "url": "https://www.openstreetmap.org/way/988151952",
+        "nodeIds": [
+          9133604358,
+          9133604359,
+          9133604360
+        ],
+        "coordinates": [
+          [
+            -123.121882,
+            49.2745181
+          ],
+          [
+            -123.1218337,
+            49.2744856
+          ],
+          [
+            -123.1218663,
+            49.2744647
+          ]
+        ],
+        "interpretation": "Public concrete approach leaves mapped lift door 9133604358 to the southeast. Inward direction points northwest; the precise footway bearing is not a surveyed lift-body alignment."
+      }
+    ],
+    "stadium-chinatown": [
+      {
+        "type": "node",
+        "id": 3714304769,
+        "version": 11,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "url": "https://www.openstreetmap.org/node/3714304769",
+        "tags": {
+          "entrance": "yes",
+          "level": "4",
+          "name": "Beatty Street",
+          "railway": "subway_entrance",
+          "wheelchair": "yes"
+        },
+        "lonlat": [
+          -123.110108,
+          49.2798687
+        ]
+      },
+      {
+        "type": "node",
+        "id": 3714304773,
+        "version": 9,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "url": "https://www.openstreetmap.org/node/3714304773",
+        "tags": {
+          "entrance": "yes",
+          "level": "3",
+          "name": "Keefer Place",
+          "railway": "subway_entrance",
+          "wheelchair": "yes"
+        },
+        "lonlat": [
+          -123.109698,
+          49.279757
+        ]
+      },
+      {
+        "type": "node",
+        "id": 3830176079,
+        "version": 9,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "url": "https://www.openstreetmap.org/node/3830176079",
+        "tags": {
+          "entrance": "yes",
+          "level": "0",
+          "name": "Expo Boulevard",
+          "railway": "subway_entrance",
+          "wheelchair": "no"
+        },
+        "lonlat": [
+          -123.10849,
+          49.2788731
+        ]
+      },
+      {
+        "type": "node",
+        "id": 5476795075,
+        "version": 2,
+        "timestamp": "2026-10-14T18:34:56Z",
+        "url": "https://www.openstreetmap.org/node/5476795075",
+        "tags": {
+          "highway": "elevator",
+          "maxweight": "1361 kg",
+          "ref": "9720"
+        },
+        "lonlat": [
+          -123.1098663,
+          49.2797654
+        ]
+      },
+      {
+        "type": "way",
+        "id": 367513823,
+        "version": 10,
+        "timestamp": "2025-03-18T00:25:06Z",
+        "url": "https://www.openstreetmap.org/way/367513823",
+        "tags": {
+          "bridge": "yes",
+          "handrail": "yes",
+          "highway": "steps",
+          "incline": "down",
+          "layer": "1",
+          "lit": "yes",
+          "ramp": "separate",
+          "ramp:wheelchair": "separate",
+          "step_count": "17",
+          "surface": "concrete",
+          "tactile_paving": "no"
+        },
+        "nodeIds": [
+          3714304778,
+          3714304785
+        ],
+        "coordinates": [
+          [
+            -123.1095761,
+            49.2798122
+          ],
+          [
+            -123.109487,
+            49.2798131
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 367513829,
+        "version": 8,
+        "timestamp": "2023-07-23T02:23:07Z",
+        "url": "https://www.openstreetmap.org/way/367513829",
+        "tags": {
+          "handrail": "yes",
+          "highway": "steps",
+          "incline": "down",
+          "lit": "yes",
+          "ramp": "no",
+          "step_count": "20",
+          "surface": "concrete",
+          "tactile_paving": "no"
+        },
+        "nodeIds": [
+          3714304780,
+          3714304787
+        ],
+        "coordinates": [
+          [
+            -123.109792,
+            49.2799124
+          ],
+          [
+            -123.1097145,
+            49.2798668
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 367513830,
+        "version": 7,
+        "timestamp": "2025-03-18T02:37:48Z",
+        "url": "https://www.openstreetmap.org/way/367513830",
+        "tags": {
+          "highway": "footway",
+          "lit": "yes",
+          "smoothness": "intermediate",
+          "surface": "concrete"
+        },
+        "nodeIds": [
+          3714304787,
+          431707894,
+          8546952454,
+          3714304779,
+          3714304773
+        ],
+        "coordinates": [
+          [
+            -123.1097145,
+            49.2798668
+          ],
+          [
+            -123.1096174,
+            49.2798108
+          ],
+          [
+            -123.1096652,
+            49.2797771
+          ],
+          [
+            -123.1096709,
+            49.2797741
+          ],
+          [
+            -123.109698,
+            49.279757
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 87222779,
+        "version": 9,
+        "timestamp": "2025-10-16T20:24:02Z",
+        "url": "https://www.openstreetmap.org/way/87222779",
+        "tags": {
+          "access": "no",
+          "area": "yes",
+          "bridge": "yes",
+          "check_date": "2025-10-15",
+          "covered": "yes",
+          "departures_board": "realtime",
+          "layer": "2",
+          "level": "2",
+          "lit": "yes",
+          "name": "Stadium–Chinatown (inactive platform)",
+          "network": "TransLink",
+          "note": "No Access to Public",
+          "public_transport": "no",
+          "railway": "platform",
+          "ref": "3",
+          "source": "bing",
+          "subway": "yes",
+          "surface": "paving_stones",
+          "wheelchair": "no"
+        },
+        "nodeIds": [
+          1014235605,
+          1014235602,
+          3830176081,
+          1014235611,
+          1014235605
+        ],
+        "coordinates": [
+          [
+            -123.1096162,
+            49.2794736
+          ],
+          [
+            -123.1088385,
+            49.2789659
+          ],
+          [
+            -123.1088814,
+            49.2789379
+          ],
+          [
+            -123.109657,
+            49.2794462
+          ],
+          [
+            -123.1096162,
+            49.2794736
           ]
         ]
       }

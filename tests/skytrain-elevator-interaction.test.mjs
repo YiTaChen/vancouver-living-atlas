@@ -12,6 +12,11 @@ import {
   rebuildBurrard,
   rebuildGranville,
 } from '../tools/station-interiors/dunsmuir.mjs';
+import {
+  rebuildStadium,
+  rebuildYaletown,
+} from '../tools/station-interiors/southeast.mjs';
+import { planFlat } from './helpers/station-walker.mjs';
 
 const { SkyTrainWorldTravel } = await import(
   cityModule('skytrain-world-travel')
@@ -72,6 +77,7 @@ async function harness(
     },
     data: {},
     navigation: {
+      mode: 'walk',
       position: new THREE.Vector3(),
       yaw: 0,
       pitch: 0.04,
@@ -81,6 +87,8 @@ async function harness(
       walkingHeight() {
         return this.position.y;
       },
+      keys: new Set(),
+      setTouchAxes() {},
       blur() {},
     },
   };
@@ -136,7 +144,7 @@ const elevatorCandidates = (travel) =>
     .interactionCandidates()
     .filter((c) => c.id.startsWith('skytrain:elevator:'));
 function walkTo(travel, goal) {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 1000; i++) {
     const dx = goal[0] - travel.foot.position[0],
       dz = goal[2] - travel.foot.position[2],
       distance = Math.hypot(dx, dz);
@@ -147,8 +155,10 @@ function walkTo(travel, goal) {
     travel.yaw = Math.atan2(dx, dz);
     travel.lookYaw = 0;
     travel.setTouchAxes(0, 1);
+    const previousY = travel.foot.position[1];
     travel.update(Math.min(0.05, distance / 2.5));
     assert(travel.active && travel.owner.isClearFoot(travel.foot));
+    assert(Math.abs(travel.foot.position[1] - previousY) <= 0.221);
   }
   assert.fail(`native input could not reach ${goal}: ${travel.foot.position}`);
 }
@@ -164,12 +174,40 @@ function aimAt(travel, owner, candidate) {
 for (const { stationId, rebuild } of [
   { stationId: 'burrard', rebuild: rebuildBurrard },
   { stationId: 'granville', rebuild: rebuildGranville },
+  { stationId: 'stadium-chinatown', rebuild: rebuildStadium },
+  { stationId: 'yaletown-roundhouse', rebuild: rebuildYaletown },
 ])
   test(`${stationId}: actual accessible lift uses F and touch through all real landings in both directions`, async () => {
     await harness(
       ({ travel, owner, connections, host, view }) => {
         const originalZoom = travel.distanceView,
           originalDistance = travel.walkDistance;
+        const streetEntry =
+          stationId === 'yaletown-roundhouse'
+            ? owner.streetEntrances().find((e) => e.id === 'davie-elevator')
+            : null;
+        if (streetEntry) {
+          // Initial setup is on the real exterior apron. Every subsequent move
+          // into/out of the mapped portal and between cores uses native input.
+          const outside = new THREE.Vector3(
+            ...streetEntry.threshold,
+          ).addScaledVector(
+            new THREE.Vector3(...streetEntry.localDirection).applyQuaternion(
+              owner.group.quaternion,
+            ),
+            -2.2,
+          );
+          outside.y = cityElevation(outside.x, outside.z);
+          travel.foot = owner.tryEnterFromStreet(outside.toArray());
+          assert(travel.foot && owner.isClearFoot(travel.foot));
+          assert(
+            new THREE.Vector3(...owner.toWorld(travel.foot)).distanceTo(
+              new THREE.Vector3(...streetEntry.threshold),
+            ) > 2.1,
+          );
+          walkTo(travel, owner.toLocal(streetEntry.threshold));
+          walkTo(travel, connections[0].start);
+        }
         assert.equal(
           travel.snapshot().canChangeLevel,
           false,
@@ -187,12 +225,47 @@ for (const { stationId, rebuild } of [
             .toReversed()
             .map((connection) => ({ connection, reverse: true })),
         ];
+        const cores = new Set(
+          connections.map(
+            (c) => `${c.start[0].toFixed(3)},${c.start[2].toFixed(3)}`,
+          ),
+        );
+        if (stationId === 'yaletown-roundhouse')
+          assert.equal(
+            cores.size,
+            2,
+            'the street and platform lifts remain physically separate',
+          );
         for (const [index, { connection, reverse }] of sequence.entries()) {
-          const destination = reverse ? connection.start : connection.end,
+          const source = reverse ? connection.end : connection.start,
+            destination = reverse ? connection.start : connection.end,
             action =
               destination[1] > travel.foot.position[1]
                 ? 'elevatorUp'
                 : 'elevatorDown';
+          if (
+            Math.hypot(
+              source[0] - travel.foot.position[0],
+              source[2] - travel.foot.position[2],
+            ) > 0.2
+          ) {
+            const remote = elevatorCandidates(travel).find(
+              (candidate) =>
+                candidate.id.includes(`:${connection.id}:`) &&
+                candidate.action === action,
+            );
+            assert(
+              !remote || !remote.canInteract(),
+              'a separate lift core cannot be called remotely from the other shaft',
+            );
+            assert(
+              Math.abs(source[1] - travel.foot.position[1]) < 0.02,
+              'separate real cores connect through the same actual concourse',
+            );
+            for (const waypoint of planFlat(owner, travel.foot, source))
+              walkTo(travel, waypoint);
+            assert(owner.isClearFoot(travel.foot));
+          }
           let candidate = elevatorCandidates(travel).find(
             (c) => c.id.includes(`:${connection.id}:`) && c.action === action,
           );
@@ -208,7 +281,8 @@ for (const { stationId, rebuild } of [
           host.clear();
           host.update(performance.now(), true);
           assert.equal(view().snapshot?.id, candidate.id);
-          const before = travel.walkDistance;
+          const before = travel.walkDistance,
+            previousDirection = travel.direction;
           travel.keys.add('KeyW');
           travel.setTouchAxes(0.2, 0.3);
           if (index % 2 === 0) {
@@ -226,22 +300,38 @@ for (const { stationId, rebuild } of [
               true,
               'the same visible prompt accepts touch',
             );
-          assert.deepEqual(travel.foot.position, destination);
+          assert(
+            new THREE.Vector3(...travel.foot.position).distanceTo(
+              new THREE.Vector3(...destination),
+            ) < 1e-9,
+            'the real target cabin differs only by triangle interpolation precision',
+          );
           assert.equal(
             travel.foot.surfaceId,
             reverse ? connection.from : connection.to,
           );
           assert(owner.isClearFoot(travel.foot));
-          const expectedPlatform = owner.geometryData.platforms.find(
+          const servedPlatforms = owner.geometryData.platforms.filter(
             (p) =>
               Math.abs(
                 owner.geometryData.floors.find((f) => f.id === p.surfaceId)
                   .vertices[0][1] - travel.foot.position[1],
               ) < 0.1,
           );
-          if (expectedPlatform) {
+          if (servedPlatforms.length) {
             assert.equal(travel.level, 'platform');
-            assert.equal(travel.direction, expectedPlatform.direction);
+            assert(
+              servedPlatforms.some(
+                (p) =>
+                  p.line === travel.line && p.direction === travel.direction,
+              ),
+            );
+            if (servedPlatforms.some((p) => p.direction === previousDirection))
+              assert.equal(
+                travel.direction,
+                previousDirection,
+                'a shared island preserves its already selected served direction',
+              );
           } else assert.equal(travel.level, 'concourse');
           assert.equal(
             travel.walkDistance,
@@ -264,6 +354,39 @@ for (const { stationId, rebuild } of [
           travel.walkDistance > originalDistance,
           'approaches used actual native walking input',
         );
+        if (streetEntry) {
+          // Return through the same real tower portal to the city. The update
+          // loop must perform the ownership handoff, rather than replacing foot.
+          walkTo(travel, owner.toLocal(streetEntry.threshold));
+          travel.yaw = Math.atan2(
+            -streetEntry.localDirection[0],
+            -streetEntry.localDirection[2],
+          );
+          travel.lookYaw = 0;
+          travel.setTouchAxes(0, 1);
+          let previous = travel.foot;
+          for (let i = 0; i < 100 && travel.active; i++) {
+            travel.update(0.025);
+            if (!travel.active) break;
+            assert(owner.isClearFoot(travel.foot));
+            assert(
+              Math.abs(travel.foot.position[1] - previous.position[1]) <= 0.221,
+            );
+            assert(
+              new THREE.Vector3(...travel.foot.position).distanceTo(
+                new THREE.Vector3(...previous.position),
+              ) > 0.04,
+            );
+            previous = travel.foot;
+          }
+          assert.equal(
+            travel.active,
+            false,
+            'native outward input releases ownership to the city',
+          );
+          assert.equal(travel.owner, null);
+          assert.equal(travel.foot, null);
+        }
       },
       { stationId, rebuild },
     );
