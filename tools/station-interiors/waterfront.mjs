@@ -421,8 +421,8 @@ export function rebuildWaterfront(source) {
   for (const x of [-32.2, -15.8])
     b.box(
       'expo-track-wall-' + x,
-      [x, -5.3, 0],
-      [0.22, 3.4, 78],
+      [x, -6.025, 0],
+      [0.22, 4.85, 78],
       'acoustic',
       'wall',
     );
@@ -451,8 +451,8 @@ export function rebuildWaterfront(source) {
   for (const z of [-0.4, 16.4]) {
     b.box(
       'canada-dark-track-wall-' + z,
-      [32, -10.8, z],
-      [48, 4.4, 0.22],
+      [32, -11.575, z],
+      [48, 5.95, 0.22],
       'acoustic',
       'wall',
     );
@@ -532,14 +532,14 @@ export function rebuildWaterfront(source) {
   b.box(
     'waterfront-expo-structural-base',
     [-24, -8.55, 0],
-    [17, 0.24, 76],
+    [17, 0.24, 84],
     'ballast',
     'floor',
   );
   b.box(
     'waterfront-canada-structural-base',
     [32, -14.65, 8],
-    [46, 0.24, 17],
+    [50, 0.24, 18],
     'ballast',
     'floor',
   );

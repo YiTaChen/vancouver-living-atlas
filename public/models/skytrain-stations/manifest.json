@@ -1,50 +1,50 @@
 {
   "schema": 1,
   "source": "tools/assets/skytrain-stations-stage2/station-layout.json",
-  "sourceSha256": "1f8094c2be2dc6b82af3207cd13ce5c87efcfc0c3030f49a3797158ffeae0b25",
+  "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
   "sourceLicense": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
   "files": [
     {
       "id": "waterfront",
       "file": "waterfront.json",
-      "bytes": 363088,
-      "sha256": "3150977917690c30d24a987bfe6cf5827aea3fe3029b2c85b2685da39ee3c2bc"
+      "bytes": 363100,
+      "sha256": "732553a9efa8909a7734b32de824d93326916fd9343a9c8115b2c63082da176b"
     },
     {
       "id": "burrard",
       "file": "burrard.json",
       "bytes": 94979,
-      "sha256": "46b1d207f8acdd8217884741c8ec8299e5b07cb4df2d1169191c880107959725"
+      "sha256": "c4d951308bf321f2f7ef8b3c765db5dc11fb15fb0a5e31e0c6750b7ecf1ae130"
     },
     {
       "id": "granville",
       "file": "granville.json",
       "bytes": 154017,
-      "sha256": "fecf67eeab01eb6ea1cb63d0e4292a14907297e690fd2bf0bf9ac71642825499"
+      "sha256": "d9dec476b1e4d63bff71e21c4d1f751798ae80271c34e54a757f96db2ce45873"
     },
     {
       "id": "stadium-chinatown",
       "file": "stadium-chinatown.json",
       "bytes": 47452,
-      "sha256": "dfcb9832186690b39ac899a784823c6be29f6fb7d7c48ca24bd1f8ec97461081"
+      "sha256": "212120d9329584963eec2d9fd149bf4f923616d6bf9e7b5082b18ae952933921"
     },
     {
       "id": "main-street-science-world",
       "file": "main-street-science-world.json",
       "bytes": 61798,
-      "sha256": "b74e48197ea479a8487141fff1dec9e537bd34481842fb1ef8288e36d6319f0e"
+      "sha256": "8fdc21584581c72f6bfc0ed89bf97d9a3dc9d1becde6d7f87b1427a00e41a8ce"
     },
     {
       "id": "vancouver-city-centre",
       "file": "vancouver-city-centre.json",
       "bytes": 39161,
-      "sha256": "43fa91ab0a0391626881b6f8d7e7233e912550daca89183572c52af86c33d648"
+      "sha256": "24dba4e41e4e1f8e1cc0d09c2c8b429af8d3f1febacc58f1782cd7aabbe31fd1"
     },
     {
       "id": "yaletown-roundhouse",
       "file": "yaletown-roundhouse.json",
       "bytes": 56427,
-      "sha256": "9e3c78700ef87aef76a91dddc0713b57f62dbcfc3d44a9585d53a17626c2e5bd"
+      "sha256": "3ac06fb20bab8e864af74438e05a629a8336f9d05703a94309e7ad955cd5afcb"
     }
   ]
 }
