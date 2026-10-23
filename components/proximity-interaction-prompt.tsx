@@ -5,7 +5,15 @@ import type { InteractionPromptSnapshot } from '@/lib/city/proximity-interaction
 import messages from '@/lib/i18n/interactions.json';
 import './proximity-interaction-prompt.css';
 
-const actionKeys = ['sit', 'stand', 'use', 'talk', 'inspect'] as const;
+const actionKeys = [
+  'sit',
+  'stand',
+  'use',
+  'talk',
+  'inspect',
+  'board',
+  'alight',
+] as const;
 export function interactionActionText(locale: Locale, action: string) {
   const key = actionKeys.find((id) => id === action) ?? 'use';
   return messages[locale][key];

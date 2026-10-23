@@ -13,6 +13,9 @@ import {
 const { BusCabinVisit, findBusVisitPlacement } = await import(
   cityModule('bus-visit')
 );
+const { CityInteractions, projectInteractionAnchor } = await import(
+  cityModule('city-interactions')
+);
 const manifest = JSON.parse(
   await readFile(
     new URL('../public/models/blender/bus/manifest.json', import.meta.url),
@@ -971,6 +974,241 @@ test('releasing a prepared visit does not reset the pose of an unrelated world b
       poses,
       'a visit can reset only the body pose it owns',
     );
+  } finally {
+    f.visit.dispose();
+  }
+});
+
+const serviceFrame = (overrides = {}) => ({
+  vehicleId: 'world-bus-0-0',
+  routeId: 'real-circuit',
+  sourceServiceId: 'bus-5:eastbound:regional',
+  headsign: '5 Robson/To Downtown',
+  x: 0,
+  z: 0,
+  yaw: 0,
+  stationM: 400,
+  speedMps: 0,
+  phase: 'dwell',
+  doorProgress: 1,
+  stoppedSeconds: 3,
+  stop: {
+    id: 'bus-5:eastbound:actual-stop',
+    sourceStopId: '613',
+    name: 'Actual GTFS stop',
+  },
+  stopVisit: 2,
+  progress: 0.1,
+  ...overrides,
+});
+
+test('bus service doorway prompts remain visible and actionable while looking horizontally at the actual door', async (t) => {
+  for (const action of ['board', 'alight'])
+    await t.test(action, async () => {
+      const f = await fixture();
+      let host;
+      try {
+        f.city.settings = { mode: 'walk' };
+        f.city.busVisit = f.visit;
+        f.city.navigation.walkingHeight = function () {
+          return this.position.y;
+        };
+        f.city.renderer.domElement.focus = () => {};
+        assert.equal(await f.visit.prepareService(serviceFrame()), true);
+        f.city.navigation.mode = 'walk';
+        const front = doorPoint('front');
+        f.city.navigation.position.set(front[0], 7, front[2]);
+        f.visit.update(0.05);
+        if (action === 'alight') {
+          assert.equal(f.visit.board(), true);
+          const rear = doorPoint('rear');
+          walkBusTo(
+            f.visit,
+            (p) => Math.hypot(p[0] + 0.7, p[2] - rear[2]) < 0.08,
+          );
+          f.visit.yaw = -Math.PI / 2;
+          f.visit.lookYaw = f.visit.pitch = 0;
+          f.visit.updateCamera();
+        } else {
+          f.city.camera.position
+            .copy(f.city.navigation.position)
+            .add(new THREE.Vector3(0, 1.65, 0));
+          f.city.camera.lookAt(
+            f.city.camera.position.clone().add(new THREE.Vector3(1, 0, 0)),
+          );
+        }
+        const prompt = f.visit
+          .interactionCandidates()
+          .find((p) => p.action === action);
+        assert.ok(prompt && prompt.canInteract());
+        assert.ok(
+          projectInteractionAnchor(f.city.camera, prompt.anchor),
+          `${action}: a normal horizontal view toward the actual door must project the prompt`,
+        );
+        host = new CityInteractions(f.city);
+        let view;
+        host.onChange = (next) => (view = next);
+        host.setInputEnabled(true);
+        host.update(performance.now(), true);
+        assert.equal(view.snapshot?.id, prompt.id);
+        if (action === 'board') {
+          const key = new Event('keydown', { cancelable: true });
+          Object.assign(key, { key: 'f', code: 'KeyF', repeat: false });
+          window.dispatchEvent(key);
+          assert.equal(key.defaultPrevented, true);
+          assert.equal(f.visit.aboard, true);
+        } else {
+          assert.equal(host.interact(view.snapshot), true);
+          assert.equal(f.visit.aboard, false);
+        }
+      } finally {
+        host?.dispose();
+        f.visit.dispose();
+      }
+    });
+});
+
+test('autonomous prewarming never moves the player; F board follows the current door and rejects stale departure', async () => {
+  const f = await fixture();
+  try {
+    const initial = f.city.navigation.position.clone();
+    assert.equal(await f.visit.prepareService(serviceFrame()), true);
+    assert.equal(f.calls.placements.length, 0);
+    assert.ok(f.city.navigation.position.equals(initial));
+    f.city.navigation.mode = 'walk';
+    const door = doorPoint('front');
+    f.city.navigation.position.set(door[0], 7, door[2]);
+    f.visit.update(0.05);
+    const prompt = f.visit
+      .interactionCandidates()
+      .find((p) => p.action === 'board');
+    assert.ok(prompt, 'standing at the actual open front door exposes F board');
+    f.visit.applyServiceFrame(
+      serviceFrame({ phase: 'closing', stoppedSeconds: 12, doorProgress: 0.8 }),
+    );
+    assert.equal(prompt.canInteract(), false);
+    assert.equal(
+      prompt.execute(),
+      false,
+      'stale F cannot board a departing vehicle',
+    );
+    assert.equal(f.visit.aboard, false);
+    f.visit.applyServiceFrame(serviceFrame());
+    const fresh = f.visit
+      .interactionCandidates()
+      .find((p) => p.action === 'board');
+    assert.equal(fresh.execute(), true);
+    assert.equal(
+      f.visit.startRide(),
+      false,
+      'route service has no passenger-controlled start',
+    );
+    const before = f.city.camera.position.clone();
+    f.visit.applyServiceFrame(
+      serviceFrame({
+        phase: 'moving',
+        doorProgress: 0,
+        stoppedSeconds: 0,
+        speedMps: 5,
+        x: 8,
+        z: 4,
+        yaw: 0.2,
+      }),
+    );
+    f.visit.update(0.05);
+    assert.ok(f.city.camera.position.distanceTo(before) > 5);
+    assert.equal(f.visit.aboard, true);
+    assert.equal(
+      f.visit.releaseService(),
+      false,
+      'occupied owner identity cannot be released by proximity LOD',
+    );
+    assert.equal(f.visit.snapshot().canAlight, false);
+    f.visit.applyServiceFrame(
+      serviceFrame({
+        x: 8,
+        z: 4,
+        yaw: 0.2,
+        stopVisit: 3,
+        stop: {
+          id: 'bus-6:future-source-stop',
+          sourceStopId: '81',
+          name: 'Future real stop',
+        },
+      }),
+    );
+    f.visit.update(0.05);
+    walkBusToRearDoor(f.visit);
+    const exit = f.visit
+      .interactionCandidates()
+      .find((p) => p.action === 'alight');
+    assert.ok(
+      exit,
+      'F exit appears only after walking to the open rear door at a later stop',
+    );
+    f.visit.applyServiceFrame(
+      serviceFrame({
+        x: 8,
+        z: 4,
+        yaw: 0.2,
+        stopVisit: 3,
+        phase: 'closing',
+        doorProgress: 0.8,
+      }),
+    );
+    assert.equal(
+      exit.execute(),
+      false,
+      'a stale exit cannot alight after closing begins',
+    );
+    f.visit.applyServiceFrame(
+      serviceFrame({ x: 8, z: 4, yaw: 0.2, stopVisit: 3 }),
+    );
+    const freshExit = f.visit
+      .interactionCandidates()
+      .find((p) => p.action === 'alight');
+    assert.equal(freshExit.execute(), true);
+    assert.equal(f.visit.aboard, false);
+    assert.equal(f.city.navigation.mode, 'walk');
+    assert.ok(
+      f.city.navigation.position.distanceTo(
+        new THREE.Vector3(...doorPoint('rear'))
+          .applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.2)
+          .add(new THREE.Vector3(8, 7 - doorPoint('rear')[1], 4)),
+      ) < 0.01,
+    );
+  } finally {
+    f.visit.dispose();
+  }
+});
+
+test('a late preload adopts the current service pose instead of spawning at its old stop', async () => {
+  const f = await fixture();
+  try {
+    let resolve;
+    f.assets.loadBoardable = () =>
+      new Promise((done) => {
+        resolve = done;
+      });
+    const loading = f.visit.prepareService(serviceFrame());
+    f.visit.applyServiceFrame(
+      serviceFrame({
+        x: 24,
+        z: 14,
+        yaw: 0.4,
+        phase: 'moving',
+        doorProgress: 0,
+        stoppedSeconds: 0,
+        speedMps: 4,
+      }),
+    );
+    resolve(f.owner);
+    assert.equal(await loading, true);
+    assert.equal(f.calls.placements.length, 0);
+    assert.equal(f.owner.group.position.x, 24);
+    assert.equal(f.owner.group.position.z, 14);
+    assert.equal(f.visit.snapshot().ridePhase, 'moving');
+    assert.equal(f.visit.snapshot().doorsOpen, false);
   } finally {
     f.visit.dispose();
   }

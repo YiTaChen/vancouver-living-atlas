@@ -298,3 +298,63 @@ test('main scene excludes parked and replaced buses from fallback and forwards A
     [1, 2],
   );
 });
+
+test('ready world service suppresses random buses while preserving car updates and real bus night poses', () => {
+  const calls = { cars: 0, lights: [], exclusions: null };
+  const busPose = new THREE.Matrix4().makeTranslation(8, 7, 4);
+  const e = {
+    busWorldService: {
+      ready: true,
+      forEachVehiclePose(visit) {
+        visit(busPose);
+      },
+    },
+    camera: { position: new THREE.Vector3() },
+    uniforms: { night: { value: 1 } },
+    settings: { quality: 'balanced' },
+    compatibleGraphics: false,
+    data: {},
+    elevation: () => 7,
+  };
+  const traffic = {
+    buses: { count: 3, visible: true },
+    busRoutes: [{}, {}, {}],
+    busAssets: {
+      group: new THREE.Group(),
+      setExcludedRoutes(ids) {
+        calls.exclusions = [...ids];
+      },
+      update() {
+        assert.fail('old random bus replacements must remain cold');
+      },
+    },
+    nightLights: {
+      beginFrame() {},
+      addVehicle(kind, pose) {
+        calls.lights.push({ kind, pose });
+      },
+      endFrame() {},
+    },
+    downtownAt: () => true,
+    vehicleAssets: {
+      update() {
+        calls.cars++;
+        return true;
+      },
+    },
+    mesh: {},
+    cabins: {},
+  };
+  const before = recorded.length;
+  updateTraffic(e, traffic, 10);
+  assert.equal(
+    recorded.length,
+    before,
+    'random fallback renderer is suppressed',
+  );
+  assert.equal(traffic.busAssets.group.visible, false);
+  assert.equal(traffic.buses.count, 0);
+  assert.deepEqual(calls.exclusions, [0, 1, 2]);
+  assert.equal(calls.cars, 1, 'normal car traffic continues');
+  assert.deepEqual(calls.lights, [{ kind: 'bus', pose: busPose }]);
+});

@@ -3,7 +3,7 @@ import { CityStreetFurniture } from './street-furniture-world';
 import { VehicleImpactWorld } from './vehicle-impact-world';
 import { ImpactFeedback } from './vehicle-impact-feedback';
 import { VehicleDriftEffects } from './vehicle-drift-effects';
-import { SkyTrainTravel } from './skytrain-travel';
+import { SkyTrainWorldTravel as SkyTrainTravel } from './skytrain-world-travel';
 import { FlightController } from './flight-controller';
 import { TeslaController } from './tesla-controller';
 import { clearOrbitGesture } from './orbit-lifecycle';
@@ -96,6 +96,7 @@ import { addSailingWaves } from './water-waves';
 import type { HarbourKind } from './harbour-path';
 import landmarkFootprints from './landmark-footprints.json';
 import { BusCabinVisit } from './bus-visit';
+import { BusWorldService } from './bus-world-service';
 import type { BusVisitDetail } from './bus-visit-policy';
 import {
   createNature,
@@ -220,6 +221,7 @@ export class CityEngine {
   impactFeedback: ImpactFeedback | null = null;
   driftEffects: VehicleDriftEffects | null = null;
   busVisit: BusCabinVisit | null = null;
+  busWorldService: BusWorldService | null = null;
   skyTrainTravel: SkyTrainTravel | null = null;
   interactions: CityInteractions | null = null;
   busVisitDetail: BusVisitDetail = 'auto';
@@ -730,6 +732,12 @@ export class CityEngine {
       this.traffic.busRoutes,
     );
     this.busVisit.onChange = () => this.publishBusVisit();
+    this.busWorldService = new BusWorldService(
+      this,
+      this.traffic.busAssets,
+      this.busVisit,
+    );
+    void this.busWorldService.load();
     this.pedestrians = new CityPedestrians(this);
     this.pedestrians.setHidden(document.hidden || this.pageSuspended);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
@@ -744,7 +752,10 @@ export class CityEngine {
     this.tesla = new TeslaController(this);
     this.skyTrainTravel = new SkyTrainTravel(this);
     this.skyTrainTravel.onChange = () => this.publishSkyTrainTravel();
+    void this.skyTrainTravel.load();
     this.interactions = new CityInteractions(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1')
+      void import('./open-world-transit-qa').then(({ installOpenWorldTransitQA }) => { if (!this.disposed) installOpenWorldTransitQA(this); });
     this.soundscape = new CitySoundscape();
     this.soundscapeWorld = new CitySoundscapeWorld(this);
     this.soundscape.setPageActive(
@@ -802,6 +813,7 @@ export class CityEngine {
       unavailable: () => this.disposed || this.contextLost,
     });
     this.prepareLandmark = (group, signal, holder) => {
+      this.skyTrainTravel?.prepareCityGeometry(group);
       if (!this.landmarkWarmup)
         return Promise.reject(new Error('GPU preparation unavailable'));
       return this.landmarkWarmup.prepare(group, signal, holder);
@@ -1099,7 +1111,7 @@ export class CityEngine {
   }
   renderScene() {
     this.runtimePerformance?.setRenderContext({
-      mode: this.skyTrainTravel?.active ? 'skytrain' : this.settings.mode,
+      mode: this.skyTrainTravel?.active && this.settings.mode === 'walk' ? 'skytrain' : this.settings.mode,
       quality: this.settings.quality,
     });
     this.detailedTrees?.update();
@@ -1492,7 +1504,7 @@ export class CityEngine {
   }
   flyTo(id: string, animate = true) {
     if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
-    if (this.skyTrainTravel?.active) return;
+    if (this.skyTrainTravel?.active) this.skyTrainTravel.setOverview(true);
     if (!this.closeBusVisit()) return;
     if (this.tesla?.active) this.tesla.deactivate();
     if (this.flight?.attached) this.flight.detach();
@@ -1502,7 +1514,7 @@ export class CityEngine {
   }
   fly(v: Viewpoint, animate = true) {
     if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
-    if (this.skyTrainTravel?.active) return;
+    if (this.skyTrainTravel?.active && this.settings.mode === 'walk') this.skyTrainTravel.setOverview(true);
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
     const distance =
@@ -1542,8 +1554,8 @@ export class CityEngine {
     finishLocalMapTransition(this);
   }
   leaveTravelAtLocation(remember = false) {
+    if (this.skyTrainTravel?.active) { this.skyTrainTravel.setOverview(true); return; }
     if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
-    if (this.skyTrainTravel?.active) return;
     if (!this.closeBusVisit()) return;
     if (this.tesla?.active) {
       this.tesla.leaveToOrbit();
@@ -1557,7 +1569,7 @@ export class CityEngine {
     this.onLocalOrbit();
   }
   zoom(f: number) {
-    if (this.skyTrainTravel?.active) return;
+    if (this.skyTrainTravel?.active && this.settings.mode === 'walk') { this.skyTrainTravel.zoom(f); return; }
     if (this.busVisit?.aboard) return;
     if (this.tesla?.active) {
       this.tesla.zoom(f);
@@ -1583,8 +1595,19 @@ export class CityEngine {
   }
   focusTrain(kind: TrainKind) {
     if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
-    if (this.skyTrainTravel?.active) return;
+    if (this.skyTrainTravel?.active) this.skyTrainTravel.setOverview(true);
     if (!this.closeBusVisit()) return;
+    if (kind === 'skytrain') {
+      const target = this.skyTrainTravel?.serviceFocus();
+      if (target) {
+        this.tesla?.deactivate(); this.flight?.clear(); this.placement?.cancel();
+        this.navigation?.setMode('orbit'); this.settings.mode='orbit'; this.settings.trains=true;
+        this.controls.enabled=true; this.controls.autoRotate=false;
+        this.controls.target.copy(target); this.camera.position.copy(target).add(new THREE.Vector3(70,95,110));
+        this.camera.near=2; this.camera.fov=48; this.camera.updateProjectionMatrix(); this.controls.update(); this.onLocalOrbit();
+        return;
+      }
+    }
     this.tesla?.deactivate();
     if (this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
@@ -1717,7 +1740,7 @@ export class CityEngine {
       !this.navigation.leaveWalkSeat()
     )
       return;
-    if (this.skyTrainTravel?.active && settings.mode !== 'walk') return;
+    if (this.skyTrainTravel?.active && settings.mode !== 'walk' && settings.mode !== 'orbit') return;
     if (
       this.busVisit &&
       (settings.mode !== this.settings.mode ||
@@ -1860,7 +1883,7 @@ export class CityEngine {
     this.runtimePerformance?.beginFrame(time, {
       visible:
         !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
-      mode: this.skyTrainTravel?.active ? 'skytrain' : this.settings.mode,
+      mode: this.skyTrainTravel?.active && this.settings.mode === 'walk' ? 'skytrain' : this.settings.mode,
       quality: this.settings.quality,
     });
     try {
@@ -1945,6 +1968,9 @@ export class CityEngine {
         !this.skyTrainTravel?.active
       )
         this.navigation?.update((time - this.lastTime) / 1000);
+      this.busWorldService?.update(
+        this.lastTime ? (time - this.lastTime) / 1000 : 0,
+      );
       this.busVisit?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
       this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
       this.tesla?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
@@ -1953,7 +1979,7 @@ export class CityEngine {
       );
       this.soundscapeWorld?.update(time);
       this.interactions?.update(time);
-      if (this.skyTrainTravel?.active && this.railway)
+      if (this.skyTrainTravel?.ready && this.railway)
         for (const train of this.railway.trains)
           if (train.kind === 'skytrain')
             for (const car of train.cars) car.group.visible = false;
@@ -2038,6 +2064,10 @@ export class CityEngine {
         this.stats.trafficStop = this.navigation?.trafficStop?.caption || '';
         this.stats.busVisit = this.busVisit?.snapshot();
         this.stats.skyTrainTravel = this.skyTrainTravel?.snapshot();
+        if (this.busWorldService)
+          this.renderer.domElement.dataset.busWorldService = JSON.stringify(
+            this.busWorldService.snapshot(),
+          );
         this.renderer.domElement.dataset.busVisit = JSON.stringify(
           this.stats.busVisit ?? null,
         );
@@ -2245,6 +2275,8 @@ export class CityEngine {
     this.tesla?.destroy();
     this.interactions?.dispose();
     this.interactions = null;
+    this.busWorldService?.dispose();
+    this.busWorldService = null;
     this.busVisit?.dispose();
     this.skyTrainTravel?.dispose();
     this.skyTrainTravel = null;

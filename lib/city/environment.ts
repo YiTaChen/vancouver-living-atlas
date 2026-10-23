@@ -720,31 +720,46 @@ export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
     downtownAt: (x, z) => (traffic.downtownAt(x, z) ? 1 : 0),
     roadHeight: (x, z) => nightAsphaltHeight(e, x, z),
   });
-  const parkedRoute = e.busVisit?.routeIndex;
-  const parked = new Set<number>(parkedRoute == null ? [] : [parkedRoute]);
-  traffic.busAssets.setExcludedRoutes(parked);
-  const replaced = traffic.busAssets.update(
-    time,
-    e.camera.position,
-    (x, z) => {
-      const fallback = (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
-      return e.data.roadSurface?.sample(x, z, fallback) ?? fallback;
-    },
-    {
-      quality: e.settings.quality,
-      compatible: e.compatibleGraphics,
-      allowNew: e.sceneryMotion?.allowNewDetails !== false,
-    },
-  );
-  for (const route of parked) replaced.add(route);
-  updateBuses(
-    traffic.buses,
-    traffic.busRoutes,
-    time,
-    (x, z) => e.data.roadRelief?.(x, z) ?? e.elevation(x, z),
-    e.camera.position,
-    replaced,
-  );
+  if (e.busWorldService?.ready) {
+    // Source-backed service owns every bus body. Leave car traffic and its
+    // admission/performance policy unchanged; never double-render random buses.
+    traffic.busAssets.setExcludedRoutes(
+      new Set(traffic.busRoutes.map((_, i) => i)),
+    );
+    traffic.busAssets.group.visible = false;
+    traffic.buses.count = 0;
+    e.busWorldService.forEachVehiclePose((matrix) =>
+      traffic.nightLights.addVehicle('bus', matrix),
+    );
+  } else {
+    traffic.busAssets.group.visible = true;
+    const parkedRoute = e.busVisit?.routeIndex;
+    const parked = new Set<number>(parkedRoute == null ? [] : [parkedRoute]);
+    traffic.busAssets.setExcludedRoutes(parked);
+    const replaced = traffic.busAssets.update(
+      time,
+      e.camera.position,
+      (x, z) => {
+        const fallback =
+          (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
+        return e.data.roadSurface?.sample(x, z, fallback) ?? fallback;
+      },
+      {
+        quality: e.settings.quality,
+        compatible: e.compatibleGraphics,
+        allowNew: e.sceneryMotion?.allowNewDetails !== false,
+      },
+    );
+    for (const route of parked) replaced.add(route);
+    updateBuses(
+      traffic.buses,
+      traffic.busRoutes,
+      time,
+      (x, z) => e.data.roadRelief?.(x, z) ?? e.elevation(x, z),
+      e.camera.position,
+      replaced,
+    );
+  }
   if (!traffic.nightReceiversReady && traffic.busAssets.group.children.length) {
     wrapNightStreetMaterials(traffic.busAssets.group, traffic.streetLighting);
     traffic.nightReceiversReady = true;

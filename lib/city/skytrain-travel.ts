@@ -28,6 +28,7 @@ import {
 } from './skytrain-ride-path';
 import type { SkyTrainTravelSnapshot } from './skytrain-travel-types';
 import { safeTouchAxis } from './touch-input';
+import { clampTravelPitch } from './travel-camera-collision';
 import { setMainSkyTrainGuideway } from './skytrain-guideway-clearance';
 import type { InteractionCandidate } from './proximity-interactions';
 import type { CabinPoint, PassengerSeat } from './skytrain-passenger-space';
@@ -66,52 +67,53 @@ const editable = (target: EventTarget | null) =>
  * train frame. The city's ordinary vehicle navigation never consumes these floors. */
 export class SkyTrainTravel {
   readonly stations: SkyTrainStations;
-  readonly train = new SkyTrainRideTrain();
-  private owner: SkyTrainStationOwner | null = null;
-  private phase: SkyTrainTravelSnapshot['phase'] = 'idle';
-  private station: StationId | null = null;
-  private destination: StationId = 'main-street-science-world';
-  private line: LineId = 'expo';
-  private direction: SkyTrainDirection = 'eastbound';
-  private level: 'concourse' | 'platform' = 'concourse';
-  private foot: StationPoint | null = null;
-  private cabinFoot: CabinPoint | null = null;
-  private cabinSeat: PassengerSeat | null = null;
-  private cabinStand: CabinPoint | null = null;
-  private stationSeat: StationSeat | null = null;
-  private avatarSeated = false;
-  private journey: SkyTrainJourney | null = null;
-  private routeData: SkyTrainRouteData | null = null;
-  private readonly paths = new Map<string, SkyTrainRidePath>();
-  private readonly metadata = new Map<StationId, RuntimeStationData>();
-  private generation = 0;
-  private disposed = false;
-  private inputEnabled = true;
-  private busy = false;
-  private error: string | null = null;
-  private keys = new Set<string>();
-  private axes = { x: 0, y: 0 };
-  private yaw = 0;
-  private pitch = -0.03;
-  private lookYaw = 0;
-  private readonly passengerEye = new THREE.Vector3();
-  private readonly passengerQuaternion = new THREE.Quaternion();
-  private readonly passengerEuler = new THREE.Euler(0, 0, 0, 'YXZ');
-  private drag: { id: number; x: number; y: number } | null = null;
-  private walkDistance = 0;
-  private tube: THREE.Group | null = null;
-  private pathKey = '';
-  private arrivalPreparation: {
+  train = new SkyTrainRideTrain();
+  protected owner: SkyTrainStationOwner | null = null;
+  protected phase: SkyTrainTravelSnapshot['phase'] = 'idle';
+  protected station: StationId | null = null;
+  protected destination: StationId = 'main-street-science-world';
+  protected line: LineId = 'expo';
+  protected direction: SkyTrainDirection = 'eastbound';
+  protected level: 'concourse' | 'platform' = 'concourse';
+  protected foot: StationPoint | null = null;
+  protected cabinFoot: CabinPoint | null = null;
+  protected cabinSeat: PassengerSeat | null = null;
+  protected cabinStand: CabinPoint | null = null;
+  protected stationSeat: StationSeat | null = null;
+  protected avatarSeated = false;
+  protected journey: SkyTrainJourney | null = null;
+  protected routeData: SkyTrainRouteData | null = null;
+  protected readonly paths = new Map<string, SkyTrainRidePath>();
+  protected readonly metadata = new Map<StationId, RuntimeStationData>();
+  protected generation = 0;
+  protected disposed = false;
+  protected inputEnabled = true;
+  protected busy = false;
+  protected error: string | null = null;
+  protected keys = new Set<string>();
+  protected axes = { x: 0, y: 0 };
+  protected yaw = 0;
+  protected pitch = -0.03;
+  protected lookYaw = 0;
+  protected readonly passengerEye = new THREE.Vector3();
+  protected readonly passengerQuaternion = new THREE.Quaternion();
+  protected readonly passengerEuler = new THREE.Euler(0, 0, 0, 'YXZ');
+  protected drag: { id: number; x: number; y: number } | null = null;
+  protected walkDistance = 0;
+  protected tube: THREE.Group | null = null;
+  protected pathKey = '';
+  protected arrivalPreparation: {
     id: StationId;
     generation: number;
     ready: boolean;
     promise: Promise<SkyTrainStationOwner | null>;
   } | null = null;
-  private readonly life = new AbortController();
+  protected readonly life = new AbortController();
   onChange = () => {};
-  constructor(private readonly city: CityEngine) {
+  constructor(protected readonly city: CityEngine) {
     this.stations = new SkyTrainStations({
       heightAt: (x, z) => city.elevation(x, z),
+      streetHeightAt: (x, z) => city.navigation?.groundHeight(x, z) ?? city.elevation(x, z),
       scene: city.scene,
       fetchStation: async (id, signal) => {
         const response = await fetch(`/models/skytrain-stations/${id}.json`, {
@@ -253,7 +255,7 @@ export class SkyTrainTravel {
         };
       });
   }
-  private sitCabin(seat: PassengerSeat) {
+  protected sitCabin(seat: PassengerSeat) {
     const space = this.train.passengerSpace;
     if (
       !this.aboard ||
@@ -275,7 +277,7 @@ export class SkyTrainTravel {
     this.publish();
     return true;
   }
-  private sitStation(owner: SkyTrainStationOwner, seat: StationSeat) {
+  protected sitStation(owner: SkyTrainStationOwner, seat: StationSeat) {
     if (
       this.owner !== owner ||
       this.phase !== 'station' ||
@@ -326,7 +328,7 @@ export class SkyTrainTravel {
     this.publish();
     return true;
   }
-  private resetSeat() {
+  protected resetSeat() {
     this.cabinSeat = null;
     this.cabinStand = null;
     this.stationSeat = null;
@@ -451,10 +453,10 @@ export class SkyTrainTravel {
                 : 'approach-door',
     };
   }
-  private publish() {
+  protected publish() {
     if (!this.disposed) this.onChange();
   }
-  private updateBuildingReplacement() {
+  protected updateBuildingReplacement() {
     const uniform = this.city.uniforms?.skyTrainReplacement;
     const main =
       this.active &&
@@ -481,12 +483,12 @@ export class SkyTrainTravel {
         this.city.data.buildingProfiles?.get('133436')?.seed,
       );
   }
-  private nearCabinDoor() {
+  protected nearCabinDoor() {
     if (!this.cabinFoot || !this.owner) return false;
     const door = this.owner.passengerDoor(this.line, this.direction);
     return distance(this.cabinFoot, door) < 1.5;
   }
-  private trainAtPlatform() {
+  protected trainAtPlatform() {
     if (
       !this.owner ||
       this.train.serviceLine !== this.line ||
@@ -524,7 +526,7 @@ export class SkyTrainTravel {
     this.axes = { x: 0, y: 0 };
     this.drag = null;
   };
-  private visibility = () => {
+  protected visibility = () => {
     if (document.hidden) this.clearInput();
   };
   async enter(id: StationId) {
@@ -620,7 +622,7 @@ export class SkyTrainTravel {
       return false;
     }
   }
-  private buildPaths() {
+  protected buildPaths() {
     this.paths.clear();
     for (const segment of this.routeData!.segments) {
       const a = this.metadata.get(segment.from)!,
@@ -668,7 +670,7 @@ export class SkyTrainTravel {
       );
     }
   }
-  private createJourney() {
+  protected createJourney() {
     this.journey = new SkyTrainJourney(this.station!, this.destination, {
       segmentSeconds: (from, to, line) =>
         Math.max(
@@ -789,7 +791,7 @@ export class SkyTrainTravel {
     this.publish();
     return true;
   }
-  private exitPoint() {
+  protected exitPoint() {
     if (!this.owner || !this.city.navigation) return null;
     const origin = this.owner.toWorld(
       this.owner.entry(this.line, this.direction),
@@ -860,7 +862,7 @@ export class SkyTrainTravel {
     }
     return false;
   }
-  private placeAtStation() {
+  protected placeAtStation() {
     if (!this.owner) return;
     this.updateBuildingReplacement();
     const stop = this.owner.trainStop(this.line, this.direction),
@@ -1004,7 +1006,7 @@ export class SkyTrainTravel {
     }
     this.updateCamera();
   }
-  private prepareArrival(id: StationId) {
+  protected prepareArrival(id: StationId) {
     const generation = this.generation;
     if (
       this.arrivalPreparation?.id === id &&
@@ -1050,7 +1052,7 @@ export class SkyTrainTravel {
     })();
     return preparation.promise;
   }
-  private async precompile(subtree: THREE.Object3D) {
+  protected async precompile(subtree: THREE.Object3D) {
     const visible = subtree.visible;
     let pending: Promise<unknown> | undefined;
     subtree.visible = true;
@@ -1068,7 +1070,7 @@ export class SkyTrainTravel {
     }
     await pending;
   }
-  private async arrive(id: StationId) {
+  protected async arrive(id: StationId) {
     const generation = this.generation;
     this.clearInput();
     try {
@@ -1097,7 +1099,7 @@ export class SkyTrainTravel {
       this.publish();
     }
   }
-  private updateCamera() {
+  protected updateCamera() {
     if (!this.active || !this.owner) return;
     // Entry suspends street navigation in orbit mode, whose 2 m near plane
     // would cut away nearby cabin geometry and reject close seat prompts.
@@ -1184,7 +1186,7 @@ export class SkyTrainTravel {
       if (this.passengerSeated) walker.update?.(0, false);
     }
   }
-  private buildTunnel(path: SkyTrainRidePath) {
+  protected buildTunnel(path: SkyTrainRidePath) {
     this.clearTube();
     const group = new THREE.Group();
     group.name = 'SkyTrain active geographic tunnel';
@@ -1223,7 +1225,7 @@ export class SkyTrainTravel {
     this.tube = group;
     this.city.scene.add(group);
   }
-  private clearTube() {
+  protected clearTube() {
     if (!this.tube) return;
     this.tube.traverse((o) => {
       if (o instanceof THREE.Mesh) {
@@ -1235,7 +1237,7 @@ export class SkyTrainTravel {
     this.tube.removeFromParent();
     this.tube = null;
   }
-  private keyDown = (event: KeyboardEvent) => {
+  protected keyDown = (event: KeyboardEvent) => {
     if (
       !this.active ||
       !this.inputEnabled ||
@@ -1269,10 +1271,10 @@ export class SkyTrainTravel {
       if (!event.repeat || this.keys.has(event.code)) this.keys.add(event.code);
     }
   };
-  private keyUp = (event: KeyboardEvent) => {
+  protected keyUp = (event: KeyboardEvent) => {
     this.keys.delete(event.code);
   };
-  private pointerDown = (event: PointerEvent) => {
+  protected pointerDown = (event: PointerEvent) => {
     if (
       !this.active ||
       !this.inputEnabled ||
@@ -1286,21 +1288,19 @@ export class SkyTrainTravel {
     this.city.renderer.domElement.setPointerCapture(event.pointerId);
     event.preventDefault();
   };
-  private pointerMove = (event: PointerEvent) => {
+  protected pointerMove = (event: PointerEvent) => {
     if (!this.drag || event.pointerId !== this.drag.id || !this.inputEnabled)
       return;
     this.lookYaw -= (event.clientX - this.drag.x) * 0.004;
-    this.pitch = THREE.MathUtils.clamp(
+    this.pitch = clampTravelPitch(
       this.pitch - (event.clientY - this.drag.y) * 0.003,
-      -1.2,
-      1.2,
     );
     this.drag.x = event.clientX;
     this.drag.y = event.clientY;
     event.preventDefault();
     this.updateCamera();
   };
-  private pointerEnd = (event: PointerEvent) => {
+  protected pointerEnd = (event: PointerEvent) => {
     if (this.drag?.id === event.pointerId) this.drag = null;
   };
   dispose() {

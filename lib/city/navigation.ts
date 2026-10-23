@@ -45,6 +45,7 @@ import {
   type InteriorView,
   type TravelView,
 } from './travel-camera';
+import { clampTravelPitch, travelLookDirection, TravelCameraCollision } from './travel-camera-collision';
 export interface WalkSeatPose {
   id: string;
   floor: readonly [number, number, number];
@@ -147,6 +148,7 @@ export class StreetNavigation {
   trafficStop: TrafficStop;
   cameraDistances = { ...TRAVEL_DEFAULT_DISTANCE };
   renderedDistance = 0;
+  private readonly cameraCollision = new TravelCameraCollision();
   interiors: Record<'drive' | 'boat', InteriorView> = {
     drive: 'interior',
     boat: 'interior',
@@ -514,10 +516,10 @@ export class StreetNavigation {
   pointerDown = (ev: PointerEvent) => {
     if (this.mode === 'orbit') return;
     this.e.renderer.domElement.focus({ preventScroll: true });
+    this.e.renderer.domElement.setPointerCapture?.(ev.pointerId);
     if (ev.pointerType === 'touch') {
       ev.preventDefault();
       ev.stopImmediatePropagation();
-      this.e.renderer.domElement.setPointerCapture?.(ev.pointerId);
       this.touches.set(ev.pointerId, [ev.clientX, ev.clientY]);
       if (this.touches.size > 1) {
         const [a, b] = [...this.touches.values()];
@@ -560,11 +562,9 @@ export class StreetNavigation {
         1.2,
       );
     else this.yaw -= (ev.clientX - this.last[0]) * 0.004;
-    this.pitch = THREE.MathUtils.clamp(
-      this.pitch + (ev.clientY - this.last[1]) * 0.003,
-      -0.7,
-      0.7,
-    );
+    const pitch = this.pitch + (ev.clientY - this.last[1]) * 0.003;
+    this.pitch = this.mode === 'walk' ? clampTravelPitch(pitch)
+      : THREE.MathUtils.clamp(pitch, -0.7, 0.7);
     this.last = [ev.clientX, ev.clientY];
   };
   pointerUp = (ev: PointerEvent) => {
@@ -1370,40 +1370,49 @@ export class StreetNavigation {
     }
     const pos = eye.clone().addScaledVector(dir, -distance * blend);
     pos.y += distance * (this.mode === 'walk' ? 0.28 : 0.35) * blend;
+    const walkThird = this.mode === 'walk' && !firstPerson('walk', distance);
+    const walkTarget = eye.clone().add(new THREE.Vector3(0, this.walkSeat ? -0.35 : -0.55, 0));
+    if (walkThird) {
+      // Orbit around the body, keeping it framed when a ceiling shortens the boom.
+      const angle = Math.atan(0.28) + THREE.MathUtils.clamp(this.pitch, -0.22, 1.1);
+      pos.copy(walkTarget).addScaledVector(dir, -distance * Math.cos(angle));
+      pos.y += distance * Math.sin(angle);
+    }
     // Clip the chase segment at walls/banks; collision checks never move the player.
     const steps = Math.ceil(distance / 1.5);
     for (let step = 1; step <= steps; step++) {
       const t = step / steps;
       const x = eye.x + (pos.x - eye.x) * t,
         z = eye.z + (pos.z - eye.z) * t;
-      if (!this.clearGround(x, z) && this.surface !== 'bridge') {
+      if (this.mode !== 'walk' && !this.clearGround(x, z) && this.surface !== 'bridge') {
         pos.x = eye.x + ((pos.x - eye.x) * (step - 1)) / steps;
         pos.z = eye.z + ((pos.z - eye.z) * (step - 1)) / steps;
         break;
       }
     }
     if (blend > 0.5)
-      pos.y = Math.max(pos.y, this.e.elevation(pos.x, pos.z) + 2);
+      pos.y = Math.max(pos.y, this.mode === 'walk'
+        ? this.walker.group.position.y + 0.25 : this.e.elevation(pos.x, pos.z) + 2);
+    if (this.mode === 'walk') {
+      // Resolve all three coordinates against actual roof/wall triangles. XZ
+      // ground tests alone let a raised chase camera cross an interior ceiling.
+      this.cameraCollision.resolve(walkThird ? walkTarget : eye, pos,
+        [this.e.buildings, this.e.landmarks, this.e.roads, this.e.terrain], 0.18, pos);
+    }
     // Distance itself is eased, so the eye remains attached to movement without drift.
     this.e.camera.position.copy(pos);
     this.e.camera.lookAt(
-      eye
+      this.mode === 'walk' ? walkThird ? walkTarget
+        : pos.clone().add(travelLookDirection(viewYaw, -this.pitch)) : eye
         .clone()
         .addScaledVector(
           dir,
-          THREE.MathUtils.lerp(
-            25,
-            this.mode === 'walk'
-              ? Math.min(1.5, Math.max(0, distance - 2) * 0.75)
-              : 2,
-            blend,
-          ),
+          THREE.MathUtils.lerp(25, 2, blend),
         )
         .add(
           new THREE.Vector3(
             0,
-            -(this.mode === 'walk' ? 0.5 : 0.25) * blend -
-              this.pitch * (25 - blend * (this.mode === 'walk' ? 20 : 15)),
+            -0.25 * blend - this.pitch * (25 - blend * 15),
             0,
           ),
         ),
@@ -1418,7 +1427,10 @@ export class StreetNavigation {
     }
     this.e.controls.target.copy(this.position).addScaledVector(dir, 25);
     this.e.camera.near = 0.08;
-    this.e.camera.fov = THREE.MathUtils.lerp(58, 48, blend);
+    this.e.camera.fov = walkThird ? Math.max(48, Math.min(100,
+      THREE.MathUtils.radToDeg(2 * Math.atan((this.walkSeat ? 0.85 : 1.12) /
+        Math.max(0.1, pos.distanceTo(walkTarget))))))
+      : THREE.MathUtils.lerp(58, 48, blend);
     this.e.camera.updateProjectionMatrix();
     this.finishReturnBlend(dt);
     this.updateCockpit(dt, stopped ? 0 : turn);

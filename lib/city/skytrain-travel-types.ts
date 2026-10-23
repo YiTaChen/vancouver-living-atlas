@@ -23,6 +23,9 @@ export interface SkyTrainTravelSnapshot {
   canWalkCabin?: boolean;
   transferAt?: StationId | null;
   availableLines?: readonly LineId[];
+  headsign?: string;
+  nextStopName?: string;
+  atStop?: StationId | null;
   hint?:
     | 'approach-access'
     | 'approach-door'

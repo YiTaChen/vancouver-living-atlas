@@ -7,6 +7,7 @@ import { cityModule } from './helpers/city-modules.mjs';
 const { WorldSeats } = await import(cityModule('world-seats'));
 const { StreetNavigation } = await import(cityModule('navigation'));
 const { GroundSurfaceIndex } = await import(cityModule('ground-surface'));
+const { TravelCameraCollision } = await import(cityModule('travel-camera-collision'));
 const { ProximityInteractionController } = await import(
   cityModule('proximity-interactions')
 );
@@ -28,6 +29,10 @@ function fixture() {
     settings: { mode: 'walk' },
     controls: { enabled: false, target: new THREE.Vector3() },
     camera: new THREE.PerspectiveCamera(),
+    buildings: new THREE.Group(),
+    landmarks: new THREE.Group(),
+    roads: new THREE.Group(),
+    terrain: new THREE.Group(),
     renderer: { domElement: { focus() {} } },
     elevation: () => 0,
     streetFurniture: {
@@ -56,6 +61,7 @@ function fixture() {
     touchBrake: false,
     cameraDistances: { walk: 0 },
     renderedDistance: 0,
+    cameraCollision: new TravelCameraCollision(),
     snapCamera: true,
     walkingDistance: 0,
     walker: {

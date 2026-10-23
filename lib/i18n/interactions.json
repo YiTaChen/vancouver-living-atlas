@@ -7,7 +7,9 @@
     "inspect": "Inspect",
     "walkCabin": "Walk through the train",
     "cabinHint": "Walk along the aisle and approach an empty seat to sit down.",
-    "shortcut": "{action} (F)"
+    "shortcut": "{action} (F)",
+    "board": "Board",
+    "alight": "Alight"
   },
   "fr": {
     "sit": "S’asseoir",
@@ -17,7 +19,9 @@
     "inspect": "Examiner",
     "walkCabin": "Marcher dans le train",
     "cabinHint": "Avancez dans l’allée et approchez-vous d’un siège libre pour vous asseoir.",
-    "shortcut": "{action} (F)"
+    "shortcut": "{action} (F)",
+    "board": "Monter",
+    "alight": "Descendre"
   },
   "es": {
     "sit": "Sentarse",
@@ -27,7 +31,9 @@
     "inspect": "Examinar",
     "walkCabin": "Caminar por el tren",
     "cabinHint": "Camina por el pasillo y acércate a un asiento libre para sentarte.",
-    "shortcut": "{action} (F)"
+    "shortcut": "{action} (F)",
+    "board": "Subir",
+    "alight": "Bajar"
   },
   "zh-Hant": {
     "sit": "坐下",
@@ -37,7 +43,9 @@
     "inspect": "查看",
     "walkCabin": "在車廂內行走",
     "cabinHint": "沿走道行走，靠近空座位即可坐下。",
-    "shortcut": "{action}（F）"
+    "shortcut": "{action}（F）",
+    "board": "上車",
+    "alight": "下車"
   },
   "zh-Hans": {
     "sit": "坐下",
@@ -47,7 +55,9 @@
     "inspect": "查看",
     "walkCabin": "在车厢内行走",
     "cabinHint": "沿走道行走，靠近空座位即可坐下。",
-    "shortcut": "{action}（F）"
+    "shortcut": "{action}（F）",
+    "board": "上车",
+    "alight": "下车"
   },
   "de": {
     "sit": "Hinsetzen",
@@ -57,7 +67,9 @@
     "inspect": "Untersuchen",
     "walkCabin": "Durch den Zug gehen",
     "cabinHint": "Gehe durch den Gang und nähere dich einem freien Sitz, um dich hinzusetzen.",
-    "shortcut": "{action} (F)"
+    "shortcut": "{action} (F)",
+    "board": "Einsteigen",
+    "alight": "Aussteigen"
   },
   "ja": {
     "sit": "座る",
@@ -67,7 +79,9 @@
     "inspect": "調べる",
     "walkCabin": "車内を歩く",
     "cabinHint": "通路を歩き、空いている座席に近づくと座れます。",
-    "shortcut": "{action}（F）"
+    "shortcut": "{action}（F）",
+    "board": "乗車する",
+    "alight": "降車する"
   },
   "ko": {
     "sit": "앉기",
@@ -77,7 +91,9 @@
     "inspect": "살펴보기",
     "walkCabin": "열차 안에서 걷기",
     "cabinHint": "통로를 따라 걸으며 빈 좌석에 다가가면 앉을 수 있습니다.",
-    "shortcut": "{action} (F)"
+    "shortcut": "{action} (F)",
+    "board": "탑승",
+    "alight": "하차"
   },
   "uk": {
     "sit": "Сісти",
@@ -87,7 +103,9 @@
     "inspect": "Оглянути",
     "walkCabin": "Пройтися вагоном",
     "cabinHint": "Ідіть проходом і підійдіть до вільного сидіння, щоб сісти.",
-    "shortcut": "{action} (F)"
+    "shortcut": "{action} (F)",
+    "board": "Сісти в транспорт",
+    "alight": "Вийти"
   },
   "ru": {
     "sit": "Сесть",
@@ -97,6 +115,8 @@
     "inspect": "Осмотреть",
     "walkCabin": "Пройти по вагону",
     "cabinHint": "Пройдите по проходу и подойдите к свободному сиденью, чтобы сесть.",
-    "shortcut": "{action} (F)"
+    "shortcut": "{action} (F)",
+    "board": "Сесть в транспорт",
+    "alight": "Выйти"
   }
 }

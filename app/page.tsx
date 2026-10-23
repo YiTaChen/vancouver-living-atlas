@@ -56,6 +56,8 @@ import type { TeslaController } from '@/lib/city/tesla-controller';
 import { DriftHoldButton, TravelJoystick } from '@/components/travel-joystick';
 import { CityInteractionOverlay } from '@/components/city-interaction-overlay';
 import type { CityInteractions } from '@/lib/city/city-interactions';
+import { TransitWorldStatus } from '@/components/transit-world-status';
+import { TransitAttribution } from '@/components/transit-attribution';
 import { BusVisitPanel } from '@/components/bus-visit-panel';
 import { SkyTrainCabinPanel } from '@/components/skytrain-cabin-panel';
 import { SkyTrainTravelPanel, skyTrainTravelText } from '@/components/skytrain-travel-panel';
@@ -130,6 +132,8 @@ import {
   type ClockState,
 } from '@/lib/city/clock';
 
+const worldTransitQA = process.env.VANCOUVER_VISUAL_QA === '1' && typeof location !== 'undefined' && new URLSearchParams(location.search).has('world-station');
+
 const TransitQA =
   process.env.VANCOUVER_VISUAL_QA === '1'
     ? lazy(() => import('@/components/city-life-transit-qa'))
@@ -202,7 +206,12 @@ function Home() {
     'map' | 'travel' | 'tools' | null
   >(null);
   const touchMove = useCallback(
-    (x: number, y: number) => engine.current?.navigation?.setTouchAxes(x, y),
+    (x: number, y: number) => {
+      const city=engine.current;
+      if(city?.skyTrainTravel?.active)city.skyTrainTravel.setTouchAxes(x,y);
+      else if(city?.busVisit?.aboard)city.busVisit.setTouchAxes(x,y);
+      else city?.navigation?.setTouchAxes(x,y);
+    },
     [],
   );
   const touchBrake = useCallback((held: boolean) => {
@@ -309,9 +318,8 @@ function Home() {
     (!mobilePanel || mobilePanel === 'map');
   const skyTrainState = stats.skyTrainTravel ?? EMPTY_SKYTRAIN_TRAVEL;
   const skyTrainActive = ['loading', 'station', 'riding'].includes(skyTrainState.phase);
-  const skyTrainInput = ready && !clean && !placing && !flight.placing &&
-    !about && !panel && !discoveryModal && settings.mode !== 'tesla' &&
-    settings.mode !== 'flight' && !stats.busVisit?.aboard &&
+  const skyTrainInput = ready && settings.mode === 'walk' && !clean && !placing && !flight.placing &&
+    !about && !panel && !discoveryModal && !stats.busVisit?.aboard &&
     (!mobilePanel || mobilePanel === 'map') && !(touchUI && mobileHudHidden);
   const busInput = ready && !clean && !placing && !flight.placing &&
     !about && !panel && !discoveryModal && !skyTrainActive &&
@@ -346,7 +354,7 @@ function Home() {
     settingsRef = useRef(settings);
   settingsRef.current = settings;
   const go = useCallback((id: string) => {
-    if (engine.current?.skyTrainTravel?.active) return;
+    if (engine.current?.skyTrainTravel?.active) engine.current.skyTrainTravel.setOverview(true);
     if (engine.current && !engine.current.closeBusVisit()) return;
     setLocalOrbit(false);
     setView(id);
@@ -527,6 +535,8 @@ function Home() {
       if (ev.key === 'Escape') {
         if (engine.current?.skyTrainTravel?.active) {
           setClean(false); setPanel(null); setMobilePanel(null);
+          engine.current.skyTrainTravel.setOverview(settingsRef.current.mode !== 'orbit');
+          ev.preventDefault();
           return;
         }
         if (
@@ -625,7 +635,7 @@ function Home() {
     return () => life.abort();
   }, [ready, go]);
   const change = (patch: Partial<Settings>) => {
-    if (patch.mode !== undefined && engine.current?.skyTrainTravel?.active) return;
+    if (patch.mode !== undefined && patch.mode !== 'walk' && patch.mode !== 'orbit' && engine.current?.skyTrainTravel?.active) return;
     if (
       (patch.mode !== undefined || patch.traffic === false) &&
       engine.current &&
@@ -761,6 +771,10 @@ function Home() {
   };
   const switchMode = (mode: string) => {
     if (teslaEntering.current) return;
+    if (engine.current?.skyTrainTravel?.active) {
+      if (mode === 'orbit' || mode === 'walk') { setTour(false); setPanel(null); setMobilePanel(null); engine.current.skyTrainTravel.setOverview(mode === 'orbit'); }
+      return;
+    }
     if (!finishBusVisit()) return;
     if (mode === 'tesla') {
       void beginTesla();
@@ -898,7 +912,7 @@ function Home() {
         interactions={interactionController}
         enabled={interactionInput} locale={locale} touch={touchUI}
       />
-      <BusVisitPanel
+      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && <BusVisitPanel
         city={engine.current}
         snapshot={stats.busVisit ?? null}
         locale={locale}
@@ -918,8 +932,8 @@ function Home() {
           !(touchUI && mobileHudHidden)
         }
         onPrepare={visitBus}
-      />
-      <SkyTrainTravelPanel
+      />}
+      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && <SkyTrainTravelPanel
         locale={locale}
         snapshot={skyTrainState}
         visible={ready && !clean && !about && !placing && !flight.placing &&
@@ -939,8 +953,8 @@ function Home() {
         onAlight={() => { engine.current?.skyTrainTravel?.alight(); }}
         onLeave={() => { engine.current?.skyTrainTravel?.leave(); }}
         onMove={skyTrainMove}
-      />
-      {ready &&
+      />}
+      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && ready &&
         !skyTrainActive &&
         !clean &&
         !about &&
@@ -962,7 +976,10 @@ function Home() {
             <TrainFront size={17} /> {tr('skyTrainCabinDisplay')}
           </button>
         )}
-      <SkyTrainCabinPanel
+      <TransitWorldStatus locale={locale} train={skyTrainState} bus={stats.busVisit ?? null}
+        visible={ready && settings.mode === 'walk' && !clean && !about && !panel && !discoveryModal && !mobilePanel && !(touchUI && mobileHudHidden)}
+        touch={touchUI} />
+      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && <SkyTrainCabinPanel
         locale={locale}
         visible={ready && !clean && !about}
         request={skyTrainCabinRequest}
@@ -970,7 +987,7 @@ function Home() {
         compatible={engine.current?.compatibleGraphics ?? false}
         pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}
         onActiveChange={cabinActiveChange}
-      />
+      />}
       <DiscoveryPanel
         city={engine.current}
         locale={locale}
@@ -1133,8 +1150,8 @@ function Home() {
           {settings.mode !== 'orbit' &&
             settings.mode !== 'flight' &&
             settings.mode !== 'tesla' &&
-            !skyTrainActive &&
-            !stats.busVisit?.aboard &&
+            !skyTrainState.seated &&
+            !stats.busVisit?.seated &&
             !placing &&
             !about &&
             !panel &&
@@ -1425,7 +1442,7 @@ function Home() {
                     )
               }
               onPointerDownCapture={
-                m.id === 'orbit' || m.id === 'tesla'
+                m.id === 'orbit' || m.id === 'tesla' || (skyTrainActive && m.id === 'walk')
                   ? undefined
                   : m.id === 'flight'
                     ? dragAircraft
@@ -1438,7 +1455,7 @@ function Home() {
                       event.stopPropagation();
                       if (event.detail === 0) beginFlight();
                     }
-                  : m.id === 'orbit' || m.id === 'tesla'
+                  : m.id === 'orbit' || m.id === 'tesla' || (skyTrainActive && m.id === 'walk')
                     ? undefined
                     : (event) => {
                         if (event.detail > 0) {
@@ -1450,7 +1467,7 @@ function Home() {
             >
               <RadioGroupItem
                 value={m.id}
-                disabled={!ready || teslaPreparing || skyTrainActive}
+                disabled={!ready || teslaPreparing || (skyTrainActive && m.id !== 'orbit' && m.id !== 'walk')}
                 className="mode-radio-dot"
               />
               <m.icon size={15} />
@@ -2406,6 +2423,8 @@ function Home() {
           City of Vancouver · OGL
         </a>
         <span> / </span>
+        <a href="https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/gtfs/gtfs-data" target="_blank" rel="noreferrer" title="Offline GTFS · illustrative timing">TransLink GTFS</a>
+        <span> / </span>
         <a
           href="https://www.openstreetmap.org/copyright"
           target="_blank"
@@ -2446,6 +2465,7 @@ function Home() {
             <DialogDescription>{tr('aboutIntro')}</DialogDescription>
           </DialogHeader>
           <p>{tr('aboutBody')}</p>
+          <TransitAttribution />
           <dl>
             {(['terrain', 'buildings', 'detail', 'license'] as const).map(
               (section) => (

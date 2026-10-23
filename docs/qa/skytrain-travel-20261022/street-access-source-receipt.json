@@ -1,0 +1,703 @@
+{
+  "date": "2026-10-22",
+  "interpretation": "Official July 2026 entrance-map PDF pixels were inspected in full. Street-side anchor positions were hand interpreted against the retained City road and building footprint packets; these are approximate facade/approach registrations, not measured station floor plans or surveyed door coordinates. No source PDF artwork, photographs or textures are redistributed.",
+  "sources": [
+    {
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf",
+      "sha256": "9082c0b747d5d81dbde589b7492ccf3fa59ae752d07a5b8036e1b869adf833bb",
+      "pixelsInspected": true
+    },
+    {
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/burrard_station.pdf",
+      "sha256": "dc13d2b175e6fda0e6be720f244e94fcee4e44080b2ee1957d4473c8dcf0acb8",
+      "pixelsInspected": true
+    },
+    {
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+      "sha256": "a895d1cff11748621c35f10e9a314dc07fd2c72e700bdc202869031ee35fa7cd",
+      "pixelsInspected": true
+    },
+    {
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf",
+      "sha256": "b95d4c00eaca42327584d21627b194f73efa9776bc5169d91b483547f14546bb",
+      "pixelsInspected": true
+    },
+    {
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/main_street_station.pdf",
+      "sha256": "ed70a65af35f3ec623c34d37466a97de964dfd6054397b6e8b8f56cdbf0a76d8",
+      "pixelsInspected": true
+    },
+    {
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/yaletown_roundhouse_station.pdf",
+      "sha256": "406d77862f567b3e6e354e5d50ddc5b8b1b0a367530516011e8e4bce41a8ea91",
+      "pixelsInspected": true
+    }
+  ],
+  "streetPacket": {
+    "roadsSha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb",
+    "buildingsSha256": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+    "landmarkFootprintsSha256": "cf44d69c0411de2488bc86fa5b21ed48eddadbad4a16fcd3a7a4b06ead01b74b"
+  },
+  "stations": [
+    {
+      "id": "waterfront",
+      "retainedRuntimePacketSha256": "9547d43082a57211a00305a700c6694f67f599bf3a6554d2a8b5c5ca608bf746",
+      "retainedSourceSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+      "entrances": [
+        {
+          "id": "cordova-lobby",
+          "label": "Cordova Street · heritage station lobby",
+          "lonlat": [
+            -123.111986,
+            49.285624
+          ],
+          "bearing": 315,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf"
+        },
+        {
+          "id": "granville-canada",
+          "label": "Granville Street · Canada Line entrance",
+          "lonlat": [
+            -123.113236,
+            49.285546
+          ],
+          "bearing": 135,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf"
+        }
+      ],
+      "worldPortalsUsingBareTerrain": [
+        {
+          "id": "cordova-lobby",
+          "stationId": "waterfront",
+          "label": "Cordova Street · heritage station lobby",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "waterfront-cordova-lobby-street-apron",
+          "threshold": [
+            1162.8119927784685,
+            13.105608777147175,
+            41.856320000313744
+          ],
+          "inward": [
+            1161.7513326066887,
+            13.146907989172096,
+            40.79565982853393
+          ],
+          "outward": [
+            1164.7211810876722,
+            13.022548096215058,
+            43.76550830951743
+          ],
+          "localDirection": [
+            -0.22885866848638892,
+            0,
+            0.9734596601085413
+          ]
+        },
+        {
+          "id": "granville-canada",
+          "stationId": "waterfront",
+          "label": "Granville Street · Canada Line entrance",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "waterfront-granville-canada-street-apron",
+          "threshold": [
+            1072.0467254516352,
+            17.147053988609365,
+            50.539280000538724
+          ],
+          "inward": [
+            1073.107385623415,
+            17.17711871004645,
+            51.599940172318554
+          ],
+          "outward": [
+            1070.1375371424315,
+            17.090030123669564,
+            48.630091691335025
+          ],
+          "localDirection": [
+            0.22885866848638914,
+            0,
+            -0.9734596601085413
+          ]
+        }
+      ],
+      "physicalRoutes": [
+        {
+          "entranceId": "cordova-lobby",
+          "platformSurfaceId": "waterfront-expo",
+          "waypoints": 35,
+          "length": 248.9289782718844
+        },
+        {
+          "entranceId": "cordova-lobby",
+          "platformSurfaceId": "waterfront-canada",
+          "waypoints": 43,
+          "length": 351.20998039366333
+        },
+        {
+          "entranceId": "granville-canada",
+          "platformSurfaceId": "waterfront-expo",
+          "waypoints": 43,
+          "length": 405.76838453594405
+        },
+        {
+          "entranceId": "granville-canada",
+          "platformSurfaceId": "waterfront-canada",
+          "waypoints": 51,
+          "length": 508.0493866577229
+        }
+      ],
+      "terrainOpeningCount": 16,
+      "geometry": {
+        "station": "waterfront",
+        "drawCalls": 15,
+        "instances": 1635,
+        "triangles": 20450,
+        "floors": 333,
+        "disposed": false
+      }
+    },
+    {
+      "id": "burrard",
+      "retainedRuntimePacketSha256": "ab50104b558d2faacbcbe073db33517449ed9ebc3238d163ee9f29f0af30a9fb",
+      "retainedSourceSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+      "entrances": [
+        {
+          "id": "burrard-plaza",
+          "label": "Burrard / Dunsmuir · station plaza",
+          "lonlat": [
+            -123.120154,
+            49.285603
+          ],
+          "bearing": 315,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/burrard_station.pdf"
+        }
+      ],
+      "worldPortalsUsingBareTerrain": [
+        {
+          "id": "burrard-plaza",
+          "stationId": "burrard",
+          "label": "Burrard / Dunsmuir · station plaza",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/burrard_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "burrard-burrard-plaza-street-apron",
+          "threshold": [
+            569.7154299576347,
+            23.460366811419078,
+            44.194039999948416
+          ],
+          "inward": [
+            568.6547697858549,
+            23.31121294857657,
+            43.1333798281686
+          ],
+          "outward": [
+            571.6246182668384,
+            23.46355527389474,
+            46.10322830915209
+          ],
+          "localDirection": [
+            0.0360616717222384,
+            0,
+            -0.9993495663843545
+          ]
+        }
+      ],
+      "physicalRoutes": [
+        {
+          "entranceId": "burrard-plaza",
+          "platformSurfaceId": "burrard-upper",
+          "waypoints": 27,
+          "length": 189.64632766608506
+        },
+        {
+          "entranceId": "burrard-plaza",
+          "platformSurfaceId": "burrard-lower",
+          "waypoints": 37,
+          "length": 327.39582268734995
+        }
+      ],
+      "terrainOpeningCount": 4,
+      "geometry": {
+        "station": "burrard",
+        "drawCalls": 19,
+        "instances": 1309,
+        "triangles": 16320,
+        "floors": 191,
+        "disposed": false
+      }
+    },
+    {
+      "id": "granville",
+      "retainedRuntimePacketSha256": "d2da8dfd508ed5a0d1594e0c1f3e1108282bc5e209a706ff04d2a9443b57af7b",
+      "retainedSourceSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+      "entrances": [
+        {
+          "id": "granville-street",
+          "label": "Granville Street entrance",
+          "lonlat": [
+            -123.11661616,
+            49.28333933
+          ],
+          "bearing": 135,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf"
+        },
+        {
+          "id": "dunsmuir-street",
+          "label": "Dunsmuir Street accessible entrance approach",
+          "lonlat": [
+            -123.11567165,
+            49.28341303
+          ],
+          "bearing": 135,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf"
+        },
+        {
+          "id": "seymour-street",
+          "label": "Seymour Street entrance approach",
+          "lonlat": [
+            -123.115527,
+            49.283043
+          ],
+          "bearing": 315,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf"
+        }
+      ],
+      "worldPortalsUsingBareTerrain": [
+        {
+          "id": "granville-street",
+          "stationId": "granville",
+          "label": "Granville Street entrance",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "granville-granville-street-street-apron",
+          "threshold": [
+            826.6058246449962,
+            26.439484008208176,
+            296.1857844004979
+          ],
+          "inward": [
+            827.666484816776,
+            26.303331563112472,
+            297.2464445722777
+          ],
+          "outward": [
+            824.6966363357925,
+            26.665757567984528,
+            294.2765960912942
+          ],
+          "localDirection": [
+            -0.004409511008494432,
+            0,
+            0.999990278059075
+          ]
+        },
+        {
+          "id": "dunsmuir-street",
+          "stationId": "granville",
+          "label": "Dunsmuir Street accessible entrance approach",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "granville-dunsmuir-street-street-apron",
+          "threshold": [
+            895.188786760131,
+            27.891371918703587,
+            287.98150040032994
+          ],
+          "inward": [
+            896.2494469319108,
+            27.959468743123562,
+            289.04216057210976
+          ],
+          "outward": [
+            893.2795984509273,
+            27.72979830383444,
+            286.07231209112626
+          ],
+          "localDirection": [
+            -0.004409511008494432,
+            0,
+            0.999990278059075
+          ]
+        },
+        {
+          "id": "seymour-street",
+          "stationId": "granville",
+          "label": "Seymour Street entrance approach",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "granville-seymour-street-street-apron",
+          "threshold": [
+            905.6921434948931,
+            29.523719992386216,
+            329.1732400002334
+          ],
+          "inward": [
+            904.6314833231133,
+            29.49087412671165,
+            328.1125798284536
+          ],
+          "outward": [
+            907.6013318040968,
+            29.566945345763287,
+            331.0824283094371
+          ],
+          "localDirection": [
+            0.00440951100849421,
+            0,
+            -0.9999902780590748
+          ]
+        }
+      ],
+      "physicalRoutes": [
+        {
+          "entranceId": "granville-street",
+          "platformSurfaceId": "granville-upper",
+          "waypoints": 23,
+          "length": 253.66556803641328
+        },
+        {
+          "entranceId": "granville-street",
+          "platformSurfaceId": "granville-lower",
+          "waypoints": 29,
+          "length": 404.53234861050436
+        },
+        {
+          "entranceId": "dunsmuir-street",
+          "platformSurfaceId": "granville-upper",
+          "waypoints": 23,
+          "length": 317.9848974692638
+        },
+        {
+          "entranceId": "dunsmuir-street",
+          "platformSurfaceId": "granville-lower",
+          "waypoints": 29,
+          "length": 468.8516780433549
+        },
+        {
+          "entranceId": "seymour-street",
+          "platformSurfaceId": "granville-upper",
+          "waypoints": 23,
+          "length": 317.0057761762135
+        },
+        {
+          "entranceId": "seymour-street",
+          "platformSurfaceId": "granville-lower",
+          "waypoints": 29,
+          "length": 467.8725567503047
+        }
+      ],
+      "terrainOpeningCount": 6,
+      "geometry": {
+        "station": "granville",
+        "drawCalls": 20,
+        "instances": 1744,
+        "triangles": 21710,
+        "floors": 409,
+        "disposed": false
+      }
+    },
+    {
+      "id": "stadium-chinatown",
+      "retainedRuntimePacketSha256": "d52147b9bbe8670471c2905f6124ad7e684dec2553bb0389cee2f03ab707a9b7",
+      "retainedSourceSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+      "entrances": [
+        {
+          "id": "beatty-upper",
+          "label": "Beatty Street · upper entrance",
+          "lonlat": [
+            -123.110421,
+            49.280156
+          ],
+          "bearing": 135,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf"
+        },
+        {
+          "id": "pacific-lower",
+          "label": "Pacific / Expo Boulevard · lower entrance",
+          "lonlat": [
+            -123.108764,
+            49.278603
+          ],
+          "bearing": 315,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf"
+        }
+      ],
+      "worldPortalsUsingBareTerrain": [
+        {
+          "id": "beatty-upper",
+          "stationId": "stadium-chinatown",
+          "label": "Beatty Street · upper entrance",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "stadium-chinatown-beatty-upper-street-apron",
+          "threshold": [
+            1276.4501074717214,
+            19.116213333348604,
+            650.5540800003664
+          ],
+          "inward": [
+            1277.5107676435011,
+            19.079047573002214,
+            651.6147401721462
+          ],
+          "outward": [
+            1274.5409191625176,
+            19.183111701999657,
+            648.6448916911627
+          ],
+          "localDirection": [
+            -0.014097531997481372,
+            0,
+            0.9999006248580806
+          ]
+        },
+        {
+          "id": "pacific-lower",
+          "stationId": "stadium-chinatown",
+          "label": "Pacific / Expo Boulevard · lower entrance",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "stadium-chinatown-pacific-lower-street-apron",
+          "threshold": [
+            1396.7685458409112,
+            4,
+            823.4340400005053
+          ],
+          "inward": [
+            1395.7078856691314,
+            4,
+            822.3733798287255
+          ],
+          "outward": [
+            1398.677734150115,
+            4,
+            825.343228309709
+          ],
+          "localDirection": [
+            0.014097531997481205,
+            0,
+            -0.9999006248580805
+          ]
+        }
+      ],
+      "physicalRoutes": [
+        {
+          "entranceId": "beatty-upper",
+          "platformSurfaceId": "stadium-expo",
+          "waypoints": 43,
+          "length": 219.59581060882257
+        },
+        {
+          "entranceId": "pacific-lower",
+          "platformSurfaceId": "stadium-expo",
+          "waypoints": 23,
+          "length": 274.2310075473438
+        }
+      ],
+      "terrainOpeningCount": 8,
+      "geometry": {
+        "station": "stadium-chinatown",
+        "drawCalls": 15,
+        "instances": 856,
+        "triangles": 10830,
+        "floors": 185,
+        "disposed": false
+      }
+    },
+    {
+      "id": "main-street-science-world",
+      "retainedRuntimePacketSha256": "6fb6337234c3cb388272a8a12363fecad596db6070bdb6c464b1aeaf769c37b7",
+      "retainedSourceSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+      "entrances": [
+        {
+          "id": "main-east",
+          "label": "Terminal Avenue · east stationhouse",
+          "lonlat": [
+            -123.099908,
+            49.273054
+          ],
+          "bearing": 270,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/main_street_station.pdf"
+        }
+      ],
+      "worldPortalsUsingBareTerrain": [
+        {
+          "id": "main-east",
+          "stationId": "main-street-science-world",
+          "label": "Terminal Avenue · east stationhouse",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/main_street_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "main-street-science-world-main-east-street-apron",
+          "threshold": [
+            2039.822311798239,
+            5,
+            1441.1487199999397
+          ],
+          "inward": [
+            2038.322311798239,
+            5,
+            1441.1487199999397
+          ],
+          "outward": [
+            2042.5223117982391,
+            5,
+            1441.1487199999397
+          ],
+          "localDirection": [
+            -0.24252712132927445,
+            0,
+            -0.970144626032498
+          ]
+        }
+      ],
+      "physicalRoutes": [
+        {
+          "entranceId": "main-east",
+          "platformSurfaceId": "main-expo",
+          "waypoints": 25,
+          "length": 145.85108563537054
+        }
+      ],
+      "terrainOpeningCount": 8,
+      "geometry": {
+        "station": "main-street-science-world",
+        "drawCalls": 13,
+        "instances": 196,
+        "triangles": 2680,
+        "floors": 83,
+        "disposed": false
+      }
+    },
+    {
+      "id": "vancouver-city-centre",
+      "retainedRuntimePacketSha256": "27bcc231a14048742cf1a64561e8354dd1995d1a2057c9c0fead9264166ce103",
+      "retainedSourceSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+      "entrances": [
+        {
+          "id": "granville-georgia",
+          "label": "Granville / West Georgia · street entrance",
+          "lonlat": [
+            -123.1189031,
+            49.2821403
+          ],
+          "bearing": 315,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf"
+        }
+      ],
+      "worldPortalsUsingBareTerrain": [
+        {
+          "id": "granville-georgia",
+          "stationId": "vancouver-city-centre",
+          "label": "Granville / West Georgia · street entrance",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "vancouver-city-centre-granville-georgia-street-apron",
+          "threshold": [
+            660.5460482771911,
+            32.90464121173626,
+            429.66180399995295
+          ],
+          "inward": [
+            659.4853881054113,
+            32.897911077806434,
+            428.6011438281731
+          ],
+          "outward": [
+            662.4552365863948,
+            32.915301769601626,
+            431.5709923091566
+          ],
+          "localDirection": [
+            -0.9999975942462369,
+            0,
+            -0.002193513560147714
+          ]
+        }
+      ],
+      "physicalRoutes": [
+        {
+          "entranceId": "granville-georgia",
+          "platformSurfaceId": "vcc-canada",
+          "waypoints": 27,
+          "length": 118.17744613568483
+        }
+      ],
+      "terrainOpeningCount": 4,
+      "geometry": {
+        "station": "vancouver-city-centre",
+        "drawCalls": 15,
+        "instances": 652,
+        "triangles": 8148,
+        "floors": 94,
+        "disposed": false
+      }
+    },
+    {
+      "id": "yaletown-roundhouse",
+      "retainedRuntimePacketSha256": "d9ede81de2e90a631bf79a226197efe853eb386b2e5f1d3c8adf7700bafe5806",
+      "retainedSourceSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+      "entrances": [
+        {
+          "id": "davie-mainland",
+          "label": "Davie / Mainland · station pavilion",
+          "lonlat": [
+            -123.121813,
+            49.274484
+          ],
+          "bearing": 45,
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/yaletown_roundhouse_station.pdf"
+        }
+      ],
+      "worldPortalsUsingBareTerrain": [
+        {
+          "id": "davie-mainland",
+          "stationId": "yaletown-roundhouse",
+          "label": "Davie / Mainland · station pavilion",
+          "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/yaletown_roundhouse_station.pdf",
+          "accuracy": "Official entrance-map street placement interpreted against City streets; representative circulation, not a survey.",
+          "surfaceId": "yaletown-roundhouse-davie-mainland-street-apron",
+          "threshold": [
+            449.2517671610885,
+            7.32298553904631,
+            1281.9611200000338
+          ],
+          "inward": [
+            450.3124273328683,
+            7.327699078617968,
+            1280.900459828254
+          ],
+          "outward": [
+            447.3425788518848,
+            7.317408534276547,
+            1283.8703083092375
+          ],
+          "localDirection": [
+            0.9999665553561384,
+            0,
+            0.008178518764352743
+          ]
+        }
+      ],
+      "physicalRoutes": [
+        {
+          "entranceId": "davie-mainland",
+          "platformSurfaceId": "yaletown-canada",
+          "waypoints": 35,
+          "length": 203.36857219238877
+        }
+      ],
+      "terrainOpeningCount": 4,
+      "geometry": {
+        "station": "yaletown-roundhouse",
+        "drawCalls": 15,
+        "instances": 843,
+        "triangles": 10500,
+        "floors": 132,
+        "disposed": false
+      }
+    }
+  ]
+}

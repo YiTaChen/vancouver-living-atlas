@@ -5,6 +5,13 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { project } from './geo';
 import {
+  SKYTRAIN_STREET_ENTRANCES,
+  makeStationStreetAccess,
+  type StationStreetAccess,
+  type StreetEntrance,
+  type StationTerrainOpening,
+} from './skytrain-street-access';
+import {
   SKYTRAIN_STATIONS,
   type StationId,
   type LineId,
@@ -28,14 +35,25 @@ export interface StationSeat {
   yaw: number;
   stand: StationPoint;
 }
-interface StationFloor {
+export interface StationBoardingDoor {
+  carIndex: number;
+  /** Runtime door position in that carriage's actual rendered local frame. */
+  carDoor: StationVector;
+  /** Unmodified station-packet vector, retained for adapter provenance. */
+  sourceCarDoor: StationVector;
+  /** Station-local source sill, with the rendered-door longitudinal adapter. */
+  threshold: StationVector;
+  /** Supported station-local foot point, facing this door's platform edge. */
+  waiting: StationPoint;
+}
+export interface StationFloor {
   id: string;
   level: string;
   kind: string;
   vertices: StationVector[];
   indices: number[];
 }
-interface StationConnection {
+export interface StationConnection {
   id: string;
   from: string;
   to: string;
@@ -71,7 +89,7 @@ export interface StationPlatform {
   motionSign: number;
   doors: StationDoor[];
 }
-interface StationPart {
+export interface StationPart {
   id: string;
   position: StationVector;
   size: StationVector;
@@ -132,6 +150,8 @@ export interface StationTrainStop {
 }
 export interface SkyTrainStationOptions {
   heightAt: (x: number, z: number) => number;
+  /** Actual rendered walking support, including an existing public lobby. */
+  streetHeightAt?: (x: number, z: number) => number;
   scene?: THREE.Scene;
   fetchStation?: (id: StationId, signal: AbortSignal) => Promise<unknown>;
 }
@@ -455,6 +475,8 @@ export function stationWorldPose(
 export class SkyTrainStationOwner {
   readonly group = new THREE.Group();
   readonly data: RuntimeStationData;
+  readonly geometryData: RuntimeStationData;
+  private readonly streetAccess: StationStreetAccess | null;
   readonly baseY: number;
   readonly origin: StationVector;
   readonly yaw: number;
@@ -473,12 +495,23 @@ export class SkyTrainStationOwner {
   private readonly boardingMarker = new THREE.Group();
   private disposed = false;
   private benchSeatCache: readonly StationSeat[] | null = null;
+  private readonly boardingDoorCache = new Map<
+    string,
+    readonly StationBoardingDoor[]
+  >();
   constructor(
     data: RuntimeStationData,
     heightAt: (x: number, z: number) => number,
     quality: 'balanced' | 'high' | 'ultra' = 'balanced',
+    readonly openWorld = false,
+    streetHeightAt: (x: number, z: number) => number = heightAt,
   ) {
     this.data = validateRuntimeStation(data);
+    this.streetAccess = openWorld
+      ? makeStationStreetAccess(data, heightAt, streetHeightAt)
+      : null;
+    this.geometryData = this.streetAccess?.geometry ?? this.data;
+    data = this.geometryData;
     this.collisionObstacles = data.obstacles.map((o) => ({
       ...o,
       size: runtimeAccessSize(data.id, o.id, o.size),
@@ -511,6 +544,7 @@ export class SkyTrainStationOwner {
       // The authored west display branch remains in immutable source metadata,
       // but has no public walker links into the neighbouring city podium.
       if (
+        !openWorld &&
         data.id === 'main-street-science-world' &&
         [c.from, c.to].some(
           (id) => id !== 'main-expo' && !id.startsWith('main-east'),
@@ -560,8 +594,63 @@ export class SkyTrainStationOwner {
       .applyQuaternion(this.group.quaternion.clone().invert())
       .toArray();
   }
+  /** Source-supported street thresholds; all returned coordinates are world metres. */
+  streetEntrances(): readonly StreetEntrance[] {
+    return this.streetAccess?.entrances ?? [];
+  }
+  terrainOpenings(): readonly StationTerrainOpening[] {
+    return this.streetAccess?.openings ?? [];
+  }
+  /** Deterministic local QA route through the actual floor/tread graph. */
+  streetRoutes() {
+    return this.streetAccess?.routes ?? [];
+  }
+  tryEnterFromStreet(
+    worldPosition: StationVector,
+    maxSnap = 0.22,
+  ): StationPoint | null {
+    if (!this.streetAccess || !finiteVector(worldPosition) || this.disposed)
+      return null;
+    const local = this.toLocal(worldPosition);
+    for (const e of this.streetAccess.entrances) {
+      const threshold = this.toLocal(e.threshold),
+        d = e.localDirection,
+        dx = local[0] - threshold[0],
+        dz = local[2] - threshold[2],
+        along = dx * d[0] + dz * d[2],
+        across = dx * d[2] - dz * d[0];
+      if (along < -2.3 || along > 1.8 || Math.abs(across) > 1.45) continue;
+      const foot = this.floorAt(local, e.surfaceId);
+      if (
+        foot &&
+        Math.abs(foot.position[1] - local[1]) <= maxSnap &&
+        this.supported(foot)
+      )
+        return foot;
+    }
+    return null;
+  }
+  streetExit(point: StationPoint): StationVector | null {
+    if (!this.streetAccess || !this.isClearFoot(point)) return null;
+    for (const e of this.streetAccess.entrances) {
+      if (!this.floorAt(point.position, e.surfaceId)) continue;
+      const threshold = this.toLocal(e.threshold),
+        d = e.localDirection,
+        along =
+          (point.position[0] - threshold[0]) * d[0] +
+          (point.position[2] - threshold[2]) * d[2];
+      if (along <= -2.45) return this.toWorld(point);
+    }
+    return null;
+  }
+  worldWalk(from: StationPoint, dx: number, dz: number): StationPoint {
+    const direction = new THREE.Vector3(dx, 0, dz).applyQuaternion(
+      this.group.quaternion.clone().invert(),
+    );
+    return this.walk(from, direction.x, direction.z);
+  }
   platform(line: LineId, direction?: SkyTrainDirection): StationPlatform {
-    const p = this.data.platforms.find(
+    const p = this.geometryData.platforms.find(
       (p) => p.line === line && (!direction || p.direction === direction),
     );
     if (!p) throw new Error('Unavailable station platform');
@@ -599,7 +688,7 @@ export class SkyTrainStationOwner {
     let changed = true;
     while (changed) {
       changed = false;
-      for (const c of this.data.connections) {
+      for (const c of this.geometryData.connections) {
         if (reachable.has(c.from) && !reachable.has(c.to)) {
           reachable.add(c.to);
           changed = true;
@@ -611,17 +700,17 @@ export class SkyTrainStationOwner {
       }
     }
     const e =
-      (this.data.id === 'main-street-science-world'
-        ? this.data.entrances.find(
+      (!this.openWorld && this.geometryData.id === 'main-street-science-world'
+        ? this.geometryData.entrances.find(
             (e) => e.id === 'main-east' && reachable.has(e.surfaceId),
           )
         : undefined) ??
-      this.data.entrances.find(
+      this.geometryData.entrances.find(
         (e) =>
           reachable.has(e.surfaceId) &&
           (line === 'expo' ? !e.id.includes('canada') : !e.id.includes('expo')),
       ) ??
-      this.data.entrances.find((e) => reachable.has(e.surfaceId));
+      this.geometryData.entrances.find((e) => reachable.has(e.surfaceId));
     if (!e) throw new Error('Station entrance has no level connection');
     return this.safePoint(this.point(e.point, e.surfaceId));
   }
@@ -640,11 +729,11 @@ export class SkyTrainStationOwner {
   ): StationPoint {
     if (level === 'entry') return this.entry(line, direction);
     const p = this.platform(line, direction),
-      connections = this.data.connections.filter(
+      connections = this.geometryData.connections.filter(
         (c) => c.from === p.surfaceId || c.to === p.surfaceId,
       ),
       connection =
-        (this.data.id === 'main-street-science-world'
+        (!this.openWorld && this.geometryData.id === 'main-street-science-world'
           ? connections.find((c) => c.id === 'main-expo--main-east-top-walk')
           : undefined) ?? connections[0];
     const f = this.floorMap.get(p.surfaceId)!;
@@ -686,8 +775,60 @@ export class SkyTrainStationOwner {
       ),
     );
   }
+  /** All authored carriage doors retain their own nearby platform foot point.
+   * Expo outer doors adapt the packet's +/-5.5 m to the retained cabin's
+   * +/-4.9 m openings; source vectors and legacy default APIs are unchanged.
+   * Match carIndex and carDoor to reuse the same exit when alighting. */
+  boardingDoors(
+    line: LineId,
+    direction?: SkyTrainDirection,
+  ): readonly StationBoardingDoor[] {
+    if (this.disposed) return [];
+    const platform = this.platform(line, direction);
+    let doors = this.boardingDoorCache.get(platform.id);
+    if (!doors) {
+      doors = platform.doors.map((door) => {
+        const carDoor: StationVector = [...door.carDoor];
+        if (
+          line === 'expo' &&
+          Math.abs(Math.abs(carDoor[2]) - 5.5) < 0.0001
+        )
+          carDoor[2] = Math.sign(carDoor[2]) * 4.9;
+        const shift = new THREE.Vector3(0, 0, carDoor[2] - door.carDoor[2])
+          .applyQuaternion(new THREE.Quaternion(...door.carQuaternion))
+          .applyQuaternion(new THREE.Quaternion(...platform.quaternion));
+        const waiting = this.safePoint(
+          this.point(
+            new THREE.Vector3(...door.waiting).add(shift).toArray(),
+            platform.surfaceId,
+          ),
+        );
+        waiting.yaw = Math.atan2(
+          door.edge[0] + shift.x - waiting.position[0],
+          door.edge[2] + shift.z - waiting.position[2],
+        );
+        return {
+          carIndex: door.carIndex,
+          carDoor,
+          sourceCarDoor: [...door.carDoor],
+          threshold: new THREE.Vector3(...door.sill).add(shift).toArray(),
+          waiting,
+        };
+      });
+      this.boardingDoorCache.set(platform.id, doors);
+    }
+    // Static support is resolved once per platform; callers receive isolated
+    // values so repeated nearby-door queries never mutate the cached inventory.
+    return doors.map((door) => ({
+      carIndex: door.carIndex,
+      carDoor: [...door.carDoor],
+      sourceCarDoor: [...door.sourceCarDoor],
+      threshold: [...door.threshold],
+      waiting: copyPoint(door.waiting),
+    }));
+  }
   trainStop(line: LineId, direction?: SkyTrainDirection): StationTrainStop {
-    return trainStopFor(this.data, line, direction);
+    return trainStopFor(this.geometryData, line, direction);
   }
   /** Seats originate only from the station's rendered bench parts. Each front
    * has a verified clear floor point; tracks, stacked levels and prop-only
@@ -696,7 +837,7 @@ export class SkyTrainStationOwner {
     if (this.disposed) return [];
     if (this.benchSeatCache) return this.benchSeatCache;
     const result: StationSeat[] = [];
-    for (const part of this.data.parts) {
+    for (const part of this.geometryData.parts) {
       if (
         !/bench/i.test(part.id) ||
         part.role !== 'static' ||
@@ -803,7 +944,7 @@ export class SkyTrainStationOwner {
     return best;
   }
   private blocked(p: StationVector, radius = 0.24) {
-    for (const e of this.data.exclusions)
+    for (const e of this.geometryData.exclusions)
       if (p[1] + 1.65 > e.minY && p[1] < e.maxY && inside(p, e.polygon))
         return true;
     for (const o of this.collisionObstacles) {
@@ -825,12 +966,53 @@ export class SkyTrainStationOwner {
     }
     return false;
   }
+  private walkingCandidates(
+    surfaceId: string,
+    position: StationVector,
+  ): string[] {
+    const result = new Set([
+      surfaceId,
+      ...(this.adjacency.get(surfaceId) ?? []),
+    ]);
+    if (this.openWorld) {
+      // Coplanar polygons that physically overlap are the same pedestrian
+      // plane even when authored as separate corridor/turn primitives.
+      for (const floor of this.floors) {
+        if (floor.kind === 'stair') continue;
+        const height = triangleHeight(position[0], position[2], floor);
+        if (height !== null && Math.abs(height - position[1]) < 0.02)
+          result.add(floor.id);
+      }
+      // Overlapping concourse/apron polygons are one continuous walking plane.
+      // Follow only explicit flat links; stair tread chains remain incremental.
+      for (const id of result) {
+        const floor = this.floorMap.get(id);
+        if (!floor || floor.kind === 'stair') continue;
+        const near = [
+          [0, 0],
+          [0.3, 0],
+          [-0.3, 0],
+          [0, 0.3],
+          [0, -0.3],
+        ].some(([dx, dz]) => {
+          const height = triangleHeight(
+            position[0] + dx,
+            position[2] + dz,
+            floor,
+          );
+          return height !== null && Math.abs(height - position[1]) <= 0.28;
+        });
+        if (!near) continue;
+        for (const next of this.adjacency.get(id) ?? []) result.add(next);
+      }
+    }
+    return [...result];
+  }
   private supported(point: StationPoint, radius = 0.24) {
     if (this.blocked(point.position, radius)) return false;
-    const allowed = new Set([
-      point.surfaceId,
-      ...(this.adjacency.get(point.surfaceId) ?? []),
-    ]);
+    const allowed = new Set(
+      this.walkingCandidates(point.surfaceId, point.position),
+    );
     for (const [dx, dz] of [
       [radius, 0],
       [-radius, 0],
@@ -882,14 +1064,33 @@ export class SkyTrainStationOwner {
     let result = copyPoint(from);
     const steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / 0.12));
     const attempt = (x: number, z: number) => {
-      const allowed = [
-        result.surfaceId,
-        ...(this.adjacency.get(result.surfaceId) ?? []),
-      ];
-      for (const id of allowed) {
-        const f = this.floorMap.get(id)!,
-          y = triangleHeight(x, z, f);
-        if (y === null || Math.abs(y - result.position[1]) > 0.28) continue;
+      const allowed = this.walkingCandidates(result.surfaceId, [
+        x,
+        result.position[1],
+        z,
+      ]);
+      const candidates = allowed
+        .map((id) => ({ id, y: triangleHeight(x, z, this.floorMap.get(id)!) }))
+        .filter(
+          (candidate): candidate is { id: string; y: number } =>
+            candidate.y !== null &&
+            Math.abs(candidate.y - result.position[1]) <= 0.28,
+        );
+      if (this.openWorld)
+        candidates.sort((a, b) => {
+          const delta =
+            Math.abs(a.y - result.position[1]) -
+            Math.abs(b.y - result.position[1]);
+          if (Math.abs(delta) > 1e-6) return delta;
+          // A supported point inside the actual platform polygon belongs to
+          // that platform even where its access passage is coplanar. Only its
+          // identity changes; position and heading are retained exactly.
+          return (
+            Number(this.floorMap.get(b.id)?.kind === 'platform') -
+            Number(this.floorMap.get(a.id)?.kind === 'platform')
+          );
+        });
+      for (const { id, y } of candidates) {
         const next = this.point([x, y, z], id, from.yaw);
         if (this.supported(next)) {
           result = next;
@@ -1035,20 +1236,20 @@ export class SkyTrainStationOwner {
     this.resources.add(geometry);
   }
   private build(quality: 'balanced' | 'high' | 'ultra') {
-    const parts: StationPart[] = this.data.parts
+    const parts: StationPart[] = this.geometryData.parts
       .filter(
         (p) =>
           p.role !== 'threshold' &&
           !(
             p.role === 'removable-roof' &&
-            ['burrard', 'granville'].includes(this.data.id)
+            ['burrard', 'granville'].includes(this.geometryData.id)
           ),
       )
       .map((p) => ({
         ...p,
-        size: runtimeAccessSize(this.data.id, p.id, p.size),
+        size: runtimeAccessSize(this.geometryData.id, p.id, p.size),
         material:
-          this.data.id === 'granville' && p.role === 'stair-tread'
+          this.geometryData.id === 'granville' && p.role === 'stair-tread'
             ? 'escalator'
             : p.material,
       }));
@@ -1060,8 +1261,11 @@ export class SkyTrainStationOwner {
       yaw = 0,
       role = 'detail',
     ) => parts.push({ id, position, size, material, yaw, role });
-    if (this.data.id === 'main-street-science-world') {
-      const floor = this.data.floors.find((f) => f.id === 'main-expo')!,
+    if (
+      !this.openWorld &&
+      this.geometryData.id === 'main-street-science-world'
+    ) {
+      const floor = this.geometryData.floors.find((f) => f.id === 'main-expo')!,
         bounds = new THREE.Box3().setFromPoints(
           floor.vertices.map((p) => new THREE.Vector3(...p)),
         ),
@@ -1106,6 +1310,34 @@ export class SkyTrainStationOwner {
         0.4,
       );
     }
+    if (this.openWorld) {
+      const geometries = this.geometryData.floors
+        .filter((f) => f.kind !== 'platform')
+        .map((f) => {
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(f.vertices.flat(), 3),
+          );
+          geometry.setIndex(f.indices);
+          geometry.computeVertexNormals();
+          return geometry;
+        });
+      if (geometries.length) {
+        const geometry = mergeGeometries(geometries),
+          material = new THREE.MeshStandardMaterial({
+            color: palette.floor,
+            side: THREE.DoubleSide,
+            roughness: 0.85,
+          });
+        geometries.forEach((g) => g.dispose());
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.name = 'geographic-entrance-and-concourse-support';
+        this.resources.add(geometry);
+        this.resources.add(material);
+        this.group.add(mesh);
+      }
+    }
     const sloped = new Map<string, THREE.Matrix4[]>();
     const beam = (
       material: string,
@@ -1139,14 +1371,14 @@ export class SkyTrainStationOwner {
     // triangles; without it an access stair looks out into the city/ocean.
     // These are representative shells around the source-backed access layout.
     // Every authored pedestrian opening and train portal is subtracted first.
-    if (this.data.id !== 'main-street-science-world') {
+    if (this.geometryData.id !== 'main-street-science-world') {
       const boundsFor = (vertices: StationVector[]) =>
         new THREE.Box3().setFromPoints(
           vertices.map((p) => new THREE.Vector3(...p)),
         );
       const walkBounds = [
-        ...this.data.floors.map((f) => boundsFor(f.vertices)),
-        ...this.data.connections
+        ...this.geometryData.floors.map((f) => boundsFor(f.vertices)),
+        ...this.geometryData.connections
           .filter((c) => c.type === 'stairs' && c.treads.length)
           .map((c) => boundsFor(c.treads.flatMap((t) => t.vertices))),
       ];
@@ -1171,7 +1403,7 @@ export class SkyTrainStationOwner {
         box.max.y += 2.4;
         return box;
       });
-      for (const p of this.data.platforms) {
+      for (const p of this.geometryData.platforms) {
         const q = new THREE.Quaternion(...p.quaternion),
           vertices: THREE.Vector3[] = [];
         for (const x of [-1.6, 1.6])
@@ -1230,7 +1462,7 @@ export class SkyTrainStationOwner {
           enclosureBoxes.push({ id: `underground-${id}-${i}`, box });
         }
       };
-      for (const f of this.data.floors) {
+      for (const f of this.geometryData.floors) {
         if (f.kind === 'platform' || f.vertices[0][1] >= -0.1) continue;
         const box = boundsFor(f.vertices),
           c = box.getCenter(new THREE.Vector3()),
@@ -1259,7 +1491,7 @@ export class SkyTrainStationOwner {
           );
         }
       }
-      if (this.data.id !== 'stadium-chinatown') {
+      if (this.geometryData.id !== 'stadium-chinatown') {
         const c = stationBounds.getCenter(new THREE.Vector3()),
           s = stationBounds.getSize(new THREE.Vector3()),
           min = stationBounds.min.y - 1.2,
@@ -1285,8 +1517,10 @@ export class SkyTrainStationOwner {
           );
         }
       }
-      if (this.data.id !== 'stadium-chinatown') {
-        const platforms = this.data.floors.filter((f) => f.kind === 'platform');
+      if (this.geometryData.id !== 'stadium-chinatown') {
+        const platforms = this.geometryData.floors.filter(
+          (f) => f.kind === 'platform',
+        );
         for (const f of platforms) {
           const box = boundsFor(f.vertices),
             c = box.getCenter(new THREE.Vector3()),
@@ -1307,7 +1541,7 @@ export class SkyTrainStationOwner {
         }
         // Short opaque track-side buffers hide the outside world beyond the
         // platform bulkheads; their rail portals remain physically unobstructed.
-        for (const p of this.data.platforms) {
+        for (const p of this.geometryData.platforms) {
           const q = new THREE.Quaternion(...p.quaternion),
             alongX = Math.abs(q.y) > 0.5,
             point = (x: number, y: number, z: number) =>
@@ -1338,7 +1572,7 @@ export class SkyTrainStationOwner {
           }
         }
       }
-      for (const flight of this.data.connections.filter(
+      for (const flight of this.geometryData.connections.filter(
         (c) => c.type === 'stairs' && Math.min(c.start[1], c.end[1]) < -0.1,
       )) {
         const a = new THREE.Vector3(...flight.start),
@@ -1349,7 +1583,9 @@ export class SkyTrainStationOwner {
         if (length < 0.1) continue;
         const lateral = new THREE.Vector3(run.z, 0, -run.x).normalize(),
           halfWidth =
-            this.data.id === 'granville' ? 2.2 : flight.width / 2 + 0.22,
+            this.geometryData.id === 'granville'
+              ? 2.2
+              : flight.width / 2 + 0.22,
           center = a.clone().add(b).multiplyScalar(0.5),
           low = Math.min(a.y, b.y),
           high = Math.max(a.y, b.y);
@@ -1425,7 +1661,7 @@ export class SkyTrainStationOwner {
     // Original geometry only: the black handrails, glazed balustrades and white
     // ribbed passage recall the official Granville escalator photographs. The
     // broad arrangement is representative, not a measured reproduction.
-    for (const flight of this.data.connections.filter(
+    for (const flight of this.geometryData.connections.filter(
       (c) => c.type === 'stairs',
     )) {
       const a = new THREE.Vector3(...flight.start),
@@ -1439,7 +1675,8 @@ export class SkyTrainStationOwner {
         0,
         -horizontal.x,
       ).normalize();
-      const banks = this.data.id === 'granville' ? [-1.35, 0, 1.35] : [0];
+      const banks =
+        this.geometryData.id === 'granville' ? [-1.35, 0, 1.35] : [0];
       for (const bank of banks) {
         if (bank !== 0)
           beam(
@@ -1497,8 +1734,8 @@ export class SkyTrainStationOwner {
           });
         }
       }
-      if (['granville', 'burrard'].includes(this.data.id)) {
-        const halfWidth = this.data.id === 'granville' ? 2.12 : 1.5;
+      if (['granville', 'burrard'].includes(this.geometryData.id)) {
+        const halfWidth = this.geometryData.id === 'granville' ? 2.12 : 1.5;
         for (let k = 0; k <= Math.ceil(run / 2); k++) {
           const p = a
             .clone()
@@ -1522,7 +1759,7 @@ export class SkyTrainStationOwner {
       }
     }
     const platformFloors = [
-      ...new Set(this.data.platforms.map((p) => p.surfaceId)),
+      ...new Set(this.geometryData.platforms.map((p) => p.surfaceId)),
     ].map((id) => this.floorMap.get(id)!);
     for (const [index, f] of platformFloors.entries()) {
       const bounds = new THREE.Box3().setFromPoints(
@@ -1534,11 +1771,13 @@ export class SkyTrainStationOwner {
         length = Math.max(size.x, size.z),
         width = Math.min(size.x, size.z),
         y = f.vertices[0][1];
-      const line = this.data.platforms.find((p) => p.surfaceId === f.id)!.line,
+      const line = this.geometryData.platforms.find(
+          (p) => p.surfaceId === f.id,
+        )!.line,
         heading = alongX ? Math.PI / 2 : 0;
       const label = line === 'expo' ? 'EXPO LINE' : 'CANADA LINE';
       this.sign(
-        this.data.name.toUpperCase(),
+        this.geometryData.name.toUpperCase(),
         [center.x, y + 2.35, center.z],
         heading,
         Math.min(width + 0.8, 6),
@@ -1584,11 +1823,12 @@ export class SkyTrainStationOwner {
         );
       if (
         !['main-street-science-world', 'stadium-chinatown'].includes(
-          this.data.id,
+          this.geometryData.id,
         )
       ) {
         const undergroundWall =
-          this.data.id === 'burrard' || this.data.id === 'granville';
+          this.geometryData.id === 'burrard' ||
+          this.geometryData.id === 'granville';
         if (undergroundWall) {
           // Broad Dunsmuir tunnel character; no surveyed arch section is claimed.
           const vertices: number[] = [],
@@ -1614,7 +1854,7 @@ export class SkyTrainStationOwner {
           geometry.setIndex(indices);
           geometry.computeVertexNormals();
           const material = new THREE.MeshStandardMaterial({
-              color: this.data.id === 'granville' ? 0xb4b7b5 : 0xc4bda9,
+              color: this.geometryData.id === 'granville' ? 0xb4b7b5 : 0xc4bda9,
               roughness: 0.95,
               side: THREE.DoubleSide,
               emissive: 0x2b3030,
@@ -1634,7 +1874,7 @@ export class SkyTrainStationOwner {
               center.z - (alongX ? width / 2 + 4 : 0),
             ],
             alongX ? [length + 3, 3.2, 0.25] : [0.25, 3.2, length + 3],
-            this.data.id === 'waterfront' ? 'brick' : 'wall',
+            this.geometryData.id === 'waterfront' ? 'brick' : 'wall',
           );
           add(
             `platform-enclosure-${index}-right`,
@@ -1661,7 +1901,20 @@ export class SkyTrainStationOwner {
           );
       }
     }
-    for (const e of this.data.entrances) {
+    for (const e of this.geometryData.entrances) {
+      if (this.openWorld) {
+        const direction = this.streetAccess?.entrances.find(
+          (entry) => entry.id === e.id,
+        )?.localDirection ?? [0, 0, 1];
+        this.sign(
+          `${this.geometryData.name} / SkyTrain`,
+          [e.point[0], e.point[1] + 2.55, e.point[2]],
+          Math.atan2(-direction[0], -direction[2]),
+          5,
+          0.6,
+        );
+        continue;
+      }
       const f = this.floorMap.get(e.surfaceId)!;
       const b = new THREE.Box3().setFromPoints(
           f.vertices.map((p) => new THREE.Vector3(...p)),
@@ -1669,7 +1922,8 @@ export class SkyTrainStationOwner {
         s = b.getSize(new THREE.Vector3()),
         c = b.getCenter(new THREE.Vector3());
       const brick =
-        this.data.id === 'yaletown-roundhouse' || this.data.id === 'waterfront';
+        this.geometryData.id === 'yaletown-roundhouse' ||
+        this.geometryData.id === 'waterfront';
       add(
         `${e.id}-entry-roof`,
         [c.x, c.y + 3.5, c.z],
@@ -1691,7 +1945,7 @@ export class SkyTrainStationOwner {
         });
       }
       this.sign(
-        `${this.data.name}   /   SkyTrain`,
+        `${this.geometryData.name}   /   SkyTrain`,
         [c.x, c.y + 2.55, c.z + 1.3],
         0,
         Math.min(6, s.x + 0.4),
@@ -1802,7 +2056,7 @@ export class SkyTrainStationOwner {
       }
     });
     return {
-      station: this.data.id,
+      station: this.geometryData.id,
       drawCalls,
       instances,
       triangles,
@@ -1813,6 +2067,7 @@ export class SkyTrainStationOwner {
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    this.boardingDoorCache.clear();
     this.group.removeFromParent();
     this.group.traverse((o) => {
       if (o instanceof THREE.InstancedMesh) o.dispose();
@@ -1823,16 +2078,82 @@ export class SkyTrainStationOwner {
   }
 }
 
-/** At most one rendered interior is owned. Metadata is cached for only the
- * seven whitelisted stations; a stale asynchronous request never replaces it. */
+/** Seven bounded station owners are loaded by proximity and retained in the
+ * geographic world. Legacy scene-only load remains available for asset QA. */
 export class SkyTrainStations {
   active: SkyTrainStationOwner | null = null;
+  private readonly ownersById = new Map<StationId, SkyTrainStationOwner>();
+  private readonly ownerRequests = new Map<
+    StationId,
+    Promise<SkyTrainStationOwner>
+  >();
+  private worldMode = false;
   private readonly cache = new Map<StationId, RuntimeStationData>();
   private controller: AbortController | null = null;
   private generation = 0;
   private disposed = false;
   private readonly dataRequests = new Set<AbortController>();
   constructor(private readonly options: SkyTrainStationOptions) {}
+  get owners(): readonly SkyTrainStationOwner[] {
+    return [...this.ownersById.values()];
+  }
+  get(id: StationId): SkyTrainStationOwner | null {
+    return this.ownersById.get(id) ?? null;
+  }
+  /** Retain architecture at its geographic location, independently of active ride. */
+  async ensure(
+    id: StationId,
+    quality: 'balanced' | 'high' | 'ultra' = 'balanced',
+  ): Promise<SkyTrainStationOwner> {
+    if (this.disposed || !ids.has(id))
+      throw new Error('Unknown or disposed SkyTrain station');
+    this.worldMode = true;
+    const cached = this.ownersById.get(id);
+    if (cached) return cached;
+    const pending = this.ownerRequests.get(id);
+    if (pending) return pending;
+    const request = this.describe(id)
+      .then((data) => {
+        if (this.disposed) throw new Error('Station load superseded');
+        const owner = new SkyTrainStationOwner(
+          data,
+          this.options.heightAt,
+          quality,
+          true,
+          this.options.streetHeightAt,
+        );
+        this.ownersById.set(id, owner);
+        this.options.scene?.add(owner.group);
+        return owner;
+      })
+      .finally(() => this.ownerRequests.delete(id));
+    this.ownerRequests.set(id, request);
+    return request;
+  }
+  async updateProximity(
+    worldPosition: StationVector,
+    radius = 220,
+    pinnedId?: StationId,
+  ): Promise<void> {
+    if (
+      !finiteVector(worldPosition) ||
+      !Number.isFinite(radius) ||
+      radius < 0 ||
+      this.disposed
+    )
+      return;
+    const wanted = SKYTRAIN_STATIONS.filter(
+      (station) =>
+        station.id === pinnedId ||
+        SKYTRAIN_STREET_ENTRANCES[station.id].some((entrance) => {
+          const [x, z] = project(entrance.lonlat);
+          return (
+            Math.hypot(x - worldPosition[0], z - worldPosition[2]) <= radius
+          );
+        }),
+    );
+    await Promise.all(wanted.map((station) => this.ensure(station.id)));
+  }
   /** Metadata-only prefetch never replaces or hides the current interior. */
   async describe(id: StationId): Promise<RuntimeStationData> {
     if (this.disposed || !ids.has(id))
@@ -1866,6 +2187,13 @@ export class SkyTrainStations {
   ): Promise<SkyTrainStationOwner> {
     if (this.disposed || !ids.has(id))
       throw new Error('Unknown or disposed SkyTrain station');
+    if (this.worldMode) {
+      const owner = await this.ensure(id, quality);
+      if (!owner.data.platforms.some((p) => p.line === line))
+        throw new Error('Line does not serve this station');
+      this.active = owner;
+      return owner;
+    }
     const generation = ++this.generation;
     this.controller?.abort();
     const controller = new AbortController();
@@ -1911,7 +2239,7 @@ export class SkyTrainStations {
     return owner;
   }
   hide() {
-    if (this.active) this.active.group.visible = false;
+    if (!this.worldMode && this.active) this.active.group.visible = false;
   }
   dispose() {
     if (this.disposed) return;
@@ -1922,6 +2250,9 @@ export class SkyTrainStations {
     for (const c of this.dataRequests) c.abort();
     this.dataRequests.clear();
     this.active?.dispose();
+    for (const owner of this.ownersById.values()) owner.dispose();
+    this.ownersById.clear();
+    this.ownerRequests.clear();
     this.active = null;
     this.cache.clear();
   }

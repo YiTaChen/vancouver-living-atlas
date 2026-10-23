@@ -305,11 +305,11 @@ export class SkyTrainPassengerSpace {
       }
     return next;
   }
-  doorSpawn(side: 'left' | 'right'): CabinPoint {
-    // The selected central door is z=0 on both original cabins. Stay inside its
-    // threshold even while the door is visibly open; alighting owns the crossing.
+  doorSpawn(side: 'left' | 'right', z = 0): CabinPoint {
+    // Keep the selected physical doorway's longitudinal position. Alighting
+    // owns the threshold crossing even while the door is visibly open.
     for (const x of [side === 'left' ? 0.65 : -0.65, 0, 0.3, -0.3]) {
-      const point: CabinPoint = [x, this.floor, 0];
+      const point: CabinPoint = [x, this.floor, z];
       if (this.clear(point)) return point;
     }
     throw new Error('No clear passenger door threshold');
