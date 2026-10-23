@@ -120,11 +120,21 @@ function createActualShoreStrips(e) {
       module: ts.ModuleKind.CommonJS,
     },
   }).outputText;
-  new Function('e', 'THREE', 'lines', 'project', code)(
+  new Function(
+    'e',
+    'THREE',
+    'lines',
+    'project',
+    'createSiwashClosedRockPositions',
+    'createSiwashMainlandSkirtPositions',
+    code,
+  )(
     e,
     THREE,
     geo.lines,
     geo.project,
+    load('lib/city/siwash-coast.ts').createSiwashClosedRockPositions,
+    load('lib/city/siwash-coast.ts').createSiwashMainlandSkirtPositions,
   );
 }
 

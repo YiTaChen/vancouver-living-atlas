@@ -1,0 +1,39 @@
+{
+  "checkpoint": "Siwash legacy",
+  "hour": 14,
+  "quality": "balanced",
+  "qualityMode": "manual",
+  "camera": [
+    -2272.151255766888,
+    28.000000000000007,
+    -2130.966399999998
+  ],
+  "target": [
+    -2314.151255766888,
+    10.000000000000002,
+    -2172.966399999998
+  ],
+  "lighting": {
+    "size": 512,
+    "textureBytes": 1048576,
+    "textures": 1,
+    "activeTexels": 81249,
+    "lampSources": 1530,
+    "roadSources": 1314,
+    "buildMs": 721.2999999970198,
+    "wrappedMaterials": 163,
+    "disabledLamps": 0,
+    "warmStateBytes": 1073056,
+    "disposed": false,
+    "nightAmount": 0,
+    "activity": 0.43124999999999997
+  },
+  "render": {
+    "calls": 31,
+    "triangles": 562143
+  },
+  "memory": {
+    "geometries": 721,
+    "textures": 69
+  }
+}

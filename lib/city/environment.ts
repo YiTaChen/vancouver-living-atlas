@@ -1,5 +1,9 @@
 import * as THREE from 'three';
 import { prepareParkPaths } from './park-paths';
+import {
+  createSiwashClosedRockPositions,
+  createSiwashMainlandSkirtPositions,
+} from './siwash-coast';
 import { conformStanleyNorthboundCrossing } from './stanley-northbound-crossing';
 import { createBuses, updateBuses, type BusRoute } from './city-buses';
 import { CityBusAssets } from './bus-assets';
@@ -20,8 +24,14 @@ import { trimRoad } from './road-trim';
 import { TrafficVehicleAssets } from './traffic-vehicles';
 import {
   NightStreetLighting,
+  type NightStreetLamp,
   type NightStreetRoad,
 } from './night-street-lighting';
+import {
+  createStanleyNightPolicy,
+  reconcileStanleyStreetLamps,
+  stanleyNightBounds,
+} from './stanley-night-lighting';
 import { TrafficNightLights } from './traffic-night-lights';
 import {
   createDowntownNightPolicy,
@@ -199,12 +209,28 @@ export function createNature(e: CityEngine) {
     rockPos: number[] = [];
   for (const f of e.data.beachCoast.shoreline.features)
     for (const l of lines(f)) {
+      const closedRock = createSiwashClosedRockPositions(l, (x, z) =>
+        e.elevation(x, z),
+      );
+      if (closedRock) {
+        rockPos.push(...closedRock);
+        continue;
+      }
       const ps = l.map(project);
       for (let i = 0; i < ps.length - 1; i++) {
         const a = ps[i],
           b = ps[i + 1],
           len = Math.hypot(b[0] - a[0], b[1] - a[1]);
         if (len < 0.1) continue;
+        const mainlandRock = createSiwashMainlandSkirtPositions(
+          l[i],
+          l[i + 1],
+          (x, z) => e.elevation(x, z),
+        );
+        if (mainlandRock) {
+          rockPos.push(...mainlandRock);
+          continue;
+        }
         const [lon, lat] = [l[i][0], l[i][1]],
           isCliff = lat > 49.303 && lon < -123.15;
         const colorLine = isCliff ? rockPos : shorePos;
@@ -465,10 +491,21 @@ export function createStreetDetails(e: CityEngine): Traffic {
       !/bikeway|lane|private|non.city/i.test(f.properties.class || '') &&
       !/bridge|causeway/i.test(f.properties.name || ''),
   );
-  const lampPoints = roadDecorations(e, e.data.roadGraph),
+  const stanleyPolygons = e.parkPolys
+      .filter((park) => park.name === 'Stanley Park')
+      .map((park) => park.poly),
+    reconciled = reconcileStanleyStreetLamps(
+      roadDecorations(e, e.data.roadGraph),
+      stanleyPolygons,
+      e.data.roadGraph,
+      (x, z) => e.onLand(x, z),
+    ),
+    lampPoints = reconciled.lampPoints,
     routes: Traffic['routes'] = [],
     busRoutes: BusRoute[] = [];
   e.data.streetLampPoints = lampPoints;
+  e.data.stanleyStreetLamps = reconciled;
+  e.data.streetGeometry.lamps = lampPoints.length;
   const dummy = new THREE.Object3D();
   for (let k = 0; k < roads.length; k++) {
     const f = roads[k],
@@ -549,7 +586,12 @@ export function createStreetDetails(e: CityEngine): Traffic {
   const downtownAt = createDowntownNightPolicy(excluded, (x, z) =>
     e.onLand(x, z),
   );
-  const lightSources = [],
+  const lightSources: NightStreetLamp[] = [],
+    parkLightSources: NightStreetLamp[] = [],
+    sourceParkIndices = new Set(
+      reconciled.sourcePoles.map((pole) => pole.lampIndex),
+    ),
+    parkSourceToLamp: number[] = [],
     lampLightSourceIndices = new Int32Array(lampPoints.length).fill(-1);
   for (let i = 0; i < lampPoints.length; i++) {
     const [x, z, yaw] = lampPoints[i];
@@ -561,17 +603,28 @@ export function createStreetDetails(e: CityEngine): Traffic {
     dummy.position.set(head.x, head.y, head.z);
     dummy.updateMatrix();
     lightCaps.setMatrixAt(i, dummy.matrix);
-    if (downtownAt(head.x, head.z)) {
-      lampLightSourceIndices[i] = lightSources.length;
-      lightSources.push({
+    const parkSource = sourceParkIndices.has(i);
+    if (parkSource || downtownAt(head.x, head.z)) {
+      const source = {
         ...head,
         groundY:
           nightAsphaltHeight(e, head.x, head.z) ??
           (e.data.roadRelief?.(head.x, head.z) ?? e.elevation(head.x, head.z)) +
             1.05,
-      });
+      };
+      if (parkSource) {
+        parkSourceToLamp.push(i);
+        parkLightSources.push(source);
+      } else {
+        lampLightSourceIndices[i] = lightSources.length;
+        lightSources.push(source);
+      }
     }
   }
+  for (const [parkIndex, lampIndex] of parkSourceToLamp.entries())
+    lampLightSourceIndices[lampIndex] = lightSources.length + parkIndex;
+  // Shared immutable map is also exposed for inventory/impact acceptance.
+  e.data.streetLampLightSourceIndices = lampLightSourceIndices;
   e.roads.add(lamps, lightCaps);
   const body = new THREE.InstancedMesh(
     new THREE.BoxGeometry(1.8, 0.8, 4.3),
@@ -645,10 +698,20 @@ export function createStreetDetails(e: CityEngine): Traffic {
     roads: streetRoads,
     allowed: downtownAt,
     bounds: DOWNTOWN_NIGHT_BOUNDS,
+    park: {
+      lamps: parkLightSources,
+      bounds: stanleyNightBounds(),
+      allowed: createStanleyNightPolicy(
+        stanleyPolygons,
+        e.data.waterPolys || [],
+        (x, z) => e.onLand(x, z),
+      ),
+    },
   });
   streetLighting.update(e.clock.hour, e.uniforms.night.value);
-  // Wrap shared receivers once before warmup; terrain/water/sky and interiors
-  // keep their existing shaders. The mask retains darkness in parks and woods.
+  // One owner wraps both fields before warmup. Terrain receives only the finite
+  // park pools permitted by the park mask; water/sky/interiors stay independent.
+  wrapNightStreetMaterials(e.terrain, streetLighting, { parkOnly: true });
   for (const group of [
     e.roads,
     e.buildings,
@@ -696,6 +759,7 @@ export function nightAsphaltHeight(e: CityEngine, x: number, z: number) {
 export function wrapNightStreetMaterials(
   group: THREE.Object3D,
   lighting: NightStreetLighting,
+  options: { parkOnly?: boolean } = {},
 ) {
   group.traverse((object) => {
     if (!(object instanceof THREE.Mesh)) return;
@@ -704,9 +768,10 @@ export function wrapNightStreetMaterials(
       : [object.material])
       if (material instanceof THREE.MeshStandardMaterial)
         lighting.wrapMaterial(material, {
-          facade: material
-            .customProgramCacheKey()
-            .includes('atlas-city-bodies-pbr-v2'),
+          ...options,
+          facade: /atlas-city-bodies-pbr-v\d+(?:-|$)/.test(
+            material.customProgramCacheKey(),
+          ),
         });
   });
 }

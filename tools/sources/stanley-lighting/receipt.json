@@ -1,0 +1,31 @@
+{
+  "retrievedAt": "2026-10-23T09:40:43.223995+00:00",
+  "publisher": "City of Vancouver",
+  "dataset": "street-lighting-poles",
+  "datasetPage": "https://opendata.vancouver.ca/explore/dataset/street-lighting-poles/",
+  "license": "Open Government Licence - Vancouver",
+  "licenseUrl": "https://opendata.vancouver.ca/pages/licence/",
+  "files": {
+    "regional-poles.geojson": {
+      "url": "https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/street-lighting-poles/exports/geojson?where=within%28geo_point_2d%2C+geom%27POLYGON%28%28-123.17+49.289%2C-123.17+49.32%2C-123.12+49.32%2C-123.12+49.289%2C-123.17+49.289%29%29%27%29",
+      "bytes": 193344,
+      "sha256": "5c82e21c10b32fb92bca7e495e5c64801c3793296f13878804ebfe84262e576f"
+    },
+    "dataset-metadata.json": {
+      "url": "https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/street-lighting-poles",
+      "bytes": 3713,
+      "sha256": "e9bd997252c17a216e8682555bc0c208bfb0dd75ff667475b1f41531e98ee97c"
+    }
+  },
+  "selection": {
+    "parkFile": "public/data/parks.geojson",
+    "parkName": "Stanley Park",
+    "polygonSha256": "3601c392311b2377a98cb072dd6143746561e25f4c1a5c6b9c6a0659d4bc75b3"
+  },
+  "limitations": [
+    "Engineering Services inventory; absence of records does not establish absence of Park Board or private lights.",
+    "Positions are generally survey accurate; fixture type, direction, height, wattage and operational state are not supplied.",
+    "Regional export and current park-polygon intersection are an inventory snapshot, not a complete lighting survey.",
+    "Visual fixture geometry, orientation toward nearby roads, warm colour and finite pool falloff are authored approximations."
+  ]
+}

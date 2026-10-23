@@ -1,0 +1,84 @@
+{
+  "checkpoint": "Georgia entrance",
+  "hour": 23,
+  "quality": "balanced",
+  "qualityMode": "manual",
+  "camera": [
+    -568.1762646475418,
+    24.071681821914005,
+    -1165.2682209596032
+  ],
+  "target": [
+    -596.1762646475418,
+    6.071681821914,
+    -1195.2682209596032
+  ],
+  "lighting": {
+    "size": 512,
+    "textureBytes": 2097152,
+    "textures": 2,
+    "activeTexels": 81249,
+    "lampSources": 1530,
+    "roadSources": 1314,
+    "buildMs": 275,
+    "wrappedMaterials": 269,
+    "disabledLamps": 0,
+    "warmStateBytes": 2123248,
+    "disposed": false,
+    "nightAmount": 1,
+    "activity": 0.7542084908999245,
+    "park": {
+      "size": 512,
+      "textureBytes": 1048576,
+      "textures": 1,
+      "activeTexels": 16580,
+      "lampSources": 101,
+      "roadSources": 0,
+      "buildMs": 91.5,
+      "wrappedMaterials": 0,
+      "disabledLamps": 0,
+      "warmStateBytes": 1050192,
+      "disposed": false,
+      "nightAmount": 1,
+      "activity": 0.7542084908999245
+    },
+    "downtownTextureBytes": 1048576
+  },
+  "poleInventory": {
+    "records": 103,
+    "deduplicated": 102,
+    "admitted": 101,
+    "rejected": [
+      {
+        "sourceIds": [
+          "S2:26"
+        ],
+        "coordinates": [
+          -123.13399275704072,
+          49.30645218768322
+        ],
+        "point": [
+          -435.1473558606353,
+          -2276.737532895926
+        ],
+        "lampIndex": null,
+        "reason": "outside-current-runtime-land"
+      }
+    ]
+  },
+  "parkSample": {
+    "street": 0,
+    "warm": 0.8796008483771875,
+    "groundY": 7.057872293684001,
+    "coverage": 1
+  },
+  "siwashLevel": "low",
+  "render": {
+    "calls": 197,
+    "triangles": 1930497
+  },
+  "memory": {
+    "geometries": 734,
+    "textures": 85
+  }
+}

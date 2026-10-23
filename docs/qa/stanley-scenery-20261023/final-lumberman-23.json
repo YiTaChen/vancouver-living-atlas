@@ -1,0 +1,84 @@
+{
+  "checkpoint": "Lumberman",
+  "hour": 23,
+  "quality": "balanced",
+  "qualityMode": "manual",
+  "camera": [
+    -541.7176473292883,
+    17.472084209114833,
+    -2299.3358361790483
+  ],
+  "target": [
+    -565.7176473292883,
+    3.472084209114834,
+    -2321.3358361790483
+  ],
+  "lighting": {
+    "size": 512,
+    "textureBytes": 2097152,
+    "textures": 2,
+    "activeTexels": 81249,
+    "lampSources": 1530,
+    "roadSources": 1314,
+    "buildMs": 275,
+    "wrappedMaterials": 269,
+    "disabledLamps": 0,
+    "warmStateBytes": 2123248,
+    "disposed": false,
+    "nightAmount": 1,
+    "activity": 0.7542084908999245,
+    "park": {
+      "size": 512,
+      "textureBytes": 1048576,
+      "textures": 1,
+      "activeTexels": 16580,
+      "lampSources": 101,
+      "roadSources": 0,
+      "buildMs": 91.5,
+      "wrappedMaterials": 0,
+      "disabledLamps": 0,
+      "warmStateBytes": 1050192,
+      "disposed": false,
+      "nightAmount": 1,
+      "activity": 0.7542084908999245
+    },
+    "downtownTextureBytes": 1048576
+  },
+  "poleInventory": {
+    "records": 103,
+    "deduplicated": 102,
+    "admitted": 101,
+    "rejected": [
+      {
+        "sourceIds": [
+          "S2:26"
+        ],
+        "coordinates": [
+          -123.13399275704072,
+          49.30645218768322
+        ],
+        "point": [
+          -435.1473558606353,
+          -2276.737532895926
+        ],
+        "lampIndex": null,
+        "reason": "outside-current-runtime-land"
+      }
+    ]
+  },
+  "parkSample": {
+    "street": 0,
+    "warm": 0.7719539815085308,
+    "groundY": 4.9427033847365,
+    "coverage": 1
+  },
+  "siwashLevel": "low",
+  "render": {
+    "calls": 111,
+    "triangles": 1153279
+  },
+  "memory": {
+    "geometries": 734,
+    "textures": 85
+  }
+}

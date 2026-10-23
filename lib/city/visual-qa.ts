@@ -14,6 +14,7 @@ import { installVehicleImpactQA } from './vehicle-impact-qa';
 import { installStanleyDriveQA } from './stanley-drive-qa';
 import { installVehicleDriftQA } from './vehicle-drift-qa';
 import { installUpgradeEnduranceQA } from './upgrade-endurance-qa';
+import { installParkSceneryQA } from './park-scenery-qa';
 
 const cases = [
   {id:'station-lobby', interiorSite:'waterfront', interiorAt:[0,5], interiorYaw:Math.PI},
@@ -289,6 +290,7 @@ export function installVisualQA(e: CityEngine) {
   installVehicleImpactQA(e,panel);
   installStanleyDriveQA(e,panel);
   installVehicleDriftQA(e,panel);
+  installParkSceneryQA(e,panel);
   installStreetFurnitureQA(e, panel, runLease);
   const button = (name: string, fn: () => void) => {
     const b = document.createElement('button');
