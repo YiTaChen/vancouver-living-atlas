@@ -18,6 +18,7 @@ import {
   Tornado,
 } from 'lucide-react';
 import { TravelJoystick } from './travel-joystick';
+import { PanelToggle } from './panel-toggle';
 import type { TeslaController, TeslaButton } from '@/lib/city/tesla-controller';
 import type { TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaQualityPreference } from '@/lib/city/tesla-quality';
@@ -185,6 +186,7 @@ export function TeslaControls({
   onCloseOptions: () => void;
 }) {
   const [help, setHelp] = useState(false);
+  const [panelExpanded, setPanelExpanded] = useState(true);
   const t = (key: TextKey) => teslaText(locale, key);
   const move = useCallback(
     (x: number, y: number) => controller?.setAxes(x, y),
@@ -382,9 +384,18 @@ export function TeslaControls({
     <>
       {panelVisible && (!touch || optionsOpen) && (
         <section
-          className={`tesla-panel glass ui-chrome ${touch ? 'mobile-travel-sheet' : ''}`}
+          className={`tesla-panel glass ui-chrome collapsible-panel ${touch ? 'mobile-travel-sheet' : ''}`}
+          data-panel-collapsed={touch ? undefined : !panelExpanded}
           aria-label={t('options')}
         >
+          {!touch && (
+            <PanelToggle
+              locale={locale}
+              title={t('options')}
+              expanded={panelExpanded}
+              onToggle={() => setPanelExpanded((value) => !value)}
+            />
+          )}
           <header>
             <FlyingCarIcon size={19} />
             <strong>

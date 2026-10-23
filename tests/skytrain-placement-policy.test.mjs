@@ -90,7 +90,7 @@ assert.equal(pageDeclarations.size, pageNames.length);
 const pageCode = ts.transpileModule(
   `
   export function pageActions(deps) {
-    const {engine,teslaEntering,ready,setNotice,setSettings,setTour,setPanel,setClean,setPlacing,setMobilePanel,setTeslaPreparing,setRocketChoosing,setMobileHudHidden,setLocalOrbit} = deps;
+    const {engine,teslaEntering,ready,setNotice,setSettings,setTour,setPanel,setClean,setPlacing,setMobilePanel,setTeslaPreparing,setRocketChoosing,setHudHidden,setLocalOrbit} = deps;
     ${pageNames.map((name) => pageDeclarations.get(name)).join('\n')}
     return {switchMode,beginPlacement,switchInScene,beginFlight,beginTesla,chooseRocket,beginRocket,dragAircraft,dragFigure};
   }
@@ -624,7 +624,7 @@ function actionsFor(f) {
     setRocketChoosing(value) {
       city.rocketChoosing = value;
     },
-    setMobileHudHidden() {},
+    setHudHidden() {},
     setLocalOrbit() {},
   };
   return Object.assign(pageActions(deps), {

@@ -1046,3 +1046,213 @@ test('real React server rendering exposes a named observation region and pressed
   assert.match(html, /data-rocket-focus="sun" aria-pressed="true"/);
   assert.doesNotMatch(html, /<dialog|Observe space|Autopilot|rocket-telemetry/);
 });
+
+const panelButton = (host, section) =>
+  all(
+    host.tree,
+    (node) =>
+      node.type === 'button' &&
+      node.props['aria-controls'] === `rocket-${section}-content`,
+  )[0];
+const panelContent = (host, section) =>
+  all(host.tree, (node) => node.props.id === `rocket-${section}-content`)[0];
+
+test('minimizing rocket controls preserves input, launch and abort while snapshots cannot reopen the panel', () => {
+  const { host, props, calls } = setup({ phase: 'ready' });
+  const initialCalls = calls.length;
+  panelButton(host, 'main').props.onClick();
+  host.render();
+  assert.equal(panelButton(host, 'main').props['aria-expanded'], false);
+  assert.equal(panelContent(host, 'main').props.hidden, true);
+  assert.equal(
+    calls.length,
+    initialCalls,
+    'presentation does not command or disable the rocket',
+  );
+  let actions = findClass(host, 'rocket-minimized-actions');
+  all(
+    actions,
+    (node) => node.type === 'button' && /Launch/.test(text(node)),
+  )[0].props.onClick();
+  assert.deepEqual(calls.at(-1), ['launch']);
+  host.render({
+    ...props,
+    snapshot: { ...props.snapshot, phase: 'flight', missionId: 8 },
+  });
+  assert.equal(
+    panelContent(host, 'main').props.hidden,
+    true,
+    'new snapshots and missions retain the user preference',
+  );
+  actions = findClass(host, 'rocket-minimized-actions');
+  all(
+    actions,
+    (node) => node.type === 'button' && /Abort launch/.test(text(node)),
+  )[0].props.onClick();
+  assert.deepEqual(calls.at(-1), ['abort']);
+  panelButton(host, 'main').props.onClick();
+  host.render();
+  assert.equal(panelContent(host, 'main').props.hidden, false);
+  assert.equal(panelButton(host, 'main').props['aria-expanded'], true);
+  assert.equal(calls.filter((call) => call[0] === 'setInputEnabled').length, 1);
+  host.unmount();
+});
+
+test('chooser and placement can be minimized independently without cancelling a build or losing their restore controls', () => {
+  const { host, props, calls } = setup({}, { choosing: true });
+  panelButton(host, 'chooser').props.onClick();
+  host.render();
+  assert.equal(panelContent(host, 'chooser').props.hidden, true);
+  assert(panelButton(host, 'chooser'));
+  assert(button(host, 'Cancel'), 'cancel remains in the visible header');
+  assert.equal(
+    calls.some((call) => call[0] === 'choose' || call[0] === 'closeChoosing'),
+    false,
+  );
+  host.render({
+    ...props,
+    choosing: false,
+    snapshot: { ...props.snapshot, placing: true },
+  });
+  panelButton(host, 'placement').props.onClick();
+  host.render();
+  assert.equal(panelContent(host, 'placement').props.hidden, true);
+  assert.equal(
+    calls.some((call) => call[0] === 'cancelPlacement'),
+    false,
+  );
+  panelButton(host, 'placement').props.onClick();
+  host.render();
+  assert.equal(panelContent(host, 'placement').props.hidden, false);
+  host.render(props);
+  assert.equal(panelContent(host, 'chooser').props.hidden, true);
+  host.unmount();
+});
+
+test('minimized space observation keeps a city exit and restores the same selected destination and mission details', () => {
+  const { host, props, calls } = setup({
+    phase: 'space',
+    spaceFocus: 'sun',
+    altitude: 100000,
+  });
+  button(host, 'Mission details').props.onClick();
+  host.render();
+  panelButton(host, 'space').props.onClick();
+  host.render();
+  assert.equal(panelContent(host, 'space').props.hidden, true);
+  const exit = all(
+    findClass(host, 'rocket-minimized-actions'),
+    (node) => node.type === 'button',
+  )[0];
+  exit.props.onClick();
+  assert.deepEqual(calls.at(-1), ['returnToCity']);
+  host.render({ ...props, snapshot: { ...props.snapshot, altitude: 100200 } });
+  assert.equal(panelContent(host, 'space').props.hidden, true);
+  panelButton(host, 'space').props.onClick();
+  host.render();
+  assert.equal(panelContent(host, 'space').props.hidden, false);
+  assert(findClass(host, 'rocket-mission-details'));
+  assert.equal(
+    all(host.tree, (node) => node.props['data-rocket-focus'] === 'sun')[0]
+      .props['aria-pressed'],
+    true,
+  );
+  assert.equal(
+    calls.some((call) => call[0] === 'setSpaceFocus'),
+    false,
+  );
+  host.unmount();
+});
+
+test('telemetry, stage and throttle minimize independently while manual flight continues updating', () => {
+  const { host, props, calls } = setup({ auto: false, throttle: 0.4 });
+  const initialCalls = calls.length;
+  for (const section of ['telemetry', 'stage', 'throttle']) {
+    panelButton(host, section).props.onClick();
+    host.render();
+    assert.equal(panelContent(host, section).props.hidden, true);
+  }
+  host.render({
+    ...props,
+    snapshot: {
+      ...props.snapshot,
+      throttle: 0.8,
+      stageFuel: 0.2,
+      altitude: 800,
+    },
+  });
+  assert.equal(calls.length, initialCalls);
+  for (const section of ['telemetry', 'stage', 'throttle']) {
+    assert.equal(panelContent(host, section).props.hidden, true);
+    panelButton(host, section).props.onClick();
+    host.render();
+    assert.equal(panelContent(host, section).props.hidden, false);
+  }
+  assert.equal(
+    all(host.tree, (node) => node.props.id === 'rocket-throttle')[0].props
+      .value,
+    80,
+  );
+  host.unmount();
+});
+
+test('rocket disclosure labels follow every supported interface language', () => {
+  const labels = {
+    en: ['Collapse panel', 'Expand panel'],
+    fr: ['Réduire le panneau', 'Développer le panneau'],
+    es: ['Contraer panel', 'Expandir panel'],
+    'zh-Hant': ['收合面板', '展開面板'],
+    'zh-Hans': ['收起面板', '展开面板'],
+    de: ['Bedienfeld einklappen', 'Bedienfeld ausklappen'],
+    ja: ['パネルを折りたたむ', 'パネルを展開'],
+    ko: ['패널 접기', '패널 펼치기'],
+    uk: ['Згорнути панель', 'Розгорнути панель'],
+    ru: ['Свернуть панель', 'Развернуть панель'],
+  };
+  for (const [locale, [collapse, expand]] of Object.entries(labels)) {
+    const { host } = setup({ phase: 'ready' }, { locale });
+    assert(panelButton(host, 'main').props['aria-label'].startsWith(collapse));
+    panelButton(host, 'main').props.onClick();
+    host.render();
+    assert(panelButton(host, 'main').props['aria-label'].startsWith(expand));
+    host.unmount();
+  }
+});
+
+test('manual attitude disclosure keeps guidance input enabled and restores the latest live attitude', () => {
+  for (const touch of [false, true]) {
+    const { host, props, calls } = setup(
+      { auto: false, pitch: 12, roll: -9, verticalSpeed: 45 },
+      { touch },
+    );
+    assert(
+      findClass(host, 'rocket-attitude').props.className.includes('ui-chrome'),
+    );
+    assert.deepEqual(calls.at(-1), ['setInputEnabled', true]);
+    const initialCalls = calls.length;
+    panelButton(host, 'attitude').props.onClick();
+    host.render();
+    assert.equal(panelContent(host, 'attitude').props.hidden, true);
+    assert.equal(panelButton(host, 'attitude').props['aria-expanded'], false);
+    host.render({
+      ...props,
+      snapshot: { ...props.snapshot, pitch: 24, roll: -18, verticalSpeed: 80 },
+    });
+    assert.equal(panelContent(host, 'attitude').props.hidden, true);
+    assert.equal(
+      calls.length,
+      initialCalls,
+      'presentation never changes axes, autopilot or input ownership',
+    );
+    panelButton(host, 'attitude').props.onClick();
+    host.render();
+    assert.equal(panelContent(host, 'attitude').props.hidden, false);
+    assert.equal(panelButton(host, 'attitude').props['aria-expanded'], true);
+    assert.match(
+      text(findClass(host, 'rocket-attitude-values')),
+      /\+24\s*°.*-18\s*°.*\+80\s+m\/s/,
+    );
+    assert.equal(calls.length, initialCalls);
+    host.unmount();
+  }
+});

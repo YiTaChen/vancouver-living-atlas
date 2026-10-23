@@ -39,6 +39,7 @@ import {
   lightLabTarget,
 } from '@/lib/city/light-lab-runtime';
 import { lightLabCopy } from '@/lib/city/light-lab-copy';
+import { PanelToggle } from './panel-toggle';
 import './light-lab-panel.css';
 const EMPTY: LightLabStatus = {
   next: 0,
@@ -69,6 +70,7 @@ export function LightLabPanel({
     id = useId();
   const [open, setOpen] = useState(false),
     [active, setActive] = useState(false);
+  const [hudExpanded, setHudExpanded] = useState(true);
   const [save, setSave] = useState(emptyLightLabSave),
     [storage, setStorage] = useState(true);
   const saveRef = useRef(save),
@@ -290,10 +292,17 @@ export function LightLabPanel({
     <>
       {visible && active && (
         <section
-          className="discovery-hud light-lab-hud glass ui-chrome"
+          className="discovery-hud light-lab-hud glass ui-chrome collapsible-panel"
+          data-panel-collapsed={!hudExpanded}
           aria-label={text.title}
           lang={locale.startsWith('zh') ? locale : 'en'}
         >
+          <PanelToggle
+            locale={locale}
+            title={text.title}
+            expanded={hudExpanded}
+            onToggle={() => setHudExpanded((expanded) => !expanded)}
+          />
           <header>
             <button onClick={useMixer}>
               <FlaskConical size={16} />

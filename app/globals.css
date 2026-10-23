@@ -2508,9 +2508,9 @@ a {
 /* Mobile HUD visibility keeps the mode selector and a recoverable toggle. */
 .atlas.touch-ui .masthead { padding-right: 64px; }
 .atlas.touch-ui .masthead .github-link { display: none; }
-.mobile-hud-toggle {
+.hud-visibility-toggle {
   position: absolute;
-  top: 6px;
+  top: 20px;
   right: max(10px, env(safe-area-inset-right));
   z-index: 45;
   width: 44px;
@@ -2518,9 +2518,9 @@ a {
   display: grid;
   place-items: center;
   border-radius: 50%;
-}
-.atlas.touch-ui.mobile-hud-hidden .ui-chrome:not(.mode-switch):not(.touch-drive-controls) {
-  display: none !important;
+  color: #dce7dd;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 .about-repo-link {
   display: flex;
@@ -2533,7 +2533,7 @@ a {
   text-underline-offset: 3px;
 }
 @media (max-height: 540px) {
-  .mobile-hud-toggle { top: 2px; width: 40px; height: 40px; }
+  .hud-visibility-toggle { top: 2px; }
 }
 
 /* Keep the desktop local map clear of the tools needed to reach interiors. */
