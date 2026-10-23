@@ -85,6 +85,12 @@ async function harness(action, options = {}) {
     camera: new THREE.PerspectiveCamera(),
     controls: { enabled: true, target: new THREE.Vector3() },
     renderer: { domElement: canvas },
+    prepareScenePrograms() {
+      return (
+        this.renderer.compileAsync?.(this.scene, this.camera) ??
+        Promise.resolve()
+      );
+    },
     settings: { mode: 'walk', quality: 'balanced', autoRotate: false },
     compatibleGraphics: false,
     pageSuspended: false,
@@ -1207,6 +1213,57 @@ test('full-scene prewarm uses the actual Three light collector with each world, 
     assert.equal(await travel.enter('waterfront'), true);
     assert.equal(calls, 1);
     assert.equal(travel.train.group.visible, true);
+  });
+});
+
+test('precompile delegates to the guarded engine helper and restores visibility before shaders settle', async () => {
+  await harness(async ({ create, city }) => {
+    const travel = create(),
+      subtree = new THREE.Group();
+    subtree.visible = false;
+    city.scene.add(subtree);
+    let completeCompile,
+      helperCalls = 0;
+    const compilation = new Promise((resolve) => {
+      completeCompile = resolve;
+    });
+    city.renderer.compileAsync = () => {
+      assert.fail('SkyTrain precompile must never call native compileAsync');
+    };
+    city.prepareScenePrograms = (...args) => {
+      helperCalls++;
+      assert.equal(args.length, 0);
+      assert.equal(subtree.visible, true);
+      assert.equal(subtree.parent, city.scene);
+      return compilation;
+    };
+    let settled = false;
+    const pending = travel.precompile(subtree).then(() => {
+      settled = true;
+    });
+    assert.equal(helperCalls, 1, 'light collection begins synchronously');
+    assert.equal(subtree.visible, false, 'unready content stays hidden');
+    await Promise.resolve();
+    assert.equal(
+      settled,
+      false,
+      'readiness still waits for shader preparation',
+    );
+    completeCompile();
+    await pending;
+    assert.equal(settled, true);
+    assert.equal(subtree.visible, false);
+
+    city.prepareScenePrograms = () => {
+      assert.equal(subtree.visible, true);
+      throw new Error('preparation cancelled');
+    };
+    await assert.rejects(travel.precompile(subtree), /preparation cancelled/);
+    assert.equal(
+      subtree.visible,
+      false,
+      'synchronous failure restores visibility',
+    );
   });
 });
 

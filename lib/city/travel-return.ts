@@ -60,7 +60,16 @@ export class TravelReturn {
     this.bookmark = null;
     this.e.onTravelReturnChange?.(null);
   };
+  /** A new placement owns the current map even if its preview is cancelled.
+   * Consume an old pinch without restoring its travel bookmark or camera. */
+  releaseForPlacement() {
+    this.invalidate(true);
+    this.lastDistance = Infinity;
+  }
   observeCenter = () => {
+    // A station/train observer has independent ownership and no street bookmark.
+    // Observe every Orbit change so panning away and back cannot re-enable it.
+    this.e.skyTrainTravel?.observeOverviewMoved?.();
     const saved = this.bookmark;
     if (!saved) return;
     const target = this.e.controls.target;
@@ -101,7 +110,9 @@ export class TravelReturn {
     if (
       event.pointerType !== 'touch' ||
       this.e.navigation?.mode !== 'orbit' ||
-      (!this.bookmark && !this.gesture)
+      (!this.bookmark &&
+        !this.gesture &&
+        !this.e.skyTrainTravel?.canResumeOverview)
     )
       return;
     this.touches.set(

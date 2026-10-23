@@ -268,10 +268,11 @@ export class SkyTrainTravel {
       !space.canSit(seat, this.cabinFoot)
     )
       return false;
+    const viewedYaw = this.yaw + this.lookYaw;
     this.cabinStand = [...this.cabinFoot];
     this.cabinSeat = seat;
     this.yaw = seat.yaw;
-    this.lookYaw = 0;
+    this.lookYaw = viewedYaw - seat.yaw;
     this.clearInput();
     this.updateCamera();
     this.publish();
@@ -289,9 +290,10 @@ export class SkyTrainTravel {
       !owner.isClearFoot(seat.stand)
     )
       return false;
+    const viewedYaw = this.yaw + this.lookYaw;
     this.stationSeat = seat;
     this.yaw = seat.yaw;
-    this.lookYaw = 0;
+    this.lookYaw = viewedYaw - seat.yaw;
     this.clearInput();
     this.updateCamera();
     this.publish();
@@ -1061,10 +1063,7 @@ export class SkyTrainTravel {
       // visible light is counted once and city materials get the new cabin /
       // station lighting variant too. Restore visibility before any frame can
       // expose a destination whose asynchronous shader work is still pending.
-      pending = this.city.renderer.compileAsync?.(
-        this.city.scene,
-        this.city.camera,
-      );
+      pending = this.city.prepareScenePrograms();
     } finally {
       subtree.visible = visible;
     }

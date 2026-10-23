@@ -29,6 +29,7 @@ export function installOpenWorldTransitQA(city: CityEngine) {
       !owner ||
       !entrance ||
       !nav ||
+      !city.lastTime ||
       city.skyTrainTravel?.active ||
       city.busVisit?.aboard
     )
@@ -75,6 +76,13 @@ export function installOpenWorldTransitQA(city: CityEngine) {
       >;
     } | null;
     const snapshot = {
+      mode: city.settings.mode,
+      placement: city.placement?.mode ?? null,
+      flightPlacement: city.flight?.placing ?? false,
+      overviewCanResume: city.skyTrainTravel?.canResumeOverview ?? false,
+      target: city.controls.target.toArray(),
+      avatarVisible: city.navigation?.walker.group.visible ?? false,
+      occlusion: city.travelOcclusion?.snapshot(),
       train: city.skyTrainTravel?.snapshot(),
       service: city.skyTrainTravel?.serviceSnapshot(),
       bus: city.busWorldService?.snapshot(),

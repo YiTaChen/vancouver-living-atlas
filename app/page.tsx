@@ -749,6 +749,13 @@ function Home() {
     }
     return true;
   };
+  const prepareTravelPlacement = () => {
+    if (engine.current && !engine.current.prepareTravelPlacement()) {
+      setNotice('busVisitExitBlocked');
+      return false;
+    }
+    return true;
+  };
   const visitBus = async () => {
     const city = engine.current;
     if (!ready || !city) return;
@@ -799,7 +806,7 @@ function Home() {
   };
   const beginPlacement = (mode: TravelMode) => {
     if (teslaEntering.current) return;
-    if (!finishBusVisit()) return;
+    if (!prepareTravelPlacement()) return;
     if (!ready || !engine.current?.placement) {
       setNotice('placementUnavailable');
       return;
@@ -817,7 +824,7 @@ function Home() {
     engine.current.placement.begin(mode);
   };
   const switchInScene = (mode: TravelMode) => {
-    if (!finishBusVisit()) return false;
+    if (!prepareTravelPlacement()) return false;
     const city = engine.current;
     if (!ready || city?.placement?.mode) return false;
     city?.rocket?.returnToCity();
@@ -830,7 +837,7 @@ function Home() {
   };
   const beginFlight = () => {
     if (teslaEntering.current) return;
-    if (!finishBusVisit()) return;
+    if (!prepareTravelPlacement()) return;
     if (!ready) return;
     setRocketChoosing(false);
     engine.current?.rocket?.returnToCity();
@@ -842,7 +849,7 @@ function Home() {
     engine.current?.flight?.beginPlacement();
   };
   const beginTesla = async () => {
-    if (!ready || teslaEntering.current || !finishBusVisit()) return;
+    if (!ready || teslaEntering.current || !prepareTravelPlacement()) return;
     setRocketChoosing(false);
     engine.current?.rocket?.returnToCity();
     teslaEntering.current = true;
@@ -857,7 +864,7 @@ function Home() {
       await new Promise<void>((resolve) =>
         requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
       );
-      if (!engine.current?.tesla?.enter()) setNotice('placementUnavailable');
+      if (!engine.current?.tesla?.enter({ localOnly: true })) setNotice('placementUnavailable');
     } catch {
       setNotice('placementUnavailable');
     } finally {
@@ -866,7 +873,7 @@ function Home() {
     }
   };
   const chooseRocket = () => {
-    if (!ready || teslaEntering.current || !finishBusVisit()) return;
+    if (!ready || teslaEntering.current || !prepareTravelPlacement()) return;
     engine.current?.placement?.cancel();
     engine.current?.flight?.clear();
     engine.current?.rocket?.returnToCity();
@@ -884,7 +891,7 @@ function Home() {
       !ready ||
       teslaEntering.current ||
       !engine.current?.rocket ||
-      !finishBusVisit()
+      !prepareTravelPlacement()
     )
       return;
     setRocketChoosing(false);
@@ -898,13 +905,21 @@ function Home() {
   const switchMode = (mode: string) => {
     if (teslaEntering.current) return;
     if (engine.current?.skyTrainTravel?.active) {
-      if (mode === 'orbit' || mode === 'walk') {
-        setTour(false);
-        setPanel(null);
-        setMobilePanel(null);
-        engine.current.skyTrainTravel.setOverview(mode === 'orbit');
+      const travel = engine.current.skyTrainTravel;
+      setTour(false);
+      setPanel(null);
+      setMobilePanel(null);
+      if (mode === 'orbit') {
+        travel.setOverview(true);
+        return;
       }
-      return;
+      // Only an unmoved Overview can return to its existing passenger. A new
+      // location or transport choice releases that ownership before placement.
+      if (mode === 'walk' && travel.canResumeOverview) {
+        travel.setOverview(false);
+        return;
+      }
+      if (!prepareTravelPlacement()) return;
     }
     if (!finishBusVisit()) return;
     engine.current?.rocket?.returnToCity();
@@ -934,7 +949,7 @@ function Home() {
   const dragAircraft = (event: React.PointerEvent<HTMLElement>) => {
     if (teslaEntering.current) return;
     if (event.button !== 0 || !ready) return;
-    if (!finishBusVisit()) return;
+    if (!prepareTravelPlacement()) return;
     setRocketChoosing(false);
     engine.current?.rocket?.returnToCity();
     event.preventDefault();
@@ -953,7 +968,18 @@ function Home() {
   ) => {
     if (teslaEntering.current) return;
     if (event.button !== 0 || !ready) return;
-    if (!finishBusVisit()) return;
+    const city = engine.current;
+    if (
+      mode === 'walk' && city?.skyTrainTravel?.active &&
+      (city.settings.mode === 'walk' || city.skyTrainTravel.canResumeOverview)
+    ) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (city.settings.mode === 'orbit') city.skyTrainTravel.setOverview(false);
+      city.renderer.domElement.focus({ preventScroll: true });
+      return;
+    }
+    if (!prepareTravelPlacement()) return;
     event.preventDefault();
     event.stopPropagation();
     if (switchInScene(mode)) {
@@ -1709,9 +1735,7 @@ function Home() {
                     )
               }
               onPointerDownCapture={
-                m.id === 'orbit' ||
-                m.id === 'tesla' ||
-                (skyTrainActive && m.id === 'walk')
+                m.id === 'orbit' || m.id === 'tesla'
                   ? undefined
                   : m.id === 'flight'
                     ? dragAircraft
@@ -1724,9 +1748,7 @@ function Home() {
                       event.stopPropagation();
                       if (event.detail === 0) beginFlight();
                     }
-                  : m.id === 'orbit' ||
-                      m.id === 'tesla' ||
-                      (skyTrainActive && m.id === 'walk')
+                  : m.id === 'orbit' || m.id === 'tesla'
                     ? undefined
                     : (event) => {
                         if (event.detail > 0) {
@@ -1738,11 +1760,7 @@ function Home() {
             >
               <RadioGroupItem
                 value={m.id}
-                disabled={
-                  !ready ||
-                  teslaPreparing ||
-                  (skyTrainActive && m.id !== 'orbit' && m.id !== 'walk')
-                }
+                disabled={!ready || teslaPreparing}
                 className="mode-radio-dot"
               />
               <m.icon size={15} />
@@ -1756,7 +1774,7 @@ function Home() {
               rocketChoosing || rocket.placing || settings.mode === 'rocket'
             }
             onClick={chooseRocket}
-            disabled={!ready || teslaPreparing || skyTrainActive}
+            disabled={!ready || teslaPreparing}
             title={rocketText(locale, 'choose')}
           >
             <Rocket size={15} />

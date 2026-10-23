@@ -312,7 +312,8 @@ export class TeslaController {
       identity: currentIdentity,
     };
   }
-  enter() {
+  /** Explicit map placement stays local; existing callers retain road fallback. */
+  enter(options?: { localOnly?: boolean }) {
     if (this.disposed) return false;
     if (this.active) return true;
     if (!this.e.closeBusVisit()) return false;
@@ -332,7 +333,7 @@ export class TeslaController {
       layer: fromStreet ? (nav.surfaceLayer ?? 0) : 0,
     });
     let spawn = local.open;
-    if (!spawn && !fromStreet) {
+    if (!spawn && !fromStreet && !options?.localOnly) {
       const [rx, rz] = ROBSON,
         ry =
           (this.e.data.roadRelief?.(rx, rz) ?? this.e.elevation(rx, rz)) + 1.05;
@@ -345,7 +346,7 @@ export class TeslaController {
       heading =
         fallback.open || !local.verified ? fallbackHeading : localHeading;
     }
-    if (!spawn && fromStreet) spawn = local.verified;
+    if (!spawn && (fromStreet || options?.localOnly)) spawn = local.verified;
     if (!spawn) {
       this.warning = 'no-spawn';
       this.notify();
