@@ -35,3 +35,18 @@ export class DriverCameraMotion {
   }
 }
 export const DRIVER_LEFT_OFFSET = 0.45;
+
+/** A street-scale chase composition. The caller supplies the geographic pilot
+ * weight; requested zoom, first-person thresholds and vehicle motion stay intact.
+ * Close/cockpit and distant map views retain the existing camera exactly. */
+export function streetDriveChase(distance: number, showcaseWeight: number) {
+  const weight =
+    THREE.MathUtils.clamp(showcaseWeight, 0, 1) *
+    THREE.MathUtils.smoothstep(distance, 3.5, 7) *
+    (1 - THREE.MathUtils.smoothstep(distance, 32, 72));
+  return {
+    distance: distance * (1 - weight * 0.26),
+    lift: distance * THREE.MathUtils.lerp(0.35, 0.14, weight),
+    lookAhead: THREE.MathUtils.lerp(2, 4, weight),
+  };
+}

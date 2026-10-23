@@ -5,35 +5,9 @@ import ts from 'typescript';
 import { cityModule } from './helpers/city-modules.mjs';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-const compile = (name, imports = {}) => {
-  let code = ts.transpileModule(
-    readFileSync(new URL(`../lib/city/${name}.ts`, import.meta.url), 'utf8'),
-    {
-      compilerOptions: {
-        module: ts.ModuleKind.ESNext,
-        target: ts.ScriptTarget.ES2022,
-      },
-    },
-  ).outputText;
-  code = code.replace(
-    /from ['"]([^'"]+)['"]/g,
-    (_, id) => `from '${imports[id] || id}'`,
-  );
-  return 'data:text/javascript;base64,' + Buffer.from(code).toString('base64');
-};
-const geoUrl = compile('geo'),
-  geometryUrl = compile('placement-geometry');
-const geo = await import(geoUrl);
-const { resolvePlacement, closestOnSegment } = await import(geometryUrl);
-const { MapPlacement } = await import(
-  compile('placement', {
-    three: import.meta.resolve('three'),
-    './geo': geoUrl,
-    './placement-geometry': geometryUrl,
-    './ground-surface': cityModule('ground-surface'),
-    './visible-obstacles': cityModule('visible-obstacles'),
-  })
-);
+const geo = await import(cityModule('geo'));
+const { resolvePlacement, closestOnSegment } = await import(cityModule('placement-geometry'));
+const { MapPlacement } = await import(cityModule('placement'));
 const world = (extra = {}) => ({
   roads: [{ a: [0, 0], b: [10, 0], name: 'Short street' }],
   bridges: [],
@@ -372,43 +346,9 @@ test('a second finger during figure dragging cannot accidentally place either po
   }
 });
 
-const bridgeUrl = cityModule('bridges');
-const landmarkUrl =
-  'data:text/javascript;base64,' +
-  Buffer.from(
-    'export default ' +
-      readFileSync(
-        new URL('../lib/city/landmark-footprints.json', import.meta.url),
-        'utf8',
-      ),
-  ).toString('base64');
-const { StreetNavigation } = await import(
-  compile('navigation', {
-    './traffic-stop': cityModule('traffic-stop'),
-    './traffic-stop-state': cityModule('traffic-stop-state'),
-    './vehicle-condition': cityModule('vehicle-condition'),
-    three: import.meta.resolve('three'),
-    './geo': geoUrl,
-    './bridges': bridgeUrl,
-    './road-trim': cityModule('road-trim'),
-    './surface-reachability': cityModule('surface-reachability'),
-    './placement-geometry': geometryUrl,
-    './boat-controller': cityModule('boat-controller'),
-    './travel-camera': cityModule('travel-camera'),
-    './travel-camera-collision': cityModule('travel-camera-collision'),
-    './assets/walker': cityModule('assets/walker'),
-    './citizen': cityModule('citizen'),
-    './assets/roadster': cityModule('assets/roadster'),
-    './touch-input': cityModule('touch-input'),
-    './ground-surface': cityModule('ground-surface'),
-    './visible-obstacles': cityModule('visible-obstacles'),
-    './driver-camera': cityModule('driver-camera'),
-    './driving-steering': cityModule('driving-steering'),
-    './vehicle-drift': cityModule('vehicle-drift'),
-    './assets/cockpits': cityModule('assets/cockpits'),
-    './landmark-footprints.json': landmarkUrl,
-  })
-);
+// Resolve transitive city imports through the same canonical loader. Keeping a
+// second manual import map silently breaks whenever navigation gains a policy.
+const { StreetNavigation } = await import(cityModule('navigation'));
 function navigationFixture() {
   const { e } = fixture();
   e.data.buildings = { features: [] };

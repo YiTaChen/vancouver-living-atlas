@@ -191,6 +191,39 @@ function navigationHarness() {
   };
 }
 
+test('pilot driving camera lowers and shortens the chase without changing requested zoom, cockpit or other modes', async () => {
+  const { project } = await import(cityModule('geo'));
+  const { streetDriveChase } = await import(cityModule('driver-camera'));
+  const h = navigationHarness(), { navigation: nav, engine } = h;
+  const [x, z] = project([-123.1228089, 49.2832957]);
+  try {
+    nav.mode = 'drive'; nav.yaw = 0; nav.pitch = 0;
+    nav.clearGround = () => true;
+    nav.position.set(x, 1.25, z);
+    nav.cameraDistances.drive = 14; nav.snapCamera = true; nav.update(0);
+    const relative = engine.camera.position.clone().sub(nav.position);
+    assert(Math.abs(relative.z + 10.36) < 1e-8);
+    assert(Math.abs(relative.y - (nav.driverEyeHeight + 1.96)) < 1e-8);
+    assert.equal(nav.cameraDistances.drive, 14);
+    assert.equal(nav.speed, 0);
+    assert(nav.car.visible);
+    nav.position.set(0, 1.25, 0); nav.snapCamera = true; nav.update(0);
+    const legacy = engine.camera.position.clone().sub(nav.position);
+    assert.equal(legacy.z, -14);
+    assert(Math.abs(legacy.y - (nav.driverEyeHeight + 4.9)) < 1e-8);
+    for (const distance of [0, 2, 2.4, 3.5, 72, 96])
+      assert.deepEqual(streetDriveChase(distance, 1), streetDriveChase(distance, 0),
+        'cockpit/close zoom and local-map framing retain the previous profile');
+    nav.mode = 'walk'; nav.cameraDistances.walk = 8;
+    const poses = [];
+    for (const p of [[0, 1.25, 0], [x, 1.25, z]]) {
+      nav.position.set(...p); nav.snapCamera = true; nav.update(0);
+      poses.push(engine.camera.position.clone().sub(nav.position));
+    }
+    assert(poses[0].distanceTo(poses[1]) < 1e-8, 'walking camera is unchanged inside the pilot');
+  } finally { h.cleanup(); }
+});
+
 test('actual street update uses desktop/touch near-vertical pitch and preserves a seated first-person eye', () => {
   const h = navigationHarness(),
     { navigation: nav, engine } = h;

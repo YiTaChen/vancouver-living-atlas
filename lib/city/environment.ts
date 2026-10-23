@@ -853,6 +853,8 @@ export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
       return e.data.roadSurface?.sample(x, z, fallback) ?? fallback;
     },
     (model, matrix) => traffic.nightLights.addVehicle(model, matrix),
+    undefined,
+    true,
   );
   traffic.mesh.visible = traffic.cabins.visible = !loaded;
   if (loaded) {

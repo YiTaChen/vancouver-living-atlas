@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import * as T from 'three';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import { loader } from '../material-consumer-candidates/adapters/harness.mjs';
-import { makeSource, makeCockpitCandidate, patchSource, SUPPRESSED, sha } from './adapters/cockpit-candidate.mjs';
+import { makeSource, makeCockpitCandidate, patchSource, readPinnedSource, SUPPRESSED, sha } from './adapters/cockpit-candidate.mjs';
 const dir = new URL('./', import.meta.url), root = new URL('../../../', dir);
 function triangles(o) { o.updateMatrixWorld(true); const out = []; o.traverse(m => { if (!m.isMesh)
     return; const a = m.geometry.attributes.position, idx = m.geometry.index; for (let i = 0; i < (idx ? idx.count : a.count); i += 3) {
@@ -34,7 +34,7 @@ function counts(a) { const m = new Map(); for (const k of a)
     m.set(k, (m.get(k) || 0) + 1); return m; }
 function equal(a, b) { const ca = counts(a), cb = counts(b); assert.equal(ca.size, cb.size); for (const [k, n] of ca)
     assert.equal(cb.get(k), n, k); }
-const source = await fs.readFile(new URL('lib/city/assets/roadster.ts', root), 'utf8');
+const source = await readPinnedSource();
 let rejected = false;
 try {
     patchSource(source + '\n');
@@ -109,6 +109,9 @@ const hashes = {};
 for (const p of ['lib/city/assets/roadster.ts', 'lib/city/navigation.ts', 'lib/city/driver-camera.ts', 'lib/city/assets/cockpits.ts', 'tools/assets/material-consumer-candidates/adapters/source-patches.mjs'])
     hashes[p] = sha(await fs.readFile(new URL(p, root)));
 const report = { status: 'pass', sourceSha256: sha(source), driftRejected: true, unmodifiedConstructorAndInstrumentedBaselineTriangleParity: true, sourceHashes: hashes, exactSuppressionCounts: expectedSuppress, rigidSeatProof, changedGeometry: 'Only suppressed callsites plus explicit replacement GLB; preserved world triangles compared as oriented multisets with 1um coordinate tolerance', results: result };
-await fs.writeFile(new URL('qa/adapter-preservation.json', dir), JSON.stringify(report, null, 2) + '\n');
+// Default validation preserves the archived provenance report. A current audit
+// must not silently replace historical source hashes with today's file hashes.
+if (process.argv.includes('--write-report') || process.argv.includes('--write-fixtures'))
+    await fs.writeFile(new URL('qa/adapter-preservation.json', dir), JSON.stringify(report, null, 2) + '\n');
 console.log('ADAPTER_PRESERVATION_PASS', result.length);
 await import('./audit-materials.mjs');

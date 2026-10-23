@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "priorRevision": "28b3bb55af6f266b0b44e7b5c06a1d6d61c960c1",
+  "scope": "Exact reviewed pilot finish attributes/hooks, existing contact-shadow material hook and driver chase composition only. All remaining bytes must still match existing original consumer fixtures after their prior reviewed projections. Current runtime constructors and collision methods remain the ones executed by validation.",
+  "files": [
+    {
+      "path": "lib/city/assets/roadster.ts",
+      "reviewedSha256": "6adc2cc4771fa9431c73ac90c309eb8ec6d213f45b8170c9a3a48789aaad7455",
+      "priorSha256": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0",
+      "changes": [
+        {
+          "current": "import { installVehicleSurface } from './vehicle-surface';\n",
+          "prior": ""
+        },
+        {
+          "current": "  // Keep the authored colour/geometry and ownership. Finishing is restricted to\n  // the shared Robson/Burrard world-space pilot, including moving vehicles.\n  installVehicleSurface(palette.paint, 'roadster-paint');\n  installVehicleSurface(palette.dark, 'leather');\n  installVehicleSurface(palette.rubber, 'rubber');\n  installVehicleSurface(palette.leather, 'leather');\n  installVehicleSurface(palette.metal, 'metal');\n  installVehicleSurface(palette.glass, 'roadster-glass');\n",
+          "prior": ""
+        }
+      ]
+    },
+    {
+      "path": "lib/city/assets/aircraft-models.ts",
+      "reviewedSha256": "44c0a2e114804c18441459e73bf553bee465ebb01f158e3eeab00609ff9119dd",
+      "priorSha256": "037549b49b722250eba675217aeaed6416fc648cc88b395b77cc595e58eae308",
+      "changes": [
+        {
+          "current": "import { installVehicleSurface } from './vehicle-surface';\n",
+          "prior": ""
+        },
+        {
+          "current": "/** Metre-space aircraft are already merged by colour. This authored surface\n * role travels with each primitive, allowing metal, rubber and enamel to react\n * differently without splitting the batch or adding another texture. */\nfunction surfaceForColour(colour: number): readonly [number, number] {\n  if (colour === C.metal) return [0.27, 0.84];\n  if (colour === C.gold) return [0.32, 0.72];\n  if (colour === C.rubber) return [0.94, 0];\n  if (colour === C.seat) return [0.9, 0];\n  if (colour === C.black) return [0.82, 0.02];\n  if (colour === C.dark) return [0.63, 0.16];\n  return [0.32, 0.08];\n}\n\n",
+          "prior": ""
+        },
+        {
+          "current": "    const finish = surfaceForColour(colour);\n    const surfaces = new Uint8Array(count * 2);\n    const packed = finish.map((value) => Math.round(value * 255));\n    for (let i = 0; i < count; i++) surfaces.set(packed, i * 2);\n    g.setAttribute(\n      'assetSurface',\n      new THREE.BufferAttribute(surfaces, 2, true),\n    );\n",
+          "prior": ""
+        },
+        {
+          "current": "    if (material instanceof THREE.MeshStandardMaterial)\n      installVehicleSurface(\n        material,\n        kind === 'glass' ? 'glazing' : 'aircraft-batch',\n      );\n",
+          "prior": ""
+        }
+      ]
+    },
+    {
+      "path": "lib/city/navigation.ts",
+      "reviewedSha256": "96e0a61b27752003abb3ec37742a1945cab2c2f3f70d31de0961483700d7bafc",
+      "priorSha256": "9934aeb891d8016eebc1832ca9bab86a87c7057fda594a740b32908f3505a222",
+      "changes": [
+        {
+          "current": "import { DriverCameraMotion, DRIVER_LEFT_OFFSET, streetDriveChase } from './driver-camera';\nimport { streetShowcaseWeight } from './street-quality-profile';\n",
+          "prior": "import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';\n"
+        },
+        {
+          "current": "import { installPilotContactShadow } from './assets/vehicle-surface';\n",
+          "prior": ""
+        },
+        {
+          "current": "    installPilotContactShadow(shadow.material);\n",
+          "prior": ""
+        },
+        {
+          "current": "    const driveChase = this.mode === 'drive'\n      ? streetDriveChase(distance, streetShowcaseWeight(this.position.x, this.position.z))\n      : null;\n    const pos = eye.clone().addScaledVector(dir, -(driveChase?.distance ?? distance) * blend);\n    pos.y += (driveChase?.lift ?? distance * (this.mode === 'walk' ? 0.28 : 0.35)) * blend;\n",
+          "prior": "    const pos = eye.clone().addScaledVector(dir, -distance * blend);\n    pos.y += distance * (this.mode === 'walk' ? 0.28 : 0.35) * blend;\n"
+        },
+        {
+          "current": "          THREE.MathUtils.lerp(25, driveChase?.lookAhead ?? 2, blend),\n",
+          "prior": "          THREE.MathUtils.lerp(25, 2, blend),\n"
+        }
+      ]
+    },
+    {
+      "path": "lib/city/driver-camera.ts",
+      "reviewedSha256": "9d51cac7320272a9ac37978290c7fd6a4681442fe861c147c82716f0b7ec24a5",
+      "priorSha256": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0",
+      "changes": [
+        {
+          "current": "\n/** A street-scale chase composition. The caller supplies the geographic pilot\n * weight; requested zoom, first-person thresholds and vehicle motion stay intact.\n * Close/cockpit and distant map views retain the existing camera exactly. */\nexport function streetDriveChase(distance: number, showcaseWeight: number) {\n  const weight =\n    THREE.MathUtils.clamp(showcaseWeight, 0, 1) *\n    THREE.MathUtils.smoothstep(distance, 3.5, 7) *\n    (1 - THREE.MathUtils.smoothstep(distance, 32, 72));\n  return {\n    distance: distance * (1 - weight * 0.26),\n    lift: distance * THREE.MathUtils.lerp(0.35, 0.14, weight),\n    lookAhead: THREE.MathUtils.lerp(2, 4, weight),\n  };\n}\n",
+          "prior": ""
+        }
+      ]
+    }
+  ]
+}

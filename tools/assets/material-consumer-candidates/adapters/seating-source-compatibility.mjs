@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { projectBeforeWalkCamera } from './camera-source-compatibility.mjs';
 import { projectBeforeWaterfrontAuthority } from './waterfront-authority-source-compatibility.mjs';
+import { projectBeforeStreetPilot } from './street-pilot-source-compatibility.mjs';
 
 export const SEATING_REVIEW_BASE = '53bb3c6';
 const sha = (value) => createHash('sha256').update(value).digest('hex');
@@ -17,10 +18,11 @@ function exact(source, before, after, label) {
 
 /** Remove only the reviewed character delta; seated-source baselines keep seats. */
 export function projectBeforeCharacter(path, source) {
-  const authority = projectBeforeWaterfrontAuthority(path, source);
+  const pilot = projectBeforeStreetPilot(path, source);
+  const authority = projectBeforeWaterfrontAuthority(path, pilot.source);
   const camera = projectBeforeWalkCamera(path, authority.source);
   source = camera.source;
-  const reviewed = [...authority.reviewed, ...camera.reviewed];
+  const reviewed = [...pilot.reviewed, ...authority.reviewed, ...camera.reviewed];
   const remove = (before, after, label) => {
     source = exact(source, before, after, label);
     reviewed.push(label);

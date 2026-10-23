@@ -7,8 +7,10 @@ import {configureSharedMaps,bindSurface,SURFACES} from './adapters/shared-surfac
 import {roadsterPatch,interiorPatch} from './adapters/source-patches.mjs';
 import {originalSource} from './adapters/harness.mjs';
 import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {assertProtectedSources,projectBeforeCharacter,projectBeforeSeating} from './adapters/seating-source-compatibility.mjs';
 import {reviewedWaterfrontConsumerFixture} from './adapters/waterfront-authority-source-compatibility.mjs';
+import {projectBeforeStreetPilot} from './adapters/street-pilot-source-compatibility.mjs';
 
 test('Exact metre triangle charts retain transformed box attributes',()=>{
  const original=new THREE.BoxGeometry(2,3,4).rotateY(.54).translate(2,1,9).toNonIndexed();
@@ -83,19 +85,20 @@ test('Reviewed Waterfront split changes only exact merged-mesh metadata and reta
  assert.throws(()=>reviewedWaterfrontConsumerFixture(baseline,source+'\n// unreviewed\n'),/Protected pre-seating source drift/);
 });
 
-test('Reviewed seating, character selection and camera changes project to unchanged source fixtures while all other bytes stay exact', () => {
+test('Reviewed seating, character, camera and pilot finishes project to unchanged source fixtures while all other bytes stay exact', () => {
   const { baseline, sources } = protectedSources();
   const audit = assertProtectedSources(sources, baseline);
   assert.equal(audit.reviewedBase, '53bb3c6');
   assert.deepEqual(audit.compatibility.map(row => row.path).sort(), [
-    'lib/city/interiors.ts', 'lib/city/navigation.ts',
+    'lib/city/assets/aircraft-models.ts', 'lib/city/assets/roadster.ts',
+    'lib/city/driver-camera.ts', 'lib/city/interiors.ts', 'lib/city/navigation.ts',
   ]);
   assert.equal(Object.keys(audit.sourceHashes).length, 16);
   for (const row of audit.compatibility) {
     assert.equal(row.projectedHash, baseline[row.path]);
     assert.notEqual(row.actualHash, row.baselineHash);
     assert(row.reviewed.length > 0);
-    sources[row.path] = (!row.reviewed.includes('walk-seat contract') && row.path === 'lib/city/navigation.ts'
+    sources[row.path] = (row.path !== 'lib/city/interiors.ts' && !row.reviewed.includes('walk-seat contract')
       ? projectBeforeCharacter(row.path, sources[row.path])
       : projectBeforeSeating(row.path, sources[row.path])).source;
   }
@@ -139,7 +142,7 @@ test('Both seated-source fixtures and the original pre-seating navigation fixtur
   const { baseline, sources } = protectedSources();
   const path = 'lib/city/navigation.ts';
   const current = assertProtectedSources(sources, baseline).compatibility.find(row => row.path === path);
-  assert(current.reviewed.every(label => label.startsWith('character selection') || label.startsWith('walk camera')),
+  assert(current.reviewed.every(label => label.startsWith('character selection') || label.startsWith('walk camera') || label.startsWith('street pilot')),
     'the current seated-source fixture must preserve all seating and curb code');
   const curbDelta = `        // Only explicit, static curb chunks from the source road group. Keep
         // them out of placement raycasts and navigation height sampling.
@@ -224,5 +227,33 @@ test('Seating compatibility rejects changes to driving, walking, collision, came
   }
   const other = 'lib/city/driver-camera.ts';
   assert.throws(() => assertProtectedSources({ ...sources, [other]: sources[other] + '\n// changed\n' }, baseline),
-    /No reviewed seating projection/, 'the fourteen other sources remain exact-hash guarded');
+    /No reviewed seating projection/, 'unreviewed bytes outside the finite pilot delta remain exact-hash guarded');
+});
+
+test('Pilot compatibility rejects missing, duplicated or mutated hooks, finish attributes, geometry and chase calculations', () => {
+  const { baseline, sources } = protectedSources();
+  const review = JSON.parse(readFileSync(new URL('./adapters/reviewed-street-pilot.json', import.meta.url), 'utf8'));
+  for (const row of review.files) {
+    const source = sources[row.path];
+    const projected = projectBeforeStreetPilot(row.path, source);
+    assert(projected.reviewed.length);
+    assert.equal(createHash('sha256').update(source).digest('hex'), row.reviewedSha256);
+    assert.equal(createHash('sha256').update(projected.source).digest('hex'), row.priorSha256);
+    for (const change of row.changes) {
+      assert.equal(source.split(change.current).length - 1, 1);
+      assert.throws(() => assertProtectedSources({ ...sources, [row.path]: source.replace(change.current, change.current + change.current) }, baseline));
+      if (row.changes.length > 1)
+        assert.throws(() => assertProtectedSources({ ...sources, [row.path]: source.replace(change.current, '') }, baseline));
+    }
+  }
+  for (const [path, before, after] of [
+    ['lib/city/assets/roadster.ts', "installVehicleSurface(palette.paint, 'roadster-paint');", "installVehicleSurface(palette.paint, 'rubber');"],
+    ['lib/city/assets/roadster.ts', "box('dark', [1.48, 0.1, 3.95]", "box('dark', [1.48, 0.2, 3.95]"],
+    ['lib/city/assets/aircraft-models.ts', 'new Uint8Array(count * 2)', 'new Uint8Array(count * 3)'],
+    ['lib/city/navigation.ts', 'streetShowcaseWeight(this.position.x, this.position.z)', '1'],
+    ['lib/city/driver-camera.ts', 'weight * 0.26', 'weight * 0.4'],
+  ]) {
+    assert(sources[path].includes(before));
+    assert.throws(() => assertProtectedSources({ ...sources, [path]: sources[path].replace(before, after) }, baseline));
+  }
 });

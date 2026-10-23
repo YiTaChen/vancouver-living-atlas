@@ -62,6 +62,11 @@ import { DiscoveryMarker, type DiscoveryTarget } from './discovery-marker';
 import type { LandmarkDetail } from './landmark-detail';
 import { FacadeDetails } from './facade-details';
 import { ArchitecturalDetails } from './architecture-details';
+import { RobsonBurrardDetails } from './robson-burrard-details';
+import {
+  streetPilotLightingWeight,
+  streetPilotLightingMultipliers,
+} from './street-pilot-lighting';
 import { createBuildingBodies } from './building-bodies';
 import { createSkyTrainGuidewayUniforms } from './skytrain-guideway-clearance';
 import type { DetailedTrees } from './detailed-trees';
@@ -129,6 +134,9 @@ export class CityEngine {
   clock = new CityClock();
   lastLightUpdate = 0;
   lastLightHour = -1;
+  private pilotBaseLighting = sampleAtmosphere(14);
+  private pilotLightingCheckedAt = -Infinity;
+  private pilotLightingWeight = -1;
   lastShadowHour = -1;
   lastSolarShadowUpdate = 0;
   visibilityChange = () => {
@@ -201,6 +209,7 @@ export class CityEngine {
   detailedTrees: DetailedTrees | null = null;
   facadeDetails: FacadeDetails | null = null;
   architecturalDetails: ArchitecturalDetails | null = null;
+  streetShowcase: RobsonBurrardDetails | null = null;
   streetscapeKit: StreetscapeKit | null = null;
   streetFurniture: CityStreetFurniture | null = null;
   roads = new THREE.Group();
@@ -720,6 +729,7 @@ export class CityEngine {
     }
     this.traffic = createStreetDetails(this);
     this.streetFurniture = new CityStreetFurniture(this);
+    this.streetShowcase = new RobsonBurrardDetails(this);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.railway');
     }
@@ -737,12 +747,20 @@ export class CityEngine {
     this.driftEffects = new VehicleDriftEffects(this);
     this.navigation = new StreetNavigation(this);
     this.travelOcclusion = new TravelOcclusion(
-      [this.buildings, this.landmarks, this.roads, this.terrain, this.vegetation],
+      [
+        this.buildings,
+        this.landmarks,
+        this.roads,
+        this.terrain,
+        this.vegetation,
+      ],
       this.data.rocketBuildingMesh
-        ? [{
-            mesh: this.data.rocketBuildingMesh,
-            parts: this.data.rocketBuildingParts ?? [],
-          }]
+        ? [
+            {
+              mesh: this.data.rocketBuildingMesh,
+              parts: this.data.rocketBuildingParts ?? [],
+            },
+          ]
         : [],
       [this.terrain, this.roads],
     );
@@ -845,10 +863,13 @@ export class CityEngine {
       try {
         this.skyTrainTravel?.prepareCityGeometry(group);
         this.prepareTravelOccluders(group);
-        if (!this.landmarkWarmup) throw new Error('GPU preparation unavailable');
+        if (!this.landmarkWarmup)
+          throw new Error('GPU preparation unavailable');
         // Staged roots are not yet owned by a watched city parent. Release them
         // on every settlement; a successful attachment re-enrolls via childadded.
-        return this.landmarkWarmup.prepare(group, signal, holder).finally(releaseStaged);
+        return this.landmarkWarmup
+          .prepare(group, signal, holder)
+          .finally(releaseStaged);
       } catch (error) {
         releaseStaged();
         return Promise.reject(error);
@@ -1088,10 +1109,13 @@ export class CityEngine {
       this.ssao.normalMaterial,
     );
     const restoreCutawayNormals = this.travelOcclusion?.prepareMaterial(
-      this.ssao.normalMaterial, { normalPass: true },
+      this.ssao.normalMaterial,
+      { normalPass: true },
     );
     const restoreStationGroundNormals =
-      this.skyTrainTravel?.prepareGroundOpeningMaterial(this.ssao.normalMaterial);
+      this.skyTrainTravel?.prepareGroundOpeningMaterial(
+        this.ssao.normalMaterial,
+      );
     trackSSAOResources(this.ssao).restores.add(() => {
       restoreStationGroundNormals?.();
       restoreCutawayNormals?.();
@@ -1141,6 +1165,7 @@ export class CityEngine {
       ['trees', this.detailedTrees],
       ['facades', this.facadeDetails],
       ['architecture', this.architecturalDetails],
+      ['street-showcase', this.streetShowcase],
       ['streetscape', this.streetscapeKit],
       ['street-furniture', this.streetFurniture],
       ['interiors', this.interiors],
@@ -1159,6 +1184,7 @@ export class CityEngine {
     );
   }
   renderScene() {
+    this.applyStreetPilotLighting();
     const avatar = this.navigation?.walker.group;
     if (avatar && this.settings.mode === 'walk' && avatar.visible) {
       avatar.getWorldPosition(this.occlusionSubject);
@@ -1176,6 +1202,7 @@ export class CityEngine {
     this.detailedTrees?.update();
     this.facadeDetails?.update();
     this.architecturalDetails?.update();
+    this.streetShowcase?.update();
     this.streetscapeKit?.update();
     this.streetFurniture?.update();
     this.siwashRock?.update();
@@ -1187,6 +1214,8 @@ export class CityEngine {
     else this.landmarkDetails.forEach((l) => l.update());
     this.interiors?.update();
     this.updateShadowFrustum();
+    if (this.settings.traffic)
+      this.traffic?.vehicleAssets.prepareRender(this.camera);
     this.renderer.info.reset();
     const shadows =
       !this.compatibleGraphics &&
@@ -1297,7 +1326,11 @@ export class CityEngine {
       wrapNightStreetMaterials(group, this.traffic.streetLighting);
     // Detached loader results may be cancelled before reaching GPU preparation.
     // Their watched city parent enrolls them only when actually attached.
-    for (let parent: THREE.Object3D | null = group; parent; parent = parent.parent)
+    for (
+      let parent: THREE.Object3D | null = group;
+      parent;
+      parent = parent.parent
+    )
       if (parent === this.scene) {
         this.prepareTravelOccluders(group);
         break;
@@ -1636,9 +1669,13 @@ export class CityEngine {
   /** Explicit placement leaves passenger ownership, keeping the current map
    * camera and autonomous transit service intact. It never restores an old trip. */
   prepareTravelPlacement() {
-    if (this.skyTrainTravel?.active && !this.skyTrainTravel.releaseForPlacement())
+    if (
+      this.skyTrainTravel?.active &&
+      !this.skyTrainTravel.releaseForPlacement()
+    )
       return false;
-    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return false;
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat())
+      return false;
     return this.closeBusVisit();
   }
   leaveTravelAtLocation(remember = false) {
@@ -1942,12 +1979,40 @@ export class CityEngine {
     )
       this.updateLighting(false, time);
   }
+  /** Four scalar changes reuse the cached sky PMREM. Camera movement is checked
+   * independently of the clock so a fixed-hour trip restores the original light
+   * on leaving the pilot, without generating an environment map per frame. */
+  private applyStreetPilotLighting(time = performance.now(), force = false) {
+    if (!force && time - this.pilotLightingCheckedAt < 100) return;
+    this.pilotLightingCheckedAt = time;
+    const { x, y, z } = this.camera.position;
+    let weight = streetPilotLightingWeight(x, y - this.elevation(x, z), z);
+    if (
+      weight > 0 &&
+      (this.cabinDisplayActive ||
+        this.busVisit?.aboard ||
+        this.skyTrainTravel?.active ||
+        this.settings.mode === 'flight' ||
+        this.interiors?.height(x, z) !== undefined)
+    )
+      weight = 0;
+    if (!force && weight === this.pilotLightingWeight) return;
+    this.pilotLightingWeight = weight;
+    const base = this.pilotBaseLighting;
+    const scale = streetPilotLightingMultipliers(base, weight);
+    this.sun.intensity = base.sunIntensity * scale.sunIntensity;
+    this.ambient.intensity = base.ambientIntensity * scale.ambientIntensity;
+    this.scene.environmentIntensity =
+      base.environmentIntensity * scale.environmentIntensity;
+    this.renderer.toneMappingExposure = base.exposure * scale.exposure;
+  }
   updateLighting(force = false, time = performance.now()) {
     const hour = this.clock.hour;
     this.lastLightHour = hour;
     this.lastLightUpdate = time;
     const lighting = sampleAtmosphere(hour, this.atmosphere),
       { angle: a, night } = lighting;
+    this.pilotBaseLighting = lighting;
     this.uniforms.night.value = night;
     this.traffic?.streetLighting.update(hour, night);
     for (const n of this.data.nightMaterials || [])
@@ -1985,6 +2050,7 @@ export class CityEngine {
         this.scene.fog.density = lighting.fogDensity;
     }
     this.renderer.toneMappingExposure = lighting.exposure;
+    this.applyStreetPilotLighting(time, true);
     const hourDelta = Math.abs(hour - this.lastShadowHour);
     const movedSun = Math.min(hourDelta, 24 - hourDelta) >= 1 / 30;
     if (force || (movedSun && time - this.lastSolarShadowUpdate >= 750)) {
@@ -2433,6 +2499,7 @@ export class CityEngine {
     this.traffic?.vehicleAssets?.dispose();
     this.traffic?.busAssets?.dispose();
     this.facadeDetails?.dispose();
+    this.streetShowcase?.dispose();
     this.architecturalDetails?.dispose();
     this.streetFurniture?.dispose();
     this.vehicleImpacts?.dispose();

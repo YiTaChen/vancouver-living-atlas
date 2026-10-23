@@ -19,7 +19,11 @@ export function roadDecorations(e: CityEngine, graph: RoadGraph) {
     )
       asphalt.push(m);
   });
-  const surfaces = new GroundSurfaceIndex(asphalt);
+  // The shared traffic tyre sampler is queried every frame. Other ground
+  // indices keep their default zero-cache allocation.
+  const surfaces = new GroundSurfaceIndex(asphalt, [], {
+    cacheEdgeTolerances: true,
+  });
   e.data.roadSurface = surfaces;
   const surfaceY = (x: number, z: number) =>
     surfaces.sample(x, z, e.elevation(x, z) + 1.05);
@@ -35,12 +39,10 @@ export function roadDecorations(e: CityEngine, graph: RoadGraph) {
       [-1, 1],
       [1, 1],
       [1, -1],
-    ].map(
-      ([f, s]): Point => [
-        x + ((dx * rect.length) / 2) * f + ((px * rect.width) / 2) * s,
-        z + ((dz * rect.length) / 2) * f + ((pz * rect.width) / 2) * s,
-      ],
-    );
+    ].map(([f, s]): Point => [
+      x + ((dx * rect.length) / 2) * f + ((px * rect.width) / 2) * s,
+      z + ((dz * rect.length) / 2) * f + ((pz * rect.width) / 2) * s,
+    ]);
     const heights = corners.map(([xx, zz]) => surfaceY(xx, zz));
     if (heights.some((h) => h === undefined)) continue;
     const draped = drapeTriangles(

@@ -7,6 +7,7 @@
  */
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { installVehicleSurface } from './vehicle-surface';
 
 export type AircraftKind = 'helicopter' | 'seaplane';
 type V3 = readonly [number, number, number];
@@ -69,6 +70,19 @@ const C = {
   seat: 0x6f7f79,
 };
 
+/** Metre-space aircraft are already merged by colour. This authored surface
+ * role travels with each primitive, allowing metal, rubber and enamel to react
+ * differently without splitting the batch or adding another texture. */
+function surfaceForColour(colour: number): readonly [number, number] {
+  if (colour === C.metal) return [0.27, 0.84];
+  if (colour === C.gold) return [0.32, 0.72];
+  if (colour === C.rubber) return [0.94, 0];
+  if (colour === C.seat) return [0.9, 0];
+  if (colour === C.black) return [0.82, 0.02];
+  if (colour === C.dark) return [0.63, 0.16];
+  return [0.32, 0.08];
+}
+
 /** A small builder that converts coloured primitives into a single static mesh. */
 class SolidBatch {
   private parts: THREE.BufferGeometry[] = [];
@@ -83,6 +97,14 @@ class SolidBatch {
     const colours = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) colours.set([col.r, col.g, col.b], i * 3);
     g.setAttribute('color', new THREE.BufferAttribute(colours, 3));
+    const finish = surfaceForColour(colour);
+    const surfaces = new Uint8Array(count * 2);
+    const packed = finish.map((value) => Math.round(value * 255));
+    for (let i = 0; i < count; i++) surfaces.set(packed, i * 2);
+    g.setAttribute(
+      'assetSurface',
+      new THREE.BufferAttribute(surfaces, 2, true),
+    );
     this.parts.push(g);
   }
   box(size: V3, pos: V3, colour: number, rotation: V3 = [0, 0, 0]): void {
@@ -178,6 +200,11 @@ class SolidBatch {
             side: THREE.DoubleSide,
           });
     const mesh = new THREE.Mesh(merged, material);
+    if (material instanceof THREE.MeshStandardMaterial)
+      installVehicleSurface(
+        material,
+        kind === 'glass' ? 'glazing' : 'aircraft-batch',
+      );
     mesh.name = name;
     // Intentionally no point lights or shadow work: these assets also run on mobile.
     mesh.castShadow = false;

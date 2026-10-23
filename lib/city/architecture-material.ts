@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { sampleAtmosphere } from './atmosphere';
 import { FLAT_ROOF_FINISHES } from './building-surface-palette';
+import { STREET_SHOWCASE_GLSL } from './street-quality-profile';
 
 type Shader = Parameters<THREE.MeshStandardMaterial['onBeforeCompile']>[0];
 
@@ -45,12 +46,20 @@ varying vec3 vArchitectureNormal;\n` + shader.vertexShader;
 uniform vec4 uFlatRoofFinish[3];
 varying vec3 vArchitectureWorld;
 varying vec3 vArchitectureNormal;
+${STREET_SHOWCASE_GLSL}
 float architectureHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float architectureNoise(vec2 p){
   vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
   return mix(mix(architectureHash(i),architectureHash(i+vec2(1,0)),f.x),
     mix(architectureHash(i+vec2(0,1)),architectureHash(i+vec2(1,1)),f.x),f.y);
 }\n` + shader.fragmentShader;
+
+  // Keep the one per-fragment corridor lookup for colour and roughness. Roof
+  // fragments retain zero without evaluating distances along either street.
+  shader.fragmentShader = shader.fragmentShader.replace(
+    'vec3 architectureGlassReflection=vec3(0.0);',
+    'vec3 architectureGlassReflection=vec3(0.0); float streetArchitectureWeight=0.0;',
+  );
 
   const mark = 'facadeNormal=uBrickWeights[facadeStyle]*(1.0-facadePane);';
   shader.fragmentShader = shader.fragmentShader.replace(
@@ -111,6 +120,18 @@ float architectureNoise(vec2 p){
       float trimHeight=smoothstep(bounds.z-aa.y,bounds.z+aa.y,grid.y)*(1.0-smoothstep(bounds.w-aa.y,bounds.w+aa.y,grid.y))*valid;
       enrichedWall=mix(enrichedWall,vec3(.63,.65,.61),min(1.0,trim)*trimHeight*.24);
     }
+    // The bounded street pilot strengthens existing recesses instead of adding
+    // another pane grid, texture layer or architectural classification. Branch
+    // at zero to leave every non-pilot surface's original arithmetic intact.
+    streetArchitectureWeight=atlasStreetShowcaseWeight(vArchitectureWorld.xz);
+    if(streetArchitectureWeight>0.0){
+      float streetLowerStorey=1.0-smoothstep(vLayout.w-.4,vLayout.w+1.5,vFacade.y);
+      float streetPaneEdge=min(min(paneUV.x,1.0-paneUV.x),min(paneUV.y,1.0-paneUV.y));
+      float streetRecess=1.0-smoothstep(.018,.12,streetPaneEdge);
+      enrichedGlass*=1.0-streetArchitectureWeight*(.03+streetRecess*.16);
+      architectureGlassReflection*=1.0-streetArchitectureWeight*(.16+streetRecess*.16)*(1.0-fresnel*.55);
+      enrichedWall*=1.0-streetArchitectureWeight*(.014+streetLowerStorey*.04);
+    }
     diffuseColor.rgb=mix(enrichedWall,enrichedGlass,facadePane);
     if(facadeStyle==5 && vBaseWindow.y<-.5){
       vec2 door=vec2(abs(vFacade.x-vBaseWindow.x),vFacade.y+vBaseWindow.y+1.0);
@@ -153,7 +174,10 @@ float architectureNoise(vec2 p){
     'roughnessFactor=mix(cityFinish.roughness,pattern.w,facadePane);',
     `roughnessFactor=mix(cityFinish.roughness,pattern.w,facadePane);
     if(vFacade.x<0.0 && vFacade.y>= -1.5) roughnessFactor=uFlatRoofFinish[int(clamp(floor(vRoofFinish+.5),0.0,2.0))].w;
-    roughnessFactor=clamp(roughnessFactor+(architectureNoise(vArchitectureWorld.xz*.3)-.5)*.045*(1.0-facadePane),.17,.97);`,
+    roughnessFactor=clamp(roughnessFactor+(architectureNoise(vArchitectureWorld.xz*.3)-.5)*.045*(1.0-facadePane),.17,.97);
+    if(vFacade.x>=0.0){
+      if(streetArchitectureWeight>0.0) roughnessFactor=clamp(roughnessFactor+streetArchitectureWeight*(.018*(1.0-facadePane)-.045*facadePane),.17,.97);
+    }`,
   );
   shader.fragmentShader = shader.fragmentShader.replace(
     '#include <lights_fragment_end>',

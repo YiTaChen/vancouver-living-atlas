@@ -15,6 +15,13 @@ export function walkableGroundMeshes(root: THREE.Object3D) {
   return meshes;
 }
 
+export interface GroundSurfaceIndexOptions {
+  /** Trade 24 bytes per triangle for frequent exact tyre-height queries.
+   * Disabled by default so local/interior/navigation indices retain their
+   * original allocation and arithmetic path. */
+  cacheEdgeTolerances?: boolean;
+}
+
 /** Static, explicitly selected ground meshes; world metres, Y up.
  * Build after their transforms are final. Bridge decks should use their own
  * surface logic. Vertex positions are shared; cells contain triangle IDs only.
@@ -24,9 +31,15 @@ export class GroundSurfaceIndex {
   private readonly vertices: Float64Array;
   private readonly triangles: Uint32Array;
   private readonly inverseAreas: Float64Array;
+  private readonly edgeTolerances: Float64Array | null;
+  readonly edgeCacheBytes: number;
   private readonly cells = new Map<string, number[]>();
 
-  constructor(meshes: THREE.Mesh[], obstructionMeshes: THREE.Mesh[] = []) {
+  constructor(
+    meshes: THREE.Mesh[],
+    obstructionMeshes: THREE.Mesh[] = [],
+    options: GroundSurfaceIndexOptions = {},
+  ) {
     // De-duplicate references so shared scene traversal results do not double
     // every road. Separate meshes sharing a geometry still have own transforms.
     // The second explicit source set participates in volume queries only, even
@@ -41,7 +54,8 @@ export class GroundSurfaceIndex {
     );
     this.vertices = new Float64Array(vertexCount * 3);
     const triangleIndices: number[] = [],
-      inverseAreas: number[] = [];
+      inverseAreas: number[] = [],
+      edgeTolerances: number[] | null = options.cacheEdgeTolerances ? [] : null;
     const p = new THREE.Vector3();
     let vertexOffset = 0;
     for (const mesh of usable) {
@@ -126,6 +140,17 @@ export class GroundSurfaceIndex {
         const id = inverseAreas.length;
         triangleIndices.push(...ids);
         inverseAreas.push(inverseArea);
+        // The half-millimetre body/floor boundary is static. Retain the exact
+        // previous Float64 operation order once, rather than repeating three
+        // square roots for every vehicle wheel and walking-height query.
+        if (edgeTolerances) {
+          const eps = 0.0005 * Math.abs(inverseArea);
+          edgeTolerances.push(
+            eps * Math.hypot(cx - ax, cz - az),
+            eps * Math.hypot(bx - ax, bz - az),
+            eps * Math.hypot(cx - bx, cz - bz),
+          );
+        }
         for (let x = x0; x <= x1; x++)
           for (let z = z0; z <= z1; z++) {
             const key = `${x},${z}`,
@@ -138,6 +163,10 @@ export class GroundSurfaceIndex {
     }
     this.triangles = new Uint32Array(triangleIndices);
     this.inverseAreas = new Float64Array(inverseAreas);
+    this.edgeTolerances = edgeTolerances
+      ? new Float64Array(edgeTolerances)
+      : null;
+    this.edgeCacheBytes = this.edgeTolerances?.byteLength ?? 0;
   }
 
   /** Highest triangle height at XZ within anchorY ±4m, or undefined.
@@ -151,7 +180,8 @@ export class GroundSurfaceIndex {
     );
     if (!cell) return undefined;
     let highest: number | undefined;
-    const vertices = this.vertices;
+    const vertices = this.vertices,
+      edgeTolerances = this.edgeTolerances;
     for (const id of cell) {
       const inverse = this.inverseAreas[id];
       if (inverse === 0) continue;
@@ -174,13 +204,22 @@ export class GroundSurfaceIndex {
       const v = ((bx - ax) * dz - (bz - az) * dx) * inverse;
       // Half a millimetre in world XZ resolves independently rounded Float32
       // path caps at shared source nodes. It never widens the height window.
-      const eps = 0.0005 * Math.abs(inverse);
-      if (
-        u < -eps * Math.hypot(cx - ax, cz - az) ||
-        v < -eps * Math.hypot(bx - ax, bz - az) ||
-        u + v > 1 + eps * Math.hypot(cx - bx, cz - bz)
-      )
-        continue;
+      if (edgeTolerances) {
+        if (
+          u < -edgeTolerances[t] ||
+          v < -edgeTolerances[t + 1] ||
+          u + v > 1 + edgeTolerances[t + 2]
+        )
+          continue;
+      } else {
+        const eps = 0.0005 * Math.abs(inverse);
+        if (
+          u < -eps * Math.hypot(cx - ax, cz - az) ||
+          v < -eps * Math.hypot(bx - ax, bz - az) ||
+          u + v > 1 + eps * Math.hypot(cx - bx, cz - bz)
+        )
+          continue;
+      }
       const y = ay + u * (by - ay) + v * (cy - ay);
       if (
         Number.isFinite(y) &&
@@ -291,7 +330,8 @@ export class GroundSurfaceIndex {
           if (ids.size > 16_384) return false;
         }
     const intervals: [number, number][] = [],
-      vertices = this.vertices;
+      vertices = this.vertices,
+      edgeTolerances = this.edgeTolerances;
     const dx = to[0] - from[0],
       dz = to[1] - from[1];
     for (const id of ids) {
@@ -317,8 +357,7 @@ export class GroundSurfaceIndex {
         v = ((bx - ax) * pz - (bz - az) * px) * inverse,
         du = (dx * (cz - az) - dz * (cx - ax)) * inverse,
         dv = ((bx - ax) * dz - (bz - az) * dx) * inverse;
-      const eps = 0.0005 * Math.abs(inverse),
-        height = ay + u * (by - ay) + v * (cy - ay),
+      const height = ay + u * (by - ay) + v * (cy - ay),
         heightDelta = du * (by - ay) + dv * (cy - ay);
       let low = 0,
         high = 1;
@@ -330,10 +369,16 @@ export class GroundSurfaceIndex {
         else high = Math.min(high, t);
         return low <= high + 1e-12;
       };
+      const eps = edgeTolerances ? 0 : 0.0005 * Math.abs(inverse);
+      const edgesCovered = edgeTolerances
+        ? clip(u + edgeTolerances[ti], du) &&
+          clip(v + edgeTolerances[ti + 1], dv) &&
+          clip(1 - u - v + edgeTolerances[ti + 2], -du - dv)
+        : clip(u + eps * Math.hypot(cx - ax, cz - az), du) &&
+          clip(v + eps * Math.hypot(bx - ax, bz - az), dv) &&
+          clip(1 - u - v + eps * Math.hypot(cx - bx, cz - bz), -du - dv);
       if (
-        clip(u + eps * Math.hypot(cx - ax, cz - az), du) &&
-        clip(v + eps * Math.hypot(bx - ax, bz - az), dv) &&
-        clip(1 - u - v + eps * Math.hypot(cx - bx, cz - bz), -du - dv) &&
+        edgesCovered &&
         clip(height - anchorY + maxHeightDeltaM, heightDelta) &&
         clip(anchorY + maxHeightDeltaM - height, -heightDelta)
       )

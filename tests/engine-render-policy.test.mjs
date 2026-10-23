@@ -8,7 +8,12 @@ import { cityModule } from './helpers/city-modules.mjs';
 
 // Execute the integrated engine methods, not a second implementation of the
 // wiring. Three's real lights and SSAOPass run without a browser/WebGL context.
-const { installAtmosphereSky, sampleAtmosphere } = await import(cityModule('atmosphere'));
+const { installAtmosphereSky, sampleAtmosphere } = await import(
+  cityModule('atmosphere')
+);
+const { STREET_SHOWCASE_BOUNDS } = await import(
+  cityModule('street-quality-profile')
+);
 const source = readFileSync(
   new URL('../lib/city/engine.ts', import.meta.url),
   'utf8',
@@ -27,6 +32,7 @@ const names = [
   'ensureSSAO',
   'applySettings',
   'updateLighting',
+  'applyStreetPilotLighting',
   'setAtmosphere',
 ];
 const methods = engine.members
@@ -47,6 +53,7 @@ const code = ts.transpileModule(
   import {installSSAOBlur4} from '${cityModule('ssao-blur4')}';
   import {installPedestrianOverrideMaterial} from '${cityModule('city-life/pedestrian-renderer')}';
   import {sampleAtmosphere, applyAtmosphereSky, normalizeAtmosphere} from '${cityModule('atmosphere')}';
+  import {streetPilotLightingWeight, streetPilotLightingMultipliers} from '${cityModule('street-pilot-lighting')}';
   export class EngineMethods {${methods.join('\n')}}
 `,
   {
@@ -77,16 +84,30 @@ function fixture() {
     clock: { hour: 14 },
     lastLightHour: -1,
     lastLightUpdate: 0,
+    pilotBaseLighting: sampleAtmosphere(14),
+    pilotLightingCheckedAt: -Infinity,
+    pilotLightingWeight: -1,
+    elevation: () => 8,
     lastShadowHour: -1,
     lastSolarShadowUpdate: 0,
     scene: new THREE.Scene(),
     camera: new THREE.PerspectiveCamera(),
-    controls: { target: new THREE.Vector3(1428, 28, 135) },
+    controls: {
+      target: new THREE.Vector3(
+        STREET_SHOWCASE_BOUNDS.maxX + 1000,
+        28,
+        STREET_SHOWCASE_BOUNDS.maxZ + 1000,
+      ),
+    },
     sun: new THREE.DirectionalLight(),
     ambient: new THREE.HemisphereLight(),
     sky: new Sky(),
     atmosphere: 'clear',
-    uniforms: { night: { value: 0 }, skyHorizon: { value: new THREE.Color() }, skyZenith: { value: new THREE.Color() } },
+    uniforms: {
+      night: { value: 0 },
+      skyHorizon: { value: new THREE.Color() },
+      skyZenith: { value: new THREE.Color() },
+    },
     data: {},
     buildings: new THREE.Group(),
     vegetation: new THREE.Group(),
@@ -253,14 +274,23 @@ test('integrated real SSAOPass wrapper sees late GLB-like glass, restores draw f
   override.dispose();
 });
 
-
 test('weather changes update direct and indirect light, fog, glass, sky and environment together without resetting night or user sky settings', () => {
-  const e = fixture(), requests = [];
+  const e = fixture(),
+    requests = [];
   e.scene.fog = new THREE.FogExp2();
-  e.skyEffects = { atmosphereVisibility: 1, settings: { aurora: false, stars: true } };
+  e.skyEffects = {
+    atmosphereVisibility: 1,
+    settings: { aurora: false, stars: true },
+  };
   const target = new THREE.WebGLRenderTarget(1, 1);
-  e.environmentCache = { get: (mode, phase) => { requests.push([mode, phase]); return target; } };
-  const material = new THREE.MeshStandardMaterial(), object = new THREE.Object3D();
+  e.environmentCache = {
+    get: (mode, phase) => {
+      requests.push([mode, phase]);
+      return target;
+    },
+  };
+  const material = new THREE.MeshStandardMaterial(),
+    object = new THREE.Object3D();
   e.data.nightMaterials = [{ material, intensity: 1.5 }];
   e.data.nightObjects = [object];
   const horizonBinding = e.uniforms.skyHorizon;
@@ -274,22 +304,37 @@ test('weather changes update direct and indirect light, fog, glass, sky and envi
   assert.equal(e.scene.fog.density, day.fogDensity);
   assert(e.scene.background.equals(day.horizon));
   assert(e.uniforms.skyHorizon.value.equals(day.horizon));
-  assert.equal(e.uniforms.skyHorizon, horizonBinding, 'existing material bindings stay live');
+  assert.equal(
+    e.uniforms.skyHorizon,
+    horizonBinding,
+    'existing material bindings stay live',
+  );
   assert.equal(e.scene.environment, target.texture);
   assert.equal(e.scene.environmentIntensity, day.environmentIntensity);
   assert.equal(material.emissiveIntensity, 0);
   assert.equal(object.visible, false);
   assert.deepEqual(requests, [['overcast', 'day']]);
   e.setAtmosphere('overcast');
-  assert.equal(requests.length, 1, 'unchanged selector does not regenerate an environment');
+  assert.equal(
+    requests.length,
+    1,
+    'unchanged selector does not regenerate an environment',
+  );
   e.clock.hour = 23;
   e.updateLighting(true, 5000);
   assert.equal(e.uniforms.night.value, 1);
   assert.equal(material.emissiveIntensity, 1.5);
   assert.equal(object.visible, true);
   assert.deepEqual(requests.at(-1), ['overcast', 'night']);
-  assert.equal(e.sky.visible, true, 'continuous dark sky replaces the old hide threshold');
-  assert(e.sun.position.y < e.sun.target.position.y, 'sun direction follows the real night arc');
+  assert.equal(
+    e.sky.visible,
+    true,
+    'continuous dark sky replaces the old hide threshold',
+  );
+  assert(
+    e.sun.position.y < e.sun.target.position.y,
+    'sun direction follows the real night arc',
+  );
   assert.deepEqual(e.skyEffects.settings, { aurora: false, stars: true });
   e.setAtmosphere('invalid-mode');
   assert.equal(e.atmosphere, 'clear');

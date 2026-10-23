@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { hash } from './geo';
+import { installVehicleSurface } from './assets/vehicle-surface';
 
 export interface TrafficRoute {
   a: number[];
@@ -107,6 +108,10 @@ if (trafficWheel.w > 0.0) {
       );
   };
   material.customProgramCacheKey = () => 'traffic-source-wheel-v1';
+  installVehicleSurface(
+    material,
+    role === 'paint' ? 'paint' : role === 'glass' ? 'glazing' : 'rubber',
+  );
   return material;
 }
 
@@ -243,6 +248,9 @@ export class TrafficVehicleAssets {
     lodCounts: [0, 0, 0],
     triangles: 0,
     drawCalls: 0,
+    renderedActors: 0,
+    culledActors: 0,
+    poseCacheBytes: 0,
     textures: 0,
     assetBytes: TRAFFIC_VEHICLE_ASSETS.reduce(
       (sum, asset) => sum + asset.bytes,
@@ -254,12 +262,19 @@ export class TrafficVehicleAssets {
   private materials = roles.map(vehicleMaterial);
   private readonly models: ('sedan' | 'suv')[];
   private readonly lastLod: Uint8Array;
+  private readonly poseMatrices: Float64Array;
+  private readonly wheelTravel: Float64Array;
+  private posesReady = false;
   private readonly dummy = new THREE.Object3D();
   private readonly color = new THREE.Color();
   private readonly forward = new THREE.Vector3();
   private readonly up = new THREE.Vector3();
   private readonly right = new THREE.Vector3();
   private readonly roadRotation = new THREE.Matrix4();
+  private readonly viewProjection = new THREE.Matrix4();
+  private readonly frustum = new THREE.Frustum();
+  private readonly actorBounds = new THREE.Sphere(new THREE.Vector3(), 3.5);
+  private readonly lodAdmissions = [0, 0, 0];
 
   constructor(
     private readonly routes: readonly TrafficRoute[],
@@ -268,6 +283,12 @@ export class TrafficVehicleAssets {
   ) {
     this.models = routes.map((_, i) => (hash(i + 91) < 0.28 ? 'suv' : 'sedan'));
     this.lastLod = new Uint8Array(routes.length).fill(2);
+    // One persistent double-precision snapshot per source actor. Render
+    // preparation must not resample roads, advance time or call pose observers.
+    this.poseMatrices = new Float64Array(routes.length * 16);
+    this.wheelTravel = new Float64Array(routes.length);
+    this.stats.poseCacheBytes =
+      this.poseMatrices.byteLength + this.wheelTravel.byteLength;
     this.group.name = 'Shared Blender traffic vehicles';
     this.group.userData.trafficVehicleAssets = this.stats;
     this.group.visible = false;
@@ -280,8 +301,10 @@ export class TrafficVehicleAssets {
     if (process.env.VANCOUVER_VISUAL_QA !== '1' || this.disposed) return false;
     this.stats.enabled = enabled;
     if (!enabled) {
+      this.posesReady = false;
       this.group.visible = false;
       this.stats.actors = this.stats.triangles = this.stats.drawCalls = 0;
+      this.stats.renderedActors = this.stats.culledActors = 0;
       this.stats.lodCounts.fill(0);
     }
     return true;
@@ -363,14 +386,12 @@ export class TrafficVehicleAssets {
     camera: THREE.Vector3,
     roadHeight: (x: number, z: number) => number,
     visitPose?: TrafficVehiclePoseVisitor,
+    viewCamera?: THREE.Camera,
+    deferRender = false,
   ) {
     if (this.disposed || !this.stats.enabled || this.stats.status !== 'ready')
       return false;
-    for (const batch of this.batches)
-      for (const mesh of batch.meshes) mesh.count = 0;
-    this.stats.lodCounts.fill(0);
-    this.stats.triangles = 0;
-    this.stats.drawCalls = 0;
+    this.lodAdmissions.fill(0);
     for (let i = 0; i < this.routes.length; i++) {
       const route = this.routes[i],
         phase = (route.phase + (time * route.speed) / route.length) % 1,
@@ -387,14 +408,13 @@ export class TrafficVehicleAssets {
           : distance < (previous < 2 ? 240 : 220)
             ? 1
             : 2;
-      if (lod === 0 && this.stats.lodCounts[0] >= 64) lod = 1;
-      if (lod === 1 && this.stats.lodCounts[1] >= 192) lod = 2;
+      // Admission order includes offscreen actors, preserving the previous
+      // exact pose/LOD history supplied to independent lights/observers.
+      if (lod === 0 && this.lodAdmissions[0] >= 64) lod = 1;
+      if (lod === 1 && this.lodAdmissions[1] >= 192) lod = 2;
+      this.lodAdmissions[lod]++;
       this.lastLod[i] = lod;
       const model = this.models[i],
-        batch = this.batches.find(
-          (item) => item.model === model && item.lod === lod,
-        )!,
-        slot = batch.meshes[0].count,
         yaw = Math.atan2(route.b[0] - route.a[0], route.b[1] - route.a[1]);
       let rootY = y;
       this.dummy.rotation.set(0, yaw, 0);
@@ -421,18 +441,79 @@ export class TrafficVehicleAssets {
       this.dummy.position.set(x, rootY, z);
       this.dummy.updateMatrix();
       visitPose?.(model, this.dummy.matrix, i);
+      this.poseMatrices.set(this.dummy.matrix.elements, i * 16);
+      const radius = model === 'suv' ? 0.35 : 0.32;
+      this.wheelTravel[i] = (time * route.speed) % (Math.PI * 2 * radius);
+    }
+    this.posesReady = true;
+    this.stats.actors = this.routes.length;
+    this.group.visible = true;
+    // Legacy callers still receive immediately packed instances. The city
+    // defers only this renderer work until every camera owner has updated.
+    if (!deferRender) this.prepareRender(viewCamera);
+    return true;
+  }
+
+  /** Pack the last exact simulation snapshot against the final render camera.
+   * Moving/turning/teleporting the camera cannot leave a stale one-frame cull.
+   * No actor, road-height query, visitor, time or LOD history changes here. */
+  prepareRender(viewCamera?: THREE.Camera) {
+    if (
+      this.disposed ||
+      !this.stats.enabled ||
+      this.stats.status !== 'ready' ||
+      !this.posesReady
+    )
+      return false;
+    for (const batch of this.batches)
+      for (const mesh of batch.meshes) mesh.count = 0;
+    this.stats.lodCounts.fill(0);
+    this.stats.triangles = 0;
+    this.stats.drawCalls = 0;
+    this.stats.renderedActors = this.stats.culledActors = 0;
+    if (viewCamera) {
+      viewCamera.updateMatrixWorld();
+      this.viewProjection.multiplyMatrices(
+        viewCamera.projectionMatrix,
+        viewCamera.matrixWorldInverse,
+      );
+      this.frustum.setFromProjectionMatrix(this.viewProjection);
+    }
+    for (let i = 0; i < this.routes.length; i++) {
+      const offset = i * 16;
+      // These actors do not cast shadows. Only instance packing is culled;
+      // the earlier simulation already visited every unchanged physical pose.
+      if (viewCamera) {
+        this.actorBounds.center.set(
+          this.poseMatrices[offset + 12] + this.poseMatrices[offset + 4],
+          this.poseMatrices[offset + 13] + this.poseMatrices[offset + 5],
+          this.poseMatrices[offset + 14] + this.poseMatrices[offset + 6],
+        );
+        if (!this.frustum.intersectsSphere(this.actorBounds)) {
+          this.stats.culledActors++;
+          continue;
+        }
+      }
+      this.stats.renderedActors++;
+      const model = this.models[i],
+        lod = this.lastLod[i],
+        batch = this.batches.find(
+          (item) => item.model === model && item.lod === lod,
+        )!,
+        slot = batch.meshes[0].count;
+      this.dummy.matrix.fromArray(this.poseMatrices, offset);
       this.color.setHex(palette[Math.floor(hash(i) * palette.length)]);
-      batch.meshes.forEach((mesh, roleIndex) => {
+      for (let roleIndex = 0; roleIndex < batch.meshes.length; roleIndex++) {
+        const mesh = batch.meshes[roleIndex];
         mesh.setMatrixAt(slot, this.dummy.matrix);
         if (roleIndex === 0) mesh.setColorAt(slot, this.color);
         // Modulo limits long-running float precision loss; every wheel of a
         // template has the same radius and uses its own original center.
-        const radius = model === 'suv' ? 0.35 : 0.32;
         mesh.geometry
           .getAttribute('trafficTravel')
-          .setX(slot, (time * route.speed) % (Math.PI * 2 * radius));
+          .setX(slot, this.wheelTravel[i]);
         mesh.count++;
-      });
+      }
       this.stats.lodCounts[lod]++;
       this.stats.triangles += batch.triangles;
     }
@@ -449,8 +530,6 @@ export class TrafficVehicleAssets {
         ).needsUpdate = true;
         this.stats.drawCalls++;
       }
-    this.stats.actors = this.routes.length;
-    this.group.visible = true;
     return true;
   }
 

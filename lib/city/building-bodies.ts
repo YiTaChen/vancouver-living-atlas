@@ -448,7 +448,7 @@ export function createBuildingBodies(e: CityEngine) {
     installCityMaterialLibrary(s, materialLibrary);
   };
   material.customProgramCacheKey = () =>
-    'atlas-city-bodies-pbr-v4-station-replacement-guideway';
+    'atlas-city-bodies-pbr-v4-station-replacement-guideway-street-pilot-v1';
   const geometry = e.geometry(positions, normals, colors, uv);
   geometry.setAttribute('aStyle', new THREE.Float32BufferAttribute(styles, 1));
   geometry.setAttribute(

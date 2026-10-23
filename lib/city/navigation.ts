@@ -33,9 +33,11 @@ import { BoatController } from './boat-controller';
 import { makeWalker } from './assets/walker';
 import { makeCitizen, type CitizenCharacter } from './citizen';
 import { GroundSurfaceIndex, walkableGroundMeshes } from './ground-surface';
-import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';
+import { DriverCameraMotion, DRIVER_LEFT_OFFSET, streetDriveChase } from './driver-camera';
+import { streetShowcaseWeight } from './street-quality-profile';
 import type { TravelBookmark } from './travel-return';
 import { makeRoadster } from './assets/roadster';
+import { installPilotContactShadow } from './assets/vehicle-surface';
 import { VehicleCondition } from './vehicle-condition';
 import { makeCockpit } from './assets/cockpits';
 import {
@@ -297,6 +299,7 @@ export class StreetNavigation {
         depthWrite: false,
       }),
     );
+    installPilotContactShadow(shadow.material);
     shadow.rotation.x = -Math.PI / 2;
     shadow.position.y = 0.05;
     this.car.add(shadow);
@@ -1367,8 +1370,11 @@ export class StreetNavigation {
       );
       eye.addScaledVector(forward, this.driverMotion.surge * (1 - blend));
     }
-    const pos = eye.clone().addScaledVector(dir, -distance * blend);
-    pos.y += distance * (this.mode === 'walk' ? 0.28 : 0.35) * blend;
+    const driveChase = this.mode === 'drive'
+      ? streetDriveChase(distance, streetShowcaseWeight(this.position.x, this.position.z))
+      : null;
+    const pos = eye.clone().addScaledVector(dir, -(driveChase?.distance ?? distance) * blend);
+    pos.y += (driveChase?.lift ?? distance * (this.mode === 'walk' ? 0.28 : 0.35)) * blend;
     const walkThird = this.mode === 'walk' && !firstPerson('walk', distance);
     const walkTarget = eye.clone().add(new THREE.Vector3(0, this.walkSeat ? -0.35 : -0.55, 0));
     if (walkThird) {
@@ -1400,7 +1406,7 @@ export class StreetNavigation {
         .clone()
         .addScaledVector(
           dir,
-          THREE.MathUtils.lerp(25, 2, blend),
+          THREE.MathUtils.lerp(25, driveChase?.lookAhead ?? 2, blend),
         )
         .add(
           new THREE.Vector3(

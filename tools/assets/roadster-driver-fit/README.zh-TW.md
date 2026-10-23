@@ -16,6 +16,8 @@ Based on Vancouver Living Atlas by YiTaChen. Source: https://github.com/YiTaChen
 
 `specs.json`是完整尺寸/抑制計數契約。`qa/adapter-preservation.json`檢查原始碼SHA、精確callsite、所有未抑制的世界三角形、八個座椅剛性零件，以及3組實際輪軸更新；同時檢驗E02材質配接器開啟/關閉兩種組裝、三個LOD。`makeCockpitCandidate({ replacementGlb })`必須明確傳入替換GLB，未提供時拒絕執行；來源SHA或callsite變更也拒絕。
 
+此封存候選以`manifest.json`的完整`baseRevision`透過`git show`讀取歷史Roadster建構器，再驗證原本的SHA；本機缺少該Git revision時會拒絕執行，不回退到目前來源。稽核仍會執行目前的Roadster建構器，將其世界三角形與固定歷史來源逐一比較；僅有shader材質變更可保持此幾何檢查通過，不代表封存候選已採用新的runtime外觀或功能。
+
 ## 人物、接觸與限制
 
 匹配F04的`driver-roadster-fit.lod0/1/2.glb`，不是舊的蜷腿clearance study。人物root=[.44,0,-.06]，quaternion單位，scale=[1,1,1]，播放`driver-seated`在.5秒。站姿身高約1.81m與原inverse binds保持；自然腿長、髖部與腳踝不拉伸。駕駛專用版本移除背包，軀幹輕微後傾8°。`DriverGrip`必須先按實際GLB動畫權重套用，再skin/world transform；不能用站姿POSITION檢查彎曲手部。
@@ -35,7 +37,7 @@ Based on Vancouver Living Atlas by YiTaChen. Source: https://github.com/YiTaChen
 - 重新匯出既有藝術家編輯：`blender -b -t 2 --python-exit-code 1 --python tools/assets/roadster-driver-fit/export.py -- --source tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod0.blend --output /tmp/roadster-cockpit-local.lod0.glb`
 - 明確重新產生預設才執行：`node tools/assets/roadster-driver-fit/extract-source-seats.mjs`，然後`blender -b -t 2 --python-exit-code 1 --python tools/assets/roadster-driver-fit/build.py`
 - 來源不改寫與真實編輯證明：`blender -b -t 2 --python-exit-code 1 --python tools/assets/roadster-driver-fit/audit-blender.py`。它在暫存副本改頂點、UV、材質色/粗糙度，再重開/匯出/匯入驗證；不支援的材質節點明確拒絕。
-- `node tools/assets/roadster-driver-fit/audit-adapter.mjs`只檢查；加`--write-fixtures`才重新輸出離線完整/語意inspection GLB。
+- `node tools/assets/roadster-driver-fit/audit-adapter.mjs`預設檢查並保留封存的來源hash報告；加`--write-report`才更新目前稽核報告，加`--write-fixtures`則一併重新輸出報告與離線完整/語意inspection GLB。
 - `node tools/assets/roadster-driver-fit/test-contact.mjs`；`node tools/assets/roadster-driver-fit/check-fit.mjs --all`；`python tools/assets/roadster-driver-fit/validate.py`；`./node_modules/.bin/oxlint tools/assets/roadster-driver-fit`
 
 `render.py`真實重新匯入GLB、播放同一駕駛動作，以Cycles CPU 2執行緒輸出完整車、側剖、座椅支撐、手部、腳部與四種光照LOD證據。剖面只隱藏QA物件，隱藏清單、輸入SHA及相機用途記錄在`qa/render-evidence.json`；不會改變交付GLB或原車。完整車與語意拆分fixture的三角形相等也由配接器稽核驗證。
