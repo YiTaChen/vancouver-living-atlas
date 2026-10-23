@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { cityModule } from './helpers/city-modules.mjs';
+import { walkFlat } from './helpers/station-walker.mjs';
 import {
   makeRuntimeStation,
   SOURCE,
@@ -113,18 +114,38 @@ for (const [id, rebuild, count] of [
     }
   });
 
-  test(`${id}: rebuilding retains both original train platforms and every train anchor`, () => {
-    const original = packet.stations.find((s) => s.stationId === id);
+  test(`${id}: platform calibration preserves the rigid train and car-local door contracts`, () => {
+    const original = packet.stations.find((s) => s.stationId === id),
+      before = original.platforms[0].stopPosition.translationM,
+      after = source.platforms[0].stopPosition.translationM,
+      shift = after.map((v, i) => v - before[i]),
+      translated = (p) => p.map((v, i) => v + shift[i]);
     for (const platform of original.platforms) {
+      const expected = structuredClone(platform);
+      expected.floorHeightM += shift[1];
+      expected.railHeightM += shift[1];
+      expected.stopPosition.translationM = translated(
+        expected.stopPosition.translationM,
+      );
+      for (const d of expected.doorAlignmentPoints)
+        for (const key of [
+          'stationSillPointM',
+          'platformEdgePointM',
+          'stationWaitingPointM',
+        ])
+          d[key] = translated(d[key]);
+      for (const r of expected.waitingRegions ?? [])
+        r.polygonM = r.polygonM.map(translated);
       assert.deepEqual(
         source.platforms.find((p) => p.platformId === platform.platformId),
-        platform,
+        expected,
       );
       assert.deepEqual(
         source.floorSurfaces.find((f) => f.surfaceId === platform.surfaceId)
           .verticesM,
-        original.floorSurfaces.find((f) => f.surfaceId === platform.surfaceId)
-          .verticesM,
+        original.floorSurfaces
+          .find((f) => f.surfaceId === platform.surfaceId)
+          .verticesM.map(translated),
       );
     }
     for (const anchor of original.anchors.filter((a) =>
@@ -132,7 +153,7 @@ for (const [id, rebuild, count] of [
     ))
       assert.deepEqual(
         source.anchors.find((a) => a.id === anchor.id),
-        anchor,
+        { ...anchor, pointM: translated(anchor.pointM) },
       );
   });
 
@@ -151,49 +172,69 @@ for (const [id, rebuild, count] of [
           : owner.floorAt([-5, 0, -104.3], 'granville-mall-entrance');
       let point = initial;
       assert(point && owner.isClearFoot(point));
-      const ascent =
-        id === 'burrard'
-          ? [
-              [-7, 0, -82],
-              [-7, -2.6, -74.4],
-              [-5, -2.6, -70],
-              [-5, -2.6, -61],
-              [-5, upper, -46.4],
-            ]
-          : [
-              [-4.175, 0, -99],
-              [-4.175, -3, -91.4],
-              [-5, -3, -90],
-              [-5, -3, -78],
-              [
-                -5,
-                -3,
-                data.connections.find((c) => c.id === 'granville-big-three-2')
-                  .start[2],
-              ],
-              [-5, upper, -45.4],
-            ];
-      for (const target of ascent)
-        point = walkTo(owner, point, target, `${id} entrance/ticket/long bank`);
-      for (const target of [
-        [-5, upper, -40],
-        [0, upper, -40],
-        [0, upper, -36],
-      ])
-        point = walkTo(owner, point, target, `${id} upper platform`);
-      assert.equal(point.surfaceId, `${id}-upper`);
-      for (const target of [
-        [0, upper, -40],
-        [-13.4, upper, -40],
-        [-13.4, upper, -43.5],
-        [-14, upper, -43.5],
-        [-26.6, lower, -43.5],
-        [-27, lower, -45.9],
-        [0, lower, -45.9],
-        [0, lower, -36],
-      ])
-        point = walkTo(owner, point, target, `${id} lower platform connector`);
-      assert.equal(point.surfaceId, `${id}-lower`);
+      if (id === 'burrard') {
+        const [px, , pz] =
+            source.authoredInterior.platformCalibration.platformCenterM,
+          northZ = pz - 37;
+        point = walkFlat(owner, point, [-3, 0, -91.7]);
+        point = walkTo(
+          owner,
+          point,
+          [-3, -6.5, -105.6],
+          'Burrard street stair',
+        );
+        point = walkFlat(owner, point, [9.4, -6.5, -105]);
+        point = walkTo(
+          owner,
+          point,
+          [23.6, upper, -105],
+          'Burrard eastward triple bank',
+        );
+        point = walkFlat(owner, point, [px, upper, northZ - 0.6]);
+        point = walkTo(
+          owner,
+          point,
+          [px, upper, northZ + 0.6],
+          'Burrard upper platform',
+        );
+        assert.equal(point.surfaceId, 'burrard-upper');
+        point = walkFlat(owner, point, [24, upper, northZ - 0.6]);
+        point = walkTo(
+          owner,
+          point,
+          [24, lower, northZ + 12.6],
+          'Burrard short lower connector',
+        );
+        point = walkFlat(owner, point, [px - 1.5, lower, northZ + 12.75]);
+        assert.equal(point.surfaceId, 'burrard-lower');
+        return;
+      }
+      const endZ = data.connections.find(
+        (c) => c.id === 'granville-big-three-2',
+      ).end[2];
+      const hubZ = endZ + 5,
+        westX = 82.48954321 - 2.25;
+      point = walkFlat(owner, point, [-3.2, 0, -80.175]);
+      point = walkTo(owner, point, [11.2, -3, -80.175], 'Granville Bay pair');
+      point = walkFlat(owner, point, [13, -3, -105.4]);
+      point = walkFlat(owner, point, [75.2, -3, -100.6]);
+      point = walkTo(
+        owner,
+        point,
+        [75.2, upper, endZ + 0.6],
+        'Granville 35 m Big 3',
+      );
+      point = walkFlat(owner, point, [westX + 0.6, upper, hubZ]);
+      assert.equal(point.surfaceId, 'granville-upper');
+      point = walkFlat(owner, point, [65.1, upper, hubZ - 3.1]);
+      point = walkTo(
+        owner,
+        point,
+        [51.9, lower, hubZ - 3.1],
+        'Granville short lower connector',
+      );
+      point = walkFlat(owner, point, [westX + 0.6, lower, hubZ]);
+      assert.equal(point.surfaceId, 'granville-lower');
     } finally {
       owner.dispose();
     }
@@ -209,76 +250,125 @@ for (const [id, rebuild, count] of [
         p.surfaceId.endsWith('lower'),
       ).floorHeight;
       try {
+        const sx = 22.61400566,
+          sz = -30.86257589,
+          streetY = -2.07414,
+          seymourY = 1.21093;
         let point = owner.floorAt(
-          [27.247, 0, -25.409],
+          [sx, seymourY, sz],
           'granville-seymour-entrance',
         );
-        for (const target of [
-          [25.247, 0, -25.409],
-          [16.647, -3, -25.409],
-          [15.247, -3, -25.409],
-          [15.247, -3, -85],
-          [5, -3, -85],
-        ])
-          point = walkTo(
-            owner,
-            point,
-            target,
-            'Seymour to original ticket hall',
-          );
+        point = walkFlat(owner, point, [sx + 1.8, seymourY, sz]);
+        point = walkTo(
+          owner,
+          point,
+          [sx + 12.2, streetY, sz],
+          'Seymour entrance stairs',
+        );
+        point = walkFlat(owner, point, [69, streetY, sz]);
+        point = walkFlat(owner, point, [69, streetY, -84.4]);
+        point = walkFlat(owner, point, [70, streetY, -84.4]);
+        point = walkTo(
+          owner,
+          point,
+          [70, -3, -100.6],
+          'Seymour original farehall graded passage',
+        );
+        point = walkFlat(owner, point, [75.2, -3, -101]);
         assert.equal(point.surfaceId, 'granville-original-ticket-hall');
         point = owner.floorAt([-5, 0, -104.3], 'granville-mall-entrance');
-        for (const target of [
-          [0, 0, -102],
-          [49.108, 0, -102],
-          [49.108, 0, -77],
-        ])
-          point = walkTo(owner, point, target, 'Unpaid Hudson Mall connection');
-        assert.equal(point.surfaceId, 'granville-dunsmuir-street-hall');
-        point = owner.floorAt(
-          [49.108, 0, -62.3],
-          'granville-dunsmuir-street-hall',
+        point = walkFlat(owner, point, [-5, 0, -89]);
+        point = walkFlat(owner, point, [16, 0, -89]);
+        point = walkTo(
+          owner,
+          point,
+          [66, streetY, -89],
+          'Unpaid Hudson gentle grade',
         );
-        for (const target of [
-          [49.108, 0, -69.667],
-          [42.108, 0, -69.667],
-          [7.508, upper, -69.667],
-          [-11, upper, -69.667],
-          [-11, upper, -46.4],
-          [-11, upper, -40],
-          [0, upper, -40],
-          [0, upper, -36],
-        ])
-          point = walkTo(
-            owner,
-            point,
-            target,
-            'Dunsmuir bank to upper platform',
-          );
+        point = walkFlat(owner, point, [70.11, streetY, -72.27427749]);
+        point = walkTo(
+          owner,
+          point,
+          [63.56, streetY - 3, -72.27427749],
+          'Dunsmuir southwest entry stair',
+        );
+        point = walkFlat(owner, point, [52.76, streetY - 3, -75.87427749]);
+        point = walkFlat(owner, point, [51.76, streetY - 3, -85.1]);
+        point = walkFlat(owner, point, [61.46, streetY - 3, -85.03]);
+        point = walkTo(
+          owner,
+          point,
+          [61.46, upper, -58.14],
+          'Independent Dunsmuir triple bank',
+        );
+        const westX = 82.48954321 - 2.25;
+        point = walkFlat(owner, point, [westX + 0.6, upper, -53.74]);
         assert.equal(point.surfaceId, 'granville-upper');
-        for (const target of [
-          [0, upper, -40],
-          [-11, upper, -40],
-          [-11, upper, -69.667],
-          [-13.4, upper, -69.667],
-          [-13.4, upper, -71.167],
-          [-14, upper, -71.167],
-          [-26.6, lower, -71.167],
-          [-27, lower, -73.567],
-          [-11, lower, -73.567],
-          [-11, lower, -46.4],
-          [0, lower, -46.4],
-          [0, lower, -36],
-        ])
-          point = walkTo(
-            owner,
-            point,
-            target,
-            'Dunsmuir short connector to lower platform',
-          );
+        point = walkFlat(owner, point, [57.6, upper, -55.34]);
+        point = walkTo(
+          owner,
+          point,
+          [44.4, lower, -55.34],
+          'Dunsmuir short lower connector',
+        );
+        point = walkFlat(owner, point, [westX + 0.6, lower, -53.74]);
         assert.equal(point.surfaceId, 'granville-lower');
       } finally {
         owner.dispose();
       }
     });
 }
+
+test('Granville round stainless concourse column blocks all eight radial approaches and permits reverse movement', () => {
+  const s = rebuildGranville(
+      packet.stations.find((s) => s.stationId === 'granville'),
+    ),
+    data = makeRuntimeStation(s, 'a'.repeat(64)),
+    owner = new SkyTrainStationOwner(data, () => 0, 'balanced', false),
+    column = data.parts.find(
+      (p) => p.id === 'granville-original-ticket-hall-round-column',
+    ),
+    faces = data.parts.filter((p) =>
+      p.id.startsWith(`${column.id}-stainless-face-`),
+    );
+  try {
+    assert.equal(faces.length, 16);
+    for (const p of [column, ...faces])
+      assert(
+        data.obstacles.some((o) => o.id === p.id),
+        `${p.id}: same physical geometry`,
+      );
+    for (let i = 0; i < 8; i++) {
+      const angle = (i / 8) * Math.PI * 2,
+        dx = Math.sin(angle),
+        dz = Math.cos(angle),
+        start = [
+          column.position[0] + dx * 1.1,
+          -3,
+          column.position[2] + dz * 1.1,
+        ];
+      let foot = owner.floorAt(start, 'granville-original-ticket-hall');
+      assert(
+        foot && owner.isClearFoot(foot),
+        `radial approach ${i} is supported`,
+      );
+      for (let j = 0; j < 44; j++)
+        foot = owner.walk(foot, -dx * 0.05, -dz * 0.05);
+      const separation =
+        (foot.position[0] - column.position[0]) * dx +
+        (foot.position[2] - column.position[2]) * dz;
+      assert(
+        separation > 0.5 && separation < 0.85,
+        `body stops at the complete round column: ${i}/${separation}`,
+      );
+      const away = owner.walk(foot, dx * 0.4, dz * 0.4);
+      assert(
+        (away.position[0] - foot.position[0]) * dx +
+          (away.position[2] - foot.position[2]) * dz >
+          0.35,
+      );
+    }
+  } finally {
+    owner.dispose();
+  }
+});

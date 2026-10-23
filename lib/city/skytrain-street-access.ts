@@ -20,6 +20,10 @@ export interface StreetEntranceReference {
   /** Inward compass bearing, clockwise from north. */
   bearing: number;
   source: string;
+  /** Coordinate evidence supplements the operator's entrance diagram. */
+  coordinateSource?: string;
+  /** Explicitly distinguish interpreted street mouths from mapped stair endpoints. */
+  coordinateAccuracy?: string;
 }
 export const SKYTRAIN_STREET_ENTRANCES: Readonly<
   Record<StationId, readonly StreetEntranceReference[]>
@@ -44,32 +48,55 @@ export const SKYTRAIN_STREET_ENTRANCES: Readonly<
     {
       id: 'burrard-plaza',
       label: 'Burrard / Dunsmuir · station plaza',
-      lonlat: [-123.120154, 49.285603],
+      lonlat: [-123.120065, 49.2854422],
       bearing: 315,
       source: stationMap('burrard'),
+      coordinateSource: 'https://www.openstreetmap.org/node/5324651728',
+    },
+    {
+      id: 'burrard-park',
+      label: 'Art Phillips Park · Dunsmuir public steps',
+      lonlat: [-123.1205982, 49.2857671],
+      bearing: 135,
+      source: stationMap('burrard'),
+      coordinateSource: 'https://www.openstreetmap.org/way/139571580',
+    },
+    {
+      id: 'burrard-elevator',
+      label: 'Burrard Street · separate elevator stationhouse',
+      lonlat: [-123.1198987, 49.2856494],
+      bearing: 315,
+      source: stationMap('burrard'),
+      coordinateSource: 'https://www.openstreetmap.org/node/9198420892',
     },
   ],
   granville: [
     {
       id: 'granville-street',
       label: 'Granville Street entrance',
-      lonlat: [-123.11661616, 49.28333933],
+      lonlat: [-123.117129, 49.283014],
       bearing: 135,
       source: stationMap('granville_vancouver_city_centre'),
+      coordinateSource: 'https://www.openstreetmap.org/node/889550073',
     },
     {
       id: 'dunsmuir-street',
       label: 'Dunsmuir Street accessible entrance approach',
-      lonlat: [-123.11567165, 49.28341303],
-      bearing: 135,
+      lonlat: [-123.116088, 49.283284],
+      bearing: 225,
       source: stationMap('granville_vancouver_city_centre'),
+      coordinateSource: 'https://www.openstreetmap.org/node/1248731632',
     },
     {
       id: 'seymour-street',
       label: 'Seymour Street entrance approach',
-      lonlat: [-123.115527, 49.283043],
+      lonlat: [-123.11606963320845, 49.282678332362714],
       bearing: 315,
       source: stationMap('granville_vancouver_city_centre'),
+      coordinateSource:
+        'https://digital.lib.washington.edu/server/api/core/bitstreams/e7c27087-87fd-476e-ab80-87d30d24c2ac/content#page=73',
+      coordinateAccuracy:
+        'Photo-supported entrance direction; street mouth inferred 7 m southeast of mapped stairhead using the city building edge, not a surveyed door coordinate.',
     },
   ],
   'stadium-chinatown': [
@@ -837,6 +864,43 @@ function attachAuthoredStation(
       width: 3.8,
       treads: [],
     });
+  // Interior support follows the authored triangles, including stair holes.
+  // The hillside outside cannot choose the height of a floor inside a hall.
+  const authoredFloorHeight = (point: THREE.Vector3, floorId: string) => {
+    const floor = source.floors.find((f) => f.id === floorId);
+    if (!floor) return null;
+    const height = (x: number, z: number) => {
+      for (let i = 0; i < floor.indices.length; i += 3) {
+        const [a, b, c] = floor.indices
+          .slice(i, i + 3)
+          .map((index) => vector(floor.vertices[index]));
+        const ux = b.x - a.x,
+          uz = b.z - a.z,
+          vx = c.x - a.x,
+          vz = c.z - a.z,
+          denominator = ux * vz - vx * uz;
+        if (Math.abs(denominator) < 1e-9) continue;
+        const u = ((x - a.x) * vz - (z - a.z) * vx) / denominator,
+          v = (ux * (z - a.z) - uz * (x - a.x)) / denominator;
+        if (u >= -1e-8 && v >= -1e-8 && u + v <= 1 + 1e-8)
+          return a.y + u * (b.y - a.y) + v * (c.y - a.y);
+      }
+      return null;
+    };
+    const y = height(point.x, point.z);
+    if (y === null) return null;
+    return [
+      [0.24, 0],
+      [-0.24, 0],
+      [0, 0.24],
+      [0, -0.24],
+    ].every(([x, z]) => {
+      const footY = height(point.x + x, point.z + z);
+      return footY !== null && Math.abs(footY - y) <= 0.28;
+    })
+      ? y
+      : null;
+  };
   for (const ref of SKYTRAIN_STREET_ENTRANCES[source.id]) {
     const target =
       source.entrances.find((e) => e.id === (mapping?.[ref.id] ?? ref.id)) ??
@@ -856,6 +920,7 @@ function attachAuthoredStation(
       outside = p.clone().addScaledVector(inward, -2.8),
       join = vector(target.point),
       direction = join.clone().sub(p).setY(0);
+    const mappedDoor = direction.length() < 0.2;
     if (direction.length() > 2) {
       const floor = source.floors.find((f) => f.id === target.surfaceId)!;
       const box = new THREE.Box3().setFromPoints(floor.vertices.map(vector)),
@@ -876,7 +941,7 @@ function attachAuthoredStation(
         );
       direction.copy(join).sub(p).setY(0);
     }
-    if (direction.length() < 0.2)
+    if (!mappedDoor && direction.length() < 0.2)
       join.addScaledVector(
         inward,
         Math.max(3.2, 2 + Math.abs(p.y - join.y) * 2.1),
@@ -893,17 +958,29 @@ function attachAuthoredStation(
     const grid: StationVector[] = [],
       gridIndices: number[] = [];
     const across = new THREE.Vector3(inward.z, 0, -inward.x);
-    for (const along of [-3.2, -1, 0, 1.1, 2.2])
+    // A mapped door may be the head of a descending staircase. Its outside
+    // apron must end at that door, never overlay the first real stair flight.
+    const apronRows = mappedDoor
+      ? [-3.2, -2.8, -2.2, -1.2, -0.6, 0]
+      : [-3.2, -2.8, -1, 0, 1.1, 2.2];
+    for (const along of apronRows)
       for (const side of [-1.9, 0, 1.9]) {
         const v = p
             .clone()
             .addScaledVector(inward, along)
             .addScaledVector(across, side),
           w = world(v);
-        v.y = streetHeightAt(w.x, w.z) - base;
+        const streetY = streetHeightAt(w.x, w.z) - base;
+        // Preserve the city datum until the outer ownership handoff, then
+        // blend over the whole available apron. A one-row drop can be steep
+        // enough to reject the capsule even though both endpoints are clear.
+        const blend = mappedDoor
+          ? THREE.MathUtils.clamp((along + 2.2) / 1.6, 0, 1)
+          : 0;
+        v.y = THREE.MathUtils.lerp(streetY, target.point[1], blend);
         grid.push(tuple(v));
       }
-    for (let row = 0; row < 4; row++)
+    for (let row = 0; row < apronRows.length - 1; row++)
       for (let col = 0; col < 2; col++) {
         const a = row * 3 + col,
           b = a + 3;
@@ -916,10 +993,21 @@ function attachAuthoredStation(
       vertices: grid,
       indices: gridIndices,
     });
-    vertices.splice(0, vertices.length, grid[0], grid[12], grid[14], grid[2]);
-    const rampStart = p.clone().addScaledVector(inward, 2),
+    vertices.splice(
+      0,
+      vertices.length,
+      grid[0],
+      grid.at(-3)!,
+      grid.at(-1)!,
+      grid[2],
+    );
+    const rampStart = p.clone().addScaledVector(inward, mappedDoor ? -0.6 : 2),
       rampWorld = world(rampStart);
-    rampStart.y = streetHeightAt(rampWorld.x, rampWorld.z) - base;
+    rampStart.y =
+      authoredFloorHeight(rampStart, target.surfaceId) ??
+      (mappedDoor
+        ? target.point[1]
+        : streetHeightAt(rampWorld.x, rampWorld.z) - base);
     const throat = strip(rampStart, join, 3.8);
     geometry.floors.push({
       id: throatId,
@@ -974,8 +1062,10 @@ function attachAuthoredStation(
     }
     const threshold = world(p),
       outer = world(outside),
-      inner = world(p.clone().addScaledVector(inward, 1.1));
-    inner.y = streetHeightAt(inner.x, inner.z);
+      inner = world(p.clone().addScaledVector(inward, mappedDoor ? -0.6 : 1.1));
+    inner.y = mappedDoor
+      ? base + rampStart.y
+      : streetHeightAt(inner.x, inner.z);
     outer.y = streetHeightAt(outer.x, outer.z);
     entrances.push({
       id: ref.id,

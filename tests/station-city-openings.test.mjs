@@ -3,6 +3,18 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
+import {
+  makeRuntimeStation,
+  SOURCE,
+} from '../tools/build-skytrain-runtime-stations.mjs';
+import {
+  rebuildBurrard,
+  rebuildGranville,
+} from '../tools/station-interiors/dunsmuir.mjs';
+import {
+  rebuildStadium,
+  rebuildYaletown,
+} from '../tools/station-interiors/southeast.mjs';
 const { SkyTrainStationOwner } = await import(cityModule('skytrain-stations'));
 const { stationCityOpenings, applySkyTrainWorldOpenings } = await import(
   cityModule('skytrain-world-openings')
@@ -149,7 +161,8 @@ test('all seven geographic stations stay within the existing aperture and per-st
       owners.reduce(
         (count, owner) => count + stationCityOpenings(owner).length,
         0,
-      ) <= 96,
+      ) <=
+        7 * 48,
     );
     assert(owners.every((owner) => stationCityOpenings(owner).length <= 48));
     assert.doesNotThrow(() => patch.update(owners));
@@ -158,5 +171,172 @@ test('all seven geographic stations stay within the existing aperture and per-st
   } finally {
     patch.dispose();
     owners.forEach((owner) => owner.dispose());
+  }
+});
+
+const authoredOwner = (id) => {
+  const source = JSON.parse(readFileSync(SOURCE)).stations.find(
+      (s) => s.stationId === id,
+    ),
+    rebuild = {
+      burrard: rebuildBurrard,
+      granville: rebuildGranville,
+      'stadium-chinatown': rebuildStadium,
+      'yaletown-roundhouse': rebuildYaletown,
+    }[id];
+  return new SkyTrainStationOwner(
+    makeRuntimeStation(rebuild ? rebuild(source) : source, 'a'.repeat(64)),
+    () => 0,
+    'balanced',
+    true,
+  );
+};
+test('all reference-authored stations fit bounded texture storage, including curved banks and high glass halls', () => {
+  const owners = [
+      'waterfront',
+      'burrard',
+      'granville',
+      'stadium-chinatown',
+      'main-street-science-world',
+      'vancouver-city-centre',
+      'yaletown-roundhouse',
+    ].map(authoredOwner),
+    patch = applySkyTrainWorldOpenings([]);
+  try {
+    assert.doesNotThrow(() => patch.update(owners));
+    assert(owners.every((owner) => stationCityOpenings(owner).length <= 48));
+    assert(
+      owners.reduce(
+        (sum, owner) => sum + stationCityOpenings(owner).length,
+        0,
+      ) <=
+        7 * 48,
+    );
+    for (const [id, banks] of [
+      [
+        'burrard',
+        ['burrard-main-escalator-bank', 'burrard-street-retaining-walls'],
+      ],
+      [
+        'granville',
+        [
+          'granville-big-three',
+          'granville-bay-corridor-pair',
+          'granville-dunsmuir-main-triple',
+        ],
+      ],
+    ]) {
+      const owner = owners.find((owner) => owner.data.id === id),
+        openings = stationCityOpenings(owner);
+      for (const bank of banks) {
+        const slab = owner.geometryData.parts.find(
+            (part) => part.id === bank + '-underslab',
+          ),
+          rotation = new THREE.Quaternion(...slab.quaternion),
+          edge = new THREE.Vector3(...slab.position).addScaledVector(
+            new THREE.Vector3(1, 0, 0).applyQuaternion(rotation),
+            slab.size[0] / 2 - 0.15,
+          );
+        edge.y += 1.5;
+        assert(
+          openings.some(
+            (opening) =>
+              opening.id === bank + '-authored-bank-clearance' &&
+              contains(opening, owner.toWorld(edge.toArray())),
+          ),
+          `${bank}: entire occupied bank is open`,
+        );
+      }
+    }
+    const burrard = owners.find((owner) => owner.data.id === 'burrard'),
+      high = burrard.toWorld([
+        -1,
+        burrard.data.floors.find((f) => f.id === 'burrard-ticket-atrium')
+          .vertices[0][1] + 7.6,
+        -105,
+      ]);
+    assert(
+      stationCityOpenings(burrard).some(
+        (opening) =>
+          opening.id === 'burrard-ticket-atrium-authored-room-clearance' &&
+          contains(opening, high),
+      ),
+      'glass atrium headspace reaches its explicit roof',
+    );
+    assert(
+      !stationCityOpenings(burrard).some((opening) =>
+        contains(opening, burrard.toWorld([200, 5, -105])),
+      ),
+    );
+  } finally {
+    patch.dispose();
+    owners.forEach((owner) => owner.dispose());
+  }
+});
+test('apertures use two float texture texels each, upload only for changed owners and release once', () => {
+  const owner = authoredOwner('granville'),
+    root = new THREE.Group(),
+    material = new THREE.MeshStandardMaterial(),
+    geometry = new THREE.BoxGeometry();
+  root.add(new THREE.Mesh(geometry, material));
+  const patch = applySkyTrainWorldOpenings([root]);
+  try {
+    patch.update([owner]);
+    const shader = {
+      uniforms: {},
+      vertexShader: '#include <project_vertex>',
+      fragmentShader: '#include <clipping_planes_fragment>',
+    };
+    material.onBeforeCompile(shader, {});
+    const texture = shader.uniforms.uStationOpeningData.value;
+    assert(texture instanceof THREE.DataTexture);
+    assert.equal(texture.image.width, 2);
+    assert.equal(texture.image.height, 7 * 48);
+    assert.equal(texture.type, THREE.FloatType);
+    assert.equal(texture.minFilter, THREE.NearestFilter);
+    assert.equal(texture.magFilter, THREE.NearestFilter);
+    assert.equal(texture.colorSpace, THREE.NoColorSpace);
+    assert(texture.image.data instanceof Float32Array);
+    assert(shader.fragmentShader.includes('texelFetch'));
+    assert(
+      !shader.fragmentShader.includes('uniform vec4 uStationOpeningRect['),
+    );
+    assert(
+      !shader.uniforms.uStationOpeningRect &&
+        !shader.uniforms.uStationOpeningParameters,
+    );
+    const first = stationCityOpenings(owner)[0],
+      center = first.polygon[0].map(
+        (n, axis) => (n + first.polygon[2][axis]) / 2,
+      ),
+      row = texture.image.data;
+    assert(
+      Math.abs(row[0] - center[0]) < 0.001 &&
+        Math.abs(row[1] - center[2]) < 0.001,
+    );
+    assert(
+      Math.abs(row[6] - first.minY) < 0.001 &&
+        Math.abs(row[7] - first.maxY) < 0.001,
+    );
+    const version = texture.version;
+    patch.update([owner]);
+    assert.equal(
+      texture.version,
+      version,
+      'unchanged geographic owners do not upload again',
+    );
+    patch.update([]);
+    assert.equal(shader.uniforms.uStationOpeningCount.value, 0);
+    assert(texture.version > version);
+    let releases = 0;
+    texture.addEventListener('dispose', () => releases++);
+    patch.dispose();
+    patch.dispose();
+    assert.equal(releases, 1);
+  } finally {
+    patch.dispose();
+    owner.dispose();
+    geometry.dispose();
+    material.dispose();
   }
 });

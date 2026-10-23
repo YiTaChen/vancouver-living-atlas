@@ -1,0 +1,2417 @@
+{
+  "stationId": "burrard",
+  "url": "http://127.0.0.1:3202/?inspect",
+  "capturedAt": "2026-10-23T11:38:30.123Z",
+  "placements": "Inspect-only supported-floor placements; separate route tests verify circulation.",
+  "captures": [
+    {
+      "label": "entrance-thirdperson",
+      "file": "game-burrard-entrance-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          5.682811077581867e-14,
+          -0.034490493470980634,
+          2.0750000000000735
+        ],
+        "surfaceId": "burrard-burrard-plaza-street-apron",
+        "layer": 18,
+        "yaw": 0
+      },
+      "camera": [
+        580.3303121484901,
+        26.42820544650637,
+        65.95744895960829
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          577.6971205801526,
+          23.547514489371967,
+          63.50767686060713
+        ]
+      },
+      "render": {
+        "frame": 534,
+        "calls": 514,
+        "triangles": 2757141,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-burrard-plaza-outside-thirdperson",
+      "file": "game-burrard-entrance-burrard-plaza-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        575.4744659735849,
+        26.509703509274438,
+        61.43984506805591
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          578.081497391738,
+          23.557436726217297,
+          63.86527924694612
+        ]
+      },
+      "render": {
+        "frame": 675,
+        "calls": 301,
+        "triangles": 2521801,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-burrard-plaza-inside-thirdperson",
+      "file": "game-burrard-entrance-burrard-plaza-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          6.154655863047559e-14,
+          -0.03449049347098065,
+          2.0750000000000686
+        ],
+        "surfaceId": "burrard-burrard-plaza-street-apron",
+        "layer": 18,
+        "yaw": 0
+      },
+      "camera": [
+        580.3041519983057,
+        26.499781272429107,
+        65.93311103949733
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          577.6971205801525,
+          23.547514489371967,
+          63.50767686060712
+        ]
+      },
+      "render": {
+        "frame": 846,
+        "calls": 520,
+        "triangles": 2774931,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-burrard-park-outside-thirdperson",
+      "file": "game-burrard-entrance-burrard-park-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        538.1645355779714,
+        24.97802593797081,
+        26.580878932293764
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          535.5575041598182,
+          22.02575915491367,
+          24.155444753403557
+        ]
+      },
+      "render": {
+        "frame": 1032,
+        "calls": 280,
+        "triangles": 2627408,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-burrard-park-inside-thirdperson",
+      "file": "game-burrard-entrance-burrard-park-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.10830117108176668,
+          -1.617045340777087,
+          -55.05703525788048
+        ],
+        "surfaceId": "burrard-burrard-park-street-apron",
+        "layer": 20,
+        "yaw": 0
+      },
+      "camera": [
+        533.3348495532505,
+        24.917226425123,
+        22.087612960852354
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          535.9418809714036,
+          21.96495964206586,
+          24.51304713974256
+        ]
+      },
+      "render": {
+        "frame": 1173,
+        "calls": 566,
+        "triangles": 2608410,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-burrard-elevator-outside-thirdperson",
+      "file": "game-burrard-entrance-burrard-elevator-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        587.5498771390203,
+        25.913767876877426,
+        38.37434106823306
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          590.1569085571734,
+          22.961501093820285,
+          40.799775247123264
+        ]
+      },
+      "render": {
+        "frame": 1314,
+        "calls": 311,
+        "triangles": 2496729,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-burrard-elevator-inside-thirdperson",
+      "file": "game-burrard-entrance-burrard-elevator-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          25.11245854066531,
+          -0.6527728663006799,
+          -4.79504043827508
+        ],
+        "surfaceId": "burrard-burrard-elevator-street-apron",
+        "layer": 22,
+        "yaw": 0
+      },
+      "camera": [
+        592.3795631637412,
+        25.881498899599407,
+        42.86760703967447
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          589.772531745588,
+          22.929232116542266,
+          40.44217286078426
+        ]
+      },
+      "render": {
+        "frame": 1476,
+        "calls": 534,
+        "triangles": 2788994,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-call-firstperson",
+      "file": "game-burrard-elevator-call-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          25.562458540000005,
+          -0.917488,
+          -9.47004043999998
+        ],
+        "surfaceId": "burrard-accessible-street",
+        "layer": 13,
+        "yaw": 0
+      },
+      "camera": [
+        586.6562640861391,
+        24.314516982842946,
+        36.92834291467101
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          586.6562640861391,
+          22.664516982842947,
+          36.92834291467101
+        ]
+      },
+      "render": {
+        "frame": 1545,
+        "calls": 639,
+        "triangles": 2822180,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-lowest-landing-firstperson",
+      "file": "game-burrard-elevator-lowest-landing-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          25.11245854,
+          -20,
+          -9.470040439999991
+        ],
+        "surfaceId": "burrard-lift-lower",
+        "layer": 16,
+        "yaw": 3.141592653589743
+      },
+      "camera": [
+        586.3497477549914,
+        5.2320049828429465,
+        37.25780875317288
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          586.3497477549914,
+          3.582004982842946,
+          37.25780875317288
+        ]
+      },
+      "render": {
+        "frame": 1635,
+        "calls": 630,
+        "triangles": 2787636,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-returned-to-entry-level-firstperson",
+      "file": "game-burrard-elevator-returned-to-entry-level-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          25.11245854,
+          -0.917488,
+          -9.470040439999991
+        ],
+        "surfaceId": "burrard-accessible-street",
+        "layer": 13,
+        "yaw": -3.141592653589756
+      },
+      "camera": [
+        586.3497477549914,
+        24.314516982842946,
+        37.25780875317288
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          586.3497477549914,
+          22.664516982842947,
+          37.25780875317288
+        ]
+      },
+      "render": {
+        "frame": 1713,
+        "calls": 638,
+        "triangles": 2792426,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "upper-platform-thirdperson",
+      "file": "game-burrard-upper-platform-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          37.16594085,
+          -14,
+          53.00166617
+        ],
+        "surfaceId": "burrard-upper",
+        "layer": 1,
+        "yaw": 1.5707963267948966
+      },
+      "camera": [
+        642.9054066756369,
+        12.534271765900087,
+        73.41077105317984
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          640.2983752574837,
+          9.582004982842946,
+          70.98533687428963
+        ]
+      },
+      "render": {
+        "frame": 1773,
+        "calls": 543,
+        "triangles": 2758003,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "upper-platform-firstperson",
+      "file": "game-burrard-upper-platform-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          37.16594085,
+          -14,
+          53.00166617
+        ],
+        "surfaceId": "burrard-upper",
+        "layer": 1,
+        "yaw": 1.5707963267948966
+      },
+      "camera": [
+        640.2983752574837,
+        11.232004982842946,
+        70.98533687428963
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          640.2983752574837,
+          9.582004982842946,
+          70.98533687428963
+        ]
+      },
+      "render": {
+        "frame": 1836,
+        "calls": 577,
+        "triangles": 2806721,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "lower-platform-thirdperson",
+      "file": "game-burrard-lower-platform-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          37.16594085,
+          -20,
+          53.00166617
+        ],
+        "surfaceId": "burrard-lower",
+        "layer": 2,
+        "yaw": 1.5707963267948966
+      },
+      "camera": [
+        642.9054066756369,
+        6.534271765900088,
+        73.41077105317984
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          640.2983752574837,
+          3.582004982842946,
+          70.98533687428963
+        ]
+      },
+      "render": {
+        "frame": 1896,
+        "calls": 530,
+        "triangles": 2747603,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "lower-platform-firstperson",
+      "file": "game-burrard-lower-platform-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          37.16594085,
+          -20,
+          53.00166617
+        ],
+        "surfaceId": "burrard-lower",
+        "layer": 2,
+        "yaw": 1.5707963267948966
+      },
+      "camera": [
+        640.2983752574837,
+        5.2320049828429465,
+        70.98533687428963
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          640.2983752574837,
+          3.582004982842946,
+          70.98533687428963
+        ]
+      },
+      "render": {
+        "frame": 1959,
+        "calls": 577,
+        "triangles": 2806721,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-street-stairs-firstperson",
+      "file": "game-burrard-burrard-street-stairs-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2,
+          -3.1666666666666665,
+          -10.850000000000009
+        ],
+        "surfaceId": "burrard-street-stairs:step:19",
+        "layer": 250,
+        "yaw": 0
+      },
+      "camera": [
+        569.5964243571719,
+        22.065338316176277,
+        53.2395540670781
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          569.5964243571719,
+          20.41533831617628,
+          53.2395540670781
+        ]
+      },
+      "render": {
+        "frame": 2013,
+        "calls": 535,
+        "triangles": 2823155,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-street-stairs-overhead-thirdperson",
+      "file": "game-burrard-burrard-street-stairs-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2,
+          -3.1666666666666665,
+          -10.850000000000009
+        ],
+        "surfaceId": "burrard-street-stairs:step:19",
+        "layer": 250,
+        "yaw": 0
+      },
+      "camera": [
+        572.7427099369856,
+        29.453108063262647,
+        56.16667973525875
+      ],
+      "cutaway": true,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          569.5964243571719,
+          20.41533831617628,
+          53.2395540670781
+        ]
+      },
+      "render": {
+        "frame": 2064,
+        "calls": 105,
+        "triangles": 931618,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-park-stairs-1-firstperson",
+      "file": "game-burrard-burrard-park-stairs-1-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.1100000000000001,
+          -2.6625634794444446,
+          -51.719999999999985
+        ],
+        "surfaceId": "burrard-park-stairs-1:step:4",
+        "layer": 313,
+        "yaw": 0
+      },
+      "camera": [
+        538.3862361673041,
+        22.5694415033985,
+        26.78481624654725
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          538.3862361673041,
+          20.919441503398502,
+          26.78481624654725
+        ]
+      },
+      "render": {
+        "frame": 2121,
+        "calls": 632,
+        "triangles": 2691590,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-park-stairs-1-overhead-thirdperson",
+      "file": "game-burrard-burrard-park-stairs-1-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.1100000000000001,
+          -2.6625634794444446,
+          -51.719999999999985
+        ],
+        "surfaceId": "burrard-park-stairs-1:step:4",
+        "layer": 313,
+        "yaw": 0
+      },
+      "camera": [
+        535.2399505874904,
+        29.95721125048487,
+        23.857690578366608
+      ],
+      "cutaway": true,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          538.3862361673041,
+          20.919441503398502,
+          26.78481624654725
+        ]
+      },
+      "render": {
+        "frame": 2169,
+        "calls": 107,
+        "triangles": 885280,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-park-stairs-3-firstperson",
+      "file": "game-burrard-burrard-park-stairs-3-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.1100000000000001,
+          -5.665774669444445,
+          -33.64
+        ],
+        "surfaceId": "burrard-park-stairs-3:step:4",
+        "layer": 331,
+        "yaw": 0
+      },
+      "camera": [
+        551.6234414120014,
+        19.5662303133985,
+        39.09996128466018
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          551.6234414120014,
+          17.9162303133985,
+          39.09996128466018
+        ]
+      },
+      "render": {
+        "frame": 2217,
+        "calls": 595,
+        "triangles": 2787372,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-park-stairs-3-overhead-thirdperson",
+      "file": "game-burrard-burrard-park-stairs-3-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.1100000000000001,
+          -5.665774669444445,
+          -33.64
+        ],
+        "surfaceId": "burrard-park-stairs-3:step:4",
+        "layer": 331,
+        "yaw": 0
+      },
+      "camera": [
+        548.4771558321877,
+        26.95400006048487,
+        36.17283561647954
+      ],
+      "cutaway": true,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          551.6234414120014,
+          17.9162303133985,
+          39.09996128466018
+        ]
+      },
+      "render": {
+        "frame": 2277,
+        "calls": 111,
+        "triangles": 946480,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-interplatform-stairs-firstperson",
+      "file": "game-burrard-burrard-interplatform-stairs-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          29,
+          -17,
+          -4.68166716333333
+        ],
+        "surfaceId": "burrard-interplatform-stairs:step:18",
+        "layer": 42,
+        "yaw": 0
+      },
+      "camera": [
+        592.5035263375709,
+        8.232004982842946,
+        37.673147646728395
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          592.5035263375709,
+          6.582004982842946,
+          37.673147646728395
+        ]
+      },
+      "render": {
+        "frame": 2343,
+        "calls": 580,
+        "triangles": 2740383,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-interplatform-stairs-overhead-thirdperson",
+      "file": "game-burrard-burrard-interplatform-stairs-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          29,
+          -17,
+          -4.68166716333333
+        ],
+        "surfaceId": "burrard-interplatform-stairs:step:18",
+        "layer": 42,
+        "yaw": 0
+      },
+      "camera": [
+        589.3572407577572,
+        15.619774729929315,
+        34.74602197854775
+      ],
+      "cutaway": true,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          592.5035263375709,
+          6.582004982842946,
+          37.673147646728395
+        ]
+      },
+      "render": {
+        "frame": 2394,
+        "calls": 95,
+        "triangles": 906170,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-main-escalator-bank-2-firstperson",
+      "file": "game-burrard-burrard-main-escalator-bank-2-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          21.5,
+          -10.166666666666666,
+          -17.200000000000003
+        ],
+        "surfaceId": "burrard-main-escalator-bank-2:step:22",
+        "layer": 163,
+        "yaw": 0
+      },
+      "camera": [
+        578.2296696524913,
+        15.06533831617628,
+        34.63741505913481
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          578.2296696524913,
+          13.41533831617628,
+          34.63741505913481
+        ]
+      },
+      "render": {
+        "frame": 2454,
+        "calls": 224,
+        "triangles": 1397070,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-main-escalator-bank-2-overhead-thirdperson",
+      "file": "game-burrard-burrard-main-escalator-bank-2-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          21.5,
+          -10.166666666666666,
+          -17.200000000000003
+        ],
+        "surfaceId": "burrard-main-escalator-bank-2:step:22",
+        "layer": 163,
+        "yaw": 0
+      },
+      "camera": [
+        575.3025439843107,
+        22.45310806326265,
+        37.7837006389485
+      ],
+      "cutaway": true,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          578.2296696524913,
+          13.41533831617628,
+          34.63741505913481
+        ]
+      },
+      "render": {
+        "frame": 2517,
+        "calls": 94,
+        "triangles": 961781,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "burrard-main-escalator-bank-three-lanes-from-top",
+      "file": "game-burrard-burrard-main-escalator-bank-three-lanes-from-top.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          13,
+          -6.5,
+          -17.200000000000003
+        ],
+        "surfaceId": "burrard-ticket-atrium",
+        "layer": 5,
+        "yaw": 0
+      },
+      "camera": [
+        572.4399167308122,
+        18.732004982842945,
+        40.86065867528122
+      ],
+      "cutaway": false,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          572.4399167308122,
+          17.082004982842946,
+          40.86065867528122
+        ]
+      },
+      "render": {
+        "frame": 2595,
+        "calls": 157,
+        "triangles": 1344515,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "overview-cutaway",
+      "file": "game-burrard-overview-cutaway.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "burrard",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          13,
+          -6.5,
+          -17.200000000000003
+        ],
+        "surfaceId": "burrard-ticket-atrium",
+        "layer": 5,
+        "yaw": 0
+      },
+      "camera": [
+        752.4399167308122,
+        255.23388253651282,
+        280.86065867528123
+      ],
+      "cutaway": true,
+      "authoredSource": "burrard-reference-interior-v2",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "burrard-reference-interior-v2",
+      "openWorld": true,
+      "geometryParts": 2037,
+      "mode": "orbit",
+      "cameraView": "orbit",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          572.4399167308122,
+          17.082004982842946,
+          40.86065867528122
+        ]
+      },
+      "render": {
+        "frame": 2646,
+        "calls": 272,
+        "triangles": 1605804,
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "errors": [],
+  "responses": [],
+  "warnings": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "runtimePacket": {
+    "url": "http://127.0.0.1:3202/models/skytrain-stations/burrard.json",
+    "bytes": 571829,
+    "sha256": "4706abf993cb47986061ad648604be64952e5cf7fff34620c811187b3db2d4ca",
+    "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+    "verifiedAfterCapture": "4706abf993cb47986061ad648604be64952e5cf7fff34620c811187b3db2d4ca"
+  },
+  "startup": [
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "0"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "48"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "88"
+    },
+    {
+      "ready": false,
+      "engine": true
+    }
+  ],
+  "initial": {
+    "ready": true,
+    "stationCount": 7,
+    "fleetCount": 51,
+    "worldPaths": 64,
+    "entries": [
+      {
+        "id": "burrard-plaza",
+        "stationId": "burrard",
+        "label": "Burrard / Dunsmuir · station plaza",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/burrard_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "burrard-burrard-plaza-street-apron",
+        "threshold": [
+          576.177916991505,
+          23.578698096623455,
+          62.09429600031484
+        ],
+        "inward": [
+          576.6172047761742,
+          23.582004982842946,
+          62.502984441845136
+        ],
+        "outward": [
+          578.2279266532944,
+          23.53426277464759,
+          64.00150872745623
+        ],
+        "localDirection": [
+          0,
+          0,
+          -1
+        ]
+      },
+      {
+        "id": "burrard-park",
+        "stationId": "burrard",
+        "label": "Art Phillips Park · Dunsmuir public steps",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/burrard_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "burrard-burrard-park-street-apron",
+        "threshold": [
+          537.4610845600513,
+          22.09495112409265,
+          25.92642800003489
+        ],
+        "inward": [
+          537.0217967753821,
+          21.586821767842945,
+          25.517739558504587
+        ],
+        "outward": [
+          535.4110748982619,
+          22.010225833324718,
+          24.019215272893497
+        ],
+        "localDirection": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": "burrard-elevator",
+        "stationId": "burrard",
+        "label": "Burrard Street · separate elevator stationhouse",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/burrard_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "burrard-burrard-elevator-street-apron",
+        "threshold": [
+          588.2533281569404,
+          23.000118974408313,
+          39.02879200049199
+        ],
+        "inward": [
+          588.6926159416096,
+          22.664516982842947,
+          39.437480442022284
+        ],
+        "outward": [
+          590.3033378187298,
+          22.936992026082745,
+          40.936004727633375
+        ],
+        "localDirection": [
+          0,
+          0,
+          -1
+        ]
+      }
+    ],
+    "sourceRevision": "burrard-reference-interior-v2",
+    "geometryRevision": "burrard-reference-interior-v2",
+    "sourceFloors": 17,
+    "geometryFloors": 23,
+    "entryCandidate": null,
+    "entryDiagnostics": {
+      "walkingHeight": 23.55426277464759,
+      "floorAtInward": {
+        "position": [
+          3.2807090377673376e-14,
+          -1.758478994600802e-15,
+          0.6000000000000321
+        ],
+        "surfaceId": "burrard-burrard-plaza-street-apron",
+        "layer": 18,
+        "yaw": 0
+      },
+      "clearAtInward": true,
+      "localStreetFoot": [
+        1.7208456881689926e-14,
+        -0.027742208195356,
+        2.800000000000017
+      ]
+    },
+    "error": null
+  },
+  "enteredByStreet": true,
+  "entryTransitions": [
+    {
+      "entryId": "burrard-plaza",
+      "left": true,
+      "walked": 1.75,
+      "maxStep": 0.020317025412983216,
+      "outside": [
+        578.081497391738,
+        23.537436726217294,
+        63.86527924694612
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          578.081497391738,
+          23.537436726217294,
+          63.86527924694612
+        ],
+        "position": [
+          577.6971205801525,
+          23.547514489371967,
+          63.50767686060712
+        ],
+        "walkingHeight": 23.56576834908777,
+        "stationFoot": {
+          "position": [
+            6.154655863047559e-14,
+            -0.03449049347098065,
+            2.0750000000000686
+          ],
+          "surfaceId": "burrard-burrard-plaza-street-apron",
+          "layer": 18,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    },
+    {
+      "entryId": "burrard-park",
+      "left": true,
+      "walked": 1.7500000000000497,
+      "maxStep": 0.06461449251778273,
+      "outside": [
+        535.5575041598182,
+        22.005759154913676,
+        24.155444753403557
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          535.5575041598182,
+          22.005759154913676,
+          24.155444753403557
+        ],
+        "position": [
+          535.9418809714036,
+          21.96495964206586,
+          24.51304713974256
+        ],
+        "walkingHeight": 22.01486528654852,
+        "stationFoot": {
+          "position": [
+            0.10830117108176668,
+            -1.617045340777087,
+            -55.05703525788048
+          ],
+          "surfaceId": "burrard-burrard-park-street-apron",
+          "layer": 20,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    },
+    {
+      "entryId": "burrard-elevator",
+      "left": true,
+      "walked": 1.7499999999999938,
+      "maxStep": 0.04821056017814529,
+      "outside": [
+        590.1569085571734,
+        22.941501093820285,
+        40.799775247123264
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          590.1569085571734,
+          22.941501093820285,
+          40.799775247123264
+        ],
+        "position": [
+          589.772531745588,
+          22.929232116542266,
+          40.44217286078426
+        ],
+        "walkingHeight": 22.973337396631322,
+        "stationFoot": {
+          "position": [
+            25.11245854066531,
+            -0.6527728663006799,
+            -4.79504043827508
+          ],
+          "surfaceId": "burrard-burrard-elevator-street-apron",
+          "layer": 22,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    }
+  ],
+  "liftTrips": [
+    {
+      "core": "core-1",
+      "id": "burrard-lift-street-concourse",
+      "candidateId": "skytrain:elevator:burrard:burrard-lift-street-concourse:forward",
+      "action": "elevatorDown",
+      "from": [
+        25.562458540000005,
+        -0.917488,
+        -9.47004043999998
+      ],
+      "destination": [
+        25.11245854,
+        -6.5,
+        -9.470040439999991
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:burrard:burrard-lift-street-concourse:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          587.2785884477537,
+          23.814516982842946,
+          37.50731820683893
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        25.11245854,
+        -6.5,
+        -9.470040439999991
+      ],
+      "surfaceId": "burrard-lift-hall",
+      "direction": "eastbound"
+    },
+    {
+      "core": "core-1",
+      "id": "burrard-lift-concourse-upper",
+      "candidateId": "skytrain:elevator:burrard:burrard-lift-concourse-upper:forward",
+      "action": "elevatorDown",
+      "from": [
+        24.662458539999975,
+        -6.5,
+        -9.470040440000016
+      ],
+      "destination": [
+        25.11245854,
+        -14,
+        -9.470040439999991
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:burrard:burrard-lift-concourse-upper:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          585.420907062229,
+          18.232004982842945,
+          37.00829929950683
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        25.11245854,
+        -14,
+        -9.470040439999991
+      ],
+      "surfaceId": "burrard-lift-upper",
+      "direction": "westbound"
+    },
+    {
+      "core": "core-1",
+      "id": "burrard-lift-upper-lower",
+      "candidateId": "skytrain:elevator:burrard:burrard-lift-upper-lower:forward",
+      "action": "elevatorDown",
+      "from": [
+        24.662458539999975,
+        -14,
+        -9.470040440000016
+      ],
+      "destination": [
+        25.11245854,
+        -20,
+        -9.470040439999991
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:burrard:burrard-lift-upper-lower:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          585.420907062229,
+          10.732004982842946,
+          37.00829929950683
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        25.11245854,
+        -20,
+        -9.470040439999991
+      ],
+      "surfaceId": "burrard-lift-lower",
+      "direction": "eastbound"
+    },
+    {
+      "core": "core-1",
+      "id": "burrard-lift-upper-lower",
+      "candidateId": "skytrain:elevator:burrard:burrard-lift-upper-lower:return",
+      "action": "elevatorUp",
+      "from": [
+        24.662458539999975,
+        -20,
+        -9.470040440000016
+      ],
+      "destination": [
+        25.11245854,
+        -14,
+        -9.470040439999991
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:burrard:burrard-lift-upper-lower:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          586.6655557854583,
+          4.732004982842945,
+          38.166249883842674
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        25.11245854,
+        -14,
+        -9.470040439999991
+      ],
+      "surfaceId": "burrard-lift-upper",
+      "direction": "westbound"
+    },
+    {
+      "core": "core-1",
+      "id": "burrard-lift-concourse-upper",
+      "candidateId": "skytrain:elevator:burrard:burrard-lift-concourse-upper:return",
+      "action": "elevatorUp",
+      "from": [
+        25.562458540000005,
+        -14,
+        -9.47004043999998
+      ],
+      "destination": [
+        25.11245854,
+        -6.5,
+        -9.470040439999991
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:burrard:burrard-lift-concourse-upper:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          586.0339397245244,
+          10.732004982842946,
+          36.349367622503095
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        25.11245854,
+        -6.5,
+        -9.470040439999991
+      ],
+      "surfaceId": "burrard-lift-hall",
+      "direction": "westbound"
+    },
+    {
+      "core": "core-1",
+      "id": "burrard-lift-street-concourse",
+      "candidateId": "skytrain:elevator:burrard:burrard-lift-street-concourse:return",
+      "action": "elevatorUp",
+      "from": [
+        25.562458540000005,
+        -6.5,
+        -9.47004043999998
+      ],
+      "destination": [
+        25.11245854,
+        -0.917488,
+        -9.470040439999991
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:burrard:burrard-lift-street-concourse:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          586.0339397245244,
+          18.232004982842945,
+          36.349367622503095
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        25.11245854,
+        -0.917488,
+        -9.470040439999991
+      ],
+      "surfaceId": "burrard-accessible-street",
+      "direction": "westbound"
+    }
+  ],
+  "liftCores": [
+    {
+      "id": "core-1",
+      "initial": {
+        "surfaceId": "burrard-accessible-street",
+        "position": [
+          25.11245854,
+          -0.917488,
+          -9.470040439999991
+        ]
+      },
+      "trips": [
+        {
+          "id": "burrard-lift-street-concourse",
+          "reverse": false
+        },
+        {
+          "id": "burrard-lift-concourse-upper",
+          "reverse": false
+        },
+        {
+          "id": "burrard-lift-upper-lower",
+          "reverse": false
+        },
+        {
+          "id": "burrard-lift-upper-lower",
+          "reverse": true
+        },
+        {
+          "id": "burrard-lift-concourse-upper",
+          "reverse": true
+        },
+        {
+          "id": "burrard-lift-street-concourse",
+          "reverse": true
+        }
+      ],
+      "lowestY": -20,
+      "connectionIds": [
+        "burrard-lift-street-concourse",
+        "burrard-lift-concourse-upper",
+        "burrard-lift-upper-lower"
+      ]
+    }
+  ],
+  "escalatorBanks": [
+    {
+      "id": "burrard-main-escalator-bank",
+      "laneIds": [
+        "burrard-main-escalator-bank-1",
+        "burrard-main-escalator-bank-2",
+        "burrard-main-escalator-bank-3"
+      ],
+      "from": "burrard-ticket-atrium",
+      "to": "burrard-upper-hub"
+    }
+  ],
+  "final": {
+    "snapshot": {
+      "phase": "station",
+      "stationId": "burrard",
+      "lineId": "expo",
+      "plannedLineId": null,
+      "destinationId": "main-street-science-world",
+      "nextStationId": null,
+      "level": "concourse",
+      "doorsOpen": false,
+      "canBoard": false,
+      "canAlight": false,
+      "canExit": false,
+      "canChangeLevel": false,
+      "speedMps": 0,
+      "travelProgress": 0,
+      "error": null,
+      "busy": false,
+      "seated": false,
+      "canWalkCabin": false,
+      "availableLines": [
+        "expo"
+      ],
+      "hint": "approach-door",
+      "atStop": null
+    },
+    "contextLost": false,
+    "stationOwners": [
+      {
+        "id": "waterfront",
+        "authored": "waterfront-2026-10-23-v1",
+        "parts": 1333
+      },
+      {
+        "id": "burrard",
+        "authored": "burrard-reference-interior-v2",
+        "parts": 2037
+      },
+      {
+        "id": "granville",
+        "authored": "granville-reference-interior-v3",
+        "parts": 3387
+      },
+      {
+        "id": "stadium-chinatown",
+        "parts": 239
+      },
+      {
+        "id": "main-street-science-world",
+        "parts": 143
+      },
+      {
+        "id": "vancouver-city-centre",
+        "parts": 124
+      },
+      {
+        "id": "yaletown-roundhouse",
+        "parts": 158
+      }
+    ]
+  },
+  "debugReport": ".cache/station-interior-debug/game-burrard-browser-debug.json",
+  "passed": true
+}

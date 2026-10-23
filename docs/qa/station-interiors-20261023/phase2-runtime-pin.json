@@ -1,0 +1,45 @@
+{
+  "schema": "vancouver-living-atlas.station-interior-runtime-pin.v1",
+  "scope": "Phase 2 Burrard and Granville exact staged export; excludes future unstaged Waterfront and Southeast edits.",
+  "capturedAtUtc": "2026-10-23T11:38:20+00:00",
+  "exportRoot": ".cache/phase2-review",
+  "nodeVersion": "24.22.1",
+  "algorithm": "SHA-256",
+  "sourcePacketSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+  "runtimeFiles": {
+    "lib/city/skytrain-stations.ts": {
+      "sha256": "3cfe61e1788764e3d81d13bdec2c698b05c845916578210f197b0812601253f4",
+      "bytes": 88806
+    },
+    "lib/city/skytrain-street-access.ts": {
+      "sha256": "6416007b4c7bf2404a4659374e2aaf6adc4026c3855df3d0559dd9e15c0f5ce1",
+      "bytes": 40229
+    },
+    "lib/city/skytrain-world-travel.ts": {
+      "sha256": "8a73012c9a022b022862ed9206a595103153ab38dfdaa5773360839b0969568f",
+      "bytes": 60947
+    },
+    "lib/city/skytrain-world-openings.ts": {
+      "sha256": "df78dc450e4b5e9b3f0296d17de18eddf25bd936ee9542a61e558433cc83862a",
+      "bytes": 13333
+    }
+  },
+  "stationFiles": {
+    "public/models/skytrain-stations/burrard.json": {
+      "sha256": "4706abf993cb47986061ad648604be64952e5cf7fff34620c811187b3db2d4ca",
+      "bytes": 571829
+    },
+    "public/models/skytrain-stations/granville.json": {
+      "sha256": "1937d9392b21316ea9735de86f8c26d78e863ef75def6be75fccdb0ed398dec0",
+      "bytes": 1039375
+    }
+  },
+  "note": "runtimeFiles identify the native GPU capture checkpoint. The subsequent legacy-only guard below preserves the rendered authored-station branch; final full-suite/CI review covers the commit runtime.",
+  "reviewedCodeTreeBeforeEvidence": "ec7154c5205a0731d793e43a53dd8985054bb4ff",
+  "finalLegacyGuard": {
+    "file": "lib/city/skytrain-stations.ts",
+    "sha256": "e4268d2a5f781bae92c2bd50e9c3fcfc2bfdf0ceaf67ad330f41bcddc56e017d",
+    "change": "Apply visible-apron priority only to rendered authored interiors. Unrendered legacy construction aprons retain nearest-height vestibule behavior.",
+    "verification": "All six threshold/body regressions and six legacy construction-access tests pass (12/12); Burrard/Granville authored branch is unchanged."
+  }
+}

@@ -27,6 +27,15 @@ test('source quaternion survives authoring and export into matching rendered and
       new THREE.Euler(0.2, Math.PI / 4, -0.1, 'YXZ'),
     ),
     quaternion = rotation.toArray(),
+    platformFloor = source.floorSurfaces.find(
+      (p) => p.surfaceId === 'burrard-upper',
+    ),
+    platformCenter = [0, 1, 2].map(
+      (axis) =>
+        (Math.min(...platformFloor.verticesM.map((p) => p[axis])) +
+          Math.max(...platformFloor.verticesM.map((p) => p[axis]))) /
+        2,
+    ),
     floorY = source.floorSurfaces.find(
       (floor) => floor.surfaceId === 'burrard-upper',
     ).verticesM[0][1];
@@ -36,11 +45,11 @@ test('source quaternion survives authoring and export into matching rendered and
     'quaternion-fixture-entry',
     'Fixture entry',
     'burrard-upper',
-    [0, floorY, -4],
+    [platformCenter[0], floorY, platformCenter[2] - 4],
   );
   builder.box(
     'quaternion-fixture-wall',
-    [0, floorY + 1, 0],
+    [platformCenter[0], floorY + 1, platformCenter[2]],
     [0.2, 2, 4],
     'cream',
     'wall',
@@ -68,7 +77,10 @@ test('source quaternion survives authoring and export into matching rendered and
     assert(rendered.normalize().angleTo(rotation) < 1e-6);
     const point = (x, z) => {
       const p = new THREE.Vector3(x, 0, z).applyQuaternion(rotation);
-      return owner.floorAt([p.x, floorY, p.z], 'burrard-upper');
+      return owner.floorAt(
+        [platformCenter[0] + p.x, floorY, platformCenter[2] + p.z],
+        'burrard-upper',
+      );
     };
     const wallPoint = point(0, 1.2),
       clearPoint = point(0.95, 1.2);

@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import * as THREE from 'three';
 import { OBB } from 'three/addons/math/OBB.js';
 import { cityModule } from './helpers/city-modules.mjs';
+import { walkFlat } from './helpers/station-walker.mjs';
 import {
   makeRuntimeStation,
   SOURCE,
@@ -20,13 +21,121 @@ const {
 const sourceBytes = readFileSync(SOURCE),
   source = JSON.parse(sourceBytes),
   sourceHash = createHash('sha256').update(sourceBytes).digest('hex');
+// Optional source-author QA never writes SOURCE or public packets. Restrict the
+// test-name-pattern to the geometry/approach checks when using this mode;
+// published-file provenance remains a separate normal-suite requirement.
+const inMemoryIds = new Set(
+  (process.env.STATION_OWNER_REBUILD ?? '').split(',').filter(Boolean),
+);
+const inMemoryBuilders = inMemoryIds.size
+  ? await import('../tools/station-interiors/dunsmuir.mjs')
+  : null;
+for (const id of inMemoryIds) assert(['burrard', 'granville'].includes(id));
 const catalog = source.stations.map((s) =>
-  JSON.parse(readFileSync(`${TARGET}/${s.stationId}.json`)),
+  inMemoryIds.has(s.stationId)
+    ? makeRuntimeStation(
+        inMemoryBuilders[
+          s.stationId === 'burrard' ? 'rebuildBurrard' : 'rebuildGranville'
+        ](s),
+        sourceHash,
+      )
+    : JSON.parse(readFileSync(`${TARGET}/${s.stationId}.json`)),
 );
 const get = (id) => structuredClone(catalog.find((s) => s.id === id));
 const owner = (id = 'burrard', quality = 'balanced') =>
   new SkyTrainStationOwner(get(id), () => 42, quality);
 const close = (a, b, e = 1e-5) => assert(Math.abs(a - b) < e, `${a} != ${b}`);
+const partRotation = (part) =>
+  part.quaternion
+    ? new THREE.Quaternion(...part.quaternion)
+    : new THREE.Quaternion().setFromAxisAngle(
+        new THREE.Vector3(0, 1, 0),
+        THREE.MathUtils.degToRad(part.yaw),
+      );
+function renderedPart(o, id) {
+  for (const mesh of o.group.children) {
+    if (!(mesh instanceof THREE.InstancedMesh)) continue;
+    const index = mesh.userData.stationPartIds?.indexOf(id) ?? -1;
+    if (index < 0) continue;
+    const matrix = new THREE.Matrix4();
+    mesh.getMatrixAt(index, matrix);
+    return { mesh, index, matrix };
+  }
+  assert.fail(`${o.data.id}: source part is not rendered: ${id}`);
+}
+function walkSegment(o, initial, target) {
+  const dx = target[0] - initial.position[0],
+    dz = target[2] - initial.position[2],
+    steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / 0.05));
+  let foot = initial;
+  for (let i = 0; i < steps; i++) {
+    const next = o.walk(foot, dx / steps, dz / steps);
+    assert(o.isClearFoot(next));
+    assert(Math.abs(next.position[1] - foot.position[1]) <= 0.221);
+    foot = next;
+  }
+  return foot;
+}
+function assertFlightBothWays(o, connection) {
+  const rise = connection.end[1] - connection.start[1];
+  assert(Math.abs(rise) > 0.5);
+  for (const reverse of [false, true]) {
+    const start = reverse ? connection.end : connection.start,
+      end = reverse ? connection.start : connection.end,
+      first = o.floorAt(start, reverse ? connection.to : connection.from);
+    assert(
+      first && o.isClearFoot(first),
+      `${connection.id}: supported ${reverse ? 'lower' : 'upper'} endpoint`,
+    );
+    const last = walkSegment(o, first, end);
+    assert(
+      Math.hypot(...last.position.map((v, axis) => v - end[axis])) < 0.24,
+      `${connection.id}: ${reverse ? 'reverse' : 'forward'} ended ${last.position}, expected ${end}`,
+    );
+    assert(
+      (last.position[1] - start[1]) * Math.sign(end[1] - start[1]) >
+        Math.abs(rise) - 0.24,
+    );
+  }
+}
+function assertColliderStopsAndReverses(o, part, axes = [2, 0]) {
+  const rotation = partRotation(part),
+    floorY = part.position[1] - part.size[1] / 2;
+  for (const axis of axes)
+    for (const sign of [1, -1]) {
+      const normal = new THREE.Vector3()
+          .setComponent(axis, sign)
+          .applyQuaternion(rotation)
+          .setY(0)
+          .normalize(),
+        half = part.size[axis] / 2,
+        start = new THREE.Vector3(...part.position)
+          .addScaledVector(normal, half + 0.85)
+          .setY(floorY),
+        initial = o.floorAt(start.toArray());
+      if (!initial || !o.isClearFoot(initial)) continue;
+      const target = new THREE.Vector3(...part.position)
+          .addScaledVector(normal, -half - 0.85)
+          .setY(floorY),
+        stopped = walkSegment(o, initial, target.toArray()),
+        separation = new THREE.Vector3(...stopped.position)
+          .sub(new THREE.Vector3(...part.position))
+          .dot(normal);
+      assert(
+        separation > half + 0.21 && separation < half + 0.4,
+        `${part.id}: body must stop at this actual collider face (${separation}, half ${half})`,
+      );
+      const away = o.walk(stopped, normal.x * 0.4, normal.z * 0.4);
+      assert(
+        new THREE.Vector3(...away.position)
+          .sub(new THREE.Vector3(...stopped.position))
+          .dot(normal) > 0.35,
+        `${part.id}: reverse input leaves the collider`,
+      );
+      return;
+    }
+  assert.fail(`${part.id}: no supported approach to the real collider`);
+}
 
 test('all seven compact station layouts reproduce original authored geometry and exact source provenance', () => {
   const manifest = JSON.parse(readFileSync(`${TARGET}/manifest.json`));
@@ -89,6 +198,42 @@ test('every real line/direction has clear entry, exact platform foot origin and 
   }
 });
 
+test('each authored Dunsmuir station retains all24 clear train-door approaches around its actual platform fixtures', () => {
+  for (const id of ['burrard', 'granville']) {
+    if (!get(id).authoredInterior) continue;
+    const o = owner(id);
+    let checked = 0;
+    try {
+      for (const platform of o.data.platforms) {
+        const access = o.accessPoint(
+          'platform',
+          platform.line,
+          platform.direction,
+        );
+        assert(o.isClearFoot(access));
+        for (const door of o.boardingDoors(platform.line, platform.direction)) {
+          assert(
+            o.isClearFoot(door.waiting),
+            `${id}: source door ${door.id} has full body support`,
+          );
+          const reached = walkFlat(o, access, door.waiting.position);
+          assert.equal(reached.surfaceId, platform.surfaceId);
+          assert(
+            new THREE.Vector3(...reached.position).distanceTo(
+              new THREE.Vector3(...door.waiting.position),
+            ) < 0.18,
+            `${id}: actual platform fixtures cannot isolate door ${door.id}`,
+          );
+          checked++;
+        }
+      }
+      assert.equal(checked, 24);
+    } finally {
+      o.dispose();
+    }
+  }
+});
+
 test('terrain street datum and station quaternion are applied exactly once, including perpendicular Waterfront lines', () => {
   const o = owner('waterfront');
   for (const line of ['expo', 'canada']) {
@@ -139,60 +284,127 @@ test('stacked Dunsmuir platforms remain independent and an oversized step cannot
     assert.deepEqual(invalid.position, west.position);
     assert.deepEqual(o.walk(west, Infinity, 0), west);
     assert.deepEqual(o.walk(west, 900, 0), west);
+    const platform = o.platform('expo', 'westbound'),
+      across = new THREE.Vector3(1, 0, 0).applyQuaternion(
+        new THREE.Quaternion(...platform.quaternion),
+      ),
+      edge = new THREE.Vector3(...platform.doors[0].edge);
     let p = west;
-    for (let i = 0; i < 100; i++) p = o.walk(p, 1, 0);
-    assert(p.position[0] < 2.25 - 0.23);
+    for (let i = 0; i < 100; i++) p = o.walk(p, across.x, across.z);
+    assert(new THREE.Vector3(...p.position).sub(edge).dot(across) < -0.23);
     assert.equal(p.surfaceId, west.surfaceId);
     close(p.position[1], west.position[1]);
     o.dispose();
   }
 });
 
-test('the actual station bench and column bounds stop continuous walking without freezing reverse input', () => {
-  const o = owner('burrard');
-  let p = o.floorAt([1.25, -9, -30], 'burrard-upper');
-  assert(p);
-  for (let i = 0; i < 20; i++) p = o.walk(p, -0.1, 0);
-  assert(p.position[0] > 0.3);
-  const reverse = o.walk(p, 0.4, 0);
-  assert(reverse.position[0] > p.position[0] + 0.35);
-  o.dispose();
+test('actual station benches and every maintained column stop continuous walking without freezing reverse input', () => {
+  for (const id of ['burrard', 'granville']) {
+    const o = owner(id);
+    if (o.data.authoredInterior) {
+      const bench = o.data.obstacles.find((part) =>
+          part.id.endsWith('-bench-body'),
+        ),
+        columns = o.data.parts.filter((part) => part.role === 'column');
+      assert(bench);
+      assertColliderStopsAndReverses(o, bench);
+      for (const column of columns) {
+        const collider = o.data.obstacles.find((part) => part.id === column.id);
+        assert(
+          collider,
+          `${column.id}: a visible maintained column must have real body collision`,
+        );
+        assertColliderStopsAndReverses(o, collider);
+      }
+      o.dispose();
+      continue;
+    }
+    if (id !== 'burrard') {
+      o.dispose();
+      continue;
+    }
+    let p = o.floorAt([1.25, -9, -30], 'burrard-upper');
+    assert(p);
+    for (let i = 0; i < 20; i++) p = o.walk(p, -0.1, 0);
+    assert(p.position[0] > 0.3);
+    const reverse = o.walk(p, 0.4, 0);
+    assert(reverse.position[0] > p.position[0] + 0.35);
+    o.dispose();
+  }
 });
 
 test('station floor holes are respected rather than snapping to an overlapping stacked surface', () => {
   const d = get('burrard');
-  const floor = d.floors.find((f) => f.id === 'burrard-upper');
+  const floor = d.floors.find((f) => f.id === 'burrard-upper'),
+    platform = d.platforms.find((p) => p.surfaceId === floor.id),
+    rotation = new THREE.Quaternion(...platform.quaternion),
+    origin = new THREE.Vector3(...platform.position),
+    inverse = rotation.clone().invert(),
+    bounds = new THREE.Box3().setFromPoints(
+      floor.vertices.map((v) =>
+        new THREE.Vector3(...v).sub(origin).applyQuaternion(inverse),
+      ),
+    ),
+    center = bounds.getCenter(new THREE.Vector3()),
+    at = (x, z) =>
+      new THREE.Vector3(x, center.y, z)
+        .applyQuaternion(rotation)
+        .add(origin)
+        .toArray();
   floor.vertices = [
-    [-2.25, -9, -37],
-    [-2.25, -9, -1],
-    [2.25, -9, -1],
-    [2.25, -9, -37],
-    [-2.25, -9, 1],
-    [-2.25, -9, 37],
-    [2.25, -9, 37],
-    [2.25, -9, 1],
+    at(bounds.min.x, bounds.min.z),
+    at(bounds.min.x, center.z - 1),
+    at(bounds.max.x, center.z - 1),
+    at(bounds.max.x, bounds.min.z),
+    at(bounds.min.x, center.z + 1),
+    at(bounds.min.x, bounds.max.z),
+    at(bounds.max.x, bounds.max.z),
+    at(bounds.max.x, center.z + 1),
   ];
   floor.indices = [0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7];
   const o = new SkyTrainStationOwner(d, () => 0);
-  let p = o.floorAt([1.2, -9, -3], 'burrard-upper');
-  for (let i = 0; i < 50; i++) p = o.walk(p, 0, 0.2);
-  assert(p.position[2] < -1.2);
+  const along = new THREE.Vector3(0, 0, 1).applyQuaternion(rotation);
+  let p = o.floorAt(at(center.x + 1.2, center.z - 3), floor.id);
+  assert(p);
+  for (let i = 0; i < 50; i++) p = o.walk(p, along.x * 0.2, along.z * 0.2);
+  assert(
+    new THREE.Vector3(...p.position).sub(origin).applyQuaternion(inverse).z <
+      center.z - 1.2,
+  );
   assert.equal(p.surfaceId, 'burrard-upper');
-  assert.equal(o.floorAt([1, -9, 0]), null);
+  assert.equal(o.floorAt(at(center.x + 1, center.z)), null);
   o.dispose();
 });
 
 test('exact stair tread connectivity permits supported rising steps but never an elevator shaft fall', () => {
-  const o = owner('burrard'),
-    c = o.data.connections.find((c) => c.type === 'stairs'),
-    first = o.floorAt(c.start, c.from);
-  assert(first);
-  let p = { ...first, position: [...first.position] };
-  const v = new THREE.Vector3(...c.end).sub(new THREE.Vector3(...c.start));
-  for (let i = 0; i < 100; i++) p = o.walk(p, v.x / 100, v.z / 100);
-  assert(p.position[1] > c.start[1] + 2.5);
-  assert(Math.abs(p.position[1] - c.end[1]) < 0.3);
-  o.dispose();
+  for (const id of ['burrard', 'granville']) {
+    const o = owner(id),
+      stairs = o.data.connections.filter((c) => c.type === 'stairs');
+    if (o.data.authoredInterior) {
+      for (const c of stairs) assertFlightBothWays(o, c);
+      for (const c of o.data.connections.filter((c) => c.type === 'elevator')) {
+        const first = o.floorAt(c.start, c.from);
+        assert(first);
+        assert.equal(o.walk(first, 0, 0).layer, first.layer);
+        close(o.walk(first, 0, 0).position[1], c.start[1]);
+      }
+      o.dispose();
+      continue;
+    }
+    if (id !== 'burrard') {
+      o.dispose();
+      continue;
+    }
+    const c = stairs[0],
+      first = o.floorAt(c.start, c.from);
+    assert(first);
+    let p = { ...first, position: [...first.position] };
+    const v = new THREE.Vector3(...c.end).sub(new THREE.Vector3(...c.start));
+    for (let i = 0; i < 100; i++) p = o.walk(p, v.x / 100, v.z / 100);
+    assert(p.position[1] > c.start[1] + 2.5);
+    assert(Math.abs(p.position[1] - c.end[1]) < 0.3);
+    o.dispose();
+  }
 });
 
 test('fixed instancing budgets remain small at all world qualities and disposal is idempotent', () => {
@@ -292,6 +504,107 @@ test('a stale async request never takes over a later station or survives disposa
 test('Dunsmuir vault geometry clears the full train roof envelope on both stacked levels', () => {
   for (const id of ['burrard', 'granville']) {
     const o = owner(id);
+    if (o.data.authoredInterior) {
+      const ceilings = o.data.parts.filter((part) =>
+        /-vault-panel-/.test(part.id),
+      );
+      assert(
+        ceilings.length >= 24,
+        `${id}: both actual platform vaults are authored`,
+      );
+      const unit = new THREE.Box3(
+        new THREE.Vector3(-0.5, -0.5, -0.5),
+        new THREE.Vector3(0.5, 0.5, 0.5),
+      );
+      o.group.updateWorldMatrix(true, true);
+      const roofInstances = ceilings.map((part) => {
+        const instance = renderedPart(o, part.id);
+        return {
+          part,
+          ...instance,
+          box: new OBB().fromBox3(unit).applyMatrix4(instance.matrix),
+        };
+      });
+      for (const p of o.data.platforms) {
+        const q = new THREE.Quaternion(...p.quaternion),
+          center = new THREE.Vector3(
+            0,
+            p.floorHeight + 1.375 - p.position[1],
+            0,
+          )
+            .applyQuaternion(q)
+            .add(new THREE.Vector3(...p.position)),
+          train = new OBB(
+            center,
+            new THREE.Vector3(1.35, 1.325, 35.35),
+            new THREE.Matrix3().setFromMatrix4(
+              new THREE.Matrix4().makeRotationFromQuaternion(q),
+            ),
+          ),
+          platformCeilings = roofInstances.filter(({ part }) =>
+            part.id.startsWith(`${p.surfaceId}-vault-panel-`),
+          );
+        assert.equal(
+          platformCeilings.length,
+          12,
+          `${p.id}: continuous twelve-panel source vault`,
+        );
+        for (const roof of roofInstances)
+          assert(
+            !roof.box.intersectsOBB(train),
+            `${id} ${p.direction}: train body intersects ${roof.part.id}`,
+          );
+        for (const dx of [-1.4, 0, 1.4])
+          for (const z of [-30, 0, 30]) {
+            const origin = new THREE.Vector3(
+                dx,
+                p.floorHeight + 2.7 - p.position[1],
+                z,
+              )
+                .applyQuaternion(q)
+                .add(new THREE.Vector3(...p.position)),
+              ray = new THREE.Ray(origin, new THREE.Vector3(0, 1, 0)),
+              hits = platformCeilings
+                .map(({ box }) => box.intersectRay(ray, new THREE.Vector3()))
+                .filter(Boolean),
+              nearest = Math.min(...hits.map((hit) => hit.y - origin.y)),
+              worldOrigin = new THREE.Vector3(...o.toWorld(origin.toArray())),
+              worldUp = new THREE.Vector3(0, 1, 0).transformDirection(
+                o.group.matrixWorld,
+              ),
+              partIds = new Set(platformCeilings.map(({ part }) => part.id)),
+              renderedHits = new THREE.Raycaster(worldOrigin, worldUp)
+                .intersectObjects(
+                  [...new Set(platformCeilings.map(({ mesh }) => mesh))],
+                  false,
+                )
+                .filter((hit) =>
+                  partIds.has(
+                    hit.object.userData.stationPartIds?.[hit.instanceId],
+                  ),
+                );
+            assert(
+              hits.length,
+              `${p.id}: rendered vault covers train roof ${dx}/${z}`,
+            );
+            assert(
+              renderedHits.length,
+              `${p.id}: the real rendered triangles cover the roof`,
+            );
+            close(renderedHits[0].distance, nearest, 1e-4);
+            assert(
+              nearest >= 0.3,
+              `${id} ${p.direction}: roof clearance ${nearest}m at ${dx}/${z}`,
+            );
+            assert(
+              renderedHits[0].distance >= 0.3,
+              `${p.id}: visible roof triangles preserve .3m clearance`,
+            );
+          }
+      }
+      o.dispose();
+      continue;
+    }
     const vaults = o.group.children.filter((mesh) =>
       mesh.name.startsWith('representative-dunsmuir-vault-'),
     );
@@ -315,22 +628,199 @@ test('Dunsmuir vault geometry clears the full train roof envelope on both stacke
 });
 
 test('visible ticket reader posts block the pedestrian body and retain a usable central gate aisle', () => {
-  const o = owner('burrard'),
-    entry = o.entry('expo');
-  const before = o.walk(entry, 0, -0.5);
-  assert(before.position[2] < entry.position[2] - 0.4);
-  let p = entry;
-  for (let i = 0; i < 30; i++) p = o.walk(p, 0.1, 0);
-  assert(p.position[0] < 0.72, 'body stops before the actual reader post');
-  const reverse = o.walk(p, -0.4, 0);
-  assert(reverse.position[0] < p.position[0] - 0.35);
-  o.dispose();
+  for (const id of ['burrard', 'granville']) {
+    const o = owner(id);
+    if (o.data.authoredInterior) {
+      const posts = o.data.parts.filter((part) => part.role === 'faregate'),
+        rows = new Map();
+      assert(posts.length >= 6);
+      for (const post of posts) {
+        assert(
+          o.data.obstacles.some((obstacle) => obstacle.id === post.id),
+          `${post.id}: visible post is physical`,
+        );
+        const alongAxis = post.size[0] > post.size[2] ? 0 : 2;
+        assertColliderStopsAndReverses(o, post, [
+          alongAxis,
+          alongAxis === 0 ? 2 : 0,
+        ]);
+        const rowId = post.id.replace(/-\d+$/, ''),
+          row = rows.get(rowId) ?? [];
+        row.push(post);
+        rows.set(rowId, row);
+      }
+      for (const [rowId, row] of rows) {
+        const first = row[0],
+          alongAxis = first.size[0] > first.size[2] ? 0 : 2,
+          acrossAxis = alongAxis === 0 ? 2 : 0,
+          rotation = partRotation(first),
+          along = new THREE.Vector3()
+            .setComponent(alongAxis, 1)
+            .applyQuaternion(rotation),
+          across = new THREE.Vector3()
+            .setComponent(acrossAxis, 1)
+            .applyQuaternion(rotation);
+        row.sort(
+          (a, b) =>
+            new THREE.Vector3(...a.position).dot(across) -
+            new THREE.Vector3(...b.position).dot(across),
+        );
+        for (let i = 1; i < row.length; i++) {
+          const a = row[i - 1],
+            b = row[i],
+            center = new THREE.Vector3(...a.position)
+              .add(new THREE.Vector3(...b.position))
+              .multiplyScalar(0.5),
+            half = first.size[alongAxis] / 2 + 0.25;
+          center.y = first.position[1] - first.size[1] / 2;
+          const start = center.clone().addScaledVector(along, half),
+            end = center.clone().addScaledVector(along, -half),
+            initial = o.floorAt(start.toArray());
+          assert(
+            initial && o.isClearFoot(initial),
+            `${rowId}: gate gap has a supported approach`,
+          );
+          const last = walkSegment(o, initial, end.toArray());
+          assert(
+            new THREE.Vector3(...last.position).distanceTo(end) < 0.18,
+            `${rowId}: gap ${i - 1}/${i} admits the real body`,
+          );
+        }
+      }
+      o.dispose();
+      continue;
+    }
+    if (id !== 'burrard') {
+      o.dispose();
+      continue;
+    }
+    const entry = o.entry('expo');
+    const before = o.walk(entry, 0, -0.5);
+    assert(before.position[2] < entry.position[2] - 0.4);
+    let p = entry;
+    for (let i = 0; i < 30; i++) p = o.walk(p, 0.1, 0);
+    assert(p.position[0] < 0.72, 'body stops before the actual reader post');
+    const reverse = o.walk(p, -0.4, 0);
+    assert(reverse.position[0] < p.position[0] - 0.35);
+    o.dispose();
+  }
 });
 
-test('Granville retains three recognizable escalator banks, sloped handrails and the original supported centre flight', () => {
+test('Dunsmuir retains the actual source escalator lanes, sloped handrails and supported bidirectional flights', () => {
   for (const id of ['granville', 'burrard']) {
-    const o = owner(id),
-      flights = o.data.connections.filter((c) => c.type === 'stairs'),
+    const o = owner(id);
+    if (o.data.authoredInterior) {
+      const escalators = o.data.connections.filter(
+        (connection) => connection.type === 'escalator',
+      );
+      assert.equal(escalators.length, id === 'granville' ? 9 : 5);
+      assert.equal(o.data.authoredInterior.escalatorCount, escalators.length);
+      if (id === 'granville') {
+        const three = escalators.filter((c) =>
+          /^granville-big-three-[123]$/.test(c.id),
+        );
+        assert.equal(three.length, 3);
+        const direction = new THREE.Vector3(...three[0].end)
+            .sub(new THREE.Vector3(...three[0].start))
+            .normalize(),
+          across = new THREE.Vector3(direction.z, 0, -direction.x).normalize();
+        for (const c of three) {
+          const delta = new THREE.Vector3(...c.end).sub(
+            new THREE.Vector3(...c.start),
+          );
+          assert(
+            delta.clone().normalize().dot(direction) > 0.99999,
+            'the original three are parallel lanes',
+          );
+          close(
+            new THREE.Vector3(...c.start)
+              .sub(new THREE.Vector3(...three[0].start))
+              .dot(direction),
+            0,
+          );
+          close(
+            new THREE.Vector3(...c.start).distanceTo(
+              new THREE.Vector3(...c.end),
+            ),
+            35,
+          );
+        }
+        const laneOffsets = three
+          .map((c) => new THREE.Vector3(...c.start).dot(across))
+          .sort((a, b) => a - b);
+        assert(laneOffsets[1] - laneOffsets[0] > three[0].width + 0.1);
+        assert(laneOffsets[2] - laneOffsets[1] > three[0].width + 0.1);
+        assert.equal(
+          escalators.filter((c) =>
+            /^granville-dunsmuir-main-triple-[123]$/.test(c.id),
+          ).length,
+          3,
+        );
+      }
+      for (const c of escalators) {
+        const delta = new THREE.Vector3(...c.end).sub(
+            new THREE.Vector3(...c.start),
+          ),
+          tangent = delta.clone().normalize();
+        assert(c.treads.length >= 2);
+        for (const side of [-1, 1]) {
+          const rail = o.data.parts.find(
+            (part) => part.id === `${c.id}-handrail-${side}`,
+          );
+          assert(rail, `${c.id}: both continuous handrails are authored`);
+          const instance = renderedPart(o, rail.id),
+            axis = new THREE.Vector3(0, 0, 1).transformDirection(
+              instance.matrix,
+            );
+          assert(
+            Math.abs(axis.dot(tangent)) > 0.99999,
+            `${rail.id}: rendered rail follows the actual incline`,
+          );
+          close(rail.size[2], delta.length());
+          close(rail.position[1], (c.start[1] + c.end[1]) / 2 + 0.98);
+          const balustrade = o.data.parts.find(
+            (part) => part.id === `${c.id}-balustrade-${side}`,
+          );
+          assert(
+            balustrade && balustrade.material === 'glass',
+            `${c.id}: both escalator balustrades are rendered`,
+          );
+          const glass = renderedPart(o, balustrade.id);
+          assert(
+            Math.abs(
+              new THREE.Vector3(0, 0, 1)
+                .transformDirection(glass.matrix)
+                .dot(tangent),
+            ) > 0.99999,
+          );
+        }
+        for (const [index, tread] of c.treads.entries()) {
+          const part = o.data.parts.find((part) => part.id === tread.id),
+            instance = renderedPart(o, tread.id),
+            expected = new THREE.Matrix4().compose(
+              new THREE.Vector3(...part.position),
+              partRotation(part),
+              new THREE.Vector3(...part.size),
+            );
+          instance.matrix.elements.forEach((value, i) =>
+            close(value, expected.elements[i], 1e-4),
+          );
+          assert.equal(part.role, 'escalator-tread');
+          for (const vertex of tread.vertices)
+            close(vertex[1], part.position[1] + part.size[1] / 2);
+          if (index)
+            assert(
+              Math.abs(
+                tread.vertices[0][1] - c.treads[index - 1].vertices[0][1],
+              ) <= 0.17,
+            );
+        }
+        assertFlightBothWays(o, c);
+      }
+      o.dispose();
+      continue;
+    }
+    const flights = o.data.connections.filter((c) => c.type === 'stairs'),
       rails = o.group.getObjectByName('station-escalator-escalator'),
       glass = o.group.getObjectByName('station-escalator-glass'),
       walls = o.group.getObjectByName('station-escalator-wall'),
@@ -502,36 +992,54 @@ test('boarding text billboards and overhead station signs have correctly oriente
   globalThis.document = Object.fromEntries([['createElement', canvas]]);
   let o;
   try {
-    o = owner('burrard');
-    const boarding = o.group.getObjectByName('station-sign-SkyTrain');
-    assert(boarding instanceof THREE.Sprite);
-    const sign = o.group.getObjectByName(
-      `station-sign-${o.data.name.toUpperCase()}`,
-    );
-    assert(sign instanceof THREE.Mesh);
-    assert.equal(sign.material.side, THREE.FrontSide);
-    const normals = sign.geometry.getAttribute('normal');
-    assert(
-      Array.from({ length: normals.count }, (_, i) => normals.getZ(i)).some(
-        (z) => z > 0.9,
-      ),
-    );
-    assert(
-      Array.from({ length: normals.count }, (_, i) => normals.getZ(i)).some(
-        (z) => z < -0.9,
-      ),
-    );
-    const uv = sign.geometry.getAttribute('uv');
-    assert.equal(uv.getX(0), uv.getX(4));
-    assert.equal(uv.getX(1), uv.getX(5));
-    let textureDisposals = 0,
-      materialDisposals = 0;
-    boarding.material.map.addEventListener('dispose', () => textureDisposals++);
-    boarding.material.addEventListener('dispose', () => materialDisposals++);
-    o.dispose();
-    o.dispose();
-    assert.equal(textureDisposals, 1);
-    assert.equal(materialDisposals, 1);
+    for (const data of catalog) {
+      o = owner(data.id);
+      const boarding = o.group.getObjectByName('station-sign-SkyTrain');
+      assert(boarding instanceof THREE.Sprite);
+      const sourceSign = o.data.authoredInterior
+        ? o.data.signs.find((sign) =>
+            sign.text.includes(o.data.name.replace(' Station', '')),
+          )
+        : null;
+      if (o.data.authoredInterior)
+        assert(sourceSign, `${data.id}: real station name sign is authored`);
+      const sign = o.group.getObjectByName(
+        `station-sign-${sourceSign?.text ?? o.data.name.toUpperCase()}`,
+      );
+      assert(sign instanceof THREE.Mesh);
+      assert.equal(sign.material.side, THREE.FrontSide);
+      const normals = sign.geometry.getAttribute('normal');
+      assert(
+        Array.from({ length: normals.count }, (_, i) => normals.getZ(i)).some(
+          (z) => z > 0.9,
+        ),
+      );
+      assert(
+        Array.from({ length: normals.count }, (_, i) => normals.getZ(i)).some(
+          (z) => z < -0.9,
+        ),
+      );
+      const uv = sign.geometry.getAttribute('uv');
+      assert.equal(uv.getX(0), uv.getX(4));
+      assert.equal(uv.getX(1), uv.getX(5));
+      const resources = [
+          boarding.material.map,
+          boarding.material,
+          sign.geometry,
+          sign.material.map,
+          sign.material,
+        ],
+        disposed = resources.map(() => 0);
+      resources.forEach((resource, index) =>
+        resource.addEventListener('dispose', () => disposed[index]++),
+      );
+      o.dispose();
+      o.dispose();
+      assert.deepEqual(
+        disposed,
+        resources.map(() => 1),
+      );
+    }
   } finally {
     o?.dispose();
     if (previous === undefined) delete globalThis.document;
@@ -606,7 +1114,19 @@ test('other stations retain their existing authored entrance and first platform 
         ),
         entry = o.entry(p.line, p.direction);
       assert.equal(entry.surfaceId, e.surfaceId);
-      assert.deepEqual(entry.position, e.point);
+      if (data.authoredInterior) {
+        assert(
+          o.isClearFoot(entry),
+          `${data.id}: entrance has full body support`,
+        );
+        assert(
+          new THREE.Vector3(...entry.position).distanceTo(
+            new THREE.Vector3(...e.point),
+          ) <= 0.35,
+          `${data.id}: supported entry remains within one body width of the authored doorway`,
+        );
+        assert.deepEqual(o.accessPoint('entry', p.line, p.direction), entry);
+      } else assert.deepEqual(entry.position, e.point);
     }
     o.dispose();
   }

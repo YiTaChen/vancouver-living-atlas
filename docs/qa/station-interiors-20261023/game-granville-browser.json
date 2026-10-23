@@ -1,0 +1,2278 @@
+{
+  "stationId": "granville",
+  "url": "http://127.0.0.1:3202/?inspect",
+  "capturedAt": "2026-10-23T11:36:57.143Z",
+  "placements": "Inspect-only supported-floor placements; separate route tests verify circulation.",
+  "captures": [
+    {
+      "label": "entrance-thirdperson",
+      "file": "game-granville-entrance-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          1.584843367652411e-13,
+          0.7867971367576956,
+          -2.074999999999992
+        ],
+        "surfaceId": "granville-granville-street-street-apron",
+        "layer": 28,
+        "yaw": 0
+      },
+      "camera": [
+        785.3393495052834,
+        33.28515981967007,
+        328.4088602689199
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          787.8936747419391,
+          30.404468862535666,
+          330.9407575334217
+        ]
+      },
+      "render": {
+        "frame": 279,
+        "calls": 414,
+        "triangles": 2340092,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-granville-street-outside-thirdperson",
+      "file": "game-granville-entrance-granville-street-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        790.0497589487214,
+        33.44580599170675,
+        333.07791047966725
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          787.5208103434562,
+          30.493539208649608,
+          330.5711670298316
+        ]
+      },
+      "render": {
+        "frame": 441,
+        "calls": 328,
+        "triangles": 2745953,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-granville-street-inside-thirdperson",
+      "file": "game-granville-entrance-granville-street-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          1.2322087794558456e-13,
+          0.7867971367576797,
+          -2.074999999999952
+        ],
+        "surfaceId": "granville-granville-street-street-apron",
+        "layer": 28,
+        "yaw": 0
+      },
+      "camera": [
+        785.3647261366738,
+        33.35673564559279,
+        328.4340140835862
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          787.8936747419391,
+          30.40446886253565,
+          330.94075753342173
+        ]
+      },
+      "render": {
+        "frame": 618,
+        "calls": 421,
+        "triangles": 2357172,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-dunsmuir-street-outside-thirdperson",
+      "file": "game-granville-entrance-dunsmuir-street-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        864.2803010385575,
+        31.549903405906893,
+        303.02750206034204
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          866.7870444883931,
+          28.597636622849752,
+          300.49855345507683
+        ]
+      },
+      "render": {
+        "frame": 765,
+        "calls": 214,
+        "triangles": 1607403,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-dunsmuir-street-inside-thirdperson",
+      "file": "game-granville-entrance-dunsmuir-street-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          76.63510355558547,
+          -1.1123914079712,
+          32.52572251253794
+        ],
+        "surfaceId": "granville-dunsmuir-street-street-apron",
+        "layer": 30,
+        "yaw": 0
+      },
+      "camera": [
+        868.9241974346387,
+        31.457547100863913,
+        298.3424692482945
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          866.4174539848029,
+          28.505280317806772,
+          300.8714178535596
+        ]
+      },
+      "render": {
+        "frame": 906,
+        "calls": 332,
+        "triangles": 2057744,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-seymour-street-outside-thirdperson",
+      "file": "game-granville-entrance-seymour-street-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        865.6079628538683,
+        34.93885989411799,
+        369.09165090315435
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          868.1369114591336,
+          31.986593111060845,
+          371.59839435299
+        ]
+      },
+      "render": {
+        "frame": 1047,
+        "calls": 231,
+        "triangles": 2120981,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-seymour-street-inside-thirdperson",
+      "file": "game-granville-entrance-seymour-street-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          27.614005660103366,
+          2.2550165437451613,
+          83.01242411009869
+        ],
+        "surfaceId": "granville-seymour-street-street-apron",
+        "layer": 32,
+        "yaw": 0
+      },
+      "camera": [
+        870.292995665916,
+        34.82495505258027,
+        373.7355472992354
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          867.7640470606507,
+          31.87268826952313,
+          371.22880384939987
+        ]
+      },
+      "render": {
+        "frame": 1188,
+        "calls": 619,
+        "triangles": 3278935,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-call-firstperson",
+      "file": "game-granville-elevator-call-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          74.11010356000004,
+          -2.07414,
+          48.80000000000002
+        ],
+        "surfaceId": "granville-seymour-north-passage",
+        "layer": 14,
+        "yaw": 0
+      },
+      "camera": [
+        876.198182872748,
+        29.19353172577797,
+        314.12151502818955
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          876.198182872748,
+          27.54353172577797,
+          314.12151502818955
+        ]
+      },
+      "render": {
+        "frame": 1320,
+        "calls": 611,
+        "triangles": 3174363,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-lowest-landing-firstperson",
+      "file": "game-granville-elevator-lowest-landing-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          74.56010356,
+          -26,
+          48.8
+        ],
+        "surfaceId": "granville-dunsmuir-lower-hub",
+        "layer": 23,
+        "yaw": 1.5707963267949216
+      },
+      "camera": [
+        876.5149747329682,
+        5.267671725777971,
+        313.80191697234716
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          876.5149747329682,
+          3.6176717257779707,
+          313.80191697234716
+        ]
+      },
+      "render": {
+        "frame": 1479,
+        "calls": 276,
+        "triangles": 2131438,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-returned-to-entry-level-firstperson",
+      "file": "game-granville-elevator-returned-to-entry-level-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          74.56010356,
+          -2.07414,
+          48.8
+        ],
+        "surfaceId": "granville-seymour-north-passage",
+        "layer": 14,
+        "yaw": 1.5707963267948213
+      },
+      "camera": [
+        876.5149747329682,
+        29.19353172577797,
+        313.80191697234716
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          876.5149747329682,
+          27.54353172577797,
+          313.80191697234716
+        ]
+      },
+      "render": {
+        "frame": 1629,
+        "calls": 611,
+        "triangles": 3174699,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "upper-platform-thirdperson",
+      "file": "game-granville-upper-platform-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          88.73954321,
+          -20,
+          92.9764715
+        ],
+        "surfaceId": "granville-upper",
+        "layer": 1,
+        "yaw": 1.5707963267948966
+      },
+      "camera": [
+        920.4009132693013,
+        12.569938508835111,
+        337.3376053985682
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          917.8719646640361,
+          9.61767172577797,
+          334.83086194873255
+        ]
+      },
+      "render": {
+        "frame": 1779,
+        "calls": 622,
+        "triangles": 3302386,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "upper-platform-firstperson",
+      "file": "game-granville-upper-platform-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          88.73954321,
+          -20,
+          92.9764715
+        ],
+        "surfaceId": "granville-upper",
+        "layer": 1,
+        "yaw": 1.5707963267948966
+      },
+      "camera": [
+        917.8719646640361,
+        11.267671725777971,
+        334.83086194873255
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          917.8719646640361,
+          9.61767172577797,
+          334.83086194873255
+        ]
+      },
+      "render": {
+        "frame": 1926,
+        "calls": 624,
+        "triangles": 3415135,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "lower-platform-thirdperson",
+      "file": "game-granville-lower-platform-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          88.73954321,
+          -26,
+          92.9764715
+        ],
+        "surfaceId": "granville-lower",
+        "layer": 2,
+        "yaw": 1.5707963267948966
+      },
+      "camera": [
+        920.4009132693013,
+        6.569938508835112,
+        337.3376053985682
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          917.8719646640361,
+          3.6176717257779707,
+          334.83086194873255
+        ]
+      },
+      "render": {
+        "frame": 2073,
+        "calls": 604,
+        "triangles": 3297996,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "lower-platform-firstperson",
+      "file": "game-granville-lower-platform-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          88.73954321,
+          -26,
+          92.9764715
+        ],
+        "surfaceId": "granville-lower",
+        "layer": 2,
+        "yaw": 1.5707963267948966
+      },
+      "camera": [
+        917.8719646640361,
+        5.267671725777971,
+        334.83086194873255
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          917.8719646640361,
+          3.6176717257779707,
+          334.83086194873255
+        ]
+      },
+      "render": {
+        "frame": 2211,
+        "calls": 624,
+        "triangles": 3415375,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-seymour-stairs-firstperson",
+      "file": "game-granville-granville-seymour-stairs-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          34.84400566,
+          -0.431605,
+          73.93742411
+        ],
+        "surfaceId": "granville-seymour-stairs:step:10",
+        "layer": 458,
+        "yaw": 0
+      },
+      "camera": [
+        866.40860882189,
+        30.836066725777968,
+        359.70529257109575
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          866.40860882189,
+          29.18606672577797,
+          359.70529257109575
+        ]
+      },
+      "render": {
+        "frame": 2358,
+        "calls": 293,
+        "triangles": 2428082,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-seymour-stairs-overhead-thirdperson",
+      "file": "game-granville-granville-seymour-stairs-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          34.84400566,
+          -0.431605,
+          73.93742411
+        ],
+        "surfaceId": "granville-seymour-stairs:step:10",
+        "layer": 458,
+        "yaw": 0
+      },
+      "camera": [
+        863.3833553809102,
+        38.223836472864335,
+        362.7573442162855
+      ],
+      "cutaway": true,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          866.40860882189,
+          29.18606672577797,
+          359.70529257109575
+        ]
+      },
+      "render": {
+        "frame": 2520,
+        "calls": 107,
+        "triangles": 1242436,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-interplatform-stairs-firstperson",
+      "file": "game-granville-granville-interplatform-stairs-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          63.333333333333336,
+          -23,
+          37.294117081556706
+        ],
+        "surfaceId": "granville-interplatform-stairs:step:18",
+        "layer": 394,
+        "yaw": 0
+      },
+      "camera": [
+        860.4398475421793,
+        8.267671725777971,
+        313.6754367159538
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          860.4398475421793,
+          6.617671725777971,
+          313.6754367159538
+        ]
+      },
+      "render": {
+        "frame": 2700,
+        "calls": 332,
+        "triangles": 2094700,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-interplatform-stairs-overhead-thirdperson",
+      "file": "game-granville-granville-interplatform-stairs-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          63.333333333333336,
+          -23,
+          37.294117081556706
+        ],
+        "surfaceId": "granville-interplatform-stairs:step:18",
+        "layer": 394,
+        "yaw": 0
+      },
+      "camera": [
+        863.4651009831591,
+        15.65544147286434,
+        310.6233850707641
+      ],
+      "cutaway": true,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          860.4398475421793,
+          6.617671725777971,
+          313.6754367159538
+        ]
+      },
+      "render": {
+        "frame": 2856,
+        "calls": 98,
+        "triangles": 1132604,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-big-three-2-firstperson",
+      "file": "game-granville-granville-big-three-2-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          80.2,
+          -11.5,
+          20.24702970294284
+        ],
+        "surfaceId": "granville-big-three-2:step:51",
+        "layer": 223,
+        "yaw": 0
+      },
+      "camera": [
+        860.2065291534375,
+        19.76767172577797,
+        289.695586944364
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          860.2065291534375,
+          18.11767172577797,
+          289.695586944364
+        ]
+      },
+      "render": {
+        "frame": 3000,
+        "calls": 462,
+        "triangles": 2721208,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-big-three-2-overhead-thirdperson",
+      "file": "game-granville-granville-big-three-2-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          80.2,
+          -11.5,
+          20.24702970294284
+        ],
+        "surfaceId": "granville-big-three-2:step:51",
+        "layer": 223,
+        "yaw": 0
+      },
+      "camera": [
+        857.1544775082477,
+        27.15544147286434,
+        286.6703335033842
+      ],
+      "cutaway": true,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          860.2065291534375,
+          18.11767172577797,
+          289.695586944364
+        ]
+      },
+      "render": {
+        "frame": 3183,
+        "calls": 110,
+        "triangles": 1236454,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-dunsmuir-main-triple-2-firstperson",
+      "file": "game-granville-granville-dunsmuir-main-triple-2-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          66.46000000000001,
+          -12.53707,
+          33.35772222222222
+        ],
+        "surfaceId": "granville-dunsmuir-main-triple-2:step:45",
+        "layer": 621,
+        "yaw": 0
+      },
+      "camera": [
+        859.8452662211802,
+        18.73060172577797,
+        308.68367129821246
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          859.8452662211802,
+          17.08060172577797,
+          308.68367129821246
+        ]
+      },
+      "render": {
+        "frame": 3369,
+        "calls": 444,
+        "triangles": 2733612,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-dunsmuir-main-triple-2-overhead-thirdperson",
+      "file": "game-granville-granville-dunsmuir-main-triple-2-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          66.46000000000001,
+          -12.53707,
+          33.35772222222222
+        ],
+        "surfaceId": "granville-dunsmuir-main-triple-2:step:45",
+        "layer": 621,
+        "yaw": 0
+      },
+      "camera": [
+        856.7932145759904,
+        26.11837147286434,
+        305.6584178572327
+      ],
+      "cutaway": true,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          859.8452662211802,
+          17.08060172577797,
+          308.68367129821246
+        ]
+      },
+      "render": {
+        "frame": 3567,
+        "calls": 105,
+        "triangles": 1280840,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-big-three-three-lanes-from-top",
+      "file": "game-granville-granville-big-three-three-lanes-from-top.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          80.2,
+          -3.0000000000000004,
+          2.799999999999997
+        ],
+        "surfaceId": "granville-original-ticket-hall",
+        "layer": 7,
+        "yaw": 0
+      },
+      "camera": [
+        847.8153363239147,
+        28.26767172577797,
+        277.4131936223379
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          847.8153363239147,
+          26.61767172577797,
+          277.4131936223379
+        ]
+      },
+      "render": {
+        "frame": 3741,
+        "calls": 258,
+        "triangles": 2583384,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "granville-dunsmuir-main-triple-three-lanes-from-top",
+      "file": "game-granville-granville-dunsmuir-main-triple-three-lanes-from-top.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          66.46000000000001,
+          -5.07414,
+          18.36999999999999
+        ],
+        "surfaceId": "granville-dunsmuir-bank-top-hall",
+        "layer": 21,
+        "yaw": 0
+      },
+      "camera": [
+        849.2007175906729,
+        26.19353172577797,
+        298.1325859576771
+      ],
+      "cutaway": false,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          849.2007175906729,
+          24.54353172577797,
+          298.1325859576771
+        ]
+      },
+      "render": {
+        "frame": 3921,
+        "calls": 245,
+        "triangles": 2574112,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "overview-cutaway",
+      "file": "game-granville-overview-cutaway.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "granville",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          66.46000000000001,
+          -5.07414,
+          18.36999999999999
+        ],
+        "surfaceId": "granville-dunsmuir-bank-top-hall",
+        "layer": 21,
+        "yaw": 0
+      },
+      "camera": [
+        1029.200717590673,
+        258.7630870733369,
+        538.1325859576771
+      ],
+      "cutaway": true,
+      "authoredSource": "granville-reference-interior-v3",
+      "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+      "authoredGeometry": "granville-reference-interior-v3",
+      "openWorld": true,
+      "geometryParts": 3387,
+      "mode": "orbit",
+      "cameraView": "orbit",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          849.2007175906729,
+          24.54353172577797,
+          298.1325859576771
+        ]
+      },
+      "render": {
+        "frame": 4059,
+        "calls": 396,
+        "triangles": 2304734,
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "errors": [],
+  "responses": [],
+  "warnings": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "runtimePacket": {
+    "url": "http://127.0.0.1:3202/models/skytrain-stations/granville.json",
+    "bytes": 1039375,
+    "sha256": "1937d9392b21316ea9735de86f8c26d78e863ef75def6be75fccdb0ed398dec0",
+    "sourceSha256": "9c9294b42ce793281c3050fcd8ec4e41bbf2ea458b4a44c455b91b078a41a94c",
+    "verifiedAfterCapture": "1937d9392b21316ea9735de86f8c26d78e863ef75def6be75fccdb0ed398dec0"
+  },
+  "startup": [
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "0"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "48"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "82"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "95"
+    }
+  ],
+  "initial": {
+    "ready": true,
+    "stationCount": 7,
+    "fleetCount": 51,
+    "worldPaths": 64,
+    "entries": [
+      {
+        "id": "granville-street",
+        "stationId": "granville",
+        "label": "Granville Street entrance",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "granville-granville-street-street-apron",
+        "threshold": [
+          789.3673768883234,
+          30.551619445722896,
+          332.40151999999256
+        ],
+        "inward": [
+          788.9412461472002,
+          29.61767172577797,
+          331.97913085303236
+        ],
+        "outward": [
+          787.3787667630818,
+          30.4775329074115,
+          330.4303706475115
+        ],
+        "localDirection": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": "dunsmuir-street",
+        "stationId": "granville",
+        "label": "Dunsmuir Street accessible entrance approach",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "granville-dunsmuir-street-street-apron",
+        "threshold": [
+          864.9566915182322,
+          28.709141233468994,
+          302.34511999994396
+        ],
+        "inward": [
+          865.3790806651924,
+          27.54353172577797,
+          301.9189892588208
+        ],
+        "outward": [
+          866.9278408707132,
+          28.576510881055945,
+          300.35650987470234
+        ],
+        "localDirection": [
+          -1,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "seymour-street",
+        "stationId": "granville",
+        "label": "Seymour Street entrance approach",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "granville-seymour-street-street-apron",
+        "threshold": [
+          866.2903449142664,
+          32.05422661059952,
+          369.76804138282915
+        ],
+        "inward": [
+          866.7164756553896,
+          30.851301877838978,
+          370.19043052978935
+        ],
+        "outward": [
+          868.278955039508,
+          31.96985216137888,
+          371.73919073531016
+        ],
+        "localDirection": [
+          0,
+          0,
+          -1
+        ]
+      }
+    ],
+    "sourceRevision": "granville-reference-interior-v3",
+    "geometryRevision": "granville-reference-interior-v3",
+    "sourceFloors": 27,
+    "geometryFloors": 33,
+    "entryCandidate": null,
+    "entryDiagnostics": {
+      "walkingHeight": 30.4975329074115,
+      "floorAtInward": {
+        "position": [
+          -7.494005416219807e-16,
+          -2.250316474586893e-14,
+          -0.5999999999999689
+        ],
+        "surfaceId": "granville-granville-street-street-apron",
+        "layer": 28,
+        "yaw": 0
+      },
+      "clearAtInward": true,
+      "localStreetFoot": [
+        3.7192471324942744e-14,
+        0.8798611816335296,
+        -2.8000000000000016
+      ]
+    },
+    "error": null
+  },
+  "enteredByStreet": true,
+  "entryTransitions": [
+    {
+      "entryId": "granville-street",
+      "left": true,
+      "walked": 1.7500000000000002,
+      "maxStep": 0.14967354026111107,
+      "outside": [
+        787.5208103434562,
+        30.473539208649612,
+        330.5711670298316
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          787.5208103434562,
+          30.473539208649612,
+          330.5711670298316
+        ],
+        "position": [
+          787.8936747419391,
+          30.40446886253565,
+          330.94075753342173
+        ],
+        "walkingHeight": 30.483055749399647,
+        "stationFoot": {
+          "position": [
+            1.2322087794558456e-13,
+            0.7867971367576797,
+            -2.074999999999952
+          ],
+          "surfaceId": "granville-granville-street-street-apron",
+          "layer": 28,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    },
+    {
+      "entryId": "dunsmuir-street",
+      "left": true,
+      "walked": 1.7499999999999005,
+      "maxStep": 0.1831225298396808,
+      "outside": [
+        866.7870444883931,
+        28.57763662284975,
+        300.49855345507683
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          866.7870444883931,
+          28.57763662284975,
+          300.49855345507683
+        ],
+        "position": [
+          866.4174539848029,
+          28.505280317806772,
+          300.8714178535596
+        ],
+        "walkingHeight": 28.60059169505848,
+        "stationFoot": {
+          "position": [
+            76.63510355558547,
+            -1.1123914079712,
+            32.52572251253794
+          ],
+          "surfaceId": "granville-dunsmuir-street-street-apron",
+          "layer": 30,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    },
+    {
+      "entryId": "seymour-street",
+      "left": true,
+      "walked": 1.7499999999999005,
+      "maxStep": 0.1747734818030997,
+      "outside": [
+        868.1369114591336,
+        31.966593111060842,
+        371.59839435299
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          868.1369114591336,
+          31.966593111060842,
+          371.59839435299
+        ],
+        "position": [
+          867.7640470606507,
+          31.87268826952313,
+          371.22880384939987
+        ],
+        "walkingHeight": 31.978038103976008,
+        "stationFoot": {
+          "position": [
+            27.614005660103366,
+            2.2550165437451613,
+            83.01242411009869
+          ],
+          "surfaceId": "granville-seymour-street-street-apron",
+          "layer": 32,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    }
+  ],
+  "liftTrips": [
+    {
+      "core": "core-1",
+      "id": "granville-dunsmuir-lift-upper",
+      "candidateId": "skytrain:elevator:granville:granville-dunsmuir-lift-upper:forward",
+      "action": "elevatorDown",
+      "from": [
+        74.11010356000004,
+        -2.07414,
+        48.80000000000002
+      ],
+      "destination": [
+        74.56010356,
+        -20,
+        48.8
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:granville:granville-dunsmuir-lift-upper:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          875.5944976561568,
+          28.69353172577797,
+          313.5231304033292
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        74.56010356,
+        -20,
+        48.8
+      ],
+      "surfaceId": "granville-dunsmuir-upper-hub",
+      "direction": "westbound"
+    },
+    {
+      "core": "core-1",
+      "id": "granville-dunsmuir-lift-lower",
+      "candidateId": "skytrain:elevator:granville:granville-dunsmuir-lift-lower:forward",
+      "action": "elevatorDown",
+      "from": [
+        74.56010356,
+        -20,
+        48.35000000000001
+      ],
+      "destination": [
+        74.56010356,
+        -26,
+        48.8
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:granville:granville-dunsmuir-lift-lower:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          876.793761301986,
+          10.76767172577797,
+          312.8814398955358
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        74.56010356,
+        -26,
+        48.8
+      ],
+      "surfaceId": "granville-dunsmuir-lower-hub",
+      "direction": "eastbound"
+    },
+    {
+      "core": "core-1",
+      "id": "granville-dunsmuir-lift-lower",
+      "candidateId": "skytrain:elevator:granville:granville-dunsmuir-lift-lower:return",
+      "action": "elevatorUp",
+      "from": [
+        74.56010355999997,
+        -26,
+        49.24999999999999
+      ],
+      "destination": [
+        74.56010356,
+        -20,
+        48.8
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:granville:granville-dunsmuir-lift-lower:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          877.4329574136709,
+          4.767671725777969,
+          313.51502361597613
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        74.56010356,
+        -20,
+        48.8
+      ],
+      "surfaceId": "granville-dunsmuir-upper-hub",
+      "direction": "westbound"
+    },
+    {
+      "core": "core-1",
+      "id": "granville-dunsmuir-lift-upper",
+      "candidateId": "skytrain:elevator:granville:granville-dunsmuir-lift-upper:return",
+      "action": "elevatorUp",
+      "from": [
+        74.56010355999997,
+        -20,
+        49.24999999999999
+      ],
+      "destination": [
+        74.56010356,
+        -2.07414,
+        48.8
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:granville:granville-dunsmuir-lift-upper:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          877.4329574136709,
+          10.76767172577797,
+          313.51502361597613
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        74.56010356,
+        -2.07414,
+        48.8
+      ],
+      "surfaceId": "granville-seymour-north-passage",
+      "direction": "westbound"
+    }
+  ],
+  "liftCores": [
+    {
+      "id": "core-1",
+      "initial": {
+        "surfaceId": "granville-seymour-north-passage",
+        "position": [
+          74.56010356,
+          -2.07414,
+          48.8
+        ]
+      },
+      "trips": [
+        {
+          "id": "granville-dunsmuir-lift-upper",
+          "reverse": false
+        },
+        {
+          "id": "granville-dunsmuir-lift-lower",
+          "reverse": false
+        },
+        {
+          "id": "granville-dunsmuir-lift-lower",
+          "reverse": true
+        },
+        {
+          "id": "granville-dunsmuir-lift-upper",
+          "reverse": true
+        }
+      ],
+      "lowestY": -26,
+      "connectionIds": [
+        "granville-dunsmuir-lift-upper",
+        "granville-dunsmuir-lift-lower"
+      ]
+    }
+  ],
+  "escalatorBanks": [
+    {
+      "id": "granville-big-three",
+      "laneIds": [
+        "granville-big-three-1",
+        "granville-big-three-2",
+        "granville-big-three-3"
+      ],
+      "from": "granville-original-ticket-hall",
+      "to": "granville-upper-hub"
+    },
+    {
+      "id": "granville-dunsmuir-main-triple",
+      "laneIds": [
+        "granville-dunsmuir-main-triple-1",
+        "granville-dunsmuir-main-triple-2",
+        "granville-dunsmuir-main-triple-3"
+      ],
+      "from": "granville-dunsmuir-bank-top-hall",
+      "to": "granville-dunsmuir-upper-hub"
+    }
+  ],
+  "final": {
+    "snapshot": {
+      "phase": "station",
+      "stationId": "granville",
+      "lineId": "expo",
+      "plannedLineId": null,
+      "destinationId": "main-street-science-world",
+      "nextStationId": null,
+      "level": "concourse",
+      "doorsOpen": false,
+      "canBoard": false,
+      "canAlight": false,
+      "canExit": false,
+      "canChangeLevel": false,
+      "speedMps": 0,
+      "travelProgress": 0,
+      "error": null,
+      "busy": false,
+      "seated": false,
+      "canWalkCabin": false,
+      "availableLines": [
+        "expo"
+      ],
+      "hint": "approach-door",
+      "atStop": null
+    },
+    "contextLost": false,
+    "stationOwners": [
+      {
+        "id": "waterfront",
+        "authored": "waterfront-2026-10-23-v1",
+        "parts": 1333
+      },
+      {
+        "id": "burrard",
+        "authored": "burrard-reference-interior-v2",
+        "parts": 2037
+      },
+      {
+        "id": "granville",
+        "authored": "granville-reference-interior-v3",
+        "parts": 3387
+      },
+      {
+        "id": "stadium-chinatown",
+        "parts": 239
+      },
+      {
+        "id": "main-street-science-world",
+        "parts": 143
+      },
+      {
+        "id": "vancouver-city-centre",
+        "parts": 124
+      },
+      {
+        "id": "yaletown-roundhouse",
+        "parts": 158
+      }
+    ]
+  },
+  "debugReport": ".cache/station-interior-debug/game-granville-browser-debug.json",
+  "passed": true
+}

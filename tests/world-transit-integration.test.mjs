@@ -1860,6 +1860,158 @@ test('every authored SkyTrain door boards its actual carriage and retained seats
     );
 });
 
+test('native city steps cannot skip a short physically supported station handoff window', async () => {
+  const groundHeight = (x, z) => cityElevation(x, z) + 1.1;
+  await harness(
+    ({ travel, city }) => {
+      const owner = travel.stations.get('granville'),
+        entry = owner.streetEntrances().find((e) => e.id === 'dunsmuir-street'),
+        direction = new THREE.Vector3(...entry.localDirection).applyQuaternion(
+          owner.group.quaternion,
+        ),
+        pointAt = (distance) => {
+          const p = new THREE.Vector3(...entry.threshold).addScaledVector(
+            direction,
+            distance,
+          );
+          p.y = groundHeight(p.x, p.z);
+          return p;
+        },
+        samples = [-2.45, -2.25, -2.05, -1.85].map((distance) =>
+          Boolean(owner.tryEnterFromStreet(pointAt(distance).toArray())),
+        );
+      assert.deepEqual(
+        samples,
+        [false, true, true, false],
+        'the real raised apron has a short .22m-supported city-height window',
+      );
+      assert(
+        samples.every((eligible, index) => index % 3 !== 0 || !eligible),
+        'a .15s poll at .05s native frames misses both valid opportunities',
+      );
+      city.settings.mode = 'walk';
+      const nav = city.navigation;
+      nav.mode = 'walk';
+      nav.blur();
+      nav.position.copy(pointAt(-2.65));
+      nav.yaw = Math.atan2(direction.x, direction.z);
+      nav.keys.add('w');
+      const start = nav.position.clone();
+      let frames = 0;
+      for (; frames < 4 && !travel.active; frames++) {
+        const previous = nav.position.clone();
+        nav.update(0.05);
+        assert(
+          Math.abs(
+            Math.hypot(
+              nav.position.x - previous.x,
+              nav.position.z - previous.z,
+            ) - 0.2,
+          ) < 1e-6,
+          'the production street walker advances at its native walking speed',
+        );
+        travel.update(0.05);
+      }
+      assert.equal(travel.active, true);
+      assert.equal(travel.owner, owner);
+      assert.equal(
+        frames,
+        2,
+        'the first supported native frame hands ownership over immediately',
+      );
+      assert.equal(nav.mode, 'orbit');
+      assert.equal(nav.keys.size, 0);
+      assert(
+        travel.keys.has('KeyW'),
+        'the same held key survives automatic handoff',
+      );
+      assert(owner.isClearFoot(travel.foot));
+      assert(
+        new THREE.Vector3(...travel.interactionOrigin).distanceTo(start) > 0.4,
+      );
+      const entered = [...travel.foot.position];
+      travel.update(0.05);
+      assert(
+        Math.hypot(
+          travel.foot.position[0] - entered[0],
+          travel.foot.position[2] - entered[2],
+        ) > 0.12,
+      );
+      assert(Math.abs(travel.foot.position[1] - entered[1]) <= 0.221);
+    },
+    { groundHeight },
+  );
+});
+
+test('per-frame automatic street handoff retains input, bus, street-seat and active-owner guards', async () => {
+  const groundHeight = (x, z) => cityElevation(x, z) + 1.1;
+  await harness(
+    async ({ travel, city }) => {
+      const owner = travel.stations.get('granville'),
+        entry = owner.streetEntrances().find((e) => e.id === 'dunsmuir-street'),
+        direction = new THREE.Vector3(...entry.localDirection).applyQuaternion(
+          owner.group.quaternion,
+        ),
+        nav = city.navigation;
+      city.settings.mode = 'walk';
+      nav.mode = 'walk';
+      nav.position.fromArray(entry.threshold).addScaledVector(direction, -2.25);
+      nav.position.y = groundHeight(nav.position.x, nav.position.z);
+      assert(
+        owner.tryEnterFromStreet(nav.position.toArray()),
+        'all refusal checks run at an actually supported doorway',
+      );
+      for (const { label, block, restore } of [
+        {
+          label: 'disabled input',
+          block: () => travel.setInputEnabled(false),
+          restore: () => travel.setInputEnabled(true),
+        },
+        {
+          label: 'bus passenger',
+          block: () => {
+            city.busVisit.aboard = true;
+          },
+          restore: () => {
+            city.busVisit.aboard = false;
+          },
+        },
+        {
+          label: 'street seat',
+          block: () => {
+            nav.walkSeat = { floor: nav.position.toArray() };
+          },
+          restore: () => {
+            nav.walkSeat = null;
+          },
+        },
+      ]) {
+        block();
+        const before = nav.position.clone();
+        for (let frame = 0; frame < 4; frame++) travel.update(0.05);
+        assert.equal(travel.active, false, label);
+        assert(
+          nav.position.distanceTo(before) < 1e-9,
+          `${label}: refused handoff cannot move the walker`,
+        );
+        restore();
+      }
+      assert.equal(await travel.enter('granville'), true);
+      const foot = structuredClone(travel.foot),
+        other = travel.stations.get('burrard').streetEntrances()[0];
+      nav.position.fromArray(other.threshold);
+      travel.update(0.05);
+      assert.equal(
+        travel.owner,
+        owner,
+        'an active physical station owner cannot be replaced by another nearby entrance',
+      );
+      assert.deepEqual(travel.foot, foot);
+    },
+    { groundHeight },
+  );
+});
+
 /** Keep the production key and touch state on both input authorities. Entry
  * clears the old authority, so these checks must move without a second press. */
 test('held keyboard and touch input cross the street/station boundaries without stopping or relatching', async (t) => {

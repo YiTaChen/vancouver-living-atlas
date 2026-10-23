@@ -10,6 +10,9 @@ const { SkyTrainStationOwner, validateRuntimeStation } = await import(
 const { TravelCameraCollision } = await import(
   cityModule('travel-camera-collision')
 );
+const { adaptSkyTrainStationFrame } = await import(
+  cityModule('skytrain-ride-path')
+);
 const fixture = () => {
   const data = JSON.parse(
     readFileSync('public/models/skytrain-stations/burrard.json'),
@@ -65,6 +68,113 @@ const partMesh = (owner, id) =>
   owner.group.children.find((mesh) =>
     mesh.userData.stationPartIds?.includes(id),
   );
+
+test('authored open-city aprons render exactly their own sloping support triangles without filling source stairwells', () => {
+  const data = adaptSkyTrainStationFrame(
+      JSON.parse(readFileSync('public/models/skytrain-stations/burrard.json')),
+      JSON.parse(readFileSync('public/models/skytrain-routes.json')),
+    ),
+    owner = new SkyTrainStationOwner(
+      data,
+      (x, z) => 20 + x * 0.015 - z * 0.01,
+      'balanced',
+      true,
+    );
+  try {
+    const mesh = owner.group.children.find(
+        (object) => object.name === 'station-authored-street-apron-support',
+      ),
+      sourceIds = new Set(data.floors.map((f) => f.id)),
+      aprons = owner.geometryData.floors.filter(
+        (f) => f.kind === 'street-apron' && !sourceIds.has(f.id),
+      );
+    assert(mesh?.isMesh && !mesh.isInstancedMesh);
+    assert(aprons.length > 0);
+    assert.deepEqual(
+      mesh.userData.stationFloorIds,
+      aprons.map((f) => f.id),
+    );
+    assert.equal(
+      mesh.geometry.getAttribute('position').count,
+      aprons.reduce((sum, f) => sum + f.vertices.length, 0),
+    );
+    assert.equal(
+      mesh.geometry.index.count,
+      aprons.reduce((sum, f) => sum + f.indices.length, 0),
+    );
+    const vertices = aprons.flatMap((f) => f.vertices),
+      positions = mesh.geometry.getAttribute('position');
+    for (const [index, p] of vertices.entries())
+      assert(
+        new THREE.Vector3()
+          .fromBufferAttribute(positions, index)
+          .distanceTo(new THREE.Vector3(...p)) < 1e-5,
+      );
+    const f = aprons[0],
+      triangle = f.indices
+        .slice(0, 3)
+        .map((i) => new THREE.Vector3(...f.vertices[i])),
+      centroid = triangle
+        .reduce((sum, p) => sum.add(p), new THREE.Vector3())
+        .multiplyScalar(1 / 3),
+      world = new THREE.Vector3(...owner.toWorld(centroid.toArray()));
+    assert(
+      new Set(f.vertices.map((p) => p[1].toFixed(4))).size > 1,
+      'terrain grid is actually sloping',
+    );
+    owner.group.updateMatrixWorld(true);
+    const ray = new THREE.Raycaster(
+        world.clone().add(new THREE.Vector3(0, 1, 0)),
+        new THREE.Vector3(0, -1, 0),
+      ),
+      hit = ray.intersectObject(mesh)[0];
+    assert(
+      hit && hit.point.distanceTo(world) < 1e-4,
+      'the visible GPU triangle matches the exact walking support',
+    );
+    const flight = data.connections.find(
+        (c) => c.id === 'burrard-park-stairs-1',
+      ),
+      tread = flight.treads[3].vertices
+        .reduce(
+          (sum, p) => sum.add(new THREE.Vector3(...p)),
+          new THREE.Vector3(),
+        )
+        .multiplyScalar(0.25),
+      stairEye = new THREE.Vector3(...owner.toWorld(tread.toArray())).add(
+        new THREE.Vector3(0, 20, 0),
+      );
+    assert.equal(
+      new THREE.Raycaster(
+        stairEye,
+        new THREE.Vector3(0, -1, 0),
+      ).intersectObject(mesh).length,
+      0,
+      'the added surface cannot cover the maintained first stair flight',
+    );
+    owner.setCutaway(-10);
+    assert.equal(
+      mesh.material.clippingPlanes[0],
+      mesh.userData.stationCutawayPlane,
+    );
+    assert(
+      mesh.material.clippingPlanes[0].distanceToPoint(world) < 0,
+      'the apron clips above an underground avatar',
+    );
+    owner.setCutaway(null);
+    assert(mesh.material.clippingPlanes[0].distanceToPoint(world) > 0);
+    let geometryDisposals = 0,
+      materialDisposals = 0;
+    mesh.geometry.addEventListener('dispose', () => geometryDisposals++);
+    mesh.material.addEventListener('dispose', () => materialDisposals++);
+    owner.dispose();
+    owner.dispose();
+    assert.equal(geometryDisposals, 1);
+    assert.equal(materialDisposals, 1);
+  } finally {
+    owner.dispose();
+  }
+});
 
 test('authored interiors render their exact parts and sloped transforms without generic circulation', () => {
   const data = fixture(),

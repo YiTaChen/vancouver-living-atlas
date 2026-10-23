@@ -147,6 +147,8 @@ test('all ten locales cover sitting, standing and generic future interaction act
       'use',
       'talk',
       'inspect',
+      'elevatorUp',
+      'elevatorDown',
       'portalPlatform',
       'portalExit',
     ]) {
@@ -169,8 +171,13 @@ test('all ten locales cover sitting, standing and generic future interaction act
   }
 });
 
-test('construction portals expose translated F and tap actions through the same prompt', () => {
-  for (const action of ['portalPlatform', 'portalExit']) {
+test('station connections expose translated F and tap actions through the same prompt', () => {
+  for (const action of [
+    'portalPlatform',
+    'portalExit',
+    'elevatorUp',
+    'elevatorDown',
+  ]) {
     let dispatched = 0;
     for (const touch of [false, true]) {
       const b = button(

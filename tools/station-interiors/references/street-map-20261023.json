@@ -1,0 +1,1490 @@
+{
+  "capturedAt": "2026-10-23",
+  "attribution": "© OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "scope": "Reference entrance/path/platform geometry; source fixme tags and levels are retained. This is not a surveyed interior plan.",
+  "stations": {
+    "burrard": [
+      {
+        "type": "node",
+        "id": 1529901638,
+        "version": 7,
+        "timestamp": "2025-03-28T04:27:30Z",
+        "lonlat": [
+          -123.1203836,
+          49.2856459
+        ],
+        "tags": {
+          "entrance": "yes",
+          "level": "0",
+          "name": "Art Phillips Park",
+          "railway": "subway_entrance",
+          "wheelchair": "no"
+        },
+        "url": "https://www.openstreetmap.org/node/1529901638"
+      },
+      {
+        "type": "node",
+        "id": 5324651728,
+        "version": 5,
+        "timestamp": "2025-03-28T04:27:30Z",
+        "lonlat": [
+          -123.120065,
+          49.2854422
+        ],
+        "tags": {
+          "entrance": "yes",
+          "level": "0",
+          "name": "Burrard Street",
+          "railway": "subway_entrance",
+          "wheelchair": "no"
+        },
+        "url": "https://www.openstreetmap.org/node/5324651728"
+      },
+      {
+        "type": "node",
+        "id": 5464027763,
+        "version": 5,
+        "timestamp": "2025-03-28T04:27:30Z",
+        "lonlat": [
+          -123.1203449,
+          49.285552
+        ],
+        "tags": {
+          "entrance": "yes",
+          "level": "0",
+          "name": "Melville Street",
+          "railway": "subway_entrance",
+          "wheelchair": "no"
+        },
+        "url": "https://www.openstreetmap.org/node/5464027763"
+      },
+      {
+        "type": "node",
+        "id": 9198420892,
+        "version": 3,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "lonlat": [
+          -123.1198987,
+          49.2856494
+        ],
+        "tags": {
+          "access": "no",
+          "fixme": "Inaccessible to those with mobility devices until ~2027 due to elevator replacement; update once reopened",
+          "highway": "elevator"
+        },
+        "url": "https://www.openstreetmap.org/node/9198420892"
+      },
+      {
+        "type": "way",
+        "id": 923508924,
+        "version": 8,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "coordinates": [
+          [
+            -123.1189969,
+            49.2852438
+          ],
+          [
+            -123.119898,
+            49.2858156
+          ],
+          [
+            -123.1199319,
+            49.2857929
+          ],
+          [
+            -123.1190307,
+            49.285221
+          ],
+          [
+            -123.1189969,
+            49.2852438
+          ]
+        ],
+        "tags": {
+          "area": "yes",
+          "bench": "yes",
+          "bicycle": "designated",
+          "bin": "yes",
+          "check_date": "2025-10-15",
+          "departures_board": "realtime",
+          "fixme": "location approximate",
+          "foot": "designated",
+          "indoor": "yes",
+          "layer": "-3",
+          "level": "-3",
+          "lit": "yes",
+          "location": "underground",
+          "network": "TransLink",
+          "network:short": "TL",
+          "network:wikidata": "Q1142140",
+          "not:network:wikidata": "Q1675085",
+          "operator": "British Columbia Rapid Transit Company",
+          "operator:short": "BCRTC",
+          "operator:wikidata": "Q141170526",
+          "public_transport": "platform",
+          "railway": "platform",
+          "start_date": "1986-01-03",
+          "subway": "yes",
+          "surface": "paving_stones",
+          "tactile_paving": "yes",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/923508924"
+      },
+      {
+        "type": "way",
+        "id": 923508925,
+        "version": 8,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "coordinates": [
+          [
+            -123.1189965,
+            49.2852434
+          ],
+          [
+            -123.1198976,
+            49.2858153
+          ],
+          [
+            -123.1199314,
+            49.2857925
+          ],
+          [
+            -123.1190303,
+            49.2852207
+          ],
+          [
+            -123.1189965,
+            49.2852434
+          ]
+        ],
+        "tags": {
+          "area": "yes",
+          "bench": "yes",
+          "bicycle": "designated",
+          "bin": "yes",
+          "check_date": "2025-10-15",
+          "departures_board": "realtime",
+          "fixme": "location approximate",
+          "foot": "designated",
+          "indoor": "yes",
+          "layer": "-2",
+          "level": "-2",
+          "lit": "yes",
+          "location": "underground",
+          "network": "TransLink",
+          "network:short": "TL",
+          "network:wikidata": "Q1142140",
+          "not:network:wikidata": "Q1675085",
+          "operator": "British Columbia Rapid Transit Company",
+          "operator:short": "BCRTC",
+          "operator:wikidata": "Q141170526",
+          "public_transport": "platform",
+          "railway": "platform",
+          "start_date": "1986-01-03",
+          "subway": "yes",
+          "surface": "paving_stones",
+          "tactile_paving": "yes",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/923508925"
+      },
+      {
+        "type": "way",
+        "id": 139571580,
+        "version": 9,
+        "timestamp": "2026-10-16T04:40:20Z",
+        "nodeIds": [
+          1529901643,
+          1529901638
+        ],
+        "coordinates": [
+          [
+            -123.1205982,
+            49.2857671
+          ],
+          [
+            -123.1203836,
+            49.2856459
+          ]
+        ],
+        "tags": {
+          "check_date:ramp": "2026-10-15",
+          "handrail": "yes",
+          "highway": "steps",
+          "incline": "down",
+          "lit": "yes",
+          "ramp": "no",
+          "step_count": "27",
+          "surface": "concrete",
+          "tactile_paving": "no"
+        },
+        "url": "https://www.openstreetmap.org/way/139571580"
+      },
+      {
+        "type": "way",
+        "id": 551343526,
+        "version": 10,
+        "timestamp": "2025-11-19T16:41:11Z",
+        "nodeIds": [
+          5324651723,
+          6977997544,
+          3072748964,
+          12706458654,
+          5324651724,
+          5324651725,
+          5324651728,
+          5324651726,
+          5464027763,
+          5324651727,
+          1529901638,
+          12706458653,
+          12706458655,
+          5324651723
+        ],
+        "coordinates": [
+          [
+            -123.1201814,
+            49.2857828
+          ],
+          [
+            -123.1200798,
+            49.2857189
+          ],
+          [
+            -123.1199878,
+            49.2856658
+          ],
+          [
+            -123.1200792,
+            49.2856092
+          ],
+          [
+            -123.120159,
+            49.2855551
+          ],
+          [
+            -123.1200237,
+            49.2854701
+          ],
+          [
+            -123.120065,
+            49.2854422
+          ],
+          [
+            -123.1201156,
+            49.2854079
+          ],
+          [
+            -123.1203449,
+            49.285552
+          ],
+          [
+            -123.1204369,
+            49.2856098
+          ],
+          [
+            -123.1203836,
+            49.2856459
+          ],
+          [
+            -123.1203459,
+            49.2856714
+          ],
+          [
+            -123.1202652,
+            49.2857261
+          ],
+          [
+            -123.1201814,
+            49.2857828
+          ]
+        ],
+        "tags": {
+          "addr:city": "Vancouver",
+          "addr:housenumber": "635",
+          "addr:province": "BC",
+          "addr:street": "Burrard Street",
+          "building": "train_station",
+          "building:levels": "1",
+          "roof:levels": "0",
+          "roof:shape": "gabled"
+        },
+        "url": "https://www.openstreetmap.org/way/551343526"
+      },
+      {
+        "type": "way",
+        "id": 567744402,
+        "version": 5,
+        "timestamp": "2021-09-25T18:03:19Z",
+        "nodeIds": [
+          5324651728,
+          5464021420
+        ],
+        "coordinates": [
+          [
+            -123.120065,
+            49.2854422
+          ],
+          [
+            -123.1201519,
+            49.2854964
+          ]
+        ],
+        "tags": {
+          "conveying": "yes",
+          "highway": "steps",
+          "incline": "down",
+          "layer": "-1",
+          "lit": "yes",
+          "surface": "concrete"
+        },
+        "url": "https://www.openstreetmap.org/way/567744402"
+      },
+      {
+        "type": "way",
+        "id": 567744404,
+        "version": 4,
+        "timestamp": "2023-10-17T21:40:18Z",
+        "nodeIds": [
+          5464021420,
+          5464022321,
+          1529901638
+        ],
+        "coordinates": [
+          [
+            -123.1201519,
+            49.2854964
+          ],
+          [
+            -123.1202856,
+            49.2855867
+          ],
+          [
+            -123.1203836,
+            49.2856459
+          ]
+        ],
+        "tags": {
+          "highway": "footway",
+          "lit": "yes",
+          "smoothness": "good",
+          "surface": "concrete"
+        },
+        "url": "https://www.openstreetmap.org/way/567744404"
+      },
+      {
+        "type": "way",
+        "id": 567744406,
+        "version": 4,
+        "timestamp": "2023-10-17T21:40:19Z",
+        "nodeIds": [
+          5464022321,
+          5464022322,
+          5464022323
+        ],
+        "coordinates": [
+          [
+            -123.1202856,
+            49.2855867
+          ],
+          [
+            -123.1201744,
+            49.2856557
+          ],
+          [
+            -123.1201141,
+            49.2856154
+          ]
+        ],
+        "tags": {
+          "highway": "footway",
+          "lit": "yes",
+          "smoothness": "good",
+          "surface": "concrete"
+        },
+        "url": "https://www.openstreetmap.org/way/567744406"
+      },
+      {
+        "type": "way",
+        "id": 567744408,
+        "version": 3,
+        "timestamp": "2023-10-17T21:40:16Z",
+        "nodeIds": [
+          5464022323,
+          5464022324
+        ],
+        "coordinates": [
+          [
+            -123.1201141,
+            49.2856154
+          ],
+          [
+            -123.1199733,
+            49.2855227
+          ]
+        ],
+        "tags": {
+          "conveying": "yes",
+          "highway": "steps",
+          "incline": "down",
+          "layer": "-1",
+          "lit": "yes",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/567744408"
+      },
+      {
+        "type": "way",
+        "id": 567744411,
+        "version": 5,
+        "timestamp": "2025-11-19T16:41:11Z",
+        "nodeIds": [
+          5464022324,
+          9198420891,
+          5464022325
+        ],
+        "coordinates": [
+          [
+            -123.1199733,
+            49.2855227
+          ],
+          [
+            -123.1199321,
+            49.2855466
+          ],
+          [
+            -123.1198029,
+            49.2856224
+          ]
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "lit": "yes",
+          "smoothness": "good",
+          "surface": "concrete",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/567744411"
+      },
+      {
+        "type": "way",
+        "id": 567745480,
+        "version": 2,
+        "timestamp": "2019-12-18T22:07:28Z",
+        "nodeIds": [
+          5464022321,
+          5464027763,
+          5464027764
+        ],
+        "coordinates": [
+          [
+            -123.1202856,
+            49.2855867
+          ],
+          [
+            -123.1203449,
+            49.285552
+          ],
+          [
+            -123.1210821,
+            49.2855396
+          ]
+        ],
+        "tags": {
+          "highway": "corridor",
+          "indoor": "yes",
+          "layer": "-1",
+          "level": "-1",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/567745480"
+      },
+      {
+        "type": "way",
+        "id": 996155329,
+        "version": 1,
+        "timestamp": "2021-10-24T22:09:44Z",
+        "nodeIds": [
+          9198420894,
+          9198420892
+        ],
+        "coordinates": [
+          [
+            -123.1197997,
+            49.2855871
+          ],
+          [
+            -123.1198987,
+            49.2856494
+          ]
+        ],
+        "tags": {
+          "highway": "corridor",
+          "indoor": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/996155329"
+      }
+    ],
+    "granville": [
+      {
+        "type": "node",
+        "id": 889550073,
+        "version": 7,
+        "timestamp": "2023-09-11T21:29:18Z",
+        "lonlat": [
+          -123.117129,
+          49.283014
+        ],
+        "tags": {
+          "entrance": "yes",
+          "level": "0",
+          "name": "Granville Street Entrance",
+          "railway": "subway_entrance",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/node/889550073"
+      },
+      {
+        "type": "node",
+        "id": 1248731632,
+        "version": 6,
+        "timestamp": "2023-09-11T21:29:18Z",
+        "lonlat": [
+          -123.116088,
+          49.283284
+        ],
+        "tags": {
+          "addr:city": "Vancouver",
+          "addr:housenumber": "678",
+          "addr:street": "Dunsmuir Street",
+          "entrance": "yes",
+          "level": "0",
+          "name": "Dunsmuir Street Entrance",
+          "railway": "subway_entrance",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/node/1248731632"
+      },
+      {
+        "type": "way",
+        "id": 138641322,
+        "version": 2,
+        "timestamp": "2026-06-02T15:31:36Z",
+        "coordinates": [
+          [
+            -123.1157986,
+            49.2829353
+          ],
+          [
+            -123.1161381,
+            49.2827226
+          ]
+        ],
+        "tags": {
+          "handrail": "yes",
+          "highway": "steps",
+          "level": "-2",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/138641322"
+      },
+      {
+        "type": "way",
+        "id": 138641334,
+        "version": 3,
+        "timestamp": "2018-03-08T09:14:17Z",
+        "coordinates": [
+          [
+            -123.1161381,
+            49.2827226
+          ],
+          [
+            -123.1163328,
+            49.2826018
+          ],
+          [
+            -123.1163976,
+            49.2825616
+          ],
+          [
+            -123.1164893,
+            49.2825047
+          ],
+          [
+            -123.1166235,
+            49.2824215
+          ]
+        ],
+        "tags": {
+          "highway": "footway"
+        },
+        "url": "https://www.openstreetmap.org/way/138641334"
+      },
+      {
+        "type": "way",
+        "id": 138641342,
+        "version": 4,
+        "timestamp": "2022-03-23T22:52:51Z",
+        "coordinates": [
+          [
+            -123.1160264,
+            49.2831519
+          ],
+          [
+            -123.1159021,
+            49.2832323
+          ],
+          [
+            -123.1156207,
+            49.2830486
+          ],
+          [
+            -123.1157986,
+            49.2829353
+          ]
+        ],
+        "tags": {
+          "highway": "footway",
+          "level": "-2",
+          "lit": "yes",
+          "surface": "asphalt",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/138641342"
+      },
+      {
+        "type": "way",
+        "id": 551342757,
+        "version": 12,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "coordinates": [
+          [
+            -123.1151687,
+            49.2828781
+          ],
+          [
+            -123.1160658,
+            49.2834526
+          ],
+          [
+            -123.1160999,
+            49.28343
+          ],
+          [
+            -123.1152027,
+            49.2828555
+          ],
+          [
+            -123.1151687,
+            49.2828781
+          ]
+        ],
+        "tags": {
+          "area": "yes",
+          "bench": "yes",
+          "bicycle": "designated",
+          "bin": "yes",
+          "check_date": "2025-10-15",
+          "departures_board": "realtime",
+          "description": "Granville Outbound",
+          "fixme": "location approximate",
+          "foot": "designated",
+          "indoor": "yes",
+          "layer": "-3",
+          "level": "-3",
+          "lit": "yes",
+          "location": "underground",
+          "network": "TransLink",
+          "network:short": "TL",
+          "network:wikidata": "Q1142140",
+          "not:network:wikidata": "Q1675085",
+          "operator": "British Columbia Rapid Transit Company",
+          "operator:short": "BCRTC",
+          "operator:wikidata": "Q141170526",
+          "public_transport": "platform",
+          "railway": "platform",
+          "ref": "2",
+          "start_date": "1986-01-03",
+          "subway": "yes",
+          "surface": "paving_stones",
+          "tactile_paving": "yes",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/551342757"
+      },
+      {
+        "type": "way",
+        "id": 923508926,
+        "version": 8,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "coordinates": [
+          [
+            -123.1151682,
+            49.282879
+          ],
+          [
+            -123.1160654,
+            49.2834535
+          ],
+          [
+            -123.1160994,
+            49.2834309
+          ],
+          [
+            -123.1152023,
+            49.2828563
+          ],
+          [
+            -123.1151682,
+            49.282879
+          ]
+        ],
+        "tags": {
+          "area": "yes",
+          "bench": "yes",
+          "bicycle": "designated",
+          "check_date": "2025-10-16",
+          "departures_board": "realtime",
+          "description": "Granville inbound",
+          "fixme": "location approximate",
+          "foot": "designated",
+          "indoor": "yes",
+          "layer": "-2",
+          "level": "-2",
+          "lit": "yes",
+          "location": "underground",
+          "network": "TransLink",
+          "network:short": "TL",
+          "network:wikidata": "Q1142140",
+          "not:network:wikidata": "Q1675085",
+          "operator": "British Columbia Rapid Transit Company",
+          "operator:short": "BCRTC",
+          "operator:wikidata": "Q141170526",
+          "public_transport": "platform",
+          "railway": "platform",
+          "ref": "1",
+          "start_date": "1986-01-03",
+          "subway": "yes",
+          "surface": "paving_stones",
+          "tactile_paving": "yes",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/923508926"
+      },
+      {
+        "type": "way",
+        "id": 138641317,
+        "version": 1,
+        "timestamp": "2011-11-27T21:00:52Z",
+        "nodeIds": [
+          1520230765,
+          1520230754
+        ],
+        "tags": {
+          "highway": "steps",
+          "level": "-1"
+        },
+        "url": "https://www.openstreetmap.org/way/138641317",
+        "coordinates": [
+          [
+            -123.1166815,
+            49.2830013
+          ],
+          [
+            -123.1168907,
+            49.2828686
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 138641319,
+        "version": 4,
+        "timestamp": "2024-09-26T03:44:08Z",
+        "nodeIds": [
+          1520230841,
+          5464008298,
+          1248731632
+        ],
+        "tags": {
+          "highway": "footway",
+          "level": "-1",
+          "smoothness": "good",
+          "surface": "concrete"
+        },
+        "url": "https://www.openstreetmap.org/way/138641319",
+        "coordinates": [
+          [
+            -123.1160168,
+            49.2833353
+          ],
+          [
+            -123.1160668,
+            49.2832988
+          ],
+          [
+            -123.116088,
+            49.283284
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 138641320,
+        "version": 4,
+        "timestamp": "2025-09-22T14:55:34Z",
+        "nodeIds": [
+          1520230835,
+          1520230796
+        ],
+        "tags": {
+          "handrail": "yes",
+          "highway": "steps",
+          "incline": "down",
+          "layer": "-1",
+          "level": "-2",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/138641320",
+        "coordinates": [
+          [
+            -123.1162855,
+            49.2833092
+          ],
+          [
+            -123.1160264,
+            49.2831519
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 138641330,
+        "version": 2,
+        "timestamp": "2019-12-03T04:15:32Z",
+        "nodeIds": [
+          1520230802,
+          1520230817,
+          1520230835
+        ],
+        "tags": {
+          "highway": "corridor",
+          "indoor": "yes",
+          "level": "-1"
+        },
+        "url": "https://www.openstreetmap.org/way/138641330",
+        "coordinates": [
+          [
+            -123.1162771,
+            49.2831645
+          ],
+          [
+            -123.1163852,
+            49.2832509
+          ],
+          [
+            -123.1162855,
+            49.2833092
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 138641331,
+        "version": 2,
+        "timestamp": "2019-12-03T04:15:32Z",
+        "nodeIds": [
+          1520230809,
+          1520230802,
+          1520230765
+        ],
+        "tags": {
+          "highway": "corridor",
+          "indoor": "yes",
+          "level": "-1"
+        },
+        "url": "https://www.openstreetmap.org/way/138641331",
+        "coordinates": [
+          [
+            -123.1162289,
+            49.2831839
+          ],
+          [
+            -123.1162771,
+            49.2831645
+          ],
+          [
+            -123.1166815,
+            49.2830013
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 567741881,
+        "version": 3,
+        "timestamp": "2026-08-27T04:54:12Z",
+        "nodeIds": [
+          5464008267,
+          1520230754
+        ],
+        "tags": {
+          "highway": "steps",
+          "level": "-1"
+        },
+        "url": "https://www.openstreetmap.org/way/567741881",
+        "coordinates": [
+          [
+            -123.1169451,
+            49.2828317
+          ],
+          [
+            -123.1168907,
+            49.2828686
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 567741882,
+        "version": 3,
+        "timestamp": "2024-08-26T18:08:51Z",
+        "nodeIds": [
+          1520230754,
+          889550073
+        ],
+        "tags": {
+          "highway": "corridor",
+          "indoor": "yes",
+          "level": "-1"
+        },
+        "url": "https://www.openstreetmap.org/way/567741882",
+        "coordinates": [
+          [
+            -123.1168907,
+            49.2828686
+          ],
+          [
+            -123.117129,
+            49.283014
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 1311335727,
+        "version": 3,
+        "timestamp": "2025-09-01T16:45:45Z",
+        "nodeIds": [
+          889550073,
+          5464008296
+        ],
+        "tags": {
+          "highway": "footway",
+          "level": "-1",
+          "smoothness": "good",
+          "surface": "concrete"
+        },
+        "url": "https://www.openstreetmap.org/way/1311335727",
+        "coordinates": [
+          [
+            -123.117129,
+            49.283014
+          ],
+          [
+            -123.1171556,
+            49.2830301
+          ]
+        ]
+      },
+      {
+        "type": "interpreted-entrance",
+        "id": "seymour-street-photo-foyer",
+        "lonlat": [
+          -123.11606963320845,
+          49.282678332362714
+        ],
+        "url": "https://digital.lib.washington.edu/server/api/core/bitstreams/e7c27087-87fd-476e-ab80-87d30d24c2ac/content#page=73",
+        "author": "Michelle Marie Whitfield",
+        "title": "Turn Left at the Station: How Safety and Wayfinding Influences the Transit User’s Experience",
+        "year": 2013,
+        "figure": 59,
+        "printedPage": 59,
+        "pdfPage": 73,
+        "inference": "Photo shows a street-facing recessed foyer entered northwest, followed by a right turn northeast down the stairs. Its street mouth is interpreted 7 m southeast of the mapped stairhead to meet the retained city building edge; exact recess depth and doorway coordinate are not surveyed.",
+        "mappedStairHead": {
+          "url": "https://www.openstreetmap.org/way/138641322",
+          "lonlat": [
+            -123.1161381,
+            49.2827226
+          ]
+        },
+        "offsetSourceM": [
+          0,
+          0,
+          7
+        ]
+      }
+    ],
+    "waterfront": [
+      {
+        "type": "node",
+        "id": 3633792226,
+        "version": 8,
+        "timestamp": "2023-09-11T20:39:17Z",
+        "lonlat": [
+          -123.113392,
+          49.2868766
+        ],
+        "tags": {
+          "entrance": "yes",
+          "level": "0",
+          "name": "Howe Street",
+          "railway": "subway_entrance",
+          "wheelchair": "no"
+        },
+        "url": "https://www.openstreetmap.org/node/3633792226"
+      },
+      {
+        "type": "node",
+        "id": 13864937287,
+        "version": 1,
+        "timestamp": "2026-05-23T06:08:04Z",
+        "lonlat": [
+          -123.1141964,
+          49.285239
+        ],
+        "tags": {
+          "addr:street": "Granville Street",
+          "description": "Elevator to concourse",
+          "entrance": "yes",
+          "level": "0",
+          "name": "Canada Line - Waterfront Station - Granville Street Entrance",
+          "railway": "subway_entrance",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/node/13864937287"
+      },
+      {
+        "type": "way",
+        "id": 358462240,
+        "version": 7,
+        "timestamp": "2024-09-26T15:20:21Z",
+        "coordinates": [
+          [
+            -123.1135943,
+            49.2867245
+          ],
+          [
+            -123.1135007,
+            49.2866809
+          ]
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "smoothness": "good",
+          "surface": "concrete",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/358462240"
+      },
+      {
+        "type": "way",
+        "id": 379737506,
+        "version": 8,
+        "timestamp": "2025-06-19T14:53:44Z",
+        "coordinates": [
+          [
+            -123.113392,
+            49.2868766
+          ],
+          [
+            -123.1135157,
+            49.2867838
+          ]
+        ],
+        "tags": {
+          "handrail": "yes",
+          "highway": "steps",
+          "incline": "down",
+          "layer": "-1",
+          "ramp": "no",
+          "surface": "concrete",
+          "tactile_paving": "no",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/379737506"
+      },
+      {
+        "type": "way",
+        "id": 379828985,
+        "version": 16,
+        "timestamp": "2026-08-25T20:36:33Z",
+        "coordinates": [
+          [
+            -123.1140002,
+            49.2853009
+          ],
+          [
+            -123.1139521,
+            49.2852696
+          ],
+          [
+            -123.113903,
+            49.2852377
+          ],
+          [
+            -123.1130721,
+            49.2857813
+          ],
+          [
+            -123.1131377,
+            49.285824
+          ],
+          [
+            -123.1131692,
+            49.2858445
+          ],
+          [
+            -123.1140002,
+            49.2853009
+          ]
+        ],
+        "tags": {
+          "bench": "yes",
+          "bicycle": "designated",
+          "bin": "yes",
+          "check_date": "2025-11-30",
+          "departures_board": "realtime",
+          "foot": "designated",
+          "indoor": "yes",
+          "layer": "-2",
+          "level": "-2",
+          "lit": "yes",
+          "location": "underground",
+          "network": "TransLink",
+          "network:short": "TL",
+          "network:wikidata": "Q1142140",
+          "not:network:wikidata": "Q1675085",
+          "operator": "ProTrans BC",
+          "operator:wikidata": "Q141170779",
+          "public_transport": "platform",
+          "railway": "platform",
+          "start_date": "2009-08-18",
+          "subway": "yes",
+          "surface": "paving_stones",
+          "tactile_paving": "yes",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/379828985"
+      },
+      {
+        "type": "way",
+        "id": 379897377,
+        "version": 2,
+        "timestamp": "2020-12-25T22:02:40Z",
+        "coordinates": [
+          [
+            -123.1135157,
+            49.2867838
+          ],
+          [
+            -123.1135943,
+            49.2867245
+          ]
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/379897377"
+      },
+      {
+        "type": "way",
+        "id": 567734054,
+        "version": 7,
+        "timestamp": "2025-11-02T17:03:05Z",
+        "coordinates": [
+          [
+            -123.1135943,
+            49.2867245
+          ],
+          [
+            -123.113713,
+            49.2867826
+          ],
+          [
+            -123.1141327,
+            49.2869866
+          ],
+          [
+            -123.1144036,
+            49.2871542
+          ],
+          [
+            -123.1146068,
+            49.2872166
+          ],
+          [
+            -123.1144995,
+            49.2874301
+          ],
+          [
+            -123.1142172,
+            49.2875534
+          ],
+          [
+            -123.1136546,
+            49.2878902
+          ]
+        ],
+        "tags": {
+          "access": "permissive",
+          "covered": "yes",
+          "highway": "corridor",
+          "indoor": "yes",
+          "layer": "-1",
+          "surface": "paved",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/567734054"
+      },
+      {
+        "type": "way",
+        "id": 689601479,
+        "version": 1,
+        "timestamp": "2019-05-13T07:16:53Z",
+        "coordinates": [
+          [
+            -123.1135007,
+            49.2866809
+          ],
+          [
+            -123.1133299,
+            49.286617
+          ]
+        ],
+        "tags": {
+          "highway": "steps",
+          "incline": "down",
+          "layer": "-2",
+          "tunnel": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/689601479"
+      }
+    ],
+    "yaletown-roundhouse": [
+      {
+        "type": "node",
+        "id": 2383770178,
+        "version": 9,
+        "timestamp": "2023-09-06T20:27:59Z",
+        "tags": {
+          "entrance": "yes",
+          "level": "0",
+          "name": "Yaletown-Roundhouse",
+          "railway": "subway_entrance",
+          "wheelchair": "no"
+        },
+        "url": "https://www.openstreetmap.org/node/2383770178",
+        "lonlat": [
+          -123.121947,
+          49.2745277
+        ]
+      },
+      {
+        "type": "node",
+        "id": 9133604358,
+        "version": 3,
+        "timestamp": "2023-09-06T20:27:59Z",
+        "tags": {
+          "entrance": "yes",
+          "railway": "subway_entrance",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/node/9133604358",
+        "lonlat": [
+          -123.121882,
+          49.2745181
+        ]
+      },
+      {
+        "type": "way",
+        "id": 229833344,
+        "version": 8,
+        "timestamp": "2025-03-26T00:38:46Z",
+        "tags": {
+          "addr:city": "Vancouver",
+          "addr:housenumber": "297",
+          "addr:province": "BC",
+          "addr:street": "Davie Street",
+          "building": "transportation",
+          "building:levels": "1",
+          "roof:colour": "grey",
+          "roof:levels": "0",
+          "roof:shape": "skillion",
+          "smoking": "no",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/229833344",
+        "nodeIds": [
+          2383770185,
+          2383770179,
+          2383770178,
+          2383770176,
+          9133604358,
+          2383770182,
+          12700859683,
+          2383770185
+        ],
+        "coordinates": [
+          [
+            -123.1218165,
+            49.2746511
+          ],
+          [
+            -123.121973,
+            49.2745443
+          ],
+          [
+            -123.121947,
+            49.2745277
+          ],
+          [
+            -123.1219061,
+            49.2745019
+          ],
+          [
+            -123.121882,
+            49.2745181
+          ],
+          [
+            -123.1217511,
+            49.2746092
+          ],
+          [
+            -123.1218041,
+            49.2746432
+          ],
+          [
+            -123.1218165,
+            49.2746511
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 229833347,
+        "version": 7,
+        "timestamp": "2026-07-12T17:37:39Z",
+        "tags": {
+          "highway": "footway",
+          "indoor": "yes",
+          "layer": "-1",
+          "lit": "yes",
+          "tunnel": "yes",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/229833347",
+        "nodeIds": [
+          2383770175,
+          2383770183,
+          2383770184,
+          2383770178
+        ],
+        "coordinates": [
+          [
+            -123.1220047,
+            49.2744558
+          ],
+          [
+            -123.1217851,
+            49.2746091
+          ],
+          [
+            -123.1218099,
+            49.2746253
+          ],
+          [
+            -123.121947,
+            49.2745277
+          ]
+        ]
+      },
+      {
+        "type": "way",
+        "id": 923500678,
+        "version": 8,
+        "timestamp": "2026-08-25T20:36:33Z",
+        "tags": {
+          "bench": "yes",
+          "bicycle": "designated",
+          "bin": "yes",
+          "check_date": "2025-11-30",
+          "departures_board": "realtime",
+          "fixme": "location approximate",
+          "foot": "designated",
+          "indoor": "yes",
+          "layer": "-2",
+          "level": "-2",
+          "lit": "yes",
+          "location": "underground",
+          "network": "TransLink",
+          "network:short": "TL",
+          "network:wikidata": "Q1142140",
+          "not:network:wikidata": "Q1675085",
+          "operator": "ProTrans BC",
+          "operator:wikidata": "Q141170779",
+          "public_transport": "platform",
+          "railway": "platform",
+          "start_date": "2009-08-18",
+          "subway": "yes",
+          "surface": "paving_stones",
+          "tactile_paving": "yes",
+          "wheelchair": "yes"
+        },
+        "url": "https://www.openstreetmap.org/way/923500678",
+        "nodeIds": [
+          8572625352,
+          8572625351,
+          8572625350,
+          2383770175,
+          8572625349,
+          8572625352
+        ],
+        "coordinates": [
+          [
+            -123.1221658,
+            49.2745003
+          ],
+          [
+            -123.1217654,
+            49.2742419
+          ],
+          [
+            -123.1217211,
+            49.2742708
+          ],
+          [
+            -123.1220047,
+            49.2744558
+          ],
+          [
+            -123.1221201,
+            49.274531
+          ],
+          [
+            -123.1221658,
+            49.2745003
+          ]
+        ]
+      }
+    ]
+  }
+}

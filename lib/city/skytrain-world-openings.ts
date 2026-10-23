@@ -4,9 +4,9 @@
 import * as THREE from 'three';
 import type { SkyTrainStationOwner } from './skytrain-stations';
 import type { StationTerrainOpening } from './skytrain-street-access';
-const CAPACITY = 96;
 const STATIONS = 7;
 const PER_STATION = 48;
+const CAPACITY = STATIONS * PER_STATION;
 interface MaterialPatch {
   material: THREE.Material;
   before: THREE.Material['onBeforeCompile'];
@@ -60,15 +60,43 @@ export function stationCityOpenings(
         new THREE.Vector3(box.max.x + 0.03, box.min.y, box.min.z - 0.03),
       ],
       box.min.y - 0.4,
-      box.max.y + 3.8,
+      Math.max(
+        box.max.y + 3.8,
+        ...owner.geometryData.parts
+          .filter(
+            (part) =>
+              part.id.startsWith(floor.id + '-') &&
+              /(?:roof|ceiling|soffit)/i.test(part.role),
+          )
+          .map((part) => {
+            const matrix = new THREE.Matrix4().compose(
+              new THREE.Vector3(...part.position),
+              part.quaternion
+                ? new THREE.Quaternion(...part.quaternion)
+                : new THREE.Quaternion().setFromAxisAngle(
+                    new THREE.Vector3(0, 1, 0),
+                    (part.yaw * Math.PI) / 180,
+                  ),
+              new THREE.Vector3(...part.size),
+            );
+            return (
+              new THREE.Box3(
+                new THREE.Vector3(-0.5, -0.5, -0.5),
+                new THREE.Vector3(0.5, 0.5, 0.5),
+              ).applyMatrix4(matrix).max.y + 0.15
+            );
+          }),
+      ),
     );
   }
-  for (const part of owner.geometryData.parts) {
-    if (part.role !== 'soffit' || !part.id.endsWith('-soffit')) continue;
-    const slab = owner.geometryData.parts.find(
-      (candidate) => candidate.id === part.id.replace(/-soffit$/, '-underslab'),
-    );
-    if (!slab) continue;
+  // Each full bank has one structural underside even when its roof is a
+  // curved vault. Never infer the bank's existence only from a flat soffit.
+  for (const slab of owner.geometryData.parts) {
+    if (slab.role !== 'floor' || !slab.id.endsWith('-underslab')) continue;
+    const bankId = slab.id.replace(/-underslab$/, ''),
+      soffit = owner.geometryData.parts.find(
+        (part) => part.id === bankId + '-soffit',
+      );
     const rotation = slab.quaternion
         ? new THREE.Quaternion(...slab.quaternion)
         : new THREE.Quaternion().setFromAxisAngle(
@@ -84,12 +112,12 @@ export function stationCityOpenings(
         .add(center),
       tangent = b.clone().sub(a).setY(0).normalize(),
       across = new THREE.Vector3(tangent.z, 0, -tangent.x),
-      halfWidth = part.size[0] / 2 + 0.03;
+      halfWidth = (soffit?.size[0] ?? slab.size[0]) / 2 + 0.03;
     if (tangent.lengthSq() < 0.5) continue;
     a.addScaledVector(tangent, -0.25);
     b.addScaledVector(tangent, 0.25);
     add(
-      part.id.replace(/-soffit$/, '-authored-bank-clearance'),
+      bankId + '-authored-bank-clearance',
       [
         a.clone().addScaledVector(across, -halfWidth),
         b.clone().addScaledVector(across, -halfWidth),
@@ -107,22 +135,31 @@ export function stationCityOpenings(
 export function applySkyTrainWorldOpenings(
   roots: readonly THREE.Object3D[],
 ): SkyTrainWorldOpenings {
-  const rectangles = Array.from(
-      { length: CAPACITY },
-      () => new THREE.Vector4(),
+  // Two RGBA texels per aperture avoid consuming hundreds of fragment
+  // uniform vectors on the minimum supported WebGL2 hardware.
+  const apertureData = new Float32Array(CAPACITY * 8),
+    apertureTexture = new THREE.DataTexture(
+      apertureData,
+      2,
+      CAPACITY,
+      THREE.RGBAFormat,
+      THREE.FloatType,
     ),
-    parameters = Array.from({ length: CAPACITY }, () => new THREE.Vector4()),
     bounds = Array.from({ length: STATIONS }, () => new THREE.Vector4()),
     ranges = Array.from({ length: STATIONS }, () => new THREE.Vector4()),
     count = { value: 0 },
     regionCount = { value: 0 },
     boundsUniform = { value: bounds },
     rangesUniform = { value: ranges },
-    rectUniform = { value: rectangles },
-    parameterUniform = { value: parameters },
+    apertureUniform = { value: apertureTexture },
     patches: MaterialPatch[] = [],
     seen = new Set<THREE.Material>();
+  apertureTexture.minFilter = apertureTexture.magFilter = THREE.NearestFilter;
+  apertureTexture.colorSpace = THREE.NoColorSpace;
+  apertureTexture.generateMipmaps = false;
+  apertureTexture.needsUpdate = true;
   let disposed = false;
+  let previousOwners: readonly SkyTrainStationOwner[] = [];
   const refresh = (additionalRoots?: readonly THREE.Object3D[]) => {
     if (disposed) return;
     for (const root of additionalRoots ?? roots)
@@ -144,8 +181,7 @@ export function applySkyTrainWorldOpenings(
           ) {
             before.call(this, shader, renderer);
             shader.uniforms.uStationOpeningCount = count;
-            shader.uniforms.uStationOpeningRect = rectUniform;
-            shader.uniforms.uStationOpeningParameters = parameterUniform;
+            shader.uniforms.uStationOpeningData = apertureUniform;
             shader.uniforms.uStationRegionCount = regionCount;
             shader.uniforms.uStationRegionBounds = boundsUniform;
             shader.uniforms.uStationRegionRanges = rangesUniform;
@@ -163,8 +199,7 @@ export function applySkyTrainWorldOpenings(
             shader.fragmentShader = `
           varying vec3 vStationOpeningWorld;
           uniform int uStationOpeningCount;
-          uniform vec4 uStationOpeningRect[${CAPACITY}];
-          uniform vec4 uStationOpeningParameters[${CAPACITY}];
+          uniform highp sampler2D uStationOpeningData;
           uniform int uStationRegionCount;
           uniform vec4 uStationRegionBounds[${STATIONS}];
           uniform vec4 uStationRegionRanges[${STATIONS}];
@@ -182,8 +217,8 @@ export function applySkyTrainWorldOpenings(
             if(stationLocalIndex>=int(stationRange.y)) break;
             int stationOpeningIndex=int(stationRange.x)+stationLocalIndex;
             if(stationOpeningIndex>=uStationOpeningCount) break;
-            vec4 r=uStationOpeningRect[stationOpeningIndex];
-            vec4 p=uStationOpeningParameters[stationOpeningIndex];
+            vec4 r=texelFetch(uStationOpeningData,ivec2(0,stationOpeningIndex),0);
+            vec4 p=texelFetch(uStationOpeningData,ivec2(1,stationOpeningIndex),0);
             vec2 delta=vStationOpeningWorld.xz-r.xy;
             float across=dot(delta,p.xy);
             float along=dot(delta,vec2(-p.y,p.x));
@@ -193,7 +228,7 @@ export function applySkyTrainWorldOpenings(
             );
           };
           const patchedKey = function (this: THREE.Material) {
-            return `${originalKey}|skytrain-geographic-portals-v2-${CAPACITY}`;
+            return `${originalKey}|skytrain-geographic-portals-texture-v3-${CAPACITY}`;
           };
           material.onBeforeCompile = patched;
           material.customProgramCacheKey = patchedKey;
@@ -206,7 +241,13 @@ export function applySkyTrainWorldOpenings(
   return {
     refresh,
     update(owners) {
-      if (disposed) return;
+      if (
+        disposed ||
+        (owners.length === previousOwners.length &&
+          owners.every((owner, index) => owner === previousOwners[index]))
+      )
+        return;
+      const nextData = new Float32Array(apertureData.length);
       let i = 0,
         region = 0;
       for (const owner of owners) {
@@ -230,12 +271,18 @@ export function applySkyTrainWorldOpenings(
               .add(new THREE.Vector3(...polygon[2]))
               .multiplyScalar(0.5);
           if (width < 0.01 || length < 0.01) continue;
-          rectangles[i].set(center.x, center.z, width / 2, length / 2);
-          parameters[i].set(
-            (d.x - a.x) / width,
-            (d.z - a.z) / width,
-            opening.minY,
-            opening.maxY,
+          nextData.set(
+            [
+              center.x,
+              center.z,
+              width / 2,
+              length / 2,
+              (d.x - a.x) / width,
+              (d.z - a.z) / width,
+              opening.minY,
+              opening.maxY,
+            ],
+            i * 8,
           );
           for (const point of polygon)
             box.expandByPoint(new THREE.Vector3(...point));
@@ -252,8 +299,11 @@ export function applySkyTrainWorldOpenings(
         ranges[region].set(start, i - start, minY, maxY);
         region++;
       }
+      apertureData.set(nextData);
+      apertureTexture.needsUpdate = true;
       count.value = i;
       regionCount.value = region;
+      previousOwners = [...owners];
     },
     dispose() {
       if (disposed) return;
@@ -268,6 +318,8 @@ export function applySkyTrainWorldOpenings(
         patch.material.needsUpdate = true;
       }
       patches.length = 0;
+      apertureTexture.dispose();
+      previousOwners = [];
     },
   };
 }

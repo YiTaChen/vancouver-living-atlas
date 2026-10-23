@@ -1225,8 +1225,28 @@ export class SkyTrainStationOwner {
             candidate.y !== null &&
             Math.abs(candidate.y - result.position[1]) <= 0.28,
         );
-      if (this.openWorld)
+      if (this.openWorld) {
+        // The visible street apron can rise above an overlapping authored hall.
+        // Follow its upper surface before the flat underlay steals ownership;
+        // an apron below another floor must never pull the body through it.
+        // Legacy construction aprons are unrendered height probes, so retain
+        // their nearest-height vestibule selection rather than treating those
+        // inferred samples as an authored visible floor.
+        const topY = Math.max(...candidates.map((candidate) => candidate.y));
+        const topAprons = new Set(
+          candidates
+            .filter(
+              (candidate) =>
+                Boolean(this.geometryData.authoredInterior) &&
+                this.floorMap.get(candidate.id)?.kind === 'street-apron' &&
+                candidate.y >= topY - 1e-6,
+            )
+            .map((candidate) => candidate.id),
+        );
         candidates.sort((a, b) => {
+          const apronPriority =
+            Number(topAprons.has(b.id)) - Number(topAprons.has(a.id));
+          if (apronPriority) return apronPriority;
           const delta =
             Math.abs(a.y - result.position[1]) -
             Math.abs(b.y - result.position[1]);
@@ -1239,6 +1259,7 @@ export class SkyTrainStationOwner {
             Number(this.floorMap.get(a.id)?.kind === 'platform')
           );
         });
+      }
       for (const { id, y } of candidates) {
         const next = this.point([x, y, z], id, from.yaw);
         if (this.supported(next)) {
@@ -1467,6 +1488,47 @@ export class SkyTrainStationOwner {
       mesh.computeBoundingSphere();
       if (mesh.userData.stationOverhead)
         this.overheadMeshes.push({ mesh, minimumY });
+      this.group.add(mesh);
+    }
+    // The city mask removes terrain beneath an authored entrance. Render the
+    // adapter's exact terrain-following apron triangles there, while leaving
+    // source floor slabs and their real stairwell cutouts solely authored.
+    const sourceFloors = new Set(this.data.floors.map((floor) => floor.id)),
+      aprons = this.streetAccess
+        ? this.geometryData.floors.filter(
+            (floor) =>
+              floor.kind === 'street-apron' && !sourceFloors.has(floor.id),
+          )
+        : [];
+    if (aprons.length) {
+      const positions: number[] = [],
+        indices: number[] = [];
+      for (const apron of aprons) {
+        const offset = positions.length / 3;
+        positions.push(...apron.vertices.flat());
+        indices.push(...apron.indices.map((index) => index + offset));
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute(
+        'position',
+        new THREE.Float32BufferAttribute(positions, 3),
+      );
+      geometry.setIndex(indices);
+      geometry.computeVertexNormals();
+      const material = new THREE.MeshStandardMaterial({
+          color: palette.floor,
+          roughness: 0.85,
+          side: THREE.DoubleSide,
+          clippingPlanes: [this.cutawayPlane],
+          clipShadows: true,
+        }),
+        mesh = new THREE.Mesh(geometry, material);
+      mesh.name = 'station-authored-street-apron-support';
+      mesh.userData.stationFloorIds = aprons.map((floor) => floor.id);
+      mesh.userData.stationCutawayPlane = this.cutawayPlane;
+      mesh.receiveShadow = true;
+      this.resources.add(geometry);
+      this.resources.add(material);
       this.group.add(mesh);
     }
     for (const sign of this.geometryData.signs ?? [])

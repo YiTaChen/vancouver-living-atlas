@@ -8,15 +8,24 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { launchOptionsForProfile } from '../hosted-browser-qa.mjs';
 import { captureDunsmuirStation } from './capture-dunsmuir-views.mjs';
+import { captureSoutheastStation } from './capture-southeast-views.mjs';
 
 // The canvas is the subject of this evidence. A stalled remote UI font must
 // not prevent a screenshot of an already rendered city.
 process.env.PW_TEST_SCREENSHOT_NO_FONTS_READY = '1';
 
 const stationId = process.argv[2] ?? 'waterfront';
-if (!['waterfront', 'burrard', 'granville'].includes(stationId))
+if (
+  ![
+    'waterfront',
+    'burrard',
+    'granville',
+    'stadium-chinatown',
+    'yaletown-roundhouse',
+  ].includes(stationId)
+)
   throw new Error(
-    'Choose waterfront, burrard or granville as the station argument',
+    'Choose waterfront, burrard, granville, stadium-chinatown or yaletown-roundhouse',
   );
 const origin = process.env.STATION_GAME_URL ?? 'http://127.0.0.1:3200/?inspect',
   output = resolve('docs/qa/station-interiors-20261023'),
@@ -203,8 +212,11 @@ try {
     nav.blur();
     nav.mode = 'walk';
     nav.surface = 'ground';
-    nav.position.fromArray(entry.inward);
-    nav.yaw = owner.yaw;
+    nav.position.fromArray(entry.outward);
+    const direction = new nav.position.constructor(
+      ...entry.localDirection,
+    ).applyQuaternion(owner.group.quaternion);
+    nav.yaw = Math.atan2(direction.x, direction.z);
     nav.pitch = 0;
     nav.cameraDistances.walk = 4;
     nav.snapCamera = true;
@@ -260,6 +272,16 @@ try {
   );
   const entered = await page.evaluate(async (stationId) => {
     const travel = window.__atlas.skyTrainTravel;
+    const nav = window.__atlas.navigation;
+    // Start on the public street and walk across the real height transition.
+    // Placing the city controller on a lower inner landing bypasses that slope.
+    nav.setTouchAxes(0, 1);
+    for (let step = 0; step < 100 && !travel.active; step++) {
+      nav.update(0.05);
+      travel.update(0.05);
+    }
+    nav.blur();
+    travel.clearInput();
     return travel.active || (await travel.enter(stationId));
   }, stationId);
   report.enteredByStreet = entered;
@@ -278,6 +300,8 @@ try {
               waterfront: 'waterfront-heritage-hall',
               burrard: 'burrard-ticket-atrium',
               granville: 'granville-original-ticket-hall',
+              'stadium-chinatown': 'stadium-main-concourse',
+              'yaletown-roundhouse': 'yaletown-unpaid-concourse',
             }[stationId],
         );
       let foot = null;
@@ -533,8 +557,10 @@ try {
         await snapshot('expo-stairs-look-down');
       }
     }
-  } else {
+  } else if (stationId === 'burrard' || stationId === 'granville') {
     await captureDunsmuirStation(page, snapshot, report, stationId);
+  } else {
+    await captureSoutheastStation(page, snapshot, report, stationId);
   }
   await page.evaluate(() => window.__atlas.skyTrainTravel.setOverview(true));
   await snapshot('overview-cutaway');

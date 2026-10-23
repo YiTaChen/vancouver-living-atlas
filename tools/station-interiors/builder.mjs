@@ -477,6 +477,9 @@ export class InteriorBuilder {
       enclosed = true,
       material = 'wall',
       handrails = true,
+      // Existing dark metal palette; a photo-specific yellow strip or null
+      // can replace it where a station authors its own safety nosings.
+      nosingMaterial = kind === 'escalator' ? 'yellow' : 'escalator',
     } = {},
   ) {
     const a = new THREE.Vector3(...start),
@@ -520,15 +523,25 @@ export class InteriorBuilder {
         kind === 'escalator' ? 'escalator-tread' : 'stair-tread',
         yaw,
       );
-      if (kind === 'escalator')
+      if (nosingMaterial !== null) {
+        const depth = kind === 'escalator' ? 0.025 : 0.035,
+          nose = p
+            .clone()
+            .addScaledVector(
+              tangent,
+              kind === 'escalator'
+                ? 0
+                : Math.sign(-delta.y) * (halfRun - depth / 2),
+            );
         this.box(
           `${id}-nosing-${i}`,
-          [p.x, y + 0.003, p.z],
-          [width, 0.01, 0.025],
-          'yellow',
+          [nose.x, y + (kind === 'escalator' ? 0.003 : 0.006), nose.z],
+          [width, 0.01, depth],
+          nosingMaterial,
           'detail',
           yaw,
         );
+      }
     }
     this.s.connections.push({
       connectionId: id,
@@ -600,26 +613,146 @@ export class InteriorBuilder {
       bidirectional: true,
       runtimeEnabled: true,
     });
-    const mid = start.map((v, i) => (v + end[i]) / 2),
-      h = Math.abs(end[1] - start[1]) + 2.5;
-    for (const dx of [-0.95, 0.95])
-      this.box(
-        id + '-jamb-' + dx,
-        [mid[0] + dx, mid[1] + 1.2, mid[2]],
-        [0.12, h, 1.9],
-        'steel',
-        'lift-shaft',
-      );
-    for (const p of [start, end])
-      this.sign('Elevator  ↕', [p[0], p[1] + 2.1, p[2]], 0, 1.7, 0.3);
   }
+  /** Finalize lift landings after all adjacent passages have been authored. */
+  completeElevators() {
+    const groups = new Map();
+    for (const c of this.s.connections.filter((c) => c.type === 'elevator')) {
+      for (const [floorId, point] of [
+        [c.fromSurfaceId, c.startPointM],
+        [c.toSurfaceId, c.endPointM],
+      ]) {
+        const key = `${point[0].toFixed(5)},${point[2].toFixed(5)}`;
+        const group = groups.get(key) ?? new Map();
+        group.set(`${floorId}:${point[1]}`, { floorId, point: [...point] });
+        groups.set(key, group);
+      }
+    }
+    const landings = [];
+    let groupIndex = 0;
+    for (const group of groups.values()) {
+      const levels = [...group.values()].sort(
+        (a, b) => a.point[1] - b.point[1],
+      );
+      for (const [i, landing] of levels.entries()) {
+        const { floorId, point } = landing,
+          floor = this.s.floorSurfaces.find((f) => f.surfaceId === floorId),
+          center = floor.verticesM.reduce(
+            (sum, p) =>
+              sum.map((v, axis) => v + p[axis] / floor.verticesM.length),
+            [0, 0, 0],
+          ),
+          candidates = this.s.connections
+            .filter(
+              (c) =>
+                c.type === 'walk' &&
+                [c.fromSurfaceId, c.toSurfaceId].includes(floorId),
+            )
+            .map((c) =>
+              c.fromSurfaceId === floorId ? c.startPointM : c.endPointM,
+            ),
+          entrance = this.s.entrances.find(
+            (e) =>
+              e.surfaceId === floorId &&
+              Math.hypot(e.pointM[0] - point[0], e.pointM[2] - point[2]) > 0.8,
+          ),
+          nearest = candidates
+            .filter((p) => Math.hypot(p[0] - point[0], p[2] - point[2]) > 0.5)
+            .sort(
+              (a, b) =>
+                Math.hypot(a[0] - point[0], a[2] - point[2]) -
+                Math.hypot(b[0] - point[0], b[2] - point[2]),
+            )[0],
+          toward = entrance?.pointM ?? nearest ?? center,
+          dx = toward[0] - point[0],
+          dz = toward[2] - point[2],
+          direction =
+            Math.hypot(dx, dz) < 0.5
+              ? [0, 0, -1]
+              : Math.abs(dx) > Math.abs(dz)
+                ? [Math.sign(dx), 0, 0]
+                : [0, 0, Math.sign(dz)],
+          side =
+            direction[0] < 0
+              ? 'west'
+              : direction[0] > 0
+                ? 'east'
+                : direction[2] < 0
+                  ? 'north'
+                  : 'south',
+          id = `interior-lift-${groupIndex}-landing-${i}`;
+        this.room(id, point, 2.2, 2.2, {
+          height: 2.6,
+          material: 'stainless',
+          doors: { [side]: [[-0.85, 0.85]] },
+        });
+        const across = [direction[2], 0, -direction[0]],
+          yaw = (Math.atan2(direction[0], direction[2]) * 180) / Math.PI;
+        // Door leaves are visibly retracted into the jambs. The 1.7 m open
+        // portal keeps the existing F interaction and all approach floors.
+        for (const sign of [-1, 1])
+          this.box(
+            `${id}-open-door-${sign}`,
+            [
+              point[0] + direction[0] * 1.18 + across[0] * sign,
+              point[1] + 1.1,
+              point[2] + direction[2] * 1.18 + across[2] * sign,
+            ],
+            [0.18, 2.2, 0.08],
+            'steel',
+            'lift-door',
+            yaw,
+          );
+        this.sign(
+          'Elevator  ↕',
+          [
+            point[0] + direction[0] * 1.22,
+            point[1] + 2.4,
+            point[2] + direction[2] * 1.22,
+          ],
+          (yaw * Math.PI) / 180,
+          1.9,
+          0.28,
+        );
+        landings.push({
+          floorId,
+          pointM: point,
+          outwardDirectionM: direction,
+          clearDoorWidthM: 1.7,
+        });
+        const next = levels[i + 1];
+        if (next && next.point[1] > point[1] + 2.78)
+          this.room(
+            `interior-lift-${groupIndex}-shaft-${i}`,
+            [point[0], point[1] + 2.6, point[2]],
+            2.2,
+            2.2,
+            {
+              height: next.point[1] - point[1] - 2.78,
+              material: 'concrete',
+              roof: false,
+            },
+          );
+      }
+      groupIndex++;
+    }
+    this.s.authoredInterior.elevatorLandings = landings;
+  }
+
   /** Preserve track, rail and tactile geometry while replacing old corridors. */
   tracks() {
     for (const p of this.base.geometryParts)
       if (['rail', 'trackbed'].includes(p.role) || p.id.startsWith('tactile-'))
         this.s.geometryParts.push(structuredClone(p));
   }
-  finish() {
+  // Old display templates may contain routes through their schematic lift.
+  // Physical shafts are completed only by a template whose landings have been
+  // rebuilt and validated, so upgrading the helper cannot seal an old route.
+  finish({ encloseElevators = false } = {}) {
+    if (encloseElevators && !this.elevatorsComplete) {
+      this.completeElevators();
+      this.elevatorsComplete = true;
+    }
     return this.s;
   }
 }
