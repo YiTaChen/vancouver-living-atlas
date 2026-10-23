@@ -24,6 +24,7 @@ export function installStreetPilotQA(
   parent: HTMLElement,
   lease: Lease,
 ) {
+  const originalOrbitMinDistance = e.controls.minDistance;
   const section = document.createElement('section');
   section.setAttribute('aria-label', 'Robson Burrard pilot evidence');
   section.style.cssText = 'border:1px solid #bdd3a0;padding:8px;margin:8px 0';
@@ -54,6 +55,7 @@ export function installStreetPilotQA(
   const select = (next: Pose) => {
     const nav = e.navigation;
     if (!nav) return;
+    e.controls.minDistance = originalOrbitMinDistance;
     pose = next;
     nav.keys.clear();
     nav.setMode('orbit');
@@ -110,6 +112,9 @@ export function installStreetPilotQA(
         e.camera.fov = 40;
         e.camera.near = 0.2;
         e.camera.lookAt(e.controls.target);
+        // QA-only close-up: the normal 28 m orbit floor otherwise expands this
+        // authored 7.24 m observer. Every other pose restores the install value.
+        e.controls.minDistance = Math.min(originalOrbitMinDistance, 2);
         e.controls.update();
       }
     } else {
@@ -167,6 +172,7 @@ export function installStreetPilotQA(
     const startPosition = nav.position.toArray();
     const cameraStart = e.camera.position.toArray();
     const targetStart = e.controls.target.toArray();
+    const targetDistanceStart = e.camera.position.distanceTo(e.controls.target);
     const kind = drive ? 'travel' : 'still';
     try {
       if (drive && nav.mode !== 'drive')
@@ -220,6 +226,9 @@ export function installStreetPilotQA(
           end: e.camera.position.toArray(),
           targetStart,
           targetEnd: e.controls.target.toArray(),
+          targetDistanceStart,
+          targetDistanceEnd: e.camera.position.distanceTo(e.controls.target),
+          orbitMinDistance: e.controls.minDistance,
           fov: e.camera.fov,
         },
         navigation: {
