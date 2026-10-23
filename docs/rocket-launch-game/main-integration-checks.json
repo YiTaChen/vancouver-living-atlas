@@ -1,0 +1,29 @@
+{
+  "mainParent": "f0a578c9694ee218d740ee0f892d20d3d9502d6d",
+  "rocketParent": "6c158e57e895527274df58e5b8074dfc89333b44",
+  "checks": [
+    {
+      "command": "npm run check",
+      "exitCode": 0,
+      "log": "work/rocket-main-merge-types.log",
+      "logRetained": "ignored work",
+      "bytes": 74,
+      "sha256": "455c89e2c267bce4737bf0328ef9383090bd75b3988edd7beb4f041fb9723dcf"
+    },
+    {
+      "command": "npm run build:firebase",
+      "exitCode": 0,
+      "log": "work/rocket-main-merge-build.log",
+      "logRetained": "ignored work",
+      "bytes": 13905,
+      "sha256": "6dfe4d3eb14a168b759db0a95aa630ca5b0f6ee052df84a57b5058b1c5631d98"
+    }
+  ],
+  "newIntegrationTests": {
+    "engine": 4,
+    "ui": 4
+  },
+  "newTestsLint": "passed",
+  "format": "merged engine/page and new tests passed; README table formatting preserved",
+  "existingPageLint": "Matches original main diagnostic types and counts; not a repository-wide lint pass."
+}

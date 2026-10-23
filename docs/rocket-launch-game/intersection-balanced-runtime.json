@@ -1,0 +1,4989 @@
+{
+  "method": "Headless Chrome Metal; actual downtown roadGraph junctions; rendered ground raycast and original supportAt/start; fixed 1/60 original controller update; no forced flight states or outcomes.",
+  "quality": "balanced",
+  "startedAt": "2026-10-23T03:11:19.962Z",
+  "finishedAt": "2026-10-23T03:13:36.951Z",
+  "checks": {
+    "severalRealJunctions": true,
+    "clearJunctionMissionComplete": true,
+    "clearJunctionHasVisiblePressureDamage": true,
+    "groundPlacementFollowsActualRoadHeight": true,
+    "initialLowSpeedOverlapDoesNotDisintegrateVehicle": true,
+    "obstructedSiteOutcomeAccountedFor": true,
+    "obstructedSiteHasRenderedBuildingDamage": true,
+    "nearbyBuildingsReactBeforeVehicleDisintegrates": true,
+    "allFiveProductionJetVolumesActive": true,
+    "sideBoostersNaturallyDetachBeforeCentralCore": true,
+    "centralEngineKeepsFiringWhileFourSideEnginesAreOff": true,
+    "groundDustActuallySpreads": true,
+    "exactCityGeometryRestored": true,
+    "requestedQualityActuallyRendered": true,
+    "damageAdaptersStayBounded": true,
+    "adapterOriginalGeometryRestoredAfterEveryDraw": true,
+    "noShaderOrRuntimeErrors": true,
+    "sourceRemainedStable": true
+  },
+  "errors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "httpFailures": [],
+  "hmr": [],
+  "sourceHashes": {
+    "lib/city/rocket-controller.ts": "52c99ec6449c42e7aa6ffaea6a14a4eddb3dbc5e25f156a90777a661526177ef",
+    "lib/city/rocket-effects.ts": "a524ceefc4e657621c266ef9019694c1cf48dd65274f845e2b3660484da62506",
+    "lib/city/rocket-state.ts": "40cc789843c484fa614ce2dbee25bbc6bdda4b288e1c570c1b6174c0c35e5fcd",
+    "lib/city/assets/rocket.ts": "e42f1c5aa1b4f8fe4e509ac60dd9532044d4000c0423c3888e83b702e1198070",
+    "lib/city/assets/rocket-design.ts": "347c0cae22a968689ba68f5b98838e3f2105cd0c279f4ab0a1bbece6483a1981",
+    "lib/city/assets/rocket-wreckage.ts": "bdb4ee169daab4f28bd4c3c449044a69a808ebf7b3dcf1e125590a1ef748cfa1",
+    "lib/city/assets/rocket-exhaust.ts": "f2ee00d27751679bcc5b36537227b6a0b5802cc899e1d28f1c4fba99e6d17085",
+    "lib/city/facade-details.ts": "36509f24ef07969d2ed5781cf0523906cda08d0965c58cc48b8ace338b5c8292"
+  },
+  "finalSourceHashes": {
+    "lib/city/rocket-controller.ts": "52c99ec6449c42e7aa6ffaea6a14a4eddb3dbc5e25f156a90777a661526177ef",
+    "lib/city/rocket-effects.ts": "a524ceefc4e657621c266ef9019694c1cf48dd65274f845e2b3660484da62506",
+    "lib/city/rocket-state.ts": "40cc789843c484fa614ce2dbee25bbc6bdda4b288e1c570c1b6174c0c35e5fcd",
+    "lib/city/assets/rocket.ts": "e42f1c5aa1b4f8fe4e509ac60dd9532044d4000c0423c3888e83b702e1198070",
+    "lib/city/assets/rocket-design.ts": "347c0cae22a968689ba68f5b98838e3f2105cd0c279f4ab0a1bbece6483a1981",
+    "lib/city/assets/rocket-wreckage.ts": "bdb4ee169daab4f28bd4c3c449044a69a808ebf7b3dcf1e125590a1ef748cfa1",
+    "lib/city/assets/rocket-exhaust.ts": "f2ee00d27751679bcc5b36537227b6a0b5802cc899e1d28f1c4fba99e6d17085",
+    "lib/city/facade-details.ts": "36509f24ef07969d2ed5781cf0523906cda08d0965c58cc48b8ace338b5c8292"
+  },
+  "sourceFilesUnchanged": true,
+  "images": [
+    "intersection-0-clear-contact-1.5s.jpg",
+    "intersection-2-strap-obstructed-ignition-1.5s.jpg",
+    "intersection-2-strap-obstructed-contact-3s.jpg"
+  ],
+  "missions": [
+    {
+      "roads": ["JERVIS ST", "ROBSON ST"],
+      "category": "clear",
+      "x": 6.593189018284689,
+      "z": -67.52671199972951,
+      "pickedGroundY": 40.09829897826353,
+      "terrainY": 39.06802709822597,
+      "sampledRoadY": 40.0983009112486,
+      "actualLaunchOrigin": {
+        "x": 6.593189018284689,
+        "y": 40.5483009112486,
+        "z": -67.52671199972951
+      },
+      "initialCoreHit": false,
+      "initialHitProbes": [],
+      "outcome": "space",
+      "flightSeconds": 69.59999999999734,
+      "altitude": 100008.61895513115,
+      "failure": null,
+      "exactCityGeometryRestored": true,
+      "events": [
+        {
+          "type": "ready",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 6.593189018284689,
+            "y": 40.5483009112486,
+            "z": -67.52671199972951
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "countdown",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 6.593189018284689,
+            "y": 40.5483009112486,
+            "z": -67.52671199972951
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 6.593189018284689,
+            "y": 40.5483009112486,
+            "z": -67.52671199972951
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 6.593189018284689,
+            "y": 40.5483009112486,
+            "z": -67.52671199972951
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "liftoff",
+          "time": 23.033333333333307,
+          "position": {
+            "x": 6.593189018284689,
+            "y": 40.5483009112486,
+            "z": -67.52671199972951
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-burnout",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 20.245243579970168,
+            "y": 3037.4075558172153,
+            "z": -68.23637549141948
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 20.245243579970168,
+            "y": 3037.4075558172153,
+            "z": -68.23637549141948
+          },
+          "magnitude": 140000
+        },
+        {
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 23.14654408557433,
+            "y": 3516.8450577320273,
+            "z": -66.9519390075053
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "booster-burnout",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 107.33364569016169,
+            "y": 14443.589822685486,
+            "z": 71.29162140318726
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 107.33364569016169,
+            "y": 14443.589822685486,
+            "z": 71.29162140318726
+          },
+          "magnitude": 205000
+        },
+        {
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 114.6146841724408,
+            "y": 15141.323309626032,
+            "z": 88.78753352227712
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "mission-complete",
+          "time": 92.6166666666627,
+          "position": {
+            "x": 2053.0135803218755,
+            "y": 100049.1672560424,
+            "z": 4934.15836362276
+          },
+          "magnitude": 0
+        }
+      ],
+      "recordedContactCount": 0,
+      "stagingSamples": [
+        {
+          "elapsed": 34.04999999999935,
+          "flightSeconds": 11.033333333333461,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51191781.61002429
+        },
+        {
+          "elapsed": 34.54999999999932,
+          "flightSeconds": 11.533333333333486,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51290346.85932604
+        }
+      ],
+      "firstContacts": [],
+      "renderedTimeline": [
+        {
+          "elapsed": 16.000000000000373,
+          "flightSeconds": 0,
+          "phase": "ready",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 0,
+          "alteredPositionEntries": 0,
+          "largestBuildingDisplacement": 0,
+          "maxCollapse": 0,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [],
+          "renderer": {
+            "calls": 543,
+            "triangles": 2665347,
+            "geometries": 748,
+            "programs": 87
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 21.516666666666726,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 0,
+          "alteredPositionEntries": 0,
+          "largestBuildingDisplacement": 0,
+          "maxCollapse": 0,
+          "dustCount": 8,
+          "dustMaximumCenterRadius": 26.337639713488613,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 0.08097619563341141,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 541,
+            "triangles": 2675913,
+            "geometries": 760,
+            "programs": 89
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 43,
+          "alteredPositionEntries": 4440,
+          "largestBuildingDisplacement": 0.8995437622070312,
+          "maxCollapse": 0.13015370671178522,
+          "dustCount": 43,
+          "dustMaximumCenterRadius": 59.12064698772621,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 0.72776859998703,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 639,
+            "triangles": 2678435,
+            "geometries": 762,
+            "programs": 90
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 23.033333333333307,
+          "flightSeconds": 0.016666666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 0.011496309735079535,
+          "speed": 0.6897785913745352,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 70,
+          "alteredPositionEntries": 7488,
+          "largestBuildingDisplacement": 3.662097930908203,
+          "maxCollapse": 0.46193673190714646,
+          "dustCount": 67,
+          "dustMaximumCenterRadius": 75.13943514659455,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 654,
+            "triangles": 2679123,
+            "geometries": 762,
+            "programs": 90
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 23.533333333333278,
+          "flightSeconds": 0.5166666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 5.745299193663904,
+          "speed": 21.626216710446297,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 80,
+          "alteredPositionEntries": 10662,
+          "largestBuildingDisplacement": 10.183746337890625,
+          "maxCollapse": 0.7331645425580332,
+          "dustCount": 92,
+          "dustMaximumCenterRadius": 88.64504746737181,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 668,
+            "triangles": 2678955,
+            "geometries": 762,
+            "programs": 90
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 24.53333333333322,
+          "flightSeconds": 1.5166666666666662,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 49.23198267644672,
+          "speed": 64.95901652955946,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 94,
+          "alteredPositionEntries": 12054,
+          "largestBuildingDisplacement": 46.37233352661133,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 89.45229993878222,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 658,
+            "triangles": 2703387,
+            "geometries": 766,
+            "programs": 90
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 26.033333333333136,
+          "flightSeconds": 3.016666666666661,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 198.34225917761762,
+          "speed": 133.87133861597692,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 94,
+          "alteredPositionEntries": 12312,
+          "largestBuildingDisplacement": 72.22505950927734,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 110.14574630763863,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 563,
+            "triangles": 2659417,
+            "geometries": 788,
+            "programs": 90
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 28.033333333333022,
+          "flightSeconds": 5.016666666666654,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 564.7663235602594,
+          "speed": 233.2503142109316,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 94,
+          "alteredPositionEntries": 12312,
+          "largestBuildingDisplacement": 80.22636032104492,
+          "maxCollapse": 1,
+          "dustCount": 68,
+          "dustMaximumCenterRadius": 136.03319505688083,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 495,
+            "triangles": 2309091,
+            "geometries": 801,
+            "programs": 90
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 92.6166666666627,
+          "flightSeconds": 69.59999999999734,
+          "phase": "space",
+          "stage": "coast",
+          "altitude": 100008.61895513115,
+          "speed": 3141.0679149717485,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 94,
+          "alteredPositionEntries": 12312,
+          "largestBuildingDisplacement": 80.50372314453125,
+          "maxCollapse": 1,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 941,
+            "triangles": 315892,
+            "geometries": 807,
+            "programs": 95
+          },
+          "contactVolumeTops": []
+        }
+      ]
+    },
+    {
+      "roads": ["BUTE ST", "ROBSON ST"],
+      "category": "clear",
+      "x": 74.08624180243613,
+      "z": -0.5232039997864035,
+      "pickedGroundY": 38.61618045113232,
+      "terrainY": 37.532538202069304,
+      "sampledRoadY": 38.61618045113443,
+      "actualLaunchOrigin": {
+        "x": 74.08624180243613,
+        "y": 39.066180451134436,
+        "z": -0.5232039997864035
+      },
+      "initialCoreHit": false,
+      "initialHitProbes": [],
+      "outcome": "space",
+      "flightSeconds": 69.49999999999734,
+      "altitude": 100002.74677857052,
+      "failure": null,
+      "exactCityGeometryRestored": true,
+      "events": [
+        {
+          "type": "ready",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 74.08624180243613,
+            "y": 39.066180451134436,
+            "z": -0.5232039997864035
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "countdown",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 74.08624180243613,
+            "y": 39.066180451134436,
+            "z": -0.5232039997864035
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 74.08624180243613,
+            "y": 39.066180451134436,
+            "z": -0.5232039997864035
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 74.08624180243613,
+            "y": 39.066180451134436,
+            "z": -0.5232039997864035
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "liftoff",
+          "time": 23.033333333333307,
+          "position": {
+            "x": 74.08624180243613,
+            "y": 39.066180451134436,
+            "z": -0.5232039997864035
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-burnout",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 86.86192603904215,
+            "y": 3038.0094196360956,
+            "z": -0.36705567192388583
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 86.86192603904215,
+            "y": 3038.0094196360956,
+            "z": -0.36705567192388583
+          },
+          "magnitude": 140000
+        },
+        {
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 89.21529401431658,
+            "y": 3517.701972325543,
+            "z": 0.659080950011447
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "booster-burnout",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 111.91399486758087,
+            "y": 14463.784916801085,
+            "z": 138.39064183293252
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 111.91399486758087,
+            "y": 14463.784916801085,
+            "z": 138.39064183293252
+          },
+          "magnitude": 205000
+        },
+        {
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 111.52445261124346,
+            "y": 15164.617382831262,
+            "z": 155.68618508148842
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "mission-complete",
+          "time": 92.5166666666627,
+          "position": {
+            "x": 800.6219612993957,
+            "y": 100041.81295902166,
+            "z": 4973.837026453292
+          },
+          "magnitude": 0
+        }
+      ],
+      "recordedContactCount": 0,
+      "stagingSamples": [
+        {
+          "elapsed": 34.04999999999935,
+          "flightSeconds": 11.033333333333461,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51192472.51660843
+        },
+        {
+          "elapsed": 34.54999999999932,
+          "flightSeconds": 11.533333333333486,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51291074.49285859
+        }
+      ],
+      "firstContacts": [],
+      "renderedTimeline": [
+        {
+          "elapsed": 16.000000000000373,
+          "flightSeconds": 0,
+          "phase": "ready",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 0,
+          "alteredPositionEntries": 0,
+          "largestBuildingDisplacement": 0,
+          "maxCollapse": 0,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [],
+          "renderer": {
+            "calls": 580,
+            "triangles": 2637761,
+            "geometries": 792,
+            "programs": 88
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 21.516666666666726,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 0,
+          "alteredPositionEntries": 0,
+          "largestBuildingDisplacement": 0,
+          "maxCollapse": 0,
+          "dustCount": 8,
+          "dustMaximumCenterRadius": 26.337639713488613,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 0.0717439204454422,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 576,
+            "triangles": 2650089,
+            "geometries": 803,
+            "programs": 90
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 47,
+          "alteredPositionEntries": 4884,
+          "largestBuildingDisplacement": 0.8500823974609375,
+          "maxCollapse": 0.10905691367868973,
+          "dustCount": 43,
+          "dustMaximumCenterRadius": 59.12064698772624,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 0.6778739094734192,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.07479869574308395,
+              "displacedVertices": 67,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.05120941996574402,
+              "displacedVertices": 77,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.020041948184370995,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 690,
+            "triangles": 2652553,
+            "geometries": 807,
+            "programs": 92
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 23.033333333333307,
+          "flightSeconds": 0.016666666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 0.01149630973507243,
+          "speed": 0.689778624134074,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 81,
+          "alteredPositionEntries": 6998,
+          "largestBuildingDisplacement": 4.0610809326171875,
+          "maxCollapse": 0.443529518366797,
+          "dustCount": 67,
+          "dustMaximumCenterRadius": 75.13943514659456,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.25112420320510864,
+              "displacedVertices": 67,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.2029052972793579,
+              "displacedVertices": 77,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.12955434620380402,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 706,
+            "triangles": 2653173,
+            "geometries": 807,
+            "programs": 92
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 23.533333333333278,
+          "flightSeconds": 0.5166666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 5.744760644709309,
+          "speed": 21.62314518192515,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 91,
+          "alteredPositionEntries": 11340,
+          "largestBuildingDisplacement": 7.069114685058594,
+          "maxCollapse": 0.7162214467539906,
+          "dustCount": 92,
+          "dustMaximumCenterRadius": 88.64504746737181,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.46605736017227173,
+              "displacedVertices": 135,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.3925269842147827,
+              "displacedVertices": 126,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.27582475543022156,
+              "displacedVertices": 73,
+              "maximumDisplacement": 0.0019373203579484781,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 716,
+            "triangles": 2653383,
+            "geometries": 807,
+            "programs": 92
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 24.53333333333322,
+          "flightSeconds": 1.5166666666666662,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 49.21642690017077,
+          "speed": 64.92650145268625,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 12726,
+          "largestBuildingDisplacement": 30.258102416992188,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 85.05982522150066,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.8058768510818481,
+              "displacedVertices": 144,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.6847003698348999,
+              "displacedVertices": 126,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.4863939881324768,
+              "displacedVertices": 126,
+              "maximumDisplacement": 0.08333425999429682,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 702,
+            "triangles": 2638825,
+            "geometries": 810,
+            "programs": 92
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 26.033333333333136,
+          "flightSeconds": 3.016666666666661,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 198.256635850296,
+          "speed": 133.8677699335888,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 12780,
+          "largestBuildingDisplacement": 64.76264572143555,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 122.19121326854405,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.9495577216148376,
+              "displacedVertices": 144,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.7848749160766602,
+              "displacedVertices": 126,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.5282968282699585,
+              "displacedVertices": 126,
+              "maximumDisplacement": 0.20877807492018266,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 581,
+            "triangles": 2633461,
+            "geometries": 819,
+            "programs": 92
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 28.033333333333022,
+          "flightSeconds": 5.016666666666654,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 564.8840993260304,
+          "speed": 233.41306350972235,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 12780,
+          "largestBuildingDisplacement": 71.72065353393555,
+          "maxCollapse": 1,
+          "dustCount": 67,
+          "dustMaximumCenterRadius": 140.76668812553638,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 513,
+            "triangles": 2409012,
+            "geometries": 818,
+            "programs": 91
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 92.5166666666627,
+          "flightSeconds": 69.49999999999734,
+          "phase": "space",
+          "stage": "coast",
+          "altitude": 100002.74677857052,
+          "speed": 3137.8772885829076,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 12780,
+          "largestBuildingDisplacement": 71.86629104614258,
+          "maxCollapse": 1,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 933,
+            "triangles": 311284,
+            "geometries": 824,
+            "programs": 96
+          },
+          "contactVolumeTops": []
+        }
+      ]
+    },
+    {
+      "roads": ["ROSEMARY BROWN LANE", "BUTE ST"],
+      "category": "strap-obstructed",
+      "x": 35.478327692531614,
+      "z": 38.63917199989373,
+      "pickedGroundY": 41.34171303633798,
+      "terrainY": 40.279978861255486,
+      "sampledRoadY": 41.74784710996947,
+      "actualLaunchOrigin": {
+        "x": 35.478327692531614,
+        "y": 42.19784710996947,
+        "z": 38.63917199989373
+      },
+      "initialCoreHit": false,
+      "initialHitProbes": [
+        {
+          "index": 8,
+          "strapOn": true,
+          "booster": false,
+          "hit": true
+        },
+        {
+          "index": 11,
+          "strapOn": true,
+          "booster": false,
+          "hit": true
+        }
+      ],
+      "outcome": "space",
+      "flightSeconds": 69.46666666666401,
+      "altitude": 100023.28672160677,
+      "failure": null,
+      "exactCityGeometryRestored": true,
+      "events": [
+        {
+          "type": "ready",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 35.478327692531614,
+            "y": 42.19784710996947,
+            "z": 38.63917199989373
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "countdown",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 35.478327692531614,
+            "y": 42.19784710996947,
+            "z": 38.63917199989373
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 35.478327692531614,
+            "y": 42.19784710996947,
+            "z": 38.63917199989373
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 35.478327692531614,
+            "y": 42.19784710996947,
+            "z": 38.63917199989373
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "liftoff",
+          "time": 23.033333333333307,
+          "position": {
+            "x": 35.478327692531614,
+            "y": 42.19784710996947,
+            "z": 38.63917199989373
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-burnout",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 48.81430911338053,
+            "y": 3042.6264886145004,
+            "z": 47.81085965670506
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 48.81430911338053,
+            "y": 3042.6264886145004,
+            "z": 47.81085965670506
+          },
+          "magnitude": 140000
+        },
+        {
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 51.06936598770978,
+            "y": 3523.0114945331416,
+            "z": 49.636689147653826
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "booster-burnout",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 53.8221291257737,
+            "y": 14470.027373396691,
+            "z": 200.2359893746249
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 53.8221291257737,
+            "y": 14470.027373396691,
+            "z": 200.2359893746249
+          },
+          "magnitude": 205000
+        },
+        {
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 50.406699146778195,
+            "y": 15172.12344972431,
+            "z": 218.17939164206445
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "mission-complete",
+          "time": 92.48333333332937,
+          "position": {
+            "x": -218.35093404803928,
+            "y": 100065.48456871674,
+            "z": 5067.676836748685
+          },
+          "magnitude": 0
+        }
+      ],
+      "recordedContactCount": 133,
+      "stagingSamples": [
+        {
+          "elapsed": 34.01666666666602,
+          "flightSeconds": 11.000000000000126,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51186370.2030157
+        },
+        {
+          "elapsed": 34.033333333332685,
+          "flightSeconds": 11.016666666666794,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51189667.63352072
+        },
+        {
+          "elapsed": 34.366666666666,
+          "flightSeconds": 11.350000000000144,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51255524.667026676
+        },
+        {
+          "elapsed": 34.366666666666,
+          "flightSeconds": 11.350000000000144,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51255524.667026676
+        },
+        {
+          "elapsed": 34.383333333332665,
+          "flightSeconds": 11.366666666666811,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51258812.49821147
+        }
+      ],
+      "firstContacts": [
+        {
+          "elapsed": 21.016666666666755,
+          "flightElapsed": 0,
+          "phase": "ignition",
+          "dt": 0.016666666666666666,
+          "source": "building",
+          "point": {
+            "x": 49.212327692531616,
+            "y": 43.13573979574818,
+            "z": 38.63917199989373
+          },
+          "from": {
+            "x": 46.188327692531615,
+            "y": 45.20484710996947,
+            "z": 38.63917199989373
+          },
+          "to": {
+            "x": 46.188327692531615,
+            "y": 105.42584710996948,
+            "z": 38.63917199989373
+          },
+          "radius": 3.024,
+          "speed": 0,
+          "mass": 1886000,
+          "initialOverlap": true,
+          "bounds": {
+            "minX": 45.0573309452302,
+            "maxX": 90.86038932712314,
+            "minY": 37.13573979574818,
+            "maxY": 43.13573979574818,
+            "minZ": 30.834526800362028,
+            "maxZ": 65.2646896000303
+          },
+          "polygon": [
+            [
+              [76.38804898243289, 40.554989200213925],
+              [71.93183741793972, 45.040072000343514],
+              [78.31808162662239, 51.42983999987223],
+              [82.82366949649929, 46.890210399975274],
+              [90.86038932712314, 54.80506239992479],
+              [81.46872558620963, 65.2646896000303],
+              [79.29834651437379, 63.34998559980221],
+              [80.85878298986808, 61.56997880043633],
+              [70.34671278872167, 52.30036239992074],
+              [66.66599966845804, 56.51493759981577],
+              [62.55542224165097, 52.90037720052567],
+              [60.61522388771162, 55.114532000219185],
+              [45.0573309452302, 41.72496240051885],
+              [56.43421261330649, 30.834526800362028],
+              [64.65609358860338, 39.465166400212865],
+              [70.04174149106684, 34.29991839996546]
+            ]
+          ]
+        },
+        {
+          "elapsed": 21.016666666666755,
+          "flightElapsed": 0,
+          "phase": "ignition",
+          "dt": 0.016666666666666666,
+          "source": "building",
+          "point": {
+            "x": 35.478327692531614,
+            "y": 45.20484710996947,
+            "z": 24.90517199989373
+          },
+          "from": {
+            "x": 35.478327692531614,
+            "y": 45.20484710996947,
+            "z": 27.929171999893732
+          },
+          "to": {
+            "x": 35.478327692531614,
+            "y": 105.42584710996948,
+            "z": 27.929171999893732
+          },
+          "radius": 3.024,
+          "speed": 0,
+          "mass": 1886000,
+          "initialOverlap": true,
+          "bounds": {
+            "minX": 18.078262885195542,
+            "maxX": 38.826476873653775,
+            "minY": 40.29987784691449,
+            "maxY": 45.29987784691449,
+            "minZ": 7.4050064004774185,
+            "maxZ": 27.795490800441485
+          },
+          "polygon": [
+            [
+              [18.078262885195542, 13.760265200314734],
+              [24.12903866594196, 7.4050064004774185],
+              [38.826476873653775, 21.43021319977521],
+              [32.7858668026572, 27.795490800441485]
+            ]
+          ]
+        },
+        {
+          "elapsed": 21.03333333333342,
+          "flightElapsed": 0,
+          "phase": "ignition",
+          "dt": 0.016666666666666666,
+          "source": "building",
+          "point": {
+            "x": 49.212327692531616,
+            "y": 42.858239795748176,
+            "z": 38.63917199989373
+          },
+          "from": {
+            "x": 46.188327692531615,
+            "y": 45.20484710996947,
+            "z": 38.63917199989373
+          },
+          "to": {
+            "x": 46.188327692531615,
+            "y": 105.42584710996948,
+            "z": 38.63917199989373
+          },
+          "radius": 3.024,
+          "speed": 0,
+          "mass": 1885990.601851852,
+          "initialOverlap": true,
+          "bounds": {
+            "minX": 45.0573309452302,
+            "maxX": 90.86038932712314,
+            "minY": 37.13573979574818,
+            "maxY": 43.13573979574818,
+            "minZ": 30.834526800362028,
+            "maxZ": 65.2646896000303
+          },
+          "polygon": [
+            [
+              [76.38804898243289, 40.554989200213925],
+              [71.93183741793972, 45.040072000343514],
+              [78.31808162662239, 51.42983999987223],
+              [82.82366949649929, 46.890210399975274],
+              [90.86038932712314, 54.80506239992479],
+              [81.46872558620963, 65.2646896000303],
+              [79.29834651437379, 63.34998559980221],
+              [80.85878298986808, 61.56997880043633],
+              [70.34671278872167, 52.30036239992074],
+              [66.66599966845804, 56.51493759981577],
+              [62.55542224165097, 52.90037720052567],
+              [60.61522388771162, 55.114532000219185],
+              [45.0573309452302, 41.72496240051885],
+              [56.43421261330649, 30.834526800362028],
+              [64.65609358860338, 39.465166400212865],
+              [70.04174149106684, 34.29991839996546]
+            ]
+          ]
+        }
+      ],
+      "renderedTimeline": [
+        {
+          "elapsed": 16.000000000000373,
+          "flightSeconds": 0,
+          "phase": "ready",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 0,
+          "alteredPositionEntries": 0,
+          "largestBuildingDisplacement": 0,
+          "maxCollapse": 0,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [],
+          "renderer": {
+            "calls": 571,
+            "triangles": 2644599,
+            "geometries": 805,
+            "programs": 88
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 21.516666666666726,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 2,
+          "alteredPositionEntries": 324,
+          "largestBuildingDisplacement": 0.7446708679199219,
+          "maxCollapse": 0.1341751667888872,
+          "dustCount": 8,
+          "dustMaximumCenterRadius": 16.122427572996454,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 569,
+            "triangles": 2655839,
+            "geometries": 816,
+            "programs": 91
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 42.423466639171025,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 44.7063168831002,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 52,
+          "alteredPositionEntries": 4044,
+          "largestBuildingDisplacement": 3.5353965759277344,
+          "maxCollapse": 0.6370081018518516,
+          "dustCount": 43,
+          "dustMaximumCenterRadius": 62.414099595934296,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.1627652943134308,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.1500994712114334,
+              "displacedVertices": 67,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.17886629700660706,
+              "displacedVertices": 124,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 729,
+            "triangles": 2659575,
+            "geometries": 821,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 39.65051915396393,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 42.39552731209428,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        },
+        {
+          "elapsed": 23.033333333333307,
+          "flightSeconds": 0.016666666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 0.011496309735036903,
+          "speed": 0.6897789134004554,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 77,
+          "alteredPositionEntries": 8382,
+          "largestBuildingDisplacement": 4.897674560546875,
+          "maxCollapse": 0.882463881724236,
+          "dustCount": 67,
+          "dustMaximumCenterRadius": 80.3575914209878,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.41178280115127563,
+              "displacedVertices": 246,
+              "maximumDisplacement": 0.01191492650205099,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.3897276520729065,
+              "displacedVertices": 97,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.43948113918304443,
+              "displacedVertices": 206,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 737,
+            "triangles": 2660335,
+            "geometries": 821,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 38.27354532404119,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 41.248049120492,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        },
+        {
+          "elapsed": 23.533333333333278,
+          "flightSeconds": 0.5166666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 5.744023823071508,
+          "speed": 21.619659288796505,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 95,
+          "alteredPositionEntries": 9726,
+          "largestBuildingDisplacement": 11.091033935546875,
+          "maxCollapse": 0.9981291828924963,
+          "dustCount": 92,
+          "dustMaximumCenterRadius": 94.38118135444032,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.701420783996582,
+              "displacedVertices": 246,
+              "maximumDisplacement": 0.0956774378146468,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.6697164177894592,
+              "displacedVertices": 143,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.7410376071929932,
+              "displacedVertices": 247,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 739,
+            "triangles": 2660543,
+            "geometries": 821,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 37.60189275093012,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 40.68833864289944,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        },
+        {
+          "elapsed": 24.53333333333322,
+          "flightSeconds": 1.5166666666666662,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 49.21452586987213,
+          "speed": 64.93246934159191,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 12978,
+          "largestBuildingDisplacement": 34.37236404418945,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 90.80496857049842,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 246,
+              "maximumDisplacement": 0.4333815785152824,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 144,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 251,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 744,
+            "triangles": 2684484,
+            "geometries": 821,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 37.58573979574818,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 40.67487784691449,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        },
+        {
+          "elapsed": 26.033333333333136,
+          "flightSeconds": 3.016666666666661,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 198.17738832384757,
+          "speed": 133.69583848177686,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 13068,
+          "largestBuildingDisplacement": 42.205909729003906,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 115.91225731418007,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -1,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -1,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 246,
+              "maximumDisplacement": 0.619319085864536,
+              "damageEntries": 366,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,0",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,0",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 144,
+              "maximumDisplacement": 0.47250551730394363,
+              "damageEntries": 144,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens 0,1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens 0,1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 252,
+              "maximumDisplacement": 0.5678268671035767,
+              "damageEntries": 252,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 578,
+            "triangles": 2617983,
+            "geometries": 821,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 37.58573979574818,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 40.67487784691449,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        },
+        {
+          "elapsed": 28.033333333333022,
+          "flightSeconds": 5.016666666666654,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 564.5593386687367,
+          "speed": 233.57961183769362,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 13068,
+          "largestBuildingDisplacement": 45.05620574951172,
+          "maxCollapse": 1,
+          "dustCount": 65,
+          "dustMaximumCenterRadius": 145.51492159202056,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 526,
+            "triangles": 2423192,
+            "geometries": 819,
+            "programs": 91
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 37.58573979574818,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 40.67487784691449,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        },
+        {
+          "elapsed": 34.366666666666,
+          "flightSeconds": 11.350000000000144,
+          "phase": "flight",
+          "stage": "strap-separating",
+          "altitude": 3212.176688257366,
+          "speed": 611.3480603320937,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 13068,
+          "largestBuildingDisplacement": 45.05620574951172,
+          "maxCollapse": 1,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 1,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 182,
+            "triangles": 995468,
+            "geometries": 819,
+            "programs": 91
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 37.58573979574818,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 40.67487784691449,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        },
+        {
+          "elapsed": 92.48333333332937,
+          "flightSeconds": 69.46666666666401,
+          "phase": "space",
+          "stage": "coast",
+          "altitude": 100023.28672160677,
+          "speed": 3137.7026860362894,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 13068,
+          "largestBuildingDisplacement": 45.05620574951172,
+          "maxCollapse": 1,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 912,
+            "triangles": 311456,
+            "geometries": 825,
+            "programs": 96
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 37.58573979574818,
+              "originalTop": 43.13573979574818
+            },
+            {
+              "currentTop": 40.67487784691449,
+              "originalTop": 45.29987784691449
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "roads": ["JERVIS ST", "ROSEMARY BROWN LANE"],
+      "category": "strap-obstructed",
+      "x": -78.67533371845573,
+      "z": -74.67345600019456,
+      "pickedGroundY": 40.2061633951846,
+      "terrainY": 40.27317607313999,
+      "sampledRoadY": 41.326824614340964,
+      "actualLaunchOrigin": {
+        "x": -78.67533371845573,
+        "y": 41.77682461434097,
+        "z": -74.67345600019456
+      },
+      "initialCoreHit": false,
+      "initialHitProbes": [
+        {
+          "index": 11,
+          "strapOn": true,
+          "booster": false,
+          "hit": true
+        }
+      ],
+      "outcome": "space",
+      "flightSeconds": 69.58333333333067,
+      "altitude": 100013.64534432883,
+      "failure": null,
+      "exactCityGeometryRestored": true,
+      "events": [
+        {
+          "type": "ready",
+          "time": 16.000000000000373,
+          "position": {
+            "x": -78.67533371845573,
+            "y": 41.77682461434097,
+            "z": -74.67345600019456
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "countdown",
+          "time": 16.000000000000373,
+          "position": {
+            "x": -78.67533371845573,
+            "y": 41.77682461434097,
+            "z": -74.67345600019456
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": -78.67533371845573,
+            "y": 41.77682461434097,
+            "z": -74.67345600019456
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": -78.67533371845573,
+            "y": 41.77682461434097,
+            "z": -74.67345600019456
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "liftoff",
+          "time": 23.033333333333307,
+          "position": {
+            "x": -78.67533371845573,
+            "y": 41.77682461434097,
+            "z": -74.67345600019456
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-burnout",
+          "time": 34.01666666666602,
+          "position": {
+            "x": -58.63849225428493,
+            "y": 3041.0895205541237,
+            "z": -65.04400536771766
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": -58.63849225428493,
+            "y": 3041.0895205541237,
+            "z": -65.04400536771766
+          },
+          "magnitude": 140000
+        },
+        {
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": -54.741591123824456,
+            "y": 3521.955298049455,
+            "z": -63.09165424083161
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "booster-burnout",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 81.44958492475692,
+            "y": 14421.186126450491,
+            "z": 87.67489455001447
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 81.44958492475692,
+            "y": 14421.186126450491,
+            "z": 87.67489455001447
+          },
+          "magnitude": 205000
+        },
+        {
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 92.73211511120012,
+            "y": 15119.02831913178,
+            "z": 105.59922661937563
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "mission-complete",
+          "time": 92.59999999999603,
+          "position": {
+            "x": 521.0383412399393,
+            "y": 100055.42216894317,
+            "z": 4973.607288777515
+          },
+          "magnitude": 0
+        }
+      ],
+      "recordedContactCount": 1,
+      "stagingSamples": [
+        {
+          "elapsed": 34.04999999999935,
+          "flightSeconds": 11.033333333333461,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51192602.59933393
+        },
+        {
+          "elapsed": 34.54999999999932,
+          "flightSeconds": 11.533333333333486,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51291439.76868575
+        }
+      ],
+      "firstContacts": [
+        {
+          "elapsed": 21.016666666666755,
+          "flightElapsed": 0,
+          "phase": "ignition",
+          "dt": 0.016666666666666666,
+          "source": "building",
+          "point": {
+            "x": -78.67533371845573,
+            "y": 41.81600296232057,
+            "z": -88.40745600019456
+          },
+          "from": {
+            "x": -78.67533371845573,
+            "y": 44.783824614340965,
+            "z": -85.38345600019456
+          },
+          "to": {
+            "x": -78.67533371845573,
+            "y": 105.00482461434098,
+            "z": -85.38345600019456
+          },
+          "radius": 3.024,
+          "speed": 0,
+          "mass": 1886000,
+          "initialOverlap": true,
+          "bounds": {
+            "minX": -97.60606399475118,
+            "maxX": -64.26108314553355,
+            "minY": 37.966002962320566,
+            "maxY": 41.81600296232057,
+            "minZ": -104.74989359952815,
+            "maxZ": -84.6599731999126
+          },
+          "polygon": [
+            [
+              [-64.26108314553355, -102.60475720000841],
+              [-80.64820756978854, -84.6599731999126],
+              [-97.60606399475118, -100.23475440007559],
+              [-93.4809641250021, -104.74989359952815],
+              [-82.1389363203994, -93.06463320004923],
+              [-79.28309794871714, -90.12467199962543],
+              [-66.15117907240642, -104.3402359996449]
+            ]
+          ]
+        }
+      ],
+      "renderedTimeline": [
+        {
+          "elapsed": 16.000000000000373,
+          "flightSeconds": 0,
+          "phase": "ready",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 0,
+          "alteredPositionEntries": 0,
+          "largestBuildingDisplacement": 0,
+          "maxCollapse": 0,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [],
+          "renderer": {
+            "calls": 538,
+            "triangles": 2692207,
+            "geometries": 806,
+            "programs": 88
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 21.516666666666726,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 1,
+          "alteredPositionEntries": 108,
+          "largestBuildingDisplacement": 0.2775001525878906,
+          "maxCollapse": 0.07792207792207789,
+          "dustCount": 8,
+          "dustMaximumCenterRadius": 17.44111590809578,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 0.5167015790939331,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 536,
+            "triangles": 2702879,
+            "geometries": 817,
+            "programs": 91
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 41.538502962320564,
+              "originalTop": 41.81600296232057
+            }
+          ]
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 44,
+          "alteredPositionEntries": 4056,
+          "largestBuildingDisplacement": 2.268543243408203,
+          "maxCollapse": 0.6370081018518516,
+          "dustCount": 43,
+          "dustMaximumCenterRadius": 63.907770812907394,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.22828876972198486,
+              "displacedVertices": 271,
+              "maximumDisplacement": 0.9556269645690918,
+              "damageEntries": 1080,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-2",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-2",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.09040532261133194,
+              "displacedVertices": 7,
+              "maximumDisplacement": 0.06876981258392334,
+              "damageEntries": 300,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 688,
+            "triangles": 2706399,
+            "geometries": 822,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 39.57965305050901,
+              "originalTop": 41.81600296232057
+            }
+          ]
+        },
+        {
+          "elapsed": 23.033333333333307,
+          "flightSeconds": 0.016666666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 0.011496309735079535,
+          "speed": 0.6897785865599754,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 80,
+          "alteredPositionEntries": 6626,
+          "largestBuildingDisplacement": 5.464260101318359,
+          "maxCollapse": 0.882463881724236,
+          "dustCount": 67,
+          "dustMaximumCenterRadius": 81.91261745073611,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.5227187275886536,
+              "displacedVertices": 327,
+              "maximumDisplacement": 0.9556269645690918,
+              "damageEntries": 1080,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-2",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-2",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.2813100218772888,
+              "displacedVertices": 7,
+              "maximumDisplacement": 0.06876981258392334,
+              "damageEntries": 300,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 704,
+            "triangles": 2707047,
+            "geometries": 822,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 38.69609484297524,
+              "originalTop": 41.81600296232057
+            }
+          ]
+        },
+        {
+          "elapsed": 23.533333333333278,
+          "flightSeconds": 0.5166666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 5.745554615603048,
+          "speed": 21.627742006435707,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 92,
+          "alteredPositionEntries": 9648,
+          "largestBuildingDisplacement": 9.28924560546875,
+          "maxCollapse": 0.9981291828924963,
+          "dustCount": 92,
+          "dustMaximumCenterRadius": 96.13067145042535,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.8590253591537476,
+              "displacedVertices": 741,
+              "maximumDisplacement": 0.9556269645690918,
+              "damageEntries": 1080,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-2",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-2",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.5112255215644836,
+              "displacedVertices": 59,
+              "maximumDisplacement": 0.06876981258392334,
+              "damageEntries": 300,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 704,
+            "triangles": 2707047,
+            "geometries": 822,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 38.26511777522898,
+              "originalTop": 41.81600296232057
+            }
+          ]
+        },
+        {
+          "elapsed": 24.53333333333322,
+          "flightSeconds": 1.5166666666666662,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 49.23369108457055,
+          "speed": 64.94837552142329,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 95,
+          "alteredPositionEntries": 12582,
+          "largestBuildingDisplacement": 33.39419937133789,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 91.84200468252492,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 819,
+              "maximumDisplacement": 0.9556269645690918,
+              "damageEntries": 1080,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-2",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-2",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 0.8792219758033752,
+              "displacedVertices": 60,
+              "maximumDisplacement": 0.15022003343644863,
+              "damageEntries": 300,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 695,
+            "triangles": 2706865,
+            "geometries": 822,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 38.254752962320566,
+              "originalTop": 41.81600296232057
+            }
+          ]
+        },
+        {
+          "elapsed": 26.033333333333136,
+          "flightSeconds": 3.016666666666661,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 198.18103941278744,
+          "speed": 133.67163822086624,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 12870,
+          "largestBuildingDisplacement": 36.60224914550781,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 112.63529778827964,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-1",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-1",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 821,
+              "maximumDisplacement": 0.9556269645690918,
+              "damageEntries": 1080,
+              "originalGeometryRestoredAfterDraw": true
+            },
+            {
+              "name": "Residential foundation gardens -2,-2",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": false,
+              "ancestors": [
+                {
+                  "name": "Residential foundation gardens -2,-2",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": false,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 60,
+              "maximumDisplacement": 0.25117345470668384,
+              "damageEntries": 300,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 524,
+            "triangles": 2562100,
+            "geometries": 822,
+            "programs": 92
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 38.254752962320566,
+              "originalTop": 41.81600296232057
+            }
+          ]
+        },
+        {
+          "elapsed": 28.033333333333022,
+          "flightSeconds": 5.016666666666654,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 564.1238362945176,
+          "speed": 232.92362653067354,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 12870,
+          "largestBuildingDisplacement": 36.60224914550781,
+          "maxCollapse": 1,
+          "dustCount": 64,
+          "dustMaximumCenterRadius": 142.96522341503407,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 498,
+            "triangles": 2376947,
+            "geometries": 821,
+            "programs": 91
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 38.254752962320566,
+              "originalTop": 41.81600296232057
+            }
+          ]
+        },
+        {
+          "elapsed": 92.59999999999603,
+          "flightSeconds": 69.58333333333067,
+          "phase": "space",
+          "stage": "coast",
+          "altitude": 100013.64534432883,
+          "speed": 3140.0421012104875,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 12870,
+          "largestBuildingDisplacement": 36.60224914550781,
+          "maxCollapse": 1,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 940,
+            "triangles": 315316,
+            "geometries": 827,
+            "programs": 96
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 38.254752962320566,
+              "originalTop": 41.81600296232057
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "roads": ["BURRARD ST", "ROBSON ST"],
+      "category": "core-obstructed",
+      "x": 415.67587947125975,
+      "z": 339.6261879997863,
+      "pickedGroundY": 32.05277251769553,
+      "terrainY": 31,
+      "sampledRoadY": 32.052772520521614,
+      "actualLaunchOrigin": {
+        "x": 415.67587947125975,
+        "y": 32.50277252052162,
+        "z": 339.6261879997863
+      },
+      "initialCoreHit": true,
+      "initialHitProbes": [
+        {
+          "index": 8,
+          "strapOn": true,
+          "booster": false,
+          "hit": true
+        }
+      ],
+      "outcome": "space",
+      "flightSeconds": 69.68333333333067,
+      "altitude": 100020.31335893171,
+      "failure": null,
+      "exactCityGeometryRestored": true,
+      "events": [
+        {
+          "type": "ready",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 415.67587947125975,
+            "y": 32.50277252052162,
+            "z": 339.6261879997863
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "countdown",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 415.67587947125975,
+            "y": 32.50277252052162,
+            "z": 339.6261879997863
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 415.67587947125975,
+            "y": 32.50277252052162,
+            "z": 339.6261879997863
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 415.67587947125975,
+            "y": 32.50277252052162,
+            "z": 339.6261879997863
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "liftoff",
+          "time": 23.033333333333307,
+          "position": {
+            "x": 415.67587947125975,
+            "y": 32.50277252052162,
+            "z": 339.6261879997863
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-burnout",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 435.8057415264105,
+            "y": 3008.7259560669845,
+            "z": 338.3708632866013
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 435.8057415264105,
+            "y": 3008.7259560669845,
+            "z": 338.3708632866013
+          },
+          "magnitude": 140000
+        },
+        {
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 439.7599183736147,
+            "y": 3487.0641755489414,
+            "z": 339.8808222695529
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "booster-burnout",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 583.7402890111,
+            "y": 14371.074794283719,
+            "z": 478.5561854834113
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 583.7402890111,
+            "y": 14371.074794283719,
+            "z": 478.5561854834113
+          },
+          "magnitude": 205000
+        },
+        {
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 596.2237678692919,
+            "y": 15065.28742993056,
+            "z": 496.2019299345705
+          },
+          "magnitude": 0
+        },
+        {
+          "type": "mission-complete",
+          "time": 92.69999999999602,
+          "position": {
+            "x": 1442.0470350981395,
+            "y": 100052.81613145223,
+            "z": 5361.741390745432
+          },
+          "magnitude": 0
+        }
+      ],
+      "recordedContactCount": 127,
+      "stagingSamples": [
+        {
+          "elapsed": 34.04999999999935,
+          "flightSeconds": 11.033333333333461,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51184947.97565123
+        },
+        {
+          "elapsed": 34.54999999999932,
+          "flightSeconds": 11.533333333333486,
+          "stage": "strap-separating",
+          "strapAttached": false,
+          "boosterAttached": true,
+          "coreFlame": true,
+          "sideFlames": 0,
+          "stageThrust": 51283532.94426337
+        }
+      ],
+      "firstContacts": [
+        {
+          "elapsed": 21.016666666666755,
+          "flightElapsed": 0,
+          "phase": "ignition",
+          "dt": 0.016666666666666666,
+          "source": "building",
+          "point": {
+            "x": 420.40087947125977,
+            "y": 38.802772520521614,
+            "z": 339.6261879997863
+          },
+          "from": {
+            "x": 415.67587947125975,
+            "y": 38.802772520521614,
+            "z": 339.6261879997863
+          },
+          "to": {
+            "x": 415.67587947125975,
+            "y": 136.20277252052162,
+            "z": 339.6261879997863
+          },
+          "radius": 4.725,
+          "speed": 0,
+          "mass": 1886000,
+          "initialOverlap": true,
+          "bounds": {
+            "minX": 419.9505605015574,
+            "maxX": 437.14876335519824,
+            "minY": 30.6,
+            "maxY": 42.7,
+            "minZ": 332.75997040038476,
+            "maxZ": 350.02458920036275
+          },
+          "polygon": [
+            [
+              [419.9505605015574, 339.70522519999804],
+              [426.50163443644533, 332.75997040038476],
+              [432.50739064500016, 338.79017480022014],
+              [437.14876335519824, 343.4645016001883],
+              [430.83222687139903, 350.02458920036275]
+            ]
+          ]
+        },
+        {
+          "elapsed": 21.03333333333342,
+          "flightElapsed": 0,
+          "phase": "ignition",
+          "dt": 0.016666666666666666,
+          "source": "building",
+          "point": {
+            "x": 420.40087947125977,
+            "y": 38.802772520521614,
+            "z": 339.6261879997863
+          },
+          "from": {
+            "x": 415.67587947125975,
+            "y": 38.802772520521614,
+            "z": 339.6261879997863
+          },
+          "to": {
+            "x": 415.67587947125975,
+            "y": 136.20277252052162,
+            "z": 339.6261879997863
+          },
+          "radius": 4.725,
+          "speed": 0,
+          "mass": 1885990.601851852,
+          "initialOverlap": true,
+          "bounds": {
+            "minX": 419.9505605015574,
+            "maxX": 437.14876335519824,
+            "minY": 30.6,
+            "maxY": 42.7,
+            "minZ": 332.75997040038476,
+            "maxZ": 350.02458920036275
+          },
+          "polygon": [
+            [
+              [419.9505605015574, 339.70522519999804],
+              [426.50163443644533, 332.75997040038476],
+              [432.50739064500016, 338.79017480022014],
+              [437.14876335519824, 343.4645016001883],
+              [430.83222687139903, 350.02458920036275]
+            ]
+          ]
+        },
+        {
+          "elapsed": 21.050000000000086,
+          "flightElapsed": 0,
+          "phase": "ignition",
+          "dt": 0.016666666666666666,
+          "source": "building",
+          "point": {
+            "x": 420.40087947125977,
+            "y": 38.802772520521614,
+            "z": 339.6261879997863
+          },
+          "from": {
+            "x": 415.67587947125975,
+            "y": 38.802772520521614,
+            "z": 339.6261879997863
+          },
+          "to": {
+            "x": 415.67587947125975,
+            "y": 136.20277252052162,
+            "z": 339.6261879997863
+          },
+          "radius": 4.725,
+          "speed": 0,
+          "mass": 1885971.8055555555,
+          "initialOverlap": true,
+          "bounds": {
+            "minX": 419.9505605015574,
+            "maxX": 437.14876335519824,
+            "minY": 30.6,
+            "maxY": 42.7,
+            "minZ": 332.75997040038476,
+            "maxZ": 350.02458920036275
+          },
+          "polygon": [
+            [
+              [419.9505605015574, 339.70522519999804],
+              [426.50163443644533, 332.75997040038476],
+              [432.50739064500016, 338.79017480022014],
+              [437.14876335519824, 343.4645016001883],
+              [430.83222687139903, 350.02458920036275]
+            ]
+          ]
+        }
+      ],
+      "renderedTimeline": [
+        {
+          "elapsed": 16.000000000000373,
+          "flightSeconds": 0,
+          "phase": "ready",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 0,
+          "alteredPositionEntries": 0,
+          "largestBuildingDisplacement": 0,
+          "maxCollapse": 0,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [],
+          "renderer": {
+            "calls": 633,
+            "triangles": 2820310,
+            "geometries": 811,
+            "programs": 92
+          },
+          "contactVolumeTops": []
+        },
+        {
+          "elapsed": 21.516666666666726,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 1,
+          "alteredPositionEntries": 72,
+          "largestBuildingDisplacement": 1.5017547607421875,
+          "maxCollapse": 0.1341751667888872,
+          "dustCount": 8,
+          "dustMaximumCenterRadius": 17.441115908095824,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 631,
+            "triangles": 2831430,
+            "geometries": 822,
+            "programs": 95
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 41.263582467569414,
+              "originalTop": 42.7
+            }
+          ]
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "flightSeconds": 0,
+          "phase": "ignition",
+          "stage": "strap-on",
+          "altitude": 0,
+          "speed": 0,
+          "integrity": 1,
+          "failureStage": "none",
+          "damaged": 70,
+          "alteredPositionEntries": 9624,
+          "largestBuildingDisplacement": 7.1297149658203125,
+          "maxCollapse": 0.6370081018518516,
+          "dustCount": 43,
+          "dustMaximumCenterRadius": 63.907770812907465,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 788,
+            "triangles": 2834812,
+            "geometries": 825,
+            "programs": 95
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 42.7,
+              "originalTop": 42.7
+            }
+          ]
+        },
+        {
+          "elapsed": 23.033333333333307,
+          "flightSeconds": 0.016666666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 0.00402370840728139,
+          "speed": 0.565618438985909,
+          "integrity": 0.9988333333333334,
+          "failureStage": "none",
+          "damaged": 91,
+          "alteredPositionEntries": 13638,
+          "largestBuildingDisplacement": 9.876976013183594,
+          "maxCollapse": 0.882463881724236,
+          "dustCount": 67,
+          "dustMaximumCenterRadius": 81.91261745073625,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 798,
+            "triangles": 2835022,
+            "geometries": 825,
+            "programs": 95
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 42.207877341690015,
+              "originalTop": 42.7
+            }
+          ]
+        },
+        {
+          "elapsed": 23.533333333333278,
+          "flightSeconds": 0.5166666666666666,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 4.753305738852539,
+          "speed": 19.67564748381162,
+          "integrity": 0.9930000000000001,
+          "failureStage": "none",
+          "damaged": 95,
+          "alteredPositionEntries": 16428,
+          "largestBuildingDisplacement": 23.06066131591797,
+          "maxCollapse": 0.9981291828924963,
+          "dustCount": 92,
+          "dustMaximumCenterRadius": 96.13067145042558,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 798,
+            "triangles": 2835022,
+            "geometries": 825,
+            "programs": 95
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 31.540075126283583,
+              "originalTop": 42.7
+            }
+          ]
+        },
+        {
+          "elapsed": 24.53333333333322,
+          "flightSeconds": 1.5166666666666662,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 46.288761027592614,
+          "speed": 62.9936377030148,
+          "integrity": 0.9930000000000001,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 17190,
+          "largestBuildingDisplacement": 60.11724090576172,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 84.06226759267702,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 791,
+            "triangles": 2834891,
+            "geometries": 825,
+            "programs": 95
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 31.5075,
+              "originalTop": 42.7
+            }
+          ]
+        },
+        {
+          "elapsed": 26.033333333333136,
+          "flightSeconds": 3.016666666666661,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 192.31110418239115,
+          "speed": 131.7236399189892,
+          "integrity": 0.9930000000000001,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 17190,
+          "largestBuildingDisplacement": 67.85799789428711,
+          "maxCollapse": 1,
+          "dustCount": 96,
+          "dustMaximumCenterRadius": 122.97528813669324,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 615,
+            "triangles": 2829706,
+            "geometries": 825,
+            "programs": 95
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 31.5075,
+              "originalTop": 42.7
+            }
+          ]
+        },
+        {
+          "elapsed": 28.033333333333022,
+          "flightSeconds": 5.016666666666654,
+          "phase": "flight",
+          "stage": "strap-on",
+          "altitude": 554.3310007873602,
+          "speed": 230.97169073679342,
+          "integrity": 0.9930000000000001,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 17190,
+          "largestBuildingDisplacement": 67.85799789428711,
+          "maxCollapse": 1,
+          "dustCount": 67,
+          "dustMaximumCenterRadius": 135.39070749353556,
+          "visibleJets": 5,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 583,
+            "triangles": 2593354,
+            "geometries": 826,
+            "programs": 95
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 31.5075,
+              "originalTop": 42.7
+            }
+          ]
+        },
+        {
+          "elapsed": 92.69999999999602,
+          "flightSeconds": 69.68333333333067,
+          "phase": "space",
+          "stage": "coast",
+          "altitude": 100020.31335893171,
+          "speed": 3143.041335500392,
+          "integrity": 0.9930000000000001,
+          "failureStage": "none",
+          "damaged": 96,
+          "alteredPositionEntries": 17190,
+          "largestBuildingDisplacement": 67.85799789428711,
+          "maxCollapse": 1,
+          "dustCount": 0,
+          "dustMaximumCenterRadius": 0,
+          "visibleJets": 0,
+          "surfaceAdapters": [
+            {
+              "name": "Measured building bodies with shared facade profiles",
+              "sourceGeometryName": "",
+              "owner": "buildings",
+              "isBody": true,
+              "ancestors": [
+                {
+                  "name": "Measured building bodies with shared facade profiles",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                },
+                {
+                  "name": "",
+                  "visible": true
+                }
+              ],
+              "shared": true,
+              "instanced": false,
+              "maximumDamage": 1,
+              "displacedVertices": 0,
+              "maximumDisplacement": 0,
+              "damageEntries": 531276,
+              "originalGeometryRestoredAfterDraw": true
+            }
+          ],
+          "renderer": {
+            "calls": 935,
+            "triangles": 312436,
+            "geometries": 836,
+            "programs": 102
+          },
+          "contactVolumeTops": [
+            {
+              "currentTop": 31.5075,
+              "originalTop": 42.7
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3741 @@
+{
+  "method": "Production RocketControls + TravelJoystick React SSR markup and real globals/rocket CSS in an isolated DOM browser fixture. No WebGL city or actual rocket bounds claimed.",
+  "output": "/private/tmp/rocket-contact-ui-layout-1792730167732",
+  "cases": [
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1000,
+      "name": "auto-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 24,
+          "y": 260,
+          "width": 286,
+          "height": 115,
+          "right": 310,
+          "bottom": 375
+        },
+        ".rocket-stage-status": {
+          "x": 24,
+          "y": 164,
+          "width": 240,
+          "height": 68,
+          "right": 264,
+          "bottom": 232
+        },
+        ".rocket-telemetry": {
+          "x": 451,
+          "y": 899,
+          "width": 538,
+          "height": 71,
+          "right": 989,
+          "bottom": 970
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 1078,
+          "y": 164,
+          "width": 340,
+          "height": 380.1875,
+          "right": 1418,
+          "bottom": 544.1875
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": "Contact · scrapingSide booster · 102 m BuildingImpact approach speed 0.6 m/s · Vehicle structure 95%Amber rings mark the actual contact points.",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 1095,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 277.1875
+        },
+        {
+          "text": "Manual",
+          "x": 1251.5,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 277.1875
+        },
+        {
+          "text": "Stability assist · On",
+          "x": 1095,
+          "y": 289.1875,
+          "width": 152.890625,
+          "height": 36,
+          "right": 1247.890625,
+          "bottom": 325.1875
+        },
+        {
+          "text": "Launch sound · On",
+          "x": 1247.890625,
+          "y": 289.1875,
+          "width": 149.890625,
+          "height": 36,
+          "right": 1397.78125,
+          "bottom": 325.1875
+        },
+        {
+          "text": "First person",
+          "x": 1095,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 373.1875
+        },
+        {
+          "text": "Third person",
+          "x": 1251.5,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 373.1875
+        },
+        {
+          "text": "Abort launch",
+          "x": 1095,
+          "y": 385.1875,
+          "width": 92.78125,
+          "height": 36,
+          "right": 1187.78125,
+          "bottom": 421.1875
+        },
+        {
+          "text": "Back to Vancouver",
+          "x": 1095,
+          "y": 447.1875,
+          "width": 306,
+          "height": 36,
+          "right": 1401,
+          "bottom": 483.1875
+        },
+        {
+          "text": "Flight guide",
+          "x": 1095,
+          "y": 492.1875,
+          "width": 306,
+          "height": 35,
+          "right": 1401,
+          "bottom": 527.1875
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1000,
+      "name": "manual-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 24,
+          "y": 260,
+          "width": 286,
+          "height": 115,
+          "right": 310,
+          "bottom": 375
+        },
+        ".rocket-stage-status": {
+          "x": 24,
+          "y": 164,
+          "width": 240,
+          "height": 68,
+          "right": 264,
+          "bottom": 232
+        },
+        ".rocket-telemetry": {
+          "x": 451,
+          "y": 899,
+          "width": 538,
+          "height": 71,
+          "right": 989,
+          "bottom": 970
+        },
+        ".rocket-attitude": {
+          "x": 612,
+          "y": 452.5,
+          "width": 216,
+          "height": 95,
+          "right": 828,
+          "bottom": 547.5
+        },
+        ".rocket-throttle": {
+          "x": 1332,
+          "y": 645,
+          "width": 85,
+          "height": 225,
+          "right": 1417,
+          "bottom": 870
+        },
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 1078,
+          "y": 164,
+          "width": 340,
+          "height": 380.1875,
+          "right": 1418,
+          "bottom": 544.1875
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": "Contact · scrapingSide booster · 102 m BuildingImpact approach speed 0.6 m/s · Vehicle structure 95%Amber rings mark the actual contact points.",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 1095,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 277.1875
+        },
+        {
+          "text": "Manual",
+          "x": 1251.5,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 277.1875
+        },
+        {
+          "text": "Stability assist · On",
+          "x": 1095,
+          "y": 289.1875,
+          "width": 152.890625,
+          "height": 36,
+          "right": 1247.890625,
+          "bottom": 325.1875
+        },
+        {
+          "text": "Launch sound · On",
+          "x": 1247.890625,
+          "y": 289.1875,
+          "width": 149.890625,
+          "height": 36,
+          "right": 1397.78125,
+          "bottom": 325.1875
+        },
+        {
+          "text": "First person",
+          "x": 1095,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 373.1875
+        },
+        {
+          "text": "Third person",
+          "x": 1251.5,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 373.1875
+        },
+        {
+          "text": "Abort launch",
+          "x": 1095,
+          "y": 385.1875,
+          "width": 92.78125,
+          "height": 36,
+          "right": 1187.78125,
+          "bottom": 421.1875
+        },
+        {
+          "text": "Back to Vancouver",
+          "x": 1095,
+          "y": 447.1875,
+          "width": 306,
+          "height": 36,
+          "right": 1401,
+          "bottom": 483.1875
+        },
+        {
+          "text": "Flight guide",
+          "x": 1095,
+          "y": 492.1875,
+          "width": 306,
+          "height": 35,
+          "right": 1401,
+          "bottom": 527.1875
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1000,
+      "name": "fatal-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 803,
+          "width": 332,
+          "height": 101,
+          "right": 356,
+          "bottom": 904
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": null,
+      "timeline": "Building→Vehicle breakup",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1000,
+      "name": "fire-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 824,
+          "width": 221.359375,
+          "height": 80,
+          "right": 245.359375,
+          "bottom": 904
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": null,
+      "timeline": "Rocket on fire→Vehicle fire / explosion",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1000,
+      "name": "recovery",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": {
+          "x": 451,
+          "y": 899,
+          "width": 538,
+          "height": 71,
+          "right": 989,
+          "bottom": 970
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 1078,
+          "y": 164,
+          "width": 340,
+          "height": 316.375,
+          "right": 1418,
+          "bottom": 480.375
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Rebuild at this site",
+          "x": 1095,
+          "y": 337.375,
+          "width": 148.5,
+          "height": 36,
+          "right": 1243.5,
+          "bottom": 373.375
+        },
+        {
+          "text": "Back to Vancouver",
+          "x": 1252.5,
+          "y": 337.375,
+          "width": 148.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 373.375
+        },
+        {
+          "text": "New rocket",
+          "x": 1095,
+          "y": 383.375,
+          "width": 306,
+          "height": 36,
+          "right": 1401,
+          "bottom": 419.375
+        },
+        {
+          "text": "Flight guide",
+          "x": 1095,
+          "y": 428.375,
+          "width": 306,
+          "height": 35,
+          "right": 1401,
+          "bottom": 463.375
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1000,
+      "name": "flight-fire",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": {
+          "x": 24,
+          "y": 164,
+          "width": 240,
+          "height": 68,
+          "right": 264,
+          "bottom": 232
+        },
+        ".rocket-telemetry": {
+          "x": 451,
+          "y": 899,
+          "width": 538,
+          "height": 71,
+          "right": 989,
+          "bottom": 970
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 1078,
+          "y": 164,
+          "width": 340,
+          "height": 380.1875,
+          "right": 1418,
+          "bottom": 544.1875
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": {
+          "x": 609.2578125,
+          "y": 166,
+          "width": 221.484375,
+          "height": 37,
+          "right": 830.7421875,
+          "bottom": 203
+        },
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 1095,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 277.1875
+        },
+        {
+          "text": "Manual",
+          "x": 1251.5,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 277.1875
+        },
+        {
+          "text": "Stability assist · On",
+          "x": 1095,
+          "y": 289.1875,
+          "width": 152.890625,
+          "height": 36,
+          "right": 1247.890625,
+          "bottom": 325.1875
+        },
+        {
+          "text": "Launch sound · On",
+          "x": 1247.890625,
+          "y": 289.1875,
+          "width": 149.890625,
+          "height": 36,
+          "right": 1397.78125,
+          "bottom": 325.1875
+        },
+        {
+          "text": "First person",
+          "x": 1095,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 373.1875
+        },
+        {
+          "text": "Third person",
+          "x": 1251.5,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 373.1875
+        },
+        {
+          "text": "Abort launch",
+          "x": 1095,
+          "y": 385.1875,
+          "width": 92.78125,
+          "height": 36,
+          "right": 1187.78125,
+          "bottom": 421.1875
+        },
+        {
+          "text": "Back to Vancouver",
+          "x": 1095,
+          "y": 447.1875,
+          "width": 306,
+          "height": 36,
+          "right": 1401,
+          "bottom": 483.1875
+        },
+        {
+          "text": "Flight guide",
+          "x": 1095,
+          "y": 492.1875,
+          "width": 306,
+          "height": 35,
+          "right": 1401,
+          "bottom": 527.1875
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "en",
+      "width": 615,
+      "height": 669,
+      "name": "auto-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 274,
+          "width": 283.5,
+          "height": 115,
+          "right": 295.5,
+          "bottom": 389
+        },
+        ".rocket-stage-status": {
+          "x": 12,
+          "y": 190,
+          "width": 264,
+          "height": 68,
+          "right": 276,
+          "bottom": 258
+        },
+        ".rocket-telemetry": {
+          "x": 190.96875,
+          "y": 537,
+          "width": 233.0625,
+          "height": 54,
+          "right": 424.03125,
+          "bottom": 591
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 271.46875,
+          "height": 48,
+          "right": 283.46875,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": "Contact · scrapingSide booster · 102 m BuildingImpact approach speed 0.6 m/s · Vehicle structure 95%Amber rings mark the actual contact points.",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 18,
+          "y": 140,
+          "width": 78.765625,
+          "height": 36,
+          "right": 96.765625,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 101.765625,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 197.484375,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 202.484375,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 277.46875,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "en",
+      "width": 615,
+      "height": 669,
+      "name": "manual-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 394.5,
+          "width": 283.5,
+          "height": 115,
+          "right": 295.5,
+          "bottom": 509.5
+        },
+        ".rocket-stage-status": {
+          "x": 191.5,
+          "y": 254,
+          "width": 232,
+          "height": 68,
+          "right": 423.5,
+          "bottom": 322
+        },
+        ".rocket-telemetry": {
+          "x": 190.96875,
+          "y": 190,
+          "width": 233.0625,
+          "height": 54,
+          "right": 424.03125,
+          "bottom": 244
+        },
+        ".rocket-attitude": {
+          "x": 199.5,
+          "y": 287,
+          "width": 216,
+          "height": 95,
+          "right": 415.5,
+          "bottom": 382
+        },
+        ".rocket-throttle": {
+          "x": 535,
+          "y": 355,
+          "width": 66,
+          "height": 171,
+          "right": 601,
+          "bottom": 526
+        },
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 263.25,
+          "height": 48,
+          "right": 275.25,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": {
+          "x": 18,
+          "y": 522,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 644
+        },
+        ".bottom-bar": null
+      },
+      "cueText": "Contact · scrapingSide booster · 102 m BuildingImpact approach speed 0.6 m/s · Vehicle structure 95%Amber rings mark the actual contact points.",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Manual",
+          "x": 18,
+          "y": 140,
+          "width": 70.546875,
+          "height": 36,
+          "right": 88.546875,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 93.546875,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 189.265625,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 194.265625,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 269.25,
+          "bottom": 176
+        },
+        {
+          "text": "",
+          "x": 18,
+          "y": 522,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 644
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "en",
+      "width": 615,
+      "height": 669,
+      "name": "fatal-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 472,
+          "width": 332,
+          "height": 101,
+          "right": 356,
+          "bottom": 573
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "Building→Vehicle breakup",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "en",
+      "width": 615,
+      "height": 669,
+      "name": "fire-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 493,
+          "width": 221.359375,
+          "height": 80,
+          "right": 245.359375,
+          "bottom": 573
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "Rocket on fire→Vehicle fire / explosion",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "en",
+      "width": 615,
+      "height": 669,
+      "name": "recovery",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 273,
+          "y": 254.625,
+          "width": 330,
+          "height": 308.375,
+          "right": 603,
+          "bottom": 563
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Rebuild at this site",
+          "x": 286,
+          "y": 424,
+          "width": 147.5,
+          "height": 36,
+          "right": 433.5,
+          "bottom": 460
+        },
+        {
+          "text": "Back to Vancouver",
+          "x": 442.5,
+          "y": 424,
+          "width": 147.5,
+          "height": 36,
+          "right": 590,
+          "bottom": 460
+        },
+        {
+          "text": "New rocket",
+          "x": 286,
+          "y": 470,
+          "width": 304,
+          "height": 36,
+          "right": 590,
+          "bottom": 506
+        },
+        {
+          "text": "Flight guide",
+          "x": 286,
+          "y": 515,
+          "width": 304,
+          "height": 35,
+          "right": 590,
+          "bottom": 550
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "en",
+      "width": 615,
+      "height": 669,
+      "name": "flight-fire",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": {
+          "x": 12,
+          "y": 190,
+          "width": 264,
+          "height": 68,
+          "right": 276,
+          "bottom": 258
+        },
+        ".rocket-telemetry": {
+          "x": 190.96875,
+          "y": 537,
+          "width": 233.0625,
+          "height": 54,
+          "right": 424.03125,
+          "bottom": 591
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 271.46875,
+          "height": 48,
+          "right": 283.46875,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": {
+          "x": 204.734375,
+          "y": 136,
+          "width": 205.53125,
+          "height": 36,
+          "right": 410.265625,
+          "bottom": 172
+        },
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 18,
+          "y": 140,
+          "width": 78.765625,
+          "height": 36,
+          "right": 96.765625,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 101.765625,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 197.484375,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 202.484375,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 277.46875,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "name": "auto-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 274,
+          "width": 171,
+          "height": 130,
+          "right": 183,
+          "bottom": 404
+        },
+        ".rocket-stage-status": {
+          "x": 12,
+          "y": 190,
+          "width": 264,
+          "height": 68,
+          "right": 276,
+          "bottom": 258
+        },
+        ".rocket-telemetry": {
+          "x": 78.46875,
+          "y": 712,
+          "width": 233.0625,
+          "height": 54,
+          "right": 311.53125,
+          "bottom": 766
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 271.46875,
+          "height": 48,
+          "right": 283.46875,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": "Contact · scrapingSide booster · 102 m BuildingImpact approach speed 0.6 m/s · Vehicle structure 95%Amber rings mark the actual contact points.",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 18,
+          "y": 140,
+          "width": 78.765625,
+          "height": 36,
+          "right": 96.765625,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 101.765625,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 197.484375,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 202.484375,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 277.46875,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "name": "manual-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 482,
+          "width": 171,
+          "height": 130,
+          "right": 183,
+          "bottom": 612
+        },
+        ".rocket-stage-status": {
+          "x": 79,
+          "y": 254,
+          "width": 232,
+          "height": 68,
+          "right": 311,
+          "bottom": 322
+        },
+        ".rocket-telemetry": {
+          "x": 78.46875,
+          "y": 190,
+          "width": 233.0625,
+          "height": 54,
+          "right": 311.53125,
+          "bottom": 244
+        },
+        ".rocket-attitude": {
+          "x": 87,
+          "y": 374.5,
+          "width": 216,
+          "height": 95,
+          "right": 303,
+          "bottom": 469.5
+        },
+        ".rocket-throttle": {
+          "x": 310,
+          "y": 530,
+          "width": 66,
+          "height": 171,
+          "right": 376,
+          "bottom": 701
+        },
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 263.25,
+          "height": 48,
+          "right": 275.25,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": {
+          "x": 18,
+          "y": 697,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 819
+        },
+        ".bottom-bar": null
+      },
+      "cueText": "Contact · scrapingSide booster · 102 m BuildingImpact approach speed 0.6 m/s · Vehicle structure 95%Amber rings mark the actual contact points.",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Manual",
+          "x": 18,
+          "y": 140,
+          "width": 70.546875,
+          "height": 36,
+          "right": 88.546875,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 93.546875,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 189.265625,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 194.265625,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 269.25,
+          "bottom": 176
+        },
+        {
+          "text": "",
+          "x": 18,
+          "y": 697,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 819
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "name": "fatal-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 632,
+          "width": 290,
+          "height": 116,
+          "right": 314,
+          "bottom": 748
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "Building→Vehicle breakup",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "name": "fire-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 668,
+          "width": 221.359375,
+          "height": 80,
+          "right": 245.359375,
+          "bottom": 748
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "Rocket on fire→Vehicle fire / explosion",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "name": "recovery",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 48,
+          "y": 429.625,
+          "width": 330,
+          "height": 308.375,
+          "right": 378,
+          "bottom": 738
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Rebuild at this site",
+          "x": 61,
+          "y": 599,
+          "width": 147.5,
+          "height": 36,
+          "right": 208.5,
+          "bottom": 635
+        },
+        {
+          "text": "Back to Vancouver",
+          "x": 217.5,
+          "y": 599,
+          "width": 147.5,
+          "height": 36,
+          "right": 365,
+          "bottom": 635
+        },
+        {
+          "text": "New rocket",
+          "x": 61,
+          "y": 645,
+          "width": 304,
+          "height": 36,
+          "right": 365,
+          "bottom": 681
+        },
+        {
+          "text": "Flight guide",
+          "x": 61,
+          "y": 690,
+          "width": 304,
+          "height": 35,
+          "right": 365,
+          "bottom": 725
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "name": "flight-fire",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": {
+          "x": 12,
+          "y": 190,
+          "width": 264,
+          "height": 68,
+          "right": 276,
+          "bottom": 258
+        },
+        ".rocket-telemetry": {
+          "x": 78.46875,
+          "y": 712,
+          "width": 233.0625,
+          "height": 54,
+          "right": 311.53125,
+          "bottom": 766
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 271.46875,
+          "height": 48,
+          "right": 283.46875,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": {
+          "x": 97.5,
+          "y": 136,
+          "width": 195,
+          "height": 52,
+          "right": 292.5,
+          "bottom": 188
+        },
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 18,
+          "y": 140,
+          "width": 78.765625,
+          "height": 36,
+          "right": 96.765625,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 101.765625,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 197.484375,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 202.484375,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 277.46875,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "name": "auto-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 192,
+          "width": 270,
+          "height": 61.1875,
+          "right": 282,
+          "bottom": 253.1875
+        },
+        ".rocket-stage-status": {
+          "x": 297,
+          "y": 302,
+          "width": 250,
+          "height": 68,
+          "right": 547,
+          "bottom": 370
+        },
+        ".rocket-telemetry": {
+          "x": 300.96875,
+          "y": 240,
+          "width": 242.0625,
+          "height": 54,
+          "right": 543.03125,
+          "bottom": 294
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 271.46875,
+          "height": 48,
+          "right": 283.46875,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": "Contact · scrapingSide booster · 102 m BuildingImpact approach speed 0.6 m/s · Vehicle structure 95%Amber rings mark the actual contact points.",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 18,
+          "y": 140,
+          "width": 78.765625,
+          "height": 36,
+          "right": 96.765625,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 101.765625,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 197.484375,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 202.484375,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 277.46875,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "name": "manual-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 192,
+          "width": 270,
+          "height": 61.1875,
+          "right": 282,
+          "bottom": 253.1875
+        },
+        ".rocket-stage-status": {
+          "x": 297,
+          "y": 302,
+          "width": 250,
+          "height": 68,
+          "right": 547,
+          "bottom": 370
+        },
+        ".rocket-telemetry": {
+          "x": 300.96875,
+          "y": 240,
+          "width": 242.0625,
+          "height": 54,
+          "right": 543.03125,
+          "bottom": 294
+        },
+        ".rocket-attitude": {
+          "x": 314,
+          "y": 147.5,
+          "width": 216,
+          "height": 95,
+          "right": 530,
+          "bottom": 242.5
+        },
+        ".rocket-throttle": {
+          "x": 764,
+          "y": 137,
+          "width": 66,
+          "height": 143,
+          "right": 830,
+          "bottom": 280
+        },
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 263.25,
+          "height": 48,
+          "right": 275.25,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": {
+          "x": 18,
+          "y": 256,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 378
+        },
+        ".bottom-bar": null
+      },
+      "cueText": "Contact · scrapingSide booster · 102 m BuildingImpact approach speed 0.6 m/s · Vehicle structure 95%Amber rings mark the actual contact points.",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Manual",
+          "x": 18,
+          "y": 140,
+          "width": 70.546875,
+          "height": 36,
+          "right": 88.546875,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 93.546875,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 189.265625,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 194.265625,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 269.25,
+          "bottom": 176
+        },
+        {
+          "text": "",
+          "x": 18,
+          "y": 256,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 378
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "name": "fatal-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 193,
+          "width": 332,
+          "height": 101,
+          "right": 356,
+          "bottom": 294
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "Building→Vehicle breakup",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "name": "fire-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 214,
+          "width": 221.359375,
+          "height": 80,
+          "right": 245.359375,
+          "bottom": 294
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "Rocket on fire→Vehicle fire / explosion",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "name": "recovery",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 454,
+          "y": 93,
+          "width": 295,
+          "height": 215,
+          "right": 749,
+          "bottom": 308
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Rebuild at this site",
+          "x": 467,
+          "y": 274.375,
+          "width": 130,
+          "height": 52,
+          "right": 597,
+          "bottom": 326.375
+        },
+        {
+          "text": "Back to Vancouver",
+          "x": 606,
+          "y": 274.375,
+          "width": 130,
+          "height": 52,
+          "right": 736,
+          "bottom": 326.375
+        },
+        {
+          "text": "New rocket",
+          "x": 467,
+          "y": 336.375,
+          "width": 269,
+          "height": 36,
+          "right": 736,
+          "bottom": 372.375
+        },
+        {
+          "text": "Flight guide",
+          "x": 467,
+          "y": 381.375,
+          "width": 269,
+          "height": 35,
+          "right": 736,
+          "bottom": 416.375
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "name": "flight-fire",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": {
+          "x": 297,
+          "y": 302,
+          "width": 250,
+          "height": 68,
+          "right": 547,
+          "bottom": 370
+        },
+        ".rocket-telemetry": {
+          "x": 300.96875,
+          "y": 240,
+          "width": 242.0625,
+          "height": 54,
+          "right": 543.03125,
+          "bottom": 294
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 271.46875,
+          "height": 48,
+          "right": 283.46875,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": {
+          "x": 319.234375,
+          "y": 136,
+          "width": 205.53125,
+          "height": 36,
+          "right": 524.765625,
+          "bottom": 172
+        },
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "Autopilot",
+          "x": 18,
+          "y": 140,
+          "width": 78.765625,
+          "height": 36,
+          "right": 96.765625,
+          "bottom": 176
+        },
+        {
+          "text": "Third person",
+          "x": 101.765625,
+          "y": 140,
+          "width": 95.71875,
+          "height": 36,
+          "right": 197.484375,
+          "bottom": 176
+        },
+        {
+          "text": "Abort launch",
+          "x": 202.484375,
+          "y": 140,
+          "width": 74.984375,
+          "height": 36,
+          "right": 277.46875,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 1440,
+      "height": 1000,
+      "name": "auto-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 24,
+          "y": 260,
+          "width": 286,
+          "height": 100,
+          "right": 310,
+          "bottom": 360
+        },
+        ".rocket-stage-status": {
+          "x": 24,
+          "y": 164,
+          "width": 240,
+          "height": 68,
+          "right": 264,
+          "bottom": 232
+        },
+        ".rocket-telemetry": {
+          "x": 451,
+          "y": 899,
+          "width": 538,
+          "height": 71,
+          "right": 989,
+          "bottom": 970
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 1078,
+          "y": 164,
+          "width": 340,
+          "height": 364.1875,
+          "right": 1418,
+          "bottom": 528.1875
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": "發生接觸 · 箭體擦碰側助推器 · 102 m 建築迎面撞擊速度 0.6 m/s · 箭體結構 95%琥珀色圓環標示實際接觸位置。",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 1095,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 277.1875
+        },
+        {
+          "text": "手動操控",
+          "x": 1251.5,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 277.1875
+        },
+        {
+          "text": "穩定輔助 · 開啟",
+          "x": 1095,
+          "y": 289.1875,
+          "width": 128,
+          "height": 36,
+          "right": 1223,
+          "bottom": 325.1875
+        },
+        {
+          "text": "發射音效 · 開啟",
+          "x": 1223,
+          "y": 289.1875,
+          "width": 128,
+          "height": 36,
+          "right": 1351,
+          "bottom": 325.1875
+        },
+        {
+          "text": "第一視角",
+          "x": 1095,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 373.1875
+        },
+        {
+          "text": "第三視角",
+          "x": 1251.5,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 373.1875
+        },
+        {
+          "text": "中止發射",
+          "x": 1095,
+          "y": 385.1875,
+          "width": 70,
+          "height": 36,
+          "right": 1165,
+          "bottom": 421.1875
+        },
+        {
+          "text": "返回溫哥華",
+          "x": 1095,
+          "y": 431.1875,
+          "width": 306,
+          "height": 36,
+          "right": 1401,
+          "bottom": 467.1875
+        },
+        {
+          "text": "飛行指南",
+          "x": 1095,
+          "y": 476.1875,
+          "width": 306,
+          "height": 35,
+          "right": 1401,
+          "bottom": 511.1875
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 1440,
+      "height": 1000,
+      "name": "manual-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 24,
+          "y": 260,
+          "width": 286,
+          "height": 100,
+          "right": 310,
+          "bottom": 360
+        },
+        ".rocket-stage-status": {
+          "x": 24,
+          "y": 164,
+          "width": 240,
+          "height": 68,
+          "right": 264,
+          "bottom": 232
+        },
+        ".rocket-telemetry": {
+          "x": 451,
+          "y": 899,
+          "width": 538,
+          "height": 71,
+          "right": 989,
+          "bottom": 970
+        },
+        ".rocket-attitude": {
+          "x": 612,
+          "y": 452.5,
+          "width": 216,
+          "height": 95,
+          "right": 828,
+          "bottom": 547.5
+        },
+        ".rocket-throttle": {
+          "x": 1332,
+          "y": 645,
+          "width": 85,
+          "height": 225,
+          "right": 1417,
+          "bottom": 870
+        },
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 1078,
+          "y": 164,
+          "width": 340,
+          "height": 364.1875,
+          "right": 1418,
+          "bottom": 528.1875
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": "發生接觸 · 箭體擦碰側助推器 · 102 m 建築迎面撞擊速度 0.6 m/s · 箭體結構 95%琥珀色圓環標示實際接觸位置。",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 1095,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 277.1875
+        },
+        {
+          "text": "手動操控",
+          "x": 1251.5,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 277.1875
+        },
+        {
+          "text": "穩定輔助 · 開啟",
+          "x": 1095,
+          "y": 289.1875,
+          "width": 128,
+          "height": 36,
+          "right": 1223,
+          "bottom": 325.1875
+        },
+        {
+          "text": "發射音效 · 開啟",
+          "x": 1223,
+          "y": 289.1875,
+          "width": 128,
+          "height": 36,
+          "right": 1351,
+          "bottom": 325.1875
+        },
+        {
+          "text": "第一視角",
+          "x": 1095,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 373.1875
+        },
+        {
+          "text": "第三視角",
+          "x": 1251.5,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 373.1875
+        },
+        {
+          "text": "中止發射",
+          "x": 1095,
+          "y": 385.1875,
+          "width": 70,
+          "height": 36,
+          "right": 1165,
+          "bottom": 421.1875
+        },
+        {
+          "text": "返回溫哥華",
+          "x": 1095,
+          "y": 431.1875,
+          "width": 306,
+          "height": 36,
+          "right": 1401,
+          "bottom": 467.1875
+        },
+        {
+          "text": "飛行指南",
+          "x": 1095,
+          "y": 476.1875,
+          "width": 306,
+          "height": 35,
+          "right": 1401,
+          "bottom": 511.1875
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 1440,
+      "height": 1000,
+      "name": "fatal-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 803,
+          "width": 246.453125,
+          "height": 101,
+          "right": 270.453125,
+          "bottom": 904
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": null,
+      "timeline": "建築→箭體破裂",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 1440,
+      "height": 1000,
+      "name": "fire-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 824,
+          "width": 158,
+          "height": 80,
+          "right": 182,
+          "bottom": 904
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": null,
+      "timeline": "箭體起火→箭體起火／爆炸",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 1440,
+      "height": 1000,
+      "name": "recovery",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": {
+          "x": 451,
+          "y": 899,
+          "width": 538,
+          "height": 71,
+          "right": 989,
+          "bottom": 970
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 1078,
+          "y": 164,
+          "width": 340,
+          "height": 316.375,
+          "right": 1418,
+          "bottom": 480.375
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "在此重新搭建",
+          "x": 1095,
+          "y": 337.375,
+          "width": 148.5,
+          "height": 36,
+          "right": 1243.5,
+          "bottom": 373.375
+        },
+        {
+          "text": "返回溫哥華",
+          "x": 1252.5,
+          "y": 337.375,
+          "width": 148.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 373.375
+        },
+        {
+          "text": "新火箭",
+          "x": 1095,
+          "y": 383.375,
+          "width": 306,
+          "height": 36,
+          "right": 1401,
+          "bottom": 419.375
+        },
+        {
+          "text": "飛行指南",
+          "x": 1095,
+          "y": 428.375,
+          "width": 306,
+          "height": 35,
+          "right": 1401,
+          "bottom": 463.375
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 1440,
+      "height": 1000,
+      "name": "flight-fire",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": {
+          "x": 24,
+          "y": 164,
+          "width": 240,
+          "height": 68,
+          "right": 264,
+          "bottom": 232
+        },
+        ".rocket-telemetry": {
+          "x": 451,
+          "y": 899,
+          "width": 538,
+          "height": 71,
+          "right": 989,
+          "bottom": 970
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 1078,
+          "y": 164,
+          "width": 340,
+          "height": 364.1875,
+          "right": 1418,
+          "bottom": 528.1875
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": {
+          "x": 634.984375,
+          "y": 166,
+          "width": 170.03125,
+          "height": 37,
+          "right": 805.015625,
+          "bottom": 203
+        },
+        ".travel-joystick": null,
+        ".bottom-bar": {
+          "x": 26,
+          "y": 911,
+          "width": 1388,
+          "height": 54,
+          "right": 1414,
+          "bottom": 965
+        }
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 1095,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 277.1875
+        },
+        {
+          "text": "手動操控",
+          "x": 1251.5,
+          "y": 241.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 277.1875
+        },
+        {
+          "text": "穩定輔助 · 開啟",
+          "x": 1095,
+          "y": 289.1875,
+          "width": 128,
+          "height": 36,
+          "right": 1223,
+          "bottom": 325.1875
+        },
+        {
+          "text": "發射音效 · 開啟",
+          "x": 1223,
+          "y": 289.1875,
+          "width": 128,
+          "height": 36,
+          "right": 1351,
+          "bottom": 325.1875
+        },
+        {
+          "text": "第一視角",
+          "x": 1095,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1244.5,
+          "bottom": 373.1875
+        },
+        {
+          "text": "第三視角",
+          "x": 1251.5,
+          "y": 337.1875,
+          "width": 149.5,
+          "height": 36,
+          "right": 1401,
+          "bottom": 373.1875
+        },
+        {
+          "text": "中止發射",
+          "x": 1095,
+          "y": 385.1875,
+          "width": 70,
+          "height": 36,
+          "right": 1165,
+          "bottom": 421.1875
+        },
+        {
+          "text": "返回溫哥華",
+          "x": 1095,
+          "y": 431.1875,
+          "width": 306,
+          "height": 36,
+          "right": 1401,
+          "bottom": 467.1875
+        },
+        {
+          "text": "飛行指南",
+          "x": 1095,
+          "y": 476.1875,
+          "width": 306,
+          "height": 35,
+          "right": 1401,
+          "bottom": 511.1875
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 615,
+      "height": 669,
+      "name": "auto-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 274,
+          "width": 283.5,
+          "height": 100,
+          "right": 295.5,
+          "bottom": 374
+        },
+        ".rocket-stage-status": {
+          "x": 12,
+          "y": 190,
+          "width": 264,
+          "height": 68,
+          "right": 276,
+          "bottom": 258
+        },
+        ".rocket-telemetry": {
+          "x": 191,
+          "y": 537,
+          "width": 233,
+          "height": 54,
+          "right": 424,
+          "bottom": 591
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": "發生接觸 · 箭體擦碰側助推器 · 102 m 建築迎面撞擊速度 0.6 m/s · 箭體結構 95%琥珀色圓環標示實際接觸位置。",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 615,
+      "height": 669,
+      "name": "manual-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 394.5,
+          "width": 283.5,
+          "height": 100,
+          "right": 295.5,
+          "bottom": 494.5
+        },
+        ".rocket-stage-status": {
+          "x": 191.5,
+          "y": 254,
+          "width": 232,
+          "height": 68,
+          "right": 423.5,
+          "bottom": 322
+        },
+        ".rocket-telemetry": {
+          "x": 191,
+          "y": 190,
+          "width": 233,
+          "height": 54,
+          "right": 424,
+          "bottom": 244
+        },
+        ".rocket-attitude": {
+          "x": 199.5,
+          "y": 287,
+          "width": 216,
+          "height": 95,
+          "right": 415.5,
+          "bottom": 382
+        },
+        ".rocket-throttle": {
+          "x": 535,
+          "y": 355,
+          "width": 66,
+          "height": 171,
+          "right": 601,
+          "bottom": 526
+        },
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": {
+          "x": 18,
+          "y": 522,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 644
+        },
+        ".bottom-bar": null
+      },
+      "cueText": "發生接觸 · 箭體擦碰側助推器 · 102 m 建築迎面撞擊速度 0.6 m/s · 箭體結構 95%琥珀色圓環標示實際接觸位置。",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "手動操控",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        },
+        {
+          "text": "",
+          "x": 18,
+          "y": 522,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 644
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 615,
+      "height": 669,
+      "name": "fatal-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 472,
+          "width": 246.453125,
+          "height": 101,
+          "right": 270.453125,
+          "bottom": 573
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "建築→箭體破裂",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 615,
+      "height": 669,
+      "name": "fire-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 493,
+          "width": 158,
+          "height": 80,
+          "right": 182,
+          "bottom": 573
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "箭體起火→箭體起火／爆炸",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 615,
+      "height": 669,
+      "name": "recovery",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 273,
+          "y": 254.625,
+          "width": 330,
+          "height": 308.375,
+          "right": 603,
+          "bottom": 563
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "在此重新搭建",
+          "x": 286,
+          "y": 424,
+          "width": 147.5,
+          "height": 36,
+          "right": 433.5,
+          "bottom": 460
+        },
+        {
+          "text": "返回溫哥華",
+          "x": 442.5,
+          "y": 424,
+          "width": 147.5,
+          "height": 36,
+          "right": 590,
+          "bottom": 460
+        },
+        {
+          "text": "新火箭",
+          "x": 286,
+          "y": 470,
+          "width": 304,
+          "height": 36,
+          "right": 590,
+          "bottom": 506
+        },
+        {
+          "text": "飛行指南",
+          "x": 286,
+          "y": 515,
+          "width": 304,
+          "height": 35,
+          "right": 590,
+          "bottom": 550
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 615,
+      "height": 669,
+      "name": "flight-fire",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": {
+          "x": 12,
+          "y": 190,
+          "width": 264,
+          "height": 68,
+          "right": 276,
+          "bottom": 258
+        },
+        ".rocket-telemetry": {
+          "x": 191,
+          "y": 537,
+          "width": 233,
+          "height": 54,
+          "right": 424,
+          "bottom": 591
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": {
+          "x": 228.3203125,
+          "y": 136,
+          "width": 158.359375,
+          "height": 36,
+          "right": 386.6796875,
+          "bottom": 172
+        },
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 615,
+      "viewportWidth": 615
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 390,
+      "height": 844,
+      "name": "auto-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 274,
+          "width": 171,
+          "height": 115,
+          "right": 183,
+          "bottom": 389
+        },
+        ".rocket-stage-status": {
+          "x": 12,
+          "y": 190,
+          "width": 264,
+          "height": 68,
+          "right": 276,
+          "bottom": 258
+        },
+        ".rocket-telemetry": {
+          "x": 78.5,
+          "y": 712,
+          "width": 233,
+          "height": 54,
+          "right": 311.5,
+          "bottom": 766
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": "發生接觸 · 箭體擦碰側助推器 · 102 m 建築迎面撞擊速度 0.6 m/s · 箭體結構 95%琥珀色圓環標示實際接觸位置。",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 390,
+      "height": 844,
+      "name": "manual-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 482,
+          "width": 171,
+          "height": 115,
+          "right": 183,
+          "bottom": 597
+        },
+        ".rocket-stage-status": {
+          "x": 79,
+          "y": 254,
+          "width": 232,
+          "height": 68,
+          "right": 311,
+          "bottom": 322
+        },
+        ".rocket-telemetry": {
+          "x": 78.5,
+          "y": 190,
+          "width": 233,
+          "height": 54,
+          "right": 311.5,
+          "bottom": 244
+        },
+        ".rocket-attitude": {
+          "x": 87,
+          "y": 374.5,
+          "width": 216,
+          "height": 95,
+          "right": 303,
+          "bottom": 469.5
+        },
+        ".rocket-throttle": {
+          "x": 310,
+          "y": 530,
+          "width": 66,
+          "height": 171,
+          "right": 376,
+          "bottom": 701
+        },
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": {
+          "x": 18,
+          "y": 697,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 819
+        },
+        ".bottom-bar": null
+      },
+      "cueText": "發生接觸 · 箭體擦碰側助推器 · 102 m 建築迎面撞擊速度 0.6 m/s · 箭體結構 95%琥珀色圓環標示實際接觸位置。",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "手動操控",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        },
+        {
+          "text": "",
+          "x": 18,
+          "y": 697,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 819
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 390,
+      "height": 844,
+      "name": "fatal-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 647,
+          "width": 246.453125,
+          "height": 101,
+          "right": 270.453125,
+          "bottom": 748
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "建築→箭體破裂",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 390,
+      "height": 844,
+      "name": "fire-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 668,
+          "width": 158,
+          "height": 80,
+          "right": 182,
+          "bottom": 748
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "箭體起火→箭體起火／爆炸",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 390,
+      "height": 844,
+      "name": "recovery",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 48,
+          "y": 429.625,
+          "width": 330,
+          "height": 308.375,
+          "right": 378,
+          "bottom": 738
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "在此重新搭建",
+          "x": 61,
+          "y": 599,
+          "width": 147.5,
+          "height": 36,
+          "right": 208.5,
+          "bottom": 635
+        },
+        {
+          "text": "返回溫哥華",
+          "x": 217.5,
+          "y": 599,
+          "width": 147.5,
+          "height": 36,
+          "right": 365,
+          "bottom": 635
+        },
+        {
+          "text": "新火箭",
+          "x": 61,
+          "y": 645,
+          "width": 304,
+          "height": 36,
+          "right": 365,
+          "bottom": 681
+        },
+        {
+          "text": "飛行指南",
+          "x": 61,
+          "y": 690,
+          "width": 304,
+          "height": 35,
+          "right": 365,
+          "bottom": 725
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 390,
+      "height": 844,
+      "name": "flight-fire",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": {
+          "x": 12,
+          "y": 190,
+          "width": 264,
+          "height": 68,
+          "right": 276,
+          "bottom": 258
+        },
+        ".rocket-telemetry": {
+          "x": 78.5,
+          "y": 712,
+          "width": 233,
+          "height": 54,
+          "right": 311.5,
+          "bottom": 766
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": {
+          "x": 115.8203125,
+          "y": 136,
+          "width": 158.359375,
+          "height": 36,
+          "right": 274.1796875,
+          "bottom": 172
+        },
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 844,
+      "height": 390,
+      "name": "auto-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 192,
+          "width": 270,
+          "height": 61.1875,
+          "right": 282,
+          "bottom": 253.1875
+        },
+        ".rocket-stage-status": {
+          "x": 297,
+          "y": 302,
+          "width": 250,
+          "height": 68,
+          "right": 547,
+          "bottom": 370
+        },
+        ".rocket-telemetry": {
+          "x": 301,
+          "y": 240,
+          "width": 242,
+          "height": 54,
+          "right": 543,
+          "bottom": 294
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": "發生接觸 · 箭體擦碰側助推器 · 102 m 建築迎面撞擊速度 0.6 m/s · 箭體結構 95%琥珀色圓環標示實際接觸位置。",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 844,
+      "height": 390,
+      "name": "manual-contact",
+      "boxes": {
+        ".rocket-contact-cue": {
+          "x": 12,
+          "y": 192,
+          "width": 270,
+          "height": 61.1875,
+          "right": 282,
+          "bottom": 253.1875
+        },
+        ".rocket-stage-status": {
+          "x": 297,
+          "y": 302,
+          "width": 250,
+          "height": 68,
+          "right": 547,
+          "bottom": 370
+        },
+        ".rocket-telemetry": {
+          "x": 301,
+          "y": 240,
+          "width": 242,
+          "height": 54,
+          "right": 543,
+          "bottom": 294
+        },
+        ".rocket-attitude": {
+          "x": 314,
+          "y": 147.5,
+          "width": 216,
+          "height": 95,
+          "right": 530,
+          "bottom": 242.5
+        },
+        ".rocket-throttle": {
+          "x": 764,
+          "y": 137,
+          "width": 66,
+          "height": 143,
+          "right": 830,
+          "bottom": 280
+        },
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": {
+          "x": 18,
+          "y": 256,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 378
+        },
+        ".bottom-bar": null
+      },
+      "cueText": "發生接觸 · 箭體擦碰側助推器 · 102 m 建築迎面撞擊速度 0.6 m/s · 箭體結構 95%琥珀色圓環標示實際接觸位置。",
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "手動操控",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        },
+        {
+          "text": "",
+          "x": 18,
+          "y": 256,
+          "width": 122,
+          "height": 122,
+          "right": 140,
+          "bottom": 378
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": false,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 844,
+      "height": 390,
+      "name": "fatal-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 193,
+          "width": 246.453125,
+          "height": 101,
+          "right": 270.453125,
+          "bottom": 294
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "建築→箭體破裂",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 844,
+      "height": 390,
+      "name": "fire-observe",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": null,
+        ".rocket-accident-observation": {
+          "x": 24,
+          "y": 214,
+          "width": 158,
+          "height": 80,
+          "right": 182,
+          "bottom": 294
+        },
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": "箭體起火→箭體起火／爆炸",
+      "buttons": [],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 844,
+      "height": 390,
+      "name": "recovery",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": null,
+        ".rocket-telemetry": null,
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": null,
+        ".rocket-panel": {
+          "x": 454,
+          "y": 93,
+          "width": 295,
+          "height": 215,
+          "right": 749,
+          "bottom": 308
+        },
+        ".rocket-accident-observation": null,
+        ".rocket-alert": null,
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "在此重新搭建",
+          "x": 467,
+          "y": 258.375,
+          "width": 130,
+          "height": 36,
+          "right": 597,
+          "bottom": 294.375
+        },
+        {
+          "text": "返回溫哥華",
+          "x": 606,
+          "y": 258.375,
+          "width": 130,
+          "height": 36,
+          "right": 736,
+          "bottom": 294.375
+        },
+        {
+          "text": "新火箭",
+          "x": 467,
+          "y": 304.375,
+          "width": 269,
+          "height": 36,
+          "right": 736,
+          "bottom": 340.375
+        },
+        {
+          "text": "飛行指南",
+          "x": 467,
+          "y": 349.375,
+          "width": 269,
+          "height": 35,
+          "right": 736,
+          "bottom": 384.375
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    },
+    {
+      "locale": "zh-Hant",
+      "width": 844,
+      "height": 390,
+      "name": "flight-fire",
+      "boxes": {
+        ".rocket-contact-cue": null,
+        ".rocket-stage-status": {
+          "x": 297,
+          "y": 302,
+          "width": 250,
+          "height": 68,
+          "right": 547,
+          "bottom": 370
+        },
+        ".rocket-telemetry": {
+          "x": 301,
+          "y": 240,
+          "width": 242,
+          "height": 54,
+          "right": 543,
+          "bottom": 294
+        },
+        ".rocket-attitude": null,
+        ".rocket-throttle": null,
+        ".rocket-compact-controls": {
+          "x": 12,
+          "y": 134,
+          "width": 232,
+          "height": 48,
+          "right": 244,
+          "bottom": 182
+        },
+        ".rocket-panel": null,
+        ".rocket-accident-observation": null,
+        ".rocket-alert": {
+          "x": 342.8203125,
+          "y": 136,
+          "width": 158.359375,
+          "height": 36,
+          "right": 501.1796875,
+          "bottom": 172
+        },
+        ".travel-joystick": null,
+        ".bottom-bar": null
+      },
+      "cueText": null,
+      "timeline": null,
+      "buttons": [
+        {
+          "text": "自動駕駛",
+          "x": 18,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 95,
+          "bottom": 176
+        },
+        {
+          "text": "第三視角",
+          "x": 100,
+          "y": 140,
+          "width": 77,
+          "height": 36,
+          "right": 177,
+          "bottom": 176
+        },
+        {
+          "text": "中止發射",
+          "x": 182,
+          "y": 140,
+          "width": 56,
+          "height": 36,
+          "right": 238,
+          "bottom": 176
+        }
+      ],
+      "cueOverlaps": [],
+      "cueCoversCenterLine": null,
+      "offscreen": [],
+      "scrollWidth": 844,
+      "viewportWidth": 844
+    }
+  ],
+  "pageErrors": []
+}

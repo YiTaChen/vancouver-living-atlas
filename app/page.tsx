@@ -47,8 +47,15 @@ import {
   Rocket,
 } from 'lucide-react';
 import { FlightControls, flightText } from '@/components/flight-controls';
+import { RocketControls, rocketText } from '@/components/rocket-controls';
+import { EMPTY_ROCKET, type RocketSnapshot } from '@/lib/city/rocket-snapshot';
+import type { RocketController } from '@/lib/city/rocket-controller';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
-import { TeslaControls, teslaText } from '@/components/tesla-controls';
+import {
+  TeslaControls,
+  teslaText,
+  FlyingCarIcon,
+} from '@/components/tesla-controls';
 import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
 import { CitySoundControls } from '@/components/city-sound-controls';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
@@ -60,7 +67,10 @@ import { TransitWorldStatus } from '@/components/transit-world-status';
 import { TransitAttribution } from '@/components/transit-attribution';
 import { BusVisitPanel } from '@/components/bus-visit-panel';
 import { SkyTrainCabinPanel } from '@/components/skytrain-cabin-panel';
-import { SkyTrainTravelPanel, skyTrainTravelText } from '@/components/skytrain-travel-panel';
+import {
+  SkyTrainTravelPanel,
+  skyTrainTravelText,
+} from '@/components/skytrain-travel-panel';
 import { EMPTY_SKYTRAIN_TRAVEL } from '@/lib/city/skytrain-travel-types';
 import {
   DiscoveryPanel,
@@ -132,7 +142,10 @@ import {
   type ClockState,
 } from '@/lib/city/clock';
 
-const worldTransitQA = process.env.VANCOUVER_VISUAL_QA === '1' && typeof location !== 'undefined' && new URLSearchParams(location.search).has('world-station');
+const worldTransitQA =
+  process.env.VANCOUVER_VISUAL_QA === '1' &&
+  typeof location !== 'undefined' &&
+  new URLSearchParams(location.search).has('world-station');
 
 const TransitQA =
   process.env.VANCOUVER_VISUAL_QA === '1'
@@ -194,6 +207,10 @@ function Home() {
     minimap = useRef<HTMLCanvasElement>(null),
     engine = useRef<CityEngine | null>(null);
   const [flight, setFlight] = useState<FlightSnapshot>(EMPTY_FLIGHT);
+  const [rocket, setRocket] = useState<RocketSnapshot>(EMPTY_ROCKET);
+  const [rocketController, setRocketController] =
+    useState<RocketController | null>(null);
+  const [rocketChoosing, setRocketChoosing] = useState(false);
   const [tesla, setTesla] = useState<TeslaSnapshot>(EMPTY_TESLA);
   const [teslaController, setTeslaController] =
     useState<TeslaController | null>(null);
@@ -205,15 +222,12 @@ function Home() {
   const [mobilePanel, setMobilePanel] = useState<
     'map' | 'travel' | 'tools' | null
   >(null);
-  const touchMove = useCallback(
-    (x: number, y: number) => {
-      const city=engine.current;
-      if(city?.skyTrainTravel?.active)city.skyTrainTravel.setTouchAxes(x,y);
-      else if(city?.busVisit?.aboard)city.busVisit.setTouchAxes(x,y);
-      else city?.navigation?.setTouchAxes(x,y);
-    },
-    [],
-  );
+  const touchMove = useCallback((x: number, y: number) => {
+    const city = engine.current;
+    if (city?.skyTrainTravel?.active) city.skyTrainTravel.setTouchAxes(x, y);
+    else if (city?.busVisit?.aboard) city.busVisit.setTouchAxes(x, y);
+    else city?.navigation?.setTouchAxes(x, y);
+  }, []);
   const touchBrake = useCallback((held: boolean) => {
     if (engine.current?.navigation) engine.current.navigation.touchBrake = held;
   }, []);
@@ -308,22 +322,64 @@ function Home() {
     distance: 0,
     elevation: 0,
   });
-  const [interactionController, setInteractionController] = useState<CityInteractions | null>(null);
-  const interactionInput = ready && settings.mode === 'walk' && !clean &&
-    !placing && !flight.placing && !about && !panel && !discoveryModal &&
+  const [interactionController, setInteractionController] =
+    useState<CityInteractions | null>(null);
+  const interactionInput =
+    ready &&
+    settings.mode === 'walk' &&
+    !clean &&
+    !placing &&
+    !flight.placing &&
+    !rocket.active &&
+    !rocket.placing &&
+    !rocketChoosing &&
+    !about &&
+    !panel &&
+    !discoveryModal &&
     (!mobilePanel || mobilePanel === 'map') &&
     !(touchUI && mobileHudHidden);
-  const driveDriftEnabled = ready && settings.mode === 'drive' && !placing &&
-    !about && !panel && !discoveryModal && !stats.busVisit?.aboard &&
+  const driveDriftEnabled =
+    ready &&
+    settings.mode === 'drive' &&
+    !placing &&
+    !about &&
+    !panel &&
+    !discoveryModal &&
+    !stats.busVisit?.aboard &&
     (!mobilePanel || mobilePanel === 'map');
   const skyTrainState = stats.skyTrainTravel ?? EMPTY_SKYTRAIN_TRAVEL;
-  const skyTrainActive = ['loading', 'station', 'riding'].includes(skyTrainState.phase);
-  const skyTrainInput = ready && settings.mode === 'walk' && !clean && !placing && !flight.placing &&
-    !about && !panel && !discoveryModal && !stats.busVisit?.aboard &&
-    (!mobilePanel || mobilePanel === 'map') && !(touchUI && mobileHudHidden);
-  const busInput = ready && !clean && !placing && !flight.placing &&
-    !about && !panel && !discoveryModal && !skyTrainActive &&
-    settings.mode === 'walk' && (!mobilePanel || mobilePanel === 'map') &&
+  const skyTrainActive = ['loading', 'station', 'riding'].includes(
+    skyTrainState.phase,
+  );
+  const skyTrainInput =
+    ready &&
+    !clean &&
+    !placing &&
+    !flight.placing &&
+    !rocket.active &&
+    !rocket.placing &&
+    !rocketChoosing &&
+    !about &&
+    !panel &&
+    !discoveryModal &&
+    settings.mode === 'walk' &&
+    !stats.busVisit?.aboard &&
+    (!mobilePanel || mobilePanel === 'map') &&
+    !(touchUI && mobileHudHidden);
+  const busInput =
+    ready &&
+    !clean &&
+    !placing &&
+    !flight.placing &&
+    !rocket.active &&
+    !rocket.placing &&
+    !rocketChoosing &&
+    !about &&
+    !panel &&
+    !discoveryModal &&
+    !skyTrainActive &&
+    settings.mode === 'walk' &&
+    (!mobilePanel || mobilePanel === 'map') &&
     !(touchUI && mobileHudHidden);
   useEffect(() => {
     const bus = engine.current?.busVisit;
@@ -354,8 +410,10 @@ function Home() {
     settingsRef = useRef(settings);
   settingsRef.current = settings;
   const go = useCallback((id: string) => {
-    if (engine.current?.skyTrainTravel?.active) engine.current.skyTrainTravel.setOverview(true);
+    if (engine.current?.skyTrainTravel?.active)
+      engine.current.skyTrainTravel.setOverview(true);
     if (engine.current && !engine.current.closeBusVisit()) return;
+    setRocketChoosing(false);
     setLocalOrbit(false);
     setView(id);
     setSettings((s) => ({ ...s, mode: 'orbit' }));
@@ -420,6 +478,17 @@ function Home() {
       setPlacing(null);
       setSettings((s) => ({ ...s, mode, autoRotate: false }));
     };
+    if (city.rocket) {
+      city.rocket.onChange = setRocket;
+      setRocketController(city.rocket);
+      setRocket(city.rocket.snapshot);
+    }
+    city.onRocketMode = (mode) => {
+      setTour(false);
+      setPlacing(null);
+      setLocalOrbit(false);
+      setSettings((s) => ({ ...s, mode, autoRotate: false }));
+    };
     if (city.tesla) {
       city.tesla.onChange = setTesla;
       setTeslaController(city.tesla);
@@ -451,6 +520,8 @@ function Home() {
     return () => {
       if (city.flight) city.flight.onChange = () => {};
       city.onFlightMode = () => {};
+      if (city.rocket) city.rocket.onChange = () => {};
+      city.onRocketMode = () => {};
       if (city.tesla) city.tesla.onChange = () => {};
       city.onTeslaMode = () => {};
       city.onTravelReturnChange = () => {};
@@ -534,8 +605,12 @@ function Home() {
     const key = (ev: KeyboardEvent) => {
       if (ev.key === 'Escape') {
         if (engine.current?.skyTrainTravel?.active) {
-          setClean(false); setPanel(null); setMobilePanel(null);
-          engine.current.skyTrainTravel.setOverview(settingsRef.current.mode !== 'orbit');
+          setClean(false);
+          setPanel(null);
+          setMobilePanel(null);
+          engine.current.skyTrainTravel.setOverview(
+            settingsRef.current.mode !== 'orbit',
+          );
           ev.preventDefault();
           return;
         }
@@ -546,6 +621,18 @@ function Home() {
           )
         )
           return;
+        if (rocketChoosing) {
+          setRocketChoosing(false);
+          return;
+        }
+        if (engine.current?.rocket?.placing) {
+          engine.current.rocket.cancelPlacement();
+          return;
+        }
+        if (engine.current?.rocket?.active) {
+          engine.current.rocket.returnToCity();
+          return;
+        }
         if (engine.current?.flight?.placing) {
           engine.current.flight.cancelPlacement();
           return;
@@ -564,7 +651,7 @@ function Home() {
     };
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);
-  }, [go]);
+  }, [go, rocketChoosing]);
   // Feature-detected WebMCP navigation follows the same visible UI actions.
   useEffect(() => {
     if (!ready) return;
@@ -635,7 +722,13 @@ function Home() {
     return () => life.abort();
   }, [ready, go]);
   const change = (patch: Partial<Settings>) => {
-    if (patch.mode !== undefined && patch.mode !== 'walk' && patch.mode !== 'orbit' && engine.current?.skyTrainTravel?.active) return;
+    if (
+      patch.mode !== undefined &&
+      patch.mode !== 'walk' &&
+      patch.mode !== 'orbit' &&
+      engine.current?.skyTrainTravel?.active
+    )
+      return;
     if (
       (patch.mode !== undefined || patch.traffic === false) &&
       engine.current &&
@@ -707,11 +800,13 @@ function Home() {
   const beginPlacement = (mode: TravelMode) => {
     if (teslaEntering.current) return;
     if (!finishBusVisit()) return;
-    engine.current?.flight?.clear();
     if (!ready || !engine.current?.placement) {
       setNotice('placementUnavailable');
       return;
     }
+    setRocketChoosing(false);
+    engine.current?.rocket?.returnToCity();
+    engine.current?.flight?.clear();
     setTour(false);
     setPanel(null);
     setClean(false);
@@ -724,12 +819,9 @@ function Home() {
   const switchInScene = (mode: TravelMode) => {
     if (!finishBusVisit()) return false;
     const city = engine.current;
-    if (
-      !ready ||
-      city?.placement?.mode ||
-      !city?.navigation?.switchStreetMode(mode)
-    )
-      return false;
+    if (!ready || city?.placement?.mode) return false;
+    city?.rocket?.returnToCity();
+    if (!city?.navigation?.switchStreetMode(mode)) return false;
     setTour(false);
     setPanel(null);
     setNotice('');
@@ -740,6 +832,8 @@ function Home() {
     if (teslaEntering.current) return;
     if (!finishBusVisit()) return;
     if (!ready) return;
+    setRocketChoosing(false);
+    engine.current?.rocket?.returnToCity();
     setTour(false);
     setPanel(null);
     setPlacing(null);
@@ -749,6 +843,8 @@ function Home() {
   };
   const beginTesla = async () => {
     if (!ready || teslaEntering.current || !finishBusVisit()) return;
+    setRocketChoosing(false);
+    engine.current?.rocket?.returnToCity();
     teslaEntering.current = true;
     setTeslaPreparing(true);
     setTour(false);
@@ -769,13 +865,49 @@ function Home() {
       setTeslaPreparing(false);
     }
   };
+  const chooseRocket = () => {
+    if (!ready || teslaEntering.current || !finishBusVisit()) return;
+    engine.current?.placement?.cancel();
+    engine.current?.flight?.clear();
+    engine.current?.rocket?.returnToCity();
+    setTour(false);
+    setPanel(null);
+    setPlacing(null);
+    setMobilePanel(null);
+    setClean(false);
+    change({ mode: 'orbit', autoRotate: false });
+    setMobileHudHidden(false);
+    setRocketChoosing(true);
+  };
+  const beginRocket = (kind: RocketSnapshot['kind']) => {
+    if (
+      !ready ||
+      teslaEntering.current ||
+      !engine.current?.rocket ||
+      !finishBusVisit()
+    )
+      return;
+    setRocketChoosing(false);
+    setPlacing(null);
+    setTour(false);
+    setLocalOrbit(false);
+    setMobilePanel(null);
+    setPanel(null);
+    engine.current.rocket.beginPlacement(kind);
+  };
   const switchMode = (mode: string) => {
     if (teslaEntering.current) return;
     if (engine.current?.skyTrainTravel?.active) {
-      if (mode === 'orbit' || mode === 'walk') { setTour(false); setPanel(null); setMobilePanel(null); engine.current.skyTrainTravel.setOverview(mode === 'orbit'); }
+      if (mode === 'orbit' || mode === 'walk') {
+        setTour(false);
+        setPanel(null);
+        setMobilePanel(null);
+        engine.current.skyTrainTravel.setOverview(mode === 'orbit');
+      }
       return;
     }
     if (!finishBusVisit()) return;
+    engine.current?.rocket?.returnToCity();
     if (mode === 'tesla') {
       void beginTesla();
       return;
@@ -803,6 +935,8 @@ function Home() {
     if (teslaEntering.current) return;
     if (event.button !== 0 || !ready) return;
     if (!finishBusVisit()) return;
+    setRocketChoosing(false);
+    engine.current?.rocket?.returnToCity();
     event.preventDefault();
     event.stopPropagation();
     setTour(false);
@@ -893,11 +1027,11 @@ function Home() {
   return (
     <main
       data-travel-mode={settings.mode}
-      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode === 'flight' ? 'flight-mode' : ''} ${settings.mode === 'tesla' ? 'tesla-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
+      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing || rocket.placing || rocketChoosing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode === 'flight' ? 'flight-mode' : ''} ${settings.mode === 'tesla' ? 'tesla-mode' : ''} ${rocket.placing || rocketChoosing ? 'rocket-placement-mode' : ''} ${settings.mode === 'rocket' ? 'rocket-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
     >
       {teslaPreparing && (
         <output className="tesla-preparing glass ui-chrome">
-          <Rocket size={19} /> {teslaText(locale, 'preparing')}
+          <FlyingCarIcon size={19} /> {teslaText(locale, 'preparing')}
         </output>
       )}
       {stats.trafficStop && settings.mode === 'drive' && (
@@ -910,57 +1044,100 @@ function Home() {
       <div className="scene" ref={host} />
       <CityInteractionOverlay
         interactions={interactionController}
-        enabled={interactionInput} locale={locale} touch={touchUI}
+        enabled={interactionInput}
+        locale={locale}
+        touch={touchUI}
       />
-      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && <BusVisitPanel
-        city={engine.current}
-        snapshot={stats.busVisit ?? null}
-        locale={locale}
-        touch={touchUI}
-        controlsEnabled={busInput}
-        onMove={busMove}
-        visible={
-          ready && !skyTrainActive &&
-          settings.mode !== 'tesla' &&
-          !clean &&
-          !about &&
-          !placing &&
-          !flight.placing &&
-          !panel &&
-          !discoveryModal &&
-          !mobilePanel &&
-          !(touchUI && mobileHudHidden)
-        }
-        onPrepare={visitBus}
-      />}
-      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && <SkyTrainTravelPanel
-        locale={locale}
-        snapshot={skyTrainState}
-        visible={ready && !clean && !about && !placing && !flight.placing &&
-          settings.mode !== 'tesla' && settings.mode !== 'flight' && !panel &&
-          !discoveryModal && (!mobilePanel || mobilePanel === 'map') &&
-          !stats.busVisit?.aboard && !(touchUI && mobileHudHidden)}
-        touch={touchUI}
-        controlsEnabled={skyTrainInput}
-        onEnter={async (id) => {
-          setTour(false); setPanel(null); setPlacing(null); setMobilePanel(null);
-          await engine.current?.skyTrainTravel?.enter(id);
-        }}
-        onDestination={(id) => engine.current?.skyTrainTravel?.chooseDestination(id)}
-        onGoPlatform={() => { void engine.current?.skyTrainTravel?.goPlatform(); }}
-        onGoConcourse={() => { engine.current?.skyTrainTravel?.goConcourse(); }}
-        onBoard={() => { engine.current?.skyTrainTravel?.board(); }}
-        onAlight={() => { engine.current?.skyTrainTravel?.alight(); }}
-        onLeave={() => { engine.current?.skyTrainTravel?.leave(); }}
-        onMove={skyTrainMove}
-      />}
-      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && ready &&
+      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && (
+        <BusVisitPanel
+          city={engine.current}
+          snapshot={stats.busVisit ?? null}
+          locale={locale}
+          touch={touchUI}
+          controlsEnabled={busInput}
+          onMove={busMove}
+          visible={
+            ready &&
+            !skyTrainActive &&
+            !rocket.active &&
+            settings.mode !== 'tesla' &&
+            !clean &&
+            !about &&
+            !placing &&
+            !flight.placing &&
+            !rocket.placing &&
+            !rocketChoosing &&
+            !panel &&
+            !discoveryModal &&
+            !mobilePanel &&
+            !(touchUI && mobileHudHidden)
+          }
+          onPrepare={visitBus}
+        />
+      )}
+      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && (
+        <SkyTrainTravelPanel
+          locale={locale}
+          snapshot={skyTrainState}
+          visible={
+            ready &&
+            !clean &&
+            !about &&
+            !placing &&
+            !flight.placing &&
+            !rocket.placing &&
+            !rocketChoosing &&
+            settings.mode !== 'tesla' &&
+            settings.mode !== 'flight' &&
+            settings.mode !== 'rocket' &&
+            !panel &&
+            !discoveryModal &&
+            (!mobilePanel || mobilePanel === 'map') &&
+            !stats.busVisit?.aboard &&
+            !(touchUI && mobileHudHidden)
+          }
+          touch={touchUI}
+          controlsEnabled={skyTrainInput}
+          onEnter={async (id) => {
+            setTour(false);
+            setPanel(null);
+            setPlacing(null);
+            setMobilePanel(null);
+            await engine.current?.skyTrainTravel?.enter(id);
+          }}
+          onDestination={(id) =>
+            engine.current?.skyTrainTravel?.chooseDestination(id)
+          }
+          onGoPlatform={() => {
+            void engine.current?.skyTrainTravel?.goPlatform();
+          }}
+          onGoConcourse={() => {
+            engine.current?.skyTrainTravel?.goConcourse();
+          }}
+          onBoard={() => {
+            engine.current?.skyTrainTravel?.board();
+          }}
+          onAlight={() => {
+            engine.current?.skyTrainTravel?.alight();
+          }}
+          onLeave={() => {
+            engine.current?.skyTrainTravel?.leave();
+          }}
+          onMove={skyTrainMove}
+        />
+      )}
+      {process.env.VANCOUVER_VISUAL_QA === '1' &&
+        !worldTransitQA &&
+        ready &&
         !skyTrainActive &&
+        !rocket.active &&
         !clean &&
         !about &&
         settings.mode !== 'tesla' &&
         !placing &&
         !flight.placing &&
+        !rocket.placing &&
+        !rocketChoosing &&
         !panel &&
         !mobilePanel &&
         !(touchUI && mobileHudHidden) &&
@@ -976,27 +1153,56 @@ function Home() {
             <TrainFront size={17} /> {tr('skyTrainCabinDisplay')}
           </button>
         )}
-      <TransitWorldStatus locale={locale} train={skyTrainState} bus={stats.busVisit ?? null}
-        visible={ready && settings.mode === 'walk' && !clean && !about && !panel && !discoveryModal && !mobilePanel && !(touchUI && mobileHudHidden)}
-        touch={touchUI} />
-      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && <SkyTrainCabinPanel
+      <TransitWorldStatus
         locale={locale}
-        visible={ready && !clean && !about}
-        request={skyTrainCabinRequest}
-        quality={stats.effectiveQuality ?? settings.quality}
-        compatible={engine.current?.compatibleGraphics ?? false}
-        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}
-        onActiveChange={cabinActiveChange}
-      />}
+        train={skyTrainState}
+        bus={stats.busVisit ?? null}
+        visible={
+          ready &&
+          settings.mode === 'walk' &&
+          !clean &&
+          !about &&
+          !panel &&
+          !discoveryModal &&
+          !mobilePanel &&
+          !rocket.active &&
+          !rocket.placing &&
+          !rocketChoosing &&
+          !(touchUI && mobileHudHidden)
+        }
+        touch={touchUI}
+      />
+      {process.env.VANCOUVER_VISUAL_QA === '1' && !worldTransitQA && (
+        <SkyTrainCabinPanel
+          locale={locale}
+          visible={
+            ready &&
+            !clean &&
+            !about &&
+            !rocket.active &&
+            !rocket.placing &&
+            !rocketChoosing
+          }
+          request={skyTrainCabinRequest}
+          quality={stats.effectiveQuality ?? settings.quality}
+          compatible={engine.current?.compatibleGraphics ?? false}
+          pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}
+          onActiveChange={cabinActiveChange}
+        />
+      )}
       <DiscoveryPanel
         city={engine.current}
         locale={locale}
         visible={
-          ready && !skyTrainActive &&
+          ready &&
+          !skyTrainActive &&
+          !rocket.active &&
           !clean &&
           !about &&
           !placing &&
           !flight.placing &&
+          !rocket.placing &&
+          !rocketChoosing &&
           (!stats.busVisit || stats.busVisit.phase === 'idle') &&
           !(touchUI && mobileHudHidden) &&
           !panel &&
@@ -1022,6 +1228,31 @@ function Home() {
         optionsOpen={mobilePanel === 'travel'}
         onCloseOptions={() => setMobilePanel(null)}
       />
+      <RocketControls
+        controller={rocketController}
+        snapshot={rocket}
+        locale={locale}
+        touch={touchUI}
+        choosing={rocketChoosing}
+        onChoose={beginRocket}
+        onCloseChoosing={() => setRocketChoosing(false)}
+        controlsEnabled={
+          !about &&
+          !panel &&
+          !discoveryModal &&
+          (!mobilePanel || mobilePanel === 'map')
+        }
+        panelVisible={
+          !about &&
+          !panel &&
+          !discoveryModal &&
+          (!mobilePanel || mobilePanel === 'travel')
+        }
+        optionsOpen={mobilePanel === 'travel'}
+        onCloseOptions={() => setMobilePanel(null)}
+        minimal={touchUI && mobileHudHidden}
+        hidden={!ready || clean || about || !!panel || discoveryModal}
+      />
       <TeslaControls
         controller={teslaController}
         state={tesla}
@@ -1043,8 +1274,22 @@ function Home() {
         optionsOpen={mobilePanel === 'travel'}
         onCloseOptions={() => setMobilePanel(null)}
       />
-      <VehicleConditionPanel city={engine.current} locale={locale}
-        visible={ready&&!clean&&!about&&!panel&&!mobilePanel&&!discoveryModal&&!(touchUI&&mobileHudHidden)} />
+      <VehicleConditionPanel
+        city={engine.current}
+        locale={locale}
+        visible={
+          ready &&
+          !clean &&
+          !about &&
+          !panel &&
+          !mobilePanel &&
+          !discoveryModal &&
+          !rocket.active &&
+          !rocket.placing &&
+          !rocketChoosing &&
+          !(touchUI && mobileHudHidden)
+        }
+      />
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"
@@ -1083,11 +1328,13 @@ function Home() {
               <button
                 className="glass"
                 aria-label={
-                  settings.mode === 'tesla'
-                    ? teslaText(locale, 'options')
-                    : settings.mode === 'flight'
-                      ? flightText(locale, 'options')
-                      : tr('touchTravelOptions')
+                  settings.mode === 'rocket'
+                    ? rocketText(locale, 'rocket')
+                    : settings.mode === 'tesla'
+                      ? teslaText(locale, 'options')
+                      : settings.mode === 'flight'
+                        ? flightText(locale, 'options')
+                        : tr('touchTravelOptions')
                 }
                 aria-expanded={mobilePanel === 'travel'}
                 onClick={() => {
@@ -1149,10 +1396,14 @@ function Home() {
           </div>
           {settings.mode !== 'orbit' &&
             settings.mode !== 'flight' &&
+            settings.mode !== 'rocket' &&
             settings.mode !== 'tesla' &&
             !skyTrainState.seated &&
             !stats.busVisit?.seated &&
             !placing &&
+            !rocket.active &&
+            !rocket.placing &&
+            !rocketChoosing &&
             !about &&
             !panel &&
             !discoveryModal &&
@@ -1172,6 +1423,7 @@ function Home() {
             )}
           {mobilePanel === 'travel' &&
             settings.mode !== 'flight' &&
+            settings.mode !== 'rocket' &&
             settings.mode !== 'tesla' &&
             !placing && (
               <section
@@ -1250,7 +1502,10 @@ function Home() {
                       : 'touchVehicleHint',
                   )}
                   {settings.mode === 'drive' && (
-                    <><br />{tr('touchDriftHint')}</>
+                    <>
+                      <br />
+                      {tr('touchDriftHint')}
+                    </>
                   )}
                 </p>
               </section>
@@ -1259,9 +1514,11 @@ function Home() {
       )}
 
       {ready &&
-        !stats.busVisit?.aboard && !skyTrainActive &&
+        !stats.busVisit?.aboard &&
+        !skyTrainActive &&
         settings.mode !== 'orbit' &&
         settings.mode !== 'flight' &&
+        settings.mode !== 'rocket' &&
         settings.mode !== 'tesla' && (
           <aside
             className="travel-camera-card glass ui-chrome"
@@ -1411,8 +1668,18 @@ function Home() {
       </header>
       <div className="mode-switch glass ui-chrome">
         <RadioGroup
-          value={flight.placing ? 'flight' : placing || settings.mode}
-          onValueChange={switchMode}
+          value={
+            rocketChoosing || rocket.placing
+              ? 'rocket'
+              : flight.placing
+                ? 'flight'
+                : placing || settings.mode
+          }
+          onValueChange={(mode) => {
+            setRocketChoosing(false);
+            engine.current?.rocket?.cancelPlacement();
+            switchMode(mode);
+          }}
           className="mode-radio"
           aria-label={tr('explorationMode')}
         >
@@ -1422,7 +1689,7 @@ function Home() {
             { id: 'drive', name: tr('drive'), icon: Car },
             { id: 'boat', name: tr('boat'), icon: Ship },
             { id: 'flight', name: flightText(locale, 'fly'), icon: Plane },
-            { id: 'tesla', name: 'Tesla', icon: Rocket },
+            { id: 'tesla', name: 'Tesla', icon: FlyingCarIcon },
           ].map((m) => (
             <label
               className={`mode-pill ${(flight.placing ? 'flight' : placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' && m.id !== 'tesla' && (placing || !canSwitchStreetMode(settings.mode, m.id)) ? 'figure-handle' : ''}`}
@@ -1442,7 +1709,9 @@ function Home() {
                     )
               }
               onPointerDownCapture={
-                m.id === 'orbit' || m.id === 'tesla' || (skyTrainActive && m.id === 'walk')
+                m.id === 'orbit' ||
+                m.id === 'tesla' ||
+                (skyTrainActive && m.id === 'walk')
                   ? undefined
                   : m.id === 'flight'
                     ? dragAircraft
@@ -1455,7 +1724,9 @@ function Home() {
                       event.stopPropagation();
                       if (event.detail === 0) beginFlight();
                     }
-                  : m.id === 'orbit' || m.id === 'tesla' || (skyTrainActive && m.id === 'walk')
+                  : m.id === 'orbit' ||
+                      m.id === 'tesla' ||
+                      (skyTrainActive && m.id === 'walk')
                     ? undefined
                     : (event) => {
                         if (event.detail > 0) {
@@ -1467,13 +1738,30 @@ function Home() {
             >
               <RadioGroupItem
                 value={m.id}
-                disabled={!ready || teslaPreparing || (skyTrainActive && m.id !== 'orbit' && m.id !== 'walk')}
+                disabled={
+                  !ready ||
+                  teslaPreparing ||
+                  (skyTrainActive && m.id !== 'orbit' && m.id !== 'walk')
+                }
                 className="mode-radio-dot"
               />
               <m.icon size={15} />
               {m.name}
             </label>
           ))}
+          <button
+            type="button"
+            className={`mode-pill rocket-mode-button ${rocketChoosing || rocket.placing || settings.mode === 'rocket' ? 'active' : ''}`}
+            aria-pressed={
+              rocketChoosing || rocket.placing || settings.mode === 'rocket'
+            }
+            onClick={chooseRocket}
+            disabled={!ready || teslaPreparing || skyTrainActive}
+            title={rocketText(locale, 'choose')}
+          >
+            <Rocket size={15} />
+            {rocketText(locale, 'rocket')}
+          </button>
         </RadioGroup>
       </div>
       {placing && (
@@ -1971,7 +2259,10 @@ function Home() {
               <X size={17} />
             </button>
           </div>
-          <CitySoundControls soundscape={ready ? engine.current?.soundscape ?? null : null} locale={locale} />
+          <CitySoundControls
+            soundscape={ready ? (engine.current?.soundscape ?? null) : null}
+            locale={locale}
+          />
           {[
             { key: 'buildings', label: tr('buildingsLayer') },
             { key: 'trees', label: tr('treesLayer') },
@@ -2162,7 +2453,9 @@ function Home() {
           <span className="mini-location-title">
             {settings.mode !== 'orbit' &&
               (settings.mode === 'tesla' ? (
-                <Rocket size={15} />
+                <FlyingCarIcon size={15} />
+              ) : settings.mode === 'rocket' ? (
+                <Rocket size={14} />
               ) : settings.mode === 'flight' ? (
                 <Plane size={15} />
               ) : settings.mode === 'boat' ? (
@@ -2244,9 +2537,11 @@ function Home() {
           )}
         </div>
       </section>
-      {!stats.busVisit?.aboard && !skyTrainActive &&
+      {!stats.busVisit?.aboard &&
+        !skyTrainActive &&
         settings.mode !== 'orbit' &&
         settings.mode !== 'flight' &&
+        settings.mode !== 'rocket' &&
         settings.mode !== 'tesla' && (
           <div className="street-controls glass ui-chrome">
             <div className="street-title">
@@ -2297,7 +2592,11 @@ function Home() {
                   key={id}
                   onClick={() => {
                     if (!finishBusVisit()) return;
-                    if (settings.mode !== 'flight' && settings.mode !== 'tesla')
+                    if (
+                      settings.mode !== 'flight' &&
+                      settings.mode !== 'rocket' &&
+                      settings.mode !== 'tesla'
+                    )
                       engine.current?.navigation?.setMode(settings.mode, id);
                   }}
                 >
@@ -2327,7 +2626,10 @@ function Home() {
                   : tr('speedHelp')}{' '}
               · {tr('lookHelp')}
               {settings.mode === 'drive' && (
-                <><br />{tr('driftHelp')}</>
+                <>
+                  <br />
+                  {tr('driftHelp')}
+                </>
               )}
               <br />
               {tr('travelZoomHelp')}
@@ -2390,16 +2692,18 @@ function Home() {
             {skyTrainActive
               ? skyTrainTravelText(locale, 'title')
               : settings.mode === 'orbit'
-              ? localOrbit
-                ? tr('localView')
-                : viewText(locale, current.id, 'name')
-              : settings.mode === 'flight'
-                ? flightText(locale, flight.kind || 'fly')
-                : settings.mode === 'walk'
-                  ? tr('streetWalk')
-                  : settings.mode === 'boat'
-                    ? tr('streetBoat')
-                    : tr('streetDrive')}
+                ? localOrbit
+                  ? tr('localView')
+                  : viewText(locale, current.id, 'name')
+                : settings.mode === 'rocket'
+                  ? rocketText(locale, rocket.kind)
+                  : settings.mode === 'flight'
+                    ? flightText(locale, flight.kind || 'fly')
+                    : settings.mode === 'walk'
+                      ? tr('streetWalk')
+                      : settings.mode === 'boat'
+                        ? tr('streetBoat')
+                        : tr('streetDrive')}
           </b>
           <span className="muted">
             {settings.mode === 'orbit'
@@ -2412,7 +2716,11 @@ function Home() {
           <span>{tr('treeCount', { count: number(stats.trees) })}</span>
           <span>{stats.fps} FPS</span>
         </div>
-        {!skyTrainActive && <p>{settings.mode === 'orbit' ? tr('orbitHelp') : tr('escapeHelp')}</p>}
+        {!skyTrainActive && (
+          <p>
+            {settings.mode === 'orbit' ? tr('orbitHelp') : tr('escapeHelp')}
+          </p>
+        )}
       </footer>
       <div className="attribution ui-chrome">
         <a
@@ -2423,7 +2731,14 @@ function Home() {
           City of Vancouver · OGL
         </a>
         <span> / </span>
-        <a href="https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/gtfs/gtfs-data" target="_blank" rel="noreferrer" title="Offline GTFS · illustrative timing">TransLink GTFS</a>
+        <a
+          href="https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/gtfs/gtfs-data"
+          target="_blank"
+          rel="noreferrer"
+          title="Offline GTFS · illustrative timing"
+        >
+          TransLink GTFS
+        </a>
         <span> / </span>
         <a
           href="https://www.openstreetmap.org/copyright"

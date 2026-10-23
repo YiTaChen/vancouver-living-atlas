@@ -1,6 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
+  createLucideIcon,
   ArrowUp,
   ArrowDown,
   Car,
@@ -22,6 +23,16 @@ import type { TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaQualityPreference } from '@/lib/city/tesla-quality';
 import type { Locale } from '@/lib/i18n';
 import messages from '@/lib/i18n/tesla.json';
+
+/** A winged car silhouette, shared by Tesla's entry points and status panels. */
+export const FlyingCarIcon = createLucideIcon('FlyingCar', [
+  ['path', { d: 'M6 15v-4l2-4h8l2 4v4Z', key: 'body' }],
+  ['path', { d: 'M6 11h12', key: 'windscreen' }],
+  ['path', { d: 'm6 11-4-1v4l4 1m12-4 4-1v4l-4 1', key: 'wings' }],
+  ['path', { d: 'M7 15v2m10-2v2', key: 'wheels' }],
+  ['path', { d: 'M8 13h1m6 0h1', key: 'lights' }],
+  ['path', { d: 'M10 20h4', key: 'hover' }],
+]);
 
 type TextKey = keyof typeof messages.en;
 export const teslaText = (locale: Locale, key: TextKey) =>
@@ -338,7 +349,7 @@ export function TeslaControls({
         aria-pressed={state.flightAssist && state.mode === 'air'}
         onClick={() => controller.command('flightToggle')}
       >
-        <Rocket size={19} />
+        <FlyingCarIcon size={19} />
         <span>{t('flight')}</span>
         <kbd>F</kbd>
       </button>
@@ -375,7 +386,7 @@ export function TeslaControls({
           aria-label={t('options')}
         >
           <header>
-            <Rocket size={19} />
+            <FlyingCarIcon size={19} />
             <strong>
               Tesla Roadster <small>Rocket</small>
             </strong>
@@ -434,7 +445,7 @@ export function TeslaControls({
             {controls}
           </div>
           <div className="tesla-mobile-status glass ui-chrome">
-            <Rocket size={15} />
+            <FlyingCarIcon size={15} />
             <span>Tesla</span>
             <b>{state.speedKph}</b>
             <small>km/h</small>

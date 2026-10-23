@@ -140,7 +140,20 @@ export function createBuildingBodies(e: CityEngine) {
     seeds: number[] = [],
     roofFinishes: number[] = [],
     baseWindows: number[] = [];
-  for (const { key, polygon, h, min } of prepared) {
+  // Vertex spans permit bounded, reversible launch damage without unbatching the city.
+  const rocketParts: {
+    key: string;
+    /** Same stable source identity as the mission collision polygon. */
+    polygon: number[][][];
+    bounds: { minX: number; maxX: number; minZ: number; maxZ: number };
+    center: [number, number];
+    minY: number;
+    maxY: number;
+    start: number;
+    count: number;
+  }[] = [];
+  for (const { key, polygon, h, min, center } of prepared) {
+    const start = positions.length / 3;
     // Normalize the projected copy before choosing facade edges and roof phase.
     // Source feature coordinates remain untouched.
     for (const ring of polygon) {
@@ -276,6 +289,28 @@ export function createBuildingBodies(e: CityEngine) {
         for (const i of [t[0], t[2], t[1]])
           vertex(flat[i].x, ground + h, flat[i].y, 0, 1, 0, -1, -1, roofLayout);
     }
+    const damageBounds = {
+      minX: Infinity,
+      maxX: -Infinity,
+      minZ: Infinity,
+      maxZ: -Infinity,
+    };
+    for (const [x, z] of polygon[0]) {
+      damageBounds.minX = Math.min(damageBounds.minX, x);
+      damageBounds.maxX = Math.max(damageBounds.maxX, x);
+      damageBounds.minZ = Math.min(damageBounds.minZ, z);
+      damageBounds.maxZ = Math.max(damageBounds.maxZ, z);
+    }
+    rocketParts.push({
+      key,
+      polygon,
+      bounds: damageBounds,
+      center,
+      minY: ground + min,
+      maxY: ground + h,
+      start,
+      count: positions.length / 3 - start,
+    });
   }
   const materialLibrary = getCityMaterialLibrary(e);
   const material = new THREE.MeshStandardMaterial({
@@ -435,6 +470,8 @@ export function createBuildingBodies(e: CityEngine) {
   mesh.castShadow = true;
   mesh.receiveShadow = true;
   e.buildings.add(mesh);
+  e.data.rocketBuildingParts = rocketParts;
+  e.data.rocketBuildingMesh = mesh;
   e.stats.buildings = prepared.length;
   e.facadeDetails = new FacadeDetails(e, foundations);
 }

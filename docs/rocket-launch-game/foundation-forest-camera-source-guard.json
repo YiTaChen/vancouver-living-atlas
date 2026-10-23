@@ -1,0 +1,47 @@
+{
+  "harnessPath": "work/rocket-forest-camera-observation.mjs",
+  "harnessHash": "f3bffbff166a686ddb9e7282b941d3e48e38a428730b7143ed78ff37231d1c89",
+  "startedAt": "2026-10-23T07:38:53.932Z",
+  "sourceHashes": {
+    "lib/city/rocket-controller.ts": "5fde1107ccee44795b1a9c3fe626a6611c818f441c2ccc5384536ac6312ce5aa",
+    "lib/city/rocket-state.ts": "45ac88a642b9ea7fc44a134db25af2ae0d0211a52f0296891231d9e4e547ebf7",
+    "lib/city/rocket-effects.ts": "5135bfa027c21be1d9684d77efdce9663dd1f988a2024f084843197c4f681c82",
+    "lib/city/rocket-snapshot.ts": "581b71d3fe7627680b20c4f6d34957ecb1ac5be02819f9c020cd0dc1f77ee2c6",
+    "lib/city/assets/rocket.ts": "e42f1c5aa1b4f8fe4e509ac60dd9532044d4000c0423c3888e83b702e1198070",
+    "lib/city/assets/rocket-design.ts": "347c0cae22a968689ba68f5b98838e3f2105cd0c279f4ab0a1bbece6483a1981",
+    "lib/city/assets/rocket-wreckage.ts": "bdb4ee169daab4f28bd4c3c449044a69a808ebf7b3dcf1e125590a1ef748cfa1",
+    "lib/city/assets/rocket-exhaust.ts": "f2ee00d27751679bcc5b36537227b6a0b5802cc899e1d28f1c4fba99e6d17085",
+    "lib/city/rocket-space.ts": "62e82f3a8db1b78ed950b8ca9525ecf39b56fb26b3453a6d91f69245754bab1d",
+    "lib/city/rocket-space-shaders.ts": "9de2eed0977fe6aa8274cad902c0b09326672128d263d9d13e1ea711a7b5ea9b",
+    "lib/city/building-bodies.ts": "1521a49358ce3edf19aa7a30eb7366a1643e0aa275da74e69567e8d46cea108b",
+    "lib/city/facade-details.ts": "36509f24ef07969d2ed5781cf0523906cda08d0965c58cc48b8ace338b5c8292",
+    "components/rocket-controls.tsx": "319a534e56b6e4b2832f89550e2c098136fcadb72fed0febbb234c22aaff50a9",
+    "components/rocket-controls.css": "6d3d959ff871c7dd50f9dc544d9c0c6d6874d6a59371c3a651b8d46b9bd077c8"
+  },
+  "hmr": [],
+  "errors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "httpFailures": [],
+  "finalSourceHashes": {
+    "lib/city/rocket-controller.ts": "5fde1107ccee44795b1a9c3fe626a6611c818f441c2ccc5384536ac6312ce5aa",
+    "lib/city/rocket-state.ts": "45ac88a642b9ea7fc44a134db25af2ae0d0211a52f0296891231d9e4e547ebf7",
+    "lib/city/rocket-effects.ts": "5135bfa027c21be1d9684d77efdce9663dd1f988a2024f084843197c4f681c82",
+    "lib/city/rocket-snapshot.ts": "581b71d3fe7627680b20c4f6d34957ecb1ac5be02819f9c020cd0dc1f77ee2c6",
+    "lib/city/assets/rocket.ts": "e42f1c5aa1b4f8fe4e509ac60dd9532044d4000c0423c3888e83b702e1198070",
+    "lib/city/assets/rocket-design.ts": "347c0cae22a968689ba68f5b98838e3f2105cd0c279f4ab0a1bbece6483a1981",
+    "lib/city/assets/rocket-wreckage.ts": "bdb4ee169daab4f28bd4c3c449044a69a808ebf7b3dcf1e125590a1ef748cfa1",
+    "lib/city/assets/rocket-exhaust.ts": "f2ee00d27751679bcc5b36537227b6a0b5802cc899e1d28f1c4fba99e6d17085",
+    "lib/city/rocket-space.ts": "62e82f3a8db1b78ed950b8ca9525ecf39b56fb26b3453a6d91f69245754bab1d",
+    "lib/city/rocket-space-shaders.ts": "9de2eed0977fe6aa8274cad902c0b09326672128d263d9d13e1ea711a7b5ea9b",
+    "lib/city/building-bodies.ts": "1521a49358ce3edf19aa7a30eb7366a1643e0aa275da74e69567e8d46cea108b",
+    "lib/city/facade-details.ts": "36509f24ef07969d2ed5781cf0523906cda08d0965c58cc48b8ace338b5c8292",
+    "components/rocket-controls.tsx": "319a534e56b6e4b2832f89550e2c098136fcadb72fed0febbb234c22aaff50a9",
+    "components/rocket-controls.css": "6d3d959ff871c7dd50f9dc544d9c0c6d6874d6a59371c3a651b8d46b9bd077c8"
+  },
+  "finishedAt": "2026-10-23T07:39:07.160Z",
+  "sourceFilesUnchanged": true,
+  "passed": true
+}

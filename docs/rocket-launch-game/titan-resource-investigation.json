@@ -1,0 +1,48 @@
+{
+  "startedAt": "2026-10-22T22:08:17.237Z",
+  "responses": [
+    {
+      "url": "http://127.0.0.1:5173/favicon.ico",
+      "status": 404,
+      "type": "Other"
+    }
+  ],
+  "console": [
+    {
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://127.0.0.1:5173/favicon.ico",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "cdpLog": [
+    {
+      "source": "network",
+      "level": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": 1792706898178.954,
+      "url": "http://127.0.0.1:5173/favicon.ico",
+      "networkRequestId": "32979.48"
+    }
+  ],
+  "failed": [],
+  "pageErrors": [],
+  "markers": ["dummy-loaded", "actual-site-loaded"],
+  "resources": [
+    {
+      "url": "http://127.0.0.1:5173/favicon.ico",
+      "status": 404,
+      "initiator": "other"
+    }
+  ],
+  "state": {
+    "loaded": true,
+    "loadError": false,
+    "renderReady": true
+  },
+  "finishedAt": "2026-10-22T22:08:29.173Z"
+}

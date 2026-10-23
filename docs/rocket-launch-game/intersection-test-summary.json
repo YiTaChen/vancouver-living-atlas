@@ -1,0 +1,49 @@
+{
+  "exitCode": 0,
+  "signal": null,
+  "seconds": 159.777863209,
+  "tests": 2036,
+  "pass": 2036,
+  "fail": 0,
+  "log": "work/rocket-intersection-tests.log",
+  "command": "node --test --test-concurrency=4 tests/*.test.mjs",
+  "testConcurrency": 4,
+  "testFiles": 235,
+  "rocketModuleCounts": {
+    "tests/rocket-building-spans.test.mjs": 1,
+    "tests/rocket-controller.test.mjs": 33,
+    "tests/rocket-controls.test.mjs": 19,
+    "tests/rocket-design.test.mjs": 8,
+    "tests/rocket-effects.test.mjs": 30,
+    "tests/rocket-exhaust.test.mjs": 2,
+    "tests/rocket-space.test.mjs": 7,
+    "tests/rocket-staging-model.test.mjs": 1,
+    "tests/rocket-state.test.mjs": 33,
+    "tests/rocket-wreckage.test.mjs": 7
+  },
+  "rocketTests": 141,
+  "restoredGeneratedReports": [
+    "tools/assets/citizen-character-variants/qa/cpu-tests.json",
+    "tools/assets/roadster-driver-fit/qa/adapter-preservation.json"
+  ],
+  "generatedReportRestoration": [
+    {
+      "file": "tools/assets/citizen-character-variants/qa/cpu-tests.json",
+      "bytes": 50910,
+      "exactBytesRestored": true,
+      "sha256": "76e1d5bb8f9704aee99cf320584e5b49fe2294769b5b86399416888c5769b553"
+    },
+    {
+      "file": "tools/assets/roadster-driver-fit/qa/adapter-preservation.json",
+      "bytes": 5242,
+      "exactBytesRestored": true,
+      "sha256": "4ef0a357cefee63ae61e60ba693558d5174a0ec1c723afa7b1f76dd97d4f8934"
+    }
+  ],
+  "staticValidation": {
+    "typescript": "npm run check: pass",
+    "changedFileLint": "pass",
+    "firebaseBuild": "npm run build:firebase: pass, no deployment",
+    "repositoryLint": "Existing diagnostics in unchanged files; changed source, tests and acceptance tool pass scoped lint."
+  }
+}

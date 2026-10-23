@@ -54,7 +54,7 @@ export interface Settings {
   /** User preference is independent of the renderer's effective quality tier.
    * Older callers without this field keep their selected manual preset. */
   qualityMode?: 'auto' | 'manual';
-  mode: 'orbit' | 'walk' | 'drive' | 'boat' | 'flight' | 'tesla';
+  mode: 'orbit' | 'walk' | 'drive' | 'boat' | 'flight' | 'tesla' | 'rocket';
 }
 export interface Viewpoint {
   id: string;

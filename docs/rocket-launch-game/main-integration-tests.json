@@ -1,0 +1,76 @@
+{
+  "method": "Full suite on merged main integration tree, exact QA artifact restoration; source hashes cover engine, page, rocket and new transit/sound dependencies. Includes two dynamic landmark tests.",
+  "productSourceHashes": {
+    "app/page.tsx": "7066f676956141ce0dbd94b9ce59baed1aeee5a1ffd906bf2f654de4c9f9f044",
+    "lib/city/engine.ts": "348ddb84324805e8afe96866744aadb95a2ebaa3b0048857a8b0923a0fbc01f9",
+    "lib/city/rocket-controller.ts": "5fde1107ccee44795b1a9c3fe626a6611c818f441c2ccc5384536ac6312ce5aa",
+    "lib/city/rocket-effects.ts": "5135bfa027c21be1d9684d77efdce9663dd1f988a2024f084843197c4f681c82",
+    "lib/city/rocket-state.ts": "45ac88a642b9ea7fc44a134db25af2ae0d0211a52f0296891231d9e4e547ebf7",
+    "lib/city/context.ts": "ab73baf43560563b4a058fc166e9fd278fc14f8a7651002a182f0256e60905bf",
+    "lib/city/skytrain-world-travel.ts": "9a8d359c78aca3f3ec6d7f5eec8a767e61028a723e34e01f1e23177ede1f12f6",
+    "lib/city/city-soundscape-world.ts": "bfa01655faac9eae26f753eda4616e46da1f81eb0ca48b4e7f01366f0c714180"
+  },
+  "finalProductSourceHashes": {
+    "app/page.tsx": "7066f676956141ce0dbd94b9ce59baed1aeee5a1ffd906bf2f654de4c9f9f044",
+    "lib/city/engine.ts": "348ddb84324805e8afe96866744aadb95a2ebaa3b0048857a8b0923a0fbc01f9",
+    "lib/city/rocket-controller.ts": "5fde1107ccee44795b1a9c3fe626a6611c818f441c2ccc5384536ac6312ce5aa",
+    "lib/city/rocket-effects.ts": "5135bfa027c21be1d9684d77efdce9663dd1f988a2024f084843197c4f681c82",
+    "lib/city/rocket-state.ts": "45ac88a642b9ea7fc44a134db25af2ae0d0211a52f0296891231d9e4e547ebf7",
+    "lib/city/context.ts": "ab73baf43560563b4a058fc166e9fd278fc14f8a7651002a182f0256e60905bf",
+    "lib/city/skytrain-world-travel.ts": "9a8d359c78aca3f3ec6d7f5eec8a767e61028a723e34e01f1e23177ede1f12f6",
+    "lib/city/city-soundscape-world.ts": "bfa01655faac9eae26f753eda4616e46da1f81eb0ca48b4e7f01366f0c714180"
+  },
+  "sourceFilesUnchanged": true,
+  "exitCode": 0,
+  "signal": null,
+  "seconds": 126.370965916,
+  "tests": 2260,
+  "pass": 2259,
+  "fail": 0,
+  "log": "work/rocket-main-merge-tests.log",
+  "command": "node --test --test-concurrency=4 tests/*.test.mjs",
+  "testConcurrency": 4,
+  "testFiles": 262,
+  "rocketModuleCounts": {
+    "tests/rocket-building-spans.test.mjs": 1,
+    "tests/rocket-controller.test.mjs": 46,
+    "tests/rocket-controls.test.mjs": 23,
+    "tests/rocket-design.test.mjs": 8,
+    "tests/rocket-effects.test.mjs": 45,
+    "tests/rocket-exhaust.test.mjs": 2,
+    "tests/rocket-landmark-collision.test.mjs": 2,
+    "tests/rocket-main-engine-integration.test.mjs": 4,
+    "tests/rocket-main-ui-integration.test.mjs": 4,
+    "tests/rocket-space.test.mjs": 7,
+    "tests/rocket-staging-model.test.mjs": 1,
+    "tests/rocket-state.test.mjs": 43,
+    "tests/rocket-wreckage.test.mjs": 7
+  },
+  "rocketTests": 193,
+  "restoredGeneratedReports": [
+    "tools/assets/citizen-character-variants/qa/cpu-tests.json",
+    "tools/assets/roadster-driver-fit/qa/adapter-preservation.json"
+  ],
+  "generatedReportRestoration": [
+    {
+      "file": "tools/assets/citizen-character-variants/qa/cpu-tests.json",
+      "bytes": 50910,
+      "exactBytesRestored": true,
+      "sha256": "76e1d5bb8f9704aee99cf320584e5b49fe2294769b5b86399416888c5769b553"
+    },
+    {
+      "file": "tools/assets/roadster-driver-fit/qa/adapter-preservation.json",
+      "bytes": 5242,
+      "exactBytesRestored": true,
+      "sha256": "4ef0a357cefee63ae61e60ba693558d5174a0ec1c723afa7b1f76dd97d4f8934"
+    }
+  ],
+  "cancelled": 0,
+  "skipped": 1,
+  "todo": 0,
+  "skippedTest": {
+    "name": "generator exactly reproduces the committed export from the supplied official archive",
+    "reason": "The existing main test skips when work/open-world-transit/google_transit.zip is absent.",
+    "source": "tests/skytrain-world-service.test.mjs:83"
+  }
+}

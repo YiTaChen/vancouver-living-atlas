@@ -1,0 +1,489 @@
+{
+  "method": "CAMERA-ANGLE OBSERVATION ONLY, distinct from default acceptance. Same real dense forest and normal seed1/manual hover/automatic escape; mouse drag raises chase pitch to0.8 and the screenshot observes later real onboard fire above the canopy. Real city, RocketController, RocketEffects and model in hardware WebGL. Automatic rocket updates are paused only by the test harness, which repeatedly calls the original update(1/60), allowing exact screenshots. No phase, heat, fire, collision or destruction outcome is assigned. Replay seeds and manual throttle commands are supplied as normal inputs.",
+  "startedAt": "2026-10-23T07:38:53.988Z",
+  "errors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "httpFailures": [],
+  "checks": {
+    "realForestHeat": true,
+    "visibleBurnBeforeExplosion": true,
+    "fireCanExplodeAfterLiftoff": true,
+    "forestDoesNotAlwaysExplode": true,
+    "returnToCity": true
+  },
+  "roof": [],
+  "forest": {
+    "trace": [
+      {
+        "t": 6.033333333333317,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 6.5333333333333155,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 7.033333333333314,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 7.533333333333312,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 8.033333333333312,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 8.533333333333337,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 9.033333333333362,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 9.533333333333387,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 10.033333333333411,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 10.533333333333436,
+        "phase": "countdown",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 11.033333333333461,
+        "phase": "ignition",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0,
+        "vy": 0
+      },
+      {
+        "t": 11.533333333333486,
+        "phase": "ignition",
+        "h": 0,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0.11249999999999998,
+        "vy": 0
+      },
+      {
+        "t": 12.03333333333351,
+        "phase": "flight",
+        "h": 0.045427702323944885,
+        "heat": 0,
+        "fire": 0,
+        "exposure": 0,
+        "trees": 0,
+        "throttle": 0.19489874111506056,
+        "vy": 0.4012724322814415
+      },
+      {
+        "t": 12.533333333333536,
+        "phase": "flight",
+        "h": 0.41205758579008034,
+        "heat": 0.01431499009478509,
+        "fire": 0,
+        "exposure": 0.6311088093535753,
+        "trees": 11,
+        "throttle": 0.17440183206779677,
+        "vy": 0.9490283549562188
+      },
+      {
+        "t": 13.03333333333356,
+        "phase": "flight",
+        "h": 0.928350171685338,
+        "heat": 0.11066621246123631,
+        "fire": 0,
+        "exposure": 0.9714865598050891,
+        "trees": 19,
+        "throttle": 0.16382755390536427,
+        "vy": 1.062459466059424
+      },
+      {
+        "t": 13.533333333333585,
+        "phase": "flight",
+        "h": 1.4403858413874389,
+        "heat": 0.22725455321323712,
+        "fire": 0,
+        "exposure": 0.9990754056493498,
+        "trees": 21,
+        "throttle": 0.1590587783375176,
+        "vy": 0.967154113751918
+      },
+      {
+        "t": 14.03333333333361,
+        "phase": "flight",
+        "h": 1.8802442307146023,
+        "heat": 0.34512891667436957,
+        "fire": 0,
+        "exposure": 0.9999951242708373,
+        "trees": 23,
+        "throttle": 0.15747918297424404,
+        "vy": 0.7918715130390285
+      },
+      {
+        "t": 14.533333333333635,
+        "phase": "flight",
+        "h": 2.2273846585873365,
+        "heat": 0.46303604002599624,
+        "fire": 0,
+        "exposure": 1,
+        "trees": 24,
+        "throttle": 0.15750705570845638,
+        "vy": 0.6043282669572414
+      },
+      {
+        "t": 15.03333333333366,
+        "phase": "flight",
+        "h": 2.4849271475420203,
+        "heat": 0.580943250082884,
+        "fire": 0,
+        "exposure": 1,
+        "trees": 24,
+        "throttle": 0.1582332107643177,
+        "vy": 0.43607528876786994
+      },
+      {
+        "t": 15.533333333333685,
+        "phase": "flight",
+        "h": 2.6661377440624285,
+        "heat": 0.6995914296505985,
+        "fire": 0.15499999999999997,
+        "exposure": 1,
+        "trees": 25,
+        "throttle": 0.1591545780291361,
+        "vy": 0.29886479387448966
+      },
+      {
+        "t": 16.033333333333704,
+        "phase": "flight",
+        "h": 2.787341255189503,
+        "heat": 0.8252488131537663,
+        "fire": 0.33000000000000024,
+        "exposure": 1,
+        "trees": 25,
+        "throttle": 0.15999277374998097,
+        "vy": 0.19479291247178804
+      },
+      {
+        "t": 16.533333333333676,
+        "phase": "flight",
+        "h": 2.864413314842313,
+        "heat": 0.959478652549233,
+        "fire": 0.5050000000000009,
+        "exposure": 1,
+        "trees": 25,
+        "throttle": 0.1606251333512828,
+        "vy": 0.12039985399590772
+      },
+      {
+        "t": 17.033333333333648,
+        "phase": "flight",
+        "h": 2.9104438719013714,
+        "heat": 1,
+        "fire": 0.6800000000000016,
+        "exposure": 1,
+        "trees": 25,
+        "throttle": 0.1610669373295842,
+        "vy": 0.06846961646329011
+      },
+      {
+        "t": 17.53333333333362,
+        "phase": "flight",
+        "h": 2.934396904456051,
+        "heat": 1,
+        "fire": 0.8550000000000023,
+        "exposure": 0.9999999991170379,
+        "trees": 25,
+        "throttle": 0.16143201640431648,
+        "vy": 0.03016282925932621
+      },
+      {
+        "t": 18.03333333333359,
+        "phase": "flight",
+        "h": 2.9497451016900733,
+        "heat": 1,
+        "fire": 1,
+        "exposure": 0.9999999789669007,
+        "trees": 25,
+        "throttle": 0.236782215752333,
+        "vy": 0.2233150224962117
+      },
+      {
+        "t": 18.533333333333562,
+        "phase": "flight",
+        "h": 4.884392404044348,
+        "heat": 1,
+        "fire": 1,
+        "exposure": 0.9999983382102215,
+        "trees": 25,
+        "throttle": 0.6867822157523333,
+        "vy": 9.483525571795075
+      },
+      {
+        "cameraObservation": true,
+        "elapsed": 18.866666666666877,
+        "altitude": 10.301352671333419,
+        "fire": 1,
+        "yaw": 0.6,
+        "pitch": 0.7999999999999996,
+        "flames": [
+          {
+            "visible": true,
+            "scale": [0.7638814977985988, 1.4614326193150722, 0.8]
+          },
+          {
+            "visible": true,
+            "scale": [0.8939938405068337, 1.5985216105208848, 0.8]
+          },
+          {
+            "visible": true,
+            "scale": [0.8457491409015179, 1.5071209791299236, 0.8]
+          },
+          {
+            "visible": true,
+            "scale": [0.6635033533079473, 1.2712640441274303, 0.8]
+          },
+          {
+            "visible": true,
+            "scale": [0.5148124143701402, 1.1077965838447135, 0.8]
+          },
+          {
+            "visible": true,
+            "scale": [0.5363820876241191, 1.1670098273968859, 0.8]
+          }
+        ]
+      },
+      {
+        "t": 19.033333333333534,
+        "phase": "flight",
+        "h": 14.984543967248367,
+        "heat": 1,
+        "fire": 1,
+        "exposure": 0.9993034391123478,
+        "trees": 25,
+        "throttle": 1,
+        "vy": 31.97814249483581
+      }
+    ],
+    "escapedAt": 17.950000000000262,
+    "ignitedAt": 15.450000000000347,
+    "maxHeat": 1,
+    "maxExposure": 1,
+    "snapshot": {
+      "missionId": 1,
+      "exists": true,
+      "active": true,
+      "placing": false,
+      "kind": "small",
+      "phase": "crashed",
+      "buildProgress": 1,
+      "loaded": true,
+      "loadError": false,
+      "countdown": 0,
+      "altitude": 21.107802394639915,
+      "speed": 41.7636900046084,
+      "fuel": 0.9353223537809746,
+      "stage": "boost",
+      "stageFuel": 0.9191529422262182,
+      "stageTransitionProgress": 0,
+      "spaceFocus": "rocket",
+      "throttle": 0,
+      "tilt": 4.52183392491608,
+      "pitch": -0.44847022482459653,
+      "roll": 4.499585552626595,
+      "verticalSpeed": 0,
+      "wind": 9.760233452899389,
+      "auto": true,
+      "stabilize": true,
+      "support": "ground",
+      "supportIntegrity": 1,
+      "supportCollapsed": false,
+      "integrity": 0,
+      "contactDamage": 0,
+      "contactState": "none",
+      "contactImpact": null,
+      "contactAge": 0,
+      "groundSlopeGrade": 0,
+      "steepSurface": false,
+      "failureStage": "wreckage",
+      "failureAge": 0,
+      "failureCause": "fire",
+      "vehicleFire": 1,
+      "vehicleHeat": 1,
+      "warning": "Fire ruptured the propellant tanks.",
+      "view": "chase",
+      "damaged": 0,
+      "burning": 25,
+      "debris": 0
+    },
+    "wreckage": {
+      "time": 19.216666666666857,
+      "position": {
+        "x": -494.6823063256187,
+        "y": 38.81794196036252,
+        "z": -1375.7265913407523
+      },
+      "velocity": {
+        "x": 9.56913359874876,
+        "y": 40.64324471036748,
+        "z": 0.8741535239940835
+      },
+      "attitude": {
+        "pitch": -0.007827282020348419,
+        "roll": 0.07853258286850266
+      },
+      "angularVelocity": {
+        "pitch": 0.00849671247850599,
+        "roll": -0.08864839775358072
+      },
+      "cause": "fire",
+      "exploded": true,
+      "explosionDelay": null,
+      "explosionTime": 19.216666666666857
+    }
+  },
+  "screenshots": [
+    "accident-forest-onboard-fire.png",
+    "accident-forest-airburst.png",
+    "accident-forest-wreckage.png"
+  ],
+  "forestSite": {
+    "x": -507.4867626785675,
+    "z": -1380.5906400001757,
+    "y": 17.260139565722604,
+    "close": 23,
+    "slope": 0.24008176648845847
+  },
+  "normalForest": {
+    "missionId": 2,
+    "exists": true,
+    "active": true,
+    "placing": false,
+    "kind": "small",
+    "phase": "space",
+    "buildProgress": 1,
+    "loaded": true,
+    "loadError": false,
+    "countdown": 0,
+    "altitude": 100026.25635093758,
+    "speed": 3095.6069653785844,
+    "fuel": 0.03489999999999143,
+    "stage": "coast",
+    "stageFuel": 0.17449999999995716,
+    "stageTransitionProgress": 0,
+    "spaceFocus": "rocket",
+    "throttle": 0,
+    "tilt": 4.2536393550822105,
+    "pitch": 4.249284692753618,
+    "roll": 0.19260166142194593,
+    "verticalSpeed": 3086.5516897942566,
+    "wind": 0.14906617120797624,
+    "auto": true,
+    "stabilize": true,
+    "support": "ground",
+    "supportIntegrity": 1,
+    "supportCollapsed": false,
+    "integrity": 1,
+    "contactDamage": 0,
+    "contactState": "none",
+    "contactImpact": null,
+    "contactAge": 0,
+    "groundSlopeGrade": 0,
+    "steepSurface": false,
+    "failureStage": "none",
+    "failureAge": 0,
+    "failureCause": "",
+    "vehicleFire": 0,
+    "vehicleHeat": 0,
+    "warning": "",
+    "view": "chase",
+    "damaged": 0,
+    "burning": 25,
+    "debris": 0
+  },
+  "finishedAt": "2026-10-23T07:39:07.067Z"
+}

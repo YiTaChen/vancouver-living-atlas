@@ -1,0 +1,1359 @@
+{
+  "method": "Independent headless Chrome Metal, real production city/controller/model/effects. Original 1/60 controller update, genuine rendered-road picking and original supportAt/start. No assignments to stage, altitude, damage, velocity or outcomes. All source files remained frozen; all browsers closed before evidence collation.",
+  "checksPassed": 54,
+  "checksTotal": 54,
+  "naturalMissionsPassed": 11,
+  "naturalMissionsTotal": 11,
+  "jsErrors": 0,
+  "shaderOrWebGLErrors": 0,
+  "hmrEvents": 0,
+  "sourceSha256": {
+    "lib/city/rocket-controller.ts": "52c99ec6449c42e7aa6ffaea6a14a4eddb3dbc5e25f156a90777a661526177ef",
+    "lib/city/rocket-effects.ts": "a524ceefc4e657621c266ef9019694c1cf48dd65274f845e2b3660484da62506",
+    "lib/city/rocket-state.ts": "40cc789843c484fa614ce2dbee25bbc6bdda4b288e1c570c1b6174c0c35e5fcd",
+    "lib/city/assets/rocket.ts": "e42f1c5aa1b4f8fe4e509ac60dd9532044d4000c0423c3888e83b702e1198070",
+    "lib/city/assets/rocket-design.ts": "347c0cae22a968689ba68f5b98838e3f2105cd0c279f4ab0a1bbece6483a1981",
+    "lib/city/assets/rocket-wreckage.ts": "bdb4ee169daab4f28bd4c3c449044a69a808ebf7b3dcf1e125590a1ef748cfa1",
+    "lib/city/assets/rocket-exhaust.ts": "f2ee00d27751679bcc5b36537227b6a0b5802cc899e1d28f1c4fba99e6d17085",
+    "lib/city/facade-details.ts": "36509f24ef07969d2ed5781cf0523906cda08d0965c58cc48b8ace338b5c8292"
+  },
+  "sourceHashesIdenticalAcrossAllQualities": true,
+  "images": [
+    {
+      "quality": "balanced",
+      "source": "intersection-2-strap-obstructed-ignition-1.5s.jpg",
+      "path": "evidence/titan-intersection-pressure.jpg",
+      "bytes": 243356,
+      "originalWorkPath": "work/rocket-intersection-release-images/titan-intersection-pressure.jpg"
+    },
+    {
+      "quality": "balanced",
+      "source": "intersection-2-strap-obstructed-contact-3s.jpg",
+      "path": "evidence/titan-intersection-five-jets.jpg",
+      "bytes": 269599,
+      "originalWorkPath": "work/rocket-intersection-release-images/titan-intersection-five-jets.jpg"
+    },
+    {
+      "quality": "balanced",
+      "source": "intersection-2-strap-obstructed-strap-release.png",
+      "path": "evidence/titan-intersection-strap-release.png",
+      "bytes": 588099,
+      "originalWorkPath": "work/rocket-intersection-release-images/titan-intersection-strap-release.png"
+    },
+    {
+      "quality": "high",
+      "source": "intersection-1-strap-obstructed-contact-3s.jpg",
+      "path": "evidence/titan-intersection-high-detail.jpg",
+      "bytes": 255890,
+      "originalWorkPath": "work/rocket-intersection-release-images/titan-intersection-high-detail.jpg"
+    }
+  ],
+  "totalImageBytes": 1356944,
+  "qualities": [
+    {
+      "quality": "balanced",
+      "startedAt": "2026-10-23T03:11:19.962Z",
+      "finishedAt": "2026-10-23T03:13:36.951Z",
+      "checks": {
+        "severalRealJunctions": true,
+        "clearJunctionMissionComplete": true,
+        "clearJunctionHasVisiblePressureDamage": true,
+        "groundPlacementFollowsActualRoadHeight": true,
+        "initialLowSpeedOverlapDoesNotDisintegrateVehicle": true,
+        "obstructedSiteOutcomeAccountedFor": true,
+        "obstructedSiteHasRenderedBuildingDamage": true,
+        "nearbyBuildingsReactBeforeVehicleDisintegrates": true,
+        "allFiveProductionJetVolumesActive": true,
+        "sideBoostersNaturallyDetachBeforeCentralCore": true,
+        "centralEngineKeepsFiringWhileFourSideEnginesAreOff": true,
+        "groundDustActuallySpreads": true,
+        "exactCityGeometryRestored": true,
+        "requestedQualityActuallyRendered": true,
+        "damageAdaptersStayBounded": true,
+        "adapterOriginalGeometryRestoredAfterEveryDraw": true,
+        "noShaderOrRuntimeErrors": true,
+        "sourceRemainedStable": true
+      },
+      "missionCount": 5,
+      "resource404ConsoleCount": 2,
+      "httpFailures": [],
+      "maximumFacadeDisplacementMeters": 0,
+      "maximumFacadeDamage": 0,
+      "maximumFacadePagesPerDraw": 0,
+      "maximumCachedSurfaces": 4,
+      "maximumInstanceDamageEntries": 0,
+      "maximumClonedSurfaceVertices": 1380,
+      "damagedLandmarkOwnerMeshes": []
+    },
+    {
+      "quality": "high",
+      "startedAt": "2026-10-23T03:14:13.885Z",
+      "finishedAt": "2026-10-23T03:17:07.738Z",
+      "checks": {
+        "severalRealJunctions": true,
+        "clearJunctionMissionComplete": true,
+        "clearJunctionHasVisiblePressureDamage": true,
+        "groundPlacementFollowsActualRoadHeight": true,
+        "initialLowSpeedOverlapDoesNotDisintegrateVehicle": true,
+        "obstructedSiteOutcomeAccountedFor": true,
+        "obstructedSiteHasRenderedBuildingDamage": true,
+        "nearbyBuildingsReactBeforeVehicleDisintegrates": true,
+        "allFiveProductionJetVolumesActive": true,
+        "sideBoostersNaturallyDetachBeforeCentralCore": true,
+        "centralEngineKeepsFiringWhileFourSideEnginesAreOff": true,
+        "groundDustActuallySpreads": true,
+        "exactCityGeometryRestored": true,
+        "requestedQualityActuallyRendered": true,
+        "damageAdaptersStayBounded": true,
+        "adapterOriginalGeometryRestoredAfterEveryDraw": true,
+        "noShaderOrRuntimeErrors": true,
+        "sourceRemainedStable": true
+      },
+      "missionCount": 3,
+      "resource404ConsoleCount": 2,
+      "httpFailures": [],
+      "maximumFacadeDisplacementMeters": 10.03894292128518,
+      "maximumFacadeDamage": 1,
+      "maximumFacadePagesPerDraw": 4,
+      "maximumCachedSurfaces": 21,
+      "maximumInstanceDamageEntries": 4052,
+      "maximumClonedSurfaceVertices": 60240,
+      "damagedLandmarkOwnerMeshes": []
+    },
+    {
+      "quality": "ultra",
+      "startedAt": "2026-10-23T03:08:33.186Z",
+      "finishedAt": "2026-10-23T03:11:01.306Z",
+      "checks": {
+        "severalRealJunctions": true,
+        "clearJunctionMissionComplete": true,
+        "clearJunctionHasVisiblePressureDamage": true,
+        "groundPlacementFollowsActualRoadHeight": true,
+        "initialLowSpeedOverlapDoesNotDisintegrateVehicle": true,
+        "obstructedSiteOutcomeAccountedFor": true,
+        "obstructedSiteHasRenderedBuildingDamage": true,
+        "nearbyBuildingsReactBeforeVehicleDisintegrates": true,
+        "allFiveProductionJetVolumesActive": true,
+        "sideBoostersNaturallyDetachBeforeCentralCore": true,
+        "centralEngineKeepsFiringWhileFourSideEnginesAreOff": true,
+        "groundDustActuallySpreads": true,
+        "exactCityGeometryRestored": true,
+        "requestedQualityActuallyRendered": true,
+        "damageAdaptersStayBounded": true,
+        "adapterOriginalGeometryRestoredAfterEveryDraw": true,
+        "noShaderOrRuntimeErrors": true,
+        "sourceRemainedStable": true
+      },
+      "missionCount": 3,
+      "resource404ConsoleCount": 2,
+      "httpFailures": [],
+      "maximumFacadeDisplacementMeters": 81.85161799031759,
+      "maximumFacadeDamage": 1,
+      "maximumFacadePagesPerDraw": 11,
+      "maximumCachedSurfaces": 23,
+      "maximumInstanceDamageEntries": 4077,
+      "maximumClonedSurfaceVertices": 185856,
+      "damagedLandmarkOwnerMeshes": [
+        "Street furniture garbage-bin:0 metal",
+        "Street furniture garbage-bin:1 metal"
+      ]
+    }
+  ],
+  "landmarkScope": "High/Ultra verified actual streamed facade pages, roofs and HVAC detail. Damaged meshes under the landmark owner were street furniture bins; no claim that a named custom landmark building was hit in these eleven junction missions.",
+  "missions": [
+    {
+      "quality": "balanced",
+      "roads": ["JERVIS ST", "ROBSON ST"],
+      "category": "clear",
+      "node": 1820,
+      "origin": {
+        "x": 6.593189018284689,
+        "y": 40.5483009112486,
+        "z": -67.52671199972951
+      },
+      "initialCoreOverlap": false,
+      "initialHitProbes": [],
+      "outcome": "space",
+      "flightSeconds": 69.59999999999734,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 0,
+      "maximumDustParticles": 96,
+      "maximumDustCenterRadiusMeters": 146.70648477839396,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 0,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 26.337639713488613
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 0.8995437622070312,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 59.12064698772621
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 3.662097930908203
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 6.593189018284689,
+            "y": 40.5483009112486,
+            "z": -67.52671199972951
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 20.245243579970168,
+            "y": 3037.4075558172153,
+            "z": -68.23637549141948
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 23.14654408557433,
+            "y": 3516.8450577320273,
+            "z": -66.9519390075053
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 107.33364569016169,
+            "y": 14443.589822685486,
+            "z": 71.29162140318726
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 114.6146841724408,
+            "y": 15141.323309626032,
+            "z": 88.78753352227712
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.6166666666627,
+          "position": {
+            "x": 2053.0135803218755,
+            "y": 100049.1672560424,
+            "z": 4934.15836362276
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "balanced",
+      "roads": ["BUTE ST", "ROBSON ST"],
+      "category": "clear",
+      "node": 1863,
+      "origin": {
+        "x": 74.08624180243613,
+        "y": 39.066180451134436,
+        "z": -0.5232039997864035
+      },
+      "initialCoreOverlap": false,
+      "initialHitProbes": [],
+      "outcome": "space",
+      "flightSeconds": 69.49999999999734,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 0,
+      "maximumDustParticles": 96,
+      "maximumDustCenterRadiusMeters": 141.94502950595415,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 0,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 26.337639713488613
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 0.8500823974609375,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 59.12064698772624
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 4.0610809326171875
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 74.08624180243613,
+            "y": 39.066180451134436,
+            "z": -0.5232039997864035
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 86.86192603904215,
+            "y": 3038.0094196360956,
+            "z": -0.36705567192388583
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 89.21529401431658,
+            "y": 3517.701972325543,
+            "z": 0.659080950011447
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 111.91399486758087,
+            "y": 14463.784916801085,
+            "z": 138.39064183293252
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 111.52445261124346,
+            "y": 15164.617382831262,
+            "z": 155.68618508148842
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.5166666666627,
+          "position": {
+            "x": 800.6219612993957,
+            "y": 100041.81295902166,
+            "z": 4973.837026453292
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "balanced",
+      "roads": ["ROSEMARY BROWN LANE", "BUTE ST"],
+      "category": "strap-obstructed",
+      "node": 1839,
+      "origin": {
+        "x": 35.478327692531614,
+        "y": 42.19784710996947,
+        "z": 38.63917199989373
+      },
+      "initialCoreOverlap": false,
+      "initialHitProbes": [8, 11],
+      "outcome": "space",
+      "flightSeconds": 69.46666666666401,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 133,
+      "maximumDustParticles": 96,
+      "maximumDustCenterRadiusMeters": 150.95822672632409,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 0.7446708679199219,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 16.122427572996454
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 3.5353965759277344,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 62.414099595934296
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 4.897674560546875
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 35.478327692531614,
+            "y": 42.19784710996947,
+            "z": 38.63917199989373
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 48.81430911338053,
+            "y": 3042.6264886145004,
+            "z": 47.81085965670506
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 51.06936598770978,
+            "y": 3523.0114945331416,
+            "z": 49.636689147653826
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 53.8221291257737,
+            "y": 14470.027373396691,
+            "z": 200.2359893746249
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 50.406699146778195,
+            "y": 15172.12344972431,
+            "z": 218.17939164206445
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.48333333332937,
+          "position": {
+            "x": -218.35093404803928,
+            "y": 100065.48456871674,
+            "z": 5067.676836748685
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "balanced",
+      "roads": ["JERVIS ST", "ROSEMARY BROWN LANE"],
+      "category": "strap-obstructed",
+      "node": 1738,
+      "origin": {
+        "x": -78.67533371845573,
+        "y": 41.77682461434097,
+        "z": -74.67345600019456
+      },
+      "initialCoreOverlap": false,
+      "initialHitProbes": [11],
+      "outcome": "space",
+      "flightSeconds": 69.58333333333067,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 1,
+      "maximumDustParticles": 96,
+      "maximumDustCenterRadiusMeters": 147.2839522255078,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 0.2775001525878906,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 17.44111590809578
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 2.268543243408203,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 63.907770812907394
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 5.464260101318359
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": -78.67533371845573,
+            "y": 41.77682461434097,
+            "z": -74.67345600019456
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": -58.63849225428493,
+            "y": 3041.0895205541237,
+            "z": -65.04400536771766
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": -54.741591123824456,
+            "y": 3521.955298049455,
+            "z": -63.09165424083161
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 81.44958492475692,
+            "y": 14421.186126450491,
+            "z": 87.67489455001447
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 92.73211511120012,
+            "y": 15119.02831913178,
+            "z": 105.59922661937563
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.59999999999603,
+          "position": {
+            "x": 521.0383412399393,
+            "y": 100055.42216894317,
+            "z": 4973.607288777515
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "balanced",
+      "roads": ["BURRARD ST", "ROBSON ST"],
+      "category": "core-obstructed",
+      "node": 2062,
+      "origin": {
+        "x": 415.67587947125975,
+        "y": 32.50277252052162,
+        "z": 339.6261879997863
+      },
+      "initialCoreOverlap": true,
+      "initialHitProbes": [8],
+      "outcome": "space",
+      "flightSeconds": 69.68333333333067,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 127,
+      "maximumDustParticles": 96,
+      "maximumDustCenterRadiusMeters": 142.30237183149512,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 1.5017547607421875,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 17.441115908095824
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 7.1297149658203125,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 63.907770812907465
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 9.876976013183594
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 415.67587947125975,
+            "y": 32.50277252052162,
+            "z": 339.6261879997863
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 435.8057415264105,
+            "y": 3008.7259560669845,
+            "z": 338.3708632866013
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 439.7599183736147,
+            "y": 3487.0641755489414,
+            "z": 339.8808222695529
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 583.7402890111,
+            "y": 14371.074794283719,
+            "z": 478.5561854834113
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 596.2237678692919,
+            "y": 15065.28742993056,
+            "z": 496.2019299345705
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.69999999999602,
+          "position": {
+            "x": 1442.0470350981395,
+            "y": 100052.81613145223,
+            "z": 5361.741390745432
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "high",
+      "roads": ["JERVIS ST", "ROBSON ST"],
+      "category": "clear",
+      "node": 1820,
+      "origin": {
+        "x": 6.593189018284689,
+        "y": 40.5483009112486,
+        "z": -67.52671199972951
+      },
+      "initialCoreOverlap": false,
+      "initialHitProbes": [],
+      "outcome": "space",
+      "flightSeconds": 69.59999999999734,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 0,
+      "maximumDustParticles": 160,
+      "maximumDustCenterRadiusMeters": 146.6573100280447,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 0,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 26.365539749375753
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 0.8995437622070312,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 59.02473241139866
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 3.662097930908203
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 6.593189018284689,
+            "y": 40.5483009112486,
+            "z": -67.52671199972951
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 20.245243579970168,
+            "y": 3037.4075558172153,
+            "z": -68.23637549141948
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 23.14654408557433,
+            "y": 3516.8450577320273,
+            "z": -66.9519390075053
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 107.33364569016169,
+            "y": 14443.589822685486,
+            "z": 71.29162140318726
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 114.6146841724408,
+            "y": 15141.323309626032,
+            "z": 88.78753352227712
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.6166666666627,
+          "position": {
+            "x": 2053.0135803218755,
+            "y": 100049.1672560424,
+            "z": 4934.15836362276
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "high",
+      "roads": ["ROSEMARY BROWN LANE", "BUTE ST"],
+      "category": "strap-obstructed",
+      "node": 1839,
+      "origin": {
+        "x": 35.478327692531614,
+        "y": 42.19784710996947,
+        "z": 38.63917199989373
+      },
+      "initialCoreOverlap": false,
+      "initialHitProbes": [8, 11],
+      "outcome": "space",
+      "flightSeconds": 69.46666666666401,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 133,
+      "maximumDustParticles": 159,
+      "maximumDustCenterRadiusMeters": 150.95652392571375,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 0.7446708679199219,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 16.136036293831477
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 3.5353965759277344,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 62.41586548214443
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 4.897674560546875
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 35.478327692531614,
+            "y": 42.19784710996947,
+            "z": 38.63917199989373
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 48.81430911338053,
+            "y": 3042.6264886145004,
+            "z": 47.81085965670506
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 51.06936598770978,
+            "y": 3523.0114945331416,
+            "z": 49.636689147653826
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 53.8221291257737,
+            "y": 14470.027373396691,
+            "z": 200.2359893746249
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 50.406699146778195,
+            "y": 15172.12344972431,
+            "z": 218.17939164206445
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.48333333332937,
+          "position": {
+            "x": -218.35093404803928,
+            "y": 100065.48456871674,
+            "z": 5067.676836748685
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "high",
+      "roads": ["BURRARD ST", "ROBSON ST"],
+      "category": "core-obstructed",
+      "node": 2062,
+      "origin": {
+        "x": 415.67587947125975,
+        "y": 32.50277252052162,
+        "z": 339.6261879997863
+      },
+      "initialCoreOverlap": true,
+      "initialHitProbes": [8],
+      "outcome": "space",
+      "flightSeconds": 69.68333333333067,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 127,
+      "maximumDustParticles": 163,
+      "maximumDustCenterRadiusMeters": 147.53405536655816,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 1.5017547607421875,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 17.600496708759703
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 7.1297149658203125,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 63.57921769760529
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 9.876976013183594
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 415.67587947125975,
+            "y": 32.50277252052162,
+            "z": 339.6261879997863
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 435.8057415264105,
+            "y": 3008.7259560669845,
+            "z": 338.3708632866013
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 439.7599183736147,
+            "y": 3487.0641755489414,
+            "z": 339.8808222695529
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 583.7402890111,
+            "y": 14371.074794283719,
+            "z": 478.5561854834113
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 596.2237678692919,
+            "y": 15065.28742993056,
+            "z": 496.2019299345705
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.69999999999602,
+          "position": {
+            "x": 1442.0470350981395,
+            "y": 100052.81613145223,
+            "z": 5361.741390745432
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "ultra",
+      "roads": ["JERVIS ST", "ROBSON ST"],
+      "category": "clear",
+      "node": 1820,
+      "origin": {
+        "x": 6.593189018284689,
+        "y": 40.5483009112486,
+        "z": -67.52671199972951
+      },
+      "initialCoreOverlap": false,
+      "initialHitProbes": [],
+      "outcome": "space",
+      "flightSeconds": 69.59999999999734,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 0,
+      "maximumDustParticles": 160,
+      "maximumDustCenterRadiusMeters": 146.6573100280447,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 0,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 26.365539749375753
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 0.8995437622070312,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 59.02473241139866
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 3.662097930908203
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 6.593189018284689,
+            "y": 40.5483009112486,
+            "z": -67.52671199972951
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 20.245243579970168,
+            "y": 3037.4075558172153,
+            "z": -68.23637549141948
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 23.14654408557433,
+            "y": 3516.8450577320273,
+            "z": -66.9519390075053
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 107.33364569016169,
+            "y": 14443.589822685486,
+            "z": 71.29162140318726
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 114.6146841724408,
+            "y": 15141.323309626032,
+            "z": 88.78753352227712
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.6166666666627,
+          "position": {
+            "x": 2053.0135803218755,
+            "y": 100049.1672560424,
+            "z": 4934.15836362276
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "ultra",
+      "roads": ["ROSEMARY BROWN LANE", "BUTE ST"],
+      "category": "strap-obstructed",
+      "node": 1839,
+      "origin": {
+        "x": 35.478327692531614,
+        "y": 42.19784710996947,
+        "z": 38.63917199989373
+      },
+      "initialCoreOverlap": false,
+      "initialHitProbes": [8, 11],
+      "outcome": "space",
+      "flightSeconds": 69.46666666666401,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 133,
+      "maximumDustParticles": 159,
+      "maximumDustCenterRadiusMeters": 150.95652392571375,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 0.7446708679199219,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 16.136036293831477
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 3.5353965759277344,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 62.41586548214443
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 4.897674560546875
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 35.478327692531614,
+            "y": 42.19784710996947,
+            "z": 38.63917199989373
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 48.81430911338053,
+            "y": 3042.6264886145004,
+            "z": 47.81085965670506
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 51.06936598770978,
+            "y": 3523.0114945331416,
+            "z": 49.636689147653826
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 53.8221291257737,
+            "y": 14470.027373396691,
+            "z": 200.2359893746249
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 50.406699146778195,
+            "y": 15172.12344972431,
+            "z": 218.17939164206445
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.48333333332937,
+          "position": {
+            "x": -218.35093404803928,
+            "y": 100065.48456871674,
+            "z": 5067.676836748685
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    },
+    {
+      "quality": "ultra",
+      "roads": ["BURRARD ST", "ROBSON ST"],
+      "category": "core-obstructed",
+      "node": 2062,
+      "origin": {
+        "x": 415.67587947125975,
+        "y": 32.50277252052162,
+        "z": 339.6261879997863
+      },
+      "initialCoreOverlap": true,
+      "initialHitProbes": [8],
+      "outcome": "space",
+      "flightSeconds": 69.68333333333067,
+      "exactCityGeometryRestored": true,
+      "recordedContacts": 127,
+      "maximumDustParticles": 163,
+      "maximumDustCenterRadiusMeters": 147.53405536655816,
+      "ignitionRenderedFrames": [
+        {
+          "elapsed": 21.516666666666726,
+          "maximumBuildingCoordinateChangeMeters": 1.5017547607421875,
+          "dustCount": 8,
+          "dustCenterRadiusMeters": 17.600496708759703
+        },
+        {
+          "elapsed": 22.51666666666667,
+          "maximumBuildingCoordinateChangeMeters": 7.1297149658203125,
+          "dustCount": 43,
+          "dustCenterRadiusMeters": 63.57921769760529
+        }
+      ],
+      "firstFlightRenderedFrame": {
+        "flightSeconds": 0.016666666666666666,
+        "maximumBuildingCoordinateChangeMeters": 9.876976013183594
+      },
+      "stageEvents": [
+        {
+          "id": 4,
+          "type": "core-ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 415.67587947125975,
+            "y": 32.50277252052162,
+            "z": 339.6261879997863
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 7,
+          "type": "strap-on-separation",
+          "time": 34.01666666666602,
+          "position": {
+            "x": 435.8057415264105,
+            "y": 3008.7259560669845,
+            "z": 338.3708632866013
+          },
+          "magnitude": 140000
+        },
+        {
+          "id": 8,
+          "type": "core-only",
+          "time": 34.816666666665974,
+          "position": {
+            "x": 439.7599183736147,
+            "y": 3487.0641755489414,
+            "z": 339.8808222695529
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 10,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 583.7402890111,
+            "y": 14371.074794283719,
+            "z": 478.5561854834113
+          },
+          "magnitude": 205000
+        },
+        {
+          "id": 11,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 596.2237678692919,
+            "y": 15065.28742993056,
+            "z": 496.2019299345705
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 12,
+          "type": "mission-complete",
+          "time": 92.69999999999602,
+          "position": {
+            "x": 1442.0470350981395,
+            "y": 100052.81613145223,
+            "z": 5361.741390745432
+          },
+          "magnitude": 0
+        }
+      ],
+      "strapSeparationTime": 34.01666666666602,
+      "centralSeparationTime": 47.01666666666528,
+      "mainContinuesWithAllSideFlamesOff": true
+    }
+  ],
+  "diagnosticsExcluded": [
+    "work/rocket-intersection-baseline",
+    "work/rocket-intersection-interrupted",
+    "work/rocket-intersection-balanced-css-diagnostic",
+    "work/rocket-intersection-high-css-diagnostic"
+  ]
+}

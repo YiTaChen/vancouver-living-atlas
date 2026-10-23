@@ -1,0 +1,426 @@
+{
+  "method": "Real production city/controller/effects/models in Chrome Metal. The harness pauses automatic rocket updates and calls the original update(1/60). It does not assign phase, altitude, heat, damage counters or a success outcome. All three rockets use the same measured clear ground site and natural ground support.",
+  "startedAt": "2026-10-22T22:06:04.423Z",
+  "errors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "checks": {
+    "threeSelectableKinds": true,
+    "loadingBuffersPreserved": true,
+    "allLaunchFromActualGround": true,
+    "moreBuildingsAffected": true,
+    "buildingEffectsReachFurther": true,
+    "widerTreeResponse": true,
+    "heatAndPressureHaveDifferentRanges": true,
+    "titanStageSeparation": true,
+    "titanMissionComplete": true,
+    "boundedEffects": true,
+    "exactBuildingGeometryRestored": true,
+    "allReturnToCity": true
+  },
+  "missions": {
+    "small": {
+      "ready": {
+        "missionId": 2,
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "small",
+        "phase": "ready",
+        "buildProgress": 1,
+        "loaded": true,
+        "loadError": false,
+        "countdown": 5,
+        "altitude": 0,
+        "speed": 0,
+        "fuel": 1,
+        "stage": "boost",
+        "stageFuel": 1,
+        "spaceFocus": "rocket",
+        "throttle": 0,
+        "tilt": 0,
+        "pitch": 0,
+        "roll": 0,
+        "verticalSpeed": 0,
+        "wind": 0,
+        "auto": true,
+        "stabilize": true,
+        "support": "ground",
+        "supportIntegrity": 1,
+        "failureStage": "none",
+        "failureAge": 0,
+        "failureCause": "",
+        "vehicleFire": 0,
+        "vehicleHeat": 0,
+        "warning": "",
+        "view": "chase",
+        "damaged": 0,
+        "burning": 0,
+        "debris": 0
+      },
+      "early": {
+        "damaged": 0,
+        "burning": 4,
+        "debris": 0,
+        "buildingRange": 0,
+        "heatRange": 13.696652445488649,
+        "pressureTrees": 0,
+        "pressureTreeRange": 0,
+        "profile": {
+          "buildings": 26,
+          "trees": 12,
+          "particles": 160,
+          "actors": 0,
+          "rubble": 0
+        },
+        "phase": "flight",
+        "flightElapsed": 1.016666666666668,
+        "altitude": 26.51770705323143
+      },
+      "response": {
+        "damaged": 0,
+        "burning": 5,
+        "debris": 0,
+        "buildingRange": 0,
+        "heatRange": 15.18224908630375,
+        "pressureTrees": 0,
+        "pressureTreeRange": 0,
+        "profile": {
+          "buildings": 26,
+          "trees": 12,
+          "particles": 160,
+          "actors": 0,
+          "rubble": 0
+        },
+        "phase": "flight",
+        "flightElapsed": 5.016666666666654,
+        "altitude": 656.4967582449284
+      },
+      "restored": {
+        "hash": 3116572666,
+        "baseline": 3116572666,
+        "active": false,
+        "mode": "orbit"
+      }
+    },
+    "large": {
+      "ready": {
+        "missionId": 3,
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "large",
+        "phase": "ready",
+        "buildProgress": 1,
+        "loaded": true,
+        "loadError": false,
+        "countdown": 5,
+        "altitude": 0,
+        "speed": 0,
+        "fuel": 1,
+        "stage": "boost",
+        "stageFuel": 1,
+        "spaceFocus": "rocket",
+        "throttle": 0,
+        "tilt": 0,
+        "pitch": 0,
+        "roll": 0,
+        "verticalSpeed": 0,
+        "wind": 0,
+        "auto": true,
+        "stabilize": true,
+        "support": "ground",
+        "supportIntegrity": 1,
+        "failureStage": "none",
+        "failureAge": 0,
+        "failureCause": "",
+        "vehicleFire": 0,
+        "vehicleHeat": 0,
+        "warning": "",
+        "view": "chase",
+        "damaged": 0,
+        "burning": 0,
+        "debris": 0
+      },
+      "early": {
+        "damaged": 13,
+        "burning": 14,
+        "debris": 32,
+        "buildingRange": 73.49961314676062,
+        "heatRange": 36.77762403467864,
+        "pressureTrees": 0,
+        "pressureTreeRange": 0,
+        "profile": {
+          "buildings": 48,
+          "trees": 28,
+          "particles": 160,
+          "actors": 9,
+          "rubble": 26
+        },
+        "phase": "flight",
+        "flightElapsed": 1.016666666666668,
+        "altitude": 22.379828828456237
+      },
+      "response": {
+        "damaged": 14,
+        "burning": 15,
+        "debris": 55,
+        "buildingRange": 73.49961314676062,
+        "heatRange": 42.272181115367545,
+        "pressureTrees": 0,
+        "pressureTreeRange": 0,
+        "profile": {
+          "buildings": 48,
+          "trees": 28,
+          "particles": 160,
+          "actors": 9,
+          "rubble": 46
+        },
+        "phase": "flight",
+        "flightElapsed": 5.016666666666654,
+        "altitude": 558.4551994598405
+      },
+      "restored": {
+        "hash": 3116572666,
+        "baseline": 3116572666,
+        "active": false,
+        "mode": "orbit"
+      }
+    },
+    "super-heavy": {
+      "ready": {
+        "missionId": 4,
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "super-heavy",
+        "phase": "ready",
+        "buildProgress": 1,
+        "loaded": true,
+        "loadError": false,
+        "countdown": 5,
+        "altitude": 0,
+        "speed": 0,
+        "fuel": 1,
+        "stage": "boost",
+        "stageFuel": 1,
+        "spaceFocus": "rocket",
+        "throttle": 0,
+        "tilt": 0,
+        "pitch": 0,
+        "roll": 0,
+        "verticalSpeed": 0,
+        "wind": 0,
+        "auto": true,
+        "stabilize": true,
+        "support": "ground",
+        "supportIntegrity": 1,
+        "failureStage": "none",
+        "failureAge": 0,
+        "failureCause": "",
+        "vehicleFire": 0,
+        "vehicleHeat": 0,
+        "warning": "",
+        "view": "chase",
+        "damaged": 0,
+        "burning": 0,
+        "debris": 0
+      },
+      "early": {
+        "damaged": 78,
+        "burning": 56,
+        "debris": 123,
+        "buildingRange": 179.46585972171283,
+        "heatRange": 93.34204816274362,
+        "pressureTrees": 56,
+        "pressureTreeRange": 93.34204816274362,
+        "profile": {
+          "buildings": 96,
+          "trees": 56,
+          "particles": 240,
+          "actors": 27,
+          "rubble": 96
+        },
+        "phase": "flight",
+        "flightElapsed": 1.016666666666668,
+        "altitude": 21.626400454598514
+      },
+      "response": {
+        "damaged": 89,
+        "burning": 56,
+        "debris": 132,
+        "buildingRange": 179.46585972171283,
+        "heatRange": 93.34204816274362,
+        "pressureTrees": 56,
+        "pressureTreeRange": 93.34204816274362,
+        "profile": {
+          "buildings": 96,
+          "trees": 56,
+          "particles": 240,
+          "actors": 36,
+          "rubble": 96
+        },
+        "phase": "flight",
+        "flightElapsed": 5.016666666666654,
+        "altitude": 541.3859047047256
+      },
+      "complete": {
+        "missionId": 4,
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "super-heavy",
+        "phase": "space",
+        "buildProgress": 1,
+        "loaded": true,
+        "loadError": false,
+        "countdown": 0,
+        "altitude": 100030.6922662985,
+        "speed": 3080.14850662324,
+        "fuel": 0.03725806451612903,
+        "stage": "coast",
+        "stageFuel": 0.1925,
+        "spaceFocus": "rocket",
+        "throttle": 0,
+        "tilt": 4.7281354748093305,
+        "pitch": 4.287181797356086,
+        "roll": 1.9956887683436209,
+        "verticalSpeed": 3073.034113687858,
+        "wind": 0.08238231550444526,
+        "auto": true,
+        "stabilize": true,
+        "support": "ground",
+        "supportIntegrity": 1,
+        "failureStage": "none",
+        "failureAge": 0,
+        "failureCause": "",
+        "vehicleFire": 0,
+        "vehicleHeat": 0,
+        "warning": "",
+        "view": "chase",
+        "damaged": 89,
+        "burning": 56,
+        "debris": 132
+      },
+      "events": [
+        {
+          "id": 1,
+          "type": "ready",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 300,
+            "y": 31.453498389181465,
+            "z": -25
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 2,
+          "type": "countdown",
+          "time": 16.000000000000373,
+          "position": {
+            "x": 300,
+            "y": 31.453498389181465,
+            "z": -25
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 3,
+          "type": "ignition",
+          "time": 21.016666666666755,
+          "position": {
+            "x": 300,
+            "y": 31.453498389181465,
+            "z": -25
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 4,
+          "type": "liftoff",
+          "time": 23.033333333333307,
+          "position": {
+            "x": 300,
+            "y": 31.453498389181465,
+            "z": -25
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 5,
+          "type": "booster-burnout",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 333.91541653326647,
+            "y": 15434.440201397978,
+            "z": 151.86070513542631
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 6,
+          "type": "stage-separation",
+          "time": 47.01666666666528,
+          "position": {
+            "x": 333.91541653326647,
+            "y": 15434.440201397978,
+            "z": 151.86070513542631
+          },
+          "magnitude": 345000
+        },
+        {
+          "id": 7,
+          "type": "upper-ignition",
+          "time": 47.616666666665246,
+          "position": {
+            "x": 333.18686946274556,
+            "y": 16309.405341590758,
+            "z": 175.99919825217276
+          },
+          "magnitude": 0
+        },
+        {
+          "id": 8,
+          "type": "mission-complete",
+          "time": 88.18333333332961,
+          "position": {
+            "x": 861.7987444724952,
+            "y": 100062.14576468768,
+            "z": 4568.521161188826
+          },
+          "magnitude": 0
+        }
+      ],
+      "flightElapsed": 65.16666666666426,
+      "restored": {
+        "hash": 3116572666,
+        "baseline": 3116572666,
+        "active": false,
+        "mode": "orbit"
+      }
+    }
+  },
+  "screenshots": [
+    "titan-small-ready.png",
+    "titan-small-ignition.png",
+    "titan-large-ready.png",
+    "titan-large-ignition.png",
+    "titan-super-heavy-ready.png",
+    "titan-super-heavy-ignition.png",
+    "titan-stage-separation.png",
+    "titan-mission-complete.png"
+  ],
+  "site": {
+    "x": 300,
+    "y": 31.003498389181466,
+    "z": -25,
+    "near": 35,
+    "outer": 98,
+    "treeCount": 62,
+    "score": 161.49480067765097
+  },
+  "finishedAt": "2026-10-22T22:06:20.471Z"
+}
