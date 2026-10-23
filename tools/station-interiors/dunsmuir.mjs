@@ -22,6 +22,10 @@ const references = {
       url: 'https://buzzer.translink.ca/wp-content/uploads/2022/10/The-escalators-and-stairs-to-street-level-at-Burrard-Station.jpg',
       note: 'TransLink: street staircase and single escalator under glazed canopy.',
     },
+    {
+      url: 'https://www.shutterstock.com/image-photo/vancouver-canada-june-8-2026-260nw-2795618041.jpg',
+      note: 'Actual 2026 gate-hall photograph: low grid ceiling, curved pale wall panels and separate Platform 1/2 signs; distinct from unpaid glass atrium.',
+    },
   ],
   granville: [
     {
@@ -74,8 +78,6 @@ function preserveRailContract(b) {
   b.tracks();
   for (const f of b.base.floorSurfaces.filter((f) => f.kind === 'platform')) {
     b.platform(f.surfaceId, { columns: false, roof: false });
-    const originalLevel = b.base.levels.find((l) => l.levelId === f.levelId);
-    if (originalLevel) b.s.levels.push(structuredClone(originalLevel));
   }
 }
 
@@ -90,32 +92,116 @@ function entrance(b, id, label, floor, point) {
   });
 }
 
-function finishWithStairwells(b) {
-  // A landing under ascending treads would win the runtime's coplanar floor
-  // selection and let the walker continue beneath the visible staircase.
-  // Remove that footprint from both walking triangles and the actual slab.
-  for (const c of b.s.connections.filter((c) => c.treadSurfaces?.length)) {
-    const lowerId =
-      c.startPointM[1] < c.endPointM[1] ? c.fromSurfaceId : c.toSurfaceId;
-    const lower = b.s.floorSurfaces.find((f) => f.surfaceId === lowerId);
-    const points = c.treadSurfaces.flatMap((t) => t.verticesM);
-    const cut = {
-      minX: Math.min(...points.map((p) => p[0])),
-      maxX: Math.max(...points.map((p) => p[0])),
-      minZ: Math.min(...points.map((p) => p[2])),
-      maxZ: Math.max(...points.map((p) => p[2])),
-    };
-    const minX = Math.min(...lower.verticesM.map((p) => p[0])),
-      maxX = Math.max(...lower.verticesM.map((p) => p[0]));
-    const minZ = Math.min(...lower.verticesM.map((p) => p[2])),
-      maxZ = Math.max(...lower.verticesM.map((p) => p[2]));
-    if (
-      Math.min(maxX, cut.maxX) - Math.max(minX, cut.minX) > 0.001 &&
-      Math.min(maxZ, cut.maxZ) - Math.max(minZ, cut.minZ) > 0.001
-    )
-      carveFloorRect(b.s, lowerId, cut);
+/** The original hall has round stainless columns. Its panelled cylinder uses
+ * the maintained box renderer; each visible face also retains its real collider.
+ * Diameter and placement are inferred from photographs, not surveyed anchors. */
+function roundConcourseColumn(b, id, [x, y, z], height, radius = 0.32) {
+  b.box(
+    id,
+    [x, y + height / 2, z],
+    [0.43, height, 0.43],
+    'stainless',
+    'column-core',
+    0,
+    true,
+  );
+  const faces = 16,
+    chord = 2 * radius * Math.tan(Math.PI / faces);
+  for (let i = 0; i < faces; i++) {
+    const angle = (i / faces) * Math.PI * 2;
+    b.box(
+      `${id}-stainless-face-${i}`,
+      [
+        x + radius * Math.sin(angle),
+        y + height / 2,
+        z + radius * Math.cos(angle),
+      ],
+      [chord + 0.004, height, 0.025],
+      'stainless',
+      'column-panel',
+      (angle * 180) / Math.PI,
+      true,
+    );
   }
-  return b.finish();
+}
+
+function finishWithStairwells(b) {
+  // Cut landing slabs where a flight enters them. Preserve real underpasses
+  // once the bank is above standing headroom, rather than removing a corridor
+  // underneath an unrelated elevated portion of the same bank.
+  for (const c of b.s.connections.filter((c) => c.treadSurfaces?.length)) {
+    // Individual stair enclosures need sloping wall tops as well as banks.
+    // A full-height bounding wall over the complete run can falsely intersect
+    // another real bank that passes above its lower, deeper section.
+    const ids = new Set([
+      `${c.connectionId}-shaft-wall--1`,
+      `${c.connectionId}-shaft-wall-1`,
+    ]);
+    const wall = b.s.geometryParts.find((p) => ids.has(p.id));
+    if (wall) {
+      b.s.geometryParts = b.s.geometryParts.filter((p) => !ids.has(p.id));
+      b.s.obstacles = b.s.obstacles.filter((p) => !ids.has(p.id));
+      const a = new THREE.Vector3(...c.startPointM),
+        z = new THREE.Vector3(...c.endPointM);
+      const run = Math.hypot(z.x - a.x, z.z - a.z),
+        pieces = Math.ceil(run / 0.25);
+      const side = new THREE.Vector3(z.z - a.z, 0, a.x - z.x).normalize();
+      const yaw = (Math.atan2(z.x - a.x, z.z - a.z) * 180) / Math.PI;
+      for (let i = 0; i < pieces; i++) {
+        const p = a.clone().lerp(z, i / pieces),
+          q = a.clone().lerp(z, (i + 1) / pieces);
+        for (const sign of [-1, 1]) {
+          const center = p
+            .clone()
+            .add(q)
+            .multiplyScalar(0.5)
+            .addScaledVector(side, sign * (c.clearWidthM / 2 + 0.1));
+          center.y += 1.5;
+          b.box(
+            `${c.connectionId}-sloping-wall-${i}-${sign}`,
+            center.toArray(),
+            [0.2, Math.abs(q.y - p.y) + 3.4, run / pieces + 0.025],
+            wall.material,
+            'wall',
+            yaw,
+            true,
+          );
+        }
+      }
+    }
+    const lowerY = Math.min(c.startPointM[1], c.endPointM[1]);
+    const upperY = Math.max(c.startPointM[1], c.endPointM[1]);
+    for (const floor of b.s.floorSurfaces.filter(
+      (f) =>
+        f.verticesM.every((p) => Math.abs(p[1] - lowerY) < 0.001) ||
+        f.verticesM.every((p) => Math.abs(p[1] - upperY) < 0.001),
+    )) {
+      const low = floor.verticesM.every((p) => Math.abs(p[1] - lowerY) < 0.001);
+      const points = c.treadSurfaces
+        .filter((t) =>
+          low
+            ? t.verticesM[0][1] <= lowerY + 2
+            : t.verticesM[0][1] >= upperY - 2,
+        )
+        .flatMap((t) => t.verticesM);
+      const cut = {
+        minX: Math.min(...points.map((p) => p[0])),
+        maxX: Math.max(...points.map((p) => p[0])),
+        minZ: Math.min(...points.map((p) => p[2])),
+        maxZ: Math.max(...points.map((p) => p[2])),
+      };
+      const minX = Math.min(...floor.verticesM.map((p) => p[0])),
+        maxX = Math.max(...floor.verticesM.map((p) => p[0]));
+      const minZ = Math.min(...floor.verticesM.map((p) => p[2])),
+        maxZ = Math.max(...floor.verticesM.map((p) => p[2]));
+      if (
+        Math.min(maxX, cut.maxX) - Math.max(minX, cut.minX) > 0.001 &&
+        Math.min(maxZ, cut.maxZ) - Math.max(minZ, cut.minZ) > 0.001
+      )
+        carveFloorRect(b.s, floor.surfaceId, cut);
+    }
+  }
+  return b.finish({ encloseElevators: true });
 }
 
 // A shallow elliptical vault, constructed as continuous panels with visible ribs.
@@ -289,7 +375,7 @@ function platformShell(
   // Existing track and door positions remain unchanged. All access is on the
   // passenger side, never through the train's protected envelope.
   b.room(`${id}-platform-back`, [0, y, 0], 4.5, 74, {
-    height: 2.25,
+    height: 3.0,
     material: 'cream',
     roof: false,
     doors: {
@@ -302,13 +388,13 @@ function platformShell(
   b.box(
     `${id}-opposite-track-wall`,
     [5.6, y + 0.9, 0],
-    [0.25, 3.6, 86],
+    [0.25, 4.2, 86],
     'black',
     'wall',
   );
   vault(b, id, [1.55, y, -43], [1.55, y, 43], 8.15, {
-    spring: 2.25,
-    rise: 1.15,
+    spring: 2.6,
+    rise: 1.3,
   });
   b.beam(
     `${id}-platform-edge-light`,
@@ -367,11 +453,19 @@ function platformShell(
   );
   // Real station photos show benches along the passenger-side wall, away from
   // access portals. Use authored seat anchors so these are actually usable.
-  for (const z of [-15, 22])
+  for (const z of [
+    westDoors.some(([a, z]) => a - 2 < -15 && z + 2 > -15) ? -4 : -15,
+    22,
+  ])
     b.bench(`${id}-bench-${z}`, [-1.7, y, z], 2.4, 90, { material: 'steel' });
 }
 
-function ticketFurniture(b, id, center, { tiled = false, grid = true } = {}) {
+function ticketFurniture(
+  b,
+  id,
+  center,
+  { tiled = false, grid = true, gates = true } = {},
+) {
   const [x, y, z] = center;
   for (let i = 0; i < 3; i++) {
     b.box(
@@ -391,7 +485,7 @@ function ticketFurniture(b, id, center, { tiled = false, grid = true } = {}) {
       'detail',
     );
   }
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; gates && i < 6; i++) {
     b.box(
       `${id}-faregate-${i}`,
       [x - 4 + i * 1.6, y + 0.48, z + 2],
@@ -458,144 +552,6 @@ function ticketFurniture(b, id, center, { tiled = false, grid = true } = {}) {
         0,
         true,
       );
-}
-
-function originalHub(b, id, upperY, lowerY, { retail = false } = {}) {
-  const upper = `${id}-upper-hub`,
-    lower = `${id}-lower-hub`;
-  b.floor(
-    upper,
-    [-5.875, upperY, -42],
-    16.25,
-    10,
-    'landing',
-    `${id}-upper-level`,
-  );
-  b.room(upper, [-5.875, upperY, -42], 16.25, 10, {
-    height: 2.35,
-    material: 'cream',
-    roof: false,
-    doors: {
-      north: [
-        [-7.2, -3],
-        [-2, 4.5],
-      ],
-      south: [[3.625, 8.125]],
-      west: [
-        [-3, 0],
-        [1.5, 4],
-      ],
-    },
-  });
-  vault(b, upper, [-5.875, upperY, -47], [-5.875, upperY, -37], 16.25, {
-    spring: 2.35,
-    rise: 1.2,
-  });
-  b.floor(
-    lower,
-    [-12.875, lowerY, -42],
-    30.25,
-    10,
-    'landing',
-    `${id}-lower-level`,
-  );
-  b.room(lower, [-12.875, lowerY, -42], 30.25, 10, {
-    height: 2.6,
-    material: 'cream',
-    roof: false,
-    doors: {
-      north: [[-0.125, 3.875]],
-      south: [[10.625, 15.125]],
-      west: [
-        [-3, 0],
-        [1.5, 4],
-      ],
-    },
-  });
-  // The lower hall's ceiling must not slice through the descending connector.
-  // Its western portion is already enclosed by the stair/escalator soffits.
-  b.box(
-    `${lower}-ceiling`,
-    [-5.375, lowerY + 2.6, -42],
-    [15.25, 0.18, 10.2],
-    'cream',
-    'ceiling',
-  );
-  b.walk(
-    `${id}-upper-platform-portal`,
-    upper,
-    `${id}-upper`,
-    [0, upperY, -37],
-    [0, upperY, -37],
-    4.5,
-  );
-  b.walk(
-    `${id}-lower-platform-portal`,
-    lower,
-    `${id}-lower`,
-    [0, lowerY, -37],
-    [0, lowerY, -37],
-    4.5,
-  );
-  b.flight(
-    `${id}-interplatform-stairs`,
-    upper,
-    lower,
-    [-14, upperY, -43.5],
-    [-26, lowerY, -43.5],
-    2.4,
-    { material: 'cream' },
-  );
-  b.flight(
-    `${id}-interplatform-escalator`,
-    upper,
-    lower,
-    [-14, upperY, -39.5],
-    [-26, lowerY, -39.5],
-    1.3,
-    { kind: 'escalator', material: 'cream' },
-  );
-  b.sign(
-    '←  Platform 2  ·  King George / Production Way–University',
-    [-9, upperY + 2.0, -38],
-    0,
-    6.8,
-    0.38,
-  );
-  b.sign(
-    'Platform 1  ·  Waterfront  →',
-    [-2, upperY + 2.05, -38],
-    0,
-    4.2,
-    0.38,
-  );
-  if (retail) {
-    b.box(
-      `${id}-retail-kiosk`,
-      [-9.1, upperY + 1.12, -45.6],
-      [3.2, 2.24, 1.6],
-      'black',
-      'retail',
-      0,
-      true,
-    );
-    b.box(
-      `${id}-retail-door`,
-      [-9.1, upperY + 0.95, -44.75],
-      [1.25, 1.9, 0.04],
-      'glass',
-      'detail',
-    );
-    b.box(
-      `${id}-red-service-panel`,
-      [-6.9, upperY + 1.1, -45.0],
-      [0.65, 2.2, 0.12],
-      'red',
-      'detail',
-    );
-    b.sign('Station shop', [-9.1, upperY + 2.2, -44.74], 0, 2.8, 0.28);
-  }
-  return { upper, lower };
 }
 
 function glazedAtrium(b, id, center) {
@@ -693,54 +649,256 @@ function glazedAtrium(b, id, center) {
     );
 }
 
+function translateSourceXZ(source, dx, dz, dy = 0) {
+  const s = structuredClone(source),
+    shift = (p) => {
+      if (p) {
+        p[0] += dx;
+        p[1] += dy;
+        p[2] += dz;
+      }
+    };
+  for (const f of s.floorSurfaces) for (const p of f.verticesM) shift(p);
+  for (const p of s.geometryParts) shift(p.centerM);
+  for (const o of s.obstacles) {
+    shift(o.centerM);
+    shift(o.boundsM?.min);
+    shift(o.boundsM?.max);
+  }
+  for (const c of s.connections) {
+    shift(c.startPointM);
+    shift(c.endPointM);
+    for (const t of c.treadSurfaces ?? [])
+      for (const p of t.verticesM) shift(p);
+  }
+  for (const e of s.entrances) shift(e.pointM);
+  for (const p of s.platforms) {
+    p.floorHeightM += dy;
+    p.railHeightM += dy;
+    shift(p.stopPosition.translationM);
+    for (const d of p.doorAlignmentPoints)
+      for (const key of [
+        'stationSillPointM',
+        'platformEdgePointM',
+        'stationWaitingPointM',
+      ])
+        shift(d[key]);
+    for (const r of p.waitingRegions ?? [])
+      for (const q of r.polygonM) shift(q);
+  }
+  for (const x of s.trackExclusionVolumes) {
+    for (const p of x.footprintM) shift(p);
+    x.minY += dy;
+    x.maxY += dy;
+  }
+  for (const level of s.levels) level.floorHeightM += dy;
+  for (const x of s.anchors) shift(x.pointM);
+  for (const x of s.thresholdBridges ?? []) {
+    shift(x.storedTransform?.translationM);
+    shift(x.deployedTransform?.translationM);
+    for (const p of x.deployedFloor?.verticesM ?? []) shift(p);
+    for (const p of x.sequence ?? []) shift(p.translationM);
+  }
+  return s;
+}
+function offsetArchitecture(b, dx, dz) {
+  const at = (p) => [p[0] + dx, p[1], p[2] + dz];
+  return {
+    s: b.s,
+    room: (id, p, ...args) => b.room(id, at(p), ...args),
+    box: (id, p, ...args) => b.box(id, at(p), ...args),
+    beam: (id, p, q, ...args) => b.beam(id, at(p), at(q), ...args),
+    sign: (text, p, ...args) => b.sign(text, at(p), ...args),
+    bench: (id, p, ...args) => b.bench(id, at(p), ...args),
+  };
+}
+
 export function rebuildBurrard(source) {
-  const b = interior(
+  // OSM platform outlines 923508924/925 are approximate, but constrain the
+  // platform's horizontal relation to the independently mapped street doors.
+  const dx = 30.91594085,
+    dz = -61.64833383;
+  const originalPlatform = source.floorSurfaces.find(
+    (f) => f.surfaceId === 'burrard-upper',
+  );
+  const oldX =
+    (Math.min(...originalPlatform.verticesM.map((p) => p[0])) +
+      Math.max(...originalPlatform.verticesM.map((p) => p[0]))) /
+    2;
+  const oldZ =
+    (Math.min(...originalPlatform.verticesM.map((p) => p[2])) +
+      Math.max(...originalPlatform.verticesM.map((p) => p[2]))) /
+    2;
+  const translated = translateSourceXZ(
     source,
-    'burrard-reference-interior-v1',
+    dx - oldX,
+    dz - oldZ,
+    -14 -
+      source.floorSurfaces.find((f) => f.surfaceId === 'burrard-upper')
+        .verticesM[0][1],
+  );
+  const b = interior(
+    translated,
+    'burrard-reference-interior-v2',
     references.burrard,
   );
   preserveRailContract(b);
-  const upperY = b.originalFloor('burrard-upper').verticesM[0][1];
-  const lowerY = b.originalFloor('burrard-lower').verticesM[0][1];
-  platformShell(b, 'burrard-upper', upperY);
-  platformShell(b, 'burrard-lower', lowerY);
-  const hubs = originalHub(b, 'burrard', upperY, lowerY);
+  const upperY = b.originalFloor('burrard-upper').verticesM[0][1],
+    lowerY = b.originalFloor('burrard-lower').verticesM[0][1];
+  const shell = offsetArchitecture(b, dx, dz);
+  platformShell(shell, 'burrard-upper', upperY);
+  platformShell(shell, 'burrard-lower', lowerY, {
+    northOpen: false,
+    westDoors: [[-25.5, -23]],
+  });
+  const upper = 'burrard-upper-hub',
+    lower = 'burrard-lower-hub',
+    edgeX = dx - 2.25,
+    northZ = dz - 37,
+    upperWidth = 14.75,
+    upperCenterX = dx - 6.625;
+  b.floor(
+    upper,
+    [upperCenterX, upperY, northZ - 5],
+    upperWidth,
+    10,
+    'landing',
+    'burrard-upper-level',
+  );
+  b.room(upper, [upperCenterX, upperY, northZ - 5], upperWidth, 10, {
+    height: 2.5,
+    material: 'cream',
+    roof: false,
+    doors: { west: [[-5, 5]], south: [[-6.1, 8.125]] },
+  });
+  vault(
+    b,
+    upper,
+    [upperCenterX, upperY, northZ - 10],
+    [upperCenterX, upperY, northZ],
+    upperWidth,
+  );
+  b.walk(
+    'burrard-upper-platform-portal',
+    upper,
+    'burrard-upper',
+    [dx - 0.75, upperY, northZ],
+    [dx - 0.75, upperY, northZ],
+    3,
+  );
+  const lowerMinX = dx - 14,
+    lowerWidth = edgeX - lowerMinX,
+    lowerCenterX = (edgeX + lowerMinX) / 2;
+  b.floor(
+    lower,
+    [lowerCenterX, lowerY, northZ + 6],
+    lowerWidth,
+    16,
+    'landing',
+    'burrard-lower-level',
+  );
+  b.room(lower, [lowerCenterX, lowerY, northZ + 6], lowerWidth, 16, {
+    height: 2.6,
+    material: 'cream',
+    roof: false,
+    doors: { east: [[5.5, 8]] },
+  });
+  const stairX = 24,
+    escalatorX = 27;
+  b.flight(
+    'burrard-interplatform-stairs',
+    upper,
+    lower,
+    [stairX, upperY, northZ],
+    [stairX, lowerY, northZ + 12],
+    2.4,
+    { material: 'cream' },
+  );
+  b.flight(
+    'burrard-interplatform-escalator',
+    upper,
+    lower,
+    [escalatorX, upperY, northZ],
+    [escalatorX, lowerY, northZ + 12],
+    1.3,
+    { kind: 'escalator', material: 'cream' },
+  );
+  for (const [i, a, c, p, q] of [
+    [0, lowerMinX, stairX - 1.4, northZ - 2, northZ + 14],
+    [1, stairX + 1.4, escalatorX - 0.85, northZ - 2, northZ + 14],
+    [2, escalatorX + 0.85, edgeX, northZ - 2, northZ + 14],
+    [3, stairX - 1.4, escalatorX + 0.85, northZ - 2, northZ],
+    [4, stairX - 1.4, escalatorX + 0.85, northZ + 12, northZ + 14],
+  ])
+    if (c > a)
+      b.box(
+        `${lower}-ceiling-${i}`,
+        [(a + c) / 2, lowerY + 2.6, (p + q) / 2],
+        [c - a, 0.18, q - p],
+        'cream',
+        'ceiling',
+      );
+  const lowerPortalZ = northZ + 12.75;
+  b.walk(
+    'burrard-lower-platform-portal',
+    lower,
+    'burrard-lower',
+    [edgeX, lowerY, lowerPortalZ],
+    [edgeX, lowerY, lowerPortalZ],
+    2.4,
+  );
   const hall = 'burrard-ticket-atrium',
     street = 'burrard-street-plaza',
-    y = -2.6;
-  b.floor(hall, [-5, y, -68], 22, 14, 'concourse', hall);
-  b.room(hall, [-5, y, -68], 22, 14, {
+    y = -6.5;
+  b.floor(hall, [-1, y, -105], 22, 14, 'concourse', hall);
+  b.room(hall, [-1, y, -105], 22, 14, {
     height: 2.5,
     material: 'concrete',
     roof: false,
     doors: {
-      north: [[-5.5, 5.5]],
-      south: [
-        [-8, -4],
-        [-3.5, 3.5],
+      south: [[-8, 1]],
+      north: [
+        [-5.1, -1.2],
+        [3, 7],
       ],
       west: [[-2.5, 2.5]],
-      east: [[-2.5, 2.5]],
+      east: [
+        [-3, 3],
+        [4, 6.5],
+      ],
     },
   });
-  glazedAtrium(b, hall, [-5, y, -68]);
-  ticketFurniture(b, hall, [-5, y, -68], { grid: false });
+  glazedAtrium(b, hall, [-1, y, -105]);
+  ticketFurniture(b, hall, [-1, y, -105], { grid: false, gates: false });
   bank(
     b,
     'burrard-main-escalator-bank',
     hall,
-    hubs.upper,
-    [-5, y, -61],
-    [-5, upperY, -47],
+    upper,
+    [10, y, -105],
+    [23, upperY, -105],
     3,
   );
-  b.floor(street, [-5, 0, -85], 18, 6, 'entrance', street);
+  b.fareGates(
+    'burrard-upper-platform-gates',
+    [25, upperY, -103.5],
+    [-3.6, -2, -0.4, 1.2, 2.8],
+    90,
+  );
+  b.sign(
+    'Fare Paid Zone  ·  Platforms 1 / 2',
+    [25.2, upperY + 2.25, -104],
+    Math.PI / 2,
+    5,
+    0.42,
+  );
+  b.floor(street, [-5, 0, -89.3], 18, 6, 'entrance', street);
   b.flight(
     'burrard-street-stairs',
     street,
     hall,
-    [-7, 0, -82],
-    [-7, y, -75],
+    [-3, 0, -92.3],
+    [-3, y, -105],
     4.6,
     { enclosed: false },
   );
@@ -748,16 +906,18 @@ export function rebuildBurrard(source) {
     'burrard-street-escalator',
     street,
     hall,
-    [-2.2, 0, -82],
-    [-2.2, y, -75],
+    [-7.8, 0, -92.3],
+    [-7.8, y, -105],
     1.3,
     { kind: 'escalator', enclosed: false },
   );
-  b.shaft('burrard-street-retaining-walls', [-5, 0, -82], [-5, y, -75], 10.2, {
-    material: 'concrete',
-    roof: false,
-  });
-  b.sign('Burrard Station  ·  Expo Line', [-5, 2.5, -82.5], 0, 7.5, 0.55);
+  b.shaft(
+    'burrard-street-retaining-walls',
+    [-5, 0, -92.3],
+    [-5, y, -105],
+    10.2,
+    { material: 'concrete', roof: false },
+  );
   entrance(
     b,
     'burrard-burrard-street-entry',
@@ -765,175 +925,325 @@ export function rebuildBurrard(source) {
     street,
     [-5, 0, -87.8],
   );
-
-  // Mall doors belong to the same concourse, rather than creating a second
-  // independent staircase down to the other train platform.
-  for (const [name, x, label] of [
-    ['royal-centre', -20, 'Royal Centre'],
-    ['bentall-centre', 10, 'Bentall Centre'],
-  ]) {
-    const floor = `burrard-${name}-passage`;
-    b.floor(floor, [x, y, -68], 8, 5, 'walk', hall);
-    b.room(floor, [x, y, -68], 8, 5, {
-      height: 3,
-      doors: { west: [[-2, 2]], east: [[-2, 2]] },
-    });
-    const edge = x < -5 ? -16 : 6;
-    b.walk(
-      `${floor}-atrium-door`,
-      floor,
-      hall,
-      [edge, y, -68],
-      [edge, y, -68],
-      4,
+  b.s.entrances.at(-1).inwardDirectionM = [0, 0, -1];
+  // The mapped park node is the bottom of the public 27-step stair, not its
+  // street head. Three nine-step flights retain the photographed intermediate
+  // landings; the lower sunken plaza enters the atrium on the same level.
+  const parkHead = 'burrard-park-street',
+    parkPlaza = 'burrard-park-plaza';
+  const parkX = -4.89,
+    parkZ = -140.78,
+    parkTopY = -1.995183215;
+  b.floor(
+    parkHead,
+    [parkX, parkTopY, parkZ - 0.4],
+    3.8,
+    0.9,
+    'entrance',
+    parkHead,
+  );
+  entrance(
+    b,
+    'burrard-park-entry',
+    'Art Phillips Park public stair head',
+    parkHead,
+    [parkX, parkTopY, parkZ],
+  );
+  b.s.entrances.at(-1).inwardDirectionM = [0, 0, 1];
+  b.floor(parkPlaza, [-4.16, y, -116.09], 7.2, 8.18, 'concourse', hall);
+  b.room(parkPlaza, [-4.16, y, -116.09], 7.2, 8.18, {
+    height: 3.6,
+    material: 'concrete',
+    roof: false,
+    doors: { north: [[-2.4, 1.1]], south: [[-1.8, 1.8]] },
+  });
+  b.walk('burrard-park-atrium-door', parkPlaza, hall, [-4.16, y, -112]);
+  let from = parkHead;
+  for (let i = 0; i < 3; i++) {
+    const z0 = parkZ + i * 9.04,
+      z1 = z0 + 2.52;
+    const y0 = parkTopY + ((y - parkTopY) * i) / 3,
+      y1 = parkTopY + ((y - parkTopY) * (i + 1)) / 3;
+    const to = i === 2 ? parkPlaza : `burrard-park-intermediate-${i + 1}`;
+    if (i < 2) {
+      b.floor(to, [parkX, y1, z1 + 3.26], 3.8, 6.52, 'landing', parkPlaza);
+      b.room(to, [parkX, y1, z1 + 3.26], 3.8, 6.52, {
+        height: 2.1,
+        material: 'concrete',
+        roof: false,
+        doors: { north: [[-1.9, 1.9]], south: [[-1.9, 1.9]] },
+      });
+    }
+    b.flight(
+      `burrard-park-stairs-${i + 1}`,
+      from,
+      to,
+      [parkX, y0, z0],
+      [parkX, y1, z1],
+      3.2,
+      { enclosed: false },
     );
-    b.sign(`${label}  ↔`, [x, y + 2.25, -68], 0, 4, 0.36);
+    b.shaft(
+      `burrard-park-retaining-walls-${i + 1}`,
+      [parkX, y0, z0],
+      [parkX, y1, z1],
+      3.8,
+      { material: 'concrete', roof: false },
+    );
+    from = to;
   }
+  for (const [id, center, width, length, door, join] of [
+    [
+      'royal-centre',
+      [-16, y, -105],
+      8,
+      5,
+      { east: [[-2, 2]], west: [[-2, 2]] },
+      [-12, y, -105],
+    ],
+    [
+      'bentall-centre',
+      [4, y, -116],
+      5,
+      8,
+      { north: [[-2, 2]], south: [[-2, 2]] },
+      [4, y, -112],
+    ],
+  ]) {
+    const f = `burrard-${/** @type {string} */ (id)}-passage`;
+    b.floor(f, center, width, length, 'walk', hall);
+    b.room(f, center, width, length, { doors: door });
+    b.walk(`${f}-atrium-door`, f, hall, join);
+  }
+  const liftStreetY = -0.917488;
+  const lx = 20.11245854,
+    entryZ = -94.67004044,
+    lz = entryZ - 2.6;
   const liftStreet = 'burrard-accessible-street',
     liftHall = 'burrard-lift-hall',
     liftUpper = 'burrard-lift-upper',
     liftLower = 'burrard-lift-lower';
-  for (const [floor, levelY, levelId] of [
-    [liftStreet, 0, street],
-    [liftHall, y, hall],
-    [liftUpper, upperY, 'burrard-upper-level'],
-    [liftLower, lowerY, 'burrard-lower-level'],
+  for (const [floor, fy] of [
+    [liftStreet, liftStreetY],
+    [liftHall, y],
+    [liftUpper, upperY],
+    [liftLower, lowerY],
   ])
-    b.floor(floor, [-11, levelY, -57], 4, 6, 'landing', levelId);
-  b.elevator(
-    'burrard-lift-street-concourse',
-    liftStreet,
-    liftHall,
-    [-11, 0, -57],
-    [-11, y, -57],
+    b.floor(floor, [lx, fy, lz], 4, 6, 'lift-landing', floor);
+  b.room('burrard-accessible-station-house', [lx, liftStreetY, lz], 4, 6, {
+    height: 3.2,
+    material: 'cream',
+    doors: { south: [[-1.2, 1.2]] },
+  });
+  b.fareGates(
+    'burrard-accessible-street-gates',
+    [lx, liftStreetY, entryZ - 0.6],
+    [-0.9, 0.9],
   );
-  b.elevator(
-    'burrard-lift-concourse-upper',
-    liftHall,
-    liftUpper,
-    [-11, y, -57],
-    [-11, upperY, -57],
-  );
-  b.elevator(
-    'burrard-lift-upper-lower',
-    liftUpper,
-    liftLower,
-    [-11, upperY, -57],
-    [-11, lowerY, -57],
-  );
-  // Enclosed lift passages stay outside the main bank and join its landings.
-  for (const [target, fy, endZ, width] of [
-    [hall, y, -61, 4],
-    [hubs.upper, upperY, -47, 4],
-    [hubs.lower, lowerY, -47, 4],
-  ]) {
-    const floor = `${target}-lift-passage`,
-      z = (-60 + endZ) / 2;
-    b.floor(floor, [-11, fy, z], width, Math.abs(endZ + 60), 'walk', target);
-    b.room(floor, [-11, fy, z], width, Math.abs(endZ + 60), {
-      height: 2.7,
-      doors: { north: [[-2, 2]], south: [[-2, 2]] },
-    });
-    const landing =
-      target === hall
-        ? liftHall
-        : target === hubs.upper
-          ? liftUpper
-          : liftLower;
-    b.walk(`${floor}-lift`, landing, floor, [-11, fy, -60]);
-    b.walk(`${floor}-join`, floor, target, [-11, fy, endZ]);
-  }
   entrance(
     b,
     'burrard-accessible-entry',
     'Burrard Street elevator entrance',
     liftStreet,
-    [-11, 0, -57],
+    [lx, liftStreetY, entryZ],
   );
-  b.s.entrances[0].inwardDirectionM = [0, 0, 1];
+  b.s.entrances.at(-1).inwardDirectionM = [0, 0, -1];
+  b.elevator(
+    'burrard-lift-street-concourse',
+    liftStreet,
+    liftHall,
+    [lx, liftStreetY, lz],
+    [lx, y, lz],
+  );
+  b.elevator(
+    'burrard-lift-concourse-upper',
+    liftHall,
+    liftUpper,
+    [lx, y, lz],
+    [lx, upperY, lz],
+  );
+  b.elevator(
+    'burrard-lift-upper-lower',
+    liftUpper,
+    liftLower,
+    [lx, upperY, lz],
+    [lx, lowerY, lz],
+  );
+  const hallCross = 'burrard-atrium-lift-passage';
+  b.floor(
+    hallCross,
+    [(10 + lx + 2) / 2, y, -100],
+    lx + 2 - 10,
+    2.4,
+    'walk',
+    hall,
+  );
+  b.room(hallCross, [(10 + lx + 2) / 2, y, -100], lx + 2 - 10, 2.4, {
+    height: 2.7,
+    doors: {
+      west: [[-1.2, 1.2]],
+      south: [[lx - (10 + lx + 2) / 2 - 1.2, lx - (10 + lx + 2) / 2 + 1.2]],
+    },
+  });
+  b.walk('burrard-lift-hall-passage', liftHall, hallCross, [lx, y, -99]);
+  b.walk('burrard-lift-passage-atrium', hallCross, hall, [10, y, -100]);
+  b.walk('burrard-upper-lift-hub', liftUpper, upper, [
+    lx,
+    upperY,
+    northZ - 0.5,
+  ]);
+  b.walk('burrard-lower-lift-hub', liftLower, lower, [lx, lowerY, lz + 2]);
   b.s.authoredInterior.primaryEntrance = 'burrard-burrard-street-entry';
   b.s.authoredInterior.streetEntranceMap = {
     'burrard-plaza': 'burrard-burrard-street-entry',
+    'burrard-elevator': 'burrard-accessible-entry',
+    'burrard-park': 'burrard-park-entry',
   };
   b.s.authoredInterior.escalatorCount = 5;
+  b.s.authoredInterior.platformCalibration = {
+    source:
+      'OSM approximate platform ways 923508924/925 and mapped entrance nodes 5324651728/9198420892',
+    platformCenterM: [dx, 0, dz],
+    representativePlatformDepthsM: [-14, -20],
+    sectionBasis:
+      '27 observed/mapped park steps constrain sunken atrium section; platform assembly lowered rigidly by5m to retain plausible main-bank slope. Not a surveyed elevation.',
+    carLocalCoordinatesUnchanged: true,
+    undergroundBends: 'representative',
+  };
   b.s.authoredInterior.routeSummary =
-    'Shared glass ticket atrium → three main escalators → upper Waterfront platform; short stairs/escalator → lower outbound platform. Street stair/single escalator and one elevator system.';
+    'Mapped Burrard Street entry → unpaid glass atrium → main triple bank → platform-level faregates → upper Waterfront platform; separate short stairs/escalator → lower outbound platform. Mapped lift house has its own street gates.';
   return finishWithStairwells(b);
 }
 
 export function rebuildGranville(source) {
+  const platformCenter = [82.48954321, 0, -38.6735285];
+  const old = source.floorSurfaces.find(
+    (f) => f.surfaceId === 'granville-upper',
+  );
+  const oldX =
+    (Math.min(...old.verticesM.map((p) => p[0])) +
+      Math.max(...old.verticesM.map((p) => p[0]))) /
+    2;
+  const oldZ =
+    (Math.min(...old.verticesM.map((p) => p[2])) +
+      Math.max(...old.verticesM.map((p) => p[2]))) /
+    2;
   const b = interior(
-    source,
-    'granville-reference-interior-v1',
+    translateSourceXZ(
+      source,
+      platformCenter[0] - oldX,
+      platformCenter[2] - oldZ,
+    ),
+    'granville-reference-interior-v3',
     references.granville,
   );
   preserveRailContract(b);
-  const upperY = b.originalFloor('granville-upper').verticesM[0][1];
-  const lowerY = b.originalFloor('granville-lower').verticesM[0][1];
-  platformShell(b, 'granville-upper', upperY, { southOpen: true });
-  platformShell(b, 'granville-lower', lowerY, { southOpen: true });
-  const hubs = originalHub(b, 'granville', upperY, lowerY, { retail: true });
-  const hall = 'granville-original-ticket-hall',
-    mall = 'granville-mall-entrance',
-    seymour = 'granville-seymour-entrance',
-    y = -3;
-  b.floor(hall, [-5, y, -85], 22, 14, 'concourse', hall);
-  b.room(hall, [-5, y, -85], 22, 14, {
-    height: 3.2,
-    material: 'cream',
-    doors: { north: [[-3.5, 3.5]], south: [[-3.5, 3.5]], east: [[-2, 2]] },
-  });
-  ticketFurniture(b, hall, [-5, y, -85]);
-  // A 17 m representative rise and 30.594 m run give the published 35 m
-  // sloping length without pretending either component was surveyed.
-  const run = Math.sqrt(35 ** 2 - (y - upperY) ** 2);
-  const bottomZ = -46,
-    topZ = bottomZ - run;
-  const bankLanding = 'granville-big-three-top-landing';
-  b.floor(
-    bankLanding,
-    [-5, y, (-78 + topZ) / 2],
-    6.5,
-    Math.abs(-78 - topZ),
-    'landing',
-    hall,
-  );
-  b.room(bankLanding, [-5, y, (-78 + topZ) / 2], 6.5, Math.abs(-78 - topZ), {
-    height: 3,
-    material: 'cream',
-    roof: true,
-    doors: { north: [[-3.25, 3.25]], south: [[-3.25, 3.25]] },
-  });
-  b.walk(
-    'granville-hall-big-three-landing',
-    hall,
-    bankLanding,
-    [-5, y, -78],
-    [-5, y, -78],
-    6.5,
-  );
-  bank(
-    b,
-    'granville-big-three',
-    bankLanding,
-    hubs.upper,
-    [-5, y, topZ],
-    [-5, upperY, bottomZ],
-    3,
-  );
-  b.floor(mall, [-5, 0, -102], 14, 6, 'entrance', mall);
-  b.room(mall, [-5, 0, -102], 14, 6, {
-    height: 3.2,
-    doors: { north: [[-4, 4]], south: [[-3.5, 3.5]], east: [[-2, 2]] },
-  });
-  bank(
-    b,
-    'granville-bay-corridor-pair',
-    mall,
-    hall,
-    [-5, 0, -99],
-    [-5, y, -92],
-    2,
+  const upperY = b.originalFloor('granville-upper').verticesM[0][1],
+    lowerY = b.originalFloor('granville-lower').verticesM[0][1];
+  const [px, , pz] = platformCenter,
+    westX = px - 2.25;
+  const mainX = 75.2,
+    mainTopZ = -100,
+    mainEndZ = mainTopZ + Math.sqrt(35 ** 2 - (-3 - upperY) ** 2),
+    mainHubZ = mainEndZ + 5;
+  const dx = 69.56010356,
+    dz = -72.27427749,
+    dStreetY = -2.07414,
+    dEntryY = dStreetY - 3;
+  const dBankX = 61.46,
+    dTopZ = -84.43,
+    dEndZ = -58.74,
+    dHubZ = dEndZ + 5;
+  // OSM constrains the independent Dunsmuir entrance/turns/bank direction. It
+  // does not survey depths, widths or the unmarked original bank's exact axis.
+  for (const [id, y] of [
+    ['granville-upper', upperY],
+    ['granville-lower', lowerY],
+  ])
+    platformShell(offsetArchitecture(b, px, pz), id, y, {
+      northOpen: false,
+      westDoors: [
+        [mainHubZ - 2 - pz, mainHubZ + 2 - pz],
+        [dHubZ - 2 - pz, dHubZ + 2 - pz],
+      ],
+    });
+  const full = (w) => [[-w / 2, w / 2]];
+  const rect = (
+    id,
+    x0,
+    x1,
+    z0,
+    z1,
+    y,
+    kind,
+    doors,
+    roof = true,
+    height = 3,
+  ) => {
+    const center = [(x0 + x1) / 2, y, (z0 + z1) / 2];
+    b.floor(id, center, x1 - x0, z1 - z0, kind, id);
+    b.room(id, center, x1 - x0, z1 - z0, {
+      height,
+      material: 'cream',
+      roof,
+      doors,
+    });
+    return id;
+  };
+  const ramp = (id, start, end, width) => {
+    const alongX = start[0] !== end[0],
+      minX = Math.min(start[0], end[0]),
+      maxX = Math.max(start[0], end[0]),
+      minZ = Math.min(start[2], end[2]),
+      maxZ = Math.max(start[2], end[2]);
+    b.floor(
+      id,
+      [(minX + maxX) / 2, start[1], (minZ + maxZ) / 2],
+      alongX ? maxX - minX : width,
+      alongX ? width : maxZ - minZ,
+      'walk',
+      id,
+    );
+    const floor = b.s.floorSurfaces.find((f) => f.surfaceId === id);
+    for (const p of floor.verticesM)
+      p[1] =
+        start[1] +
+        (end[1] - start[1]) *
+          (alongX
+            ? (p[0] - start[0]) / (end[0] - start[0])
+            : (p[2] - start[2]) / (end[2] - start[2]));
+    b.s.geometryParts = b.s.geometryParts.filter((p) => p.id !== `floor-${id}`);
+    b.shaft(`${id}-enclosure`, start, end, width, { height: 2.6 });
+    b.s.geometryParts = b.s.geometryParts.filter(
+      (p) => p.id !== `${id}-enclosure-underslab`,
+    );
+    b.beam(
+      `floor-${id}`,
+      [start[0], start[1] - 0.1, start[2]],
+      [end[0], end[1] - 0.1, end[2]],
+      width,
+      0.2,
+      'floor',
+      'floor',
+    );
+    return id;
+  };
+  const mall = rect(
+    'granville-mall-entrance',
+    -8,
+    -2,
+    -105.05,
+    -77.5,
+    0,
+    'entrance',
+    {
+      north: [[-2, 2]],
+      south: full(6),
+      east: [
+        [1.275, 5.275],
+        [7.775, 13.775],
+      ],
+    },
   );
   entrance(
     b,
@@ -942,345 +1252,617 @@ export function rebuildGranville(source) {
     mall,
     [-5, 0, -104.8],
   );
-  // Relative street-door offsets come from the reference entrance coordinates;
-  // the hallway bends between them remain explicitly representative.
-  const sx = 27.247,
-    sz = -25.409;
-  b.floor(seymour, [sx + 1, 0, sz], 6, 8, 'entrance', seymour);
-  b.room(seymour, [sx + 1, 0, sz], 6, 8, {
-    height: 3.2,
-    doors: { east: [[-3, 3]], west: [[-2, 2]] },
-  });
-  const sLanding = 'granville-seymour-bottom-landing',
-    sPassage = 'granville-seymour-ticket-passage',
-    sCross = 'granville-seymour-ticket-crosspassage';
-  b.floor(sLanding, [sx - 12, y, sz], 4, 8, 'landing', hall);
-  b.room(sLanding, [sx - 12, y, sz], 4, 8, {
-    height: 3,
-    doors: { east: [[-2, 2]], north: [[-2, 2]] },
-  });
-  b.flight(
-    'granville-seymour-stairs',
-    seymour,
-    sLanding,
-    [sx - 2, 0, sz],
-    [sx - 10, y, sz],
-    3.2,
-    { material: 'cream' },
-  );
-  b.floor(
-    sPassage,
-    [sx - 12, y, (-85 + sz - 4) / 2],
-    4,
-    sz - 4 + 85,
-    'walk',
-    hall,
-  );
-  const seymourLength = sz - 4 + 85;
-  b.room(sPassage, [sx - 12, y, (-85 + sz - 4) / 2], 4, seymourLength, {
-    height: 3,
-    doors: {
-      north: [[-2, 2]],
-      south: [[-2, 2]],
-      west: [[-seymourLength / 2, -seymourLength / 2 + 2]],
-    },
-  });
-  b.walk('granville-seymour-landing-passage', sLanding, sPassage, [
-    sx - 12,
-    y,
-    sz - 4,
-  ]);
-  const crossWidth = sx - 10 - 6,
-    crossX = (sx - 10 + 6) / 2;
-  b.floor(sCross, [crossX, y, -85], crossWidth, 4, 'walk', hall);
-  b.room(sCross, [crossX, y, -85], crossWidth, 4, {
-    height: 3,
-    doors: { west: [[-2, 2]], south: [[crossWidth / 2 - 4, crossWidth / 2]] },
-  });
-  b.walk('granville-seymour-passage-turn', sPassage, sCross, [sx - 12, y, -85]);
-  b.walk('granville-seymour-ticket-hall-door', sCross, hall, [6, y, -85]);
-  b.sign('Seymour Street  ↑', [sx - 1, 2.4, sz], Math.PI / 2, 4.5, 0.42);
-  entrance(b, 'granville-seymour-entry', 'Seymour Street staircase', seymour, [
-    sx,
-    0,
-    sz,
-  ]);
-
-  // Independent Hudson/Dunsmuir branch: the official 2023 shaft photograph
-  // shows all three escalators together, within a tall tiled rectangular shaft.
-  const dHall = 'granville-dunsmuir-street-hall',
-    dUpper = 'granville-dunsmuir-upper-hub',
-    dLower = 'granville-dunsmuir-lower-hub';
-  const dx = 49.108,
-    dz = -69.667,
-    bankEndX = dx - 41;
-  b.floor(dHall, [dx, 0, dz], 14, 18, 'concourse', dHall);
-  b.room(dHall, [dx, 0, dz], 14, 18, {
-    height: 3.2,
-    material: 'cream',
-    doors: { west: [[-4.5, 4.5]], south: [[-4, 4]], north: [[-4, 4]] },
-  });
-  // This upper hall is unpaid. Actual photographs place Dunsmuir's faregates
-  // below the triple bank, beside the elevator, at the platform access level.
-  for (const u of [-5, 5])
-    b.box(
-      `${dHall}-square-column-${u}`,
-      [dx + u, 1.5, dz + 4],
-      [0.55, 3, 0.55],
-      'cream',
-      'column',
-      0,
-      true,
-    );
-  b.sign(
-    'Expo Line  ↓  Escalators and elevator',
-    [dx, 2.4, dz - 4.5],
-    0,
-    5.2,
-    0.4,
-  );
-  entrance(
-    b,
-    'granville-dunsmuir-entry',
-    'Dunsmuir Street / Hudson accessible entrance',
-    dHall,
-    [dx, 0, dz + 7.8],
-  );
-  const dUpperWidth = bankEndX + 14,
-    dLowerWidth = bankEndX + 28;
-  b.floor(
-    dUpper,
-    [(bankEndX - 14) / 2, upperY, dz],
-    dUpperWidth,
+  const bay = rect(
+    'granville-bay-bottom-landing',
     10,
+    16,
+    -84.5,
+    -77.5,
+    -3,
     'landing',
-    'granville-upper-level',
-  );
-  b.room(dUpper, [(bankEndX - 14) / 2, upperY, dz], dUpperWidth, 10, {
-    height: 2.7,
-    material: 'cream',
-    doors: {
-      east: [[-3, 3]],
-      west: [[-3, 0]],
-      north: [[dUpperWidth / 2 - 4, dUpperWidth / 2]],
-      south: [[-13 - (bankEndX - 14) / 2, -9 - (bankEndX - 14) / 2]],
-    },
-  });
-  b.floor(
-    dLower,
-    [(bankEndX - 28) / 2, lowerY, dz],
-    dLowerWidth,
-    10,
-    'landing',
-    'granville-lower-level',
-  );
-  b.room(dLower, [(bankEndX - 28) / 2, lowerY, dz], dLowerWidth, 10, {
-    height: 2.7,
-    material: 'cream',
-    roof: false,
-    doors: {
-      north: [[dLowerWidth / 2 - 4, dLowerWidth / 2]],
-      south: [[-13 - (bankEndX - 28) / 2, -9 - (bankEndX - 28) / 2]],
-    },
-  });
-  b.box(
-    `${dLower}-ceiling`,
-    [(bankEndX - 13) / 2, lowerY + 2.7, dz],
-    [bankEndX + 13, 0.18, 10.2],
-    'cream',
-    'ceiling',
+    { west: full(7), north: full(6) },
   );
   bank(
     b,
-    'granville-dunsmuir-main-triple',
-    dHall,
-    dUpper,
-    [dx - 7, 0, dz],
-    [bankEndX, upperY, dz],
-    3,
-    { vaulted: false, shaftHeight: 5.2 },
+    'granville-bay-corridor-pair',
+    mall,
+    bay,
+    [-2.6, 0, -81],
+    [10.6, -3, -81],
+    2,
   );
-  for (let i = 0; i < 6; i++) {
-    const z = dz - 4 + i * 1.6;
+  // The original entrance retains a separate enclosed bank. The original mall
+  // corridor's hidden bend and shaft offset are representative, not OSM claims.
+  const originalNorth = rect(
+    'granville-original-mall-passage',
+    10,
+    16,
+    -106,
+    -84.5,
+    -3,
+    'walk',
+    { south: full(6), east: [[-10.75, -6.75]] },
+    true,
+    2.6,
+  );
+  b.walk('granville-bay-mall-passage', bay, originalNorth, [13, -3, -84.5]);
+  const originalCross = rect(
+    'granville-original-mall-crosspassage',
+    16,
+    72,
+    -108,
+    -102,
+    -3,
+    'walk',
+    { west: [[-1, 3]], east: full(6), south: [[23, 28]] },
+  );
+  b.walk(
+    'granville-original-mall-turn',
+    originalNorth,
+    originalCross,
+    [16, -3, -104],
+  );
+  const hall = rect(
+    'granville-original-ticket-hall',
+    72,
+    83.5,
+    -110,
+    -100,
+    -3,
+    'concourse',
+    { west: [[-3, 5]], south: [[mainX - 77.75 - 2.8, mainX - 77.75 + 2.8]] },
+    true,
+    3.2,
+  );
+  b.walk('granville-mall-ticket-hall', originalCross, hall, [72, -3, -106]);
+  roundConcourseColumn(
+    b,
+    'granville-original-ticket-hall-round-column',
+    [77.75, -3, -106.3],
+    3.2,
+  );
+  for (let i = 0; i < 3; i++)
     b.box(
-      `${dUpper}-faregate-${i}`,
-      [bankEndX - 3, upperY + 0.48, z],
-      [1.25, 0.96, 0.24],
-      'steel',
-      'faregate',
-      0,
-      true,
-    );
-    b.box(
-      `${dUpper}-compass-reader-${i}`,
-      [bankEndX - 2.62, upperY + 0.98, z],
-      [0.3, 0.06, 0.23],
-      'expo',
-      'detail',
-    );
-  }
-  for (let i = 0; i < 2; i++) {
-    b.box(
-      `${dUpper}-ticket-machine-${i}`,
-      [bankEndX - 7 - i * 1.3, upperY + 1, dz + 4.3],
+      `granville-original-ticket-machine-${i}`,
+      [78 + i * 1.2, -2, -109.4],
       [0.95, 2, 0.55],
       'steel',
       'ticket-machine',
       0,
       true,
     );
-    b.box(
-      `${dUpper}-ticket-screen-${i}`,
-      [bankEndX - 7 - i * 1.3, upperY + 1.32, dz + 3.98],
-      [0.56, 0.55, 0.035],
-      'expo',
-      'detail',
+  b.fareGates(
+    'granville-original-faregates',
+    [77.7, -3, -102.2],
+    [-4.8, -3.2, -1.6, 0, 1.6, 3.2, 4.8],
+  );
+  b.sign('Expo Line  ↓  Platforms 1 & 2', [77.7, -0.55, -101.5], 0, 5.2, 0.4);
+  const mainUpper = rect(
+    'granville-upper-hub',
+    64.5,
+    westX,
+    mainEndZ,
+    mainEndZ + 10,
+    upperY,
+    'landing',
+    {
+      north: [
+        [mainX - (64.5 + westX) / 2 - 2.8, mainX - (64.5 + westX) / 2 + 2.8],
+      ],
+      west: [[-4.5, 0.1]],
+      east: [[-2, 2]],
+    },
+    false,
+    2.8,
+  );
+  const mainLower = rect(
+    'granville-lower-hub',
+    49.5,
+    westX,
+    mainEndZ,
+    mainEndZ + 10,
+    lowerY,
+    'landing',
+    {
+      south: [[76 - (49.5 + westX) / 2 - 2, 76 - (49.5 + westX) / 2 + 2]],
+      east: [[-2, 2]],
+    },
+    false,
+    2.8,
+  );
+  bank(
+    b,
+    'granville-big-three',
+    hall,
+    mainUpper,
+    [mainX, -3, mainTopZ],
+    [mainX, upperY, mainEndZ],
+    3,
+  );
+  b.flight(
+    'granville-interplatform-stairs',
+    mainUpper,
+    mainLower,
+    [64.5, upperY, mainHubZ - 3.1],
+    [52.5, lowerY, mainHubZ - 3.1],
+    2.4,
+  );
+  b.flight(
+    'granville-interplatform-escalator',
+    mainUpper,
+    mainLower,
+    [64.5, upperY, mainHubZ - 0.75],
+    [52.5, lowerY, mainHubZ - 0.75],
+    1.3,
+    { kind: 'escalator' },
+  );
+  for (const [id, target, y] of [
+    [mainUpper, 'granville-upper', upperY],
+    [mainLower, 'granville-lower', lowerY],
+  ])
+    b.walk(
+      `${id}-platform-portal`,
+      id,
+      target,
+      [westX, y, mainHubZ],
+      [westX, y, mainHubZ],
+      4,
     );
-  }
+  b.box(
+    'granville-upper-hub-ceiling',
+    [(64.5 + westX) / 2, upperY + 2.8, mainHubZ],
+    [westX - 64.5, 0.18, 10.2],
+    'cream',
+    'ceiling',
+  );
+  b.box(
+    'granville-lower-hub-ceiling',
+    [(64.5 + westX) / 2, lowerY + 2.8, mainHubZ],
+    [westX - 64.5, 0.18, 10.2],
+    'cream',
+    'ceiling',
+  );
+  b.box(
+    'granville-retail-kiosk',
+    [68, upperY + 1.05, mainEndZ + 0.8],
+    [2.8, 2.1, 1.35],
+    'black',
+    'retail',
+    0,
+    true,
+  );
   b.sign(
-    'Exit to Dunsmuir Street  ↑   Elevator  ↖',
-    [bankEndX - 4, upperY + 2.35, dz],
-    Math.PI / 2,
+    'Platform 1  ·  Waterfront  →',
+    [74, upperY + 2.1, mainHubZ - 3.7],
+    0,
+    5,
+    0.38,
+  );
+  b.sign(
+    '← Platform 2  ·  King George / Production Way–University',
+    [70, upperY + 2.1, mainHubZ + 3.7],
+    0,
+    6.5,
+    0.38,
+  );
+  const sx = 22.61400566,
+    sz = -30.86257589,
+    seymourStreetY = 1.21093,
+    seymourDoorY = 1.2336301520610071;
+  // Whitfield2013 Figure59 shows a street-facing NW entry recess, then a right
+  // turn NE down the stair. OSM locates the stair head, not its street facade.
+  // Seven metres to the SE is inferred from that photograph and the current
+  // Bay-building footprint; it is deliberately not labelled an OSM door node.
+  const seymour = rect(
+    'granville-seymour-entrance',
+    sx - 3,
+    sx + 3,
+    sz - 3,
+    sz + 7,
+    seymourStreetY,
+    'entrance',
+    { east: [[-3.9, -0.1]], south: [[-2, 2]] },
+  );
+  // The city sample at the inferred facade is22.7mm above the retained stair
+  // head. Keep the stair fixed and express that normal threshold explicitly.
+  carveFloorRect(b.s, seymour, {
+    minX: sx - 3,
+    maxX: sx + 3,
+    minZ: sz + 6,
+    maxZ: sz + 7.1,
+  });
+  const seymourForecourt = b.floor(
+    'granville-seymour-street-recess-threshold',
+    [sx, seymourDoorY, sz + 6.5],
     6,
-    0.42,
+    1,
+    'entrance',
+    'granville-seymour-street-recess-threshold',
+  );
+  b.walk(
+    'granville-seymour-recess-threshold',
+    seymourForecourt,
+    seymour,
+    [sx, seymourDoorY, sz + 6],
+    [sx, seymourStreetY, sz + 6],
+  );
+  entrance(
+    b,
+    'granville-seymour-entry',
+    'Seymour Street staircase',
+    seymourForecourt,
+    [sx, seymourDoorY, sz + 7],
+  );
+  b.sign(
+    'Granville Station',
+    [sx, seymourStreetY + 2.65, sz + 7.05],
+    Math.PI,
+    4,
+    0.4,
+  );
+  const sBottom = rect(
+    'granville-seymour-bottom-landing',
+    sx + 11,
+    58,
+    sz - 3,
+    sz + 3,
+    dStreetY,
+    'landing',
+    { west: full(6), east: full(6) },
+  );
+  b.flight(
+    'granville-seymour-stairs',
+    seymour,
+    sBottom,
+    [sx + 2.4, seymourStreetY, sz],
+    [sx + 11.6, dStreetY, sz],
+    3.2,
+  );
+  const sEast = rect(
+    'granville-seymour-east-passage',
+    58,
+    71,
+    sz - 3,
+    sz + 3,
+    dStreetY,
+    'walk',
+    { west: full(6), north: [[2.5, 6.5]] },
+  );
+  b.walk('granville-seymour-east-turn', sBottom, sEast, [58, dStreetY, sz]);
+  const sNorth = rect(
+    'granville-seymour-north-passage',
+    67,
+    71,
+    -85,
+    sz - 3,
+    dStreetY,
+    'walk',
+    {
+      south: full(4),
+      north: full(4),
+      west: [[dz - 2 - (-85 + sz - 3) / 2, dz + 2 - (-85 + sz - 3) / 2]],
+      east: [
+        [-85 - (-85 + sz - 3) / 2, -81 - (-85 + sz - 3) / 2],
+        [-76 - (-85 + sz - 3) / 2, -68.5 - (-85 + sz - 3) / 2],
+      ],
+    },
+  );
+  b.walk('granville-seymour-north-turn', sEast, sNorth, [69, dStreetY, sz - 3]);
+  const sTurn = rect(
+    'granville-seymour-ticket-turn',
+    67,
+    74.5,
+    -85,
+    -81,
+    dStreetY,
+    'landing',
+    {
+      west: full(4),
+      south: full(7.5),
+      north: [
+        [-3.75, -2.75],
+        [-2.25, 0.75],
+      ],
+    },
+  );
+  b.walk('granville-seymour-ticket-east-turn', sNorth, sTurn, [
+    71,
+    dStreetY,
+    -83,
+  ]);
+  const sRamp = ramp(
+    'granville-seymour-ticket-passage',
+    [70, dStreetY, -85],
+    [70, -3, -100],
+    3,
+  );
+  b.walk('granville-seymour-ticket-ramp', sTurn, sRamp, [70, dStreetY, -85]);
+  const sCorner = rect(
+    'granville-seymour-ticket-corner',
+    68.5,
+    72,
+    -104,
+    -100,
+    -3,
+    'landing',
+    { north: full(3.5), south: full(3.5), east: full(4) },
+  );
+  b.walk('granville-seymour-ticket-corner', sRamp, sCorner, [70, -3, -100]);
+  b.walk('granville-seymour-ticket-door', sCorner, hall, [72, -3, -102]);
+  // The mapped entrance runs southwest/source-X, then turns north and east
+  // through the level -1 hall before the independent Dunsmuir triple shaft.
+  const dHall = rect(
+    'granville-dunsmuir-street-hall',
+    dx,
+    dx + 1.8,
+    dz - 3.75,
+    dz + 3.75,
+    dStreetY,
+    'entrance',
+    { west: full(7.5), east: full(7.5), north: full(1.8), south: full(1.8) },
+    true,
+    3.2,
+  );
+  entrance(
+    b,
+    'granville-dunsmuir-entry',
+    'Dunsmuir Street / Hudson accessible entrance',
+    dHall,
+    [dx, dStreetY, dz],
+  );
+  b.walk('granville-dunsmuir-upper-mall-branch', dHall, sNorth, [
+    dx + 0.45,
+    dStreetY,
+    dz,
+  ]);
+  const dEntry = rect(
+    'granville-dunsmuir-entry-lower-hall',
+    51.76,
+    dx - 5.4,
+    dz - 3,
+    dz + 3,
+    dEntryY,
+    'landing',
+    { east: full(6), north: [[-6.2, -2.2]] },
+    true,
+    3.2,
+  );
+  b.flight(
+    'granville-dunsmuir-entry-stairs',
+    dHall,
+    dEntry,
+    [dx, dStreetY, dz],
+    [dx - 5.4, dEntryY, dz],
+    3.2,
+  );
+  const dNorth = rect(
+    'granville-dunsmuir-entry-north-passage',
+    49.76,
+    53.76,
+    -84.43,
+    dz - 3,
+    dEntryY,
+    'walk',
+    { south: [[0, 2]], north: full(4) },
+    true,
+    3.2,
+  );
+  b.walk('granville-dunsmuir-entry-turn-north', dEntry, dNorth, [
+    52.76,
+    dEntryY,
+    dz - 3,
+  ]);
+  const dTop = rect(
+    'granville-dunsmuir-bank-top-hall',
+    49.76,
+    64.5,
+    -87.43,
+    -81.43,
+    dEntryY,
+    'concourse',
+    {
+      south: [
+        [-7.37, -3.37],
+        [dBankX - 57.13 - 2.8, dBankX - 57.13 + 2.8],
+      ],
+    },
+    false,
+    5.2,
+  );
+  b.box(
+    'granville-dunsmuir-bank-top-hall-ceiling',
+    [57.13, dEntryY + 5.2, -85.93],
+    [14.94, 0.18, 3.2],
+    'cream',
+    'ceiling',
+  );
+  b.walk('granville-dunsmuir-entry-turn-east', dNorth, dTop, [
+    51.76,
+    dEntryY,
+    -84.43,
+  ]);
+  b.box(
+    'granville-dunsmuir-top-hall-square-column',
+    [56.5, dEntryY + 2.6, -86.5],
+    [0.65, 5.2, 0.65],
+    'tile',
+    'column',
+    0,
+    true,
+  );
+  const dUpper = rect(
+    'granville-dunsmuir-upper-hub',
+    57,
+    westX,
+    dEndZ,
+    dEndZ + 10,
+    upperY,
+    'landing',
+    {
+      north: [
+        [dBankX - (57 + westX) / 2 - 2.8, dBankX - (57 + westX) / 2 + 2.8],
+      ],
+      west: [[-3.2, 0.1]],
+      east: [[-2, 2]],
+    },
+    true,
+    2.8,
+  );
+  const dLower = rect(
+    'granville-dunsmuir-lower-hub',
+    42,
+    westX,
+    dEndZ,
+    dEndZ + 10,
+    lowerY,
+    'landing',
+    {
+      north: [[76 - (42 + westX) / 2 - 2, 76 - (42 + westX) / 2 + 2]],
+      east: [[-2, 2]],
+    },
+    false,
+    2.8,
+  );
+  bank(
+    b,
+    'granville-dunsmuir-main-triple',
+    dTop,
+    dUpper,
+    [dBankX, dEntryY, dTopZ],
+    [dBankX, upperY, dEndZ],
+    3,
+    { vaulted: false, shaftHeight: 5.2 },
+  );
+  b.fareGates(
+    'granville-dunsmuir-upper-hub-faregates',
+    [72, upperY, dHubZ],
+    [-3.2, -1.6, 0, 1.6, 3.2],
+    90,
+  );
+  b.box(
+    'granville-dunsmuir-farehall-square-column',
+    [67.5, upperY + 1.4, dHubZ + 3.25],
+    [0.65, 2.8, 0.65],
+    'tile',
+    'column',
+    0,
+    true,
+  );
+  b.box(
+    'granville-dunsmuir-ticket-machine',
+    [58, upperY + 1, dEndZ + 8.8],
+    [0.55, 2, 0.95],
+    'steel',
+    'ticket-machine',
+    0,
+    true,
   );
   b.flight(
     'granville-dunsmuir-interplatform-stairs',
     dUpper,
     dLower,
-    [-14, upperY, dz - 1.5],
-    [-26, lowerY, dz - 1.5],
+    [57, upperY, dHubZ - 1.6],
+    [45, lowerY, dHubZ - 1.6],
     2.4,
-    { material: 'cream' },
   );
-  for (const [levelY, target, levelId] of [
-    [upperY, hubs.upper, 'granville-upper-level'],
-    [lowerY, hubs.lower, 'granville-lower-level'],
-  ]) {
-    const passage = `granville-dunsmuir-platform-passage-${levelY}`,
-      length = -47 - (dz + 5);
-    b.floor(
-      passage,
-      [-11, levelY, (dz + 5 - 47) / 2],
-      4,
-      length,
-      'walk',
-      levelId,
-    );
-    b.room(passage, [-11, levelY, (dz + 5 - 47) / 2], 4, length, {
-      height: 2.7,
-      doors: { north: [[-2, 2]], south: [[-2, 2]] },
-    });
+  b.box(
+    'granville-dunsmuir-lower-hub-ceiling',
+    [(57 + westX) / 2, lowerY + 2.8, dHubZ],
+    [westX - 57, 0.18, 10.2],
+    'cream',
+    'ceiling',
+  );
+  for (const [id, target, y] of [
+    [dUpper, 'granville-upper', upperY],
+    [dLower, 'granville-lower', lowerY],
+  ])
     b.walk(
-      `${passage}-dunsmuir`,
-      levelY === upperY ? dUpper : dLower,
-      passage,
-      [-11, levelY, dz + 5],
-    );
-    b.walk(`${passage}-platform-hub`, passage, target, [-11, levelY, -47]);
-  }
-  const liftZ = dz - 6.2,
-    liftUpper = 'granville-dunsmuir-lift-upper-hall',
-    liftLower = 'granville-dunsmuir-lift-lower-hall';
-  for (const [floor, levelY, target] of [
-    [liftUpper, upperY, dUpper],
-    [liftLower, lowerY, dLower],
-  ]) {
-    b.floor(
-      floor,
-      [(bankEndX + dx + 2) / 2, levelY, liftZ],
-      dx + 2 - bankEndX,
-      4,
-      'walk',
+      `${id}-platform-portal`,
+      id,
       target,
-    );
-    b.room(
-      floor,
-      [(bankEndX + dx + 2) / 2, levelY, liftZ],
-      dx + 2 - bankEndX,
+      [westX, y, dHubZ],
+      [westX, y, dHubZ],
       4,
-      {
-        height: 2.7,
-        doors: {
-          west: [[-2, 2]],
-          south: [[-(dx + 2 - bankEndX) / 2, -(dx + 2 - bankEndX) / 2 + 4]],
-        },
-      },
     );
-    // A four metre corner landing joins the north side of the lower bank hub.
-    const turn = `${floor}-turn`;
-    b.floor(turn, [bankEndX - 2, levelY, liftZ + 1.2], 4, 4, 'landing', target);
-    b.room(turn, [bankEndX - 2, levelY, liftZ + 1.2], 4, 4, {
-      height: 2.7,
-      doors: { east: [[-2, 2]], south: [[-2, 2]] },
-    });
-    b.walk(`${floor}-turn`, floor, turn, [bankEndX, levelY, liftZ]);
-    b.walk(`${turn}-bank-hub`, turn, target, [bankEndX - 2, levelY, dz - 5]);
-  }
+  const liftZ = -56;
   b.elevator(
     'granville-dunsmuir-lift-upper',
-    dHall,
-    liftUpper,
-    [dx, 0, liftZ],
+    sNorth,
+    dUpper,
+    [dx, dStreetY, liftZ],
     [dx, upperY, liftZ],
   );
   b.elevator(
     'granville-dunsmuir-lift-lower',
-    liftUpper,
-    liftLower,
+    dUpper,
+    dLower,
     [dx, upperY, liftZ],
     [dx, lowerY, liftZ],
   );
-  b.sign(
-    'Platform 1  ·  Waterfront  →',
-    [-9, upperY + 2.1, dz + 3.8],
-    0,
-    4.6,
-    0.4,
+  const lowLink = rect(
+    'granville-lower-platform-hub-passage',
+    74,
+    78,
+    mainEndZ + 10,
+    dEndZ,
+    lowerY,
+    'walk',
+    { north: full(4), south: full(4) },
+    true,
+    2.8,
   );
-  b.sign(
-    '←  Platform 2  ·  King George / Production Way–University',
-    [-9, upperY + 2.1, dz - 3.8],
+  b.walk('granville-lower-original-hub-link', mainLower, lowLink, [
+    76,
+    lowerY,
+    mainEndZ + 10,
+  ]);
+  b.walk('granville-lower-dunsmuir-hub-link', lowLink, dLower, [
+    76,
+    lowerY,
+    dEndZ,
+  ]);
+  const unpaidWest = rect(
+    'granville-unpaid-mall-crosspassage',
+    -2,
+    16,
+    -91,
+    -87,
     0,
-    6.5,
-    0.4,
+    'walk',
+    { west: full(4), east: full(4) },
   );
-
-  // Unpaid Hudson Mall connection links the two entrance groups; no same-paid-
-  // platform Canada Line transfer is implied. Turns/extents are representative.
-  const cross = 'granville-unpaid-mall-crosspassage',
-    link = 'granville-unpaid-hudson-passage',
-    mallWidth = dx;
-  b.floor(cross, [(2 + dx + 2) / 2, 0, -102], mallWidth, 4, 'walk', mall);
-  b.room(cross, [(2 + dx + 2) / 2, 0, -102], mallWidth, 4, {
-    height: 3,
-    doors: { west: [[-2, 2]], south: [[mallWidth / 2 - 4, mallWidth / 2]] },
-  });
-  b.walk('granville-mall-crosspassage-door', mall, cross, [2, 0, -102]);
-  const mallLength = dz - 9 + 102;
-  b.floor(link, [dx, 0, (-102 + dz - 9) / 2], 4, mallLength, 'walk', mall);
-  b.room(link, [dx, 0, (-102 + dz - 9) / 2], 4, mallLength, {
-    height: 3,
-    doors: {
-      north: [[-2, 2]],
-      south: [[-2, 2]],
-      west: [[-mallLength / 2, -mallLength / 2 + 2]],
-    },
-  });
-  b.walk('granville-unpaid-crosspassage-turn', cross, link, [dx, 0, -102]);
-  b.walk('granville-unpaid-dunsmuir-hall', link, dHall, [dx, 0, dz - 9]);
-  b.sign('Dunsmuir Street  ·  Elevator  →', [20, 2.3, -102], 0, 4.4, 0.36);
-  b.sign(
-    'Granville Street / Seymour Street  ←',
-    [dx, 2.3, dz - 9],
-    0,
-    4.6,
-    0.36,
+  const unpaid = ramp(
+    'granville-unpaid-hudson-passage',
+    [16, 0, -89],
+    [66, dStreetY, -89],
+    4,
   );
+  b.walk('granville-unpaid-original-entry', mall, unpaidWest, [-2, 0, -89]);
+  b.walk('granville-unpaid-west-turn', unpaidWest, unpaid, [16, 0, -89]);
+  const unpaidNorth = rect(
+    'granville-unpaid-dunsmuir-passage',
+    66,
+    68,
+    -91,
+    -80,
+    dStreetY,
+    'walk',
+    { west: [[-5.5, -1.5]], east: [[0.5, 4.5]], south: full(2) },
+  );
+  b.walk('granville-unpaid-hudson-turn', unpaid, unpaidNorth, [
+    66,
+    dStreetY,
+    -89,
+  ]);
+  b.walk('granville-unpaid-dunsmuir-hall', unpaidNorth, sNorth, [
+    67.5,
+    dStreetY,
+    -85,
+  ]);
   for (const [id, direction] of [
     ['granville-mall-entry', [0, 0, 1]],
-    ['granville-seymour-entry', [-1, 0, 0]],
-    ['granville-dunsmuir-entry', [0, 0, -1]],
+    ['granville-seymour-entry', [0, 0, -1]],
+    ['granville-dunsmuir-entry', [-1, 0, 0]],
   ])
     b.s.entrances.find((e) => e.entranceId === id).inwardDirectionM = direction;
   b.s.authoredInterior.primaryEntrance = 'granville-mall-entry';
@@ -1291,10 +1873,56 @@ export function rebuildGranville(source) {
   };
   b.s.authoredInterior.escalatorCount = 9;
   b.s.authoredInterior.officialBigThreeLengthM = 35;
+  b.s.authoredInterior.concourseColumns = {
+    original:
+      'Photographed round stainless ticket-hall column; faceted panel geometry, diameter and position inferred.',
+    dunsmuir:
+      'Photographed square tiled concourse columns; selected clear hall positions and dimensions inferred.',
+    platform: 'No added platform-vault columns.',
+  };
+  b.s.authoredInterior.platformCalibration = {
+    source:
+      'OSM approximate platform ways551342757/923508926; mapped street nodes889550073/1248731632 and Seymour way138641322',
+    platformCenterM: platformCenter,
+    carLocalCoordinatesUnchanged: true,
+    undergroundBends: 'representative',
+    streetHeightBasis:
+      'Current city DEM at mapped street portals; underground section inferred.',
+  };
+  b.s.authoredInterior.mappedDunsmuirPath = {
+    entranceDirectionM: [-1, 0, 0],
+    entryHallM: [54.45, dEntryY, -71.69],
+    northTurnM: [51.76, dEntryY, -85],
+    bankHeadM: [dBankX, dEntryY, dTopZ],
+    bankFootM: [dBankX, upperY, dEndZ],
+    sourceWays: ['138641324', '138641331', '138641330', '138641320'],
+    qualification:
+      'Horizontal topology/direction constrained by OSM; step runs, widths, exact shaft axis and elevations inferred.',
+  };
+  b.s.authoredInterior.seymourStreetRecess = {
+    photo:
+      'https://digital.lib.washington.edu/server/api/core/bitstreams/e7c27087-87fd-476e-ab80-87d30d24c2ac/content',
+    photoDetail:
+      'Michelle Marie Whitfield2013, Turn Left at the Station, Figure59 (PDF page73 / printed59). Street-facing recess, right turn to descending stairs.',
+    mappedStairHead: {
+      coordinatesLonLat: [-123.1161381, 49.2827226],
+      sourcePointM: [sx, seymourStreetY, sz],
+      source: 'https://www.openstreetmap.org/way/138641322',
+    },
+    inferredStreetDoor: {
+      sourcePointM: [sx, seymourDoorY, sz + 7],
+      coordinatesLonLat: [-123.11606963320845, 49.282678332362714],
+      streetThresholdHeightM: seymourDoorY - seymourStreetY,
+      inwardDirectionM: [0, 0, -1],
+      basis:
+        'Street-facing portal derived7m SE from mapped stair head, photograph and Bay-building footprint; street-door coordinate and recess dimensions are inferred, not an independently mapped doorway.',
+    },
+  };
   b.s.authoredInterior.routeSummary =
-    'Original Granville/Seymour ticket hall → enclosed Big 3 → upper platform and short connector to lower platform; independent unpaid Dunsmuir/Hudson hall → tiled triple bank → lower faregate hall beside the elevator; unpaid mall connection.';
+    'Granville Street → original Bay pair / mall ticket hall → independent 35m vaulted Big3 → platforms. Seymour joins the unpaid upper mall passage. Dunsmuir enters southwest to a lower unpaid hall, turns north/east to its distinct rectangular triple shaft, then reaches bottom faregates and the same three-level elevator.';
   b.s.authoredInterior.unverifiedDetails = [
-    'All subterranean bends, positions, widths, floor offsets and unpaid corridor extents are representative; Dunsmuir lower-platform stair routing remains unmeasured.',
+    'OSM platform polygons explicitly say location approximate. The original Big3 hidden mall bend/parallel shaft offset is representative, not measured; only its35m sloping length and grouping are published.',
+    'Dunsmuir follows the mapped entry direction and corridor/bank turns; the 3m entry descent, shaft rise/run components and hall widths are inferred. The one elevator serves street and both platforms via two graph edges, not two separate lifts.',
   ];
   return finishWithStairwells(b);
 }

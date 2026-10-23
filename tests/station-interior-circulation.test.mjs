@@ -57,17 +57,17 @@ function flat(o, initial, goal) {
   assert.fail(`${o.data.id}: no physically supported flat route from ${initial.position} to ${goal}`);
 }
 
-function path(s, from, to) {
+function path(s, from, to, allowElevator = false) {
   const queue = [from], seen = new Set(queue), previous = new Map();
   for (const id of queue) {
     if (id === to) break;
-    for (const c of s.connections.filter(c => c.type !== 'elevator')) {
+    for (const c of s.connections.filter(c => allowElevator || c.type !== 'elevator')) {
       const next = c.from === id ? c.to : c.to === id ? c.from : null;
       if (!next || seen.has(next)) continue;
       seen.add(next); previous.set(next, { surface: id, connection: c }); queue.push(next);
     }
   }
-  assert(seen.has(to), `${s.id}: entrance has no public walking graph route`);
+  if (!seen.has(to)) return null;
   const result = [];
   while (to !== from) { const p = previous.get(to); result.unshift({ connection: p.connection, forward: p.connection.from === p.surface }); to = p.surface; }
   return result;
@@ -85,23 +85,43 @@ for (const s of data) test(`${s.id}: authored flights support capsule walking in
     } finally { o.dispose(); }
 });
 
-for (const s of data) test(`${s.id}: every public entrance physically reaches every platform and returns`, () => {
+for (const s of data) test(`${s.id}: every public entrance reaches every platform through supported walking or real lift cabins and returns`, () => {
     const o = owner(s);
     try {
       for (const entrance of s.entrances) for (const platform of new Map(s.platforms.map(p => [p.surfaceId, p])).values()) {
         const inward = entrance.inwardDirection ?? [0, 0, 1];
-        const start = entrance.point.map((n, i) => n + inward[i] * .4);
-        let foot = o.floorAt(start, entrance.surfaceId);
-        assert(foot && o.isClearFoot(foot), `${s.id}/${entrance.id}: doorway has no clear interior foot point`);
-        const chain = path(s, entrance.surfaceId, platform.surfaceId);
+        const footOptions = [.4,-.4,0].map(distance => o.floorAt(entrance.point.map((n,i) => n+inward[i]*distance),entrance.surfaceId));
+        let foot = footOptions.find(point => point && o.isClearFoot(point));
+        assert(foot, `${s.id}/${entrance.id}: doorway/stair head has no supported public foot point`);
+        const start = foot.position;
+        // Prefer the complete walking route. Only a genuinely separate accessible
+        // entrance may need a lift; arbitrary inter-floor walking remains forbidden.
+        const walking = path(s, entrance.surfaceId, platform.surfaceId);
+        const chain = walking ?? path(s, entrance.surfaceId, platform.surfaceId, true);
+        assert(chain, `${s.id}/${entrance.id}: entrance has no public circulation route`);
+        const traverse = (c, forward) => {
+          const start = forward ? c.start : c.end, end = forward ? c.end : c.start;
+          foot = flat(o, foot, start);
+          if (c.type !== 'elevator') {
+            foot = c.treads.length ? straight(o, foot, end) : flat(o, foot, end);
+            return;
+          }
+          assert(!walking, 'a walking entrance must retain its physical stairs route');
+          assert(Math.hypot(start[0] - end[0], start[2] - end[2]) < .01, 'lift travel stays inside one real vertical shaft');
+          for (const [point, floor] of [[start, forward ? c.from : c.to], [end, forward ? c.to : c.from]]) {
+            assert(s.authoredInterior.elevatorLandings.some(l => l.floorId === floor && Math.hypot(...l.pointM.map((n, i) => n - point[i])) < .01), 'lift endpoint has authored cabin/door geometry');
+          }
+          // The production interaction is exercised separately. Here the graph
+          // transition is permitted only between supported centres of that cabin.
+          foot = o.floorAt(end, forward ? c.to : c.from);
+          assert(foot && o.isClearFoot(foot), 'lift arrival supports the complete passenger capsule');
+        };
         for (const { connection: c, forward } of chain) {
-          foot = flat(o, foot, forward ? c.start : c.end);
-          foot = c.treads.length ? straight(o, foot, forward ? c.end : c.start) : flat(o, foot, forward ? c.end : c.start);
+          traverse(c, forward);
         }
         assert(o.floorAt(foot.position, platform.surfaceId), `${s.id}: walking route ends outside public platform`);
         for (const { connection: c, forward } of [...chain].reverse()) {
-          foot = flat(o, foot, forward ? c.end : c.start);
-          foot = c.treads.length ? straight(o, foot, forward ? c.start : c.end) : flat(o, foot, forward ? c.start : c.end);
+          traverse(c, !forward);
         }
         foot = flat(o, foot, start);
         assert(o.floorAt(foot.position, entrance.surfaceId), `${s.id}: return route ends outside its entrance`);

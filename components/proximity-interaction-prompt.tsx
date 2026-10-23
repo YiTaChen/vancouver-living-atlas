@@ -13,6 +13,8 @@ const actionKeys = [
   'inspect',
   'board',
   'alight',
+  'elevatorUp',
+  'elevatorDown',
   'portalPlatform',
   'portalExit',
 ] as const;

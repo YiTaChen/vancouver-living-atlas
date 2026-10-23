@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
+import { InteriorBuilder } from '../tools/station-interiors/builder.mjs';
 import {
   carveFloorRect,
   resizeIsland,
@@ -12,6 +13,73 @@ const { SkyTrainStationOwner, validateRuntimeStation } = await import(
 );
 const close = (a, b, tolerance = 1e-7) =>
   assert(Math.abs(a - b) < tolerance, `${a} != ${b}`);
+
+test('ordinary stair nosings follow every real downhill tread edge across X, Z and diagonal flights', () => {
+  for (const [dx, dz] of [
+    [8, 0],
+    [-8, 0],
+    [0, 8],
+    [0, -8],
+    [6, 8],
+    [-6, -8],
+  ])
+    for (const rise of [-3, 3]) {
+      const b = new InteriorBuilder(fixture(), 'nosing-geometry-test', []),
+        a = [4, -7, 9],
+        end = [a[0] + dx, a[1] + rise, a[2] + dz],
+        tangent = new THREE.Vector3(dx, 0, dz).normalize();
+      b.flight('fixture-stairs', 'a', 'b', a, end, 2.4, {
+        enclosed: false,
+        handrails: false,
+      });
+      const connection = b.s.connections[0],
+        strips = b.s.geometryParts.filter((p) => p.id.includes('-nosing-'));
+      assert.equal(strips.length, connection.treadSurfaces.length);
+      for (const [i, tread] of connection.treadSurfaces.entries()) {
+        const strip = strips[i],
+          vertices = tread.verticesM.map((p) => new THREE.Vector3(...p)),
+          extents = vertices.map((p) => p.dot(tangent)),
+          downhillEdge = rise > 0 ? Math.min(...extents) : Math.max(...extents),
+          expected = downhillEdge + (Math.sign(rise) * strip.sizeM[2]) / 2,
+          orientation = new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(0, 1, 0),
+            (strip.yawDegrees * Math.PI) / 180,
+          ),
+          stripAlong = new THREE.Vector3(0, 0, 1).applyQuaternion(orientation),
+          stripAcross = new THREE.Vector3(1, 0, 0).applyQuaternion(orientation);
+        close(new THREE.Vector3(...strip.centerM).dot(tangent), expected);
+        close(strip.centerM[1], tread.verticesM[0][1] + 0.006);
+        close(stripAlong.dot(tangent), 1);
+        close(stripAcross.dot(tangent), 0);
+        close(strip.sizeM[0], 2.4);
+        assert.equal(
+          strip.material,
+          'escalator',
+          'ordinary stair edges use the existing dark steel palette',
+        );
+        assert.equal(strip.role, 'detail');
+        assert(
+          !b.s.obstacles.some((p) => p.id === strip.id),
+          'thin visual strips do not change capsule step heights',
+        );
+      }
+    }
+});
+
+test('station-specific normal stair nosings may use yellow or disable the default without changing treads', () => {
+  for (const material of ['yellow', null]) {
+    const b = new InteriorBuilder(fixture(), 'nosing-option-test', []);
+    b.flight('fixture-stairs', 'a', 'b', [0, 0, 0], [4, -2, 0], 2.4, {
+      enclosed: false,
+      handrails: false,
+      nosingMaterial: material,
+    });
+    const strips = b.s.geometryParts.filter((p) => p.id.includes('-nosing-'));
+    assert.equal(b.s.connections[0].treadSurfaces.length, 12);
+    assert.equal(strips.length, material === null ? 0 : 12);
+    assert(strips.every((p) => p.material === material));
+  }
+});
 const rectangle = (minX, maxX, y, minZ, maxZ) => [
   [minX, y, minZ],
   [minX, y, maxZ],

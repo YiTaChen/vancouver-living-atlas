@@ -11,7 +11,9 @@
     "board": "Board",
     "alight": "Alight",
     "portalPlatform": "Teleport to platform",
-    "portalExit": "Return to station entrance"
+    "portalExit": "Return to station entrance",
+    "elevatorUp": "Elevator up",
+    "elevatorDown": "Elevator down"
   },
   "fr": {
     "sit": "S’asseoir",
@@ -25,7 +27,9 @@
     "board": "Monter",
     "alight": "Descendre",
     "portalPlatform": "Se téléporter au quai",
-    "portalExit": "Revenir à l’entrée de la station"
+    "portalExit": "Revenir à l’entrée de la station",
+    "elevatorUp": "Ascenseur · monter",
+    "elevatorDown": "Ascenseur · descendre"
   },
   "es": {
     "sit": "Sentarse",
@@ -39,7 +43,9 @@
     "board": "Subir",
     "alight": "Bajar",
     "portalPlatform": "Teletransportarse al andén",
-    "portalExit": "Volver a la entrada de la estación"
+    "portalExit": "Volver a la entrada de la estación",
+    "elevatorUp": "Subir en ascensor",
+    "elevatorDown": "Bajar en ascensor"
   },
   "zh-Hant": {
     "sit": "坐下",
@@ -53,7 +59,9 @@
     "board": "上車",
     "alight": "下車",
     "portalPlatform": "傳送至候車月台",
-    "portalExit": "返回車站門口"
+    "portalExit": "返回車站門口",
+    "elevatorUp": "搭電梯上樓",
+    "elevatorDown": "搭電梯下樓"
   },
   "zh-Hans": {
     "sit": "坐下",
@@ -67,7 +75,9 @@
     "board": "上车",
     "alight": "下车",
     "portalPlatform": "传送至候车站台",
-    "portalExit": "返回车站门口"
+    "portalExit": "返回车站门口",
+    "elevatorUp": "搭电梯上楼",
+    "elevatorDown": "搭电梯下楼"
   },
   "de": {
     "sit": "Hinsetzen",
@@ -81,7 +91,9 @@
     "board": "Einsteigen",
     "alight": "Aussteigen",
     "portalPlatform": "Zum Bahnsteig teleportieren",
-    "portalExit": "Zum Bahnhofseingang zurückkehren"
+    "portalExit": "Zum Bahnhofseingang zurückkehren",
+    "elevatorUp": "Aufzug nach oben",
+    "elevatorDown": "Aufzug nach unten"
   },
   "ja": {
     "sit": "座る",
@@ -95,7 +107,9 @@
     "board": "乗車する",
     "alight": "降車する",
     "portalPlatform": "ホームへ転送",
-    "portalExit": "駅の入口へ戻る"
+    "portalExit": "駅の入口へ戻る",
+    "elevatorUp": "エレベーターで上へ",
+    "elevatorDown": "エレベーターで下へ"
   },
   "ko": {
     "sit": "앉기",
@@ -109,7 +123,9 @@
     "board": "탑승",
     "alight": "하차",
     "portalPlatform": "승강장으로 순간이동",
-    "portalExit": "역 입구로 돌아가기"
+    "portalExit": "역 입구로 돌아가기",
+    "elevatorUp": "엘리베이터로 올라가기",
+    "elevatorDown": "엘리베이터로 내려가기"
   },
   "uk": {
     "sit": "Сісти",
@@ -123,7 +139,9 @@
     "board": "Сісти в транспорт",
     "alight": "Вийти",
     "portalPlatform": "Телепортуватися на платформу",
-    "portalExit": "Повернутися до входу на станцію"
+    "portalExit": "Повернутися до входу на станцію",
+    "elevatorUp": "Ліфт угору",
+    "elevatorDown": "Ліфт униз"
   },
   "ru": {
     "sit": "Сесть",
@@ -137,6 +155,8 @@
     "board": "Сесть в транспорт",
     "alight": "Выйти",
     "portalPlatform": "Телепортироваться на платформу",
-    "portalExit": "Вернуться ко входу на станцию"
+    "portalExit": "Вернуться ко входу на станцию",
+    "elevatorUp": "Лифт вверх",
+    "elevatorDown": "Лифт вниз"
   }
 }

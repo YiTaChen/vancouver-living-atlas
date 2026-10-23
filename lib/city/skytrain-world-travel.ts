@@ -18,6 +18,8 @@ import {
   stationWorldPose,
   trainStopFor,
   type StationBoardingDoor,
+  type StationConnection,
+  type StationPoint,
   type SkyTrainStationOwner,
 } from './skytrain-stations';
 import {
@@ -81,7 +83,6 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
   private loadingWorld: Promise<void> | null = null;
   private worldTime = 0;
   private nextPublish = 0;
-  private nextProximity = 0;
   private distanceView = 4;
   private overviewAnchor: THREE.Vector3 | null = null;
   private overviewMoved = false;
@@ -657,6 +658,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     const seats = [
       ...super.interactionCandidates(),
       ...this.constructionCandidates(),
+      ...this.elevatorCandidates(),
     ];
     if (!this.active || !this.inputEnabled || this.passengerSeated)
       return seats;
@@ -722,6 +724,251 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       ];
     }
     return seats;
+  }
+  /** Completed cabins opt in to lift actions. Metadata keeps source X/Z, while
+   * the graph and rendered doors have already undergone entrance rebasing. */
+  private completedElevatorLanding(
+    owner: SkyTrainStationOwner,
+    floorId: string,
+    position: readonly number[],
+  ): { outward: THREE.Vector3; sourcePoint: readonly number[] } | null {
+    const landings = owner.geometryData.authoredInterior?.elevatorLandings;
+    if (!Array.isArray(landings)) return null;
+    const metadata = landings.find(
+      (landing) =>
+        landing &&
+        landing.floorId === floorId &&
+        Array.isArray(landing.pointM) &&
+        landing.pointM.length === 3 &&
+        landing.pointM.every(Number.isFinite) &&
+        Math.abs(landing.pointM[1] - position[1]) < 0.1 &&
+        typeof landing.clearDoorWidthM === 'number' &&
+        Number.isFinite(landing.clearDoorWidthM) &&
+        landing.clearDoorWidthM >= 1.4 &&
+        Array.isArray(landing.outwardDirectionM) &&
+        landing.outwardDirectionM.length === 3 &&
+        landing.outwardDirectionM.every(Number.isFinite),
+    );
+    if (!metadata) return null;
+    const leaves = owner.geometryData.parts.filter(
+      (part) =>
+        part.role === 'lift-door' &&
+        part.size[1] >= 2 &&
+        Math.abs(part.position[1] - position[1] - 1.1) < 0.2 &&
+        Math.hypot(
+          part.position[0] - position[0],
+          part.position[2] - position[2],
+        ) < 1.8,
+    );
+    if (leaves.length !== 2) return null;
+    const outward = new THREE.Vector3(...leaves[0].position)
+        .add(new THREE.Vector3(...leaves[1].position))
+        .multiplyScalar(0.5)
+        .sub(new THREE.Vector3().fromArray(position))
+        .setY(0),
+      panelGap = Math.hypot(
+        leaves[0].position[0] - leaves[1].position[0],
+        leaves[0].position[2] - leaves[1].position[2],
+      ),
+      declared = new THREE.Vector3(...metadata.outwardDirectionM).setY(0);
+    if (
+      outward.length() < 0.8 ||
+      outward.length() > 1.5 ||
+      panelGap < 1.6 ||
+      panelGap > 2.4 ||
+      declared.lengthSq() < 0.5 ||
+      outward.normalize().dot(declared.normalize()) < 0.95
+    )
+      return null;
+    return { outward, sourcePoint: metadata.pointM };
+  }
+  /** A lift serves only its declared, vertically aligned pair of landings.
+   * All positions come from the runtime graph, after street/GPS rebasing. */
+  private elevatorTrip(
+    owner: SkyTrainStationOwner,
+    connection: StationConnection,
+    reverse: boolean,
+  ): { from: StationPoint; to: StationPoint; outward: THREE.Vector3 } | null {
+    const foot = this.foot;
+    if (
+      this.disposed ||
+      this.busy ||
+      !this.inputEnabled ||
+      this.passengerSeated ||
+      this.aboard ||
+      this.phase !== 'station' ||
+      this.owner !== owner ||
+      this.station !== owner.data.id ||
+      this.city.settings.mode !== 'walk' ||
+      this.city.contextLost ||
+      this.city.pageSuspended ||
+      document.hidden ||
+      !owner.group.visible ||
+      !owner.geometryData.authoredInterior ||
+      !foot ||
+      connection.type !== 'elevator' ||
+      !owner.geometryData.connections.includes(connection) ||
+      connection.from === connection.to ||
+      Math.hypot(
+        connection.start[0] - connection.end[0],
+        connection.start[2] - connection.end[2],
+      ) > 0.1 ||
+      Math.abs(connection.start[1] - connection.end[1]) < 0.5
+    )
+      return null;
+    const fromPosition = reverse ? connection.end : connection.start,
+      toPosition = reverse ? connection.start : connection.end,
+      fromLanding = this.completedElevatorLanding(
+        owner,
+        reverse ? connection.to : connection.from,
+        fromPosition,
+      ),
+      toLanding = this.completedElevatorLanding(
+        owner,
+        reverse ? connection.from : connection.to,
+        toPosition,
+      );
+    if (
+      !fromLanding ||
+      !toLanding ||
+      Math.hypot(
+        fromLanding.sourcePoint[0] -
+          toLanding.sourcePoint[0] -
+          fromPosition[0] +
+          toPosition[0],
+        fromLanding.sourcePoint[2] -
+          toLanding.sourcePoint[2] -
+          fromPosition[2] +
+          toPosition[2],
+      ) > 0.1
+    )
+      return null;
+    const from = owner.floorAt(
+        fromPosition,
+        reverse ? connection.to : connection.from,
+      ),
+      to = owner.floorAt(toPosition, reverse ? connection.from : connection.to),
+      current = owner.floorAt(foot.position, foot.surfaceId),
+      landing = owner.floorAt(
+        foot.position,
+        reverse ? connection.to : connection.from,
+      );
+    if (
+      !from ||
+      !to ||
+      !current ||
+      !landing ||
+      current.layer !== foot.layer ||
+      Math.abs(current.position[1] - foot.position[1]) > 0.02 ||
+      Math.abs(landing.position[1] - foot.position[1]) > 0.02 ||
+      separation(foot.position, from.position) > 1.55 ||
+      !owner.isClearFoot(foot) ||
+      !owner.isClearFoot(from) ||
+      !owner.isClearFoot(to)
+    )
+      return null;
+    // A nearby lift behind a wall is not an interaction shortcut. The real
+    // capsule must be able to reach the cabin centre through its open doorway.
+    const approach = owner.walk(
+      foot,
+      from.position[0] - foot.position[0],
+      from.position[2] - foot.position[2],
+    );
+    return separation(approach.position, from.position) <= 0.18
+      ? { from, to, outward: fromLanding.outward }
+      : null;
+  }
+  private elevatorCandidates(): InteractionCandidate[] {
+    const owner = this.owner;
+    if (!owner?.geometryData.authoredInterior || !this.foot) return [];
+    const candidates: InteractionCandidate[] = [];
+    for (const connection of owner.geometryData.connections) {
+      if (connection.type !== 'elevator') continue;
+      for (const reverse of [false, true]) {
+        const trip = this.elevatorTrip(owner, connection, reverse);
+        if (!trip) continue;
+        const up = trip.to.position[1] > trip.from.position[1],
+          outward = trip.outward,
+          across = new THREE.Vector3(outward.z, 0, -outward.x),
+          button = new THREE.Vector3(...trip.from.position).addScaledVector(
+            across,
+            up ? -0.45 : 0.45,
+          ),
+          proximity = owner.toWorld(button.toArray()),
+          anchor = owner.toWorld(
+            button
+              .clone()
+              .addScaledVector(outward, 0.85)
+              .add(new THREE.Vector3(0, 1.15, 0))
+              .toArray(),
+          );
+        candidates.push({
+          id: `skytrain:elevator:${owner.data.id}:${connection.id}:${reverse ? 'return' : 'forward'}`,
+          kind: 'scene',
+          action: up ? 'elevatorUp' : 'elevatorDown',
+          anchor,
+          proximityPoint: proximity,
+          range: 1.55,
+          priority: 10,
+          canInteract: () =>
+            this.elevatorTrip(owner, connection, reverse) !== null,
+          execute: () => {
+            const current = this.elevatorTrip(owner, connection, reverse);
+            if (!current) return false;
+            this.clearInput();
+            this.foot = {
+              ...current.to,
+              position: [...current.to.position],
+              yaw: this.yaw,
+            };
+            const platform = this.platformAtFoot();
+            this.level = platform ? 'platform' : 'concourse';
+            if (platform) {
+              this.line = platform.line;
+              this.direction = platform.direction;
+            }
+            this.updateCamera();
+            this.city.interactions?.clear();
+            this.publish();
+            return true;
+          },
+        });
+      }
+    }
+    return candidates;
+  }
+  private platformAtFoot() {
+    const owner = this.owner,
+      foot = this.foot;
+    if (!owner || !foot) return undefined;
+    const surfaces = new Set([foot.surfaceId]);
+    if (owner.geometryData.authoredInterior) {
+      // Landing IDs are distinct from platform IDs. Only an actual coplanar
+      // walking connection associates a lift lobby with its served platform.
+      const pending = [foot.surfaceId];
+      for (const surface of pending)
+        for (const c of owner.geometryData.connections) {
+          if (
+            c.type !== 'walk' ||
+            ![c.from, c.to].includes(surface) ||
+            Math.abs(c.start[1] - foot.position[1]) > 0.25 ||
+            Math.abs(c.end[1] - foot.position[1]) > 0.25
+          )
+            continue;
+          const next = c.from === surface ? c.to : c.from;
+          if (!surfaces.has(next)) {
+            surfaces.add(next);
+            pending.push(next);
+          }
+        }
+    }
+    return owner.geometryData.platforms
+      .filter((p) => surfaces.has(p.surfaceId))
+      .sort(
+        (a, b) =>
+          this.platformDistance(a.line, a.direction) -
+          this.platformDistance(b.line, b.direction),
+      )[0];
   }
   /** The temporary shortcuts are physical nearby objects, independent of the
    * legacy station planner. Their destinations never modify a service run. */
@@ -1134,10 +1381,11 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       this.city.settings.buildings &&
       this.city.settings.mode === 'walk' &&
       !this.city.busVisit?.aboard &&
-      this.inputEnabled &&
-      this.worldTime >= this.nextProximity
+      this.inputEnabled
     ) {
-      this.nextProximity = this.worldTime + 0.15;
+      // A sloped doorway can have only a short city-height handoff window.
+      // Check every native movement frame so a timed poll cannot skip it;
+      // each owner first rejects positions outside its small doorway bounds.
       for (const owner of this.stations.owners) {
         if (
           owner.tryEnterFromStreet([
@@ -1199,13 +1447,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
             Math.cos(this.yaw) * amount,
           );
           this.walkDistance += separation(before, this.foot.position);
-          const platform = this.owner.geometryData.platforms
-            .filter((p) => p.surfaceId === this.foot!.surfaceId)
-            .sort(
-              (a, b) =>
-                this.platformDistance(a.line, a.direction) -
-                this.platformDistance(b.line, b.direction),
-            )[0];
+          const platform = this.platformAtFoot();
           this.level = platform ? 'platform' : 'concourse';
           if (platform) {
             this.line = platform.line;

@@ -282,7 +282,7 @@ test('every actual station bench retains a stable rear camera beneath its roof w
   }
 });
 
-test('all seventeen physical station stair routes retain chase heading on ascent and descent through actual treads and roofs', () => {
+test('all physical station stair routes retain chase heading on ascent and descent through actual treads and roofs', () => {
   let checkedRoutes = 0,
     heightChanges = 0;
   for (const id of stationIds) {
@@ -325,7 +325,7 @@ test('all seventeen physical station stair routes retain chase heading on ascent
       owner.dispose();
     }
   }
-  assert.equal(checkedRoutes, 17);
+  assert.equal(checkedRoutes, 19);
   assert(
     heightChanges > 20,
     'the actual route samples include rising and descending station geometry',

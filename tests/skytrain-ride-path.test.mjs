@@ -324,10 +324,9 @@ test('Main Street uses both GTFS platform anchors and authored interiors use the
       data.authoredInterior &&
       SKYTRAIN_STREET_ENTRANCES[station.id].find(
         (e) =>
-          e.id ===
-          (data.authoredInterior.streetEntranceMap[
-            data.authoredInterior.primaryEntrance
-          ] ?? data.authoredInterior.primaryEntrance),
+          e.id === data.authoredInterior.primaryEntrance ||
+          data.authoredInterior.streetEntranceMap[e.id] ===
+            data.authoredInterior.primaryEntrance,
       );
     assert.deepEqual(
       adaptSkyTrainStationFrame(data, routes).lonlat,
