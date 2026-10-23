@@ -75,6 +75,10 @@ export interface RuntimePerformanceOptions {
   performance?: TracePerformance | null;
 }
 
+// Includes the street pilot wrapper and late explicit landmark-detail spans.
+// This allowance exists only in the explicitly enabled diagnostics recorder.
+const MAX_LABELS = 48;
+
 /** Fixed-capacity storage, including captures left recording for a long session. */
 class Ring<T> {
   private values: T[] = [];
@@ -372,7 +376,7 @@ export class RuntimePerformanceDiagnostics {
   private admitLabel(label: string) {
     if (!/^[a-zA-Z][a-zA-Z0-9._-]{0,63}$/.test(label)) return false;
     if (this.labels.has(label)) return true;
-    if (this.labels.size >= 32) {
+    if (this.labels.size >= MAX_LABELS) {
       this.stats.labelLimit++;
       return false;
     }
@@ -433,7 +437,7 @@ export class RuntimePerformanceDiagnostics {
         browserEvents: 100,
         gpuSamples: 120,
         resets: 30,
-        labels: 32,
+        labels: MAX_LABELS,
         wrappers: 32,
       },
       stats: { ...this.stats },

@@ -174,7 +174,7 @@ test('rings, labels and snapshots stay bounded without mutating previously captu
   for (let i = 0; i < 400; i++) {
     h.at(i * 110);
     d.beginFrame(i * 110, context);
-    for (let label = 0; label < 40; label++)
+    for (let label = 0; label < 56; label++)
       d.measure(`label${label}`, () => h.add(0.01));
     d.endFrame();
   }
@@ -185,11 +185,75 @@ test('rings, labels and snapshots stay bounded without mutating previously captu
   assert.equal(report.dropped.hitches, 359);
   assert.equal(report.frames[0].id, 101);
   assert.equal(report.frames.at(-1).id, 400);
-  assert.equal(Object.keys(report.frames[0].spans).length, 32);
+  assert.equal(Object.keys(report.frames[0].spans).length, 48);
   report.frames[0].spans.label0.totalMs = -10;
   report.hitches[0].precedingFrame.spans.label0.totalMs = -20;
   assert.ok(d.snapshot().frames[0].spans.label0.totalMs > 0);
   assert.ok(d.snapshot().hitches[0].precedingFrame.spans.label0.totalMs > 0);
+  d.dispose();
+});
+
+test('pilot wrapper and late landmark span both survive the actual engine label order up to the bounded cap', () => {
+  const h = harness(),
+    d = h.diagnostics;
+  // The engine registers wrappers before opening a frame; explicit traffic,
+  // railway, harbour and landmark spans are admitted during that frame.
+  const labels = [
+    'tickClock',
+    'renderScene',
+    'updateShadowFrustum',
+    'updateLabels',
+    'updateAutoQuality',
+    'controls',
+    'navigation',
+    'bus',
+    'flight',
+    'tesla',
+    'skytrain',
+    'interactions',
+    'impacts',
+    'impact-feedback',
+    'drift',
+    'pedestrians',
+    'travel-return',
+    'waves',
+    'trees',
+    'facades',
+    'architecture',
+    'street-showcase',
+    'streetscape',
+    'street-furniture',
+    'interiors',
+    'soundscape',
+    'render-submit',
+    'landmark-warmup',
+    'scenery-preparation',
+  ];
+  const systems = labels.map((label) => {
+    const target = { update: () => h.add(1) };
+    d.wrap(target, 'update', label);
+    return target;
+  });
+  d.beginFrame(0, context);
+  for (const system of systems) system.update();
+  for (const label of ['traffic', 'railway', 'harbour', 'landmark-detail'])
+    d.measure(label, () => h.add(1));
+  for (let i = labels.length + 4; i < 48; i++)
+    d.measure(`extra${i}`, () => h.add(1));
+  assert.equal(
+    d.measure('overflow', () => 9),
+    9,
+    'a rejected diagnostic label still executes the original work',
+  );
+  d.endFrame();
+  const report = d.snapshot(),
+    spans = report.frames[0].spans;
+  assert.equal(report.limits.labels, 48);
+  assert.equal(Object.keys(spans).length, 48);
+  assert.equal(spans['street-showcase'].calls, 1);
+  assert.equal(spans['landmark-detail'].totalMs, 1);
+  assert.equal(report.stats.labelLimit, 1);
+  assert.equal(spans.overflow, undefined);
   d.dispose();
 });
 

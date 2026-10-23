@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { installVehicleSurface } from './vehicle-surface';
 
 /** Original two-seat open roadster. Metres, +Z forward, +X driver's left. */
 export function makeRoadster() {
@@ -33,6 +34,14 @@ export function makeRoadster() {
       depthWrite: false,
     }),
   };
+  // Keep the authored colour/geometry and ownership. Finishing is restricted to
+  // the shared Robson/Burrard world-space pilot, including moving vehicles.
+  installVehicleSurface(palette.paint, 'roadster-paint');
+  installVehicleSurface(palette.dark, 'leather');
+  installVehicleSurface(palette.rubber, 'rubber');
+  installVehicleSurface(palette.leather, 'leather');
+  installVehicleSurface(palette.metal, 'metal');
+  installVehicleSurface(palette.glass, 'roadster-glass');
   type Key = keyof typeof palette;
   type P = [number, number, number];
   const batches = new Map<Key, THREE.BufferGeometry[]>();

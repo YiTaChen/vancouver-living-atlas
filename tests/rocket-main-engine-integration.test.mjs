@@ -105,6 +105,7 @@ function fixture(t) {
     },
     uniforms: { time: { value: 0 } },
     tickClock: call('clock-tick'),
+    applyStreetPilotLighting: call('pilot-lighting'),
     updateShadowFrustum: call('shadow-update'),
     updateAutoQuality: call('quality-update'),
     updateLabels: call('labels-update'),
@@ -206,6 +207,7 @@ test('the merged RAF advances the rocket alongside main transit and sound system
   const count = (label) => events.filter(([name]) => name === label).length;
   for (const label of [
     'rocket-update',
+    'pilot-lighting',
     'bus-world-update',
     'bus-visit-update',
     'world-skytrain-update',

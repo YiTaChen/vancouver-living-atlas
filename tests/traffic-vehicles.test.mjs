@@ -37,6 +37,187 @@ const route = (x = 0) => ({
   phase: 0.2,
 });
 
+test('manual fleet visibility packs fewer draws/vertices while every actor keeps identical pose and LOD history', async () => {
+  const routes = Array.from({ length: 300 }, (_, i) => ({
+    a: [(i % 150) * 0.4 - 30, i % 2 ? -120 : 0],
+    b: [(i % 150) * 0.4 - 30, i % 2 ? -20 : 200],
+    length: i % 2 ? 100 : 200,
+    speed: 8,
+    phase: 0.2,
+  }));
+  const original = new TrafficVehicleAssets(routes, new THREE.Group(), load);
+  const culled = new TrafficVehicleAssets(routes, new THREE.Group(), load);
+  await Promise.all([original.ready, culled.ready]);
+  const camera = new THREE.PerspectiveCamera(60, 16 / 9, 0.1, 1000);
+  camera.position.set(0, 2, 0);
+  camera.lookAt(0, 2, 100);
+  const height = (x, z) => 1 + x * 0.01 + z * 0.02;
+  try {
+    for (const time of [0, 1, 12]) {
+      const a = [],
+        b = [];
+      original.update(time, camera.position, height, (model, matrix, id) =>
+        a.push([id, model, ...matrix.elements]),
+      );
+      culled.update(
+        time,
+        camera.position,
+        height,
+        (model, matrix, id) => b.push([id, model, ...matrix.elements]),
+        camera,
+      );
+      assert.deepEqual(
+        b,
+        a,
+        'all exact physical poses still reach lights and observers',
+      );
+      assert.deepEqual(
+        culled.lastLod,
+        original.lastLod,
+        'offscreen actors retain LOD admission and future hysteresis',
+      );
+      assert.equal(culled.stats.actors, 300);
+      assert.equal(
+        culled.stats.renderedActors + culled.stats.culledActors,
+        300,
+      );
+      assert(
+        culled.stats.renderedActors > 0 && culled.stats.renderedActors < 200,
+      );
+      assert(culled.stats.triangles < original.stats.triangles);
+      assert(culled.stats.drawCalls <= original.stats.drawCalls);
+      assert.equal(
+        culled.stats.lodCounts.reduce((s, n) => s + n, 0),
+        culled.stats.renderedActors,
+      );
+    }
+    camera.lookAt(0, 2, -100);
+    const seen = [];
+    culled.update(
+      12,
+      camera.position,
+      height,
+      (_model, _matrix, id) => seen.push(id),
+      camera,
+    );
+    assert.equal(seen.length, 300);
+    assert(
+      culled.stats.renderedActors > 0 && culled.stats.renderedActors < 200,
+      'turning the camera repacks the opposite half without spawning actors',
+    );
+  } finally {
+    original.dispose();
+    culled.dispose();
+  }
+});
+
+test('conservative visibility keeps a car crossing the near plane even when its root is behind the camera', async () => {
+  const fleet = new TrafficVehicleAssets(
+    [
+      {
+        a: [0, -5],
+        b: [0, 5],
+        length: 10,
+        speed: 1,
+        phase: 0.4,
+      },
+    ],
+    new THREE.Group(),
+    load,
+  );
+  await fleet.ready;
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  camera.position.set(0, 1, 0);
+  camera.lookAt(0, 1, 10);
+  try {
+    fleet.update(0, camera.position, () => 0, undefined, camera);
+    assert.equal(fleet.stats.renderedActors, 1);
+    assert.equal(fleet.stats.culledActors, 0);
+  } finally {
+    fleet.dispose();
+  }
+});
+
+test('deferred fleet packing uses final camera turns and teleports without resimulating or revisiting any actor', async () => {
+  const routes = [
+    { a: [0, 20], b: [0, 100], length: 80, speed: 8, phase: 0.25 },
+    { a: [0, -100], b: [0, -20], length: 80, speed: 8, phase: 0.25 },
+  ];
+  const original = new TrafficVehicleAssets(routes, new THREE.Group(), load);
+  const fleet = new TrafficVehicleAssets(routes, new THREE.Group(), load);
+  await Promise.all([original.ready, fleet.ready]);
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 200);
+  camera.position.set(0, 2, 0);
+  camera.lookAt(0, 2, 100);
+  let roadQueries = 0;
+  const a = [],
+    b = [];
+  const height = () => {
+    roadQueries++;
+    return 0;
+  };
+  const packedZ = () => {
+    const positions = [],
+      matrix = new THREE.Matrix4();
+    for (const batch of fleet.batches)
+      for (let i = 0; i < batch.meshes[0].count; i++) {
+        batch.meshes[0].getMatrixAt(i, matrix);
+        positions.push(matrix.elements[14]);
+      }
+    return positions.sort((x, y) => x - y);
+  };
+  try {
+    original.update(
+      0,
+      camera.position,
+      () => 0,
+      (model, matrix, id) => a.push([id, model, ...matrix.elements]),
+    );
+    fleet.update(
+      0,
+      camera.position,
+      height,
+      (model, matrix, id) => b.push([id, model, ...matrix.elements]),
+      undefined,
+      true,
+    );
+    assert.deepEqual(b, a);
+    const queries = roadQueries,
+      history = fleet.lastLod.slice();
+    assert.deepEqual(history, original.lastLod);
+    assert.equal(fleet.stats.poseCacheBytes, 2 * 17 * 8);
+    fleet.prepareRender(camera);
+    assert.deepEqual(packedZ(), [40]);
+    // Camera owners change these after the early traffic simulation. Packing
+    // must admit the new view immediately, using the same exact pose snapshot.
+    camera.lookAt(0, 2, -100);
+    fleet.prepareRender(camera);
+    assert.deepEqual(packedZ(), [-80]);
+    camera.position.set(0, 2, 100);
+    camera.lookAt(0, 2, 0);
+    fleet.prepareRender(camera);
+    assert.deepEqual(packedZ(), [-80, 40]);
+    assert.equal(
+      roadQueries,
+      queries,
+      'camera changes cause no new road/elevation work',
+    );
+    assert.equal(
+      b.length,
+      2,
+      'observers and lights are visited once per simulation',
+    );
+    assert.deepEqual(
+      fleet.lastLod,
+      history,
+      'final-view packing cannot change LOD history',
+    );
+  } finally {
+    original.dispose();
+    fleet.dispose();
+  }
+});
+
 test('production traffic exports match the six original Blender payloads and versioned URLs', () => {
   for (const asset of TRAFFIC_VEHICLE_ASSETS) {
     const url = trafficVehicleUrl(asset),
@@ -159,8 +340,9 @@ test('fleet keeps route speed, palette and tire datum, follows road pitch, and o
   assert(Math.abs(travel - (8 % (2 * Math.PI * radius))) < 1e-5);
   // Check the actual material hook supplied to Three for position AND normals.
   const shader = {
-    vertexShader:
-      '#include <common>\n#include <beginnormal_vertex>\n#include <begin_vertex>',
+    vertexShader: THREE.ShaderLib.standard.vertexShader,
+    fragmentShader: THREE.ShaderLib.standard.fragmentShader,
+    uniforms: {},
   };
   meshes[0].material.onBeforeCompile(shader);
   assert(

@@ -1,0 +1,1060 @@
+{
+  "schema": "atlas-robson-burrard-round1-results-v1",
+  "scope": "Robson/Burrard pilot only; no whole-city rollout or general FPS improvement claim",
+  "revisions": {
+    "baseline": "28b3bb55af6f266b0b44e7b5c06a1d6d61c960c1",
+    "runtime": "43559a91a55b08fc8bc21313ae8cf38dac18d8ea",
+    "primaryCapture": "e8c3506c62264a24e7c034053cfd182502213507",
+    "diagnosticCapture": "766fbbffe0f81ea43243177699b861e0ff162fec"
+  },
+  "environment": {
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "render": [
+      1280,
+      720
+    ],
+    "quality": "manual High",
+    "node": "24.22.1",
+    "prescribedWeather": "clear",
+    "clockFixed": true
+  },
+  "protocol": {
+    "settleSecondsPerWindow": 12,
+    "captureSecondsPerWindow": 12,
+    "primaryRecorderEnabled": false,
+    "orderRepeat": "candidate first, baseline second",
+    "dynamicActorPhaseFrozen": false,
+    "counters": "multipass submitted calls/triangles, not unique visible geometry",
+    "cpuGpuNullMeaning": "recorder off, unavailable; not zero",
+    "diagnosticCommonSuffixes": "CPU/GPU are independent recorder-on captures; GPU only accepted async timer samples paired by frameId, no CPU subtraction"
+  },
+  "primary": [
+    {
+      "window": 1,
+      "pose": "corner-eye",
+      "action": "still",
+      "hour": 14,
+      "viewClass": "matched_observer",
+      "cameraEquivalent": true,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-corner-eye-day-still-01.json",
+        "valid": true,
+        "raf": {
+          "count": 274,
+          "fps": 22.769767731748868,
+          "p50Ms": 49.10000000000582,
+          "p95Ms": 66.80000000000291,
+          "p99Ms": 83.69999999999709,
+          "over100Ms": 0
+        },
+        "callsMedian": 1061,
+        "trianglesMedian": 4844919,
+        "pedestriansEndSnapshot": 12,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 826,
+          "textures": 142
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-corner-eye-day-still-01.json",
+        "valid": true,
+        "raf": {
+          "count": 249,
+          "fps": 20.692234179582,
+          "p50Ms": 49.700000000004366,
+          "p95Ms": 67.59999999999854,
+          "p99Ms": 116.79999999999563,
+          "over100Ms": 4
+        },
+        "callsMedian": 1063,
+        "trianglesMedian": 4815243,
+        "pedestriansEndSnapshot": 25,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 823,
+          "textures": 143
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": -9.12408759124087
+    },
+    {
+      "window": 2,
+      "pose": "corner-eye",
+      "action": "still",
+      "hour": 14,
+      "viewClass": "matched_observer",
+      "cameraEquivalent": true,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-corner-eye-day-still-02.json",
+        "valid": true,
+        "raf": {
+          "count": 283,
+          "fps": 23.551734755869226,
+          "p50Ms": 48.90000000000873,
+          "p95Ms": 50.59999999999127,
+          "p99Ms": 51,
+          "over100Ms": 1
+        },
+        "callsMedian": 1077,
+        "trianglesMedian": 4894695,
+        "pedestriansEndSnapshot": 11,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 826,
+          "textures": 142
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-corner-eye-day-still-02.json",
+        "valid": true,
+        "raf": {
+          "count": 258,
+          "fps": 21.4690487879973,
+          "p50Ms": 49.30000000000291,
+          "p95Ms": 67.10000000000582,
+          "p99Ms": 83.69999999999709,
+          "over100Ms": 1
+        },
+        "callsMedian": 1083,
+        "trianglesMedian": 4876779,
+        "pedestriansEndSnapshot": 24,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 824,
+          "textures": 143
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": -8.84302574506921
+    },
+    {
+      "window": 3,
+      "pose": "robson-drive",
+      "action": "still",
+      "hour": 14,
+      "viewClass": "intentionally_changed_drive_camera",
+      "cameraEquivalent": false,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-robson-drive-day-still-03.json",
+        "valid": true,
+        "raf": {
+          "count": 276,
+          "fps": 22.93577981651378,
+          "p50Ms": 48.90000000000873,
+          "p95Ms": 51.30000000000291,
+          "p99Ms": 51.89999999999418,
+          "over100Ms": 1
+        },
+        "callsMedian": 974,
+        "trianglesMedian": 5614263,
+        "pedestriansEndSnapshot": 10,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 916,
+          "textures": 142
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-robson-drive-day-still-03.json",
+        "valid": true,
+        "raf": {
+          "count": 259,
+          "fps": 21.552441500515933,
+          "p50Ms": 49.39999999999418,
+          "p95Ms": 67.60000000000582,
+          "p99Ms": 84.10000000000582,
+          "over100Ms": 0
+        },
+        "callsMedian": 996,
+        "trianglesMedian": 5589991,
+        "pedestriansEndSnapshot": 18,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 924,
+          "textures": 143
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": -6.031355057750609
+    },
+    {
+      "window": 4,
+      "pose": "robson-drive",
+      "action": "still",
+      "hour": 23,
+      "viewClass": "intentionally_changed_drive_camera",
+      "cameraEquivalent": false,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-robson-drive-night-still-04.json",
+        "valid": true,
+        "raf": {
+          "count": 252,
+          "fps": 20.914251568568847,
+          "p50Ms": 49.5,
+          "p95Ms": 66.70000000001164,
+          "p99Ms": 84.10000000000582,
+          "over100Ms": 0
+        },
+        "callsMedian": 990,
+        "trianglesMedian": 5622179,
+        "pedestriansEndSnapshot": 10,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 919,
+          "textures": 143
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-robson-drive-night-still-04.json",
+        "valid": true,
+        "raf": {
+          "count": 253,
+          "fps": 21.142002389965494,
+          "p50Ms": 49.70000000001164,
+          "p95Ms": 66.89999999999418,
+          "p99Ms": 83.40000000000873,
+          "over100Ms": 0
+        },
+        "callsMedian": 1012,
+        "trianglesMedian": 5597003,
+        "pedestriansEndSnapshot": 18,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 930,
+          "textures": 144
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": 1.0889742845922479
+    },
+    {
+      "window": 5,
+      "pose": "burrard-eye",
+      "action": "still",
+      "hour": 14,
+      "viewClass": "matched_observer",
+      "cameraEquivalent": true,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-burrard-eye-day-still-05.json",
+        "valid": true,
+        "raf": {
+          "count": 286,
+          "fps": 23.73522772540166,
+          "p50Ms": 33.80000000001746,
+          "p95Ms": 68,
+          "p99Ms": 99.89999999999418,
+          "over100Ms": 3
+        },
+        "callsMedian": 557,
+        "trianglesMedian": 3894533,
+        "pedestriansEndSnapshot": 18,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 932,
+          "textures": 143
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-burrard-eye-day-still-05.json",
+        "valid": true,
+        "raf": {
+          "count": 276,
+          "fps": 23.030515432948647,
+          "p50Ms": 34,
+          "p95Ms": 67.40000000002328,
+          "p99Ms": 83.5,
+          "over100Ms": 0
+        },
+        "callsMedian": 563,
+        "trianglesMedian": 3867609,
+        "pedestriansEndSnapshot": 31,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 942,
+          "textures": 144
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": -2.969056377322321
+    },
+    {
+      "window": 6,
+      "pose": "roadster-detail",
+      "action": "still",
+      "hour": 14,
+      "viewClass": "matched_observer",
+      "cameraEquivalent": true,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-roadster-detail-day-still-06.json",
+        "valid": true,
+        "raf": {
+          "count": 266,
+          "fps": 22.04432068685461,
+          "p50Ms": 49.30000000001746,
+          "p95Ms": 67.69999999998254,
+          "p99Ms": 83.60000000000582,
+          "over100Ms": 0
+        },
+        "callsMedian": 1076,
+        "trianglesMedian": 4701843,
+        "pedestriansEndSnapshot": 12,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 945,
+          "textures": 143
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-roadster-detail-day-still-06.json",
+        "valid": true,
+        "raf": {
+          "count": 266,
+          "fps": 22.135676719259724,
+          "p50Ms": 49.29999999998836,
+          "p95Ms": 67,
+          "p99Ms": 84.29999999998836,
+          "over100Ms": 1
+        },
+        "callsMedian": 1082,
+        "trianglesMedian": 4677071,
+        "pedestriansEndSnapshot": 21,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 954,
+          "textures": 144
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": 0.4144198122629783
+    },
+    {
+      "window": 7,
+      "pose": "robson-drive",
+      "action": "travel",
+      "hour": 14,
+      "viewClass": "intentionally_changed_drive_camera",
+      "cameraEquivalent": false,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-robson-drive-day-travel-07.json",
+        "valid": true,
+        "raf": {
+          "count": 233,
+          "fps": 19.417152095469035,
+          "p50Ms": 50,
+          "p95Ms": 83.69999999998254,
+          "p99Ms": 117.29999999998836,
+          "over100Ms": 9
+        },
+        "callsMedian": 902,
+        "trianglesMedian": 5644039,
+        "pedestriansEndSnapshot": 13,
+        "startToEndDisplacementM": 505.1330093735473,
+        "resourceCounts": {
+          "geometries": 978,
+          "textures": 143
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-robson-drive-day-travel-07.json",
+        "valid": true,
+        "raf": {
+          "count": 246,
+          "fps": 20.44343981650764,
+          "p50Ms": 49.80000000001746,
+          "p95Ms": 82.39999999999418,
+          "p99Ms": 83.60000000000582,
+          "over100Ms": 0
+        },
+        "callsMedian": 879,
+        "trianglesMedian": 5614191,
+        "pedestriansEndSnapshot": 14,
+        "startToEndDisplacementM": 523.524954265969,
+        "resourceCounts": {
+          "geometries": 988,
+          "textures": 144
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": 5.285469856715452
+    }
+  ],
+  "reverseOrderRepeat": [
+    {
+      "window": 1,
+      "pose": "corner-eye",
+      "action": "still",
+      "hour": 14,
+      "viewClass": "matched_observer",
+      "cameraEquivalent": true,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-corner-eye-day-still-01.json",
+        "valid": true,
+        "raf": {
+          "count": 276,
+          "fps": 22.937114078900333,
+          "p50Ms": 49.80000000000291,
+          "p95Ms": 50.40000000000873,
+          "p99Ms": 50.80000000000291,
+          "over100Ms": 0
+        },
+        "callsMedian": 1073,
+        "trianglesMedian": 4890823,
+        "pedestriansEndSnapshot": 12,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 826,
+          "textures": 142
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-corner-eye-day-still-08.json",
+        "valid": true,
+        "raf": {
+          "count": 255,
+          "fps": 21.220821370615404,
+          "p50Ms": 49.79999999998836,
+          "p95Ms": 65.70000000001164,
+          "p99Ms": 100.20000000001164,
+          "over100Ms": 4
+        },
+        "callsMedian": 1071,
+        "trianglesMedian": 4826859,
+        "pedestriansEndSnapshot": 25,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 1031,
+          "textures": 144
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": -7.482600916493376
+    },
+    {
+      "window": 2,
+      "pose": "burrard-eye",
+      "action": "still",
+      "hour": 14,
+      "viewClass": "matched_observer",
+      "cameraEquivalent": true,
+      "settingsAndBufferEqual": true,
+      "pairStatus": "validated_pair",
+      "before": {
+        "captureFile": "pilot-burrard-eye-day-still-02.json",
+        "valid": true,
+        "raf": {
+          "count": 287,
+          "fps": 23.915470893122,
+          "p50Ms": 33.80000000001746,
+          "p95Ms": 66.90000000002328,
+          "p99Ms": 82.79999999998836,
+          "over100Ms": 1
+        },
+        "callsMedian": 557,
+        "trianglesMedian": 3897741,
+        "pedestriansEndSnapshot": 17,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 846,
+          "textures": 142
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "after": {
+        "captureFile": "pilot-burrard-eye-day-still-09.json",
+        "valid": true,
+        "raf": {
+          "count": 278,
+          "fps": 23.167631984666027,
+          "p50Ms": 34,
+          "p95Ms": 66.79999999998836,
+          "p99Ms": 83.80000000004657,
+          "over100Ms": 2
+        },
+        "callsMedian": 561,
+        "trianglesMedian": 3827313,
+        "pedestriansEndSnapshot": 29,
+        "startToEndDisplacementM": 0.0,
+        "resourceCounts": {
+          "geometries": 1031,
+          "textures": 144
+        },
+        "cpuMedianMs": null,
+        "gpuMedianMs": null
+      },
+      "fpsChangePercent": -3.127008921538932
+    }
+  ],
+  "diagnostics": [
+    {
+      "window": 1,
+      "pose": "corner-eye",
+      "action": "still",
+      "hour": 14,
+      "cameraEquivalent": true,
+      "cpu": {
+        "commonDurationMs": 12029.000000017884,
+        "before": {
+          "count": 262,
+          "meanMs": 34.61259542052982,
+          "p50Ms": 31.899999976158142,
+          "p95Ms": 47.599999994039536,
+          "p99Ms": 49.70000001788139,
+          "maxMs": 56.69999998807907
+        },
+        "after": {
+          "count": 271,
+          "meanMs": 29.68413284091052,
+          "p50Ms": 27.299999982118607,
+          "p95Ms": 40.69999998807907,
+          "p99Ms": 44.900000005960464,
+          "maxMs": 48
+        }
+      },
+      "gpu": {
+        "commonDurationMs": 5246.100000017883,
+        "before": {
+          "count": 111,
+          "meanMs": 25.771404783783783,
+          "p50Ms": 25.626204,
+          "p95Ms": 26.549589,
+          "p99Ms": 27.216828,
+          "maxMs": 28.028019
+        },
+        "after": {
+          "count": 120,
+          "meanMs": 26.09372815833333,
+          "p50Ms": 25.875359,
+          "p95Ms": 26.7248,
+          "p99Ms": 27.499889,
+          "maxMs": 28.491967
+        }
+      }
+    },
+    {
+      "window": 2,
+      "pose": "corner-eye",
+      "action": "still",
+      "hour": 14,
+      "cameraEquivalent": true,
+      "cpu": {
+        "commonDurationMs": 12092.600000011924,
+        "before": {
+          "count": 280,
+          "meanMs": 32.536428570002315,
+          "p50Ms": 30.099999994039536,
+          "p95Ms": 45.099999994039536,
+          "p99Ms": 47,
+          "maxMs": 48.20000001788139
+        },
+        "after": {
+          "count": 272,
+          "meanMs": 29.519117646248024,
+          "p50Ms": 27.200000017881393,
+          "p95Ms": 40,
+          "p99Ms": 43.900000005960464,
+          "maxMs": 44.400000005960464
+        }
+      },
+      "gpu": {
+        "commonDurationMs": 5148.100000005958,
+        "before": {
+          "count": 120,
+          "meanMs": 25.61670474166667,
+          "p50Ms": 25.567519,
+          "p95Ms": 25.796872,
+          "p99Ms": 26.377491,
+          "maxMs": 26.547223
+        },
+        "after": {
+          "count": 105,
+          "meanMs": 26.16597755238095,
+          "p50Ms": 25.934239,
+          "p95Ms": 26.74304,
+          "p99Ms": 26.79296,
+          "maxMs": 26.85744
+        }
+      }
+    },
+    {
+      "window": 3,
+      "pose": "robson-drive",
+      "action": "still",
+      "hour": 14,
+      "cameraEquivalent": false,
+      "cpu": {
+        "commonDurationMs": 12062.700000017881,
+        "before": {
+          "count": 273,
+          "meanMs": 34.696336995769336,
+          "p50Ms": 31.099999994039536,
+          "p95Ms": 49.5,
+          "p99Ms": 59.599999994039536,
+          "maxMs": 137.69999998807907
+        },
+        "after": {
+          "count": 262,
+          "meanMs": 27.16374045781052,
+          "p50Ms": 25.099999994039536,
+          "p95Ms": 35.900000005960464,
+          "p99Ms": 38.19999998807907,
+          "maxMs": 40.30000001192093
+        }
+      },
+      "gpu": {
+        "commonDurationMs": 5598.299999994037,
+        "before": {
+          "count": 113,
+          "meanMs": 27.261497610619468,
+          "p50Ms": 26.6768,
+          "p95Ms": 27.60512,
+          "p99Ms": 27.731679,
+          "maxMs": 59.52896
+        },
+        "after": {
+          "count": 120,
+          "meanMs": 25.981436575,
+          "p50Ms": 25.738079,
+          "p95Ms": 26.620639,
+          "p99Ms": 26.68272,
+          "maxMs": 26.73184
+        }
+      }
+    },
+    {
+      "window": 4,
+      "pose": "robson-drive",
+      "action": "still",
+      "hour": 23,
+      "cameraEquivalent": false,
+      "cpu": {
+        "commonDurationMs": 12031.10000001191,
+        "before": {
+          "count": 275,
+          "meanMs": 31.72072727203369,
+          "p50Ms": 29.5,
+          "p95Ms": 46.19999998807907,
+          "p99Ms": 49.099999994039536,
+          "maxMs": 78.90000000596046
+        },
+        "after": {
+          "count": 265,
+          "meanMs": 28.83773584826937,
+          "p50Ms": 26.80000001192093,
+          "p95Ms": 38.5,
+          "p99Ms": 41.099999994039536,
+          "maxMs": 47.69999998807907
+        }
+      },
+      "gpu": {
+        "commonDurationMs": 5481.200000011915,
+        "before": {
+          "count": 120,
+          "meanMs": 28.8981425,
+          "p50Ms": 28.711565,
+          "p95Ms": 29.573602,
+          "p99Ms": 29.595945,
+          "maxMs": 29.729973
+        },
+        "after": {
+          "count": 116,
+          "meanMs": 27.904857439655174,
+          "p50Ms": 27.657759,
+          "p95Ms": 28.423999,
+          "p99Ms": 28.46224,
+          "maxMs": 28.53856
+        }
+      }
+    },
+    {
+      "window": 5,
+      "pose": "burrard-eye",
+      "action": "still",
+      "hour": 14,
+      "cameraEquivalent": true,
+      "cpu": {
+        "commonDurationMs": 12044.800000017887,
+        "before": {
+          "count": 292,
+          "meanMs": 30.18904109676815,
+          "p50Ms": 28,
+          "p95Ms": 43.19999998807907,
+          "p99Ms": 49.20000001788139,
+          "maxMs": 52.80000001192093
+        },
+        "after": {
+          "count": 281,
+          "meanMs": 23.707829182046165,
+          "p50Ms": 21.799999982118607,
+          "p95Ms": 33.599999994039536,
+          "p99Ms": 38.099999994039536,
+          "maxMs": 39.599999994039536
+        }
+      },
+      "gpu": {
+        "commonDurationMs": 4945.400000017893,
+        "before": {
+          "count": 120,
+          "meanMs": 25.729671383333333,
+          "p50Ms": 25.353094,
+          "p95Ms": 26.309278,
+          "p99Ms": 32.561125,
+          "maxMs": 32.891353
+        },
+        "after": {
+          "count": 109,
+          "meanMs": 25.80334119266055,
+          "p50Ms": 25.756479,
+          "p95Ms": 26.399039,
+          "p99Ms": 26.53552,
+          "maxMs": 26.567519
+        }
+      }
+    },
+    {
+      "window": 6,
+      "pose": "roadster-detail",
+      "action": "still",
+      "hour": 14,
+      "cameraEquivalent": true,
+      "cpu": {
+        "commonDurationMs": 12038.199999994045,
+        "before": {
+          "count": 234,
+          "meanMs": 33.68974358785866,
+          "p50Ms": 33.60000002384186,
+          "p95Ms": 35.19999998807907,
+          "p99Ms": 36,
+          "maxMs": 37.400000005960464
+        },
+        "after": {
+          "count": 219,
+          "meanMs": 31.366210045879836,
+          "p50Ms": 28.600000023841858,
+          "p95Ms": 38.69999998807907,
+          "p99Ms": 39.5,
+          "maxMs": 212.09999999403954
+        }
+      },
+      "gpu": {
+        "commonDurationMs": 6238.299999994051,
+        "before": {
+          "count": 120,
+          "meanMs": 31.666311508333333,
+          "p50Ms": 31.5456,
+          "p95Ms": 31.66208,
+          "p99Ms": 31.701759,
+          "maxMs": 68.325119
+        },
+        "after": {
+          "count": 109,
+          "meanMs": 31.5055107706422,
+          "p50Ms": 31.705927,
+          "p95Ms": 31.957433,
+          "p99Ms": 32.019035,
+          "maxMs": 34.876424
+        }
+      }
+    },
+    {
+      "window": 7,
+      "pose": "robson-drive",
+      "action": "travel",
+      "hour": 14,
+      "cameraEquivalent": false,
+      "cpu": {
+        "commonDurationMs": 12002.10000001191,
+        "before": {
+          "count": 266,
+          "meanMs": 34.360150375424475,
+          "p50Ms": 31.900000005960464,
+          "p95Ms": 48.099999994039536,
+          "p99Ms": 53.5,
+          "maxMs": 104.69999998807907
+        },
+        "after": {
+          "count": 245,
+          "meanMs": 29.9338775520422,
+          "p50Ms": 27.900000005960464,
+          "p95Ms": 39.60000002384186,
+          "p99Ms": 57.19999998807907,
+          "maxMs": 87.5
+        }
+      },
+      "gpu": {
+        "commonDurationMs": 5652.600000011909,
+        "before": {
+          "count": 120,
+          "meanMs": 28.731784674999997,
+          "p50Ms": 28.60144,
+          "p95Ms": 30.778404,
+          "p99Ms": 31.140044,
+          "maxMs": 31.406719
+        },
+        "after": {
+          "count": 111,
+          "meanMs": 28.831901234234234,
+          "p50Ms": 28.71076,
+          "p95Ms": 30.848555,
+          "p99Ms": 31.310457,
+          "maxMs": 31.867873
+        }
+      }
+    }
+  ],
+  "microbenchmark": {
+    "queryCount": 20000,
+    "uniqueQueries": 2000,
+    "trials": 7,
+    "sourceRoads": [
+      "ROBSON ST",
+      "BURRARD ST",
+      "GRANVILLE ST",
+      "WATER ST",
+      "DENMAN ST"
+    ],
+    "triangles": 6146,
+    "edgeCacheBytes": 147504,
+    "beforeMedianMs": 192.42257699999982,
+    "afterMedianMs": 55.74133699999993,
+    "reductionPercent": 71.0318103680734,
+    "beforeTrialsMs": [
+      182.38111099999992,
+      199.16148700000008,
+      205.04371300000003,
+      180.66668200000004,
+      174.35259799999994,
+      198.244557,
+      192.42257699999982
+    ],
+    "afterTrialsMs": [
+      55.74133699999993,
+      64.51499599999988,
+      54.274615999999924,
+      55.96785899999986,
+      55.15797600000042,
+      60.36818799999992,
+      54.08219000000008
+    ],
+    "exactResults": true,
+    "runtime": "Node 24.22.1, Darwin x64",
+    "runtimeCommit": "43559a91a55b08fc8bc21313ae8cf38dac18d8ea",
+    "method": "7 warmed alternating-order trials; exact per-query and checksum equality",
+    "isolation": "Root confirmed repository builds/tests and 3D tabs closed and idle before this run. No concurrent test or build was started by this agent.",
+    "scope": "CPU road-height query microbenchmark; not an end-to-end frame/FPS measurement",
+    "productionTrafficEdgeCacheBytes": 9037752,
+    "productionTrafficEdgeCacheMiB": 8.619071960449219,
+    "otherDefaultIndicesEdgeCacheBytes": 0
+  },
+  "productionBudget": {
+    "before": {
+      "revision": "28b3bb55af6f266b0b44e7b5c06a1d6d61c960c1",
+      "nodeVersion": "v24.22.1",
+      "compression": {
+        "method": "gzip per-file sum",
+        "level": 9,
+        "mtime": 0,
+        "excludedSuffixes": [
+          ".gz"
+        ]
+      },
+      "groups": {
+        "js": {
+          "files": 14,
+          "rawBytes": 6684587,
+          "gzipBytes": 2304398
+        },
+        "css": {
+          "files": 2,
+          "rawBytes": 292778,
+          "gzipBytes": 48577
+        },
+        "all": {
+          "files": 147,
+          "rawBytes": 64817111,
+          "gzipBytes": 29419645
+        }
+      },
+      "qaIsolation": {
+        "markers": [
+          "Pilot pose:",
+          "Pilot capture:",
+          "Pilot run: matched suite",
+          "Robson / Burrard — matched pilot",
+          "robson-burrard-pilot-v1",
+          "rawRafIntervalsMs"
+        ],
+        "matches": []
+      }
+    },
+    "after": {
+      "revision": "1e2ad6d1888313364e0f8d4c47aebdf7d2a955a4",
+      "nodeVersion": "v24.22.1",
+      "compression": {
+        "method": "gzip per-file sum",
+        "level": 9,
+        "mtime": 0,
+        "excludedSuffixes": [
+          ".gz"
+        ]
+      },
+      "groups": {
+        "js": {
+          "files": 14,
+          "rawBytes": 6715007,
+          "gzipBytes": 2314906
+        },
+        "css": {
+          "files": 2,
+          "rawBytes": 292778,
+          "gzipBytes": 48577
+        },
+        "all": {
+          "files": 147,
+          "rawBytes": 64847531,
+          "gzipBytes": 29430153
+        }
+      },
+      "qaIsolation": {
+        "markers": [
+          "Pilot pose:",
+          "Pilot capture:",
+          "Pilot run: matched suite",
+          "Robson / Burrard — matched pilot",
+          "robson-burrard-pilot-v1",
+          "rawRafIntervalsMs"
+        ],
+        "matches": []
+      },
+      "sourceChangesAtBuild": {},
+      "workingTreeDirtyAtMeasurement": false
+    }
+  },
+  "validation": {
+    "coreCI": {
+      "revision": "766fbbffe0f81ea43243177699b861e0ff162fec",
+      "url": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/40033399979",
+      "status": "passed",
+      "total": 2615,
+      "passed": 2614,
+      "failed": 0,
+      "skipped": 1
+    },
+    "finalDeliveryLiveGate": "https://github.com/YiTaChen/vancouver-living-atlas/pull/46/checks",
+    "typecheck": "passed",
+    "architectureValidation": "passed",
+    "productionBuild": "passed",
+    "manualCoverage": "Captured pilot poses and limited seaplane/helicopter/cockpit/Scout collision-loss UI checks; not blanket flight/rocket/transit/mobile gameplay acceptance",
+    "recorderVerification": {
+      "total": 14,
+      "passed": 14
+    }
+  },
+  "images": [
+    {
+      "file": "burrard-eye-before.png",
+      "caseWindow": 5,
+      "side": "before",
+      "sourceCapture": "pilot-burrard-eye-day-still-05.png",
+      "sha256": "4e93027b0173dc18477510d51f78eecde6f941171962d61b210e4dc58d176579",
+      "bytes": 1143695,
+      "retouched": false
+    },
+    {
+      "file": "burrard-eye-after.png",
+      "caseWindow": 5,
+      "side": "after",
+      "sourceCapture": "pilot-burrard-eye-day-still-05.png",
+      "sha256": "6021e9723a344063b4a116c400ff408896e176930c0870e1ff881f72b549563e",
+      "bytes": 1182983,
+      "retouched": false
+    },
+    {
+      "file": "roadster-detail-before.png",
+      "caseWindow": 6,
+      "side": "before",
+      "sourceCapture": "pilot-roadster-detail-day-still-06.png",
+      "sha256": "3c9fff0d49dc9d553949e0c04e1ccd7aef9b9651fe79f72c5335068a0613c4b7",
+      "bytes": 1337713,
+      "retouched": false
+    },
+    {
+      "file": "roadster-detail-after.png",
+      "caseWindow": 6,
+      "side": "after",
+      "sourceCapture": "pilot-roadster-detail-day-still-06.png",
+      "sha256": "7e49704cb8ce0c7d4a1927cebead922cd3d73774f57f8d26672430cfa84a9df6",
+      "bytes": 1354805,
+      "retouched": false
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "file": "pilot-formal-uninstrumented-summary.json",
+      "sha256": "3eb75097a929f17ae479b4ac7bd1afdf714aac5d0e176d9db0729e4d736fcf21"
+    },
+    {
+      "file": "pilot-order-repeat-summary.json",
+      "sha256": "d8439e02269be4b3c18acf70a87ee3f0316384e236fcbed5fd26070b54064b24"
+    },
+    {
+      "file": "pilot-formal-instrumented-summary.json",
+      "sha256": "ce70cc5b70d1966c6d75849b0090345d00d3b77fd3bbb619ad7521dec60159e4"
+    },
+    {
+      "file": "ground-surface-edge-cache-benchmark-final.json",
+      "sha256": "c59f2273d39ea313e6be6f9ef1014e545ed7bdadbd6edfe1ff09695717e5b5d7"
+    }
+  ],
+  "limitations": [
+    "Single Radeon Pro 560X / Chrome 155 desktop environment, not phone or cross-GPU proof.",
+    "Recorder-off corner FPS regressed about 7–9%; Burrard about 3%; lower diagnostic CPU does not establish faster end-to-end rendering.",
+    "Chase/travel composition intentionally differs; do not attribute those FPS deltas causally to optimization.",
+    "Camera-local scene lighting affects all visible geometry while active.",
+    "Facades/signs are representative decoration; no surveyed tenants, interiors or new portals.",
+    "Preliminary calibration/captures and cold startup are excluded; no full-city or long-session acceptance claim."
+  ]
+}

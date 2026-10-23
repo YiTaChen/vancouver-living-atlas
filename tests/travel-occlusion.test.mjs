@@ -894,7 +894,8 @@ test('production engine updates cutaway before render from the current transform
   avatar.position.set(2, 4, 3);
   const cutaway = new TravelOcclusion([root]);
   let expected = true,
-    draws = 0;
+    draws = 0,
+    lightingStages = 0;
   const engine = Object.assign(Object.create(EngineRender.prototype), {
     navigation: { walker: { group: avatar } },
     settings: { mode: 'walk', quality: 'balanced' },
@@ -903,6 +904,9 @@ test('production engine updates cutaway before render from the current transform
     occlusionSubject: new THREE.Vector3(),
     travelOcclusion: cutaway,
     landmarkDetails: [],
+    applyStreetPilotLighting() {
+      lightingStages++;
+    },
     updateShadowFrustum() {},
     sceneryPreparation: { pump() {} },
     compatibleGraphics: true,
@@ -911,6 +915,11 @@ test('production engine updates cutaway before render from the current transform
       info: { reset() {} },
       shadowMap: { enabled: false },
       render() {
+        assert.equal(
+          lightingStages,
+          draws + 1,
+          'lighting stage runs once before GPU submission',
+        );
         assert.equal(
           cutaway.snapshot().active,
           expected,
@@ -945,6 +954,7 @@ test('production engine updates cutaway before render from the current transform
   engine.settings.mode = 'walk';
   engine.renderScene();
   assert.equal(draws, 6);
+  assert.equal(lightingStages, draws);
   cutaway.dispose();
   dispose(root);
 });

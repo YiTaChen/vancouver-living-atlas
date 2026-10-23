@@ -7,6 +7,7 @@ import {
 } from '../rocket-state';
 import { RocketWreckageVisual } from './rocket-wreckage';
 import { rocketExhaustGeometry, rocketExhaustMaterial } from './rocket-exhaust';
+import { installVehicleSurface } from './vehicle-surface';
 import {
   addRocketDesign,
   createTitanStrapOns,
@@ -63,6 +64,13 @@ export function createRocketModel(kind: RocketKind) {
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -2,
   });
+  // Surface finishing never changes stage hierarchy, physical hulls, fire
+  // recolouring or exhaust. Its altitude fade restores the space-flight look.
+  installVehicleSurface(white, 'rocket-paint');
+  installVehicleSurface(orange, 'rocket-paint');
+  installVehicleSurface(black, 'rocket-black');
+  installVehicleSurface(glass, 'glazing');
+  installVehicleSurface(steel, 'rocket-metal');
   function part(
     geometry: THREE.BufferGeometry,
     material: THREE.Material,

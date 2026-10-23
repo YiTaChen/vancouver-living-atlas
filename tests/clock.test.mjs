@@ -7,6 +7,12 @@ import { cityModule } from './helpers/city-modules.mjs';
 const { installAtmosphereSky, sampleAtmosphere } = await import(
   cityModule('atmosphere')
 );
+const { streetPilotLightingWeight } = await import(
+  cityModule('street-pilot-lighting')
+);
+const { STREET_SHOWCASE_SEGMENTS, STREET_SHOWCASE_BOUNDS } = await import(
+  cityModule('street-quality-profile')
+);
 const source = readFileSync(
   new URL('../lib/city/clock.ts', import.meta.url),
   'utf8',
@@ -188,7 +194,13 @@ const ast = ts.createSourceFile(
 const engineClass = ast.statements.find(
   (n) => ts.isClassDeclaration(n) && n.name.text === 'CityEngine',
 );
-const selected = ['applySettings', 'setClock', 'tickClock', 'updateLighting'];
+const selected = [
+  'applySettings',
+  'setClock',
+  'tickClock',
+  'updateLighting',
+  'applyStreetPilotLighting',
+];
 const methods = engineClass.members
   .filter(
     (n) => ts.isMethodDeclaration(n) && selected.includes(n.name.getText(ast)),
@@ -198,7 +210,7 @@ assert.equal(methods.length, selected.length);
 const clockUrl =
   'data:text/javascript;base64,' + Buffer.from(code).toString('base64');
 const compiled = ts.transpileModule(
-  `import * as THREE from '${import.meta.resolve('three')}'; import {sunAngle} from '${clockUrl}'; import {sampleAtmosphere,applyAtmosphereSky} from '${cityModule('atmosphere')}'; export class EngineMethods {${methods.join('\n')}}`,
+  `import * as THREE from '${import.meta.resolve('three')}'; import {sunAngle} from '${clockUrl}'; import {sampleAtmosphere,applyAtmosphereSky} from '${cityModule('atmosphere')}'; import {streetPilotLightingWeight,streetPilotLightingMultipliers} from '${cityModule('street-pilot-lighting')}'; export class EngineMethods {${methods.join('\n')}}`,
   {
     compilerOptions: {
       module: ts.ModuleKind.ESNext,
@@ -247,10 +259,22 @@ function engineFixture() {
     navigation: { setMode: () => calls.mode++ },
     lastLightUpdate: 0,
     lastLightHour: -1,
+    pilotBaseLighting: sampleAtmosphere(10),
+    pilotLightingCheckedAt: -Infinity,
+    pilotLightingWeight: -1,
+    elevation: () => 8,
     lastShadowHour: -1,
     lastSolarShadowUpdate: 0,
   });
   installAtmosphereSky(e.sky);
+  e.camera.position.set(
+    STREET_SHOWCASE_BOUNDS.maxX + 1000,
+    8,
+    STREET_SHOWCASE_BOUNDS.maxZ + 1000,
+  );
+  e.controls.target
+    .copy(e.camera.position)
+    .add(new THREE.Vector3(200, 10, 300));
   e.clock.tick(0);
   return { e, calls };
 }
@@ -333,4 +357,170 @@ test('fix and manual seek commands publish immediately and do not affect traffic
   assert.equal(calls.resize, 0);
   e.tickClock(performance.now() + 60_000);
   near(e.clock.hour, 8.25);
+});
+
+const lightingScalars = (e) => ({
+  sunIntensity: e.sun.intensity,
+  ambientIntensity: e.ambient.intensity,
+  environmentIntensity: e.scene.environmentIntensity,
+  exposure: e.renderer.toneMappingExposure,
+});
+const baseScalars = (sample) =>
+  Object.fromEntries(
+    [
+      'sunIntensity',
+      'ambientIntensity',
+      'environmentIntensity',
+      'exposure',
+    ].map((key) => [key, sample[key]]),
+  );
+const pilotCentre = () => {
+  const { a, b } = STREET_SHOWCASE_SEGMENTS[0];
+  return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+};
+
+test('real engine restores exact baseline after a tiny pilot-boundary exit at fixed time without extra environment work', () => {
+  const { e, calls } = engineFixture();
+  const [x, z] = pilotCentre();
+  const base = sampleAtmosphere(14);
+  const target = { texture: new THREE.Texture() };
+  let environmentRequests = 0;
+  e.environmentCache = {
+    get: () => {
+      environmentRequests++;
+      return target;
+    },
+  };
+  e.clock.configure({ hour: 14, running: false }, 0);
+  e.updateLighting(true, 0);
+  assert.deepEqual(lightingScalars(e), baseScalars(base));
+  const cachedAtmosphere = e.pilotBaseLighting;
+  const skySunPosition = e.sky.material.uniforms.sunPosition.value.clone();
+  e.renderer.shadowMap.needsUpdate = false;
+
+  e.camera.position.set(x, e.elevation(x, z) + 2, z);
+  e.tickClock(100);
+  e.applyStreetPilotLighting(100);
+  assert.equal(e.pilotLightingWeight, 1);
+  assert(e.ambient.intensity < base.ambientIntensity);
+  assert(e.scene.environmentIntensity > base.environmentIntensity);
+  const inside = lightingScalars(e);
+  e.applyStreetPilotLighting(200);
+  assert.deepEqual(
+    lightingScalars(e),
+    inside,
+    'repeated checks never compound multipliers',
+  );
+
+  // Find a real point in the spatial fade whose positive weight is below the
+  // old equality tolerance; this must still restore exact baseline after exit.
+  let insideX = x,
+    outsideX = STREET_SHOWCASE_BOUNDS.maxX + 1;
+  for (let i = 0; i < 60; i++) {
+    const middle = (insideX + outsideX) / 2;
+    if (streetPilotLightingWeight(middle, 2, z) > 0.000005) insideX = middle;
+    else outsideX = middle;
+  }
+  e.camera.position.x = insideX;
+  e.applyStreetPilotLighting(300);
+  assert(e.pilotLightingWeight > 0 && e.pilotLightingWeight < 0.00001);
+  assert.notDeepEqual(lightingScalars(e), baseScalars(base));
+  e.camera.position.x = STREET_SHOWCASE_BOUNDS.maxX + 1;
+  e.applyStreetPilotLighting(400);
+  assert.equal(e.pilotLightingWeight, 0);
+  assert.deepEqual(lightingScalars(e), baseScalars(base));
+  assert.strictEqual(e.pilotBaseLighting, cachedAtmosphere);
+  assert.equal(e.clock.hour, 14);
+  assert.equal(environmentRequests, 1);
+  assert.strictEqual(e.scene.environment, target.texture);
+  assert(e.sky.material.uniforms.sunPosition.value.equals(skySunPosition));
+  assert.equal(e.renderer.shadowMap.needsUpdate, false);
+  assert.equal(calls.resize, 0);
+  assert.equal(calls.mode, 0);
+  target.texture.dispose();
+});
+
+test('real engine excludes interior, flight and transit views and measures pilot height relative to ground', () => {
+  const { e } = engineFixture();
+  const [x, z] = pilotCentre();
+  const base = sampleAtmosphere(14);
+  e.clock.configure({ hour: 14, running: false }, 0);
+  e.elevation = () => 140;
+  e.camera.position.set(x, 142, z);
+  e.updateLighting(true, 0);
+  assert.equal(
+    e.pilotLightingWeight,
+    1,
+    'a street at high world Y is still a low camera',
+  );
+  let time = 0;
+  for (const [name, enter, leave] of [
+    [
+      'public interior',
+      () => {
+        e.interiors = { height: () => 140 };
+      },
+      () => {
+        e.interiors = null;
+      },
+    ],
+    [
+      'flight',
+      () => {
+        e.settings.mode = 'flight';
+      },
+      () => {
+        e.settings.mode = 'walk';
+      },
+    ],
+    [
+      'bus',
+      () => {
+        e.busVisit = { aboard: true };
+      },
+      () => {
+        e.busVisit = null;
+      },
+    ],
+    [
+      'skytrain',
+      () => {
+        e.skyTrainTravel = { active: true };
+      },
+      () => {
+        e.skyTrainTravel = null;
+      },
+    ],
+    [
+      'separate cabin display',
+      () => {
+        e.cabinDisplayActive = true;
+      },
+      () => {
+        e.cabinDisplayActive = false;
+      },
+    ],
+  ]) {
+    enter();
+    e.applyStreetPilotLighting((time += 100));
+    assert.equal(
+      e.pilotLightingWeight,
+      0,
+      `${String(name)} excludes pilot lighting`,
+    );
+    assert.deepEqual(lightingScalars(e), baseScalars(base));
+    leave();
+    e.applyStreetPilotLighting((time += 100));
+    assert.equal(
+      e.pilotLightingWeight,
+      1,
+      `${String(name)} exit restores the street look`,
+    );
+    assert(e.ambient.intensity < base.ambientIntensity);
+  }
+  e.camera.position.y = 230;
+  e.applyStreetPilotLighting((time += 100));
+  assert.equal(e.pilotLightingWeight, 0);
+  assert.deepEqual(lightingScalars(e), baseScalars(base));
+  assert.equal(e.clock.hour, 14);
 });

@@ -3,6 +3,7 @@ import type { CityEngine } from '../engine';
 import type { RoadEdge, RoadGraph } from '../road-graph';
 import { GroundSurfaceIndex } from '../ground-surface';
 import { project } from '../geo';
+import { streetShowcaseWeight } from '../street-quality-profile';
 import { PathActor } from './actor-state';
 import { SimulationClock } from './simulation-clock';
 import {
@@ -18,6 +19,7 @@ import {
 } from './pedestrian-renderer';
 import {
   validatedSidewalkRoute,
+  validatedSidewalkRuns,
   sampleSidewalkRoute,
   sidewalkStationWindow,
   SIDEWALK_MAX_WINDOWS_PER_EDGE,
@@ -86,6 +88,38 @@ interface Walker {
 interface SourceWindow {
   edge: RoadEdge;
   window: SidewalkStationWindow;
+}
+
+/** A one-time, bounded presentation choice on an already-proven physical route.
+ * New identities may start near the camera only outside its visible frustum;
+ * existing routes/actors never move when the camera moves. */
+export function sidewalkBirthStation(
+  route: SidewalkRoute,
+  seed: number,
+  center: readonly [number, number, number],
+  visible: (position: readonly [number, number, number]) => boolean,
+  occupied: readonly (readonly [number, number, number])[] = [],
+) {
+  const half = route.lengthM / 2;
+  let best: number | null = null,
+    bestDistance = Infinity;
+  for (let i = 0; i < 16; i++) {
+    const station = half * ((i + 0.5) / 16 + (seed % 2));
+    const position = sampleSidewalkRoute(route, station).position;
+    const distance = Math.hypot(...position.map((n, axis) => n - center[axis]));
+    if (
+      distance < 6 ||
+      distance >= bestDistance ||
+      visible(position) ||
+      occupied.some(
+        (p) => Math.hypot(...position.map((n, axis) => n - p[axis])) < 2.4,
+      )
+    )
+      continue;
+    best = station;
+    bestDistance = distance;
+  }
+  return best;
 }
 function windowDistance2(window: SidewalkStationWindow, x: number, z: number) {
   const dx = window.b[0] - window.a[0],
@@ -179,6 +213,34 @@ export class CityPedestrians {
   setHidden(hidden: boolean) {
     this.clock.setHidden(hidden);
   }
+  private onScreen(position: readonly [number, number, number]) {
+    this.bounds.min.set(position[0] - 0.7, position[1], position[2] - 0.7);
+    this.bounds.max.set(
+      position[0] + 0.7,
+      position[1] + 2.3,
+      position[2] + 0.7,
+    );
+    return this.frustum.intersectsBox(this.bounds);
+  }
+  private makeRouteRoom() {
+    if (this.routes.size < 64) return true;
+    const active = new Set(this.selected.map((s) => s.actorId));
+    const stale = [...this.routes].find(
+      ([id, route]) =>
+        !active.has(`${id}:0`) &&
+        !active.has(`${id}:1`) &&
+        Math.hypot(
+          route.points[0][0] - this.center.x,
+          route.points[0][2] - this.center.z,
+        ) > 180,
+    );
+    if (!stale) return false;
+    this.routes.delete(stale[0]);
+    this.attempted.delete(stale[0].split(':span')[0]);
+    this.walkers.delete(`${stale[0]}:0`);
+    this.walkers.delete(`${stale[0]}:1`);
+    return true;
+  }
   private prepareNearby() {
     if (!this.trunks) {
       // DetailedTrees retains the actual world positions used by both city
@@ -233,70 +295,95 @@ export class CityPedestrians {
         a.edge.id - b.edge.id ||
         a.window.windowIndex - b.window.windowIndex,
     );
+    const showcase = streetShowcaseWeight(this.center.x, this.center.z) > 0.01;
     let probes = 0;
     for (const { edge, window } of windows)
       for (const side of [-1, 1] as const) {
         const key = `footway:${edge.id}:${side}:run${window.windowIndex}`;
         if (this.routes.has(key) || this.attempted.has(key) || probes >= 2)
           continue;
-        if (this.routes.size >= 64) {
-          const active = new Set(this.selected.map((s) => s.actorId));
-          const stale = [...this.routes].find(
-            ([id, route]) =>
-              !active.has(`${id}:0`) &&
-              !active.has(`${id}:1`) &&
-              Math.hypot(
-                route.points[0][0] - this.center.x,
-                route.points[0][2] - this.center.z,
-              ) > 180,
-          );
-          if (!stale) return;
-          this.routes.delete(stale[0]);
-          this.attempted.delete(stale[0]);
-          this.walkers.delete(`${stale[0]}:0`);
-          this.walkers.delete(`${stale[0]}:1`);
-        }
+        if (!this.makeRouteRoom()) return;
         probes++;
         const probe = (x: number, z: number) => {
-          if (!this.e.navigation?.clearGround(x, z, 'walk', true)) return undefined;
+          if (!this.e.navigation?.clearGround(x, z, 'walk', true))
+            return undefined;
           const y = this.floor!.sample(x, z, this.e.elevation(x, z) + 1.18);
           return y === undefined
             ? undefined
             : { y, surfaceId: 'ground', layer: 0 };
         };
-        let route: SidewalkRoute | null = null;
-        for (const offsetFromCurbM of [1, 0.55, 1.45]) {
-          route = validatedSidewalkRoute(this.graph, edge, side, probe, {
-            offsetFromCurbM,
-            windowIndex: window.windowIndex,
-            clearSegment: (a, b) => this.trunks!.clearSegment(a, b),
-          });
-          if (route) break;
+        const proofOptions = {
+          windowIndex: window.windowIndex,
+          clearSegment: (
+            a: readonly [number, number, number],
+            b: readonly [number, number, number],
+          ) => this.trunks!.clearSegment(a, b),
+        };
+        let proven: SidewalkRoute[] = [];
+        if (showcase)
+          proven = validatedSidewalkRuns(
+            this.graph,
+            edge,
+            side,
+            probe,
+            proofOptions,
+          );
+        else {
+          for (const offsetFromCurbM of [1, 0.55, 1.45]) {
+            const route = validatedSidewalkRoute(
+              this.graph,
+              edge,
+              side,
+              probe,
+              {
+                ...proofOptions,
+                offsetFromCurbM,
+              },
+            );
+            if (route) {
+              proven = [route];
+              break;
+            }
+          }
         }
-        this.attempted.set(key, !!route);
+        this.attempted.set(key, proven.length > 0);
         if (this.attempted.size > 256)
           this.attempted.delete(this.attempted.keys().next().value!);
-        if (!route) continue;
-        this.routes.set(key, route);
-        for (let seed = 0; seed < 2; seed++) {
-          // Spread the two identities along the physical footway (16% and 84%),
-          // rather than clustering both in its middle. They still need a verified
-          // offscreen birth; this does not create actors in front of the camera.
-          const station = route.lengthM * (seed ? 0.58 : 0.08);
-          const id = `${key}:${seed}`,
-            pose = sampleSidewalkRoute(route, station);
-          this.walkers.set(id, {
-            actor: new PathActor(id, route, station, seed * 0.4),
-            route,
-            seed: edge.id * 2 + window.windowIndex * 7 + seed,
-            previous: station,
-            current: station,
-            movementAt: this.clock.time,
-            interval: 0.05,
-            phase: seed * 0.4,
-            delta: 0,
-            yaw: pose.yawRadians,
-          });
+        for (const route of proven) {
+          if (this.routes.has(route.routeId)) continue;
+          if (!this.makeRouteRoom()) break;
+          this.routes.set(route.routeId, route);
+          const births: (readonly [number, number, number])[] = [];
+          for (let seed = 0; seed < 2; seed++) {
+            // Spread the two identities along the physical footway (16% and 84%),
+            // rather than clustering both in its middle. They still need a verified
+            // offscreen birth; this does not create actors in front of the camera.
+            const station =
+              (showcase
+                ? sidewalkBirthStation(
+                    route,
+                    seed,
+                    this.center.toArray() as [number, number, number],
+                    (position) => this.onScreen(position),
+                    births,
+                  )
+                : null) ?? route.lengthM * (seed ? 0.58 : 0.08);
+            const id = `${route.routeId}:${seed}`,
+              pose = sampleSidewalkRoute(route, station);
+            births.push(pose.position);
+            this.walkers.set(id, {
+              actor: new PathActor(id, route, station, seed * 0.4),
+              route,
+              seed: edge.id * 2 + window.windowIndex * 7 + seed,
+              previous: station,
+              current: station,
+              movementAt: this.clock.time,
+              interval: 0.05,
+              phase: seed * 0.4,
+              delta: 0,
+              yaw: pose.yawRadians,
+            });
+          }
         }
       }
   }
@@ -363,19 +450,8 @@ export class CityPedestrians {
         this.nearbyCandidates = 0;
         const candidates = [...this.walkers].map(([actorId, w]) => {
           const position = sampleSidewalkRoute(w.route, w.current).position;
-          this.bounds.min.set(
-            position[0] - 0.7,
-            position[1],
-            position[2] - 0.7,
-          );
-          this.bounds.max.set(
-            position[0] + 0.7,
-            position[1] + 2.3,
-            position[2] + 0.7,
-          );
           const spawnSafe =
-            previousIds.has(actorId) ||
-            !this.frustum.intersectsBox(this.bounds);
+            previousIds.has(actorId) || !this.onScreen(position);
           let near = Infinity;
           for (const c of centers)
             if (c.streetVisible && c.surfaceId === 'ground' && c.layer === 0)
@@ -481,7 +557,11 @@ export class CityPedestrians {
         phaseRadians: (w.phase + (w.delta * t) / 1.4) * Math.PI * 2,
         walkWeight: state.activity === 'walk' ? 1 : 0,
         variant: PEDESTRIAN_VARIANTS[w.seed % 4],
-        distanceM: this.center.distanceTo(new THREE.Vector3(...pose.position)),
+        distanceM: Math.hypot(
+          pose.position[0] - this.center.x,
+          pose.position[1] - this.center.y,
+          pose.position[2] - this.center.z,
+        ),
       });
     }
     this.rendered = poses.length;

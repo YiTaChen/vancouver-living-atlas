@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { installVehicleSurface } from '../assets/vehicle-surface';
 
 /** Based on Vancouver Living Atlas by YiTaChen.
  * Source: https://github.com/YiTaChen/vancouver-living-atlas
@@ -172,6 +173,9 @@ function clothingMaterial() {
     );
   };
   material.name = 'City life / shared original vertex colors';
+  // Source colours/rigid-limb deformation remain exact. Palette 1 skin, 4
+  // footwear and fabric gain distinct roughness only inside the pilot region.
+  installVehicleSurface(material, 'crowd');
   return material;
 }
 

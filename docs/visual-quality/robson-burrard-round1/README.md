@@ -1,5 +1,10 @@
 # Robson / Burrard visual pilot — round one
 
+**Results:** [Unretouched before/after images, seven recorder-off windows,
+reverse-order repeats, CPU/GPU diagnostics and limits](RESULTS.md).
+The fixed-camera corner runs lost approximately 7–9% FPS and Burrard about 3%;
+lower CPU query cost is not a general frame-rate improvement or whole-city rollout.
+
 This is a spatially limited pilot, not approval to restyle all Vancouver. The
 owner requested the pilot on 2026-10-23, with staged commits, pushes and merges
 to main. Evaluate its appearance, cost and regressions before expanding it.
@@ -44,3 +49,40 @@ not assertions about real tenants or newly traversable building entrances.
 Use shared geometry/materials, explicit local detail caps, cached selection and
 bounded work. Preserve third-party notices. No new remote telemetry or external
 asset service is part of this upgrade.
+
+## Implementation
+
+The appearance envelope follows the existing source arterial segments, with a
+32 m core and an 85 m smooth outer fade. It is not a rectangular city-wide theme.
+
+- `street-quality-profile.ts` shares the exact CPU/GLSL envelope and detail caps.
+- `robson-burrard-details.ts` fits representative ground-floor displays, frames,
+  plinths, canopy clearances and generic trade labels to unchanged footprint edges.
+  It uses five shared box pools and one sign pool, up to 100 visible bays / 1,800
+  boxes. These are appearance-only; picking, camera collision and travel
+  occlusion ignore them. Existing interior/public-landmark geometry is excluded.
+- `architecture-material.ts` strengthens the existing pane recesses and material
+  separation within the pilot, reusing the current metre-based facade layout.
+- `street-pilot-lighting.ts` redistributes cached atmosphere fill/reflection for
+  near-ground pilot cameras, restoring the original light on exit and excluding
+  public interiors, transit cabins and flight. These are scene-light scalars,
+  so all geometry visible from an active pilot camera shares that light.
+- Vehicle/crowd finishing reuses original geometry and animation. Aircraft carry
+  two normalized surface-role bytes per vertex; paint, glass, rubber, metal and
+  fabric retain distinct responses. The existing car shadow gets a local soft
+  edge without another draw, map or pass. Mobile surfaces restore their original
+  finish outside the pilot and fade back above 150–300 m world height.
+- The local driving chase is lower and closer; zoom/cockpit/collision thresholds
+  remain unchanged. Pedestrians recover only individually proven source sidewalk
+  intervals and keep the existing actor/route/work caps.
+
+Traffic simulation and night-light visitors still process every actor. Final
+render-camera frustum packing uses cached exact poses after every camera owner
+has updated, so turns and teleports cannot cull from an earlier camera. The
+asphalt ground index alone opts into exact cached edge tolerances: 9,037,752 bytes
+(8.62 MiB) on the full source road replay. Other floor/navigation indices allocate
+no such cache. Its query microbenchmark is separate from end-to-end frame time.
+
+Original asset provenance and archived offline fixtures remain immutable. The
+new material-consumer review receipt accepts only the explicitly reviewed source
+deltas before the original whole-file checks; mutated or duplicate deltas fail.

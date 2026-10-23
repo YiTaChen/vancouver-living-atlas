@@ -4,6 +4,8 @@
  */
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 import * as T from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -15,6 +17,20 @@ export const PACKAGE = new URL('../', import.meta.url);
 export const SOURCE_SHA256 = 'e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0';
 export const SUPPRESSED = ['dashboard', 'steering-rim', 'steering-spoke-horizontal', 'steering-spoke-lower', 'legacy-driver-torso', 'legacy-driver-head', 'legacy-driver-arm', 'driver-seat-cushion', 'driver-seat-back', 'driver-seat-headrest', 'driver-seat-bolster', 'driver-seat-seam'];
 export const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+/** This archived fit is tied to the recorded historical constructor. Read that
+ * exact Git object; a missing revision or a different source fails closed. The
+ * adapter audit separately compares its geometry with the live constructor. */
+export async function readPinnedSource() {
+    const { baseRevision } = JSON.parse(await fs.readFile(new URL('manifest.json', PACKAGE), 'utf8'));
+    if (!/^[0-9a-f]{40}$/.test(baseRevision))
+        throw Error('Roadster fit requires its recorded full Git revision');
+    const source = execFileSync('git', ['show', `${baseRevision}:lib/city/assets/roadster.ts`], {
+        cwd: fileURLToPath(ROOT), encoding: 'utf8', maxBuffer: 1024 * 1024,
+    });
+    if (sha(source) !== SOURCE_SHA256)
+        throw Error('Unreviewed historical Roadster source SHA-256');
+    return source;
+}
 function replace(s, a, b, n = 1) { if (s.split(a).length - 1 !== n)
     throw Error(`Reviewed callsite drift: ${a}`); return s.split(a).join(b); }
 export function patchSource(source, { suppress = false, materialCandidate = false } = {}) {
@@ -63,7 +79,7 @@ export function patchSource(source, { suppress = false, materialCandidate = fals
     return s;
 }
 export async function makeSource({ suppress = false, materialCandidate = false } = {}) {
-    const source = await fs.readFile(new URL('lib/city/assets/roadster.ts', ROOT), 'utf8');
+    const source = await readPinnedSource();
     let code = ts.transpileModule(patchSource(source, { suppress, materialCandidate }), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
     code = code.replace(/from ['"]([^'"]+)['"]/g, (_, id) => `from '${id.startsWith('file:') ? id : import.meta.resolve(id)}'`);
     return (await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'))).makeRoadster();

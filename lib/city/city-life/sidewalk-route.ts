@@ -107,6 +107,8 @@ export interface SidewalkRouteOptions {
   offsetFromCurbM?: number;
   /** Fixed source station window; never a camera-relative moving route. */
   windowIndex?: number;
+  /** Optional fixed 20m proof fragment within the same source window. */
+  fragmentIndex?: number;
   clearSegment?: (a: Point3, b: Point3) => boolean;
 }
 
@@ -202,8 +204,16 @@ export function validatedSidewalkRoute(
   const dx = b.point[0] - a.point[0],
     dz = b.point[1] - a.point[1];
   const length = Math.hypot(dx, dz);
-  const start = window.startM,
-    end = window.endM;
+  const fragment = options.fragmentIndex;
+  if (
+    fragment !== undefined &&
+    (!Number.isInteger(fragment) || fragment < 0 || fragment >= 4)
+  )
+    return null;
+  const start = window.startM + (fragment ?? 0) * 20,
+    end =
+      fragment === undefined ? window.endM : Math.min(window.endM, start + 20);
+  if (end - start < 8) return null;
   const offsetFromCurbM = options.offsetFromCurbM ?? 1;
   if (
     !Number.isFinite(offsetFromCurbM) ||
@@ -263,7 +273,11 @@ export function validatedSidewalkRoute(
     points.push(point);
   }
   return {
-    routeId: `footway:${edge.id}:${side}:run${windowIndex}`,
+    routeId:
+      `footway:${edge.id}:${side}:run${windowIndex}` +
+      (fragment === undefined
+        ? ''
+        : `:span${Math.round(start * 100)}-${Math.round(end * 100)}`),
     surfaceId: 'ground',
     layer: 0,
     validated: true,
@@ -276,6 +290,60 @@ export function validatedSidewalkRoute(
     points,
     cumulative,
   };
+}
+
+/** Keep proven portions of a pilot sidewalk when a tree or clipped gap blocks
+ * another portion of its 80m source window. Four fixed fragments bound work;
+ * each uses the unchanged full body-width floor, grade and trunk proof above.
+ * Adjacent runs merge only when their proven offset and endpoint agree. */
+export function validatedSidewalkRuns(
+  graph: RoadGraph,
+  edge: RoadEdge,
+  side: -1 | 1,
+  probe: FloorProbe,
+  options: Pick<SidewalkRouteOptions, 'windowIndex' | 'clearSegment'> = {},
+): SidewalkRoute[] {
+  const runs: SidewalkRoute[] = [];
+  const window = sidewalkStationWindow(graph, edge, options.windowIndex ?? 0);
+  if (!window) return runs;
+  for (let fragmentIndex = 0; fragmentIndex < 4; fragmentIndex++) {
+    let route: SidewalkRoute | null = null;
+    for (const offsetFromCurbM of [1, 0.55, 1.45]) {
+      route = validatedSidewalkRoute(graph, edge, side, probe, {
+        ...options,
+        fragmentIndex,
+        offsetFromCurbM,
+      });
+      if (route) break;
+    }
+    if (!route) continue;
+    const previous = runs.at(-1);
+    const endpoint = previous?.points.at(-1);
+    const contiguous =
+      previous &&
+      endpoint &&
+      previous.offsetFromCurbM === route.offsetFromCurbM &&
+      Math.abs(previous.sourceEndM - route.sourceStartM) < 1e-6 &&
+      Math.hypot(...endpoint.map((n, i) => n - route!.points[0][i])) < 1e-6;
+    if (contiguous) {
+      const startLength = previous.cumulative.at(-1)!;
+      previous.points.push(...route.points.slice(1));
+      previous.cumulative.push(
+        ...route.cumulative.slice(1).map((n) => n + startLength),
+      );
+      previous.sourceEndM = route.sourceEndM;
+      previous.lengthM = previous.cumulative.at(-1)! * 2;
+    } else runs.push(route);
+  }
+  for (const route of runs) {
+    const base = `footway:${edge.id}:${side}:run${options.windowIndex ?? 0}`;
+    route.routeId =
+      Math.abs(route.sourceStartM - window.startM) < 1e-6 &&
+      Math.abs(route.sourceEndM - window.endM) < 1e-6
+        ? base
+        : `${base}:span${Math.round(route.sourceStartM * 100)}-${Math.round(route.sourceEndM * 100)}`;
+  }
+  return runs;
 }
 
 export function sampleSidewalkRoute(route: SidewalkRoute, stationM: number) {
