@@ -6,6 +6,7 @@ import {
   type RocketState,
 } from '../rocket-state';
 import { RocketWreckageVisual } from './rocket-wreckage';
+import { rocketExhaustGeometry, rocketExhaustMaterial } from './rocket-exhaust';
 import {
   addRocketDesign,
   createTitanStrapOns,
@@ -209,33 +210,45 @@ export function createRocketModel(kind: RocketKind) {
   separationFlash.position.y = h * 0.46;
   separationFlash.visible = false;
   group.add(separationFlash);
-  const flameMat = new THREE.MeshBasicMaterial({
-    color: 0xffc865,
-    transparent: true,
-    opacity: 0.88,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-  });
+  const flameMat = titan
+    ? rocketExhaustMaterial()
+    : new THREE.MeshBasicMaterial({
+        color: 0xffc865,
+        transparent: true,
+        opacity: 0.88,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      });
+  const jetMaterial = flameMat,
+    jetCoreMaterial = titan ? rocketExhaustMaterial(true) : null,
+    mainJetLength = h * (titan ? 0.7 : 0.65),
+    strapJetLength = h * 0.5;
   const flame = new THREE.Mesh(
-    new THREE.ConeGeometry(r * 0.85, h * 0.65, 20, 1, true),
-    flameMat,
+    titan
+      ? rocketExhaustGeometry(r * 0.85, mainJetLength)
+      : new THREE.ConeGeometry(r * 0.85, mainJetLength, 20, 1, true),
+    jetMaterial,
   );
   flame.rotation.z = Math.PI;
   flame.position.y = -h * 0.3;
   flame.visible = false;
   group.add(flame);
   const core = new THREE.Mesh(
-    new THREE.ConeGeometry(r * 0.4, h * 0.38, 16),
-    new THREE.MeshBasicMaterial({
-      color: 0xd6edff,
-      transparent: true,
-      opacity: 0.9,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    }),
+    titan
+      ? rocketExhaustGeometry(r * 0.4, mainJetLength * 0.72, true)
+      : new THREE.ConeGeometry(r * 0.4, h * 0.38, 16),
+    jetCoreMaterial ??
+      new THREE.MeshBasicMaterial({
+        color: 0xd6edff,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      }),
   );
   flame.add(core);
-  core.position.y = -h * 0.11;
+  core.position.y = titan ? -mainJetLength * 0.14 : -h * 0.11;
+  flame.frustumCulled = core.frustumCulled = false;
   const sidePlumes: THREE.Mesh[] = [];
   if (large)
     for (const side of [-1, 1]) {
@@ -252,19 +265,20 @@ export function createRocketModel(kind: RocketKind) {
     }
   const strapPlumes = strapOns.map((booster, i) => {
     const plume = new THREE.Mesh(
-      new THREE.ConeGeometry(r * 0.36, h * 0.32, 20, 1, true),
-      flameMat,
+      rocketExhaustGeometry(r * 0.36, strapJetLength),
+      jetMaterial,
     );
     plume.name = `Titan external booster exhaust ${i + 1}`;
     plume.rotation.z = Math.PI;
     plume.position.y = -h * 0.155;
     plume.visible = false;
     const brightCore = new THREE.Mesh(
-      new THREE.ConeGeometry(r * 0.18, h * 0.25, 14),
+      rocketExhaustGeometry(r * 0.18, strapJetLength * 0.72, true),
       core.material,
     );
     brightCore.name = 'Titan external exhaust bright core';
-    brightCore.position.y = -h * 0.025;
+    brightCore.position.y = -strapJetLength * 0.14;
+    plume.frustumCulled = brightCore.frustumCulled = false;
     plume.add(brightCore);
     booster.add(plume);
     return plume;
@@ -495,6 +509,7 @@ export function createRocketModel(kind: RocketKind) {
       const nozzle = state.boosterAttached ? 0 : h * 0.418;
       flame.position.y = nozzle - h * (state.boosterAttached ? 0.3 : 0.16);
       flame.userData.upper = !state.boosterAttached;
+      flame.userData.nozzle = nozzle;
       light.position.y = nozzle + 1;
       if (!separation) return;
       const t = Math.max(0, state.elapsed - separation.time);
@@ -546,6 +561,10 @@ export function createRocketModel(kind: RocketKind) {
       booster.quaternion.copy(inverse).multiply(detachedQ);
     },
     fire(power: number, time: number) {
+      if (titan) {
+        (jetMaterial as THREE.ShaderMaterial).uniforms.uTime.value = time;
+        jetCoreMaterial!.uniforms.uTime.value = time;
+      }
       const coreFraction = config.strapOns
         ? config.stages.boost.maxThrust /
           (config.stages.boost.maxThrust + config.strapOns.maxThrust)
@@ -559,6 +578,7 @@ export function createRocketModel(kind: RocketKind) {
         plume.visible =
           strapsAttached && activeStage === 'strap-on' && power > 0.01;
         plume.scale.y = power * (1 + 0.07 * Math.sin(time * 41 + i * 1.7));
+        plume.position.y = h * 0.005 - strapJetLength * 0.5 * plume.scale.y;
       });
       sidePlumes.forEach((plume, i) => {
         plume.visible = power > 0.01 && !flame.userData.upper;
@@ -571,6 +591,11 @@ export function createRocketModel(kind: RocketKind) {
           (1 + 0.08 * Math.sin(time * 53)),
         1,
       );
+      if (titan)
+        flame.position.y =
+          (flame.userData.nozzle ?? 0) +
+          h * 0.005 -
+          mainJetLength * 0.5 * flame.scale.y;
       light.intensity = power * (titan ? 350 : large ? 180 : 65);
     },
   };

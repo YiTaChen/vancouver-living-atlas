@@ -2,7 +2,9 @@
 
 研究日期：2026-10-22。以下以 NASA、ESA 與遊戲開發者提供的資料為參考；參考現象與本遊戲規則分開，所有海陸、月面和星空素材均由程式產生，沒有下載或重製外部圖片。
 
-本輪修訂 Titan：更明亮的銀色箭體、清楚的黑色隔熱面與銀框翼片，新增四枚外掛助推器，與中央核心同時點火。外掛先燃盡、向外分離，核心持續推進，再進行核心與上面級分離；地面五股噴流會撞擊當地表面並向外攤開。[城市驗收 18／18](rocket-launch-game/titan-four-runtime-report.json)、[模型展示 4／4](rocket-launch-game/titan-four-model-report.json)與[完整回歸 2,016／2,016](rocket-launch-game/titan-four-test-summary.json)通過；完整套件包含 121 項火箭測試及其中 19 項 UI 測試，TypeScript、lint／格式檢查與 `build:firebase` 通過，沒有部署。完整流程與本輪獨立報告見 [Titan 四助推器修訂](rocket-launch-game/TITAN_FOUR_BOOSTERS.md)，未沿用舊版通過數字。
+本輪市區路口修正：實際建築撞點會先收到損壞，放置高度對齊道路，建築坍塌後的任務碰撞高度同步降低；初始低速重疊使用有限時間的擠壓反應，完整障礙物與高速撞擊仍會墜毀。Titan 使用五股體積噴流、近地火舌與卷塵，並保留建造、倒數和原有分級節奏。[本輪實作、驗收與效能上限](rocket-launch-game/INTERSECTION_CONTACTS.md)：11 次城市升空、54 項條件及 2,036／2,036 完整測試通過。
+
+前一輪修訂 Titan：更明亮的銀色箭體、清楚的黑色隔熱面與銀框翼片，新增四枚外掛助推器，與中央核心同時點火。外掛先燃盡、向外分離，核心持續推進，再進行核心與上面級分離；地面五股噴流會撞擊當地表面並向外攤開。[城市驗收 18／18](rocket-launch-game/titan-four-runtime-report.json)、[模型展示 4／4](rocket-launch-game/titan-four-model-report.json)與[完整回歸 2,016／2,016](rocket-launch-game/titan-four-test-summary.json)通過；完整套件包含 121 項火箭測試及其中 19 項 UI 測試，TypeScript、lint／格式檢查與 `build:firebase` 通過，沒有部署。完整流程與本輪獨立報告見 [Titan 四助推器修訂](rocket-launch-game/TITAN_FOUR_BOOSTERS.md)，未沿用舊版通過數字。
 
 先前三型首次加入時，完整回歸 **2,001／2,001 通過**，其中包含 **106 項火箭測試**及其中的 **17 項 UI 測試**，不另外加總；當時 TypeScript 與 `build:firebase` 通過，實際城市固定步進驗收 **12／12**、獨立模型展示 **4／4**。[Titan 舊版驗收與原始報告](rocket-launch-game/SUPER_HEAVY.md)保留方法與限制，先前環境、事故及 1,982 項回歸也按版本保留。
 

@@ -1025,3 +1025,545 @@ test('tilted Titan exhaust anchors to the surface at its displaced ground contac
     effects.dispose();
   }
 });
+
+function buildingContact(source = 'building') {
+  return {
+    source,
+    point: { x: 3, y: 5, z: 1 },
+    from: { x: 0, y: 5, z: 1 },
+    to: { x: 4, y: 5, z: 1 },
+    radius: 2,
+    speed: 0,
+    mass: 1886000,
+    initialOverlap: true,
+    bounds: { minX: 3, maxX: 7, minY: 0, maxY: 10, minZ: 0, maxZ: 2 },
+    polygon: [
+      [
+        [3, 0],
+        [7, 0],
+        [7, 2],
+        [3, 2],
+      ],
+    ],
+  };
+}
+
+test('an unspooled city contact deforms its actual building by over 20cm and emits bounded contact fragments', () => {
+  const { engine, state, mesh } = fixture(2, 'super-heavy');
+  state.throttle = 0;
+  const position = mesh.geometry.getAttribute('position'),
+    original = Array.from(position.array),
+    effects = new RocketEffects(engine, state);
+  try {
+    effects.receiveCollision(buildingContact(), state, 1 / 60);
+    effects.update(1 / 60, state);
+    effects.beforeRender();
+    effects.afterRender();
+    assert.equal(
+      effects.damaged,
+      1,
+      'the contacted span is damaged even before exhaust spool-up',
+    );
+    assert(
+      original[7] - position.getY(2) > 0.2,
+      'the visible roof has a measurable first-contact response',
+    );
+    assert.deepEqual(
+      Array.from(position.array).slice(18),
+      original.slice(18),
+      'the distant building is untouched',
+    );
+    assert(effects.fragments.length >= 4);
+    assert(
+      effects.fragments.some(
+        (fragment) => fragment.p.distanceTo(new THREE.Vector3(3, 5, 1)) < 6,
+      ),
+      'fragments start at the contact, not a distant roof centre',
+    );
+    for (let i = 0; i < 180; i++) {
+      effects.receiveCollision(buildingContact(), state, 1 / 60);
+      effects.update(1 / 60, state);
+    }
+    assert(effects.fragments.length <= 96);
+    assert(
+      effects.supportCollisionHeight(5, 1, state) < 5,
+      'the mission collider can follow the real settling building',
+    );
+    effects.reset();
+    assert.deepEqual(Array.from(position.array), original);
+    assert.equal(effects.contacts.size, 0);
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('visible facade pages follow building damage and char glass only through reversible mission materials', () => {
+  const { engine, state, mesh } = fixture(1, 'super-heavy');
+  engine.buildings = new THREE.Group();
+  engine.scene.add(engine.buildings);
+  engine.buildings.add(mesh);
+  state.throttle = 0;
+  let compilations = 0,
+    sourceDisposals = 0;
+  const geometry = new THREE.BoxGeometry(1, 8, 0.5).translate(4, 5, 1),
+    source = Array.from(geometry.getAttribute('position').array),
+    material = new THREE.MeshStandardMaterial({
+      emissive: 0xffffff,
+      emissiveIntensity: 1,
+    }),
+    page = new THREE.Mesh(geometry, material);
+  material.onBeforeCompile = (shader) => {
+    compilations++;
+    shader.fragmentShader += '\n// original facade glass and night shader';
+  };
+  geometry.addEventListener('dispose', () => sourceDisposals++);
+  engine.buildings.add(page);
+  const effects = new RocketEffects(engine, state);
+  try {
+    effects.receiveCollision(buildingContact(), state, 1 / 60);
+    effects.update(1 / 60, state);
+    effects.beforeRender();
+    const ownedGeometry = page.geometry,
+      ownedMaterial = page.material;
+    assert.notEqual(ownedGeometry, geometry);
+    assert.notEqual(ownedMaterial, material);
+    assert(
+      ownedGeometry.getAttribute('aRocketDamage').array.some((n) => n > 0.3),
+    );
+    assert.notDeepEqual(
+      Array.from(ownedGeometry.getAttribute('position').array),
+      source,
+    );
+    assert.deepEqual(
+      Array.from(geometry.getAttribute('position').array),
+      source,
+      'the facade queue retains its exact source vertices',
+    );
+    const shader = {
+      vertexShader: '#include <begin_vertex>',
+      fragmentShader: '#include <opaque_fragment>',
+    };
+    ownedMaterial.onBeforeCompile(shader, {});
+    assert.equal(compilations, 1);
+    assert(shader.fragmentShader.includes('vRocketDamage'));
+    assert(
+      shader.fragmentShader.indexOf('gl_FragColor.rgb*=') >
+        shader.fragmentShader.indexOf('#include <opaque_fragment>'),
+      'scorch applies after glass and night-light output',
+    );
+    assert.equal(
+      material.emissiveIntensity,
+      1,
+      'the ordinary city material is unchanged',
+    );
+    effects.afterRender();
+    assert.equal(page.geometry, geometry);
+    assert.equal(page.material, material);
+    effects.beforeRender();
+    assert.equal(
+      page.geometry,
+      ownedGeometry,
+      'the detail geometry is cached instead of cloned each frame',
+    );
+    effects.afterRender();
+    let ownedDisposed = 0;
+    ownedGeometry.addEventListener('dispose', () => ownedDisposed++);
+    engine.buildings.remove(page);
+    effects.beforeRender();
+    effects.afterRender();
+    assert.equal(
+      ownedDisposed,
+      1,
+      'a retired LOD page releases only the mission copy',
+    );
+    effects.reset();
+    assert.equal(sourceDisposals, 0);
+    assert.deepEqual(
+      Array.from(geometry.getAttribute('position').array),
+      source,
+    );
+    assert.equal(mesh.material.vertexColors, true);
+    assert.equal(mesh.geometry.getAttribute('aRocketDamage'), undefined);
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('landmark instance contacts deform the visible instance while restoring shared geometry and the newest owner matrices', () => {
+  const { engine, state } = fixture(0, 'super-heavy');
+  engine.landmarks = new THREE.Group();
+  engine.scene.add(engine.landmarks);
+  const geometry = new THREE.BoxGeometry(4, 10, 2),
+    material = new THREE.MeshStandardMaterial(),
+    mesh = new THREE.InstancedMesh(geometry, material, 2),
+    first = new THREE.Matrix4().makeTranslation(5, 5, 1),
+    second = new THREE.Matrix4().makeTranslation(100, 5, 1);
+  mesh.setMatrixAt(0, first);
+  mesh.setMatrixAt(1, second);
+  engine.landmarks.add(mesh);
+  state.throttle = 0;
+  const effects = new RocketEffects(engine, state);
+  try {
+    effects.receiveCollision(buildingContact('landmark'), state, 1 / 60);
+    effects.update(1 / 60, state);
+    const newest = new THREE.Matrix4().makeTranslation(5, 5.1, 1);
+    mesh.setMatrixAt(0, newest);
+    mesh.getMatrixAt(0, newest);
+    effects.beforeRender();
+    const actual = new THREE.Matrix4();
+    mesh.getMatrixAt(0, actual);
+    assert.notDeepEqual(actual.elements, newest.elements);
+    assert(
+      mesh.geometry.getAttribute('aRocketDamage') instanceof
+        THREE.InstancedBufferAttribute,
+    );
+    assert(mesh.geometry.getAttribute('aRocketDamage').getX(0) > 0.3);
+    assert.equal(mesh.geometry.getAttribute('aRocketDamage').getX(1), 0);
+    mesh.getMatrixAt(1, actual);
+    assert.deepEqual(actual.elements, second.elements);
+    effects.afterRender();
+    mesh.getMatrixAt(0, actual);
+    assert.deepEqual(actual.elements, newest.elements);
+    assert.equal(mesh.geometry, geometry);
+    assert.equal(mesh.material, material);
+    effects.reset();
+    assert.equal(geometry.getAttribute('aRocketDamage'), undefined);
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('building detail damage has fixed mesh and vertex budgets without disposing source-owned pages', () => {
+  const { engine, state, mesh } = fixture(1, 'super-heavy');
+  engine.buildings = new THREE.Group();
+  engine.scene.add(engine.buildings);
+  engine.buildings.add(mesh);
+  let sourceDisposals = 0;
+  const pages = [];
+  for (let i = 0; i < 40; i++) {
+    const geometry = new THREE.BoxGeometry(0.1, 8, 0.1).translate(
+        4 + i * 0.02,
+        5,
+        1,
+      ),
+      material = new THREE.MeshBasicMaterial(),
+      page = new THREE.Mesh(geometry, material);
+    geometry.addEventListener('dispose', () => sourceDisposals++);
+    pages.push({ page, geometry, material });
+    engine.buildings.add(page);
+  }
+  const effects = new RocketEffects(engine, state);
+  try {
+    effects.receiveCollision(buildingContact(), state, 1 / 60);
+    effects.update(1 / 60, state);
+    effects.beforeRender();
+    assert(effects.buildingSurfaces.size <= 32);
+    assert(effects.surfaceVertices <= 240000);
+    effects.afterRender();
+    effects.reset();
+    assert.equal(effects.buildingSurfaces.size, 0);
+    assert.equal(effects.buildingMaterials.size, 0);
+    assert.equal(sourceDisposals, 0);
+    for (const source of pages) {
+      assert.equal(source.page.geometry, source.geometry);
+      assert.equal(source.page.material, source.material);
+    }
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('near-ground Titan exhaust creates rolling dust in the existing pool instead of white hot sparkles', () => {
+  const { engine, state } = fixture(0, 'super-heavy');
+  const effects = new RocketEffects(engine, state);
+  try {
+    heat(effects, state, 1);
+    const dust = effects.particles.filter(
+      (particle) => particle.age < particle.life && particle.dust,
+    );
+    assert(dust.length > 10);
+    assert(dust.every((particle) => !particle.hot && particle.life >= 3.5));
+    assert(
+      dust.some((particle) => Math.hypot(particle.v.x, particle.v.z) > 25),
+    );
+    assert(
+      effects.alphas.some((alpha) => alpha < -2),
+      'the existing draw receives the separate large dust-puff category',
+    );
+    assert.equal(effects.particles.length, 360);
+    const outwash = effects.group.getObjectByName(
+      'Titan five-jet ground flame outwash',
+    );
+    assert.equal(outwash.count, 40);
+    assert.equal(outwash.material.forceSinglePass, true);
+    effects.reset();
+    assert(effects.alphas.every((alpha) => alpha === 0));
+    assert.equal(outwash.count, 0);
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('ground impingement rests above the rendered road surface rather than below the asphalt', () => {
+  const { engine, state } = fixture(0, 'super-heavy');
+  engine.elevation = () => 40.28;
+  engine.data.roadSurface = { sample: () => 41.748 };
+  state.position.y = 42.198;
+  state.support.groundY = 41.748;
+  const effects = new RocketEffects(engine, state);
+  try {
+    effects.update(0.1, state);
+    assert(Math.abs(effects.groundContacts[0].y - 42.198) < 1e-6);
+    assert(effects.groundContacts.every((contact) => contact.y > 41.748));
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('a real contacted span outside the nearest-building budget replaces an untouched candidate', () => {
+  const { engine, state, mesh } = fixture(100, 'super-heavy');
+  state.throttle = 0;
+  const original = Array.from(mesh.geometry.getAttribute('position').array),
+    effects = new RocketEffects(engine, state),
+    contact = buildingContact();
+  contact.point.x = 201;
+  contact.bounds.minX = 201;
+  contact.bounds.maxX = 205;
+  contact.polygon = [
+    [
+      [201, 0],
+      [205, 0],
+      [205, 2],
+      [201, 2],
+    ],
+  ];
+  try {
+    assert.equal(effects.parts.length, 96);
+    assert(!effects.parts.some((part) => part.part.key === '99'));
+    effects.receiveCollision(contact, state, 1 / 60);
+    effects.update(1 / 60, state);
+    effects.beforeRender();
+    effects.afterRender();
+    assert.equal(effects.parts.length, 96);
+    assert(
+      effects.parts.some((part) => part.part.key === '99' && part.contact),
+    );
+    assert.notDeepEqual(
+      Array.from(mesh.geometry.getAttribute('position').array).slice(99 * 18),
+      original.slice(99 * 18),
+    );
+    effects.reset();
+    assert.deepEqual(
+      Array.from(mesh.geometry.getAttribute('position').array),
+      original,
+    );
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('world-space contact priority evicts an unselected facade cache instead of skipping the newly hit page', () => {
+  const { engine, state, mesh } = fixture(2, 'super-heavy', [5, 180]);
+  engine.buildings = new THREE.Group();
+  engine.scene.add(engine.buildings);
+  engine.buildings.add(mesh);
+  const pages = [];
+  for (let i = 0; i < 31; i++) {
+    const page = new THREE.Mesh(
+      new THREE.BoxGeometry(0.1, 8, 0.1).translate(179 + i * 0.02, 5, 1),
+      new THREE.MeshBasicMaterial(),
+    );
+    pages.push(page);
+    engine.buildings.add(page);
+  }
+  const effects = new RocketEffects(engine, state);
+  try {
+    effects.parts[1].exposure = 0.6;
+    effects.parts[1].collapse = 0.2;
+    effects.beforeRender();
+    effects.afterRender();
+    assert.equal(effects.buildingSurfaces.size, 32);
+    const priorCopies = [...effects.buildingSurfaces.values()].filter(
+      (surface) => surface.mesh !== mesh,
+    );
+    let retiredCopies = 0;
+    for (const surface of priorCopies)
+      surface.geometry.addEventListener('dispose', () => retiredCopies++);
+    const geometry = new THREE.BoxGeometry(1, 8, 0.5).translate(4, 5, 1),
+      page = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial());
+    engine.buildings.add(page);
+    effects.receiveCollision(buildingContact(), state, 1 / 60);
+    effects.beforeRender();
+    assert.notEqual(
+      page.geometry,
+      geometry,
+      'world-coordinate page vertices take priority even though every page.position is zero',
+    );
+    assert(
+      page.geometry.getAttribute('aRocketDamage').array.some((n) => n > 0),
+    );
+    assert.equal(effects.buildingSurfaces.size, 32);
+    assert.equal(
+      retiredCopies,
+      1,
+      'one less relevant cached page is retired to admit the real contact',
+    );
+    effects.afterRender();
+    effects.reset();
+    assert.equal(page.geometry, geometry);
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('instanced damage bounds both individual capacity and aggregate attribute allocation to 4096', () => {
+  const { engine, state } = fixture(0, 'super-heavy');
+  engine.landmarks = new THREE.Group();
+  engine.scene.add(engine.landmarks);
+  const meshes = [4097, 2500, 2500].map((capacity) => {
+    const mesh = new THREE.InstancedMesh(
+      new THREE.BoxGeometry(1, 8, 1),
+      new THREE.MeshStandardMaterial(),
+      capacity,
+    );
+    mesh.setMatrixAt(0, new THREE.Matrix4().makeTranslation(5, 5, 1));
+    engine.landmarks.add(mesh);
+    return mesh;
+  });
+  const effects = new RocketEffects(engine, state);
+  try {
+    effects.receiveCollision(buildingContact('landmark'), state, 1 / 60);
+    effects.beforeRender();
+    assert.equal(
+      meshes[0].geometry.getAttribute('aRocketDamage'),
+      undefined,
+      'oversized source groups retain their ordinary renderer',
+    );
+    assert.equal(effects.surfaceInstances, 2500);
+    assert(
+      [...effects.buildingSurfaces.values()].reduce(
+        (sum, surface) =>
+          sum +
+          (surface.mesh instanceof THREE.InstancedMesh
+            ? surface.damage.count
+            : 0),
+        0,
+      ) <= 4096,
+    );
+    effects.afterRender();
+    effects.reset();
+    assert.equal(effects.surfaceInstances, 0);
+    assert(
+      meshes.every(
+        (mesh) => mesh.geometry.getAttribute('aRocketDamage') === undefined,
+      ),
+    );
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('geometry and material restore independently when a detail owner replaces either during the draw', () => {
+  const { engine, state, mesh } = fixture(1, 'super-heavy');
+  engine.buildings = new THREE.Group();
+  engine.scene.add(engine.buildings);
+  engine.buildings.add(mesh);
+  const geometry = new THREE.BoxGeometry(1, 8, 0.5).translate(4, 5, 1),
+    material = new THREE.MeshStandardMaterial(),
+    page = new THREE.Mesh(geometry, material);
+  engine.buildings.add(page);
+  const effects = new RocketEffects(engine, state);
+  try {
+    effects.receiveCollision(buildingContact(), state, 1 / 60);
+    effects.beforeRender();
+    const replacement = new THREE.BoxGeometry(1, 8, 0.5).translate(4, 5, 1);
+    page.geometry = replacement;
+    effects.afterRender();
+    assert.equal(page.geometry, replacement, 'the owner geometry wins');
+    assert.equal(
+      page.material,
+      material,
+      'the surviving mission material is removed despite the geometry swap',
+    );
+    effects.beforeRender();
+    const nextMaterial = new THREE.MeshStandardMaterial({ color: 0x334455 });
+    page.material = nextMaterial;
+    effects.afterRender();
+    assert.equal(
+      page.geometry,
+      replacement,
+      'the mission geometry is removed independently',
+    );
+    assert.equal(page.material, nextMaterial, 'the owner material wins');
+    effects.reset();
+    assert.equal(page.geometry, replacement);
+    assert.equal(page.material, nextMaterial);
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('a bounded ground-dust reservation survives competing fire smoke and returns the full pool for accidents', () => {
+  const { engine, state } = fixture(0, 'super-heavy');
+  engine.compatibleGraphics = true;
+  const effects = new RocketEffects(engine, state);
+  try {
+    for (let i = 0; i < 90; i++) effects.update(1 / 60, state);
+    const dust = effects.particles.filter(
+        (particle) => particle.dust && particle.age < particle.life,
+      ),
+      ages = dust.map((particle) => particle.age);
+    assert(dust.length >= 40 && dust.length <= 96);
+    assert(
+      dust.some((particle) => particle.age > 0.8),
+      'puffs survive long enough to form a rolling outward front',
+    );
+    for (let i = 0; i < 2000; i++) effects.emit(0, 2, 0, 0.4, false, true);
+    assert.deepEqual(
+      dust.map((particle) => particle.age),
+      ages,
+    );
+    assert(
+      dust.every((particle) => particle.dust),
+      'tree and vehicle smoke cannot immediately overwrite the reserved puffs',
+    );
+    state.phase = 'flight';
+    state.position.y = state.altitude = 200;
+    effects.update(1 / 60, state);
+    assert.equal(effects.groundContactCount, 0);
+    assert.equal(
+      effects.dustSpawn,
+      0,
+      'new dust stops when jets no longer reach the surface',
+    );
+    const trailAges = dust.map((particle) => particle.age);
+    for (let i = 0; i < 2000; i++) effects.emit(0, 2, 0, 0.4, false, true);
+    assert.deepEqual(
+      dust.map((particle) => particle.age),
+      trailAges,
+    );
+    assert(
+      dust.every((particle) => particle.dust),
+      'the already airborne dust front keeps its remaining lifetime after liftoff',
+    );
+    state.fireIntensity = 1;
+    for (let i = 0; i < 240; i++) effects.emit(0, 2, 0, 0.5, false, true);
+    assert(
+      effects.particles.every((particle) => !particle.dust),
+      'onboard fire takes priority over the ground-dust reservation',
+    );
+    state.phase = 'crashed';
+    for (let i = 0; i < 240; i++) effects.emit(0, 2, 0, 1, true, true);
+    assert(
+      effects.particles.every((particle) => !particle.dust),
+      'an accident can reuse every slot immediately',
+    );
+    assert.equal(effects.particles.length, 240);
+    effects.reset();
+    assert.equal(effects.dustSpawn, 0);
+    assert.equal(effects.dustNext, 0);
+    assert.equal(effects.dustAlive, 0);
+  } finally {
+    effects.dispose();
+  }
+});

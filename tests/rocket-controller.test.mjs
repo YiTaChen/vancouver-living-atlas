@@ -115,6 +115,8 @@ function setup(t) {
     heatSamples = [];
     heightSamples = [];
     collisionHeight = () => null;
+    contacts = [];
+    onCollision = () => {};
     constructor(engine) {
       this.engine = engine;
       this.group = new THREE.Group();
@@ -122,6 +124,15 @@ function setup(t) {
       resources.effects.push(this);
     }
     update() {}
+    receiveCollision(contact, state, dt) {
+      this.contacts.push({
+        contact,
+        phase: state.phase,
+        elapsed: state.elapsed,
+        dt,
+      });
+      this.onCollision(contact, state, dt);
+    }
     sampleVehicleHeat(state) {
       this.heatSamples.push({
         elapsed: state.elapsed,
@@ -1202,4 +1213,231 @@ test('Titan completes a continuous mission with four side boosters first, then t
   c.returnToCity();
   assert.equal(e.controls.enabled, true);
   assert.equal(e.settings.mode, 'orbit');
+});
+
+test('ground placement uses the actual asphalt surface for the rig and foundation without changing a caller support record', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  e.elevation = () => 10;
+  e.data.roadSurface = { sample: () => 11.75 };
+  const support = { kind: 'ground', groundY: 10, seed: 13 };
+  c.start('super-heavy', 0, 10.45, 0, support);
+  await tick();
+  assert.equal(c.state.origin.y, 12.2);
+  assert.equal(c.state.support.groundY, 11.75);
+  assert.equal(c.model.group.position.y, 12.2);
+  assert.equal(c.scaffold.position.y, 12.2);
+  assert.equal(support.groundY, 10, 'external support metadata is not mutated');
+  assert.equal(c.world.surface(0, 0).height, 11.75);
+});
+
+test('an already overlapping Titan strap crushes a weak wall over time and follows only its actually damaged mission collider', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBuildingVolumes = [
+    buildingVolume(10, 12, -1, 1, 20),
+    buildingVolume(40, 45, -1, 1, 80),
+  ];
+  const metadata = structuredClone(e.data.flightBuildingVolumes);
+  c.start('super-heavy', 0, 0.45, 0, { kind: 'ground', groundY: 0, seed: 13 });
+  await tick();
+  assert.match(c.snapshot.warning, /clearance obstructed/i);
+  const fx = resources.effects[0];
+  let contactSeconds = 0;
+  fx.onCollision = (contact, state, dt) => {
+    if (contact.source === 'building') contactSeconds += dt;
+  };
+  fx.collisionHeight = (x, z) =>
+    x >= 10 && x <= 12 && Math.abs(z) <= 1
+      ? Math.max(0.2, 20 * (1 - Math.min(1, contactSeconds / 2.6)))
+      : null;
+  advanceUntil(c, () => c.snapshot.phase === 'ready');
+  c.launch();
+  advanceUntil(c, () => c.snapshot.phase === 'flight', 10);
+  assert.equal(
+    c.state.wreckage,
+    null,
+    'the first low-speed contact is not instant whole-vehicle rupture',
+  );
+  assert(
+    fx.contacts.length > 20,
+    'ignition already applies repeated real wall contact',
+  );
+  assert(
+    fx.contacts.every(
+      ({ contact }) => contact.source === 'building' && contact.initialOverlap,
+    ),
+  );
+  const contact = fx.contacts[0].contact;
+  assert.equal(contact.bounds.minX, 10);
+  assert.equal(contact.bounds.maxX, 12);
+  assert(contact.point.x >= 10 && contact.point.x <= 12);
+  assert(Math.abs(contact.point.z) <= 1);
+  assert(
+    contact.from.x > 5,
+    'the exact side booster capsule, not the core base, is reported',
+  );
+  const volumes = [...new Set([...c.world.cells.values()].flat())],
+    near = volumes.find((v) => v.bounds.min.x === 10),
+    far = volumes.find((v) => v.bounds.min.x === 40);
+  advance(c, 4);
+  assert.equal(
+    c.snapshot.phase,
+    'flight',
+    'a yielding low wall allows the real ascent to escape',
+  );
+  assert(near.bounds.max.y < 3);
+  assert.equal(far.bounds.max.y, 80);
+  assert(
+    c.state.integrity > 0.8 && c.state.integrity < 1,
+    'crushing still costs structure',
+  );
+  assert.deepEqual(e.data.flightBuildingVolumes, metadata);
+  c.resetDamage();
+  await tick();
+  assert.equal(
+    near.bounds.max.y,
+    20,
+    'repair restores the contact collider as well as the city mesh',
+  );
+  assert.equal(c.contactVolumes.size, 0);
+});
+
+test('a strong initially overlapping building still stops Titan after bounded readable crushing', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(10, 12, -1, 1, 160)];
+  c.start('super-heavy', 0, 0.45, 0, { kind: 'ground', groundY: 0, seed: 13 });
+  await tick();
+  advanceUntil(c, () => c.snapshot.phase === 'ready');
+  c.launch();
+  advanceUntil(c, () => c.snapshot.phase === 'flight', 10);
+  assert.equal(c.state.wreckage, null);
+  advance(c, 0.5);
+  assert.equal(c.snapshot.phase, 'flight');
+  assert(c.state.integrity < 1);
+  advanceUntil(c, () => c.snapshot.phase === 'crashed', 4);
+  assert(c.state.flightElapsed >= 2.5 && c.state.flightElapsed < 3);
+  assert.equal(c.snapshot.failureCause, 'impact');
+  assert(
+    resources.effects[0].contacts.length >= 150,
+    'the building receives damage throughout the accident',
+  );
+  assert(
+    resources.effects[0].contacts.some(({ phase }) => phase === 'ignition'),
+  );
+  assert.equal(e.data.flightBuildingVolumes[0].maxY, 160);
+});
+
+test('a new high-speed wall impact reports its exact building before rupture and receives no initial-overlap grace', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(10, 12, -1, 1, 145)];
+  c.start('super-heavy', 0, 0, 0, { kind: 'platform' });
+  await tick();
+  readyFlight(c, 100, { kind: 'platform' }, 'super-heavy');
+  c.state.velocity.x = 80;
+  c.state.speed = 80;
+  c.update(1 / 60);
+  assert.equal(c.snapshot.phase, 'crashed');
+  const samples = resources.effects[0].contacts;
+  assert(samples.length > 0);
+  assert(
+    samples.every(({ phase }) => phase === 'flight'),
+    'contact is delivered before wreckage',
+  );
+  assert(
+    samples.some(
+      ({ contact }) =>
+        contact.source === 'building' &&
+        contact.speed > 70 &&
+        contact.point.x >= 10,
+    ),
+  );
+});
+
+test('an initially intersecting bridge deck never receives the building crush exception', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBridgeVolumes = [
+    {
+      min: [-2, 15, -2],
+      max: [2, 15.12, 2],
+      matrix: new THREE.Matrix4().toArray(),
+    },
+  ];
+  c.start('super-heavy', 0, 0.45, 0, { kind: 'ground', groundY: 0, seed: 13 });
+  await tick();
+  assert.equal(c.initialContacts.size, 0);
+  advanceUntil(c, () => c.snapshot.phase === 'ready');
+  c.launch();
+  advanceUntil(c, () => c.snapshot.phase === 'crashed', 10);
+  assert(c.state.flightElapsed < 0.1);
+  assert(
+    resources.effects[0].contacts.some(
+      ({ contact }) => contact.source === 'bridge' && !contact.initialOverlap,
+    ),
+  );
+});
+
+test('a never-contacted pressure-collapsed building is resampled before a later sweep and cannot cause a ghost impact', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(10, 12, -1, 1, 145)];
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  assert.equal(
+    c.initialContacts.size,
+    0,
+    'this building never intersected assembly',
+  );
+  const volume = [...new Set([...c.world.cells.values()].flat())][0];
+  resources.effects[0].collisionHeight = (x, z) =>
+    x >= 10 && x <= 12 && Math.abs(z) <= 1 ? 30 : null;
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.update(1 / 60);
+  assert.equal(c.snapshot.phase, 'flight');
+  assert.equal(c.state.wreckage, null);
+  assert.equal(
+    resources.effects[0].contacts.length,
+    0,
+    'cleared geometry does not emit a fabricated contact',
+  );
+  assert.equal(volume.bounds.max.y, 30);
+  assert.equal(e.data.flightBuildingVolumes[0].maxY, 145);
+  assert.equal(c.contactVolumes.get(volume).originalTop, 145);
+  c.resetDamage();
+  await tick();
+  assert.equal(
+    volume.bounds.max.y,
+    145,
+    'city repair restores the original mission collider',
+  );
+});
+
+test('pressure resampling preserves an uncollapsed neighbouring wall and its original identity during later settlement', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBuildingVolumes = [
+    buildingVolume(10, 12, -1, 1, 145),
+    buildingVolume(-12, -10, -1, 1, 150),
+  ];
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  resources.effects[0].collisionHeight = (x, z) =>
+    x >= 10 && x <= 12 && Math.abs(z) <= 1 ? 30 : null;
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.update(1 / 60);
+  assert.equal(
+    c.snapshot.phase,
+    'crashed',
+    'the separate intact wall still blocks the surviving vehicle',
+  );
+  const samples = resources.effects[0].contacts;
+  assert(
+    samples.some(
+      ({ contact }) =>
+        contact.bounds.minX === -12 && contact.bounds.maxY === 150,
+    ),
+  );
+  assert(
+    !samples.some(({ contact }) => contact.bounds.minX === 10),
+    'the already settled neighbour is not falsely struck',
+  );
+  const volumes = [...new Set([...c.world.cells.values()].flat())];
+  assert.equal(volumes.find((v) => v.bounds.min.x === -12).bounds.max.y, 150);
+  assert.equal(volumes.find((v) => v.bounds.min.x === 10).bounds.max.y, 30);
 });

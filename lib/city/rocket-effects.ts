@@ -9,6 +9,7 @@ import {
 } from './rocket-state';
 import { disposeRocketObject } from './assets/rocket';
 import type { ForestTree } from './detailed-trees';
+import type { RocketCityContact } from './rocket-controller';
 
 type BodyPart = {
   key: string;
@@ -29,6 +30,20 @@ type DamagedPart = {
   dirtyPosition: boolean;
   dirtyColor: boolean;
   fragmentsStage: number;
+  contact?: THREE.Vector3;
+};
+type BuildingSurface = {
+  mesh: THREE.Mesh;
+  source: THREE.BufferGeometry;
+  geometry: THREE.BufferGeometry;
+  damage: THREE.BufferAttribute | THREE.InstancedBufferAttribute;
+  position: Float32Array | null;
+  world: Float32Array | null;
+  areas: (DamagedPart | null)[];
+  matrix: THREE.Matrix4;
+  shared: boolean;
+  version: number;
+  stateKey: string;
 };
 type FlyingSlot = {
   mesh: THREE.InstancedMesh;
@@ -178,6 +193,20 @@ export class RocketEffects {
   burning = 0;
   debris = 0;
   private parts: DamagedPart[] = [];
+  private contactParts: DamagedPart[] = [];
+  private contacts = new Set<string>();
+  private surfaceVersion = 0;
+  private surfaceVertices = 0;
+  private surfaceInstances = 0;
+  private buildingSurfaces = new Map<THREE.Mesh, BuildingSurface>();
+  private buildingMaterials = new Map<THREE.Material, THREE.Material>();
+  private surfaceRestores: {
+    mesh: THREE.Mesh;
+    geometry: THREE.BufferGeometry;
+    material: THREE.Material | THREE.Material[];
+    appliedGeometry: THREE.BufferGeometry;
+    appliedMaterial: THREE.Material | THREE.Material[];
+  }[] = [];
   private body: THREE.Mesh | null;
   private flying: FlyingSlot[] = [];
   private launched = new Set<string>();
@@ -201,10 +230,14 @@ export class RocketEffects {
     life: number;
     hot: boolean;
     soot: boolean;
+    dust: boolean;
   }[];
   private spawn = 0;
   private vehicleSpawn = 0;
   private next = 0;
+  private dustNext = 0;
+  private dustSpawn = 0;
+  private dustAlive = 0;
   private time = 0;
   private scanAt = 0;
   private eventId = 0;
@@ -337,14 +370,15 @@ export class RocketEffects {
       transparent: true,
       depthWrite: false,
       uniforms: {
+        uTime: this.outwashTime,
         uScale: {
           value: e.container.clientHeight * 0.55 * Math.sqrt(this.strength),
         },
       },
       vertexShader:
-        'attribute float aLife; varying float vLife; uniform float uScale; void main(){vLife=aLife;vec4 p=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*p;gl_PointSize=clamp(uScale*(abs(aLife)>1.?4.:9.)/max(2.,-p.z),1.,110.);}',
+        'attribute float aLife; varying float vLife; uniform float uScale; void main(){vLife=aLife;vec4 p=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*p;gl_PointSize=clamp(uScale*(aLife< -2.?34.:(abs(aLife)>1.?4.:9.))/max(2.,-p.z),1.,aLife< -2.?260.:110.);}',
       fragmentShader:
-        'varying float vLife;void main(){float d=length(gl_PointCoord-.5)*2.;if(d>1.||vLife==0.)discard;bool hot=vLife>1.;float a=hot?vLife-1.:abs(vLife);vec3 smoke=vLife<0.?mix(vec3(.12,.15,.17),vec3(.42,.43,.43),a):mix(vec3(.50,.55,.59),vec3(.84,.88,.90),a);vec3 c=hot?mix(vec3(1.,.18,.02),vec3(1.,.86,.4),a):smoke;gl_FragColor=vec4(c,(1.-smoothstep(.15,1.,d))*a*.65);}',
+        'varying float vLife;uniform float uTime;void main(){vec2 p=(gl_PointCoord-.5)*2.;float d=length(p);if(d>1.||vLife==0.)discard;bool dust=vLife< -2.;bool hot=vLife>1.;float a=dust?-vLife-2.:(hot?vLife-1.:abs(vLife));float curl=.72+.28*sin(p.x*8.+sin(p.y*6.+uTime*1.7)*2.-uTime*2.);vec3 smoke=dust?mix(vec3(.24,.19,.14),vec3(.59,.48,.35),curl):(vLife<0.?mix(vec3(.12,.15,.17),vec3(.42,.43,.43),a):mix(vec3(.50,.55,.59),vec3(.84,.88,.90),a));vec3 c=hot?mix(vec3(1.,.18,.02),vec3(1.,.86,.4),a):smoke;gl_FragColor=vec4(c,(1.-smoothstep(dust?.05:.15,1.,d))*a*(dust?.78*curl:.65));}',
     });
     this.smoke = new THREE.Points(geo, mat);
     this.smoke.frustumCulled = false;
@@ -356,6 +390,7 @@ export class RocketEffects {
       life: 1,
       hot: false,
       soot: false,
+      dust: false,
     }));
     this.scorch = new THREE.Mesh(
       new THREE.CircleGeometry(1, 48),
@@ -390,12 +425,13 @@ export class RocketEffects {
           fragmentShader: `
             uniform float uPower; uniform float uTime; varying vec2 vUv;
             void main(){
-              float edge=max(0.,1.-abs(vUv.x-.5)*2.);
               float forward=1.-vUv.y;
+              float curl=.16*sin(forward*17.-uTime*8.)+.07*sin(forward*35.+uTime*11.);
+              float edge=max(0.,1.-abs((vUv.x-.5)*2.-curl)/max(.16,1.-forward*.7));
               float tail=1.-smoothstep(.15,1.,forward);
-              float pulse=.72+.28*sin(forward*34.-uTime*23.+vUv.x*9.);
-              vec3 color=mix(vec3(1.,.86,.48),vec3(1.,.23,.025),forward);
-              gl_FragColor=vec4(color,pow(edge,1.5)*tail*pulse*uPower*.7);
+              float pulse=.65+.35*sin(forward*34.-uTime*23.+sin(vUv.x*19.+uTime*7.));
+              vec3 color=mix(vec3(1.,.44,.045),vec3(.72,.075,.004),forward);
+              gl_FragColor=vec4(color,pow(edge,1.5)*tail*pulse*uPower*.85);
               #include <tonemapping_fragment>
               #include <colorspace_fragment>
             }`,
@@ -486,6 +522,157 @@ export class RocketEffects {
     this.group.name = 'Rocket local heat / pressure / pooled particles';
     e.scene.add(this.group);
   }
+  /** A real collision damages the contacted city surface before the vehicle response. */
+  receiveCollision(contact: RocketCityContact, state: RocketState, dt: number) {
+    if (!contact.bounds || this.restoredAfterFailure) return;
+    this.lastState = state;
+    const b = contact.bounds;
+    let damage = [...this.parts, ...this.contactParts].find(
+      (d) =>
+        Math.abs(d.bounds.minX - b.minX) < 0.2 &&
+        Math.abs(d.bounds.maxX - b.maxX) < 0.2 &&
+        Math.abs(d.bounds.minZ - b.minZ) < 0.2 &&
+        Math.abs(d.bounds.maxZ - b.maxZ) < 0.2 &&
+        Math.abs(d.part.minY - b.minY) < 0.2,
+    );
+    if (!damage && contact.source === 'building' && this.body) {
+      const position = this.body.geometry.getAttribute('position');
+      const part = (this.e.data.rocketBuildingParts ?? []).find(
+        (p: BodyPart) => {
+          if (Math.abs(p.minY - b.minY) > 0.2) return false;
+          let minX = Infinity,
+            maxX = -Infinity,
+            minZ = Infinity,
+            maxZ = -Infinity;
+          for (let i = p.start; i < p.start + p.count; i++) {
+            minX = Math.min(minX, position.getX(i));
+            maxX = Math.max(maxX, position.getX(i));
+            minZ = Math.min(minZ, position.getZ(i));
+            maxZ = Math.max(maxZ, position.getZ(i));
+          }
+          return (
+            Math.abs(minX - b.minX) < 0.2 &&
+            Math.abs(maxX - b.maxX) < 0.2 &&
+            Math.abs(minZ - b.minZ) < 0.2 &&
+            Math.abs(maxZ - b.maxZ) < 0.2
+          );
+        },
+      );
+      if (part && this.parts.length >= this.profile.buildings) {
+        const replace = this.parts.findLastIndex(
+          (d) => !d.contact && d.exposure === 0 && d.collapse === 0,
+        );
+        if (replace >= 0) this.parts.splice(replace, 1);
+      }
+      if (part && this.parts.length < this.profile.buildings) {
+        const color = this.body.geometry.getAttribute('color');
+        damage = {
+          part,
+          position: new Float32Array(
+            (position.array as Float32Array).subarray(
+              part.start * 3,
+              (part.start + part.count) * 3,
+            ),
+          ),
+          color: new Float32Array(
+            (color.array as Float32Array).subarray(
+              part.start * 3,
+              (part.start + part.count) * 3,
+            ),
+          ),
+          bounds: { minX: b.minX, maxX: b.maxX, minZ: b.minZ, maxZ: b.maxZ },
+          exposure: 0,
+          collapse: 0,
+          collapseElapsed: -1,
+          dirtyPosition: false,
+          dirtyColor: false,
+          fragmentsStage: 0,
+        };
+        this.parts.push(damage);
+        this.surfaceVersion++;
+      }
+    }
+    if (
+      !damage &&
+      contact.source !== 'building' &&
+      this.contactParts.length < 8
+    ) {
+      damage = {
+        part: {
+          key: `${contact.source}:${b.minX}:${b.minZ}`,
+          center: [(b.minX + b.maxX) / 2, (b.minZ + b.maxZ) / 2],
+          minY: b.minY,
+          maxY: b.maxY,
+          start: 0,
+          count: 0,
+        },
+        position: new Float32Array(),
+        color: new Float32Array(),
+        bounds: { minX: b.minX, maxX: b.maxX, minZ: b.minZ, maxZ: b.maxZ },
+        exposure: 0,
+        collapse: 0,
+        collapseElapsed: -1,
+        dirtyPosition: false,
+        dirtyColor: false,
+        fragmentsStage: 0,
+      };
+      this.contactParts.push(damage);
+      this.surfaceVersion++;
+    }
+    if (!damage) return;
+    const load = Math.min(4, Math.sqrt(Math.max(0, contact.mass) / 120000)),
+      severity = unit(contact.speed / 50 + load * 0.12),
+      engine = sampleRocketEffects(state).engine;
+    damage.exposure = Math.min(
+      1,
+      Math.max(damage.exposure, 0.32 + severity * 0.2) +
+        Math.max(0, Math.min(0.1, dt)) * (0.35 + load * 0.3 + engine * 0.45),
+    );
+    damage.dirtyColor = true;
+    damage.collapse = Math.max(
+      damage.collapse,
+      Math.min(0.2, 0.3 / Math.max(1, damage.part.maxY - damage.part.minY)),
+    );
+    damage.dirtyPosition = true;
+    damage.contact = new THREE.Vector3(
+      contact.point.x,
+      contact.point.y,
+      contact.point.z,
+    );
+    const key = `${damage.part.key}:${damage.part.start}:${damage.part.minY}`;
+    if (!this.contacts.has(key)) {
+      this.contacts.add(key);
+      const first = this.fragments.length;
+      this.emitBuildingFragments(
+        damage,
+        Math.max(0.45, severity * this.strength),
+        this.strength > 1 ? 8 : 4,
+      );
+      for (let i = first; i < this.fragments.length; i++) {
+        this.fragments[i].p
+          .copy(damage.contact)
+          .add(
+            new THREE.Vector3(
+              (rand(i + 31) - 0.5) * contact.radius,
+              (rand(i + 32) - 0.5) * contact.radius,
+              (rand(i + 33) - 0.5) * contact.radius,
+            ),
+          );
+      }
+      for (let i = 0; i < 12; i++)
+        this.emit(
+          contact.point.x,
+          contact.point.y,
+          contact.point.z,
+          0.4 + severity,
+          false,
+          true,
+        );
+    }
+    this.damaged = [...this.parts, ...this.contactParts].filter(
+      (d) => d.exposure > 0.12,
+    ).length;
+  }
   /** Local forest feedback; the number of fires elsewhere never heats this vehicle. */
   sampleVehicleHeat(state: RocketState): number {
     const config = ROCKET_CONFIGS[state.kind],
@@ -521,7 +708,7 @@ export class RocketEffects {
     state: RocketState = this.lastState,
   ): number | null {
     let height: number | null = null;
-    for (const damage of this.parts) {
+    for (const damage of [...this.parts, ...this.contactParts]) {
       const b = damage.bounds;
       if (x < b.minX || x > b.maxX || z < b.minZ || z > b.maxZ) continue;
       const supporting =
@@ -548,14 +735,30 @@ export class RocketEffects {
     hot: boolean,
     soot = false,
     rise = false,
+    groundDust = false,
   ) {
-    const p = this.particles[this.next++ % this.particles.length],
-      k = this.next;
+    const reserved =
+        (this.groundContactCount || this.dustAlive > 0) &&
+        !this.lastState.wreckage &&
+        this.lastState.fireIntensity <= 0 &&
+        (this.lastState.phase === 'ignition' ||
+          this.lastState.phase === 'flight')
+          ? Math.floor(this.particles.length * 0.4)
+          : 0,
+      index =
+        groundDust && reserved
+          ? this.particles.length - reserved + (this.dustNext++ % reserved)
+          : this.next % (this.particles.length - reserved),
+      p = this.particles[index],
+      k = ++this.next;
+    if (p.dust && p.age < p.life)
+      this.dustAlive = Math.max(0, this.dustAlive - 1);
     p.p.set(x, y, z);
     p.age = 0;
     p.life = hot ? 0.4 + rand(k) * 0.6 : 2 + rand(k) * 4;
     p.hot = hot;
     p.soot = soot;
+    p.dust = false;
     const a = rand(k + 9) * Math.PI * 2,
       speed = (3 + rand(k + 3) * 15) * power;
     p.v.set(
@@ -741,15 +944,19 @@ export class RocketEffects {
         .add(new THREE.Vector3(s.position.x, s.position.y, s.position.z));
       const nozzle = contact.clone(),
         ray = new THREE.Vector3(direction.x, direction.y, direction.z),
-        heightAt = (x: number, z: number) =>
-          Math.max(
-            this.e.elevation?.(x, z) ?? this.savedGround.y,
+        heightAt = (x: number, z: number) => {
+          const terrain = this.e.elevation?.(x, z) ?? this.savedGround.y,
+            ground =
+              this.e.data.roadSurface?.sample(x, z, terrain + 1.05) ?? terrain;
+          return Math.max(
+            ground,
             // Building-part rectangles can include open courtyards. They
             // describe a supporting roof only for an actual rooftop launch.
             s.support.kind.startsWith('roof')
               ? (this.supportCollisionHeight(x, z, s) ?? -Infinity)
               : -Infinity,
           );
+        };
       // A tilted nozzle lands away from its own x/z. Re-sample there so a
       // nearby slope or collapsing roof cannot leave the footprint floating.
       for (let iteration = 0; iteration < 3; iteration++) {
@@ -816,12 +1023,17 @@ export class RocketEffects {
       );
       for (const d of this.parts) {
         const distance = Math.hypot(
-          d.part.center[0] - s.origin.x,
-          d.part.center[1] - s.origin.z,
+          Math.max(d.bounds.minX - s.origin.x, 0, s.origin.x - d.bounds.maxX),
+          Math.max(d.bounds.minZ - s.origin.z, 0, s.origin.z - d.bounds.maxZ),
         );
         const falloff = Math.max(0, 1 - distance / (f.blastRadius + 10));
         // Low domestic buildings fail sooner; towers receive scorch and limited facade damage.
-        const weakness = d.part.maxY - d.part.minY < 14 ? 1 : 0.17;
+        const weakness =
+          d.part.maxY - d.part.minY < 14
+            ? 1
+            : this.strength > 1
+              ? 0.25 + 0.45 * Math.max(0, 1 - distance / 35)
+              : 0.17;
         const exposure = Math.min(
           1,
           d.exposure +
@@ -842,7 +1054,7 @@ export class RocketEffects {
         );
       }
     }
-    for (const d of this.parts) {
+    for (const d of [...this.parts, ...this.contactParts]) {
       const supporting = !this.restoredAfterFailure && supportsRocket(d, s);
       if (supporting && d.exposure < 1) {
         d.exposure = 1;
@@ -879,7 +1091,9 @@ export class RocketEffects {
           );
       }
     }
-    this.damaged = this.parts.filter((d) => d.exposure > 0.12).length;
+    this.damaged = [...this.parts, ...this.contactParts].filter(
+      (d) => d.exposure > 0.12,
+    ).length;
     this.burning = this.trees.filter((t) => t.heat > 0.13).length;
     for (const t of this.trees) {
       // Once lit, the local fuel continues burning after the exhaust moves away.
@@ -934,6 +1148,9 @@ export class RocketEffects {
     }
     this.updateVehicleEffects(dt, s, vehicleAnchor);
     this.updateGroundOutwash(s, f.groundExposure);
+    this.dustSpawn = this.groundContactCount
+      ? Math.min(8, this.dustSpawn + dt * 50 * Math.sqrt(f.engine))
+      : 0;
     if (f.engine > 0.03 && s.altitude < 14000) {
       this.spawn +=
         dt *
@@ -947,7 +1164,7 @@ export class RocketEffects {
           radius =
             this.strength > 1 ? rand(this.next + 27) * config.radius * 1.4 : 0;
         const contact =
-          this.groundContactCount && this.next % 3 !== 0
+          this.groundContactCount && this.dustSpawn >= 1 && this.next % 3 !== 0
             ? this.groundContacts[this.next % this.groundContactCount]
             : null;
         const particle = this.emit(
@@ -957,9 +1174,17 @@ export class RocketEffects {
             : Math.max(this.savedGround.y + 1, s.position.y - 3),
           contact ? contact.z : s.position.z + Math.sin(angle) * radius,
           f.engine * this.strength,
-          this.next % 4 === 0,
+          s.kind !== 'super-heavy' && this.next % 4 === 0,
+          false,
+          false,
+          !!contact,
         );
         if (contact) {
+          this.dustSpawn--;
+          particle.dust = true;
+          this.dustAlive++;
+          particle.hot = false;
+          particle.life = 3.5 + rand(this.next + 12) * 2;
           const speed =
             (18 + rand(this.next + 41) * 29) * Math.sqrt(this.strength);
           particle.v.set(
@@ -970,6 +1195,7 @@ export class RocketEffects {
         }
       }
     }
+    this.dustAlive = 0;
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
       p.age += dt;
@@ -977,7 +1203,15 @@ export class RocketEffects {
         this.alphas[i] = 0;
         continue;
       }
-      p.v.y += dt * (p.hot ? -3 : 1.5);
+      if (p.dust) this.dustAlive++;
+      p.v.y += dt * (p.hot ? -3 : p.dust ? 2.4 : 1.5);
+      if (p.dust) {
+        const drag = Math.exp(-dt * 0.42),
+          turn = Math.sin(p.age * 5 + i) * dt * 0.18,
+          vx = p.v.x;
+        p.v.x = (p.v.x - p.v.z * turn) * drag;
+        p.v.z = (p.v.z + vx * turn) * drag;
+      }
       p.p.addScaledVector(p.v, dt);
       if (p.p.y < this.savedGround.y + 0.5) {
         p.p.y = this.savedGround.y + 0.5;
@@ -986,9 +1220,10 @@ export class RocketEffects {
       this.positions[i * 3] = p.p.x;
       this.positions[i * 3 + 1] = p.p.y;
       this.positions[i * 3 + 2] = p.p.z;
-      this.alphas[i] =
-        ((p.hot ? 1 : 0) + Math.max(0.001, 1 - p.age / p.life)) *
-        (p.soot && !p.hot ? -1 : 1);
+      const alpha = Math.max(0.001, 1 - p.age / p.life);
+      this.alphas[i] = p.dust
+        ? -2 - alpha
+        : ((p.hot ? 1 : 0) + alpha) * (p.soot && !p.hot ? -1 : 1);
     }
     this.smoke.geometry.attributes.position.needsUpdate =
       this.smoke.geometry.attributes.aLife.needsUpdate = true;
@@ -1051,9 +1286,343 @@ export class RocketEffects {
       .premultiply(this.treeLocal);
     this.overrideSlot(mesh, index, this.treeInstance);
   }
+  private damageMaterial(source: THREE.Material) {
+    const cached = this.buildingMaterials.get(source);
+    if (cached) return cached;
+    const material = source.clone(),
+      compile = source.onBeforeCompile.bind(source),
+      key = source.customProgramCacheKey();
+    material.onBeforeCompile = (shader, renderer) => {
+      compile(shader, renderer);
+      if (
+        !shader.vertexShader.includes('#include <begin_vertex>') ||
+        !shader.fragmentShader.includes('#include <opaque_fragment>')
+      )
+        return;
+      shader.vertexShader =
+        'attribute float aRocketDamage; varying float vRocketDamage;\n' +
+        shader.vertexShader;
+      shader.vertexShader = shader.vertexShader.replace(
+        '#include <begin_vertex>',
+        '#include <begin_vertex>\nvRocketDamage=aRocketDamage;',
+      );
+      shader.fragmentShader =
+        'varying float vRocketDamage;\n' + shader.fragmentShader;
+      // Apply only to this mission-owned material, after glass and night emission.
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <opaque_fragment>',
+        '#include <opaque_fragment>\ngl_FragColor.rgb*=mix(vec3(1.),vec3(.18,.15,.13),clamp(vRocketDamage,0.,1.));',
+      );
+    };
+    material.customProgramCacheKey = () => key + ':rocket-local-damage-v1';
+    this.buildingMaterials.set(source, material);
+    return material;
+  }
+  private releaseSurface(surface: BuildingSurface) {
+    if (surface.mesh instanceof THREE.InstancedMesh)
+      this.surfaceInstances -= surface.damage.count;
+    if (surface.shared) {
+      // These attributes/index remain city-owned. Dispose only our added buffer.
+      for (const name of Object.keys(surface.geometry.attributes))
+        if (name !== 'aRocketDamage') surface.geometry.deleteAttribute(name);
+      surface.geometry.setIndex(null);
+    } else this.surfaceVertices -= surface.damage.count;
+    surface.geometry.dispose();
+    this.buildingSurfaces.delete(surface.mesh);
+  }
+  private surfaceFor(mesh: THREE.Mesh): BuildingSurface | null {
+    const instanced = mesh instanceof THREE.InstancedMesh;
+    let surface = this.buildingSurfaces.get(mesh);
+    if (
+      surface?.source === mesh.geometry &&
+      (!instanced || surface.damage.count === mesh.instanceMatrix.count)
+    )
+      return surface;
+    if (surface) this.releaseSurface(surface);
+    const source = mesh.geometry,
+      position = source.getAttribute('position');
+    if (!position || !position.count) return null;
+    const shared = instanced || mesh === this.body;
+    if (
+      mesh !== this.body &&
+      (this.buildingSurfaces.size >= 32 ||
+        (!shared && this.surfaceVertices + position.count > 240000) ||
+        (instanced &&
+          (mesh.instanceMatrix.count > 4096 ||
+            this.surfaceInstances + mesh.instanceMatrix.count > 4096)))
+    )
+      return null;
+    const geometry = shared ? new THREE.BufferGeometry() : source.clone();
+    if (shared) {
+      for (const [name, attribute] of Object.entries(source.attributes))
+        geometry.setAttribute(name, attribute);
+      geometry.setIndex(source.index);
+      geometry.groups = source.groups.map((g) => ({ ...g }));
+      geometry.setDrawRange(source.drawRange.start, source.drawRange.count);
+      geometry.boundingBox = source.boundingBox?.clone() ?? null;
+      geometry.boundingSphere = source.boundingSphere?.clone() ?? null;
+    }
+    const count = instanced ? mesh.instanceMatrix.count : position.count,
+      damage = instanced
+        ? new THREE.InstancedBufferAttribute(new Float32Array(count), 1)
+        : new THREE.BufferAttribute(new Float32Array(count), 1);
+    damage.setUsage(THREE.DynamicDrawUsage);
+    geometry.setAttribute('aRocketDamage', damage);
+    surface = {
+      mesh,
+      source,
+      geometry,
+      damage,
+      position: shared
+        ? null
+        : new Float32Array(position.array as ArrayLike<number>),
+      world: shared ? null : new Float32Array(position.count * 3),
+      areas: [],
+      matrix: new THREE.Matrix4(),
+      shared,
+      version: -1,
+      stateKey: '',
+    };
+    if (!shared) this.surfaceVertices += position.count;
+    if (instanced) this.surfaceInstances += count;
+    this.buildingSurfaces.set(mesh, surface);
+    return surface;
+  }
+  private areaAt(x: number, y: number, z: number, areas: DamagedPart[]) {
+    let chosen: DamagedPart | null = null;
+    for (const d of areas) {
+      const b = d.bounds;
+      if (
+        x < b.minX - 1.5 ||
+        x > b.maxX + 1.5 ||
+        z < b.minZ - 1.5 ||
+        z > b.maxZ + 1.5 ||
+        y < d.part.minY - 1.5 ||
+        y > d.part.maxY + 1.5
+      )
+        continue;
+      if (!chosen || d.part.minY > chosen.part.minY) chosen = d;
+    }
+    return chosen;
+  }
+  private applyBuildingSurfaces() {
+    const areas = [...this.parts, ...this.contactParts],
+      affected = areas.filter((d) => d.exposure > 0.01 || d.collapse > 0);
+    if (!affected.length) return;
+    for (const surface of this.buildingSurfaces.values()) {
+      let root: THREE.Object3D = surface.mesh;
+      while (root.parent) root = root.parent;
+      if (root !== this.e.scene || surface.mesh.geometry !== surface.source)
+        this.releaseSurface(surface);
+    }
+    const contacts = affected.flatMap((d) => (d.contact ? [d.contact] : [])),
+      candidates: { mesh: THREE.Mesh; distance: number }[] = [],
+      intersects = (bounds: THREE.Box3) =>
+        affected.some(
+          (d) =>
+            bounds.max.x >= d.bounds.minX - 2 &&
+            bounds.min.x <= d.bounds.maxX + 2 &&
+            bounds.max.z >= d.bounds.minZ - 2 &&
+            bounds.min.z <= d.bounds.maxZ + 2 &&
+            bounds.max.y >= d.part.minY &&
+            bounds.min.y <= d.part.maxY,
+        ),
+      bounds = new THREE.Box3(),
+      roots = [
+        this.e.buildings,
+        ...(this.e.landmarks?.children ?? []).filter((holder) => {
+          const detail = this.e.landmarkDetails?.find(
+            (d) => d.holder === holder,
+          );
+          return !detail || intersects(detail.bounds);
+        }),
+      ];
+    for (const root of roots)
+      root?.traverseVisible((object) => {
+        if (!(object instanceof THREE.Mesh) || object === this.body) return;
+        if (
+          object instanceof THREE.InstancedMesh &&
+          object.instanceMatrix.count > 4096
+        )
+          return;
+        object.updateWorldMatrix(true, false);
+        if (!object.geometry.boundingBox) object.geometry.computeBoundingBox();
+        if (object instanceof THREE.InstancedMesh) bounds.setFromObject(object);
+        else if (object.geometry.boundingBox)
+          bounds
+            .copy(object.geometry.boundingBox)
+            .applyMatrix4(object.matrixWorld);
+        else return;
+        if (intersects(bounds))
+          candidates.push({
+            mesh: object,
+            distance: contacts.length
+              ? Math.min(
+                  ...contacts.map((point) => bounds.distanceToPoint(point)),
+                )
+              : bounds.distanceToPoint(this.savedGround),
+          });
+      });
+    candidates.sort((a, b) => a.distance - b.distance);
+    const meshes: THREE.Mesh[] = this.body ? [this.body] : [];
+    let vertices = 0,
+      instances = 0;
+    for (const { mesh } of candidates) {
+      if (meshes.length >= 32) break;
+      if (mesh instanceof THREE.InstancedMesh) {
+        const count = mesh.instanceMatrix.count;
+        if (count > 4096 || instances + count > 4096) continue;
+        instances += count;
+      } else {
+        const count = mesh.geometry.getAttribute('position')?.count ?? 0;
+        if (vertices + count > 240000) continue;
+        vertices += count;
+      }
+      meshes.push(mesh);
+    }
+    const selected = new Set(meshes);
+    for (const surface of this.buildingSurfaces.values())
+      if (!selected.has(surface.mesh)) this.releaseSurface(surface);
+    const usedMaterials = new Set<THREE.Material>();
+    for (const surface of this.buildingSurfaces.values())
+      for (const material of Array.isArray(surface.mesh.material)
+        ? surface.mesh.material
+        : [surface.mesh.material])
+        usedMaterials.add(material);
+    for (const [source, material] of this.buildingMaterials)
+      if (!usedMaterials.has(source)) {
+        material.dispose();
+        this.buildingMaterials.delete(source);
+      }
+    const stateKey = areas
+      .map((d) => `${d.exposure.toFixed(5)}:${d.collapse.toFixed(5)}`)
+      .join(';');
+    let instanceBudget = 4096;
+    for (const mesh of meshes) {
+      const surface = this.surfaceFor(mesh);
+      if (!surface) continue;
+      const damage = surface.damage;
+      mesh.updateWorldMatrix(true, false);
+      const dirty =
+        surface.stateKey !== stateKey ||
+        surface.version !== this.surfaceVersion ||
+        !surface.matrix.equals(mesh.matrixWorld);
+      if (dirty || mesh instanceof THREE.InstancedMesh) damage.array.fill(0);
+      if (mesh === this.body && dirty) {
+        for (const d of this.parts) {
+          (damage.array as Float32Array).fill(
+            d.exposure,
+            d.part.start,
+            d.part.start + d.part.count,
+          );
+        }
+      } else if (mesh instanceof THREE.InstancedMesh) {
+        const matrix = new THREE.Matrix4(),
+          world = new THREE.Matrix4(),
+          deformation = new THREE.Matrix4(),
+          inverse = mesh.matrixWorld.clone().invert(),
+          point = new THREE.Vector3();
+        const center =
+          mesh.geometry.boundingBox?.getCenter(new THREE.Vector3()) ??
+          new THREE.Vector3();
+        for (
+          let i = 0;
+          i < mesh.count && instanceBudget > 0;
+          i++, instanceBudget--
+        ) {
+          mesh.getMatrixAt(i, matrix);
+          world.multiplyMatrices(mesh.matrixWorld, matrix);
+          point.copy(center).applyMatrix4(world);
+          const d = this.areaAt(point.x, point.y, point.z, affected);
+          if (!d) continue;
+          damage.setX(i, d.exposure);
+          const c = d.collapse;
+          deformation.set(
+            1,
+            c * 0.16,
+            0,
+            -d.part.minY * c * 0.16,
+            0,
+            1 - c * 0.925,
+            0,
+            d.part.minY * c * 0.925,
+            0,
+            c * 0.08,
+            1,
+            -d.part.minY * c * 0.08,
+            0,
+            0,
+            0,
+            1,
+          );
+          this.overrideSlot(
+            mesh,
+            i,
+            world.premultiply(deformation).premultiply(inverse),
+          );
+        }
+      } else if (mesh !== this.body && dirty) {
+        const source = surface.position!,
+          world = surface.world!,
+          point = new THREE.Vector3(),
+          inverse = mesh.matrixWorld.clone().invert(),
+          position = surface.geometry.getAttribute(
+            'position',
+          ) as THREE.BufferAttribute;
+        if (
+          surface.version !== this.surfaceVersion ||
+          !surface.matrix.equals(mesh.matrixWorld)
+        ) {
+          surface.matrix.copy(mesh.matrixWorld);
+          surface.version = this.surfaceVersion;
+          surface.areas.length = damage.count;
+          for (let i = 0; i < damage.count; i++) {
+            point.fromArray(source, i * 3).applyMatrix4(mesh.matrixWorld);
+            point.toArray(world, i * 3);
+            surface.areas[i] = this.areaAt(point.x, point.y, point.z, areas);
+          }
+        }
+        for (let i = 0; i < damage.count; i++) {
+          const d = surface.areas[i];
+          point.fromArray(world, i * 3);
+          if (d) {
+            const lift = Math.max(0, point.y - d.part.minY),
+              shift = d.collapse * lift * 0.16;
+            point.x += shift;
+            point.z += shift * 0.5;
+            point.y = d.part.minY + lift * (1 - d.collapse * 0.925);
+            damage.setX(i, d.exposure);
+          }
+          point.applyMatrix4(inverse);
+          position.setXYZ(i, point.x, point.y, point.z);
+        }
+        position.needsUpdate = true;
+        surface.geometry.computeBoundingBox();
+        surface.geometry.computeBoundingSphere();
+      }
+      if (dirty || mesh instanceof THREE.InstancedMesh)
+        damage.needsUpdate = true;
+      surface.stateKey = stateKey;
+      surface.matrix.copy(mesh.matrixWorld);
+      surface.version = this.surfaceVersion;
+      const material = Array.isArray(mesh.material)
+        ? mesh.material.map((m) => this.damageMaterial(m))
+        : this.damageMaterial(mesh.material);
+      this.surfaceRestores.push({
+        mesh,
+        geometry: mesh.geometry,
+        material: mesh.material,
+        appliedGeometry: surface.geometry,
+        appliedMaterial: material,
+      });
+      mesh.geometry = surface.geometry;
+      mesh.material = material;
+    }
+  }
   /** Called after city LOD/traffic updates, then restored after the draw. This never hijacks their instance ownership. */
   beforeRender() {
-    if (this.restoreSlots.length) this.afterRender();
+    if (this.restoreSlots.length || this.surfaceRestores.length)
+      this.afterRender();
     const s = this.lastState,
       f = sampleRocketEffects(s);
     let shadowChanged = false;
@@ -1103,6 +1672,7 @@ export class RocketEffects {
           d.dirtyPosition = d.dirtyColor = false;
         }
     }
+    this.applyBuildingSurfaces();
     if (
       f.groundExposure > 0.12 &&
       this.time - this.scanAt > 0.3 &&
@@ -1224,6 +1794,13 @@ export class RocketEffects {
     }
   }
   afterRender() {
+    for (const restore of this.surfaceRestores) {
+      if (restore.mesh.geometry === restore.appliedGeometry)
+        restore.mesh.geometry = restore.geometry;
+      if (restore.mesh.material === restore.appliedMaterial)
+        restore.mesh.material = restore.material;
+    }
+    this.surfaceRestores.length = 0;
     for (const p of this.restoreSlots) {
       p.mesh.setMatrixAt(p.index, p.matrix);
       p.mesh.instanceMatrix.addUpdateRange(p.index * 16, 16);
@@ -1270,9 +1847,19 @@ export class RocketEffects {
     this.fragments.length = 0;
     this.rubble.count = 0;
     this.flying.length = 0;
+    for (const surface of this.buildingSurfaces.values())
+      this.releaseSurface(surface);
+    for (const material of this.buildingMaterials.values()) material.dispose();
+    this.buildingMaterials.clear();
+    this.contactParts.length = 0;
+    this.contacts.clear();
+    this.surfaceVersion++;
     this.launched.clear();
     this.eventId = this.lastState.events.at(-1)?.id ?? 0;
     this.spawn = 0;
+    this.dustSpawn = 0;
+    this.dustNext = 0;
+    this.dustAlive = 0;
     this.vehicleSpawn = 0;
     this.shockAge = 99;
     this.groundContactCount = 0;

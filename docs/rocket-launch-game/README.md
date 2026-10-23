@@ -2,7 +2,9 @@
 
 2026-10-22，分支 `codex/rocket-launch-game`。以下是執行中的 Three.js / WebGL 畫面，不是生成圖片。
 
-本輪 Titan 改成明亮銀色箭體、清楚的黑色隔熱面與銀框翼片，並加入四枚真正會先分離的外掛助推器。四枚外掛與中央核心同時點火，側助推器先釋放、核心持續推進，最後再分離核心並由上面級飛往太空。地面五股噴流會撞擊實際表面、向外攤開並隨噴嘴高度淡出。[城市驗收 18／18](titan-four-runtime-report.json)、[模型展示 4／4](titan-four-model-report.json)與[完整回歸 2,016／2,016](titan-four-test-summary.json)通過；完整套件含 121 項火箭測試及其中 19 項 UI 測試，TypeScript、lint／格式檢查和 `build:firebase` 通過，沒有部署。[四助推器流程與獨立驗收](TITAN_FOUR_BOOSTERS.md)整理本輪證據。
+本輪修正市區路口的單方面瞬間解體：以實際撞點同步建築損壞與任務碰撞體，對發射前已重疊的低速接觸提供有時間與速度限制的擠壓反應。Titan 五股噴流加入體積火焰與沿道路散開的火舌、卷塵，並修正低推力火焰脫離噴嘴的問題。[市區路口修正與驗收方法](INTERSECTION_CONTACTS.md)記錄本輪 **11 次城市升空／54 項條件**與 **2,036／2,036 完整測試**通過的結果；下方保留先前版本的獨立報告。
+
+前一輪 Titan 改成明亮銀色箭體、清楚的黑色隔熱面與銀框翼片，並加入四枚真正會先分離的外掛助推器。四枚外掛與中央核心同時點火，側助推器先釋放、核心持續推進，最後再分離核心並由上面級飛往太空。地面五股噴流會撞擊實際表面、向外攤開並隨噴嘴高度淡出。[城市驗收 18／18](titan-four-runtime-report.json)、[模型展示 4／4](titan-four-model-report.json)與[完整回歸 2,016／2,016](titan-four-test-summary.json)通過；完整套件含 121 項火箭測試及其中 19 項 UI 測試，TypeScript、lint／格式檢查和 `build:firebase` 通過，沒有部署。[四助推器流程與獨立驗收](TITAN_FOUR_BOOSTERS.md)整理本輪證據。
 
 ![新版三型模型：Titan 銀黑箭體與四枚外掛助推器](evidence/titan-four-models.png)
 
