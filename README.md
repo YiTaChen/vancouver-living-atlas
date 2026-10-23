@@ -12,6 +12,8 @@ Vancouver Living Atlas is an interactive 3D Vancouver that runs in your browser.
 
 **Project specification (繁體中文):** [Completed work, architecture, asset pipeline, roadmap and testing](docs/PROJECT_SPECIFICATION.md). The [material-pipeline acceptance report](docs/visual-quality/material-pipeline/README.md) includes matched images, measured limits and editable Blender source validation.
 
+**Robson / Burrard street pilot:** [Original before/after images, measured costs and limits](docs/visual-quality/robson-burrard-round1/RESULTS.md). This local pilot adds frontage details, material finishing and street activity. Fixed-camera corner FPS fell about 7–9% despite lower CPU cost; further city-wide rollout is deferred.
+
 **AI development backlog (繁體中文):** [City-scale to street-scale requirements, asset dimensions/budgets, offline Blender handoff and future bus/SkyTrain interiors and boarding](docs/AI_AGENT_DEVELOPMENT_BACKLOG.md). Asset agents without WebGL can complete offline production; runtime integration and browser acceptance remain separate.
 
 **October Blender delivery (繁體中文):** [Independent verification, adopted city consumers, rejected candidates, performance costs and next steps](docs/BLENDER_INTEGRATION_REPORT_2026_10.md). Nearby roof equipment, general traffic cars and a limited Ultra-only broadleaf-tree cohort use the new models. Historical staging decisions remain in that report; current SkyTrain passenger travel is documented below.

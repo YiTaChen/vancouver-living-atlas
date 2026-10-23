@@ -1,5 +1,10 @@
 # Robson / Burrard visual pilot — round one
 
+**Results:** [Unretouched before/after images, seven recorder-off windows,
+reverse-order repeats, CPU/GPU diagnostics and limits](RESULTS.md).
+The fixed-camera corner runs lost approximately 7–9% FPS and Burrard about 3%;
+lower CPU query cost is not a general frame-rate improvement or whole-city rollout.
+
 This is a spatially limited pilot, not approval to restyle all Vancouver. The
 owner requested the pilot on 2026-10-23, with staged commits, pushes and merges
 to main. Evaluate its appearance, cost and regressions before expanding it.
