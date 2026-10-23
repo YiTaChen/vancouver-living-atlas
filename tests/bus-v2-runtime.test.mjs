@@ -369,6 +369,9 @@ test('production v2 cabin opens original doors, walks to all 24 real seats and a
         .interactionCandidates()
         .find((candidate) => candidate.id === `bus:seat:${seat.seatId}`);
       assert.ok(sit?.canInteract());
+      const approachDirection = city.camera.getWorldDirection(
+        new THREE.Vector3(),
+      );
       assert.equal(sit.execute(), true);
       assert.equal(visit.snapshot().passengerAnchor, seat.seatId);
       assert.equal(visit.snapshot().seated, true);
@@ -385,7 +388,18 @@ test('production v2 cabin opens original doors, walks to all 24 real seats and a
       assert.ok(
         city.camera
           .getWorldDirection(new THREE.Vector3())
+          .distanceTo(approachDirection) < 1e-5,
+        'sitting preserves the selected view heading',
+      );
+      assert.ok(
+        new THREE.Vector3(0, 0, 1)
+          .applyQuaternion(
+            city.navigation.walker.group.getWorldQuaternion(
+              new THREE.Quaternion(),
+            ),
+          )
           .distanceTo(expectedDirection) < 1e-5,
+        'the seated body still faces the authored seat direction',
       );
       assert.equal(
         visit.alight(),

@@ -37,10 +37,7 @@ import {
   applySkyTrainWorldOpenings,
   type SkyTrainWorldOpenings,
 } from './skytrain-world-openings';
-import {
-  TravelCameraCollision,
-  travelLookDirection,
-} from './travel-camera-collision';
+import { travelLookDirection } from './travel-camera-collision';
 import type { SkyTrainTravelSnapshot } from './skytrain-travel-types';
 import type { InteractionCandidate } from './proximity-interactions';
 import {
@@ -86,6 +83,8 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
   private nextPublish = 0;
   private nextProximity = 0;
   private distanceView = 4;
+  private overviewAnchor: THREE.Vector3 | null = null;
+  private overviewMoved = false;
   private readonly constructionAccess = new Map<
     SkyTrainStationOwner,
     readonly StationConstructionPortal[]
@@ -103,7 +102,6 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     { length: 4 },
     () => new THREE.PointLight(0xe8f5ff, 0, 18, 2),
   );
-  private readonly cameraCollision = new TravelCameraCollision();
   private readonly exteriors = new SkyTrainWorldExteriors();
   private readonly poseScratch = {
     position: new THREE.Vector3(),
@@ -462,6 +460,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
   private captureLights(root: THREE.Object3D) {
     let lights = this.lightSources.get(root);
     if (!lights) {
+      this.city.prepareTravelOccluders?.(root);
       lights = [];
       root.traverse((node) => {
         if (node instanceof THREE.PointLight) {
@@ -863,6 +862,8 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     if (!point) return false;
     this.owner = owner;
     this.station = id;
+    this.overviewAnchor = null;
+    this.overviewMoved = false;
     const platform =
       owner.geometryData.platforms.find(
         (p) => p.line === this.line && p.direction === this.direction,
@@ -895,6 +896,15 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     this.updateCamera();
     this.publish();
     return true;
+  }
+  stand() {
+    const previousYaw = this.yaw;
+    // Adopt the requested view before the base method clears free look and
+    // publishes the standing pose. A refused stand keeps the seated heading.
+    this.yaw += this.lookYaw;
+    const stood = super.stand();
+    if (!stood) this.yaw = previousYaw;
+    return stood;
   }
   chooseDestination(_id: StationId) {
     return false;
@@ -1142,6 +1152,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       }
     }
     if (this.active && this.city.settings.mode === 'orbit' && nav) {
+      this.observeOverviewMoved();
       const origin = this.interactionOrigin;
       if (origin) {
         nav.position.fromArray(origin);
@@ -1165,6 +1176,12 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
             1,
           ),
           amount = forward * (this.aboard ? 1.8 : 2.5) * dt;
+        // Free look stays independent at rest. Walking adopts that visible
+        // heading without moving the camera to the opposite side of the body.
+        if (forward !== 0 && this.lookYaw !== 0) {
+          this.yaw += this.lookYaw;
+          this.lookYaw = 0;
+        }
         if (this.aboard && this.cabinFoot) {
           const before = this.cabinFoot;
           this.cabinFoot =
@@ -1239,8 +1256,68 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       this.publish();
     }
   }
+  /** Rotation and zoom retain the observer's passenger. A deliberate horizontal
+   * pan permanently changes this Overview into a new placement destination. */
+  observeOverviewMoved() {
+    if (
+      this.active &&
+      this.city.settings.mode === 'orbit' &&
+      this.overviewAnchor &&
+      Math.hypot(
+        this.city.controls.target.x - this.overviewAnchor.x,
+        this.city.controls.target.z - this.overviewAnchor.z,
+      ) > 2
+    )
+      this.overviewMoved = true;
+    return this.overviewMoved;
+  }
+  get canResumeOverview() {
+    return Boolean(
+      this.active &&
+      this.city.settings.mode === 'orbit' &&
+      this.overviewAnchor &&
+      !this.observeOverviewMoved(),
+    );
+  }
+  /** Explicit placement abandons only passenger ownership. Autonomous trains,
+   * retained station architecture and the current Overview camera survive. */
+  releaseForPlacement() {
+    if (this.disposed) return false;
+    if (!this.active) return true;
+    if (this.city.settings.mode !== 'orbit' && !this.setOverview(true))
+      return false;
+    this.clearInput();
+    this.resetSeat();
+    this.occupied = null;
+    this.train = this.previewTrain;
+    this.phase = 'idle';
+    this.station = null;
+    this.owner = null;
+    this.foot = null;
+    this.journey = null;
+    this.arrivalPreparation = null;
+    this.pathKey = '';
+    this.clearTube();
+    this.overviewAnchor = null;
+    this.overviewMoved = true;
+    const nav = this.city.navigation;
+    if (nav) {
+      nav.blur();
+      nav.mode = 'orbit';
+      nav.walker.group.visible = false;
+    }
+    this.city.travelReturn?.releaseForPlacement();
+    this.city.interactions?.clear();
+    this.publish();
+    return true;
+  }
   setOverview(enabled: boolean) {
     if (!this.active) return false;
+    if (enabled && this.city.settings.mode === 'orbit') {
+      this.observeOverviewMoved();
+      return true;
+    }
+    if (!enabled && !this.canResumeOverview) return false;
     this.clearInput();
     if (enabled) {
       const origin = this.interactionOrigin;
@@ -1256,6 +1333,8 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
         autoRotate: false,
       };
       this.city.controls.target.copy(target);
+      this.overviewAnchor = target.clone();
+      this.overviewMoved = false;
       this.city.camera.position
         .copy(target)
         .add(new THREE.Vector3(180, 230, 240));
@@ -1270,6 +1349,8 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       this.city.controls.update();
       this.city.onLocalOrbit();
     } else {
+      this.overviewAnchor = null;
+      this.overviewMoved = false;
       this.city.settings = {
         ...this.city.settings,
         mode: 'walk',
@@ -1283,10 +1364,12 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
   }
   zoom(factor: number) {
     if (!Number.isFinite(factor) || factor <= 0) return;
-    this.distanceView = Math.min(
-      14,
-      zoomTravel(this.distanceView, factor).distance,
-    );
+    const next = zoomTravel(this.distanceView, factor);
+    this.distanceView = next.distance;
+    if (next.exit) {
+      this.setOverview(true);
+      return;
+    }
     this.updateCamera();
   }
   private worldWheel = (event: WheelEvent) => {
@@ -1307,12 +1390,16 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     if (!this.active || this.city.settings.mode !== 'walk') return;
     const origin = this.interactionOrigin;
     if (!origin) return;
-    const feet = new THREE.Vector3(...origin),
+    const third = !firstPerson('walk', this.distanceView),
+      viewPitch = third
+        ? -Math.atan(0.28) - THREE.MathUtils.clamp(-this.pitch, -0.22, 1.1)
+        : this.pitch,
+      feet = new THREE.Vector3(...origin),
       bodyQuaternion = new THREE.Quaternion(),
       eye = feet.clone(),
       direction = travelLookDirection(
         this.yaw + this.lookYaw + (this.aboard ? 0 : (this.owner?.yaw ?? 0)),
-        this.pitch,
+        viewPitch,
       );
     if (this.aboard) {
       this.train.setPassengerLocal(
@@ -1329,205 +1416,69 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     const avatarQuaternion = bodyQuaternion
         .clone()
         .multiply(new THREE.Quaternion().setFromAxisAngle(UP, this.yaw)),
-      third = !firstPerson('walk', this.distanceView),
       bodyUp = UP.clone().applyQuaternion(bodyQuaternion),
       bodyForward = new THREE.Vector3(0, 0, 1).applyQuaternion(
         avatarQuaternion,
       );
-    if (this.owner) {
-      const localFoot = this.owner.toLocal(feet.toArray()),
-        elevation = THREE.MathUtils.clamp(0.14 - this.pitch, -0.18, 0.85),
-        pivotHeight = this.passengerSeated
-          ? (this.stationSeat?.seatHeight ?? 0.46) + 0.72
-          : 1.05;
-      // Decide before the boom collision: a roof removed by the cutaway must
-      // not force the camera back below that same roof on every frame.
-      this.owner.setCutaway(
-        !this.aboard &&
-          third &&
-          pivotHeight + this.distanceView * Math.sin(elevation) > 3.3
-          ? localFoot[1]
-          : null,
-      );
-    }
     let camera = eye,
       target = eye.clone().add(direction),
       fov = 65;
     if (third) {
-      const root = this.aboard ? this.train.passengerFrame : this.owner!.group,
-        roots = this.aboard ? [this.train.group] : [this.owner!.group],
+      const seated = this.passengerSeated,
         seatHeight =
           this.cabinSeat?.seatHeight ?? this.stationSeat?.seatHeight ?? 0.46,
-        seated = this.passengerSeated,
-        localFeet = root.worldToLocal(feet.clone()),
-        key = [
-          this.cabinSeat?.id ?? this.stationSeat?.id ?? 'standing',
-          ...localFeet.toArray().map((value) => value.toFixed(3)),
-          this.yaw.toFixed(4),
-          this.lookYaw.toFixed(4),
-          this.pitch.toFixed(4),
-          this.distanceView.toFixed(3),
-        ].join(':'),
-        cached = this.city.camera.userData.skyTrainBodyView as
-          | {
-              root: THREE.Object3D;
-              key: string;
-              camera: THREE.Vector3;
-              target: THREE.Vector3;
-              fov: number;
-            }
-          | undefined;
-      let reused = false;
-      if (cached?.root === root && cached.key === key) {
-        const candidate = root.localToWorld(cached.camera.clone()),
-          pivot = root.localToWorld(cached.target.clone()),
-          checked = this.cameraCollision.resolve(pivot, candidate, roots, 0.12);
-        // Moving doors remain physical even when the seated pose is cached.
-        if (checked.distanceToSquared(candidate) < 1e-6) {
-          camera = candidate;
-          target = pivot;
-          fov = cached.fov;
-          reused = true;
-        }
+        pivot = feet
+          .clone()
+          .addScaledVector(bodyUp, seated ? seatHeight + 0.43 : 1.13),
+        distance = Math.min(14, this.distanceView),
+        right = new THREE.Vector3(1, 0, 0).applyQuaternion(avatarQuaternion),
+        shoulders = feet
+          .clone()
+          .addScaledVector(bodyUp, seated ? seatHeight + 0.68 : 1.42),
+        anchors = [
+          feet
+            .clone()
+            .addScaledVector(bodyUp, seated ? seatHeight + 1.02 : 1.88),
+          feet
+            .clone()
+            .addScaledVector(bodyUp, 0.04)
+            .addScaledVector(bodyForward, seated ? 0.6 : 0),
+          shoulders.clone().addScaledVector(right, 0.35),
+          shoulders.clone().addScaledVector(right, -0.35),
+        ];
+      // Requested heading and pitch own the chase ray. Occluders are handled
+      // during rendering, so stairs, chairs and roofs cannot orbit the camera.
+      camera = pivot.clone().addScaledVector(direction, -distance);
+      target = pivot;
+      const inverseView = new THREE.Quaternion()
+          .setFromRotationMatrix(new THREE.Matrix4().lookAt(camera, target, UP))
+          .invert(),
+        local = new THREE.Vector3(),
+        aspect = Math.max(0.25, this.city.camera.aspect);
+      let tangent = Math.tan(THREE.MathUtils.degToRad(55) / 2);
+      for (const anchor of anchors) {
+        local.copy(anchor).sub(camera).applyQuaternion(inverseView);
+        const depth = Math.max(0.08, -local.z);
+        tangent = Math.max(
+          tangent,
+          Math.abs(local.y) / (depth * 0.88),
+          Math.abs(local.x) / (depth * aspect * 0.88),
+        );
       }
-      if (!reused) {
-        const flat = direction
-            .clone()
-            .addScaledVector(bodyUp, -direction.dot(bodyUp))
-            .normalize(),
-          behind = flat.multiplyScalar(seated ? 1 : -1),
-          elevation = THREE.MathUtils.clamp(0.14 - this.pitch, -0.18, 0.85),
-          head = feet
-            .clone()
-            .addScaledVector(bodyUp, seated ? seatHeight + 0.9 : 1.8)
-            .addScaledVector(bodyForward, seated ? 0.08 : 0),
-          soles = feet
-            .clone()
-            .addScaledVector(bodyUp, 0.12)
-            .addScaledVector(bodyForward, seated ? 0.45 : 0),
-          torso = feet
-            .clone()
-            .addScaledVector(bodyUp, seated ? seatHeight + 0.72 : 1.05)
-            .addScaledVector(bodyForward, seated ? 0.12 : 0),
-          anchors = [head, soles, torso],
-          rotation = new THREE.Matrix4(),
-          inverseView = new THREE.Quaternion(),
-          local = new THREE.Vector3(),
-          aspect = Math.max(0.25, this.city.camera.aspect);
-        let chosen: {
-          camera: THREE.Vector3;
-          target: THREE.Vector3;
-          fov: number;
-          score: number;
-        } | null = null;
-        // A seated person's rear ray starts in its chair. Use a free torso-front
-        // pivot and first try the aisle in front, then shoulder and side views.
-        // Standing keeps the ordinary rear chase as its preferred candidate.
-        search: for (const frontOffset of seated ? [0.12, 0.3, 0.5] : [0]) {
-          const pivot = feet
-            .clone()
-            .addScaledVector(bodyUp, seated ? seatHeight + 0.72 : 1.05)
-            .addScaledVector(bodyForward, frontOffset);
-          for (const angle of [
-            0,
-            0.55,
-            -0.55,
-            Math.PI / 2,
-            -Math.PI / 2,
-            Math.PI,
-            2.2,
-            -2.2,
-          ]) {
-            const axis = behind.clone().applyAxisAngle(bodyUp, angle),
-              desired = pivot
-                .clone()
-                .addScaledVector(axis, this.distanceView * Math.cos(elevation))
-                .addScaledVector(
-                  bodyUp,
-                  this.distanceView * Math.sin(elevation),
-                ),
-              candidate = this.cameraCollision.resolve(
-                pivot,
-                desired,
-                roots,
-                0.12,
-              ),
-              gap = candidate.distanceTo(pivot);
-            if (gap < 0.55) continue;
-            rotation.lookAt(candidate, pivot, bodyUp);
-            inverseView.setFromRotationMatrix(rotation).invert();
-            let tangent = Math.tan(THREE.MathUtils.degToRad(55) / 2),
-              fits = true;
-            for (const anchor of anchors) {
-              local.copy(anchor).sub(candidate).applyQuaternion(inverseView);
-              if (local.z >= -0.08) {
-                fits = false;
-                break;
-              }
-              tangent = Math.max(
-                tangent,
-                Math.abs(local.y) / (-local.z * 0.9),
-                Math.abs(local.x) / (-local.z * aspect * 0.9),
-              );
-            }
-            const requestedFov = THREE.MathUtils.radToDeg(
-              2 * Math.atan(tangent),
-            );
-            if (!fits || requestedFov > 100) continue;
-            let clear = true;
-            for (const anchor of [head, torso]) {
-              // The face and torso must be visible through actual geometry.
-              // A chair may naturally overlap a shoe; that never authorizes a
-              // camera through its frame, cushion, partition or nearby wall.
-              if (
-                this.cameraCollision
-                  .resolve(anchor, candidate, roots, 0.02)
-                  .distanceToSquared(candidate) > 1e-5
-              ) {
-                clear = false;
-                break;
-              }
-            }
-            if (!clear) continue;
-            const score = gap - Math.abs(angle) * 0.12;
-            if (!chosen || score > chosen.score)
-              chosen = {
-                camera: candidate,
-                target: pivot,
-                fov: requestedFov,
-                score,
-              };
-            if (gap >= 1.1) break search;
-          }
-        }
-        if (chosen) {
-          camera = chosen.camera;
-          target = chosen.target;
-          fov = chosen.fov;
-          this.city.camera.userData.skyTrainBodyView = {
-            root,
-            key,
-            camera: root.worldToLocal(camera.clone()),
-            target: root.worldToLocal(target.clone()),
-            fov,
-          };
-        } else {
-          // A free head-side view is the final bounded alternative in a tight
-          // standing pocket. It never places the camera inside the body/seat.
-          const pivot = head.clone().addScaledVector(bodyForward, 0.22),
-            desired = pivot.clone().addScaledVector(bodyForward, 1.2);
-          camera = this.cameraCollision.resolve(pivot, desired, roots, 0.1);
-          if (camera.distanceToSquared(pivot) < 0.04) camera = eye.clone();
-          target = torso;
-          fov = 100;
-          delete this.city.camera.userData.skyTrainBodyView;
-        }
-      }
+      fov = Math.min(100, THREE.MathUtils.radToDeg(2 * Math.atan(tangent)));
     }
+    // The requested chase pose is preserved by whole-object occlusion. Use
+    // that exact pose for the authored station's higher roof cutaway too.
+    this.owner?.updateCutaway(
+      camera,
+      !this.aboard && third ? this.owner.toLocal(feet.toArray())[1] : null,
+    );
+    delete this.city.camera.userData.skyTrainBodyView;
     this.city.camera.near = 0.05;
     this.city.camera.fov = fov;
     this.city.camera.updateProjectionMatrix();
     this.city.camera.position.copy(camera);
+    this.city.camera.up.copy(UP);
     this.city.camera.lookAt(target);
     this.city.controls.target.copy(target);
     this.city.controls.enabled = false;
@@ -1551,7 +1502,6 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       third ? 'third-person' : 'first-person',
     );
   }
-
   dispose() {
     this.city.renderer.domElement.removeEventListener(
       'wheel',

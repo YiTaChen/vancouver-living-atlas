@@ -844,7 +844,13 @@ test('pointer and keyboard mode selection share in-place switching and reject bl
   const home = ast.statements.find(
     (n) => ts.isFunctionDeclaration(n) && n.name?.text === 'Home',
   );
-  const names = ['finishBusVisit', 'switchInScene', 'switchMode', 'dragFigure'];
+  const names = [
+    'finishBusVisit',
+    'prepareTravelPlacement',
+    'switchInScene',
+    'switchMode',
+    'dragFigure',
+  ];
   const actions = home.body.statements
     .filter(
       (n) =>
@@ -894,6 +900,9 @@ test('pointer and keyboard mode selection share in-place switching and reject bl
         teslaEntering: { current: teslaBusy },
         engine: {
           current: {
+            prepareTravelPlacement() {
+              return this.closeBusVisit();
+            },
             closeBusVisit: () => {
               busCloseCalls++;
               return exitAllowed;

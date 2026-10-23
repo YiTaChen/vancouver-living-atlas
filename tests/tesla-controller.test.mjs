@@ -442,6 +442,50 @@ test('overview entry uses the fallback road heading when no local road is verifi
   assert.equal(e.navigation.mode, 'orbit');
 });
 
+test('explicit map entry cannot jump to Robson when the current map has no valid local road', (t) => {
+  const { c, e, world, calls } = setup(t);
+  e.controls.target.set(3500, 12, 4000);
+  e.camera.position.set(3700, 450, 4400);
+  const target = e.controls.target.toArray(),
+    camera = e.camera.position.toArray(),
+    navPosition = e.navigation.position.toArray(),
+    original = world.groundPoseNear.bind(world);
+  world.groundPoseNear = (...args) => {
+    if (Math.hypot(args[0][0] - target[0], args[0][2] - target[2]) < 1) {
+      calls.spawn.push({ position: [...args[0]], radius: args[3] });
+      return null;
+    }
+    return original(...args);
+  };
+  assert.equal(c.enter({ localOnly: true }), false);
+  assert.equal(c.warning, 'no-spawn');
+  assert.equal(c.active, false);
+  assert.equal(c.model, null);
+  assert.equal(c.state, null);
+  assert.equal(calls.spawn.length, 1, 'no distant fallback query is permitted');
+  assert.equal(calls.spawn[0].radius, 48);
+  assert.equal(e.settings.mode, 'orbit');
+  assert.deepEqual(e.controls.target.toArray(), target);
+  assert.deepEqual(e.camera.position.toArray(), camera);
+  assert.deepEqual(e.navigation.position.toArray(), navPosition);
+  assert.equal(calls.legacyModes.length, 0);
+  assert.equal(calls.placementCancels, 0);
+  assert.equal(calls.aircraftClears, 0);
+  assert.equal(calls.invalidations, 0);
+});
+
+test('explicit map entry accepts a physically verified local road without seeking the distant open fallback', (t) => {
+  const { c, e, world, calls } = setup(t);
+  e.controls.target.set(3500, 12, 4000);
+  world.hasLaunchClearance = () => false;
+  assert.equal(c.enter({ localOnly: true }), true);
+  assert.equal(calls.spawn.length, 1);
+  assert.equal(calls.spawn[0].radius, 48);
+  close(c.state.position[0], 3500);
+  close(c.state.position[2], 4000);
+  assert.equal(e.settings.mode, 'tesla');
+});
+
 function offerNearbyOpenCandidate(world) {
   const original = world.groundPoseNear.bind(world);
   world.groundPoseNear = (...args) => {

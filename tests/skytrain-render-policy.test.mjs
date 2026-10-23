@@ -49,8 +49,9 @@ const code = ts.transpileModule(
   }
   export class WorldPassengerHarness extends PassengerHarness {
     ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['aboard'], ts.isGetAccessorDeclaration)}
+    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['canResumeOverview'], ts.isGetAccessorDeclaration)}
     ${members('skytrain-travel', 'SkyTrainTravel', ['interactionOrigin', 'passengerSeated'], ts.isGetAccessorDeclaration)}
-    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['setOverview'], ts.isMethodDeclaration)}
+    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['observeOverviewMoved', 'setOverview'], ts.isMethodDeclaration)}
     ${members('skytrain-travel', 'SkyTrainTravel', ['publish'], ts.isMethodDeclaration)}
     ${members('skytrain-travel', 'SkyTrainTravel', ['clearInput'], ts.isPropertyDeclaration)}
   }

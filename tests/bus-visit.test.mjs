@@ -179,6 +179,31 @@ const open = (visit) => {
   for (let i = 0; i < 25; i++) visit.update(0.05);
 };
 
+test('a real boardable bus enrolls its cabin in walking occlusion and releases it when closed', async () => {
+  const { TravelOcclusion } = await import(cityModule('travel-occlusion'));
+  const f = await fixture(),
+    occlusion = new TravelOcclusion(),
+    prepared = [];
+  f.city.prepareTravelOccluders = (group) => {
+    assert.equal(group.parent, f.city.scene);
+    prepared.push(group);
+    occlusion.refresh([group]);
+  };
+  try {
+    assert.equal(await f.visit.prepare(), true);
+    assert.deepEqual(prepared, [f.owner.group]);
+    assert(occlusion.snapshot().meshCount > 0);
+    assert(occlusion.snapshot().materialCount > 0);
+    assert.equal(f.visit.close(), true);
+    assert.equal(occlusion.snapshot().watchedObjects, 0);
+    assert.equal(occlusion.snapshot().meshCount, 0);
+    assert.equal(occlusion.snapshot().materialCount, 0);
+  } finally {
+    f.visit.dispose();
+    occlusion.dispose();
+  }
+});
+
 test('parking checks front/rear clearance, entire footprint and exact ground identity', () => {
   const { city } = cityFixture();
   const placement = findBusVisitPlacement(city, routes);
@@ -355,7 +380,12 @@ test('boarding enters the physical aisle; nearby sitting uses metadata and look 
       .interactionCandidates()
       .find((row) => row.id === 'bus:seat:seat-09');
     assert.ok(candidate && candidate.canInteract());
+    const approachHeading = f.city.camera.getWorldDirection(new THREE.Vector3());
     assert.equal(candidate.execute(), true);
+    assert.ok(
+      approachHeading.dot(f.city.camera.getWorldDirection(new THREE.Vector3())) > 0.999999,
+      'sitting changes the seated body pose without turning the chosen view',
+    );
     const seat = f.visit.space.seats.find((row) => row.id === 'seat-09');
     const localEye = f.owner.interiorRoot.worldToLocal(
       f.city.camera.position.clone(),
@@ -398,12 +428,34 @@ test('boarding enters the physical aisle; nearby sitting uses metadata and look 
     assert.ok(before.angleTo(f.city.camera.quaternion) > 0.1);
     assert.equal(f.visit.snapshot().passengerAnchor, 'seat-09');
     event('pointerup', { pointerId: 4 });
+    const viewedHeading = f.city.camera.getWorldDirection(new THREE.Vector3());
     assert.equal(f.visit.preview('seat-09'), true);
     assert.equal(f.visit.preview('seat-01'), false);
     assert.equal(f.visit.preview('missing'), false);
     const stand = f.visit.interactionCandidates()[0];
     assert.equal(stand.action, 'stand');
     assert.equal(stand.execute(), true);
+    assert.ok(
+      viewedHeading.dot(f.city.camera.getWorldDirection(new THREE.Vector3())) > 0.999999,
+      'standing keeps the heading the passenger chose through free look',
+    );
+    const walk = f.visit.space.walk.bind(f.visit.space);
+    let requested;
+    f.visit.space.walk = (point, x, z) => {
+      requested = new THREE.Vector3(x, 0, z);
+      return walk(point, x, z);
+    };
+    f.visit.setTouchAxes(0, 1);
+    f.visit.update(0.02);
+    f.visit.clearInput();
+    const worldStep = requested.transformDirection(
+      f.owner.interiorRoot.matrixWorld,
+    );
+    assert.ok(
+      worldStep.dot(viewedHeading.clone().setY(0).normalize()) > 0.999999,
+      'mobile forward follows the visible heading instead of the old body facing',
+    );
+    f.visit.space.walk = walk;
     assert.equal(f.visit.snapshot().passengerAnchor, 'main-aisle');
     assert.equal(f.visit.snapshot().seated, false);
     assert.equal(f.calls.poses.at(-1).value, false);

@@ -614,12 +614,13 @@ export class BusCabinVisit {
       !this.transfers.changeRideAnchor(VISITOR, anchor.anchor)
     )
       return false;
+    const viewedHeading = this.yaw + this.lookYaw;
     this.cabinStand = stand;
     this.cabinSeat = seat;
     this.viewAnchor = seat.id;
     this.previewAnchor = null;
     this.yaw = seat.yaw;
-    this.lookYaw = 0;
+    this.lookYaw = viewedHeading - seat.yaw;
     this.clearInput();
     this.updateCamera();
     this.notify();
@@ -646,6 +647,7 @@ export class BusCabinVisit {
     this.cabinStand = null;
     this.viewAnchor = this.standingAnchor;
     this.previewAnchor = null;
+    this.yaw += this.lookYaw;
     this.lookYaw = 0;
     this.clearInput();
     this.updateCamera();
@@ -912,6 +914,7 @@ export class BusCabinVisit {
         this.rideSpeed = this.rideTime = this.rideProgress = 0;
         this.ridePlan = serviceFrame ? null : this.planRide();
         this.city.scene.add(owner.group);
+        this.city.prepareTravelOccluders?.(owner.group);
         this.accessibility = BusAccessibility.create(
           owner.group,
           owner.manifest.accessibility,
@@ -1196,6 +1199,11 @@ export class BusCabinVisit {
           -1,
           1,
         );
+        // Moving adopts the direction already visible through free look.
+        if (forward !== 0) {
+          this.yaw += this.lookYaw;
+          this.lookYaw = 0;
+        }
         const previous = this.cabinFoot;
         this.cabinFoot = this.space.walk(
           previous,

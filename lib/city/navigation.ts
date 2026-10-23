@@ -45,7 +45,7 @@ import {
   type InteriorView,
   type TravelView,
 } from './travel-camera';
-import { clampTravelPitch, travelLookDirection, TravelCameraCollision } from './travel-camera-collision';
+import { clampTravelPitch, travelLookDirection } from './travel-camera-collision';
 export interface WalkSeatPose {
   id: string;
   floor: readonly [number, number, number];
@@ -148,7 +148,6 @@ export class StreetNavigation {
   trafficStop: TrafficStop;
   cameraDistances = { ...TRAVEL_DEFAULT_DISTANCE };
   renderedDistance = 0;
-  private readonly cameraCollision = new TravelCameraCollision();
   interiors: Record<'drive' | 'boat', InteriorView> = {
     drive: 'interior',
     boat: 'interior',
@@ -1373,7 +1372,7 @@ export class StreetNavigation {
     const walkThird = this.mode === 'walk' && !firstPerson('walk', distance);
     const walkTarget = eye.clone().add(new THREE.Vector3(0, this.walkSeat ? -0.35 : -0.55, 0));
     if (walkThird) {
-      // Orbit around the body, keeping it framed when a ceiling shortens the boom.
+      // Keep the player's requested angle. Occluders are cut away by the renderer.
       const angle = Math.atan(0.28) + THREE.MathUtils.clamp(this.pitch, -0.22, 1.1);
       pos.copy(walkTarget).addScaledVector(dir, -distance * Math.cos(angle));
       pos.y += distance * Math.sin(angle);
@@ -1393,12 +1392,6 @@ export class StreetNavigation {
     if (blend > 0.5)
       pos.y = Math.max(pos.y, this.mode === 'walk'
         ? this.walker.group.position.y + 0.25 : this.e.elevation(pos.x, pos.z) + 2);
-    if (this.mode === 'walk') {
-      // Resolve all three coordinates against actual roof/wall triangles. XZ
-      // ground tests alone let a raised chase camera cross an interior ceiling.
-      this.cameraCollision.resolve(walkThird ? walkTarget : eye, pos,
-        [this.e.buildings, this.e.landmarks, this.e.roads, this.e.terrain], 0.18, pos);
-    }
     // Distance itself is eased, so the eye remains attached to movement without drift.
     this.e.camera.position.copy(pos);
     this.e.camera.lookAt(

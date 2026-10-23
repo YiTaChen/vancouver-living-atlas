@@ -6,15 +6,9 @@ import assert from 'node:assert/strict';
 const DELTAS = [
   {
     current:
-      "  type TravelView,\n} from './travel-camera';\nimport { clampTravelPitch, travelLookDirection, TravelCameraCollision } from './travel-camera-collision';\nexport interface WalkSeatPose {\n  id: string;\n",
+      "  type TravelView,\n} from './travel-camera';\nimport { clampTravelPitch, travelLookDirection } from './travel-camera-collision';\nexport interface WalkSeatPose {\n  id: string;\n",
     prior:
       "  type TravelView,\n} from './travel-camera';\nexport interface WalkSeatPose {\n  id: string;\n",
-  },
-  {
-    current:
-      "  cameraDistances = { ...TRAVEL_DEFAULT_DISTANCE };\n  renderedDistance = 0;\n  private readonly cameraCollision = new TravelCameraCollision();\n  interiors: Record<'drive' | 'boat', InteriorView> = {\n    drive: 'interior',\n",
-    prior:
-      "  cameraDistances = { ...TRAVEL_DEFAULT_DISTANCE };\n  renderedDistance = 0;\n  interiors: Record<'drive' | 'boat', InteriorView> = {\n    drive: 'interior',\n",
   },
   {
     current:
@@ -30,7 +24,7 @@ const DELTAS = [
   },
   {
     current:
-      "    const pos = eye.clone().addScaledVector(dir, -distance * blend);\n    pos.y += distance * (this.mode === 'walk' ? 0.28 : 0.35) * blend;\n    const walkThird = this.mode === 'walk' && !firstPerson('walk', distance);\n    const walkTarget = eye.clone().add(new THREE.Vector3(0, this.walkSeat ? -0.35 : -0.55, 0));\n    if (walkThird) {\n      // Orbit around the body, keeping it framed when a ceiling shortens the boom.\n      const angle = Math.atan(0.28) + THREE.MathUtils.clamp(this.pitch, -0.22, 1.1);\n      pos.copy(walkTarget).addScaledVector(dir, -distance * Math.cos(angle));\n      pos.y += distance * Math.sin(angle);\n    }\n    // Clip the chase segment at walls/banks; collision checks never move the player.\n    const steps = Math.ceil(distance / 1.5);\n",
+      "    const pos = eye.clone().addScaledVector(dir, -distance * blend);\n    pos.y += distance * (this.mode === 'walk' ? 0.28 : 0.35) * blend;\n    const walkThird = this.mode === 'walk' && !firstPerson('walk', distance);\n    const walkTarget = eye.clone().add(new THREE.Vector3(0, this.walkSeat ? -0.35 : -0.55, 0));\n    if (walkThird) {\n      // Keep the player's requested angle. Occluders are cut away by the renderer.\n      const angle = Math.atan(0.28) + THREE.MathUtils.clamp(this.pitch, -0.22, 1.1);\n      pos.copy(walkTarget).addScaledVector(dir, -distance * Math.cos(angle));\n      pos.y += distance * Math.sin(angle);\n    }\n    // Clip the chase segment at walls/banks; collision checks never move the player.\n    const steps = Math.ceil(distance / 1.5);\n",
     prior:
       "    const pos = eye.clone().addScaledVector(dir, -distance * blend);\n    pos.y += distance * (this.mode === 'walk' ? 0.28 : 0.35) * blend;\n    // Clip the chase segment at walls/banks; collision checks never move the player.\n    const steps = Math.ceil(distance / 1.5);\n",
   },
@@ -42,7 +36,7 @@ const DELTAS = [
   },
   {
     current:
-      "    }\n    if (blend > 0.5)\n      pos.y = Math.max(pos.y, this.mode === 'walk'\n        ? this.walker.group.position.y + 0.25 : this.e.elevation(pos.x, pos.z) + 2);\n    if (this.mode === 'walk') {\n      // Resolve all three coordinates against actual roof/wall triangles. XZ\n      // ground tests alone let a raised chase camera cross an interior ceiling.\n      this.cameraCollision.resolve(walkThird ? walkTarget : eye, pos,\n        [this.e.buildings, this.e.landmarks, this.e.roads, this.e.terrain], 0.18, pos);\n    }\n    // Distance itself is eased, so the eye remains attached to movement without drift.\n    this.e.camera.position.copy(pos);\n    this.e.camera.lookAt(\n      this.mode === 'walk' ? walkThird ? walkTarget\n        : pos.clone().add(travelLookDirection(viewYaw, -this.pitch)) : eye\n        .clone()\n        .addScaledVector(\n          dir,\n          THREE.MathUtils.lerp(25, 2, blend),\n        )\n        .add(\n          new THREE.Vector3(\n            0,\n            -0.25 * blend - this.pitch * (25 - blend * 15),\n            0,\n          ),\n",
+      "    }\n    if (blend > 0.5)\n      pos.y = Math.max(pos.y, this.mode === 'walk'\n        ? this.walker.group.position.y + 0.25 : this.e.elevation(pos.x, pos.z) + 2);\n    // Distance itself is eased, so the eye remains attached to movement without drift.\n    this.e.camera.position.copy(pos);\n    this.e.camera.lookAt(\n      this.mode === 'walk' ? walkThird ? walkTarget\n        : pos.clone().add(travelLookDirection(viewYaw, -this.pitch)) : eye\n        .clone()\n        .addScaledVector(\n          dir,\n          THREE.MathUtils.lerp(25, 2, blend),\n        )\n        .add(\n          new THREE.Vector3(\n            0,\n            -0.25 * blend - this.pitch * (25 - blend * 15),\n            0,\n          ),\n",
     prior:
       "    }\n    if (blend > 0.5)\n      pos.y = Math.max(pos.y, this.e.elevation(pos.x, pos.z) + 2);\n    // Distance itself is eased, so the eye remains attached to movement without drift.\n    this.e.camera.position.copy(pos);\n    this.e.camera.lookAt(\n      eye\n        .clone()\n        .addScaledVector(\n          dir,\n          THREE.MathUtils.lerp(\n            25,\n            this.mode === 'walk'\n              ? Math.min(1.5, Math.max(0, distance - 2) * 0.75)\n              : 2,\n            blend,\n          ),\n        )\n        .add(\n          new THREE.Vector3(\n            0,\n            -(this.mode === 'walk' ? 0.5 : 0.25) * blend -\n              this.pitch * (25 - blend * (this.mode === 'walk' ? 20 : 15)),\n            0,\n          ),\n",
   },
