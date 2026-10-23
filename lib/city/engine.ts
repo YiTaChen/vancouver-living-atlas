@@ -91,6 +91,7 @@ import { StreetNavigation } from './navigation';
 import { MapPlacement } from './placement';
 import { CityClock, type ClockState } from './clock';
 import { createLandmarks } from './landmarks';
+import type { SiwashRockDetail } from './siwash-rock-detail';
 import { createRailway, updateRailway, type Railway } from './railway';
 import type { TrainKind } from './rail-path';
 import { WaterWorld } from './water-world';
@@ -206,6 +207,7 @@ export class CityEngine {
   terrain = new THREE.Group();
   landmarks = new THREE.Group();
   landmarkDetails: LandmarkDetail[] = [];
+  siwashRock: SiwashRockDetail | null = null;
   interiors: PublicInteriors | null = null;
   landmarkWorker: LandmarkWorkerClient<THREE.Group> | null = null;
   landmarkWarmup: LandmarkGpuWarmup | null = null;
@@ -1172,6 +1174,7 @@ export class CityEngine {
     this.architecturalDetails?.update();
     this.streetscapeKit?.update();
     this.streetFurniture?.update();
+    this.siwashRock?.update();
     this.landmarkWorker?.beginFrame();
     if (this.runtimePerformance)
       this.runtimePerformance.measure('landmark-detail', () =>
@@ -2415,6 +2418,8 @@ export class CityEngine {
     this.placement?.destroy();
     this.controls?.dispose();
     this.landmarkDetails.forEach((l) => l.disposePending());
+    this.siwashRock?.dispose();
+    this.siwashRock = null;
     this.sceneryPreparation.dispose();
     this.landmarkWarmup?.dispose();
     this.landmarkWorker?.dispose();

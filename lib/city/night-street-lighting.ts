@@ -29,12 +29,34 @@ export interface NightStreetFieldOptions {
   allowed: (x: number, z: number) => boolean;
   /** Smaller fields are useful for tests; production never exceeds the fixed budget. */
   size?: number;
+  /** Source-local park pools never inherit the downtown road-wide fill. */
+  sourceLocalOnly?: boolean;
+  /** An independent bounded field, baked without its own material wrappers.
+   * One owner installs both samplers using one world-position varying. */
+  park?: Omit<NightStreetFieldOptions, 'park'>;
 }
 export interface NightStreetSample {
   street: number;
   warm: number;
   groundY: number | null;
   coverage: number;
+}
+export interface NightStreetLightingStats {
+  size: number;
+  textureBytes: number;
+  textures: number;
+  activeTexels: number;
+  lampSources: number;
+  roadSources: number;
+  buildMs: number;
+  wrappedMaterials: number;
+  disabledLamps: number;
+  warmStateBytes: number;
+  disposed: boolean;
+  nightAmount: number;
+  activity: number;
+  park?: NightStreetLightingStats;
+  downtownTextureBytes?: number;
 }
 
 type Material = THREE.MeshStandardMaterial | THREE.MeshPhysicalMaterial;
@@ -85,6 +107,7 @@ export class NightStreetLighting {
   private readonly bytes: Uint8Array;
   private readonly warm: Float32Array;
   private readonly lampXZ: Float64Array;
+  private readonly park?: NightStreetLighting;
   private readonly disabledLamps = new Set<number>();
   private readonly wrappers = new Map<Material, Wrapper>();
   private disposed = false;
@@ -249,7 +272,8 @@ export class NightStreetLighting {
           broad = Math.max(0, 1 - distance / 32) ** 2,
           pool = Math.max(0, 1 - distance / 22) ** 2;
         if (broad <= 0) return;
-        street[index] = Math.max(street[index], broad * 0.28);
+        if (!options.sourceLocalOnly)
+          street[index] = Math.max(street[index], broad * 0.28);
         // Retain the unclamped sum: subtracting a broken source from a clipped
         // value would incorrectly switch off the other overlapping lamp pools.
         warm[index] += pool;
@@ -318,6 +342,19 @@ export class NightStreetLighting {
       roadSources: roads.length,
       buildMs: performance.now() - start,
     };
+    if (options.park) {
+      try {
+        this.park = new NightStreetLighting({
+          ...options.park,
+          roads: [],
+          sourceLocalOnly: true,
+        });
+        this.park.texture.name = 'Static source-local Stanley Park light field';
+      } catch (error) {
+        this.texture.dispose();
+        throw error;
+      }
+    }
   }
 
   /** Pure uniform changes: street lighting remains active at midnight and no
@@ -328,6 +365,7 @@ export class NightStreetLighting {
       ? clamp(nightAmount)
       : 0;
     this.uniforms.uAtlasNightActivity.value = nightStreetActivity(hour);
+    this.park?.update(hour, nightAmount);
   }
 
   /** Switch off one baked warm pool without rebuilding geometry/materials or
@@ -335,7 +373,16 @@ export class NightStreetLighting {
    * the aggregate street fill and immutable height/coverage datum are retained.
    * CPU state is one fixed float field plus two coordinates per source, never
    * a full field per lamp. The same texture and shader uniforms stay attached. */
-  disableLamp(index: number) {
+  disableLamp(index: number): boolean {
+    // Render/impact indices map into the concatenated downtown + park source
+    // inventory. A park hit must never subtract a downtown source with index 0.
+    if (
+      !this.disposed &&
+      Number.isInteger(index) &&
+      index >= this.lampXZ.length / 2 &&
+      this.park
+    )
+      return this.park.disableLamp(index - this.lampXZ.length / 2);
     if (
       this.disposed ||
       !Number.isInteger(index) ||
@@ -424,11 +471,26 @@ export class NightStreetLighting {
     };
   }
 
+  /** Independent QA access keeps existing downtown samples byte-for-byte. */
+  samplePark(x: number, z: number): NightStreetSample {
+    return (
+      this.park?.sample(x, z) ?? {
+        street: 0,
+        warm: 0,
+        groundY: null,
+        coverage: 0,
+      }
+    );
+  }
+
   /** Preserve each source's surface/wheel/facade shader and program identity.
    * Instanced and BatchedMesh transformations are applied after deformation.
    * The existing normal map and indirect AO remain in the normal PBR pipeline.
    */
-  wrapMaterial(material: Material, options: { facade?: boolean } = {}) {
+  wrapMaterial(
+    material: Material,
+    options: { facade?: boolean; parkOnly?: boolean } = {},
+  ) {
     if (this.disposed)
       throw new Error('Night street lighting has been disposed');
     if (this.wrappers.has(material)) return false;
@@ -438,12 +500,13 @@ export class NightStreetLighting {
     // oxlint-disable-next-line typescript/unbound-method
     const originalKey = material.customProgramCacheKey;
     const facade = options.facade === true;
+    const parkOnly = options.parkOnly === true;
     const compile: Material['onBeforeCompile'] = (shader, renderer) => {
       originalCompile.call(material, shader, renderer);
-      this.installShader(shader, facade);
+      this.installShader(shader, facade, parkOnly);
     };
     const key = () =>
-      `${originalKey.call(material)}|atlas-night-street-v1-${facade ? 'facade' : 'surface'}`;
+      `${originalKey.call(material)}|atlas-night-street-v1-${facade ? 'facade' : 'surface'}${this.park ? '-park-v1' : ''}${parkOnly ? '-park-only' : ''}`;
     const disposeListener = () => this.releaseMaterial(material);
     material.onBeforeCompile = compile;
     material.customProgramCacheKey = key;
@@ -460,8 +523,14 @@ export class NightStreetLighting {
     return true;
   }
 
-  private installShader(shader: Shader, facade: boolean) {
+  private installShader(shader: Shader, facade: boolean, parkOnly: boolean) {
     Object.assign(shader.uniforms, this.uniforms);
+    if (this.park)
+      Object.assign(shader.uniforms, {
+        uAtlasParkNightField: this.park.uniforms.uAtlasNightField,
+        uAtlasParkNightBounds: this.park.uniforms.uAtlasNightBounds,
+        uAtlasParkNightHeights: this.park.uniforms.uAtlasNightHeights,
+      });
     shader.vertexShader =
       'varying vec3 vAtlasNightStreetWorld;\n' + shader.vertexShader;
     shader.vertexShader = shader.vertexShader.replace(
@@ -487,10 +556,25 @@ export class NightStreetLighting {
       vec4 atlasNightFieldSample(vec2 worldXZ) {
         // Coherent day/outside branches avoid a field lookup without creating
         // another shader variant when the clock or camera location changes.
+        ${parkOnly ? 'return vec4(0.0); // Preserve existing downtown terrain reception.' : ''}
         if (uAtlasNightAmount <= 0.001) return vec4(0.0);
         vec2 atlasUv = (worldXZ - uAtlasNightBounds.xy) * uAtlasNightBounds.zw;
         if (any(lessThan(atlasUv, vec2(0.0))) || any(greaterThan(atlasUv, vec2(1.0)))) return vec4(0.0);
         return texture2D(uAtlasNightField, atlasUv);
+      }
+      ${
+        this.park
+          ? `
+      uniform sampler2D uAtlasParkNightField;
+      uniform vec4 uAtlasParkNightBounds;
+      uniform vec2 uAtlasParkNightHeights;
+      vec4 atlasParkNightFieldSample(vec2 worldXZ) {
+        if (uAtlasNightAmount <= 0.001) return vec4(0.0);
+        vec2 atlasParkUv = (worldXZ - uAtlasParkNightBounds.xy) * uAtlasParkNightBounds.zw;
+        if (any(lessThan(atlasParkUv, vec2(0.0))) || any(greaterThan(atlasParkUv, vec2(1.0)))) return vec4(0.0);
+        return texture2D(uAtlasParkNightField, atlasParkUv);
+      }`
+          : ''
       }
     \n` + shader.fragmentShader;
     const hasFacade =
@@ -530,20 +614,42 @@ export class NightStreetLighting {
         * uAtlasNightAmount * uAtlasNightActivity * 0.13;`
           : ''
       }
+      ${
+        this.park
+          ? `
+      // Only finite pools surrounding adopted municipal poles illuminate park
+      // receivers. No road-wide or ambient term is introduced into the forest.
+      vec4 atlasParkField = atlasParkNightFieldSample(vAtlasNightStreetWorld.xz);
+      float atlasParkGround = uAtlasParkNightHeights.x + (atlasParkField.b / max(atlasParkField.a, 0.0001)) * uAtlasParkNightHeights.y;
+      float atlasParkHeight = vAtlasNightStreetWorld.y - atlasParkGround;
+      float atlasParkHeightFade = smoothstep(-3.0, -1.0, atlasParkHeight) * (1.0 - smoothstep(3.2, 20.0, atlasParkHeight));
+      reflectedLight.indirectDiffuse += diffuseColor.rgb * vec3(1.0, 0.82, 0.60)
+        * atlasParkField.g * 0.45 * atlasFacing * atlasParkHeightFade
+        * uAtlasNightAmount * atlasReceiver;`
+          : ''
+      }
     `,
     );
   }
 
-  stats() {
+  stats(): NightStreetLightingStats {
+    const park = this.park?.stats();
     return {
       ...this.fieldStats,
-      textures: this.disposed ? 0 : 1,
+      textureBytes: this.fieldStats.textureBytes + (park?.textureBytes ?? 0),
+      textures: (this.disposed ? 0 : 1) + (park?.textures ?? 0),
       wrappedMaterials: this.wrappers.size,
-      disabledLamps: this.disabledLamps.size,
-      warmStateBytes: this.warm.byteLength + this.lampXZ.byteLength,
+      disabledLamps: this.disabledLamps.size + (park?.disabledLamps ?? 0),
+      warmStateBytes:
+        this.warm.byteLength +
+        this.lampXZ.byteLength +
+        (park?.warmStateBytes ?? 0),
       disposed: this.disposed,
       nightAmount: this.uniforms.uAtlasNightAmount.value,
       activity: this.uniforms.uAtlasNightActivity.value,
+      ...(park
+        ? { park, downtownTextureBytes: this.fieldStats.textureBytes }
+        : {}),
     };
   }
 
@@ -567,5 +673,6 @@ export class NightStreetLighting {
     this.uniforms.uAtlasNightAmount.value = 0;
     for (const material of this.wrappers.keys()) this.releaseMaterial(material);
     this.texture.dispose();
+    this.park?.dispose();
   }
 }

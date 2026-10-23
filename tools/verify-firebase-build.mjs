@@ -163,6 +163,11 @@ export async function verifyFirebaseBuild(
     'Instrumented QA builds must never be deployed',
   );
   assert(
+    !scripts.includes('Park scenery QA:') &&
+      !files.some((name) => /(?:^|\/)park-scenery-qa[.-]/.test(name)),
+    'Park scenery diagnostics must not ship in the public build',
+  );
+  assert(
     !scripts.includes('Save SkyTrain cabin checkpoint'),
     'SkyTrain capture controls must not ship in production',
   );

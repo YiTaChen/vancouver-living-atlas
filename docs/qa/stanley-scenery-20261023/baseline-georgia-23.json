@@ -1,0 +1,39 @@
+{
+  "checkpoint": "Georgia entrance",
+  "hour": 23,
+  "quality": "balanced",
+  "qualityMode": "manual",
+  "camera": [
+    -568.1762646475418,
+    24.071681821914005,
+    -1165.2682209596032
+  ],
+  "target": [
+    -596.1762646475418,
+    6.071681821914,
+    -1195.2682209596032
+  ],
+  "lighting": {
+    "size": 512,
+    "textureBytes": 1048576,
+    "textures": 1,
+    "activeTexels": 81249,
+    "lampSources": 1530,
+    "roadSources": 1314,
+    "buildMs": 721.2999999970198,
+    "wrappedMaterials": 163,
+    "disabledLamps": 0,
+    "warmStateBytes": 1073056,
+    "disposed": false,
+    "nightAmount": 1,
+    "activity": 0.7542084908999245
+  },
+  "render": {
+    "calls": 197,
+    "triangles": 1925613
+  },
+  "memory": {
+    "geometries": 721,
+    "textures": 69
+  }
+}
