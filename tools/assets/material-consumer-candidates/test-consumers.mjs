@@ -68,7 +68,7 @@ function protectedSources() {
   return { baseline, sources };
 }
 
-test('Reviewed additive seating and character selection project to their unchanged source fixtures while all other bytes stay exact', () => {
+test('Reviewed seating, character selection and camera changes project to unchanged source fixtures while all other bytes stay exact', () => {
   const { baseline, sources } = protectedSources();
   const audit = assertProtectedSources(sources, baseline);
   assert.equal(audit.reviewedBase, '53bb3c6');
@@ -80,7 +80,7 @@ test('Reviewed additive seating and character selection project to their unchang
     assert.equal(row.projectedHash, baseline[row.path]);
     assert.notEqual(row.actualHash, row.baselineHash);
     assert(row.reviewed.length > 0);
-    sources[row.path] = (row.reviewed.every(label => label.startsWith('character selection'))
+    sources[row.path] = (!row.reviewed.includes('walk-seat contract') && row.path === 'lib/city/navigation.ts'
       ? projectBeforeCharacter(row.path, sources[row.path])
       : projectBeforeSeating(row.path, sources[row.path])).source;
   }
@@ -124,7 +124,7 @@ test('Both seated-source fixtures and the original pre-seating navigation fixtur
   const { baseline, sources } = protectedSources();
   const path = 'lib/city/navigation.ts';
   const current = assertProtectedSources(sources, baseline).compatibility.find(row => row.path === path);
-  assert(current.reviewed.every(label => label.startsWith('character selection')),
+  assert(current.reviewed.every(label => label.startsWith('character selection') || label.startsWith('walk camera')),
     'the current seated-source fixture must preserve all seating and curb code');
   const curbDelta = `        // Only explicit, static curb chunks from the source road group. Keep
         // them out of placement raycasts and navigation height sampling.
@@ -168,6 +168,22 @@ test('Character compatibility rejects mutated, incomplete, duplicated or relocat
     assert.throws(() => assertProtectedSources({ ...sources, [path]: source.replace(before, after) }, baseline),
       /Protected pre-seating source drift|Reviewed seating anchor changed/,
       `unreviewed character mutation rejected: ${before}`);
+  }
+});
+
+test('Camera compatibility rejects altered, missing or duplicated camera changes without weakening movement or material hashes', () => {
+  const { baseline, sources } = protectedSources();
+  const path = 'lib/city/navigation.ts', source = sources[path];
+  for (const [before, after] of [
+    ['this.mode === \'walk\' ? clampTravelPitch(pitch)', 'this.mode === \'walk\' ? pitch'],
+    ['this.e.roads, this.e.terrain], 0.18, pos)', 'this.e.roads, this.e.terrain], 0.01, pos)'],
+    ['    this.e.renderer.domElement.setPointerCapture?.(ev.pointerId);\n', ''],
+    ['  private readonly cameraCollision = new TravelCameraCollision();\n',
+      '  private readonly cameraCollision = new TravelCameraCollision();\n  private readonly cameraCollision = new TravelCameraCollision();\n'],
+  ]) {
+    assert(source.includes(before));
+    assert.throws(() => assertProtectedSources({ ...sources, [path]: source.replace(before, after) }, baseline),
+      /Protected pre-seating source drift|Reviewed seating anchor changed/);
   }
 });
 

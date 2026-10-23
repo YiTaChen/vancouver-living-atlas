@@ -3,6 +3,15 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import * as THREE from 'three';
+import { cityModule } from './helpers/city-modules.mjs';
+import {
+  actualTrain,
+  stationOwner,
+  ridePath,
+  routes,
+} from './helpers/skytrain-geometry.mjs';
+
+const { project } = await import(cityModule('geo'));
 
 // Execute the actual engine render method and passenger underground getters.
 // Only the GPU renderer/composer is recorded; no second visibility policy is
@@ -30,11 +39,20 @@ function members(file, className, names, predicate) {
 }
 const code = ts.transpileModule(
   `
+  import * as THREE from '${import.meta.resolve('three')}';
+  import { project } from '${cityModule('geo')}';
   export class RenderHarness {
     ${members('engine', 'CityEngine', ['renderScene', 'fly', 'navigateMinimap'], ts.isMethodDeclaration)}
   }
   export class PassengerHarness {
     ${members('skytrain-travel', 'SkyTrainTravel', ['active', 'aboard', 'underground'], ts.isGetAccessorDeclaration)}
+  }
+  export class WorldPassengerHarness extends PassengerHarness {
+    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['aboard'], ts.isGetAccessorDeclaration)}
+    ${members('skytrain-travel', 'SkyTrainTravel', ['interactionOrigin', 'passengerSeated'], ts.isGetAccessorDeclaration)}
+    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['setOverview'], ts.isMethodDeclaration)}
+    ${members('skytrain-travel', 'SkyTrainTravel', ['publish'], ts.isMethodDeclaration)}
+    ${members('skytrain-travel', 'SkyTrainTravel', ['clearInput'], ts.isPropertyDeclaration)}
   }
 `,
   {
@@ -44,7 +62,7 @@ const code = ts.transpileModule(
     },
   },
 ).outputText;
-const { RenderHarness, PassengerHarness } = await import(
+const { RenderHarness, PassengerHarness, WorldPassengerHarness } = await import(
   `data:text/javascript;base64,${Buffer.from(code).toString('base64')}`
 );
 
@@ -237,7 +255,7 @@ for (const composer of [false, true]) {
   });
 }
 
-for (const method of ['fly', 'navigateMinimap']) {
+for (const method of ['navigateMinimap']) {
   test(`actual engine ${method} cannot move the camera or replace travel while a passenger is in a station or aboard`, () => {
     for (const phase of ['loading', 'station', 'riding']) {
       const f = fixture({ underground: true });
@@ -298,3 +316,149 @@ for (const method of ['fly', 'navigateMinimap']) {
     }
   });
 }
+
+test('actual engine fly opens an observer view while preserving the actual station, seat and selected-car passenger pose', async () => {
+  const owner = stationOwner('waterfront'),
+    train = await actualTrain('expo'),
+    path = ridePath(
+      routes.segments.find((segment) => segment.lineId === 'expo'),
+    );
+  train.setPathPose(path, 0.43);
+  assert(train.selectPassengerCar(2));
+  try {
+    for (const aboard of [false, true])
+      for (const seated of [false, true])
+        for (const animate of [false, true]) {
+          const f = fixture({ underground: true });
+          try {
+            const e = f.engine,
+              bench = owner.benchSeats()[0],
+              seat = train.passengerSpace.seats[0],
+              calls = [];
+            const passenger = Object.assign(new WorldPassengerHarness(), {
+              city: e,
+              phase: aboard ? 'riding' : 'station',
+              station: 'waterfront',
+              owner,
+              foot: bench.stand,
+              stationSeat: !aboard && seated ? bench : null,
+              cabinFoot: train.passengerSpace.doorSpawn('left'),
+              cabinSeat: aboard && seated ? seat : null,
+              train,
+              occupied: aboard ? { id: 'same-autonomous-service' } : null,
+              busy: false,
+              disposed: false,
+              keys: new Set(['KeyW']),
+              axes: { x: 0.2, y: -1 },
+              drag: { pointerId: 1 },
+              onChange: () => calls.push('publish'),
+              updateCamera: () =>
+                assert.fail('overview must not reposition the passenger'),
+            });
+            train.setPassengerLocal(
+              passenger.cabinSeat?.position ?? passenger.cabinFoot,
+              passenger.cabinSeat?.eyeHeight ?? 1.65,
+              passenger.cabinSeat?.eyeOffsetXZ,
+            );
+            e.skyTrainTravel = passenger;
+            e.elevation = () => 1.1;
+            e.onLocalOrbit = () => calls.push('overview');
+            e.onTravelResume = () => assert.fail('fly must remain an observer');
+            e.completeLocalMapTransition = () => calls.push('finish-map');
+            e.travelReturn = {
+              invalidate: (remember) => calls.push(['invalidate', remember]),
+            };
+            e.controls.update = () => calls.push('controls');
+            e.navigation = {
+              mode: 'walk',
+              position: new THREE.Vector3(...passenger.interactionOrigin),
+              setMode: () =>
+                assert.fail('fly must not replace the passenger controller'),
+            };
+            const before = {
+              origin: passenger.interactionOrigin,
+              foot: structuredClone(passenger.foot),
+              cabinFoot: [...passenger.cabinFoot],
+              station: passenger.station,
+              stationSeat: passenger.stationSeat,
+              cabinSeat: passenger.cabinSeat,
+              occupied: passenger.occupied,
+              navigationPosition: e.navigation.position.toArray(),
+              trainPosition: train.group.position.toArray(),
+              trainQuaternion: train.group.quaternion.toArray(),
+              passengerPosition: train.passenger.getWorldPosition(
+                new THREE.Vector3(),
+              ),
+              passengerParent: train.passenger.parent,
+              frame: train.passengerFrame,
+              camera: e.camera,
+            };
+            const view = {
+              coord: [-123.12, 49.28],
+              distance: 1300,
+              azimuth: 0.3,
+              elevation: 0.8,
+            };
+            e.fly(view, animate);
+            assert.equal(e.camera, before.camera);
+            assert.equal(e.settings.mode, 'orbit');
+            assert.equal(e.settings.autoRotate, false);
+            assert.equal(e.controls.enabled, true);
+            assert.equal(e.camera.near, 2);
+            assert.equal(e.camera.fov, 48);
+            assert.equal(e.skyTrainTravel, passenger);
+            assert.equal(passenger.active, true);
+            assert.equal(passenger.aboard, aboard);
+            assert.equal(passenger.passengerSeated, seated);
+            assert.equal(passenger.station, before.station);
+            assert.equal(passenger.stationSeat, before.stationSeat);
+            assert.equal(passenger.cabinSeat, before.cabinSeat);
+            assert.equal(passenger.occupied, before.occupied);
+            assert.deepEqual(passenger.foot, before.foot);
+            assert.deepEqual(passenger.cabinFoot, before.cabinFoot);
+            assert.deepEqual(passenger.interactionOrigin, before.origin);
+            assert.deepEqual(
+              e.navigation.position.toArray(),
+              before.navigationPosition,
+            );
+            assert.deepEqual(
+              train.group.position.toArray(),
+              before.trainPosition,
+            );
+            assert.deepEqual(
+              train.group.quaternion.toArray(),
+              before.trainQuaternion,
+            );
+            assert.equal(train.passengerFrame, before.frame);
+            assert.equal(train.passengerCarIndex, 2);
+            assert.equal(train.passenger.parent, before.passengerParent);
+            assert(
+              train.passenger
+                .getWorldPosition(new THREE.Vector3())
+                .distanceTo(before.passengerPosition) < 1e-8,
+            );
+            assert.equal(passenger.keys.size, 0);
+            assert.deepEqual(passenger.axes, { x: 0, y: 0 });
+            assert.equal(passenger.drag, null);
+            assert.equal(calls.filter((call) => call === 'overview').length, 1);
+            assert.equal(calls.filter((call) => call === 'publish').length, 1);
+            const [x, z] = project(view.coord),
+              expectedTarget = new THREE.Vector3(x, 1.1, z);
+            if (animate) {
+              assert.equal(e.transition.duration, 1800);
+              assert(e.transition.toTarget.distanceTo(expectedTarget) < 1e-8);
+              assert(e.transition.from.distanceTo(e.camera.position) < 1e-8);
+            } else {
+              assert(e.controls.target.distanceTo(expectedTarget) < 1e-8);
+              assert(e.camera.position.distanceTo(expectedTarget) > 1299);
+            }
+            f.assertStationAndRail();
+          } finally {
+            f.dispose();
+          }
+        }
+  } finally {
+    train.dispose();
+    owner.dispose();
+  }
+});

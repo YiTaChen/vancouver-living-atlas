@@ -600,7 +600,7 @@ test('onboard movement and stand-up guidance use the active language without des
   }
 });
 
-test('all ten locales provide complete trip labels and explain desktop interaction and mobile movement', () => {
+test('all ten locales explain physical stairs, F interaction and mobile movement in a context-only world HUD', () => {
   const expected = [
     'en',
     'fr',
@@ -614,20 +614,55 @@ test('all ten locales provide complete trip labels and explain desktop interacti
     'ru',
   ].sort();
   assert.deepEqual(Object.keys(catalogs).sort(), expected);
+  const physicalHints = {
+    en: [/stairs/, /left joystick/, /Tap the prompt/],
+    fr: [/escaliers/, /joystick gauche/, /Touchez l’invite/],
+    es: [/escaleras/, /joystick izquierdo/, /Toca el aviso/],
+    'zh-Hant': [/樓梯/, /左側搖桿/, /點選互動提示/],
+    'zh-Hans': [/楼梯/, /左侧摇杆/, /点击互动提示/],
+    de: [/Treppe/, /linken Joystick/, /Hinweis.*antippen/],
+    ja: [/階段/, /左のスティック/, /表示をタップ/],
+    ko: [/계단/, /왼쪽 스틱/, /안내를 누르/],
+    uk: [/сходами/, /лівим джойстиком/, /Торкніться підказки/],
+    ru: [/лестнице/, /левым джойстиком/, /Нажмите подсказку/],
+  };
   const keys = Object.keys(catalogs.en).sort();
   for (const locale of expected) {
     assert.deepEqual(Object.keys(catalogs[locale]).sort(), keys);
     for (const key of keys)
       assert(catalogs[locale][key].trim(), `${locale}/${key}`);
-    assert.match(catalogs[locale].desktopHint, /WASD/);
-    assert.match(catalogs[locale].desktopHint, /E/);
+    assert.match(catalogs[locale].desktopHint, /W\/S/);
+    assert.match(catalogs[locale].desktopHint, /A\/D/);
+    assert.match(catalogs[locale].desktopHint, /\bF\b/);
+    assert.match(catalogs[locale].desktopHint, physicalHints[locale][0]);
+    assert.doesNotMatch(catalogs[locale].desktopHint, /\bE\b/);
+    assert.match(catalogs[locale].touchHint, physicalHints[locale][1]);
+    assert.match(catalogs[locale].touchHint, physicalHints[locale][2]);
+    assert.doesNotMatch(catalogs[locale].touchHint, /W\/S|A\/D|\b[EF]\b/);
     assert.notEqual(catalogs[locale].board, catalogs[locale].alight);
     const h = setup(),
-      { host } = panel(h, state(), { locale });
-    assert.match(
-      text(host.tree),
-      new RegExp(catalogs[locale].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
+      props = {
+        locale,
+        train: state({ phase: 'station', stationId: 'waterfront' }),
+        bus: null,
+        visible: true,
+        touch: false,
+      },
+      host = h.mount(h.load('transit-world-status').TransitWorldStatus, props);
+    assert.equal(
+      all(host.tree, (node) => node.type === 'section')[0].props['aria-label'],
+      catalogs[locale].title,
     );
+    assert(text(host.tree).includes(catalogs[locale].desktopHint));
+    assert.equal(
+      all(host.tree, (node) => node.type === 'select' || node.type === 'button')
+        .length,
+      0,
+      'the world HUD cannot select floors, destinations or remote vehicle actions',
+    );
+    host.render({ ...props, touch: true });
+    assert(!text(host.tree).includes(catalogs[locale].desktopHint));
+    assert.doesNotMatch(text(host.tree), /W\/S|A\/D|\b[EF]\b/);
     host.unmount();
   }
 });

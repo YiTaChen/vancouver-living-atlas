@@ -22,6 +22,7 @@ import {
   type BusPassengerSeat,
 } from './bus-passenger-space';
 import type { InteractionCandidate } from './proximity-interactions';
+import type { WorldBusFrame } from './bus-route-runtime';
 import {
   BusAccessibility,
   rampContainsPoint,
@@ -49,6 +50,7 @@ interface Door {
   group: 'front' | 'rear';
   node: THREE.Object3D;
   point: Point;
+  promptPoint: Point;
   end: Point;
   duration: number;
   start: number;
@@ -83,6 +85,9 @@ export interface BusVisitSnapshot {
   ridePhase: 'parked' | 'closing' | 'moving' | 'opening' | 'complete';
   speedMps: number;
   rideProgress: number;
+  serviceVehicleId?: string | null;
+  serviceStopId?: string | null;
+  serviceHeadsign?: string | null;
 }
 export interface BusVisitPlacement {
   routeIndex: number;
@@ -261,8 +266,8 @@ export function findBusVisitPlacement(
   return fallback;
 }
 
-/** A boardable cabin with physical seating and a short, verified street ride.
- * This uses a displayed road segment, not a scheduled TransLink route. */
+/** Physical cabin adapter for autonomous route service, retaining the debug
+ * parked visit adapter for asset QA. Service boarding never places the walker. */
 export class BusCabinVisit {
   onChange: (snapshot: BusVisitSnapshot) => void = () => {};
   private phase: Phase = 'idle';
@@ -298,6 +303,7 @@ export class BusCabinVisit {
   private axes = { x: 0, y: 0 };
   private walkDistance = 0;
   private avatarSeated = false;
+  private serviceFrame: WorldBusFrame | null = null;
   private ridePlan: {
     points: THREE.Vector3[];
     length: number;
@@ -327,6 +333,105 @@ export class BusCabinVisit {
   }
   get aboard() {
     return this.transfers.state(VISITOR)?.mode === 'riding';
+  }
+  /** Service identity is stable across proxy/detail handover and route changes. */
+  get serviceVehicleId() {
+    return this.serviceFrame?.vehicleId ?? null;
+  }
+  private get transferVehicleId() {
+    return this.serviceVehicleId ?? VEHICLE;
+  }
+  private get transferCarId() {
+    return this.serviceVehicleId ? `${this.serviceVehicleId}:car-0` : CAR;
+  }
+  private get transferServiceId() {
+    return this.serviceFrame?.routeId ?? SERVICE;
+  }
+  get serviceDetailReady() {
+    return Boolean(this.serviceFrame && this.owner && this.placement);
+  }
+  prepareService(frame: WorldBusFrame, policy?: BusVisitPolicy) {
+    if (this.aboard && frame.vehicleId !== this.serviceVehicleId)
+      return Promise.resolve(false);
+    if (frame.vehicleId !== this.serviceVehicleId) this.releaseService();
+    this.serviceFrame = frame;
+    return this.prepare(policy, frame);
+  }
+  /** The service applies its current pose after asynchronous loading too. No
+   * walker placement or preloading callback is allowed to move the player. */
+  applyServiceFrame(frame: WorldBusFrame) {
+    if (frame.vehicleId !== this.serviceVehicleId) return;
+    const previous = this.serviceFrame;
+    this.serviceFrame = frame;
+    if (!this.owner || !this.placement) return;
+    const nav = this.city.navigation;
+    if (!nav) return;
+    const dx = Math.sin(frame.yaw) * 3.1,
+      dz = Math.cos(frame.yaw) * 3.1;
+    const slope = Math.atan2(
+      nav.groundHeight(frame.x + dx, frame.z + dz) -
+        nav.groundHeight(frame.x - dx, frame.z - dz),
+      6.2,
+    );
+    if (!this.accessibility || this.accessibility.stowed) {
+      this.owner.group.position.set(
+        frame.x,
+        nav.groundHeight(frame.x, frame.z),
+        frame.z,
+      );
+      this.owner.group.rotation.set(-slope, frame.yaw, 0, 'YXZ');
+    }
+    this.owner.group.updateWorldMatrix(true, true);
+    this.placement.position.copy(this.owner.group.position);
+    this.placement.rotation.copy(this.owner.group.quaternion);
+    this.placement.yaw = frame.yaw;
+    this.rideSpeed = frame.speedMps;
+    this.rideProgress = frame.progress;
+    this.ridePhase =
+      frame.phase === 'moving'
+        ? 'moving'
+        : frame.phase === 'closing'
+          ? 'closing'
+          : frame.phase === 'opening'
+            ? 'opening'
+            : 'complete';
+    this.doorProgress = frame.doorProgress;
+    this.stoppedSeconds = frame.stoppedSeconds;
+    if (this.accessibility?.stowed) this.accessibility.reanchorStowed();
+    const front = this.freshOutside('front'),
+      rear = this.freshOutside('rear');
+    if (front) this.placement.frontFloor = front;
+    if (rear) this.placement.rearFloor = rear;
+    this.applyDoors();
+    if (
+      previous?.phase !== frame.phase ||
+      previous.stopVisit !== frame.stopVisit
+    )
+      this.notify();
+  }
+  serviceDepartureReady() {
+    if (!this.accessibility || this.accessibility.stowed) return true;
+    // A deployed access ramp is stowed before autonomous departure while doors
+    // remain open; a person standing in its area retains the existing interlock.
+    if (
+      (this.serviceFrame?.stoppedSeconds ?? 0) >= 9 &&
+      !this.accessibility.moving
+    )
+      this.accessibility.stow(this.frontDoorsOpen());
+    return this.accessibility.stowed;
+  }
+  releaseService() {
+    if (this.aboard) return false;
+    if (!this.serviceFrame) return true;
+    ++this.generation;
+    this.abort?.abort();
+    this.abort = null;
+    this.pending = null;
+    this.release();
+    this.serviceFrame = null;
+    this.phase = 'idle';
+    this.notify();
+    return true;
   }
   get passengerSeated() {
     return Boolean(this.cabinSeat);
@@ -361,6 +466,45 @@ export class BusCabinVisit {
     this.drag = null;
   };
   interactionCandidates(): readonly InteractionCandidate[] {
+    if (!this.aboard) {
+      const owner = this.owner,
+        frame = this.serviceFrame;
+      const floor = this.walkingFloor();
+      const entrance = this.freshOutside('front');
+      const anchor = this.doorPromptAnchor('front');
+      if (
+        !owner ||
+        !frame ||
+        !floor ||
+        !entrance ||
+        !anchor ||
+        !this.canBoardAt(floor)
+      )
+        return [];
+      const visit = frame.stopVisit,
+        vehicle = frame.vehicleId;
+      const point: Point = [entrance.x, entrance.y, entrance.z];
+      return [
+        {
+          id: `bus:board:${vehicle}:${visit}`,
+          kind: 'object',
+          action: 'board',
+          anchor,
+          proximityPoint: point,
+          range: 1.25,
+          priority: 90,
+          canInteract: () =>
+            this.owner === owner &&
+            this.serviceVehicleId === vehicle &&
+            this.serviceFrame?.stopVisit === visit &&
+            this.canBoardAt(this.walkingFloor()),
+          execute: () =>
+            this.serviceVehicleId === vehicle &&
+            this.serviceFrame?.stopVisit === visit &&
+            this.board(),
+        },
+      ];
+    }
     const origin = this.interactionOrigin;
     if (
       !origin ||
@@ -391,6 +535,32 @@ export class BusCabinVisit {
       ];
     const owner = this.owner,
       space = this.space;
+    const exit = this.freshOutside('rear');
+    const exitAnchor = this.doorPromptAnchor('rear');
+    if (this.serviceFrame && exit && exitAnchor && this.canAlight(exit)) {
+      const vehicle = this.serviceFrame.vehicleId,
+        visit = this.serviceFrame.stopVisit;
+      return [
+        {
+          id: `bus:alight:${vehicle}:${visit}`,
+          kind: 'object',
+          action: 'alight',
+          anchor: exitAnchor,
+          proximityPoint: origin,
+          range: 1.5,
+          priority: 95,
+          canInteract: () =>
+            this.owner === owner &&
+            this.serviceVehicleId === vehicle &&
+            this.serviceFrame?.stopVisit === visit &&
+            this.canAlight(),
+          execute: () =>
+            this.serviceVehicleId === vehicle &&
+            this.serviceFrame?.stopVisit === visit &&
+            this.alight(),
+        },
+      ];
+    }
     return space.seats
       .filter((seat) => space.canSit(seat, this.cabinFoot!))
       .map((seat) => ({
@@ -488,7 +658,7 @@ export class BusCabinVisit {
   private hidden() {
     return document.hidden || this.city.pageSuspended || this.city.contextLost;
   }
-  prepare(policy?: BusVisitPolicy): Promise<boolean> {
+  prepare(policy?: BusVisitPolicy, service?: WorldBusFrame): Promise<boolean> {
     if (this.disposed || this.hidden()) return Promise.resolve(false);
     if (this.accessibility && !this.accessibility.stowed)
       return Promise.resolve(
@@ -499,6 +669,10 @@ export class BusCabinVisit {
     const profile = policy ? busVisitProfile(policy) : 'budget';
     if (this.owner && this.placement) {
       if ((this.owner.requestedProfile ?? 'budget') === profile) {
+        if (service) {
+          this.applyServiceFrame(this.serviceFrame ?? service);
+          return Promise.resolve(true);
+        }
         const floor = this.freshOutside('front');
         if (!floor) return Promise.resolve(this.reject('No safe bus entrance'));
         return Promise.resolve(this.placeWalker(floor));
@@ -531,8 +705,8 @@ export class BusCabinVisit {
           owner.manifest,
           'city-bus-12m',
           'low-floor-bus-12m',
-          VEHICLE,
-          CAR,
+          this.transferVehicleId,
+          this.transferCarId,
           0,
         );
         const vehicle = record(owner.vehicle);
@@ -588,6 +762,8 @@ export class BusCabinVisit {
             d.frameId !== 'vehicle' ||
             d.side !== 'right' ||
             !['front', 'rear'].includes(String(d.doorGroupId)) ||
+            !Array.isArray(d.openingPolygonM) ||
+            d.openingPolygonM.length < 3 ||
             !Array.isArray(motion.keyframes)
           )
             throw new Error('Missing actual bus door animation');
@@ -607,11 +783,20 @@ export class BusCabinVisit {
           action.clampWhenFinished = true;
           action.play();
           action.paused = true;
+          const opening = d.openingPolygonM.map(point);
+          // Anchor the prompt in the actual doorway at eye level, rather than
+          // directly beneath a person standing on its outside boarding floor.
+          const promptPoint: Point = [
+            opening.reduce((n, p) => n + p[0], 0) / opening.length,
+            Math.min(...opening.map((p) => p[1])) + 1.45,
+            opening.reduce((n, p) => n + p[2], 0) / opening.length,
+          ];
           return {
             id: text(d.doorId),
             group: d.doorGroupId as 'front' | 'rear',
             node,
             point: point(d.boardingPointM),
+            promptPoint,
             duration,
             start,
             action,
@@ -634,38 +819,79 @@ export class BusCabinVisit {
           owner.cabinSurfaces,
         );
         if (!space.spawn()) throw new Error('Bus has no safe aisle spawn');
-        const placement = findBusVisitPlacement(
-          this.city,
-          this.routes,
-          doors.find((d) => d.group === 'front')!.point,
-          doors.find((d) => d.group === 'rear')!.point,
-          bounds(vehicle.fullBoundsM),
-          owner.manifest.accessibility
-            ? (candidate) => {
-                owner!.group.position.copy(candidate.position);
-                owner!.group.quaternion.copy(candidate.rotation);
-                const probe = BusAccessibility.create(
-                  owner!.group,
-                  owner!.manifest.accessibility,
-                  (x, z) => this.rampGround(x, z),
-                );
-                if (!probe) return true;
-                try {
-                  return probe.landingFits();
-                } finally {
-                  probe.dispose();
-                }
+        const serviceFrame = this.serviceFrame;
+        const serviceRotation = serviceFrame
+          ? new THREE.Quaternion().setFromAxisAngle(
+              new THREE.Vector3(0, 1, 0),
+              serviceFrame.yaw,
+            )
+          : null;
+        const servicePosition = serviceFrame
+          ? new THREE.Vector3(
+              serviceFrame.x,
+              this.city.navigation!.groundHeight(
+                serviceFrame.x,
+                serviceFrame.z,
+              ),
+              serviceFrame.z,
+            )
+          : null;
+        const serviceFloor = servicePosition
+          ? {
+              x: servicePosition.x,
+              y: servicePosition.y,
+              z: servicePosition.z,
+              surfaceId: 'ground',
+              layer: 0,
+            }
+          : null;
+        const placement =
+          serviceFrame && serviceRotation && servicePosition && serviceFloor
+            ? {
+                routeIndex: -1,
+                position: servicePosition,
+                rotation: serviceRotation,
+                yaw: serviceFrame.yaw,
+                frontFloor: serviceFloor,
+                rearFloor: serviceFloor,
               }
-            : undefined,
-        );
+            : findBusVisitPlacement(
+                this.city,
+                this.routes,
+                doors.find((d) => d.group === 'front')!.point,
+                doors.find((d) => d.group === 'rear')!.point,
+                bounds(vehicle.fullBoundsM),
+                owner.manifest.accessibility
+                  ? (candidate) => {
+                      owner!.group.position.copy(candidate.position);
+                      owner!.group.quaternion.copy(candidate.rotation);
+                      const probe = BusAccessibility.create(
+                        owner!.group,
+                        owner!.manifest.accessibility,
+                        (x, z) => this.rampGround(x, z),
+                      );
+                      if (!probe) return true;
+                      try {
+                        return probe.landingFits();
+                      } finally {
+                        probe.dispose();
+                      }
+                    }
+                  : undefined,
+              );
         if (!placement) throw new Error('No safe flat bus parking and exit');
         const bodyBounds = bounds(vehicle.bodyBoundsM);
         const transfers = new PassengerTransfers(1);
-        if (!transfers.register(VISITOR, placement.frontFloor))
+        const initialWalkingFloor = serviceFrame
+          ? (this.walkingFloor() ?? placement.frontFloor)
+          : placement.frontFloor;
+        if (!transfers.register(VISITOR, initialWalkingFloor))
           throw new Error('Invalid entrance floor');
         owner.group.position.copy(placement.position);
         owner.group.quaternion.copy(placement.rotation);
-        owner.group.name = 'Boardable city bus cabin';
+        owner.group.name = serviceFrame
+          ? `Boardable route bus ${serviceFrame.vehicleId}`
+          : 'Boardable city bus cabin';
         const cabinLight = new THREE.PointLight(0xffecd1, 4, 12, 2);
         cabinLight.position.set(0, 2.45, 0);
         cabinLight.castShadow = false;
@@ -684,7 +910,7 @@ export class BusCabinVisit {
         this.stoppedSeconds = 0;
         this.ridePhase = 'parked';
         this.rideSpeed = this.rideTime = this.rideProgress = 0;
-        this.ridePlan = this.planRide();
+        this.ridePlan = serviceFrame ? null : this.planRide();
         this.city.scene.add(owner.group);
         this.accessibility = BusAccessibility.create(
           owner.group,
@@ -703,10 +929,13 @@ export class BusCabinVisit {
             this.city.navigation?.groundSurface?.trianglesInBounds?.(area) ??
             null,
         );
-        this.busAssets.setExcludedRoutes(new Set([placement.routeIndex]));
+        if (!serviceFrame)
+          this.busAssets.setExcludedRoutes(new Set([placement.routeIndex]));
         this.phase = 'ready';
         this.error = '';
-        if (!this.placeWalker(placement.frontFloor))
+        if (serviceFrame)
+          this.applyServiceFrame(this.serviceFrame ?? serviceFrame);
+        else if (!this.placeWalker(placement.frontFloor))
           throw new Error('Cannot place visitor at entrance');
         this.applyDoors();
         this.notify();
@@ -831,6 +1060,7 @@ export class BusCabinVisit {
       : null;
   }
   startRide() {
+    if (this.serviceFrame) return false;
     if (
       this.disposed ||
       this.hidden() ||
@@ -942,7 +1172,7 @@ export class BusCabinVisit {
     }
     const h = Number.isFinite(dt) ? Math.max(0, Math.min(0.05, dt)) : 0;
     this.elapsed += h;
-    this.updateRide(h);
+    if (!this.serviceFrame) this.updateRide(h);
     this.applyDoors();
     const accessibilityChanged = this.accessibility?.update(
       h,
@@ -1041,6 +1271,13 @@ export class BusCabinVisit {
             Math.hypot(...b.anchor.translationM.map((v, i) => v - spawn[i])),
         )[0];
     const floor = this.walkingFloor();
+    // Prewarming may happen while the player walks around a block. Register
+    // their current verified floor when actively boarding, rather than drawing
+    // an imaginary straight walking path from the earlier prewarm location.
+    if (this.serviceFrame && floor) {
+      this.transfers = new PassengerTransfers(1);
+      this.transfers.register(VISITOR, floor);
+    }
     if (!anchor || !spawn || !floor)
       return this.reject('Walk to the front door to board');
     if (!this.synchronizeWalkingFloor(floor))
@@ -1133,6 +1370,7 @@ export class BusCabinVisit {
     this.abort = null;
     this.pending = null;
     this.release();
+    this.serviceFrame = null;
     this.phase = 'idle';
     this.error = '';
     this.notify();
@@ -1152,13 +1390,7 @@ export class BusCabinVisit {
       error: this.error || null,
       aboard: this.aboard,
       doorsOpen: this.actualDoorsOpen(),
-      canBoard:
-        !this.hidden() &&
-        !this.accessibility?.moving &&
-        !this.aboard &&
-        this.inputEnabled &&
-        !!walking &&
-        boardingProofValid(this.proof('front', walking)),
+      canBoard: this.canBoardAt(walking),
       canAlight: this.canAlight(exit),
       anchors:
         this.contract?.anchors.map((a) => ({
@@ -1182,6 +1414,7 @@ export class BusCabinVisit {
         this.inputEnabled &&
         !this.hidden(),
       canRide:
+        !this.serviceFrame &&
         this.aboard &&
         this.inputEnabled &&
         !this.hidden() &&
@@ -1192,6 +1425,9 @@ export class BusCabinVisit {
       ridePhase: this.ridePhase,
       speedMps: this.rideSpeed,
       rideProgress: this.rideProgress,
+      serviceVehicleId: this.serviceVehicleId,
+      serviceStopId: this.serviceFrame?.stop?.id ?? null,
+      serviceHeadsign: this.serviceFrame?.headsign ?? null,
     };
   }
   /** Static body collision for the host navigation; the doors are approached outside it. */
@@ -1259,6 +1495,18 @@ export class BusCabinVisit {
     this.transfers = new PassengerTransfers(1);
     this.busAssets.setExcludedRoutes(new Set());
   }
+  private canBoardAt(floor: SurfaceState | null) {
+    return (
+      !this.disposed &&
+      !this.hidden() &&
+      !this.accessibility?.moving &&
+      !this.aboard &&
+      this.inputEnabled &&
+      (!this.serviceFrame ||
+        (this.serviceFrame.phase === 'dwell' && !!this.serviceFrame.stop)) &&
+      Boolean(floor && boardingProofValid(this.proof('front', floor)))
+    );
+  }
   private walkingFloor() {
     const n = this.city.navigation;
     if (
@@ -1317,7 +1565,8 @@ export class BusCabinVisit {
     );
     const floor = groundFloor(this.city, p.x, p.z, 'walk');
     return floor &&
-      Math.abs(floor.y - owner.group.position.y) <= 0.12 &&
+      Math.abs(floor.y - (p.y - door.point[1])) <=
+        (this.serviceFrame ? 0.18 : 0.12) &&
       walkClearance(this.city, floor)
       ? floor
       : null;
@@ -1328,7 +1577,7 @@ export class BusCabinVisit {
       ...floor,
       surface: 'ground',
       yaw: this.placement.yaw + Math.PI / 2,
-      name: 'Parked bus',
+      name: this.serviceFrame?.stop?.name ?? 'Parked bus',
       snappedDistance: 0,
     };
     return this.city.navigation.startAt('walk', p);
@@ -1339,6 +1588,14 @@ export class BusCabinVisit {
       door.action.time = door.start + this.doorProgress * door.duration;
     this.owner.mixer.update(0);
     this.owner.group.updateWorldMatrix(true, true);
+  }
+  private doorPromptAnchor(group: 'front' | 'rear'): Point | null {
+    const door = this.doors.find((d) => d.group === group);
+    return this.owner && door
+      ? this.owner.group
+          .localToWorld(new THREE.Vector3(...door.promptPoint))
+          .toArray()
+      : null;
   }
   private actualDoorsOpen() {
     return (
@@ -1415,10 +1672,10 @@ export class BusCabinVisit {
       }
     const lineOfSight = clearApproach && this.apertureClear(group);
     return {
-      vehicleId: VEHICLE,
-      serviceId: SERVICE,
-      carId: CAR,
-      stopId: 'parked-bus-door',
+      vehicleId: this.transferVehicleId,
+      serviceId: this.transferServiceId,
+      carId: this.transferCarId,
+      stopId: this.serviceFrame?.stop?.id ?? 'parked-bus-door',
       platformId: 'parked-bus-ground',
       doorId: door?.id ?? '',
       doorSide: 'right',
@@ -1430,12 +1687,15 @@ export class BusCabinVisit {
       distanceM: doorPoint
         ? doorPoint.distanceTo(new THREE.Vector3(floor.x, floor.y, floor.z))
         : Infinity,
-      doorOpen: this.actualDoorsOpen(),
+      doorOpen:
+        this.actualDoorsOpen() &&
+        (!this.serviceFrame || this.serviceFrame.phase === 'dwell'),
       correctDoorSide: !!door,
       alignmentValid:
         !!owner &&
         !!this.placement &&
-        (this.accessibility
+        (this.accessibility &&
+        (!this.serviceFrame || !this.accessibility.stowed)
           ? this.accessibility.aligned
           : owner.group.position.distanceTo(this.placement.position) < 1e-5) &&
         Math.abs(owner.group.quaternion.dot(this.placement.rotation)) >
@@ -1532,6 +1792,7 @@ export class BusCabinVisit {
       (!this.accessibility || this.accessibility.stowed) &&
       this.nearRearDoor() &&
       (this.ridePhase === 'parked' || this.ridePhase === 'complete') &&
+      (!this.serviceFrame || this.serviceFrame.phase === 'dwell') &&
       Boolean(exit && boardingProofValid(this.proof('rear', exit)))
     );
   }

@@ -212,6 +212,7 @@ function fixture({ bridge = false } = {}) {
     scene: new THREE.Scene(),
     buildings: new THREE.Group(),
     landmarks: new THREE.Group(),
+    roads: new THREE.Group(),
     settings: { mode: 'orbit' },
     transition: null,
     data: {
@@ -394,6 +395,7 @@ const { StreetNavigation } = await import(
     './placement-geometry': geometryUrl,
     './boat-controller': cityModule('boat-controller'),
     './travel-camera': cityModule('travel-camera'),
+    './travel-camera-collision': cityModule('travel-camera-collision'),
     './assets/walker': cityModule('assets/walker'),
     './citizen': cityModule('citizen'),
     './assets/roadster': cityModule('assets/roadster'),
