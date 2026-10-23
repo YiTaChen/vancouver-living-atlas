@@ -734,9 +734,15 @@ export class CityEngine {
     this.impactFeedback = new ImpactFeedback(this.scene);
     this.driftEffects = new VehicleDriftEffects(this);
     this.navigation = new StreetNavigation(this);
-    this.travelOcclusion = new TravelOcclusion([
-      this.buildings, this.landmarks, this.roads, this.terrain, this.vegetation,
-    ]);
+    this.travelOcclusion = new TravelOcclusion(
+      [this.buildings, this.landmarks, this.roads, this.terrain, this.vegetation],
+      this.data.rocketBuildingMesh
+        ? [{
+            mesh: this.data.rocketBuildingMesh,
+            parts: this.data.rocketBuildingParts ?? [],
+          }]
+        : [],
+    );
     this.busVisit = new BusCabinVisit(
       this,
       this.traffic.busAssets,

@@ -914,6 +914,7 @@ export class BusCabinVisit {
         this.rideSpeed = this.rideTime = this.rideProgress = 0;
         this.ridePlan = serviceFrame ? null : this.planRide();
         this.city.scene.add(owner.group);
+        this.city.prepareTravelOccluders?.(owner.group);
         this.accessibility = BusAccessibility.create(
           owner.group,
           owner.manifest.accessibility,

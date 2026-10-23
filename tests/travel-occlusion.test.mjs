@@ -4,8 +4,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import ts from 'typescript';
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { cityModule } from './helpers/city-modules.mjs';
 
 const { TravelOcclusion } = await import(cityModule('travel-occlusion'));
@@ -38,42 +40,40 @@ function dispose(root) {
   });
 }
 
-test('a local cutaway reveals only foreground walls/roofs and retains the floor, adjacent city and background', () => {
-  const wall = mesh(),
-    cutaway = new TravelOcclusion([wall]);
-  const geometry = wall.geometry,
-    material = wall.material;
-  const flags = [
-    material.opacity,
-    material.transparent,
-    material.depthWrite,
-    material.side,
-  ];
+test('whole occluding walls and roofs disappear with no local opening, while floors, neighboring objects and background remain', async () => {
+  const root = new THREE.Group(),
+    material = new THREE.MeshStandardMaterial(),
+    wall = new THREE.Mesh(new THREE.BoxGeometry(12, 3, 0.2), material),
+    adjacent = new THREE.Mesh(wall.geometry, material),
+    background = new THREE.Mesh(wall.geometry, material);
+  wall.position.set(0, 1.5, -4);
+  adjacent.position.set(20, 1.5, -4);
+  background.position.set(0, 1.5, 4);
+  root.add(wall, adjacent, background);
+  const cutaway = new TravelOcclusion([root]),
+    geometry = wall.geometry,
+    flags = [
+      material.opacity,
+      material.transparent,
+      material.depthWrite,
+      material.side,
+    ];
   cutaway.update(v(0, 3, -8), v(0, 0, 0));
-  assert(cutaway.coverageAt(v(0, 2.05, -4)) > 0.9);
+  for (const x of [-5.9, 0, 5.9])
+    for (const normalPass of [false, true])
+      assert.equal(
+        cutaway.coverageAt(v(x, 2, -4), { object: wall, normalPass }),
+        1,
+        'the whole selected wall disappears, including both far edges',
+      );
+  assert.equal(cutaway.coverageAt(v(20, 2, -4), { object: adjacent }), 0);
+  assert.equal(cutaway.coverageAt(v(0, 2, 4), { object: background }), 0);
   assert.equal(
-    cutaway.coverageAt(v(4, 2.05, -4)),
+    cutaway.coverageAt(v(0, 0.08, -4), { object: wall }),
     0,
-    'adjacent facade is opaque',
+    'walking floor is retained',
   );
-  assert.equal(
-    cutaway.coverageAt(v(0, 1.1, 2)),
-    0,
-    'behind player remains opaque',
-  );
-  assert.equal(
-    cutaway.coverageAt(v(0, 0.08, -4)),
-    0,
-    'physical walking floor is retained',
-  );
-  assert.equal(
-    cutaway.coverageAt(v(0, -4, -4)),
-    0,
-    'stacked floor below stays opaque',
-  );
-  const inner = cutaway.coverageAt(v(0.45, 2.05, -4));
-  const edge = cutaway.coverageAt(v(0.6, 2.05, -4));
-  assert(inner > edge && edge > 0, 'soft local border precedes ordered dither');
+  assert.equal(cutaway.coverageAt(v(0, -4, -4), { object: wall }), 0);
   assert.strictEqual(wall.geometry, geometry);
   assert.strictEqual(wall.material, material);
   assert.deepEqual(
@@ -86,19 +86,28 @@ test('a local cutaway reveals only foreground walls/roofs and retains the floor,
     flags,
   );
   const shader = compile(material);
-  assert.match(
-    shader.fragmentShader,
-    /travelCutawayThreshold < travelCutawayCoverage/,
-  );
-  assert.match(shader.fragmentShader, /gl_FragCoord/);
+  assert.match(shader.fragmentShader, /vTravelOccluderSelected > 0\.5/);
+  assert.match(shader.fragmentShader, /\) discard;/);
+  assert.equal(shader.fragmentShader.includes('gl_FragCoord'), false);
+  assert.equal(shader.fragmentShader.includes('travelCutawayCoverage'), false);
   assert.equal(shader.fragmentShader.includes('diffuseColor.a ='), false);
+  assert.equal(cutaway.snapshot().mode, 'full-occluder');
+  assert.equal(
+    cutaway.snapshot().pieceCount,
+    1,
+    'shared box geometry is registered only once',
+  );
   cutaway.dispose();
-  dispose(wall);
+  geometry.dispose();
+  await Promise.resolve();
+  assert.equal(geometry.hasAttribute('aTravelOccluderMin'), false);
+  assert.equal(geometry.hasAttribute('aTravelOccluderMax'), false);
+  dispose(root);
 });
 
-test('real InstancedMesh keeps each world transform and cuts no adjacent batch instances', () => {
+test('real InstancedMesh isolates whole transformed instances despite shared geometry and material', () => {
   const batch = new THREE.InstancedMesh(
-    new THREE.BoxGeometry(2, 3, 0.2),
+    new THREE.BoxGeometry(12, 3, 0.2),
     new THREE.MeshStandardMaterial(),
     3,
   );
@@ -110,33 +119,47 @@ test('real InstancedMesh keeps each world transform and cuts no adjacent batch i
   batch.setMatrixAt(2, matrix.makeTranslation(0, 1.5, 5));
   batch.updateMatrixWorld(true);
   const cutaway = new TravelOcclusion([batch]);
-  const point = (index) => {
+  const point = (index, x = 0) => {
     batch.getMatrixAt(index, matrix);
-    return v(0, 0, 0).applyMatrix4(matrix).applyMatrix4(batch.matrixWorld);
+    return v(x, 0, 0).applyMatrix4(matrix).applyMatrix4(batch.matrixWorld);
   };
-  const camera = batch.localToWorld(v(0, 1.9, -8));
-  const feet = batch.localToWorld(v(0, 0, 0));
-  cutaway.update(camera, feet);
-  assert(cutaway.coverageAt(point(0)) > 0.9);
-  assert.equal(cutaway.coverageAt(point(1)), 0);
-  assert.equal(cutaway.coverageAt(point(2)), 0);
-  const shader = compile(batch.material);
-  const vertex = shader.vertexShader;
+  cutaway.update(
+    batch.localToWorld(v(0, 1.9, -8)),
+    batch.localToWorld(v(0, 0, 0)),
+  );
+  for (const x of [-5.9, 0, 5.9])
+    assert.equal(
+      cutaway.coverageAt(point(0, x), { object: batch, instanceId: 0 }),
+      1,
+    );
+  assert.equal(
+    cutaway.coverageAt(point(1), { object: batch, instanceId: 1 }),
+    0,
+  );
+  assert.equal(
+    cutaway.coverageAt(point(2), { object: batch, instanceId: 2 }),
+    0,
+  );
+  const vertex = compile(batch.material).vertexShader;
   assert(
     vertex.indexOf('#include <skinning_vertex>') <
-      vertex.indexOf('vec4 travelCutawayPosition'),
+      vertex.indexOf('mat4 travelOccluderTransform'),
   );
   assert(
-    vertex.indexOf('batchingMatrix * travelCutawayPosition') <
-      vertex.indexOf('instanceMatrix * travelCutawayPosition'),
+    vertex.indexOf('batchingMatrix * travelOccluderTransform') <
+      vertex.indexOf('instanceMatrix * travelOccluderTransform'),
   );
   assert(
-    vertex.indexOf('instanceMatrix * travelCutawayPosition') <
-      vertex.indexOf('modelMatrix * travelCutawayPosition'),
+    vertex.indexOf('instanceMatrix * travelOccluderTransform') <
+      vertex.indexOf('modelMatrix * travelOccluderTransform'),
   );
   assert(
-    vertex.indexOf('modelMatrix * travelCutawayPosition') <
+    vertex.indexOf('modelMatrix * travelOccluderTransform') <
       vertex.indexOf('#include <project_vertex>'),
+  );
+  assert.match(
+    vertex,
+    /cross\(travelOccluderLinear\[1\], travelOccluderLinear\[2\]\)/,
   );
   assert.equal(batch.count, 3);
   assert.equal(cutaway.snapshot().materialCount, 1);
@@ -172,7 +195,7 @@ test('existing real station aperture and night lighting hooks, uniforms and cach
   assert.strictEqual(shader.uniforms.uTravelCutawayEnabled.value, 0);
   assert.equal(
     root.material.customProgramCacheKey(),
-    sourceKey + '|travel-local-cutaway-v1',
+    sourceKey + '|travel-full-occluder-v2',
   );
   root.material.color.set(0x123456);
   root.material.emissiveIntensity = 0.42;
@@ -198,7 +221,7 @@ test('dynamic source cache keys and default compile fingerprints remain valid an
   const cutaway = new TravelOcclusion([root]);
   assert.equal(
     material.customProgramCacheKey(),
-    key + '|travel-local-cutaway-v1',
+    key + '|travel-full-occluder-v2',
   );
   cutaway.dispose();
   assert.strictEqual(material.onBeforeCompile, originalCompile);
@@ -208,12 +231,12 @@ test('dynamic source cache keys and default compile fingerprints remain valid an
   const second = new TravelOcclusion([root]);
   assert.equal(
     material.customProgramCacheKey(),
-    'source-1|travel-local-cutaway-v1',
+    'source-1|travel-full-occluder-v2',
   );
   variant = 2;
   assert.equal(
     material.customProgramCacheKey(),
-    'source-2|travel-local-cutaway-v1',
+    'source-2|travel-full-occluder-v2',
   );
   second.dispose();
   dispose(root);
@@ -319,21 +342,22 @@ test('update uses only stable shared uniforms and does not traverse, raycast or 
   root.material.dispose();
 });
 
-test('range, radius and invalid input are bounded; first-person coincident torso is finite and clear restores rendering', () => {
-  const cutaway = new TravelOcclusion();
+test('range, margin and invalid input stay bounded; a coincident query remains finite and clear restores rendering', () => {
+  const wall = mesh();
+  wall.position.set(0, 1.5, 0);
+  const cutaway = new TravelOcclusion([wall]);
   cutaway.update(v(0, 2, -500), v(0, 0, 0), { radius: 100, strength: 10 });
   assert.equal(cutaway.snapshot().length, 32);
   assert.equal(cutaway.snapshot().radius, 1.8);
   assert.equal(cutaway.snapshot().strength, 1);
-  assert.equal(
-    cutaway.coverageAt(v(0, 2, -500)),
-    0,
-    'cutaway never spans the city',
-  );
+  const remote = mesh();
+  remote.position.set(0, 1.5, -500);
+  cutaway.refresh([remote]);
+  assert.equal(cutaway.coverageAt(v(0, 2, -500), { object: remote }), 0);
   cutaway.update(v(0, 1.1, 0), v(0, 0, 0));
   assert.equal(cutaway.snapshot().active, false);
   cutaway.update(v(0, 1.1, 0), v(0, 0, 0), { firstPerson: true });
-  assert(cutaway.coverageAt(v(0.1, 1.1, 0)) > 0.9);
+  assert.equal(cutaway.coverageAt(v(0.1, 1.1, 0), { object: wall }), 1);
   cutaway.update(v(NaN, 1, 0), v(0, 0, 0));
   assert.equal(cutaway.snapshot().active, false);
   cutaway.update(v(0, 2, -5), v(0, 0, 0), {
@@ -341,9 +365,13 @@ test('range, radius and invalid input are bounded; first-person coincident torso
     subjectHeight: Infinity,
   });
   assert(cutaway.snapshot().end.every(Number.isFinite));
+  cutaway.update(v(0, 2, -5), v(0, 0, 0), { strength: 0 });
+  assert.equal(cutaway.snapshot().active, false);
   cutaway.update(v(0, 2, -5), v(0, 0, 0), { enabled: false });
   assert.equal(cutaway.snapshot().active, false);
   cutaway.dispose();
+  dispose(wall);
+  dispose(remote);
 });
 
 test('unsupported source shader fails closed without breaking it and reports a diagnostic', () => {
@@ -700,54 +728,77 @@ test('production landmark preparation releases staged roots on successful, rejec
   }
 });
 
-test('SSAO override removes foreground depth without mismatched dither and retains standing/seated body normals', () => {
-  const normal = new THREE.MeshNormalMaterial();
-  const originalCompile = normal.onBeforeCompile,
+test('SSAO override uses identical full-piece removal and explicit zero defaults protect unregistered avatar geometry', () => {
+  const normal = new THREE.MeshNormalMaterial(),
+    wall = mesh(),
+    avatar = mesh(),
+    originalCompile = normal.onBeforeCompile,
     originalKey = normal.customProgramCacheKey;
-  const restorePedestrian = installPedestrianOverrideMaterial(normal);
-  const pedestrianCompile = normal.onBeforeCompile,
-    pedestrianKey = normal.customProgramCacheKey;
-  const cutaway = new TravelOcclusion();
-  const release = cutaway.prepareMaterial(normal, { normalPass: true });
-  const shader = compile(normal, THREE.ShaderLib.normal);
+  normal.defaultAttributeValues = { existing: [1] };
+  const originalDefaults = normal.defaultAttributeValues;
+  const restorePedestrian = installPedestrianOverrideMaterial(normal),
+    pedestrianCompile = normal.onBeforeCompile,
+    pedestrianKey = normal.customProgramCacheKey,
+    pedestrianDefaults = normal.defaultAttributeValues,
+    cutaway = new TravelOcclusion([wall]),
+    release = cutaway.prepareMaterial(normal, { normalPass: true }),
+    shader = compile(normal, THREE.ShaderLib.normal);
   assert.match(shader.vertexShader, /pedestrianRigidLimb/);
-  assert.match(shader.vertexShader, /instanceMatrix \* travelCutawayPosition/);
-  assert.match(shader.fragmentShader, /travelCutawayCoverage > 0\.001/);
-  assert.equal(
-    shader.fragmentShader.includes('gl_FragCoord'),
-    false,
-    'AO pixel coordinates need not match full-resolution color',
+  assert.match(
+    shader.vertexShader,
+    /instanceMatrix \* travelOccluderTransform/,
   );
-  assert.match(shader.fragmentShader, /uTravelCutawayEnd.xz\) < 0\.70/);
+  assert.match(
+    shader.vertexShader,
+    /dot\(travelOccluderSize, travelOccluderSize\) > 0\.00000001/,
+  );
+  assert.match(shader.fragmentShader, /vTravelOccluderSelected > 0\.5/);
+  assert.equal(shader.fragmentShader.includes('gl_FragCoord'), false);
+  assert.deepEqual(normal.defaultAttributeValues.aTravelOccluderMin, [0, 0, 0]);
+  assert.deepEqual(normal.defaultAttributeValues.aTravelOccluderMax, [0, 0, 0]);
   assert.match(
     normal.customProgramCacheKey(),
-    /travel-local-cutaway-v1-normal$/,
+    /travel-full-occluder-v2-normal$/,
   );
   for (const floor of [0, 4.2, -7.5]) {
-    const feet = v(0, floor, 0);
-    cutaway.update(v(0, floor + 2.8, -8), feet);
+    wall.position.set(0, floor + 1.5, -4);
+    cutaway.update(v(0, floor + 2.8, -8), v(0, floor, 0));
     for (const y of [0.2, 0.5, 0.9, 1.3, 1.8])
       assert.equal(
-        cutaway.coverageAt(v(0.15, floor + y, -0.2), { normalPass: true }),
+        cutaway.coverageAt(v(0.15, floor + y, -0.2), {
+          object: avatar,
+          normalPass: true,
+        }),
         0,
-        `body retained at local height ${y} above standing/seated world floor ${floor}`,
       );
-    assert(
-      cutaway.coverageAt(v(0, floor + 1.95, -4), { normalPass: true }) > 0.9,
+    assert.equal(
+      cutaway.coverageAt(v(0.9, floor + 1.95, -4), {
+        object: wall,
+        normalPass: true,
+      }),
+      1,
+    );
+    assert.equal(
+      cutaway.coverageAt(v(0.9, floor, -4), { object: wall, normalPass: true }),
+      0,
     );
   }
   release();
   release();
   assert.strictEqual(normal.onBeforeCompile, pedestrianCompile);
   assert.strictEqual(normal.customProgramCacheKey, pedestrianKey);
+  assert.strictEqual(normal.defaultAttributeValues, pedestrianDefaults);
   restorePedestrian();
+  assert.strictEqual(normal.defaultAttributeValues, originalDefaults);
   assert.strictEqual(normal.onBeforeCompile, originalCompile);
   assert.strictEqual(normal.customProgramCacheKey, originalKey);
   cutaway.dispose();
   normal.dispose();
+  dispose(wall);
+  dispose(avatar);
 });
 
-test('normal endpoint protection covers the actual standing/seated male/female walker vertices at any chase yaw', async () => {
+test('absent occluder metadata protects actual standing/seated male/female walker geometry at any chase yaw', async () => {
   const { makeWalker } = await import(cityModule('assets/walker'));
   const cutaway = new TravelOcclusion();
   const point = new THREE.Vector3();
@@ -772,7 +823,7 @@ test('normal endpoint protection covers the actual standing/seated male/female w
               .fromBufferAttribute(positions, i)
               .applyMatrix4(object.matrixWorld);
             assert.equal(
-              cutaway.coverageAt(point, { normalPass: true }),
+              cutaway.coverageAt(point, { object, normalPass: true }),
               0,
               `${character} seated=${seated} yaw=${yaw} vertex ${point.toArray().join(',')}`,
             );
@@ -927,4 +978,313 @@ test('actual Waterfront stair enclosure admits its opaque materials without chan
     assert.strictEqual(object.geometry, source);
   cutaway.dispose();
   owner.dispose();
+});
+
+test('merged disconnected boxes retain complete components instead of hiding an entire material batch', () => {
+  const a = new THREE.BoxGeometry(10, 3, 0.2).translate(0, 1.5, -4),
+    b = new THREE.BoxGeometry(10, 3, 0.2).translate(30, 1.5, -4),
+    geometry = mergeGeometries([a, b]),
+    root = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial()),
+    cutaway = new TravelOcclusion([root]);
+  cutaway.update(v(0, 3, -8), v(0, 0, 0));
+  assert.equal(cutaway.snapshot().pieceCount, 2);
+  assert.equal(
+    cutaway.coverageAt(v(4.9, 2, -4), { object: root, vertexIndex: 0 }),
+    1,
+  );
+  assert.equal(
+    cutaway.coverageAt(v(30, 2, -4), {
+      object: root,
+      vertexIndex: a.getAttribute('position').count,
+    }),
+    0,
+  );
+  cutaway.dispose();
+  a.dispose();
+  b.dispose();
+  dispose(root);
+});
+
+test('local OBB selection leaves a rotated thin nonblocking wall opaque, including with nonuniform scale and shear', () => {
+  const root = new THREE.Mesh(
+    new THREE.BoxGeometry(0.1, 3, 12),
+    new THREE.MeshStandardMaterial(),
+  );
+  root.rotation.y = Math.PI / 4;
+  root.position.set(0, 1.5, -4);
+  root.scale.set(0.8, 1.2, 1.5);
+  const cutaway = new TravelOcclusion([root]);
+  // A ray along the wall's world AABB corner misses its actual rotated panel.
+  cutaway.update(v(5, 3, -8), v(5, 0, 0), { radius: 0.05 });
+  assert.equal(cutaway.coverageAt(v(0, 2, -4), { object: root }), 0);
+  cutaway.update(v(0, 3, -8), v(0, 0, 0));
+  assert.equal(cutaway.coverageAt(v(0, 2, -4), { object: root }), 1);
+  root.matrixAutoUpdate = false;
+  root.matrix.makeShear(0.15, 0.2, 0, 0, 0, 0).setPosition(0, 1.5, -4);
+  root.matrixWorldNeedsUpdate = true;
+  assert.equal(cutaway.coverageAt(v(0, 2, -4), { object: root }), 1);
+  root.scale.set(0, 0, 0);
+  root.matrix.makeScale(0, 0, 0);
+  root.matrixWorldNeedsUpdate = true;
+  assert.equal(cutaway.coverageAt(v(0, 2, -4), { object: root }), 0);
+  cutaway.dispose();
+  dispose(root);
+});
+
+test('explicit walk surfaces never become whole-city terrain occluders, and their physical children still enroll', () => {
+  const terrain = new THREE.Mesh(
+    new THREE.BoxGeometry(10000, 200, 10000),
+    new THREE.MeshStandardMaterial(),
+  );
+  terrain.userData.walkSurface = true;
+  const wall = mesh();
+  wall.position.set(0, 1.5, -4);
+  terrain.add(wall);
+  const original = terrain.material.onBeforeCompile,
+    cutaway = new TravelOcclusion([terrain]);
+  cutaway.update(v(0, 3, -8), v(0, 0, 0));
+  assert.strictEqual(terrain.material.onBeforeCompile, original);
+  assert.equal(terrain.geometry.hasAttribute('aTravelOccluderMin'), false);
+  assert.equal(cutaway.coverageAt(v(0, 100, -4), { object: terrain }), 0);
+  assert.equal(cutaway.coverageAt(v(0, 2, -4), { object: wall }), 1);
+  cutaway.dispose();
+  dispose(terrain);
+});
+
+test('late explicit source spans replace generic metadata and owner disposal restores exact original attribute identity', async () => {
+  const root = mesh(),
+    geometry = root.geometry,
+    originalMin = new THREE.Float32BufferAttribute(
+      new Float32Array(geometry.getAttribute('position').count * 3).fill(-2),
+      3,
+    ),
+    originalMax = new THREE.Float32BufferAttribute(
+      new Float32Array(geometry.getAttribute('position').count * 3).fill(2),
+      3,
+    );
+  geometry.setAttribute('aTravelOccluderMin', originalMin);
+  geometry.setAttribute('aTravelOccluderMax', originalMax);
+  const cutaway = new TravelOcclusion([root]);
+  cutaway.registerParts(root, [
+    {
+      start: 0,
+      count: geometry.getAttribute('position').count,
+      bounds: { minX: -1, maxX: 1, minZ: -0.1, maxZ: 0.1 },
+      minY: -1.5,
+      maxY: 1.5,
+    },
+  ]);
+  assert.equal(cutaway.snapshot().pieceCount, 1);
+  cutaway.dispose();
+  geometry.dispose();
+  await Promise.resolve();
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMin'), originalMin);
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMax'), originalMax);
+  dispose(root);
+});
+
+test('geometry metadata survives renderer disposal enumeration, releases controller tracking immediately, and restores afterward', async () => {
+  for (const controllerFirst of [false, true]) {
+    const root = mesh(),
+      geometry = root.geometry,
+      cutaway = new TravelOcclusion([root]),
+      min = geometry.getAttribute('aTravelOccluderMin'),
+      max = geometry.getAttribute('aTravelOccluderMax');
+    let rendererDisposals = 0;
+    geometry.addEventListener('dispose', () => {
+      if (rendererDisposals++) return;
+      assert.strictEqual(geometry.getAttribute('aTravelOccluderMin'), min);
+      assert.strictEqual(geometry.getAttribute('aTravelOccluderMax'), max);
+      assert(Object.values(geometry.attributes).includes(min));
+      assert(Object.values(geometry.attributes).includes(max));
+    });
+    if (controllerFirst) {
+      cutaway.dispose();
+      assert.equal(
+        rendererDisposals,
+        0,
+        'the camera never disposes borrowed source geometry',
+      );
+      assert.equal(cutaway.snapshot().geometryCount, 0);
+      assert.strictEqual(
+        geometry.getAttribute('aTravelOccluderMin'),
+        min,
+        'retain uploaded buffer metadata until source owner disposal',
+      );
+    }
+    geometry.dispose();
+    assert.equal(rendererDisposals, 1);
+    assert.equal(cutaway.snapshot().geometryCount, 0);
+    assert.strictEqual(
+      geometry.getAttribute('aTravelOccluderMin'),
+      min,
+      'all synchronous disposal listeners see the GPU-owned attributes',
+    );
+    await Promise.resolve();
+    assert.equal(geometry.hasAttribute('aTravelOccluderMin'), false);
+    assert.equal(geometry.hasAttribute('aTravelOccluderMax'), false);
+    cutaway.dispose();
+    dispose(root);
+  }
+});
+
+test('late source-span refinement reuses uploaded attributes instead of orphaning their GPU buffers', () => {
+  const root = mesh(),
+    geometry = root.geometry,
+    cutaway = new TravelOcclusion([root]),
+    min = geometry.getAttribute('aTravelOccluderMin'),
+    max = geometry.getAttribute('aTravelOccluderMax');
+  cutaway.registerParts(root, [
+    {
+      start: 0,
+      count: geometry.getAttribute('position').count,
+      bounds: { minX: -1, maxX: 1, minZ: -0.1, maxZ: 0.1 },
+      minY: -1.5,
+      maxY: 1.5,
+    },
+  ]);
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMin'), min);
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMax'), max);
+  assert.equal(min.version, 1);
+  assert.equal(max.version, 1);
+  assert(
+    cutaway.geometryPatches instanceof WeakMap,
+    'detached source geometry is not retained by the controller registry',
+  );
+  cutaway.releaseSubtree(root);
+  assert.equal(cutaway.snapshot().meshCount, 0);
+  cutaway.dispose();
+  dispose(root);
+});
+
+test('ground obstacles and authored road paint are excluded while other elevated road structures stay eligible', () => {
+  for (const kind of [
+    'groundObstruction',
+    'Road paint 0',
+    'South motor ramp white edges 0',
+    'Northbound exit white edges 0',
+  ]) {
+    const root = mesh();
+    if (kind === 'groundObstruction') root.userData.groundObstruction = true;
+    else root.name = kind;
+    const original = root.material.onBeforeCompile,
+      cutaway = new TravelOcclusion([root]);
+    cutaway.update(v(0, 3, -8), v(0, 0, 0));
+    assert.strictEqual(root.material.onBeforeCompile, original);
+    assert.equal(root.geometry.hasAttribute('aTravelOccluderMin'), false);
+    cutaway.dispose();
+    dispose(root);
+  }
+  const roof = mesh();
+  roof.position.set(0, 1.5, -4);
+  roof.name = 'elevated-road-beam';
+  const cutaway = new TravelOcclusion([roof]);
+  cutaway.update(v(0, 3, -8), v(0, 0, 0));
+  assert.equal(cutaway.coverageAt(v(0, 2, -4), { object: roof }), 1);
+  cutaway.dispose();
+  dispose(roof);
+});
+
+test('actual garbage collection releases detached geometry and disposed controllers even when the other side remains alive', () => {
+  const script = `
+    import * as THREE from 'three';
+    import assert from 'node:assert/strict';
+    import {setImmediate} from 'node:timers/promises';
+    const {TravelOcclusion}=await import(${JSON.stringify(cityModule('travel-occlusion'))});
+    let root=new THREE.Mesh(new THREE.BoxGeometry(2,3,.2),new THREE.MeshStandardMaterial());
+    const retainedGeometry=root.geometry;
+    let controller=new TravelOcclusion([root]);
+    const weakController=new WeakRef(controller);
+    controller.dispose(); controller=null; root=null;
+    for(let i=0;i<8;i++){await setImmediate();global.gc();await setImmediate();}
+    assert.equal(weakController.deref(),undefined,'retained geometry must not retain disposed controller/city');
+    assert(retainedGeometry.hasAttribute('aTravelOccluderMin'));
+    retainedGeometry.dispose();await Promise.resolve();
+    assert.equal(retainedGeometry.hasAttribute('aTravelOccluderMin'),false);
+    let city=new THREE.Group();controller=new TravelOcclusion([city]);
+    let detached=new THREE.Mesh(new THREE.BoxGeometry(2,3,.2),new THREE.MeshStandardMaterial());
+    city.add(detached);
+    const weakGeometry=new WeakRef(detached.geometry);
+    detached.removeFromParent();detached=null;
+    for(let i=0;i<8;i++){await setImmediate();global.gc();await setImmediate();}
+    assert.equal(weakGeometry.deref(),undefined,'live controller must not retain detached undisposed geometry');
+    controller.dispose();
+  `;
+  const child = spawnSync(
+    process.execPath,
+    ['--expose-gc', '--input-type=module'],
+    {
+      input: script,
+      encoding: 'utf8',
+      timeout: 30000,
+    },
+  );
+  assert.equal(child.status, 0, child.stderr || String(child.error));
+});
+
+test('successive camera controllers reuse uploaded module-owned geometry attributes until source disposal', async () => {
+  const root = mesh(),
+    geometry = root.geometry,
+    first = new TravelOcclusion([root]),
+    min = geometry.getAttribute('aTravelOccluderMin'),
+    max = geometry.getAttribute('aTravelOccluderMax'),
+    uploaded = new Set([min, max]);
+  first.dispose();
+  const second = new TravelOcclusion([root]);
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMin'), min);
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMax'), max);
+  second.registerParts(root, [
+    {
+      start: 0,
+      count: geometry.getAttribute('position').count,
+      bounds: { minX: -1, maxX: 1, minZ: -0.1, maxZ: 0.1 },
+      minY: -1.5,
+      maxY: 1.5,
+    },
+  ]);
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMin'), min);
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMax'), max);
+  geometry.addEventListener('dispose', () => {
+    for (const attribute of Object.values(geometry.attributes))
+      uploaded.delete(attribute);
+  });
+  second.dispose();
+  geometry.dispose();
+  assert.equal(
+    uploaded.size,
+    0,
+    'source renderer can delete every previously uploaded metadata buffer',
+  );
+  await Promise.resolve();
+  assert.equal(geometry.hasAttribute('aTravelOccluderMin'), false);
+  assert.equal(geometry.hasAttribute('aTravelOccluderMax'), false);
+  root.material.dispose();
+});
+
+test('a new controller taking ownership during deferred source cleanup cancels stale restoration and rearms final cleanup', async () => {
+  const root = mesh(),
+    geometry = root.geometry,
+    first = new TravelOcclusion([root]),
+    min = geometry.getAttribute('aTravelOccluderMin'),
+    max = geometry.getAttribute('aTravelOccluderMax');
+  let enumerations = 0;
+  geometry.addEventListener('dispose', () => {
+    enumerations++;
+    assert.strictEqual(geometry.getAttribute('aTravelOccluderMin'), min);
+    assert.strictEqual(geometry.getAttribute('aTravelOccluderMax'), max);
+  });
+  geometry.dispose();
+  const second = new TravelOcclusion([root]);
+  await Promise.resolve();
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMin'), min);
+  assert.strictEqual(geometry.getAttribute('aTravelOccluderMax'), max);
+  assert.equal(second.snapshot().geometryCount, 1);
+  first.dispose();
+  second.dispose();
+  geometry.dispose();
+  assert.equal(enumerations, 2);
+  await Promise.resolve();
+  assert.equal(geometry.hasAttribute('aTravelOccluderMin'), false);
+  assert.equal(geometry.hasAttribute('aTravelOccluderMax'), false);
+  root.material.dispose();
 });
