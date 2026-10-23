@@ -152,10 +152,28 @@ export class RocketController {
       fuel: s ? s.fuel / ROCKET_CONFIGS[s.kind].fuelMass : 1,
       stage: s?.stage ?? 'boost',
       stageFuel: s
-        ? s.boosterAttached
-          ? s.boosterFuel / ROCKET_CONFIGS[s.kind].stages.boost.fuelMass
-          : s.upperFuel / ROCKET_CONFIGS[s.kind].stages.upper.fuelMass
+        ? s.stage === 'strap-on' || s.stage === 'strap-separating'
+          ? s.strapFuel / (ROCKET_CONFIGS[s.kind].strapOns?.fuelMass || 1)
+          : s.boosterAttached
+            ? s.boosterFuel / ROCKET_CONFIGS[s.kind].stages.boost.fuelMass
+            : s.upperFuel / ROCKET_CONFIGS[s.kind].stages.upper.fuelMass
         : 1,
+      stageTransitionProgress: s
+        ? s.stage === 'strap-separating'
+          ? THREE.MathUtils.clamp(
+              s.stageElapsed /
+                (ROCKET_CONFIGS[s.kind].strapSeparationDuration || 0.8),
+              0,
+              1,
+            )
+          : s.stage === 'separating'
+            ? THREE.MathUtils.clamp(
+                s.stageElapsed / ROCKET_CONFIGS[s.kind].separationDuration,
+                0,
+                1,
+              )
+            : 0
+        : 0,
       spaceFocus: this.spaceFocus,
       throttle: this.auto ? (s?.throttle ?? 0) : this.throttle,
       tilt: s
@@ -789,6 +807,7 @@ export class RocketController {
             ),
           ) ||
           this.model.collisionSegments.some((probe) => {
+            if (probe.strapOn && !s.strapAttached) return false;
             if (probe.booster && !s.boosterAttached) return false;
             const rotation = new THREE.Quaternion().setFromUnitVectors(
               new THREE.Vector3(0, 1, 0),

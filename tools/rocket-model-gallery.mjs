@@ -8,7 +8,8 @@ const temporary = await fs.mkdtemp('/private/tmp/rocket-model-gallery-');
 const repository = new URL('../', import.meta.url);
 const workDirectory = new URL('work/rocket-model-gallery/', repository);
 const outputDirectory = new URL('../../outputs/', repository);
-const imageName = 'rocket-three-designs.png';
+const imageName =
+  process.env.ROCKET_GALLERY_IMAGE || 'rocket-three-designs.png';
 const report = {
   method:
     'Production createRocketModel(kind), build(1), stage(createRocket(kind)). Display heights are normalized to 100 units to compare architecture; actual dimensions remain labelled 18/48/110 metres. This isolated model QA fixture is not natural-flight evidence.',
@@ -117,7 +118,7 @@ try {
     const descriptions = {
       small: ['SCOUT', '單芯箭體 · 後掠穩定翼 · 尖錐整流罩'],
       large: ['ATLAS', '橘色主芯 · 雙側助推器 · 寬型整流罩'],
-      'super-heavy': ['TITAN', '不鏽鋼船體 · 熱盾 · 格柵舵與前後控制翼'],
+      'super-heavy': ['TITAN', '亮銀箭體 · 四外掛助推器 · 熱盾與控制翼'],
     };
     for (const [index, kind] of ['small', 'large', 'super-heavy'].entries()) {
       const model = createRocketModel(kind),
@@ -180,12 +181,16 @@ try {
           atlasBoosters: structural.filter(
             (mesh) => mesh.name === 'Atlas side booster',
           ).length,
+          titanSideBoosters: structural.filter(
+            (mesh) => mesh.name === 'Titan external booster tank',
+          ).length,
           titanGridFins: structural.filter(
             (mesh) => mesh.name === 'Titan lattice grid fins',
           ).length,
           titanFlaps: structural.filter(
             (mesh) =>
-              mesh.name.includes('Titan') && mesh.name.includes('control flap'),
+              mesh.name === 'Titan aft control flap' ||
+              mesh.name === 'Titan forward control flap',
           ).length,
         },
         ndc: {
@@ -249,6 +254,7 @@ try {
     report.gallery.models[2].engineCount === 19 &&
     report.gallery.models[0].features.scoutFins === 4 &&
     report.gallery.models[1].features.atlasBoosters === 2 &&
+    report.gallery.models[2].features.titanSideBoosters === 4 &&
     report.gallery.models[2].features.titanGridFins === 1 &&
     report.gallery.models[2].features.titanFlaps === 4;
   await page.screenshot({ path: temporary + '/' + imageName });

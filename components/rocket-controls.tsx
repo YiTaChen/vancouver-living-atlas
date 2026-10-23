@@ -39,7 +39,7 @@ const en = {
   largeHint:
     'Orange core with twin side boosters. Needs a strong, open foundation.',
   superHeavyHint:
-    'Wide silver body, dark heat shield and broad fins. Needs the strongest foundation.',
+    '4 external boosters, bright silver body, dark heat shield and control fins. Needs the strongest foundation.',
   smallMetrics: '18 m tall · blast 35 m · heat 17 m',
   largeMetrics: '48 m tall · blast 100 m · heat 45 m',
   superHeavyMetrics: '110 m tall · blast 220 m · heat 105 m',
@@ -166,7 +166,17 @@ const en = {
   stageSeparating: 'Stage separation',
   stageUpper: 'Stage 2 · Upper stage',
   stageCoast: 'Coasting',
+  stageStrapOn: 'Stage 1 · 4 boosters + core',
+  stageStrapSeparating: 'Side boosters separating',
+  stageCore: 'Stage 2 · Core only',
+  stageCoreSeparating: 'Core stage separating',
+  stageTitanUpper: 'Stage 3 · Upper stage',
   stageFuel: 'Stage fuel',
+  stageTransition: 'Next stage ignition preparation',
+  strapTransition: 'Side-booster release progress',
+  strapOnHint: '4 boosters and core ignite together',
+  strapSeparationHint: 'Boosters released · core firing',
+  coreSeparationHint: 'Core released · upper stage preparing',
   separationHint: 'Booster released · upper stage preparing',
   spaceObservation: 'Space observation',
   observationHint: 'Choose a destination to find it. Drag to look around.',
@@ -196,7 +206,8 @@ const zh: Record<RocketTextKey, string> = {
   'super-heavy': '泰坦 · 超大型火箭',
   smallHint: '細長箭體與四片尾翼。輕巧、轉向靈活，但容易受風偏移。',
   largeHint: '橙色主箭體與雙側助推器。需要寬廣、堅固的發射地基。',
-  superHeavyHint: '寬銀色箭體、黑色隔熱面與大翼片。需要最堅固的發射地基。',
+  superHeavyHint:
+    '四枚外掛助推器、亮銀色箭體、黑色隔熱面與控制翼。需要最堅固的發射地基。',
   smallMetrics: '高 18 m · 風壓 35 m · 熱影響 17 m',
   largeMetrics: '高 48 m · 風壓 100 m · 熱影響 45 m',
   superHeavyMetrics: '高 110 m · 風壓 220 m · 熱影響 105 m',
@@ -309,7 +320,17 @@ const zh: Record<RocketTextKey, string> = {
   stageSeparating: '級間分離',
   stageUpper: '第二級 · 上面級',
   stageCoast: '慣性滑行',
+  stageStrapOn: '第一級 · 四側助推器＋核心',
+  stageStrapSeparating: '側助推器分離中',
+  stageCore: '第二級 · 核心推進',
+  stageCoreSeparating: '核心級分離中',
+  stageTitanUpper: '第三級 · 上面級',
   stageFuel: '本級燃料',
+  stageTransition: '下一級點火準備',
+  strapTransition: '側助推器釋放進度',
+  strapOnHint: '四枚側助推器與核心同時點火',
+  strapSeparationHint: '側助推器已釋放 · 核心持續推進',
+  coreSeparationHint: '核心已釋放 · 上面級準備中',
   separationHint: '助推器已釋放 · 上面級準備中',
   spaceObservation: '太空觀察',
   observationHint: '選擇天體即可找到它，也可以拖曳視角自由觀察。',
@@ -391,13 +412,33 @@ function RocketSilhouette({ kind }: { kind: RocketKind }) {
       ) : (
         <>
           <path
+            data-rocket-strap="rear-left"
+            d="m8 18 4 9v27H4V27Z"
+            fill="#b9c9d0"
+          />
+          <path
+            data-rocket-strap="rear-right"
+            d="m40 18 4 9v27h-8V27Z"
+            fill="#b9c9d0"
+          />
+          <path
             d="M24 3c9 9 11 17 11 24v25H13V27c0-7 2-15 11-24Z"
-            fill="currentColor"
-            fillOpacity=".2"
+            fill="#e5edef"
           />
           <path d="M24 4c9 9 11 16 11 23v25H24Z" fill="#071b28" />
           <path d="m13 36-9 20 11-5m20-15 9 20-11-5M7 22h6v6H7Zm28 0h6v6h-6M9 22v6m30-6v6M7 25h6m22 0h6M13 44h22" />
           <path d="m18 53-1 5h6l-1-5m4 0-1 5h6l-1-5" />
+          <path
+            data-rocket-strap="front-left"
+            d="m16 22 4 8v26h-8V30Z"
+            fill="#d5e1e5"
+          />
+          <path
+            data-rocket-strap="front-right"
+            d="m32 22 4 8v26h-8V30Z"
+            fill="#d5e1e5"
+          />
+          <path d="M4 49h8m24 0h8M12 51h8m8 0h8M6 58h4m28 0h4m-28 2h4m12 0h4" />
         </>
       )}
     </svg>
@@ -488,12 +529,25 @@ export function RocketControls({
   const preflight = ['building', 'ready', 'countdown'].includes(state.phase);
   const stageLabel: RocketTextKey = (
     {
-      boost: 'stageBoost',
-      separating: 'stageSeparating',
-      upper: 'stageUpper',
+      'strap-on': 'stageStrapOn',
+      'strap-separating': 'stageStrapSeparating',
+      boost: state.kind === 'super-heavy' ? 'stageCore' : 'stageBoost',
+      separating:
+        state.kind === 'super-heavy'
+          ? 'stageCoreSeparating'
+          : 'stageSeparating',
+      upper: state.kind === 'super-heavy' ? 'stageTitanUpper' : 'stageUpper',
       coast: 'stageCoast',
     } as const
   )[state.stage || 'boost'];
+  const stageTransition =
+    state.stage === 'strap-separating' || state.stage === 'separating';
+  const separationHint: RocketTextKey =
+    state.stage === 'strap-separating'
+      ? 'strapSeparationHint'
+      : state.kind === 'super-heavy'
+        ? 'coreSeparationHint'
+        : 'separationHint';
   const detailsOpen =
     missionDetails.missionId === state.missionId && missionDetails.open;
   const failureAge = Math.max(0, state.failureAge ?? 0);
@@ -967,12 +1021,12 @@ export function RocketControls({
             !minimal &&
             !observingAccident && (
               <section
-                className={`rocket-stage-status glass ${manualFlight ? 'rocket-stage-manual' : ''} ${state.stage === 'separating' ? 'separating' : ''}`}
+                className={`rocket-stage-status glass ${manualFlight ? 'rocket-stage-manual' : ''} ${stageTransition ? 'separating' : ''}`}
                 aria-label={t('stageFuel')}
               >
                 <header>
                   <output aria-live="polite">{t(stageLabel)}</output>
-                  {state.stage !== 'separating' && state.stage !== 'coast' && (
+                  {!stageTransition && state.stage !== 'coast' && (
                     <span>
                       {Math.round(
                         Math.max(0, Math.min(1, state.stageFuel)) * 100,
@@ -981,14 +1035,30 @@ export function RocketControls({
                     </span>
                   )}
                 </header>
-                {state.stage === 'separating' ? (
-                  <small>{t('separationHint')}</small>
+                {stageTransition ? (
+                  <>
+                    <small>{t(separationHint)}</small>
+                    <progress
+                      aria-label={t(
+                        state.stage === 'strap-separating'
+                          ? 'strapTransition'
+                          : 'stageTransition',
+                      )}
+                      value={state.stageTransitionProgress ?? 0}
+                      max={1}
+                    />
+                  </>
                 ) : (
-                  <progress
-                    aria-label={t('stageFuel')}
-                    value={state.stageFuel}
-                    max={1}
-                  />
+                  <>
+                    <progress
+                      aria-label={t('stageFuel')}
+                      value={state.stageFuel}
+                      max={1}
+                    />
+                    {state.stage === 'strap-on' && (
+                      <small>{t('strapOnHint')}</small>
+                    )}
+                  </>
                 )}
               </section>
             )}

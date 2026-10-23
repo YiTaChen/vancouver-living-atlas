@@ -99,7 +99,7 @@ test('all three vehicle classes reach 100km by continuous staged ascent without 
       );
       assert(s.altitude >= SPACE_ALTITUDE && s.altitude < SPACE_ALTITUDE + 60);
       assert(s.flightElapsed > (kind === 'super-heavy' ? 65 : 60));
-      assert(s.flightElapsed < (kind === 'super-heavy' ? 80 : 70));
+      assert(s.flightElapsed < (kind === 'super-heavy' ? 75 : 70));
       assert(s.fuel > 0 && s.fuel < ROCKET_CONFIGS[kind].fuelMass);
       assert(
         Math.hypot(s.position.x - s.origin.x, s.position.z - s.origin.z) >
@@ -120,11 +120,15 @@ test('all three vehicle classes account for every stage dry mass and fuel reserv
     const s = createRocket(kind, 0, 0, 0, { kind: 'platform' });
     assert.equal(
       config.dryMass,
-      config.stages.boost.dryMass + config.stages.upper.dryMass,
+      config.stages.boost.dryMass +
+        config.stages.upper.dryMass +
+        (config.strapOns?.dryMass ?? 0),
     );
     assert.equal(
       config.fuelMass,
-      config.stages.boost.fuelMass + config.stages.upper.fuelMass,
+      config.stages.boost.fuelMass +
+        config.stages.upper.fuelMass +
+        (config.strapOns?.fuelMass ?? 0),
     );
     assert.equal(s.mass, config.dryMass + config.fuelMass);
     assert.equal(s.mass, rocketMass(s));
@@ -133,6 +137,7 @@ test('all three vehicle classes account for every stage dry mass and fuel reserv
       config.countdownDuration + config.ignitionDuration + 2,
     );
     assert(flight.boosterFuel < s.boosterFuel);
+    if (config.strapOns) assert(flight.strapFuel < s.strapFuel);
     assert.equal(flight.upperFuel, s.upperFuel);
     assert.equal(flight.mass, rocketMass(flight));
     assert(Math.abs(s.mass - flight.mass - (s.fuel - flight.fuel)) < 1e-6);
@@ -153,8 +158,293 @@ test('all three vehicle classes account for every stage dry mass and fuel reserv
     6.3,
     'closed flaps do not inflate aerodynamic core radius',
   );
-  assert.equal(titan.footprintRadius, 11.5);
+  assert.equal(titan.footprintRadius, 14.1);
   assert.equal(titan.upperFootprintRadius, 10.1);
+});
+
+test('Titan lights four external boosters with its core and drops their real mass before either central stage', () => {
+  const config = ROCKET_CONFIGS['super-heavy'];
+  const initial = createRocket('super-heavy', 0, 0, 0, {
+    kind: 'platform',
+    seed: 13,
+  });
+  assert.equal(initial.stage, 'strap-on');
+  assert.equal(initial.strapAttached, true);
+  assert.equal(initial.boosterAttached, true);
+  assert.equal(initial.mass, 1_886_000);
+  assert.equal(config.dryMass, 460_000);
+  assert.equal(config.strapOns.dryMass, 4 * 35_000);
+  assert.equal(config.strapOns.fuelMass, 4 * 125_000);
+  assert.equal(
+    config.maxThrust,
+    config.strapOns.maxThrust + config.stages.boost.maxThrust,
+  );
+  let s = launchRocket(run(initial, config.buildDuration + 0.1));
+  const ready = structuredClone(s);
+  s = run(s, config.countdownDuration - 0.1);
+  assert.equal(s.phase, 'countdown');
+  assert.equal(
+    s.fuel,
+    ready.fuel,
+    'neither propulsion system burns before ignition',
+  );
+  s = run(s, 0.1 + config.ignitionDuration * 0.5);
+  assert.equal(s.phase, 'ignition');
+  assert(
+    s.strapFuel < initial.strapFuel && s.boosterFuel < initial.boosterFuel,
+  );
+  assert.equal(s.upperFuel, initial.upperFuel);
+  const consumedStrap = initial.strapFuel - s.strapFuel;
+  const consumedCore = initial.boosterFuel - s.boosterFuel;
+  assert(
+    Math.abs(
+      consumedStrap / consumedCore -
+        config.strapOns.fuelPerSecond / config.stages.boost.fuelPerSecond,
+    ) < 1e-9,
+  );
+  assert(
+    s.stageThrust > config.maxThrust * 0.45 &&
+      s.stageThrust < config.maxThrust * 0.55,
+  );
+  const ignition = s.events.find((event) => event.type === 'ignition');
+  assert.equal(
+    s.events.find((event) => event.type === 'core-ignition').time,
+    ignition.time,
+  );
+  let before = s;
+  while (s.strapAttached && s.elapsed < 60) {
+    before = s;
+    s = stepRocket(s, {}, dt);
+  }
+  assert.equal(s.stage, 'strap-separating');
+  assert.equal(s.strapFuel, 0);
+  assert.equal(s.strapAttached, false);
+  assert.equal(s.boosterAttached, true, 'the central core remains attached');
+  assert(s.boosterFuel > 0 && s.boosterFuel < initial.boosterFuel);
+  assert.equal(s.upperFuel, initial.upperFuel);
+  assert.equal(
+    s.separation,
+    null,
+    'strap release does not overwrite central-core separation',
+  );
+  assert.equal(s.mass, rocketMass(s));
+  assert(
+    Math.abs(
+      before.mass - s.mass - config.strapOns.dryMass - (before.fuel - s.fuel),
+    ) < 1e-6,
+  );
+  assert.deepEqual(s.strapSeparation.position, s.position);
+  assert.deepEqual(s.strapSeparation.velocity, s.velocity);
+  assert.deepEqual(s.strapSeparation.attitude, s.attitude);
+  assert.equal(s.strapSeparation.time, s.elapsed);
+  assert.equal(s.strapSeparation.flightTime, s.flightElapsed);
+  assert.equal(
+    s.events.find((event) => event.type === 'strap-on-separation').magnitude,
+    140_000,
+  );
+  assert(
+    Math.abs(s.velocity.y - before.velocity.y) < 2.5,
+    'release cannot teleport momentum',
+  );
+  assert(Math.abs(s.position.y - before.position.y) < 25);
+  const released = structuredClone(s);
+  s = run(s, config.strapSeparationDuration - dt * 2);
+  assert.equal(s.stage, 'strap-separating');
+  assert(
+    s.boosterFuel < released.boosterFuel,
+    'the core burns throughout release',
+  );
+  assert(s.stageThrust > config.stages.boost.maxThrust * 0.99);
+  assert(sampleRocketEffects(s).engine > 0.5);
+  assert.equal(s.upperFuel, initial.upperFuel);
+  s = run(s, 0.15);
+  assert.equal(s.stage, 'boost');
+  assert(s.throttle > 0.99 && s.stageThrust > 0);
+  assert.deepEqual(s.strapSeparation, released.strapSeparation);
+  const result = untilDone(s);
+  assert.equal(result.phase, 'space');
+  assert(result.flightElapsed > 65 && result.flightElapsed < 75);
+  assert.equal(result.strapAttached, false);
+  assert.equal(result.boosterAttached, false);
+  assert.equal(result.mass, config.stages.upper.dryMass + result.upperFuel);
+  assert(
+    Math.abs(
+      initial.mass -
+        result.mass -
+        (initial.fuel - result.fuel) -
+        config.strapOns.dryMass -
+        config.stages.boost.dryMass,
+    ) < 1e-6,
+  );
+  assert.deepEqual(
+    result.events
+      .filter((event) =>
+        [
+          'ignition',
+          'core-ignition',
+          'liftoff',
+          'strap-on-burnout',
+          'strap-on-separation',
+          'core-only',
+          'booster-burnout',
+          'stage-separation',
+          'upper-ignition',
+          'mission-complete',
+        ].includes(event.type),
+      )
+      .map((event) => event.type),
+    [
+      'ignition',
+      'core-ignition',
+      'liftoff',
+      'strap-on-burnout',
+      'strap-on-separation',
+      'core-only',
+      'booster-burnout',
+      'stage-separation',
+      'upper-ignition',
+      'mission-complete',
+    ],
+  );
+  assert.deepEqual(released.strapSeparation, result.strapSeparation);
+});
+
+test('manual Titan commands scale both burning systems and stopping throttle never spends hidden fuel', () => {
+  const config = ROCKET_CONFIGS['super-heavy'];
+  let s = run(
+    launchRocket(
+      prepared('super-heavy', { kind: 'platform', seed: 13 }),
+      'manual',
+    ),
+    config.countdownDuration + config.ignitionDuration + 3,
+    { throttle: 0.7, stabilize: true, windScale: 0 },
+  );
+  s = run(s, 0.5, { throttle: 0.4, stabilize: true, windScale: 0 });
+  const before = structuredClone(s);
+  s = run(s, 1, {
+    throttle: 0.4,
+    pitch: 0.7,
+    roll: -0.4,
+    stabilize: true,
+    windScale: 0,
+  });
+  assert.equal(s.stage, 'strap-on');
+  assert(s.attitude.pitch > before.attitude.pitch + 0.01);
+  assert(s.attitude.roll < before.attitude.roll - 0.005);
+  assert(
+    Math.abs(
+      before.strapFuel - s.strapFuel - config.strapOns.fuelPerSecond * 0.4,
+    ) < 1e-6,
+  );
+  assert(
+    Math.abs(
+      before.boosterFuel -
+        s.boosterFuel -
+        config.stages.boost.fuelPerSecond * 0.4,
+    ) < 1e-6,
+  );
+  assert.equal(s.upperFuel, before.upperFuel);
+  s = run(s, 0.5, { throttle: 0, stabilize: true, windScale: 0 });
+  assert.equal(s.throttle, 0);
+  assert.equal(sampleRocketEffects(s).engine, 0);
+  const stopped = structuredClone(s);
+  s = run(s, 0.5, { throttle: 0, stabilize: true, windScale: 0 });
+  assert.equal(s.strapFuel, stopped.strapFuel);
+  assert.equal(s.boosterFuel, stopped.boosterFuel);
+  assert.equal(s.upperFuel, stopped.upperFuel);
+  assert.equal(s.mass, stopped.mass);
+  const resumed = stepRocket(s, { auto: true }, dt);
+  assert(Math.abs(resumed.attitude.pitch - s.attitude.pitch) < 0.01);
+  assert.equal(untilDone(resumed).phase, 'space');
+});
+
+test('Titan abort and impact shut down all live engines without a later automatic stage ignition', () => {
+  const config = ROCKET_CONFIGS['super-heavy'];
+  for (const target of [
+    'strap-on',
+    'strap-separating',
+    'boost',
+    'separating',
+    'upper',
+  ]) {
+    let s = run(
+      launchRocket(prepared('super-heavy', { kind: 'platform', seed: 13 })),
+      config.countdownDuration + config.ignitionDuration + 2,
+    );
+    while (
+      s.stage !== target &&
+      !['space', 'crashed'].includes(s.phase) &&
+      s.elapsed < 100
+    )
+      s = stepRocket(s, {}, dt);
+    assert.equal(s.stage, target);
+    const snapshot = structuredClone(s),
+      lastEvent = s.nextEventId;
+    const aborted = run(stepRocket(s, { abort: true }, dt), 2);
+    assert.equal(aborted.phase, 'aborted');
+    assert.equal(aborted.stage, 'coast');
+    assert.equal(aborted.throttle, 0);
+    assert.equal(aborted.stageThrust, 0);
+    assert.equal(sampleRocketEffects(aborted).engine, 0);
+    assert.equal(aborted.strapFuel, snapshot.strapFuel);
+    assert.equal(aborted.boosterFuel, snapshot.boosterFuel);
+    assert.equal(aborted.upperFuel, snapshot.upperFuel);
+    assert(
+      !aborted.events.some(
+        (event) =>
+          event.id >= lastEvent &&
+          [
+            'core-only',
+            'upper-ignition',
+            'strap-on-separation',
+            'stage-separation',
+          ].includes(event.type),
+      ),
+    );
+    const crashed = run(crashRocket(s), 2);
+    assert.equal(crashed.phase, 'crashed');
+    assert.equal(crashed.fuel, snapshot.fuel);
+    assert.equal(crashed.stageThrust, 0);
+    assert.equal(sampleRocketEffects(crashed).engine, 0);
+    assert.deepEqual(
+      s,
+      snapshot,
+      'separation and abort operations do not mutate input states',
+    );
+  }
+});
+
+test('Scout and Atlas retain their original two-stage event order without any external booster fuel or mass', () => {
+  for (const kind of ['small', 'large']) {
+    assert.equal(ROCKET_CONFIGS[kind].strapOns, undefined);
+    const s = prepared(kind, { kind: 'platform', seed: 13 });
+    assert.equal(s.stage, 'boost');
+    assert.equal(s.strapAttached, false);
+    assert.equal(s.strapFuel, 0);
+    assert.equal(s.strapSeparation, null);
+    const result = untilDone(launchRocket(s));
+    assert.equal(result.phase, 'space');
+    assert(result.flightElapsed > 60 && result.flightElapsed < 70);
+    assert.deepEqual(
+      result.events.map((event) => event.type),
+      [
+        'ready',
+        'countdown',
+        'ignition',
+        'liftoff',
+        'booster-burnout',
+        'stage-separation',
+        'upper-ignition',
+        'mission-complete',
+      ],
+    );
+    assert.equal(result.strapFuel, 0);
+    assert.equal(result.strapSeparation, null);
+    assert.equal(
+      result.mass,
+      ROCKET_CONFIGS[kind].stages.upper.dryMass + result.upperFuel,
+    );
+  }
 });
 
 test('Titan requires a firm launch foundation and ordinary roofs or lake beds give way', () => {
@@ -257,7 +547,7 @@ test('Titan exhaust affects a wider area and supplies stronger impulses without 
       return [kind, effect];
     }),
   );
-  assert.equal(ROCKET_CONFIGS['super-heavy'].effectStrength, 1.8);
+  assert.equal(ROCKET_CONFIGS['super-heavy'].effectStrength, 2.2);
   assert(effects['super-heavy'].blastRadius > 200);
   assert(effects['super-heavy'].heatRadius > 95);
   assert(effects['super-heavy'].blastRadius > effects.large.blastRadius * 2);

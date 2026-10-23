@@ -590,7 +590,7 @@ export class RocketSpace {
     earthshine.name = 'Soft Earth bounce';
     const ambient = new THREE.AmbientLight(0xe6ecf4, 0.38);
     ambient.name = 'Space vehicle readability fill';
-    const cameraFill = new THREE.DirectionalLight(0xeaf1ff, 0.85);
+    const cameraFill = new THREE.DirectionalLight(0xeaf1ff, 1.25);
     cameraFill.name = 'Soft camera-side vehicle fill';
     // Standard-material vehicles need a little reflected light in this
     // environment without an HDR map. Keep a gentle shape-defining fill on the

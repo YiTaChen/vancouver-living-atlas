@@ -222,6 +222,12 @@ export class RocketEffects {
   private vehicleAnchor = new THREE.Vector3();
   private treeInstance = new THREE.Matrix4();
   private treeLocal = new THREE.Matrix4();
+  private groundOutwash: THREE.InstancedMesh | null = null;
+  private outwashPower = { value: 0 };
+  private outwashTime = { value: 0 };
+  private outwashTransform = new THREE.Object3D();
+  private groundContacts = Array.from({ length: 5 }, () => new THREE.Vector3());
+  private groundContactCount = 0;
   constructor(
     private e: CityEngine,
     state: RocketState,
@@ -367,6 +373,41 @@ export class RocketEffects {
     this.scorch.position.copy(this.savedGround);
     this.scorch.position.y += 0.35;
     this.group.add(this.scorch);
+    if (state.kind === 'super-heavy') {
+      // Forty fading ribbons share one draw call. The five jets hit the local
+      // surface and turn outward; they are not a giant fireball under the city.
+      this.groundOutwash = new THREE.InstancedMesh(
+        new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2),
+        new THREE.ShaderMaterial({
+          transparent: true,
+          depthWrite: false,
+          side: THREE.DoubleSide,
+          forceSinglePass: true,
+          blending: THREE.AdditiveBlending,
+          uniforms: { uPower: this.outwashPower, uTime: this.outwashTime },
+          vertexShader:
+            'varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*instanceMatrix*vec4(position,1.);}',
+          fragmentShader: `
+            uniform float uPower; uniform float uTime; varying vec2 vUv;
+            void main(){
+              float edge=max(0.,1.-abs(vUv.x-.5)*2.);
+              float forward=1.-vUv.y;
+              float tail=1.-smoothstep(.15,1.,forward);
+              float pulse=.72+.28*sin(forward*34.-uTime*23.+vUv.x*9.);
+              vec3 color=mix(vec3(1.,.86,.48),vec3(1.,.23,.025),forward);
+              gl_FragColor=vec4(color,pow(edge,1.5)*tail*pulse*uPower*.7);
+              #include <tonemapping_fragment>
+              #include <colorspace_fragment>
+            }`,
+        }),
+        40,
+      );
+      this.groundOutwash.name = 'Titan five-jet ground flame outwash';
+      this.groundOutwash.count = 0;
+      this.groundOutwash.frustumCulled = false;
+      this.groundOutwash.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      this.group.add(this.groundOutwash);
+    }
     this.shock = new THREE.Mesh(
       new THREE.RingGeometry(0.92, 1, 64),
       new THREE.MeshBasicMaterial({
@@ -675,6 +716,78 @@ export class RocketEffects {
       }
     }
   }
+  private updateGroundOutwash(s: RocketState, exposure: number) {
+    if (!this.groundOutwash) return;
+    this.groundContactCount = 0;
+    this.groundOutwash.count = 0;
+    this.outwashPower.value = Math.min(1, exposure * 1.35);
+    this.outwashTime.value = this.time;
+    const direction = rocketDirection(s.attitude);
+    if (exposure < 0.025 || direction.y < 0.25) return;
+    const config = ROCKET_CONFIGS[s.kind],
+      q = new THREE.Quaternion().setFromUnitVectors(
+        new THREE.Vector3(0, 1, 0),
+        new THREE.Vector3(direction.x, direction.y, direction.z),
+      ),
+      count = s.strapAttached ? 5 : 1;
+    let nearestContact = Infinity;
+    for (let source = 0; source < count; source++) {
+      const angle = ((source - 1) * Math.PI) / 2,
+        radius = source ? config.radius * 1.7 : 0,
+        contact = this.groundContacts[source];
+      contact
+        .set(Math.cos(angle) * radius, 0, Math.sin(angle) * radius)
+        .applyQuaternion(q)
+        .add(new THREE.Vector3(s.position.x, s.position.y, s.position.z));
+      const nozzle = contact.clone(),
+        ray = new THREE.Vector3(direction.x, direction.y, direction.z),
+        heightAt = (x: number, z: number) =>
+          Math.max(
+            this.e.elevation?.(x, z) ?? this.savedGround.y,
+            // Building-part rectangles can include open courtyards. They
+            // describe a supporting roof only for an actual rooftop launch.
+            s.support.kind.startsWith('roof')
+              ? (this.supportCollisionHeight(x, z, s) ?? -Infinity)
+              : -Infinity,
+          );
+      // A tilted nozzle lands away from its own x/z. Re-sample there so a
+      // nearby slope or collapsing roof cannot leave the footprint floating.
+      for (let iteration = 0; iteration < 3; iteration++) {
+        const drop =
+          Math.max(0, nozzle.y - heightAt(contact.x, contact.z)) / direction.y;
+        contact.copy(nozzle).addScaledVector(ray, -drop);
+      }
+      contact.y = heightAt(contact.x, contact.z) + 0.45;
+      const reach = config.height * (source ? 0.5 : 0.7),
+        distance = contact.distanceTo(nozzle);
+      // Pressure and drifting dust outlive direct flame impingement. A jet
+      // that no longer reaches the surface must stop painting fire on it.
+      if (distance > reach) continue;
+      nearestContact = Math.min(nearestContact, distance / reach);
+      this.groundContacts[this.groundContactCount].copy(contact);
+      for (let spoke = 0; spoke < 8; spoke++) {
+        const a = (spoke * Math.PI) / 4 + source * 0.17,
+          length = (18 + Math.sqrt(exposure) * 30) * (source ? 0.72 : 1),
+          transform = this.outwashTransform;
+        transform.position.set(
+          contact.x + Math.sin(a) * length * 0.43,
+          contact.y + spoke * 0.008,
+          contact.z + Math.cos(a) * length * 0.43,
+        );
+        transform.rotation.set(0, a, 0);
+        transform.scale.set(3 + Math.sqrt(exposure) * 7, 1, length);
+        transform.updateMatrix();
+        this.groundOutwash.setMatrixAt(
+          this.groundContactCount * 8 + spoke,
+          transform.matrix,
+        );
+      }
+      this.groundContactCount++;
+    }
+    this.outwashPower.value *= Math.sqrt(Math.max(0, 1 - nearestContact));
+    this.groundOutwash.count = this.groundContactCount * 8;
+    this.groundOutwash.instanceMatrix.needsUpdate = true;
+  }
   update(dt: number, s: RocketState, vehicleAnchor?: THREE.Vector3 | null) {
     this.lastState = s;
     this.time += dt;
@@ -820,6 +933,7 @@ export class RocketEffects {
         this.emit(t.x, t.y + 3, t.z, 0.3, false, true);
     }
     this.updateVehicleEffects(dt, s, vehicleAnchor);
+    this.updateGroundOutwash(s, f.groundExposure);
     if (f.engine > 0.03 && s.altitude < 14000) {
       this.spawn +=
         dt *
@@ -832,13 +946,28 @@ export class RocketEffects {
         const angle = rand(this.next + 17) * Math.PI * 2,
           radius =
             this.strength > 1 ? rand(this.next + 27) * config.radius * 1.4 : 0;
-        this.emit(
-          s.position.x + Math.cos(angle) * radius,
-          Math.max(this.savedGround.y + 1, s.position.y - 3),
-          s.position.z + Math.sin(angle) * radius,
+        const contact =
+          this.groundContactCount && this.next % 3 !== 0
+            ? this.groundContacts[this.next % this.groundContactCount]
+            : null;
+        const particle = this.emit(
+          contact ? contact.x : s.position.x + Math.cos(angle) * radius,
+          contact
+            ? contact.y
+            : Math.max(this.savedGround.y + 1, s.position.y - 3),
+          contact ? contact.z : s.position.z + Math.sin(angle) * radius,
           f.engine * this.strength,
           this.next % 4 === 0,
         );
+        if (contact) {
+          const speed =
+            (18 + rand(this.next + 41) * 29) * Math.sqrt(this.strength);
+          particle.v.set(
+            Math.cos(angle) * speed,
+            1.5 + rand(this.next + 4) * 5,
+            Math.sin(angle) * speed,
+          );
+        }
       }
     }
     for (let i = 0; i < this.particles.length; i++) {
@@ -1146,6 +1275,9 @@ export class RocketEffects {
     this.spawn = 0;
     this.vehicleSpawn = 0;
     this.shockAge = 99;
+    this.groundContactCount = 0;
+    this.outwashPower.value = 0;
+    if (this.groundOutwash) this.groundOutwash.count = 0;
     for (const t of this.trees) {
       t.heat = t.pressure = t.fall = 0;
       t.bend.identity();

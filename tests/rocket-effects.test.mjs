@@ -884,3 +884,144 @@ test('Titan impact, explosion and launch dust are stronger while every graphics 
   assert(explosions[2].spread > explosions[1].spread * 1.5);
   assert(dust[0] < dust[1] && dust[1] < dust[2]);
 });
+
+test('Titan redirects five near-ground jets into bounded outward flame ribbons and fast surface dust', () => {
+  const { engine, state } = fixture(0, 'super-heavy');
+  const effects = new RocketEffects(engine, state);
+  const outwash = effects.group.getObjectByName(
+    'Titan five-jet ground flame outwash',
+  );
+  try {
+    effects.update(0.1, state);
+    assert(outwash instanceof THREE.InstancedMesh);
+    assert.equal(
+      outwash.count,
+      40,
+      'eight surface directions for each of five firing nozzles',
+    );
+    outwash.computeBoundingBox();
+    const size = outwash.boundingBox.getSize(new THREE.Vector3());
+    assert(
+      size.x > 65 && size.z > 65,
+      'the plume spreads across the ground beyond the vehicle footprint',
+    );
+    assert(
+      size.y < 0.1,
+      'ground flame spread cannot turn into a floating fireball',
+    );
+    assert(
+      effects.particles.some(
+        (p) => p.age < p.life && p.p.y < 2 && Math.hypot(p.v.x, p.v.z) > 25,
+      ),
+    );
+    assert.equal(
+      effects.particles.length,
+      360,
+      'spread reuses the existing balanced particle budget',
+    );
+    state.strapAttached = false;
+    state.strapFuel = 0;
+    state.stage = 'boost';
+    effects.update(0.1, state);
+    assert.equal(
+      outwash.count,
+      8,
+      'the central nozzle alone remains after the four are released',
+    );
+    state.phase = 'aborted';
+    effects.update(0.1, state);
+    assert.equal(
+      outwash.count,
+      0,
+      'shutdown ends the impingement flames immediately',
+    );
+    effects.reset();
+    assert.equal(outwash.count, 0);
+    assert.equal(outwash.material.uniforms.uPower.value, 0);
+  } finally {
+    effects.dispose();
+  }
+});
+
+test('Titan ground impingement follows the actual local surface height and vanishes once the plume is aloft', () => {
+  const { engine, state } = fixture(0, 'super-heavy');
+  engine.elevation = () => 8;
+  state.position.y = 8.45;
+  const effects = new RocketEffects(engine, state);
+  effects.supportCollisionHeight = () => 50;
+  const outwash = effects.group.getObjectByName(
+    'Titan five-jet ground flame outwash',
+  );
+  try {
+    effects.update(0.1, state);
+    const matrix = new THREE.Matrix4();
+    outwash.getMatrixAt(0, matrix);
+    assert(
+      Math.abs(new THREE.Vector3().setFromMatrixPosition(matrix).y - 8.45) <
+        1e-6,
+    );
+    state.support.kind = 'roof-small';
+    state.position.y = 50.45;
+    effects.update(0.1, state);
+    outwash.getMatrixAt(0, matrix);
+    assert(
+      Math.abs(new THREE.Vector3().setFromMatrixPosition(matrix).y - 50.45) <
+        1e-6,
+      'a real rooftop launch still follows its supporting roof',
+    );
+    state.phase = 'flight';
+    state.position.y = state.altitude = 500;
+    effects.update(0.1, state);
+    assert.equal(
+      outwash.count,
+      0,
+      'direct ground flames stop beyond the nozzle plume even while pressure decays gradually',
+    );
+  } finally {
+    effects.dispose();
+  }
+  for (const kind of ['small', 'large']) {
+    const fixtureValue = fixture(0, kind);
+    const other = new RocketEffects(fixtureValue.engine, fixtureValue.state);
+    assert.equal(
+      other.group.getObjectByName('Titan five-jet ground flame outwash'),
+      undefined,
+    );
+    other.dispose();
+  }
+});
+
+test('tilted Titan exhaust anchors to the surface at its displaced ground contact', () => {
+  const { engine, state } = fixture(0, 'super-heavy');
+  engine.elevation = (_x, z) => 30 + 0.4 * z;
+  state.position.y = 50;
+  state.attitude.pitch = Math.PI / 6;
+  const effects = new RocketEffects(engine, state);
+  try {
+    effects.update(0.1, state);
+    const contact = effects.groundContacts[0];
+    assert(
+      contact.z < state.position.z - 10,
+      'a 30-degree tilted jet hits away from the nozzle x/z',
+    );
+    assert(
+      Math.abs(contact.y - engine.elevation(contact.x, contact.z) - 0.45) <
+        1e-6,
+      'the final contact uses the surface height at the displaced landing point',
+    );
+    const outwash = effects.group.getObjectByName(
+        'Titan five-jet ground flame outwash',
+      ),
+      matrix = new THREE.Matrix4();
+    assert.equal(outwash.count, 40);
+    outwash.getMatrixAt(0, matrix);
+    assert(
+      Math.abs(
+        new THREE.Vector3().setFromMatrixPosition(matrix).y - contact.y,
+      ) < 1e-5,
+      'the rendered central ribbon is anchored to that surface contact',
+    );
+  } finally {
+    effects.dispose();
+  }
+});

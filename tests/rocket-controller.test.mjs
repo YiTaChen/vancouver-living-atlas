@@ -1047,7 +1047,82 @@ test('Titan screen placement sizes its ring, slope sampling and assembly scaffol
   assert.equal(c.snapshot.loaded, true);
 });
 
-test('Titan completes a continuous controller mission from construction through two stages to 100km', async (t) => {
+test('Titan telemetry follows the burning booster pack and then its partly used core without resetting fuel', async (t) => {
+  const { controller: c } = setup(t);
+  c.start('super-heavy', 0, 0.45, 0, { kind: 'platform' });
+  await tick();
+  const config = ROCKET_CONFIGS['super-heavy'];
+  c.state.strapFuel = config.strapOns.fuelMass * 0.4;
+  c.state.boosterFuel = config.stages.boost.fuelMass * 0.7;
+  assert.equal(c.snapshot.stage, 'strap-on');
+  assert(Math.abs(c.snapshot.stageFuel - 0.4) < 1e-12);
+  c.state.strapAttached = false;
+  c.state.strapFuel = 0;
+  c.state.stage = 'strap-separating';
+  c.state.stageElapsed = config.strapSeparationDuration / 2;
+  assert.equal(c.snapshot.stageFuel, 0);
+  assert.equal(c.snapshot.stageTransitionProgress, 0.5);
+  c.state.stage = 'boost';
+  assert(Math.abs(c.snapshot.stageFuel - 0.7) < 1e-12);
+  assert.equal(c.snapshot.stageTransitionProgress, 0);
+  c.state.stage = 'separating';
+  c.state.stageElapsed = config.separationDuration / 2;
+  assert.equal(c.snapshot.stageTransitionProgress, 0.5);
+});
+
+test('Titan detached side boosters retire their collision probes while the remaining core still collides', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(10, 12, -1, 1, 145)];
+  c.start('super-heavy', 0, 0, 0, { kind: 'platform' });
+  await tick();
+  readyFlight(c, 100, { kind: 'platform' }, 'super-heavy');
+  const side = c.model.collisionSegments.find(
+    (probe) => probe.strapOn && probe.from.x > 5,
+  );
+  assert(side);
+  assert(
+    c.world.hit(
+      side.from.clone().add(new THREE.Vector3(0, 100, 0)),
+      side.to.clone().add(new THREE.Vector3(0, 100, 0)),
+      side.radius,
+    ),
+  );
+  c.update(1 / 60);
+  assert.equal(
+    c.snapshot.phase,
+    'crashed',
+    'an attached side booster must hit the actual obstacle',
+  );
+  c.start('super-heavy', 0, 0, 0, { kind: 'platform' });
+  await tick();
+  readyFlight(c, 100, { kind: 'platform' }, 'super-heavy');
+  c.state.strapAttached = false;
+  c.state.strapFuel = 0;
+  c.state.stage = 'boost';
+  c.state.stageElapsed = 2;
+  c.state.strapSeparation = {
+    time: c.state.elapsed,
+    flightTime: c.state.flightElapsed,
+    position: { ...c.state.position },
+    velocity: { ...c.state.velocity },
+    attitude: { ...c.state.attitude },
+  };
+  c.update(1 / 60);
+  assert.equal(
+    c.snapshot.phase,
+    'flight',
+    'the dropped pack cannot cause a ghost collision',
+  );
+  c.world = { hit: () => true, surface: () => ({ height: 0 }) };
+  c.update(1 / 60);
+  assert.equal(
+    c.snapshot.phase,
+    'crashed',
+    'central core collision remains active',
+  );
+});
+
+test('Titan completes a continuous mission with four side boosters first, then the core and upper stage', async (t) => {
   const { controller: c, engine: e } = setup(t);
   c.start('super-heavy', 0, 0.45, 0, {
     kind: 'platform',
@@ -1088,6 +1163,9 @@ test('Titan completes a continuous controller mission from construction through 
   assert(c.snapshot.altitude >= 100000 && c.snapshot.altitude < 100060);
   assert(c.state.flightElapsed > 65 && c.state.flightElapsed < 80);
   assert.equal(c.state.boosterAttached, false);
+  assert.equal(c.state.strapAttached, false);
+  assert(c.state.strapSeparation);
+  assert(c.state.strapSeparation.time < c.state.separation.time);
   assert(c.state.separation && c.state.upperFuel > 0);
   assert.equal(c.snapshot.stage, 'coast');
   assert.deepEqual(
@@ -1097,6 +1175,9 @@ test('Titan completes a continuous controller mission from construction through 
           'countdown',
           'ignition',
           'liftoff',
+          'strap-on-burnout',
+          'strap-on-separation',
+          'core-only',
           'booster-burnout',
           'stage-separation',
           'upper-ignition',
@@ -1108,6 +1189,9 @@ test('Titan completes a continuous controller mission from construction through 
       'countdown',
       'ignition',
       'liftoff',
+      'strap-on-burnout',
+      'strap-on-separation',
+      'core-only',
       'booster-burnout',
       'stage-separation',
       'upper-ignition',

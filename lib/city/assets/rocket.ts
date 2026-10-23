@@ -6,7 +6,11 @@ import {
   type RocketState,
 } from '../rocket-state';
 import { RocketWreckageVisual } from './rocket-wreckage';
-import { addRocketDesign } from './rocket-design';
+import {
+  addRocketDesign,
+  createTitanStrapOns,
+  TITAN_SHIELD_AZIMUTH,
+} from './rocket-design';
 
 /** Original reusable meshes. Dimensions are authored gameplay dimensions, not a real vehicle blueprint. */
 export function createRocketModel(kind: RocketKind) {
@@ -44,14 +48,15 @@ export function createRocketModel(kind: RocketKind) {
     metalness: 0.72,
     roughness: 0.15,
   });
+  const steelColor = titan ? 0xd8e2e7 : 0xaabcc5;
   const steel = new THREE.MeshStandardMaterial({
-    color: 0xaabcc5,
-    metalness: 0.76,
-    roughness: 0.34,
+    color: steelColor,
+    metalness: titan ? 0.28 : 0.76,
+    roughness: titan ? 0.42 : 0.34,
   });
   const heatShield = new THREE.MeshStandardMaterial({
-    color: 0x34434a,
-    metalness: 0.12,
+    color: 0x53646b,
+    metalness: 0.05,
     roughness: 0.88,
     polygonOffset: true,
     polygonOffsetFactor: -1,
@@ -106,7 +111,7 @@ export function createRocketModel(kind: RocketKind) {
       new THREE.LatheGeometry(
         profile.map((p) => new THREE.Vector2(p.x * 1.009, p.y)),
         32,
-        -Math.PI / 2,
+        TITAN_SHIELD_AZIMUTH,
         Math.PI,
       ),
       heatShield,
@@ -166,6 +171,13 @@ export function createRocketModel(kind: RocketKind) {
     steel,
     heatShield,
   });
+  const strapDesign = titan
+    ? createTitanStrapOns(h, r, { white, black, steel, orange })
+    : null;
+  const strapOns = strapDesign?.groups ?? [],
+    strapOrigins = strapOns.map((booster) => booster.position.clone());
+  strapOns.forEach((booster) => group.add(booster));
+  if (strapDesign) collisionSegments.push(...strapDesign.collision);
   const upperEngine = new THREE.Group();
   upperEngine.name = 'Upper-stage vacuum engine';
   upper.add(upperEngine);
@@ -238,6 +250,25 @@ export function createRocketModel(kind: RocketKind) {
       group.add(plume);
       sidePlumes.push(plume);
     }
+  const strapPlumes = strapOns.map((booster, i) => {
+    const plume = new THREE.Mesh(
+      new THREE.ConeGeometry(r * 0.36, h * 0.32, 20, 1, true),
+      flameMat,
+    );
+    plume.name = `Titan external booster exhaust ${i + 1}`;
+    plume.rotation.z = Math.PI;
+    plume.position.y = -h * 0.155;
+    plume.visible = false;
+    const brightCore = new THREE.Mesh(
+      new THREE.ConeGeometry(r * 0.18, h * 0.25, 14),
+      core.material,
+    );
+    brightCore.name = 'Titan external exhaust bright core';
+    brightCore.position.y = -h * 0.025;
+    plume.add(brightCore);
+    booster.add(plume);
+    return plume;
+  });
   const light = new THREE.PointLight(
     0xffa345,
     0,
@@ -246,7 +277,13 @@ export function createRocketModel(kind: RocketKind) {
   );
   light.position.y = 1;
   group.add(light);
-  const wreckage = new RocketWreckageVisual(kind, group, segments, upperEngine);
+  const wreckage = new RocketWreckageVisual(
+    kind,
+    group,
+    segments,
+    upperEngine,
+    strapOns,
+  );
   // Attached to real shell sections, so onboard fire survives breakup and the
   // floating-origin space handoff without rendering ground trees through Earth.
   const fireMaterial = new THREE.MeshBasicMaterial({
@@ -274,6 +311,22 @@ export function createRocketModel(kind: RocketKind) {
     segment.add(mesh);
     return mesh;
   });
+  strapOns.forEach((booster, i) => {
+    const mesh = new THREE.Mesh(
+      new THREE.ConeGeometry(r * 0.55, h * 0.12, 7),
+      fireMaterial,
+    );
+    mesh.name = 'Attached external booster fire';
+    mesh.userData.strapOn = true;
+    mesh.position.set(
+      Math.cos((i * Math.PI) / 2) * r * 0.44,
+      h * 0.27,
+      Math.sin((i * Math.PI) / 2) * r * 0.44,
+    );
+    mesh.visible = false;
+    booster.add(mesh);
+    bodyFlames.push(mesh);
+  });
   const blastMaterial = new THREE.MeshBasicMaterial({
     color: 0xffba56,
     transparent: true,
@@ -290,6 +343,8 @@ export function createRocketModel(kind: RocketKind) {
   group.add(blast);
   const scorch = new THREE.Color(0x55483e);
   const inverse = new THREE.Quaternion();
+  let activeStage: RocketState['stage'] | null = null,
+    strapsAttached = titan;
   return {
     group,
     segments,
@@ -297,12 +352,14 @@ export function createRocketModel(kind: RocketKind) {
     light,
     booster,
     upper,
+    strapOns,
+    strapPlumes,
     height: h,
     radius: r,
     collisionSegments,
     damage(state: RocketState, surface: (x: number, z: number) => number) {
       white.color.set(0xe8eced).lerp(scorch, state.fireDamage * 0.8);
-      steel.color.set(0xaabcc5).lerp(scorch, state.fireDamage * 0.8);
+      steel.color.set(steelColor).lerp(scorch, state.fireDamage * 0.8);
       orange.color.set(0xe98236).lerp(scorch, state.fireDamage * 0.65);
       white.emissive.setRGB(
         state.fireIntensity * 0.16,
@@ -313,7 +370,10 @@ export function createRocketModel(kind: RocketKind) {
       fireMaterial.opacity = state.fireIntensity * 0.85;
       bodyFlames.forEach((mesh, i) => {
         mesh.visible =
-          state.fireIntensity > 0.025 && (state.boosterAttached || i >= 3);
+          state.fireIntensity > 0.025 &&
+          (mesh.userData.strapOn
+            ? state.strapAttached
+            : state.boosterAttached || i >= 3);
         mesh.scale.set(
           0.7 + 0.2 * Math.sin(state.elapsed * 19 + i),
           0.65 +
@@ -356,9 +416,80 @@ export function createRocketModel(kind: RocketKind) {
         g.visible = t > 0;
         g.scale.y = Math.max(0.001, t);
       });
+      strapOns.forEach((booster, i) => {
+        const t = THREE.MathUtils.clamp(progress * 1.5 - 0.1 - i * 0.08, 0, 1);
+        booster.visible = t > 0;
+        booster.scale.y = Math.max(0.001, t);
+      });
     },
     /** The detached booster preserves separation momentum and tumbles about its own centre. */
     stage(state: RocketState) {
+      activeStage = state.stage;
+      strapsAttached = state.strapAttached;
+      const straps = state.strapSeparation;
+      strapOns.forEach((booster, i) => {
+        if (!straps) return;
+        const t = Math.max(0, state.elapsed - straps.time);
+        booster.visible = t < 28;
+        const direction = rocketDirection(straps.attitude),
+          initial = new THREE.Quaternion().setFromUnitVectors(
+            new THREE.Vector3(0, 1, 0),
+            new THREE.Vector3(direction.x, direction.y, direction.z),
+          ),
+          angle = (i * Math.PI) / 2,
+          rotation = initial
+            .clone()
+            .multiply(
+              new THREE.Quaternion().setFromEuler(
+                new THREE.Euler(
+                  Math.cos(angle) * t * 0.1,
+                  t * 0.035,
+                  -Math.sin(angle) * t * 0.1,
+                ),
+              ),
+            ),
+          center = new THREE.Vector3(0, h * 0.3, 0),
+          origin = strapOrigins[i]
+            .clone()
+            .add(center)
+            .applyQuaternion(initial)
+            .add(
+              new THREE.Vector3(
+                straps.position.x,
+                straps.position.y,
+                straps.position.z,
+              ),
+            );
+        const outward = new THREE.Vector3(
+          Math.cos(angle),
+          0,
+          Math.sin(angle),
+        ).applyQuaternion(initial);
+        origin
+          .addScaledVector(
+            new THREE.Vector3(
+              straps.velocity.x,
+              straps.velocity.y,
+              straps.velocity.z,
+            ),
+            t,
+          )
+          .addScaledVector(outward, 7 * t);
+        origin.y -= 4.905 * t * t;
+        origin.sub(center.applyQuaternion(rotation));
+        const inverse = group.quaternion.clone().invert();
+        booster.position
+          .copy(origin)
+          .sub(
+            new THREE.Vector3(
+              state.position.x,
+              state.position.y,
+              state.position.z,
+            ),
+          )
+          .applyQuaternion(inverse);
+        booster.quaternion.copy(inverse).multiply(rotation);
+      });
       const separation = state.separation;
       upperEngine.visible = !state.boosterAttached;
       const nozzle = state.boosterAttached ? 0 : h * 0.418;
@@ -415,14 +546,27 @@ export function createRocketModel(kind: RocketKind) {
       booster.quaternion.copy(inverse).multiply(detachedQ);
     },
     fire(power: number, time: number) {
-      flame.visible = power > 0.01;
+      const coreFraction = config.strapOns
+        ? config.stages.boost.maxThrust /
+          (config.stages.boost.maxThrust + config.strapOns.maxThrust)
+        : 1;
+      const mainPower =
+        titan && (activeStage === 'strap-separating' || activeStage === 'boost')
+          ? Math.min(1, power / coreFraction)
+          : power;
+      flame.visible = mainPower > 0.01;
+      strapPlumes.forEach((plume, i) => {
+        plume.visible =
+          strapsAttached && activeStage === 'strap-on' && power > 0.01;
+        plume.scale.y = power * (1 + 0.07 * Math.sin(time * 41 + i * 1.7));
+      });
       sidePlumes.forEach((plume, i) => {
         plume.visible = power > 0.01 && !flame.userData.upper;
         plume.scale.y = power * (1 + 0.06 * Math.sin(time * 37 + i));
       });
       flame.scale.set(
         1 + 0.12 * Math.sin(time * 37),
-        power *
+        mainPower *
           (flame.userData.upper ? 0.53 : 1) *
           (1 + 0.08 * Math.sin(time * 53)),
         1,

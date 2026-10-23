@@ -3,8 +3,15 @@ import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 
-const { createRocket, crashRocket, rocketDirection, ROCKET_CONFIGS } =
-  await import(cityModule('rocket-state'));
+const {
+  createRocket,
+  crashRocket,
+  launchRocket,
+  stepRocket,
+  sampleRocketEffects,
+  rocketDirection,
+  ROCKET_CONFIGS,
+} = await import(cityModule('rocket-state'));
 const { createRocketModel, disposeRocketObject } = await import(
   cityModule('assets/rocket')
 );
@@ -322,4 +329,319 @@ test('all three designs reuse six real wreckage sections without first-frame tel
     cityGeometry.dispose();
     cityMaterial.dispose();
   }
+});
+
+test('Titan has four independent cardinal strap-ons with real engines, construction, bounded footprints and owned bright plumes', () => {
+  const model = createRocketModel('super-heavy'),
+    config = ROCKET_CONFIGS['super-heavy'];
+  try {
+    assert.equal(model.strapOns.length, 4);
+    assert.equal(model.strapPlumes.length, 4);
+    model.build(0);
+    assert(model.strapOns.every((booster) => !booster.visible));
+    model.build(0.35);
+    assert(
+      model.strapOns.every((booster) => booster.visible && booster.scale.y < 1),
+    );
+    model.build(1);
+    model.strapOns.forEach((booster, i) => {
+      assert.equal(booster.parent, model.group);
+      assert(!model.segments.some((segment) => ancestor(booster, segment)));
+      const angle = (i * Math.PI) / 2;
+      assert(
+        Math.abs(booster.position.x - Math.cos(angle) * config.radius * 1.7) <
+          1e-8,
+      );
+      assert(
+        Math.abs(booster.position.z - Math.sin(angle) * config.radius * 1.7) <
+          1e-8,
+      );
+      assert.equal(booster.scale.y, 1);
+      for (const name of [
+        'Titan external booster tank',
+        'Titan external booster nose',
+        'Titan external booster engine bell',
+        'Titan external booster feed line',
+      ])
+        assert(booster.getObjectByName(name), name);
+      assert.equal(
+        meshes(
+          booster,
+          (mesh) => mesh.name === 'Titan external booster mounting strut',
+        ).length,
+        2,
+      );
+      assert.equal(model.strapPlumes[i].parent, booster);
+      assert(
+        model.strapPlumes[i].getObjectByName(
+          'Titan external exhaust bright core',
+        ),
+      );
+      for (const mesh of meshes(booster))
+        for (const point of vertices(mesh)) {
+          assert(
+            Math.hypot(point.x, point.z) <= config.footprintRadius + 1e-5,
+            `${mesh.name} outside launch footprint`,
+          );
+          assert(point.y >= -1e-5 && point.y <= config.height + 1e-5);
+        }
+    });
+    const probes = model.collisionSegments.filter((probe) => probe.strapOn);
+    assert.equal(probes.length, 4);
+    probes.forEach((probe, i) => {
+      assert.equal(
+        probe.booster,
+        false,
+        'strap removal is independent from central-core removal',
+      );
+      assert.equal(probe.from.x, model.strapOns[i].position.x);
+      assert.equal(probe.from.z, model.strapOns[i].position.z);
+      assert(
+        Math.hypot(probe.from.x, probe.from.z) + probe.radius <
+          config.footprintRadius,
+      );
+    });
+    assert.equal(named(model, 'Titan control flap silver rim').length, 4);
+    for (const kind of ['small', 'large']) {
+      const other = createRocketModel(kind);
+      assert.equal(other.strapOns.length, 0);
+      assert.equal(other.strapPlumes.length, 0);
+      disposeRocketObject(other.group);
+    }
+  } finally {
+    disposeRocketObject(model.group);
+  }
+});
+
+test('Titan production stages keep all five engines firing initially and central thrust lit throughout external-booster separation', () => {
+  const model = createRocketModel('super-heavy');
+  let state = createRocket('super-heavy', 0, 0, 0, {
+    kind: 'platform',
+    seed: 13,
+  });
+  state.phase = 'ready';
+  state.buildProgress = 1;
+  state = launchRocket(state);
+  model.build(1);
+  let combined = 0,
+    separating = 0,
+    coreOnly = 0,
+    upper = false;
+  try {
+    for (let i = 0; i < 6000 && !upper; i++) {
+      state = stepRocket(state, {}, 1 / 60);
+      model.stage(state);
+      model.fire(sampleRocketEffects(state).engine, state.elapsed);
+      if (state.throttle > 0.2 && state.phase !== 'countdown') {
+        if (state.stage === 'strap-on') {
+          combined++;
+          assert(model.flame.visible);
+          assert(model.strapPlumes.every((plume) => plume.visible));
+        } else if (state.stage === 'strap-separating') {
+          separating++;
+          assert(state.boosterAttached && !state.strapAttached);
+          assert(
+            model.flame.visible,
+            'central engine never cuts during strap separation',
+          );
+          assert(model.strapPlumes.every((plume) => !plume.visible));
+          const expected =
+            state.throttle * (1 + 0.08 * Math.sin(state.elapsed * 53));
+          assert(
+            Math.abs(model.flame.scale.y - expected) < 1e-8,
+            'main engine retains its own power instead of shrinking with total combined thrust',
+          );
+        } else if (state.stage === 'boost') {
+          coreOnly++;
+          assert(model.flame.visible);
+          assert(model.strapPlumes.every((plume) => !plume.visible));
+        } else if (state.stage === 'upper') {
+          upper = true;
+          assert(model.flame.visible);
+          assert(
+            model.upper.getObjectByName('Upper-stage vacuum engine').visible,
+          );
+          assert(!state.boosterAttached && !state.strapAttached);
+        }
+      }
+    }
+    assert(combined > 100 && separating > 10 && coreOnly > 100 && upper);
+    assert(state.strapSeparation.time < state.separation.time);
+    const events = state.events.map((event) => event.type);
+    assert(
+      events.indexOf('core-ignition') < events.indexOf('strap-on-separation'),
+    );
+  } finally {
+    disposeRocketObject(model.group);
+  }
+});
+
+test('four discarded Titan boosters preserve pose and momentum independently through core staging, space scale and later breakup', () => {
+  const model = createRocketModel('super-heavy'),
+    h = ROCKET_CONFIGS['super-heavy'].height;
+  let state = createRocket('super-heavy', 100, 3500, -200);
+  state.elapsed = 50;
+  state.attitude = { pitch: 0.2, roll: -0.18 };
+  state.velocity = { x: 80, y: 900, z: -30 };
+  model.build(1);
+  pointModel(model, state);
+  model.stage(state);
+  const structure = model.strapOns.flatMap((booster) => meshes(booster)),
+    before = structure.map(vertices),
+    centers = model.strapOns.map((booster) =>
+      booster.localToWorld(new THREE.Vector3(0, h * 0.3, 0)),
+    ),
+    initialRotation = model.group.quaternion.clone();
+  state.strapAttached = false;
+  state.stage = 'strap-separating';
+  state.strapSeparation = {
+    time: state.elapsed,
+    flightTime: 12,
+    position: { ...state.position },
+    velocity: { ...state.velocity },
+    attitude: { ...state.attitude },
+  };
+  try {
+    model.stage(state);
+    structure.forEach((mesh, i) =>
+      assertSameVertices(before[i], vertices(mesh), 'strap separation'),
+    );
+    function expectedCenter(index, time) {
+      const outward = new THREE.Vector3(
+        Math.cos((index * Math.PI) / 2),
+        0,
+        Math.sin((index * Math.PI) / 2),
+      ).applyQuaternion(initialRotation);
+      return centers[index]
+        .clone()
+        .addScaledVector(new THREE.Vector3(80, 900, -30), time)
+        .addScaledVector(outward, 7 * time)
+        .add(new THREE.Vector3(0, -4.905 * time * time, 0));
+    }
+    state.elapsed += 2;
+    state.position = { x: 400, y: 6500, z: -500 };
+    state.attitude = { pitch: -0.1, roll: 0.3 };
+    pointModel(model, state);
+    model.stage(state);
+    model.strapOns.forEach((booster, i) => {
+      assert.equal(booster.parent, model.group);
+      assert(
+        booster
+          .localToWorld(new THREE.Vector3(0, h * 0.3, 0))
+          .distanceTo(expectedCenter(i, 2)) < 1e-7,
+      );
+      assert(booster.quaternion.angleTo(new THREE.Quaternion()) > 0.1);
+    });
+    assert(
+      model.booster.position.length() < 1e-8,
+      'external separation does not release the central core',
+    );
+    model.group.position.set(0, 0, 0);
+    model.group.scale.setScalar(1e-5);
+    model.stage(state);
+    model.strapOns.forEach((booster, i) => {
+      const expected = expectedCenter(i, 2)
+        .sub(
+          new THREE.Vector3(
+            state.position.x,
+            state.position.y,
+            state.position.z,
+          ),
+        )
+        .multiplyScalar(1e-5);
+      assert(
+        booster
+          .localToWorld(new THREE.Vector3(0, h * 0.3, 0))
+          .distanceTo(expected) < 1e-10,
+      );
+    });
+    model.group.scale.setScalar(1);
+    pointModel(model, state);
+    state.elapsed += 2;
+    state.boosterAttached = false;
+    state.stage = 'separating';
+    state.separation = {
+      time: state.elapsed,
+      flightTime: 25,
+      position: { ...state.position },
+      velocity: { ...state.velocity },
+      attitude: { ...state.attitude },
+    };
+    model.stage(state);
+    model.strapOns.forEach((booster, i) =>
+      assert(
+        booster
+          .localToWorld(new THREE.Vector3(0, h * 0.3, 0))
+          .distanceTo(expectedCenter(i, 4)) < 1e-7,
+      ),
+    );
+    state = crashRocket(state);
+    model.damage(state, () => 0);
+    assert.equal(
+      model.group.children.filter((object) =>
+        object.name.startsWith('Ruptured rocket section '),
+      ).length,
+      3,
+    );
+    assert.equal(
+      model.group.children.filter((object) =>
+        object.name.startsWith('Ruptured Titan external booster '),
+      ).length,
+      0,
+    );
+    assert(model.strapOns.every((booster) => booster.parent === model.group));
+    state.elapsed = state.strapSeparation.time + 28.1;
+    model.stage(state);
+    assert(model.strapOns.every((booster) => !booster.visible));
+  } finally {
+    disposeRocketObject(model.group);
+  }
+});
+
+test('attached Titan strap-ons rupture as four real pieces without teleportation, settle above terrain and dispose shared resources exactly once', () => {
+  const model = createRocketModel('super-heavy');
+  let state = createRocket('super-heavy', 100, 5, -30, { kind: 'platform' });
+  state.attitude = { pitch: 0.13, roll: -0.09 };
+  state.velocity = { x: 20, y: -10, z: 8 };
+  state.elapsed = 50;
+  state = crashRocket(state);
+  model.build(1);
+  pointModel(model, state);
+  const structure = model.strapOns.flatMap((booster) => meshes(booster)),
+    before = structure.map(vertices);
+  model.damage(state, () => 0);
+  structure.forEach((mesh, i) =>
+    assertSameVertices(before[i], vertices(mesh), 'attached strap rupture'),
+  );
+  const pivots = model.group.children.filter((object) =>
+    object.name.startsWith('Ruptured Titan external booster '),
+  );
+  assert.equal(pivots.length, 4);
+  model.strapOns.forEach((booster, i) =>
+    assert.equal(booster.parent, pivots[i]),
+  );
+  for (let frame = 0; frame < 600; frame++) {
+    state.elapsed += 1 / 60;
+    model.stage(state);
+    model.damage(state, () => 0);
+  }
+  for (const mesh of structure)
+    for (const point of vertices(mesh))
+      assert(point.y >= -1e-5, `${mesh.name} penetrates terrain`);
+  const resources = new Map();
+  model.group.traverse((object) => {
+    if (!(object instanceof THREE.Mesh || object instanceof THREE.Points))
+      return;
+    resources.set(object.geometry, 0);
+    for (const material of Array.isArray(object.material)
+      ? object.material
+      : [object.material])
+      resources.set(material, 0);
+  });
+  for (const resource of resources.keys())
+    resource.addEventListener('dispose', () =>
+      resources.set(resource, resources.get(resource) + 1),
+    );
+  disposeRocketObject(model.group);
+  assert([...resources.values()].every((count) => count === 1));
 });

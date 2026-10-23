@@ -27,7 +27,75 @@ export class RocketWreckageVisual {
     private root: THREE.Group,
     private segments: THREE.Group[],
     private upperEngine: THREE.Group,
+    private strapOns: THREE.Group[] = [],
   ) {}
+
+  private addPiece(
+    segment: THREE.Group,
+    centerLocal: THREE.Vector3,
+    rotation: THREE.Quaternion,
+    state: RocketState,
+    index: number,
+    name: string,
+  ) {
+    const wreck = state.wreckage!;
+    const pivot = new THREE.Group();
+    pivot.name = name;
+    pivot.add(segment);
+    segment.position.sub(centerLocal);
+    this.root.add(pivot);
+    pivot.updateWorldMatrix(true, true);
+    const bounds = new THREE.Box3(),
+      local = pivot.matrixWorld.clone().invert();
+    segment.traverse((object) => {
+      if (!(object instanceof THREE.Mesh) || !object.castShadow) return;
+      object.geometry.computeBoundingBox();
+      if (object.geometry.boundingBox)
+        bounds.union(
+          object.geometry.boundingBox
+            .clone()
+            .applyMatrix4(local.clone().multiply(object.matrixWorld)),
+        );
+    });
+    const corners: THREE.Vector3[] = [];
+    for (const x of [bounds.min.x, bounds.max.x])
+      for (const y of [bounds.min.y, bounds.max.y])
+        for (const z of [bounds.min.z, bounds.max.z])
+          corners.push(new THREE.Vector3(x, y, z));
+    const angle = index * 2.399 + state.seed,
+      kick =
+        0.5 +
+        Math.min(
+          3,
+          Math.hypot(wreck.velocity.x, wreck.velocity.y, wreck.velocity.z) *
+            0.08,
+        );
+    this.pieces.push({
+      pivot,
+      position: centerLocal
+        .clone()
+        .applyQuaternion(rotation)
+        .add(
+          new THREE.Vector3(
+            wreck.position.x,
+            wreck.position.y,
+            wreck.position.z,
+          ),
+        ),
+      velocity: new THREE.Vector3(
+        wreck.velocity.x * 0.2 + Math.sin(angle) * kick,
+        Math.max(0.6, -wreck.velocity.y * 0.12) + index * 0.2,
+        wreck.velocity.z * 0.2 + Math.cos(angle) * kick,
+      ),
+      rotation: rotation.clone(),
+      spin: new THREE.Vector3(
+        0.22 + index * 0.045,
+        Math.sin(angle) * 0.16,
+        Math.cos(angle) * 0.4 + wreck.angularVelocity.roll * 0.12,
+      ),
+      corners,
+    });
+  }
 
   update(
     state: RocketState,
@@ -47,62 +115,29 @@ export class RocketWreckageVisual {
       this.segments.forEach((segment, i) => {
         if (!state.boosterAttached && i < 3) return;
         const height = config.height * (i < 5 ? 0.11 + i * 0.14 : 0.85);
-        const pivot = new THREE.Group();
-        pivot.name = `Ruptured rocket section ${i + 1}`;
-        pivot.add(segment);
-        segment.position.y = -height;
-        this.root.add(pivot);
-        pivot.updateWorldMatrix(true, true);
-        const bounds = new THREE.Box3();
-        const local = pivot.matrixWorld.clone().invert();
-        segment.traverse((object) => {
-          if (!(object instanceof THREE.Mesh) || !object.castShadow) return;
-          object.geometry.computeBoundingBox();
-          if (object.geometry.boundingBox)
-            bounds.union(
-              object.geometry.boundingBox
-                .clone()
-                .applyMatrix4(local.clone().multiply(object.matrixWorld)),
-            );
-        });
-        const corners: THREE.Vector3[] = [];
-        for (const x of [bounds.min.x, bounds.max.x])
-          for (const y of [bounds.min.y, bounds.max.y])
-            for (const z of [bounds.min.z, bounds.max.z])
-              corners.push(new THREE.Vector3(x, y, z));
-        const angle = i * 2.399 + state.seed;
-        const kick =
-          0.5 +
-          Math.min(
-            3,
-            Math.hypot(wreck.velocity.x, wreck.velocity.y, wreck.velocity.z) *
-              0.08,
-          );
-        this.pieces.push({
-          pivot,
-          position: new THREE.Vector3(0, height, 0)
-            .applyQuaternion(rotation)
-            .add(
-              new THREE.Vector3(
-                wreck.position.x,
-                wreck.position.y,
-                wreck.position.z,
-              ),
-            ),
-          velocity: new THREE.Vector3(
-            wreck.velocity.x * 0.2 + Math.sin(angle) * kick,
-            Math.max(0.6, -wreck.velocity.y * 0.12) + i * 0.2,
-            wreck.velocity.z * 0.2 + Math.cos(angle) * kick,
-          ),
-          rotation: rotation.clone(),
-          spin: new THREE.Vector3(
-            0.22 + i * 0.045,
-            Math.sin(angle) * 0.16,
-            Math.cos(angle) * 0.4 + wreck.angularVelocity.roll * 0.12,
-          ),
-          corners,
-        });
+        this.addPiece(
+          segment,
+          new THREE.Vector3(0, height, 0),
+          rotation,
+          state,
+          i,
+          `Ruptured rocket section ${i + 1}`,
+        );
       });
+      if (state.strapAttached)
+        this.strapOns.forEach((strap, i) => {
+          const center = strap.position
+            .clone()
+            .add(new THREE.Vector3(0, config.height * 0.3, 0));
+          this.addPiece(
+            strap,
+            center,
+            rotation,
+            state,
+            i + 6,
+            `Ruptured Titan external booster ${i + 1}`,
+          );
+        });
       // Airborne breakup carries its actual upward momentum. A collision instead
       // dissipates the normal velocity, allowing the shell to buckle and settle.
       if (wreck.cause !== 'impact')

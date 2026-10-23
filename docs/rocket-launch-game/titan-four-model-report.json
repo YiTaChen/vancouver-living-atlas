@@ -1,0 +1,102 @@
+{
+  "method": "Production createRocketModel(kind), build(1), stage(createRocket(kind)). Display heights are normalized to 100 units to compare architecture; actual dimensions remain labelled 18/48/110 metres. This isolated model QA fixture is not natural-flight evidence.",
+  "startedAt": "2026-10-22T23:57:56.497Z",
+  "errors": [],
+  "consoleErrors": [],
+  "httpFailures": [],
+  "checks": {
+    "actualSizesLabelled": true,
+    "completeModelsInFrame": true,
+    "normalizedHeight": true,
+    "distinctArchitectures": true
+  },
+  "gallery": {
+    "models": [
+      {
+        "kind": "small",
+        "actualHeightMeters": 18,
+        "normalizedHeight": 99.60000026888318,
+        "normalizedTop": 100.00000031789145,
+        "normalizedBottom": 0.4000000490082636,
+        "normalizedWidth": 24.44444497426351,
+        "sourceMeshCount": 25,
+        "engineCount": 1,
+        "features": {
+          "scoutFins": 4,
+          "atlasBoosters": 0,
+          "titanSideBoosters": 0,
+          "titanGridFins": 0,
+          "titanFlaps": 0
+        },
+        "ndc": {
+          "minX": -0.5117695889757382,
+          "maxX": -0.36438828636564047,
+          "minY": -0.4084391289545366,
+          "maxY": 0.617721608000039
+        }
+      },
+      {
+        "kind": "large",
+        "actualHeightMeters": 48,
+        "normalizedHeight": 99.74999991059305,
+        "normalizedTop": 99.99999982118608,
+        "normalizedBottom": 0.24999991059303328,
+        "normalizedWidth": 38.427082896232605,
+        "sourceMeshCount": 43,
+        "engineCount": 7,
+        "features": {
+          "scoutFins": 0,
+          "atlasBoosters": 2,
+          "titanSideBoosters": 0,
+          "titanGridFins": 0,
+          "titanFlaps": 0
+        },
+        "ndc": {
+          "minX": -0.12948084748017522,
+          "maxX": 0.1332193102041685,
+          "minY": -0.500982647357843,
+          "maxY": 0.6107412085299356
+        }
+      },
+      {
+        "kind": "super-heavy",
+        "actualHeightMeters": 110,
+        "normalizedHeight": 99.5999999479814,
+        "normalizedTop": 100,
+        "normalizedBottom": 0.4000000520185991,
+        "normalizedWidth": 24.970909104130477,
+        "sourceMeshCount": 94,
+        "engineCount": 19,
+        "features": {
+          "scoutFins": 0,
+          "atlasBoosters": 0,
+          "titanSideBoosters": 4,
+          "titanGridFins": 1,
+          "titanFlaps": 4
+        },
+        "ndc": {
+          "minX": 0.4026535611134656,
+          "maxX": 0.6040415126263214,
+          "minY": -0.592261645105185,
+          "maxY": 0.6027906510388477
+        }
+      }
+    ],
+    "camera": [130, 110, 350],
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version)",
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "calls": 156,
+    "triangles": 24424,
+    "lights": [
+      {
+        "type": "DirectionalLight",
+        "intensity": 1.7472430034859059
+      },
+      {
+        "type": "HemisphereLight",
+        "intensity": 1.4822701182812437
+      }
+    ]
+  },
+  "finishedAt": "2026-10-22T23:58:07.073Z"
+}

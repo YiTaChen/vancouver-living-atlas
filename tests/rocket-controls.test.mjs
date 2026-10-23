@@ -269,11 +269,20 @@ test('the flight readout follows the active stage and its fuel instead of whole-
 });
 
 test('stage separation is announced before a fresh upper-stage fuel gauge appears', () => {
-  const { host, props } = setup({ stage: 'separating', stageFuel: 0 });
+  const { host, props } = setup({
+    stage: 'separating',
+    stageFuel: 0,
+    stageTransitionProgress: 0.6,
+  });
   const stage = findClass(host, 'rocket-stage-status');
   assert.match(text(stage), /Stage separation/);
   assert.match(text(stage), /Booster released/);
-  assert.equal(all(stage, (node) => node.type === 'progress').length, 0);
+  const transition = all(stage, (node) => node.type === 'progress')[0];
+  assert.equal(
+    transition.props['aria-label'],
+    'Next stage ignition preparation',
+  );
+  assert.equal(transition.props.value, 0.6);
   assert.equal(
     all(stage, (node) => node.type === 'output')[0].props['aria-live'],
     'polite',
@@ -289,6 +298,126 @@ test('stage separation is announced before a fresh upper-stage fuel gauge appear
     )[0].props.value,
     1,
   );
+  host.unmount();
+});
+
+test('Titan shows side-booster fuel, real separation progress, then core and upper-stage fuel in both languages', () => {
+  for (const locale of ['en', 'zh-Hant']) {
+    const { host, props, calls } = setup(
+      { kind: 'super-heavy', stage: 'strap-on', stageFuel: 0.4, fuel: 0.9 },
+      { locale, touch: true },
+    );
+    let stage = findClass(host, 'rocket-stage-status');
+    assert.match(
+      text(stage),
+      locale === 'en'
+        ? /Stage 1.*4 boosters \+ core.*40.*ignite together/
+        : /第一級.*四側助推器＋核心.*40.*同時點火/,
+    );
+    assert.equal(all(stage, (n) => n.type === 'progress')[0].props.value, 0.4);
+    const before = calls.length;
+    for (const [kind, fuel, progress, title, hint] of [
+      [
+        'strap-separating',
+        0,
+        0.45,
+        locale === 'en' ? /Side boosters separating/ : /側助推器分離中/,
+        locale === 'en'
+          ? /Boosters released.*core firing/
+          : /側助推器已釋放.*核心持續推進/,
+      ],
+      [
+        'boost',
+        0.64,
+        0,
+        locale === 'en' ? /Stage 2.*Core only.*64/ : /第二級.*核心推進.*64/,
+        null,
+      ],
+      [
+        'separating',
+        0,
+        0.75,
+        locale === 'en' ? /Core stage separating/ : /核心級分離中/,
+        locale === 'en'
+          ? /Core released.*upper stage/
+          : /核心已釋放.*上面級準備中/,
+      ],
+      [
+        'upper',
+        0.82,
+        0,
+        locale === 'en' ? /Stage 3.*Upper stage.*82/ : /第三級.*上面級.*82/,
+        null,
+      ],
+    ]) {
+      host.render({
+        ...props,
+        snapshot: {
+          ...props.snapshot,
+          stage: kind,
+          stageFuel: fuel,
+          stageTransitionProgress: progress,
+        },
+      });
+      stage = findClass(host, 'rocket-stage-status');
+      assert.match(text(stage), title);
+      if (hint) assert.match(text(stage), hint);
+      const bar = all(stage, (n) => n.type === 'progress')[0];
+      assert.equal(bar.props.value, hint ? progress : fuel);
+      const progressLabel =
+        kind === 'strap-separating'
+          ? locale === 'en'
+            ? 'Side-booster release progress'
+            : '側助推器釋放進度'
+          : locale === 'en'
+            ? 'Next stage ignition preparation'
+            : '下一級點火準備';
+      assert.equal(
+        bar.props['aria-label'],
+        hint ? progressLabel : locale === 'en' ? 'Stage fuel' : '本級燃料',
+      );
+      if (hint)
+        assert.doesNotMatch(
+          text(stage),
+          /%/,
+          'separation progress is not presented as a fuel reading',
+        );
+    }
+    assert.equal(
+      calls.length,
+      before,
+      'stage readouts never command or change the flight',
+    );
+    host.unmount();
+  }
+});
+
+test('Titan manual camera, guidance and throttle remain available across side-booster separation', () => {
+  const { host, props, calls } = setup(
+    { kind: 'super-heavy', stage: 'strap-on', auto: false },
+    { touch: true },
+  );
+  for (const stage of [
+    'strap-on',
+    'strap-separating',
+    'boost',
+    'separating',
+    'upper',
+  ]) {
+    host.render({ ...props, snapshot: { ...props.snapshot, stage } });
+    assert(findClass(host, 'rocket-throttle'));
+    const range = all(
+      host.tree,
+      (n) => n.type === 'input' && n.props.type === 'range',
+    )[0];
+    range.props.onChange({ target: { value: '72' } });
+    assert.deepEqual(calls.at(-1), ['setThrottle', 0.72]);
+    button(host, 'Third person').props.onClick();
+    assert.deepEqual(calls.at(-1), ['setView', 'first']);
+    button(host, 'Manual').props.onClick();
+    assert.deepEqual(calls.at(-1), ['setAuto', true]);
+    assert(button(host, 'Abort launch'));
+  }
   host.unmount();
 });
 
@@ -707,6 +836,15 @@ test('the production chooser renders three different vehicle silhouettes and kee
     3,
     'vehicle shapes differ, not only their SVG size',
   );
+  const straps = [...icons[2][2].matchAll(/data-rocket-strap="([^"]+)"/g)].map(
+    (match) => match[1],
+  );
+  assert.deepEqual(
+    straps,
+    ['rear-left', 'rear-right', 'front-left', 'front-right'],
+    'Titan silhouette depicts all four external boosters',
+  );
+  assert.match(html, /4 external boosters/);
   const header = html.match(/<header>([\s\S]*?)<\/header>/)[1];
   assert.match(header, /rocket-chooser-cancel/);
   assert.match(header, /Cancel/);

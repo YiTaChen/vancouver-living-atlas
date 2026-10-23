@@ -1,4 +1,4 @@
-import type { RocketKind } from './rocket-state';
+import type { RocketKind, RocketStage } from './rocket-state';
 
 export type RocketView = 'first' | 'chase';
 export type RocketSpaceFocus = 'rocket' | 'earth' | 'sun' | 'moon';
@@ -26,8 +26,9 @@ export interface RocketSnapshot {
   altitude: number;
   speed: number;
   fuel: number;
-  stage: 'boost' | 'separating' | 'upper' | 'coast';
+  stage: RocketStage;
   stageFuel: number;
+  stageTransitionProgress: number;
   spaceFocus: RocketSpaceFocus;
   throttle: number;
   tilt: number;
@@ -66,6 +67,7 @@ export const EMPTY_ROCKET: RocketSnapshot = {
   fuel: 1,
   stage: 'boost',
   stageFuel: 1,
+  stageTransitionProgress: 0,
   spaceFocus: 'rocket',
   throttle: 0,
   tilt: 0,
