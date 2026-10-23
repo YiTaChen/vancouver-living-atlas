@@ -13,6 +13,8 @@ const actionKeys = [
   'inspect',
   'board',
   'alight',
+  'portalPlatform',
+  'portalExit',
 ] as const;
 export function interactionActionText(locale: Locale, action: string) {
   const key = actionKeys.find((id) => id === action) ?? 'use';

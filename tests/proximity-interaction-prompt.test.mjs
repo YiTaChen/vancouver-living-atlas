@@ -141,7 +141,15 @@ test('all ten locales cover sitting, standing and generic future interaction act
       Object.keys(messages[locale]).sort(),
       Object.keys(messages.en).sort(),
     );
-    for (const action of ['sit', 'stand', 'use', 'talk', 'inspect']) {
+    for (const action of [
+      'sit',
+      'stand',
+      'use',
+      'talk',
+      'inspect',
+      'portalPlatform',
+      'portalExit',
+    ]) {
       assert(messages[locale][action].length > 0);
       assert.equal(
         interactionActionText(locale, action),
@@ -158,5 +166,33 @@ test('all ten locales cover sitting, standing and generic future interaction act
       interactionActionText(locale, 'future-door-action'),
       messages[locale].use,
     );
+  }
+});
+
+test('construction portals expose translated F and tap actions through the same prompt', () => {
+  for (const action of ['portalPlatform', 'portalExit']) {
+    let dispatched = 0;
+    for (const touch of [false, true]) {
+      const b = button(
+        ProximityInteractionPrompt(
+          props({
+            snapshot: { ...props().snapshot, kind: 'scene', action },
+            touch,
+            onInteract: () => dispatched++,
+          }),
+        ),
+      );
+      assert.equal(
+        b.props['aria-label'],
+        touch
+          ? messages['zh-Hant'][action]
+          : messages['zh-Hant'].shortcut.replace(
+              '{action}',
+              messages['zh-Hant'][action],
+            ),
+      );
+      b.props.onClick({ stopPropagation() {} });
+    }
+    assert.equal(dispatched, 2);
   }
 });

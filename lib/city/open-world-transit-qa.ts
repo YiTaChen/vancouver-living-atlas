@@ -3,6 +3,7 @@
 import type { CityEngine } from './engine';
 import { SKYTRAIN_STATIONS } from './skytrain-network';
 import type { SkyTrainStationOwner, StationPoint } from './skytrain-stations';
+import type { StationConstructionPortal } from './skytrain-construction-access';
 export function installOpenWorldTransitQA(city: CityEngine) {
   const requested = new URLSearchParams(location.search).get('world-station');
   const panel = document.createElement('details'),
@@ -68,6 +69,10 @@ export function installOpenWorldTransitQA(city: CityEngine) {
     const passenger = city.skyTrainTravel as unknown as {
       owner: SkyTrainStationOwner | null;
       foot: StationPoint | null;
+      constructionAccess: Map<
+        SkyTrainStationOwner,
+        readonly StationConstructionPortal[]
+      >;
     } | null;
     const snapshot = {
       train: city.skyTrainTravel?.snapshot(),
@@ -94,6 +99,10 @@ export function installOpenWorldTransitQA(city: CityEngine) {
         yaw: o.yaw,
         entrances: o.streetEntrances(),
         routes: o.streetRoutes(),
+        constructionPortals: passenger?.constructionAccess.get(o),
+        accessFloors: o.geometryData.floors.filter((floor) =>
+          /street-apron|vestibule/.test(floor.id),
+        ),
       })),
     };
     city.renderer.domElement.dataset.openWorldTransit =

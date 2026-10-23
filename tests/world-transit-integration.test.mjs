@@ -35,7 +35,7 @@ class CanvasTarget extends EventTarget {
   focus() {}
   setPointerCapture() {}
 }
-async function harness(run) {
+async function harness(run, { groundHeight = cityElevation } = {}) {
   const previous = new Map(
     ['window', 'document', 'Element', 'fetch'].map((key) => [
       key,
@@ -107,6 +107,7 @@ async function harness(run) {
       cameraCollision: new TravelCameraCollision(),
       car: new THREE.Group(),
       cameraDistance: 4,
+      cameraDistances: { walk: 4, drive: 22, boat: 16 },
       position: new THREE.Vector3(),
       walker: {
         group: new THREE.Group(),
@@ -126,7 +127,7 @@ async function harness(run) {
       update: StreetNavigation.prototype.update,
       move: StreetNavigation.prototype.move,
       moveGround: StreetNavigation.prototype.moveGround,
-      roadHeight: cityElevation,
+      roadHeight: groundHeight,
       blocked() {
         return false;
       },
@@ -138,7 +139,7 @@ async function harness(run) {
       notifyCamera() {},
       finishReturnBlend() {},
       clearGround: () => true,
-      groundHeight: cityElevation,
+      groundHeight,
       walkingHeight() {
         return this.position.y;
       },
@@ -148,6 +149,7 @@ async function harness(run) {
   const travel = new SkyTrainWorldTravel(city);
   city.skyTrainTravel = travel;
   const interactionHost = new CityInteractions(city);
+  city.interactions = interactionHost;
   let interactionView;
   interactionHost.onChange = (view) => (interactionView = view);
   interactionHost.setInputEnabled(true);
@@ -946,6 +948,409 @@ test('world transit integration uses independent clocks, physical entrances, rea
       },
     );
   });
+});
+
+test('authorized construction portals use common F and touch transfers for every platform while preserving service and fresh physical guards', async (t) => {
+  await harness(
+    async ({ travel, city, interactionHost, currentInteraction }) => {
+      const sources = [...travel.constructionAccess.entries()].flatMap(
+        ([owner, portals]) =>
+          portals
+            .filter((p) => p.kind === 'platform')
+            .map((portal) => ({ owner, portal })),
+      );
+      assert.equal(sources.length, 17);
+      assert.equal(new Set(sources.map(({ owner }) => owner.data.id)).size, 7);
+      const fleet = [...travel.fleet],
+        runs = fleet.map((v) => v.run),
+        elapsed = () => fleet.map((v) => v.run.snapshot().elapsed),
+        portalId = (p) => `skytrain:portal:${p.stationId}:${p.id}`;
+      let coplanarSources = 0;
+      city.settings.mode = 'walk';
+      city.navigation.cameraDistances.walk = 1.3;
+      Object.defineProperty(
+        city.navigation,
+        'cameraDistance',
+        Object.getOwnPropertyDescriptor(
+          StreetNavigation.prototype,
+          'cameraDistance',
+        ),
+      );
+
+      const approach = (owner, portal) => {
+        interactionHost.clear();
+        const id = portalId(portal);
+        if (portal.kind === 'platform') {
+          const entrance = owner
+              .streetEntrances()
+              .find((e) => e.id === portal.entranceId),
+            retained = () => {
+              assert.equal(travel.owner, owner);
+              assert.equal(travel.active, true);
+              assert.ok(owner.isClearFoot(travel.foot));
+            };
+          // Use the same update/axes path as a person arriving from the public
+          // entrance. Never coerce its naturally chosen overlapping floor ID.
+          walkStationRoute(travel, [portal.point.position], retained);
+          const inside = [...portal.point.position];
+          inside[0] += entrance.localDirection[0] * 1.4;
+          inside[2] += entrance.localDirection[2] * 1.4;
+          walkStationRoute(travel, [inside, portal.point.position], retained);
+          const apron = owner.floorAt(
+            travel.foot.position,
+            portal.point.surfaceId,
+          );
+          assert.ok(
+            apron &&
+              Math.abs(apron.position[1] - travel.foot.position[1]) <= 0.22,
+          );
+          if (travel.foot.surfaceId !== portal.point.surfaceId)
+            coplanarSources++;
+          assert.equal(
+            travel
+              .interactionCandidates()
+              .find((p) => p.id === id)
+              ?.canInteract(),
+            true,
+            'the physically walked apron/vestibule overlap permits portal use before a floor identity is changed',
+          );
+          const nearby = [...portal.point.position];
+          nearby[0] -= entrance.localDirection[0] * 0.9;
+          nearby[2] -= entrance.localDirection[2] * 0.9;
+          walkStationRoute(travel, [nearby], retained);
+          if (travel.foot.surfaceId !== portal.point.surfaceId)
+            coplanarSources++;
+          const yaw = Math.atan2(
+            portal.point.position[0] - travel.foot.position[0],
+            portal.point.position[2] - travel.foot.position[2],
+          );
+          let turn = Math.atan2(
+            Math.sin(yaw - travel.yaw),
+            Math.cos(yaw - travel.yaw),
+          );
+          while (Math.abs(turn) > 1e-6) {
+            travel.setTouchAxes(-Math.sign(turn), 0);
+            travel.update(Math.min(0.1, Math.abs(turn) / 1.65));
+            retained();
+            turn = Math.atan2(
+              Math.sin(yaw - travel.yaw),
+              Math.cos(yaw - travel.yaw),
+            );
+          }
+          travel.clearInput();
+          travel.lookYaw = travel.pitch = 0;
+          travel.updateCamera();
+          const candidate = travel
+            .interactionCandidates()
+            .find((p) => p.id === id);
+          assert.ok(
+            candidate &&
+              projectInteractionAnchor(city.camera, candidate.anchor),
+            'a normal horizontal view from the physically walked 0.9m approach projects the portal',
+          );
+          interactionHost.update(performance.now(), true);
+          assert.equal(currentInteraction().snapshot?.id, id);
+          return candidate;
+        }
+        for (const radius of [1.1, 1.4, 0.9, 1.8])
+          for (let i = 0; i < 8; i++) {
+            const angle = (i * Math.PI) / 4,
+              foot = owner.walk(
+                portal.point,
+                Math.sin(angle) * radius,
+                Math.cos(angle) * radius,
+              );
+            if (
+              !foot ||
+              !owner.isClearFoot(foot) ||
+              owner.streetExit(foot) ||
+              new THREE.Vector3(...foot.position).distanceTo(
+                new THREE.Vector3(...portal.point.position),
+              ) < 0.85
+            )
+              continue;
+            travel.foot = foot;
+            travel.yaw = Math.atan2(
+              portal.point.position[0] - foot.position[0],
+              portal.point.position[2] - foot.position[2],
+            );
+            travel.lookYaw = travel.pitch = 0;
+            travel.clearInput();
+            travel.updateCamera();
+            const candidate = travel
+              .interactionCandidates()
+              .find((p) => p.id === id);
+            if (
+              !candidate ||
+              !projectInteractionAnchor(city.camera, candidate.anchor)
+            )
+              continue;
+            interactionHost.update(performance.now(), true);
+            if (currentInteraction().snapshot?.id === id) return candidate;
+          }
+        assert.fail(
+          `${id}: a supported nearby horizontal view must select this construction marker`,
+        );
+      };
+      const assertFleet = (before) => {
+        assert.deepEqual(travel.fleet, fleet);
+        assert.deepEqual(
+          fleet.map((v) => v.run),
+          runs,
+        );
+        assert.deepEqual(
+          elapsed(),
+          before,
+          'portal transfer never advances, resets or rebuilds a train service',
+        );
+      };
+      for (const [index, { owner, portal }] of sources.entries()) {
+        const entrance = owner
+            .streetEntrances()
+            .find((e) => e.id === portal.entranceId),
+          exitPortal = travel.constructionAccess
+            .get(owner)
+            .find((p) => p.pairId === portal.pairId && p.kind === 'exit');
+        assert.ok(exitPortal);
+        city.navigation.mode = 'walk';
+        city.navigation.position.fromArray(entrance.threshold);
+        assert.equal(await travel.enter(owner.data.id), true);
+        const candidate = approach(owner, portal);
+        assert.equal(candidate.action, 'portalPlatform');
+        const visible = currentInteraction().snapshot;
+        if (index === 0) {
+          const savedFoot = travel.foot,
+            savedPoints = travel.constructionAccess.get(owner),
+            unchanged = () => {
+              assert.equal(travel.owner, owner);
+              assert.equal(travel.phase, 'station');
+              assert.deepEqual(travel.foot, savedFoot);
+            },
+            reject = (label) => {
+              assert.equal(candidate.canInteract(), false, label);
+              assert.equal(candidate.execute(), false, label);
+              unchanged();
+            };
+          travel.setInputEnabled(false);
+          reject('disabled input');
+          travel.setInputEnabled(true);
+          travel.stationSeat = owner.benchSeats()[0];
+          assert.ok(travel.passengerSeated);
+          reject('a seated station passenger cannot use a portal');
+          travel.stationSeat = null;
+          travel.occupied = fleet[0];
+          reject('an occupied vehicle cannot use a portal');
+          travel.occupied = null;
+          assert.equal(travel.setOverview(true), true);
+          reject('Overview cannot transfer the physical passenger');
+          assert.equal(interactionHost.interact(visible), false);
+          travel.setOverview(false);
+          travel.constructionAccess.set(
+            owner,
+            savedPoints.map((p) => structuredClone(p)),
+          );
+          reject('a replaced portal inventory invalidates captured callbacks');
+          travel.constructionAccess.set(owner, savedPoints);
+          const supported = owner.isClearFoot;
+          owner.isClearFoot = function (point) {
+            return point !== portal.target.point && supported.call(this, point);
+          };
+          reject('fresh platform target support is mandatory');
+          owner.isClearFoot = function (point) {
+            return point !== savedFoot && supported.call(this, point);
+          };
+          reject('fresh source support is mandatory');
+          owner.isClearFoot = supported;
+          // Check the overlap guard independently of which equally supported
+          // floor the placement adapter selected. Keep the real walked foot.
+          const apronPoint = owner.floorAt(
+              portal.point.position,
+              entrance.surfaceId,
+            ),
+            overlapPortal = { ...portal, point: apronPoint };
+          assert.ok(apronPoint && owner.isClearFoot(apronPoint));
+          assert.notEqual(savedFoot.surfaceId, apronPoint.surfaceId);
+          travel.constructionAccess.set(
+            owner,
+            savedPoints.map((p) => (p === portal ? overlapPortal : p)),
+          );
+          const overlapCandidate = travel
+            .interactionCandidates()
+            .find((p) => p.id === candidate.id);
+          assert.equal(
+            overlapCandidate?.canInteract(),
+            true,
+            'a naturally walked vestibule accepts an equally supported coplanar apron marker',
+          );
+          const stacked = {
+            ...savedFoot,
+            surfaceId: `supported-stacked:${savedFoot.surfaceId}`,
+            layer: savedFoot.layer + 1,
+            position: [...savedFoot.position],
+          };
+          stacked.position[1] += 0.6;
+          // Model an independently supported second level over the doorway;
+          // the actual apron sample remains at its original lower height.
+          owner.isClearFoot = function (point) {
+            return point === stacked || supported.call(this, point);
+          };
+          travel.foot = stacked;
+          assert.equal(
+            overlapCandidate.canInteract(),
+            false,
+            'a supported stacked surface within interaction range is not the coplanar doorway',
+          );
+          assert.equal(overlapCandidate.execute(), false);
+          assert.deepEqual(travel.foot, stacked);
+          travel.foot = savedFoot;
+          owner.isClearFoot = supported;
+          travel.constructionAccess.set(owner, savedPoints);
+          const far = owner.walk(
+            portal.point,
+            -entrance.localDirection[0] * 2.6,
+            -entrance.localDirection[2] * 2.6,
+          );
+          assert.ok(owner.isClearFoot(far));
+          assert.ok(
+            new THREE.Vector3(...far.position).distanceTo(
+              new THREE.Vector3(...portal.point.position),
+            ) > 2.2,
+          );
+          travel.foot = far;
+          assert.equal(
+            candidate.canInteract(),
+            false,
+            'range is freshly checked',
+          );
+          assert.equal(candidate.execute(), false);
+          assert.deepEqual(travel.foot, far);
+          travel.foot = savedFoot;
+          travel.owner = travel.stations.owners.find((o) => o !== owner);
+          assert.equal(
+            candidate.execute(),
+            false,
+            'a captured portal cannot transfer a different station owner',
+          );
+          travel.owner = owner;
+          approach(owner, portal);
+        }
+        const before = elapsed(),
+          zoom = travel.distanceView;
+        interactionHost.update(performance.now(), true);
+        assert.equal(currentInteraction().snapshot?.id, candidate.id);
+        const key = new Event('keydown', { cancelable: true });
+        Object.assign(key, { key: 'f', code: 'KeyF', repeat: false });
+        window.dispatchEvent(key);
+        assert.equal(key.defaultPrevented, true);
+        assert.equal(travel.owner, owner);
+        assert.equal(travel.active, true);
+        assert.equal(travel.aboard, false);
+        assert.equal(travel.level, 'platform');
+        assert.deepEqual(travel.foot, portal.target.point);
+        assert.ok(owner.isClearFoot(travel.foot));
+        assert.equal(travel.distanceView, zoom);
+        assert.equal(travel.keys.size, 0);
+        assert.deepEqual(travel.axes, { x: 0, y: 0 });
+        assertFleet(before);
+        const arrived = structuredClone(travel.foot);
+        assert.equal(
+          candidate.execute(),
+          false,
+          'the captured entry portal cannot be repeated from its destination',
+        );
+        assert.deepEqual(travel.foot, arrived);
+        assert.equal(
+          interactionHost.interact(visible),
+          false,
+          'stale mobile entry cannot transfer again',
+        );
+
+        const exit = approach(owner, exitPortal),
+          exitView = currentInteraction().snapshot;
+        assert.equal(exit.action, 'portalExit');
+        if (index === 0) {
+          const oldHeight = city.navigation.groundHeight,
+            oldClear = city.navigation.clearGround,
+            foot = structuredClone(travel.foot),
+            position = city.navigation.position.clone();
+          city.navigation.groundHeight = () => NaN;
+          assert.equal(
+            exit.execute(),
+            false,
+            'nonfinite freshly sampled street height rejects exit',
+          );
+          city.navigation.groundHeight = oldHeight;
+          city.navigation.clearGround = () => false;
+          assert.equal(
+            exit.execute(),
+            false,
+            'unsupported street rejects exit',
+          );
+          city.navigation.clearGround = oldClear;
+          assert.deepEqual(travel.foot, foot);
+          assert.ok(city.navigation.position.equals(position));
+          assert.equal(travel.owner, owner);
+        }
+        const beforeExit = elapsed();
+        interactionHost.update(performance.now(), true);
+        assert.equal(
+          interactionHost.interact(exitView),
+          true,
+          'the common mobile prompt returns to this station outside',
+        );
+        assert.equal(travel.active, false);
+        assert.equal(travel.owner, null);
+        assert.equal(city.navigation.mode, 'walk');
+        assert.ok(
+          city.navigation.position.distanceTo(
+            new THREE.Vector3(...exitPortal.target.position),
+          ) < 0.001,
+        );
+        assert.equal(city.navigation.cameraDistance, zoom);
+        assert.equal(
+          owner.tryEnterFromStreet(city.navigation.position.toArray()),
+          null,
+        );
+        assert.equal(city.navigation.keys.size, 0);
+        assert.equal(city.navigation.touchX, 0);
+        assert.equal(city.navigation.touchY, 0);
+        assertFleet(beforeExit);
+        assert.equal(
+          exit.execute(),
+          false,
+          'captured return cannot execute after leaving the station',
+        );
+        city.navigation.update(0.1);
+        tick(travel, 30);
+        assert.equal(
+          travel.active,
+          false,
+          'return remains beyond automatic re-entry after the proximity clock resumes',
+        );
+        assert.ok(elapsed().every((value, i) => value > beforeExit[i] + 2.9));
+        assert.deepEqual(
+          fleet.map((v) => v.run),
+          runs,
+        );
+      }
+      const interactions = JSON.parse(
+        readFileSync('lib/i18n/interactions.json', 'utf8'),
+      );
+      for (const [locale, strings] of Object.entries(interactions)) {
+        assert.ok(strings.portalPlatform?.length, locale);
+        assert.ok(strings.portalExit?.length, locale);
+      }
+      t.diagnostic(
+        `Naturally walked coplanar portal approaches: ${coplanarSources}`,
+      );
+    },
+    {
+      // A bounded rendered-street height fixture reproduces small curb/road
+      // differences from the DEM while keeping the real owner/controller.
+      groundHeight: (x, z) =>
+        cityElevation(x, z) + 1.9 + Math.sin(x * 1.3 + z * 0.7) * 0.055,
+    },
+  );
 });
 
 test('all seventeen street routes retain WorldTravel ownership through native walking updates and reverse only through the outside doorway', async (t) => {
