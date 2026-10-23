@@ -1,0 +1,88 @@
+/* Keep disclosure beside cruise, with power below; it never overlays a control. */
+.atlas .flight-helm.collapsible-panel[data-panel-collapsed='false'] {
+  display: grid;
+  grid-template-columns: minmax(0, 150px) 44px;
+  align-items: start;
+  gap: 8px;
+  width: 202px;
+}
+.atlas .flight-helm.collapsible-panel > .panel-toggle {
+  position: static;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  min-width: 44px;
+  width: 44px;
+  margin: 0;
+  pointer-events: auto;
+}
+.atlas .flight-helm.collapsible-panel > .flight-cruise {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  min-width: 0;
+}
+.atlas .flight-helm.collapsible-panel > .flight-cruise > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.atlas .flight-helm.collapsible-panel > .flight-power {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+.atlas .flight-helm.collapsible-panel[data-panel-collapsed='true'] {
+  width: max-content;
+  padding: 0;
+  min-height: 44px;
+  gap: 0;
+}
+.atlas
+  .flight-helm.collapsible-panel[data-panel-collapsed='true']
+  > .panel-toggle {
+  width: auto;
+}
+.atlas.touch-ui .flight-helm.collapsible-panel[data-panel-collapsed='false'] {
+  grid-template-columns: minmax(0, 104px) 44px;
+  width: 156px;
+}
+.atlas.touch-ui.hud-hidden
+  .flight-helm.collapsible-panel[data-panel-collapsed='false'] {
+  display: grid !important;
+}
+.atlas.touch-ui .flight-helm.collapsible-panel > .flight-power {
+  justify-self: end;
+}
+/* The mobile restore button stays clear of the neighbouring zoom controls. */
+.atlas.touch-ui
+  .flight-helm.collapsible-panel[data-panel-collapsed='true']
+  > .panel-toggle {
+  width: 44px;
+  padding: 8px;
+}
+.atlas.touch-ui
+  .flight-helm.collapsible-panel[data-panel-collapsed='true']
+  .panel-toggle-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (max-height: 540px) and (orientation: landscape) {
+  .atlas.touch-ui.flight-mode:has(.flight-helm[data-panel-collapsed='false'])
+    .mobile-actions {
+    right: max(184px, calc(env(safe-area-inset-right) + 184px));
+  }
+}
+@media (max-height: 360px) and (orientation: landscape) {
+  .atlas.touch-ui .flight-helm.collapsible-panel[data-panel-collapsed='false'] {
+    grid-template-columns: minmax(0, 128px) 44px;
+    width: 180px;
+  }
+  .atlas.touch-ui.flight-mode:has(.flight-helm[data-panel-collapsed='false'])
+    .mobile-actions {
+    right: max(200px, calc(env(safe-area-inset-right) + 200px));
+  }
+}

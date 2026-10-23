@@ -13,13 +13,19 @@
 }
 
 .rocket-panel {
-  top: 164px;
-  right: 22px;
+  top: var(--atlas-panel-top, 164px);
+  right: var(--atlas-right-dock-offset, 96px);
   width: min(340px, calc(100vw - 32px));
   padding: 16px;
   border: 1px solid rgba(143, 210, 229, 0.26);
   border-radius: 16px;
-  max-height: calc(100dvh - 270px);
+  max-height: max(
+    140px,
+    calc(
+      100dvh - var(--atlas-panel-top, 164px) -
+        var(--atlas-right-bottom-reserve, 320px)
+    )
+  );
   overflow-y: auto;
   scrollbar-width: thin;
 }
@@ -555,7 +561,7 @@
 }
 
 .rocket-throttle {
-  right: 23px;
+  right: var(--atlas-right-dock-offset, 96px);
   bottom: 130px;
   width: 85px;
   display: flex;
@@ -589,8 +595,8 @@
 }
 
 .rocket-return {
-  right: 22px;
-  top: 164px;
+  right: var(--atlas-right-dock-offset, 96px);
+  top: var(--atlas-panel-top, 164px);
   border-radius: 10px;
 }
 .rocket-alert {
@@ -836,7 +842,7 @@
   min-height: 28px;
   font-size: 10px;
 }
-.rocket-preflight-compact > .rocket-kicker,
+.rocket-preflight-compact .rocket-kicker,
 .rocket-preflight-compact .rocket-build-description,
 .rocket-preflight-compact .rocket-risk-full,
 .rocket-preflight-compact .rocket-consequence,
@@ -868,18 +874,23 @@
   min-height: 34px;
   font-size: 11px;
 }
-.rocket-preflight-compact > .rocket-panel-actions {
+.rocket-preflight-compact .rocket-panel-content > .rocket-panel-actions {
   display: inline-flex;
   width: calc(50% - 4px);
   margin: 0 0 0 8px;
   vertical-align: top;
 }
-.rocket-preflight-compact > .rocket-panel-actions > button {
+.rocket-preflight-compact
+  .rocket-panel-content
+  > .rocket-panel-actions
+  > button {
   min-height: 34px;
   padding: 7px 5px;
   font-size: 11px;
 }
-.rocket-preflight-compact:has(.rocket-build-progress) > .rocket-panel-actions {
+.rocket-preflight-compact:has(.rocket-build-progress)
+  .rocket-panel-content
+  > .rocket-panel-actions {
   width: 100%;
   margin-left: 0;
 }
@@ -893,6 +904,27 @@
   color: #e8faff;
   text-shadow: 0 1px 4px #071924;
   pointer-events: none;
+}
+.rocket-attitude > header {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border: 1px solid #b1d7e33b;
+  border-radius: 10px;
+  background: #0a1d2ab8;
+  transform: translateX(-50%);
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.rocket-attitude > header > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .rocket-attitude-reticle {
   position: relative;
@@ -1078,6 +1110,27 @@
     top: calc(50dvh + 60px);
   }
 }
+@media (max-width: 700px) and (orientation: portrait) {
+  .rocket-attitude > header {
+    top: calc(100% + 6px);
+    bottom: auto;
+    left: 0;
+    max-width: calc(50vw - 40px);
+    transform: none;
+  }
+  .atlas.touch-ui .rocket-stage-manual {
+    top: 270px;
+    left: 12px;
+    width: min(220px, calc(100vw - 144px));
+    transform: none;
+  }
+  .atlas.touch-ui
+    .rocket-preflight-compact:has(
+      .rocket-compact-action[aria-pressed='false']
+    ) {
+    width: min(220px, calc(100vw - 144px));
+  }
+}
 
 @media (max-width: 900px) and (max-height: 560px) {
   .rocket-placement.rocket-chooser {
@@ -1174,5 +1227,178 @@
   .rocket-build-progress > span,
   .rocket-mission-meter > span {
     transition: none;
+  }
+}
+
+/* Keep presentation independent from guidance, simulation and keyboard input. */
+.rocket-placement [hidden],
+.rocket-panel [hidden],
+.rocket-space-panel [hidden],
+.rocket-stage-status [hidden],
+.rocket-attitude [hidden],
+.rocket-throttle [hidden],
+.rocket-telemetry [hidden] {
+  display: none !important;
+}
+.rocket-panel-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  width: 36px;
+  min-height: 36px;
+  padding: 6px;
+  border: 1px solid #b1d7e33b;
+  border-radius: 8px;
+  background: #0a1d2ab8;
+  color: #deeff5;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.rocket-panel-toggle:focus-visible {
+  outline: 2px solid #dce7a2;
+  outline-offset: 2px;
+}
+.rocket-panel header > .rocket-panel-toggle,
+.rocket-placement header > .rocket-panel-toggle,
+.rocket-space-panel header > .rocket-panel-toggle {
+  margin-left: 0;
+  min-height: 36px;
+}
+.rocket-placement header > strong,
+.rocket-panel header > strong,
+.rocket-space-panel header > div {
+  min-width: 0;
+}
+.rocket-is-collapsed.rocket-panel,
+.rocket-is-collapsed.rocket-placement,
+.rocket-is-collapsed.rocket-space-panel {
+  width: min(300px, calc(100vw - 88px));
+  max-height: none;
+  overflow: visible;
+  padding: 10px;
+}
+.rocket-minimized-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+.rocket-minimized-state {
+  width: 100%;
+  color: #aac9d7;
+  font-size: 11px;
+}
+.rocket-panel .rocket-minimized-actions > .rocket-launch {
+  width: auto;
+  margin: 0;
+}
+.rocket-telemetry {
+  gap: 8px;
+}
+.rocket-telemetry > .rocket-telemetry-content {
+  display: flex;
+  flex-direction: row;
+  min-width: 0;
+  gap: 20px;
+}
+.rocket-telemetry-content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 66px;
+}
+.rocket-telemetry > .rocket-telemetry-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rocket-telemetry-heading > strong {
+  display: none;
+}
+.rocket-telemetry.rocket-is-collapsed {
+  padding: 6px 10px;
+}
+.rocket-telemetry.rocket-is-collapsed .rocket-telemetry-heading > strong {
+  display: block;
+  font-size: 11px;
+  white-space: normal;
+}
+.rocket-throttle > header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+}
+.rocket-throttle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.rocket-throttle-content > label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.rocket-stage-status header output {
+  flex: 1;
+}
+.rocket-stage-status small {
+  display: block;
+  margin-top: 6px;
+  font-size: 9px;
+}
+.rocket-panel > header {
+  position: sticky;
+  top: -16px;
+  z-index: 2;
+  background: #122b33f5;
+}
+.atlas:not(.touch-ui) .rocket-panel:not(.rocket-preflight-compact),
+.atlas:not(.touch-ui) .rocket-return {
+  right: var(--atlas-right-dock-offset, 96px);
+  max-width: calc(100vw - var(--atlas-right-dock-offset, 96px) - 12px);
+}
+.atlas:not(.touch-ui)
+  .rocket-panel:not(.rocket-is-collapsed)
+  ~ .rocket-throttle {
+  right: calc(var(--atlas-right-dock-offset, 96px) + 352px);
+}
+.atlas:not(.touch-ui) .rocket-panel.rocket-is-collapsed ~ .rocket-throttle {
+  right: calc(var(--atlas-right-dock-offset, 96px) + 312px);
+}
+.atlas.touch-ui .rocket-panel-toggle {
+  flex-basis: 44px;
+  width: 44px;
+  min-height: 44px;
+}
+.atlas.touch-ui .rocket-panel header > .rocket-panel-toggle,
+.atlas.touch-ui .rocket-placement header > .rocket-panel-toggle,
+.atlas.touch-ui .rocket-space-panel header > .rocket-panel-toggle {
+  min-height: 44px;
+}
+.atlas.touch-ui .rocket-panel.mobile-travel-sheet {
+  top: var(--atlas-panel-top, 116px);
+  bottom: auto;
+  right: max(64px, calc(env(safe-area-inset-right, 0px) + 54px));
+  width: min(330px, calc(100vw - 88px));
+  max-height: calc(100dvh - var(--atlas-panel-top, 116px) - 24px);
+}
+.atlas.touch-ui .rocket-throttle,
+.atlas.touch-ui .rocket-return {
+  right: max(64px, calc(env(safe-area-inset-right, 0px) + 54px));
+}
+@media (max-width: 900px) {
+  .rocket-telemetry > .rocket-telemetry-content {
+    gap: 13px;
+  }
+  .rocket-telemetry-content > div {
+    min-width: 42px;
+    gap: 3px;
   }
 }

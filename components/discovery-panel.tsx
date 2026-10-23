@@ -47,6 +47,7 @@ import { discoverySample } from '@/lib/city/discovery-runtime';
 import './discovery-panel.css';
 import { LightLabPanel } from './light-lab-panel';
 import { lightLabCopy } from '@/lib/city/light-lab-copy';
+import { PanelToggle } from './panel-toggle';
 
 const EN = {
   title: 'City field notes',
@@ -252,6 +253,7 @@ export function DiscoveryPanel({
   const labText = lightLabCopy(locale);
   const [labRequest, setLabRequest] = useState(0);
   const [labActive, setLabActive] = useState(false);
+  const [hudExpanded, setHudExpanded] = useState(true);
   const [save, setSave] = useState(emptyDiscoverySave);
   const saveRef = useRef(save);
   const [open, setOpen] = useState(false),
@@ -477,10 +479,17 @@ export function DiscoveryPanel({
       )}
       {visible && (running || finished) && (
         <section
-          className={`discovery-hud glass ui-chrome ${finished ? 'discovery-finished' : ''}`}
+          className={`discovery-hud glass ui-chrome collapsible-panel ${finished ? 'discovery-finished' : ''}`}
+          data-panel-collapsed={!hudExpanded}
           aria-label={text.title}
           lang={contentLocale}
         >
+          <PanelToggle
+            locale={locale}
+            title={text.title}
+            expanded={hudExpanded}
+            onToggle={() => setHudExpanded((expanded) => !expanded)}
+          />
           <header>
             <button onClick={openJournal} aria-label={text.open}>
               <BookOpen size={16} />

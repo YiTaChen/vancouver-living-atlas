@@ -35,6 +35,10 @@
   align-items: center;
   gap: 6px;
 }
+.discovery-hud.collapsible-panel[data-panel-collapsed='false'] > header {
+  min-height: 44px;
+  padding-right: 52px;
+}
 .discovery-hud header button {
   display: flex;
   align-items: center;

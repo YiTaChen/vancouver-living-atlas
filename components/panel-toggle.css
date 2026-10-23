@@ -1,0 +1,73 @@
+.collapsible-panel > .panel-toggle {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid rgba(168, 207, 224, 0.2);
+  border-radius: 10px;
+  background: rgba(8, 23, 36, 0.68);
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.35;
+  cursor: pointer;
+  touch-action: manipulation;
+  pointer-events: auto;
+}
+.collapsible-panel > .panel-toggle:hover {
+  background: rgba(61, 99, 109, 0.75);
+}
+.collapsible-panel > .panel-toggle:focus-visible {
+  outline: 2px solid #dce79d;
+  outline-offset: 2px;
+}
+.panel-toggle:not(.is-collapsed) .panel-toggle-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.collapsible-panel[data-panel-collapsed='false']
+  > :is(
+    header,
+    .explore-heading,
+    .street-title,
+    .mini-title,
+    .panel-collapse-heading
+  ) {
+  padding-right: 42px;
+  min-height: 40px;
+}
+.collapsible-panel[data-panel-collapsed='true'] {
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  min-height: 54px;
+  height: auto;
+  max-height: none;
+  padding: 5px;
+  overflow: visible;
+}
+.collapsible-panel[data-panel-collapsed='true'] > :not(.panel-toggle) {
+  display: none !important;
+}
+.collapsible-panel[data-panel-collapsed='true'] > .panel-toggle {
+  position: static;
+  width: 100%;
+}
+.transit-world-status.collapsible-panel[data-panel-collapsed='false'] > strong {
+  padding-right: 42px;
+  min-height: 40px;
+}
+.tesla-panel.collapsible-panel[data-panel-collapsed='false'] > header {
+  padding-right: 46px;
+}

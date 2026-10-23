@@ -1,5 +1,7 @@
 'use client';
+import { useState } from 'react';
 import { BusFront, TrainFront } from 'lucide-react';
+import { PanelToggle, panelText } from './panel-toggle';
 import type { Locale } from '@/lib/i18n';
 import type { SkyTrainTravelSnapshot } from '@/lib/city/skytrain-travel-types';
 import type { BusVisitSnapshot } from '@/lib/city/bus-visit';
@@ -23,6 +25,7 @@ export function TransitWorldStatus({
   visible: boolean;
   touch: boolean;
 }) {
+  const [expanded, setExpanded] = useState(true);
   const trainActive = train.phase === 'station' || train.phase === 'riding',
     aboard = train.phase === 'riding' || Boolean(bus?.aboard),
     active = trainActive || Boolean(bus?.aboard),
@@ -35,10 +38,17 @@ export function TransitWorldStatus({
   return (
     <>
       <section
-        className="transit-world-status glass ui-chrome"
+        className="transit-world-status glass ui-chrome collapsible-panel"
+        data-panel-collapsed={!expanded}
         aria-label={trainActive ? t.title : 'Bus'}
         aria-live="polite"
       >
+        <PanelToggle
+          locale={locale}
+          title={trainActive ? t.title : panelText(locale, 'status')}
+          expanded={expanded}
+          onToggle={() => setExpanded((value) => !value)}
+        />
         <strong>
           {trainActive ? <TrainFront size={18} /> : <BusFront size={18} />}{' '}
           {train.headsign && aboard ? train.headsign : name || t.title}

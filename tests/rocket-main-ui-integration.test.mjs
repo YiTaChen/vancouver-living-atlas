@@ -51,7 +51,7 @@ test('merged page keeps standing bus interactions and gates transit input during
     stats: { busVisit: { aboard: true, seated: false } },
     mobilePanel: null,
     touchUI: true,
-    mobileHudHidden: false,
+    hudHidden: false,
     skyTrainActive: false,
   };
   assert.equal(evaluate('interactionInput', input), true);
@@ -76,6 +76,53 @@ test('merged page keeps standing bus interactions and gates transit input during
   ])
     for (const gate of ['interactionInput', 'busInput', 'skyTrainInput'])
       assert.equal(evaluate(gate, { ...input, ...state }), false, gate);
+});
+
+test('hiding the HUD preserves walking, drift and passenger inputs on desktop and touch', () => {
+  const base = {
+    ready: true,
+    settings: { mode: 'walk' },
+    clean: false,
+    placing: null,
+    flight: { placing: false },
+    rocket: { active: false, placing: false },
+    rocketChoosing: false,
+    about: false,
+    panel: null,
+    discoveryModal: false,
+    stats: { busVisit: { aboard: false } },
+    mobilePanel: null,
+    skyTrainActive: false,
+  };
+  for (const touchUI of [false, true]) {
+    for (const hudHidden of [false, true]) {
+      const context = { ...base, touchUI, hudHidden };
+      assert.equal(evaluate('interactionInput', context), true);
+      assert.equal(evaluate('busInput', context), true);
+      assert.equal(
+        evaluate('skyTrainInput', { ...context, skyTrainActive: true }),
+        true,
+      );
+      assert.equal(
+        evaluate('driveDriftEnabled', {
+          ...context,
+          settings: { mode: 'drive' },
+        }),
+        true,
+      );
+      for (const modal of [
+        { about: true },
+        { panel: 'time' },
+        { discoveryModal: true },
+      ]) {
+        assert.equal(
+          evaluate('interactionInput', { ...context, ...modal }),
+          false,
+        );
+        assert.equal(evaluate('busInput', { ...context, ...modal }), false);
+      }
+    }
+  }
 });
 
 const actionNames = [
@@ -205,7 +252,7 @@ function harness({
     setClean() {},
     setPlacing() {},
     setMobilePanel() {},
-    setMobileHudHidden() {},
+    setHudHidden() {},
     setLocalOrbit() {},
     setTeslaPreparing() {},
     requestAnimationFrame: (callback) => callback(),

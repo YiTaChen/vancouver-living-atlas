@@ -58,6 +58,8 @@ import {
 } from '@/components/tesla-controls';
 import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
 import { CitySoundControls } from '@/components/city-sound-controls';
+import { PanelToggle, panelText } from '@/components/panel-toggle';
+import '@/components/city-hud.css';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaController } from '@/lib/city/tesla-controller';
 import { DriftHoldButton, TravelJoystick } from '@/components/travel-joystick';
@@ -217,7 +219,22 @@ function Home() {
   const [teslaPreparing, setTeslaPreparing] = useState(false);
   const teslaEntering = useRef(false);
   const [touchUI, setTouchUI] = useState(false);
-  const [mobileHudHidden, setMobileHudHidden] = useState(false);
+  const [hudHidden, setHudHidden] = useState(false);
+  const [collapsedPanels, setCollapsedPanels] = useState({
+    explore: false,
+    tools: false,
+    map: false,
+    travel: false,
+    camera: false,
+    status: false,
+    modes: false,
+    placement: false,
+  });
+  const togglePanel = (name: keyof typeof collapsedPanels) =>
+    setCollapsedPanels((previous) => ({
+      ...previous,
+      [name]: !previous[name],
+    }));
   const [interiorCutaway, setInteriorCutaway] = useState(true);
   const [mobilePanel, setMobilePanel] = useState<
     'map' | 'travel' | 'tools' | null
@@ -336,8 +353,7 @@ function Home() {
     !about &&
     !panel &&
     !discoveryModal &&
-    (!mobilePanel || mobilePanel === 'map') &&
-    !(touchUI && mobileHudHidden);
+    (!mobilePanel || mobilePanel === 'map');
   const driveDriftEnabled =
     ready &&
     settings.mode === 'drive' &&
@@ -364,8 +380,7 @@ function Home() {
     !discoveryModal &&
     settings.mode === 'walk' &&
     !stats.busVisit?.aboard &&
-    (!mobilePanel || mobilePanel === 'map') &&
-    !(touchUI && mobileHudHidden);
+    (!mobilePanel || mobilePanel === 'map');
   const busInput =
     ready &&
     !clean &&
@@ -379,8 +394,7 @@ function Home() {
     !discoveryModal &&
     !skyTrainActive &&
     settings.mode === 'walk' &&
-    (!mobilePanel || mobilePanel === 'map') &&
-    !(touchUI && mobileHudHidden);
+    (!mobilePanel || mobilePanel === 'map');
   useEffect(() => {
     const bus = engine.current?.busVisit;
     bus?.setInputEnabled(busInput);
@@ -864,7 +878,8 @@ function Home() {
       await new Promise<void>((resolve) =>
         requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
       );
-      if (!engine.current?.tesla?.enter({ localOnly: true })) setNotice('placementUnavailable');
+      if (!engine.current?.tesla?.enter({ localOnly: true }))
+        setNotice('placementUnavailable');
     } catch {
       setNotice('placementUnavailable');
     } finally {
@@ -883,7 +898,7 @@ function Home() {
     setMobilePanel(null);
     setClean(false);
     change({ mode: 'orbit', autoRotate: false });
-    setMobileHudHidden(false);
+    setHudHidden(false);
     setRocketChoosing(true);
   };
   const beginRocket = (kind: RocketSnapshot['kind']) => {
@@ -970,12 +985,14 @@ function Home() {
     if (event.button !== 0 || !ready) return;
     const city = engine.current;
     if (
-      mode === 'walk' && city?.skyTrainTravel?.active &&
+      mode === 'walk' &&
+      city?.skyTrainTravel?.active &&
       (city.settings.mode === 'walk' || city.skyTrainTravel.canResumeOverview)
     ) {
       event.preventDefault();
       event.stopPropagation();
-      if (city.settings.mode === 'orbit') city.skyTrainTravel.setOverview(false);
+      if (city.settings.mode === 'orbit')
+        city.skyTrainTravel.setOverview(false);
       city.renderer.domElement.focus({ preventScroll: true });
       return;
     }
@@ -1053,7 +1070,7 @@ function Home() {
   return (
     <main
       data-travel-mode={settings.mode}
-      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing || rocket.placing || rocketChoosing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode === 'flight' ? 'flight-mode' : ''} ${settings.mode === 'tesla' ? 'tesla-mode' : ''} ${rocket.placing || rocketChoosing ? 'rocket-placement-mode' : ''} ${settings.mode === 'rocket' ? 'rocket-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
+      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing || rocket.placing || rocketChoosing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode === 'flight' ? 'flight-mode' : ''} ${settings.mode === 'tesla' ? 'tesla-mode' : ''} ${rocket.placing || rocketChoosing ? 'rocket-placement-mode' : ''} ${settings.mode === 'rocket' ? 'rocket-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${hudHidden ? 'hud-hidden' : ''} ${collapsedPanels.tools ? 'tools-collapsed' : ''} ${collapsedPanels.map ? 'map-collapsed' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
     >
       {teslaPreparing && (
         <output className="tesla-preparing glass ui-chrome">
@@ -1095,8 +1112,7 @@ function Home() {
             !rocketChoosing &&
             !panel &&
             !discoveryModal &&
-            !mobilePanel &&
-            !(touchUI && mobileHudHidden)
+            !mobilePanel
           }
           onPrepare={visitBus}
         />
@@ -1119,8 +1135,7 @@ function Home() {
             !panel &&
             !discoveryModal &&
             (!mobilePanel || mobilePanel === 'map') &&
-            !stats.busVisit?.aboard &&
-            !(touchUI && mobileHudHidden)
+            !stats.busVisit?.aboard
           }
           touch={touchUI}
           controlsEnabled={skyTrainInput}
@@ -1166,7 +1181,6 @@ function Home() {
         !rocketChoosing &&
         !panel &&
         !mobilePanel &&
-        !(touchUI && mobileHudHidden) &&
         (!stats.busVisit || stats.busVisit.phase === 'idle') && (
           <button
             className="skytrain-cabin-launcher glass ui-chrome"
@@ -1193,8 +1207,7 @@ function Home() {
           !mobilePanel &&
           !rocket.active &&
           !rocket.placing &&
-          !rocketChoosing &&
-          !(touchUI && mobileHudHidden)
+          !rocketChoosing
         }
         touch={touchUI}
       />
@@ -1230,7 +1243,6 @@ function Home() {
           !rocket.placing &&
           !rocketChoosing &&
           (!stats.busVisit || stats.busVisit.phase === 'idle') &&
-          !(touchUI && mobileHudHidden) &&
           !panel &&
           !mobilePanel
         }
@@ -1276,7 +1288,7 @@ function Home() {
         }
         optionsOpen={mobilePanel === 'travel'}
         onCloseOptions={() => setMobilePanel(null)}
-        minimal={touchUI && mobileHudHidden}
+        minimal={touchUI && hudHidden}
         hidden={!ready || clean || about || !!panel || discoveryModal}
       />
       <TeslaControls
@@ -1312,23 +1324,35 @@ function Home() {
           !discoveryModal &&
           !rocket.active &&
           !rocket.placing &&
-          !rocketChoosing &&
-          !(touchUI && mobileHudHidden)
+          !rocketChoosing
         }
       />
-      {touchUI && ready && (
+      {ready && !clean && (
         <button
-          className="mobile-hud-toggle glass"
-          aria-label={tr(mobileHudHidden ? 'showMobileUI' : 'hideMobileUI')}
-          aria-pressed={mobileHudHidden}
-          onClick={() => {
-            setMobileHudHidden(!mobileHudHidden);
+          type="button"
+          className="hud-visibility-toggle glass"
+          aria-label={panelText(
+            locale,
+            hudHidden ? 'showInterface' : 'hideInterface',
+          )}
+          title={panelText(
+            locale,
+            hudHidden ? 'showInterface' : 'hideInterface',
+          )}
+          aria-pressed={hudHidden}
+          onPointerDown={(event) => event.stopPropagation()}
+          onClick={(event) => {
+            setHudHidden((previous) => !previous);
             setMobilePanel(null);
             setPanel(null);
             setAbout(false);
+            if (event.detail > 0)
+              engine.current?.renderer.domElement.focus({
+                preventScroll: true,
+              });
           }}
         >
-          {mobileHudHidden ? <Eye size={20} /> : <EyeOff size={20} />}
+          {hudHidden ? <Eye size={20} /> : <EyeOff size={20} />}
         </button>
       )}
       {touchUI && ready && (
@@ -1547,11 +1571,18 @@ function Home() {
         settings.mode !== 'rocket' &&
         settings.mode !== 'tesla' && (
           <aside
-            className="travel-camera-card glass ui-chrome"
+            className="travel-camera-card glass ui-chrome collapsible-panel"
+            data-panel-collapsed={collapsedPanels.camera}
             aria-label={tr('travelCamera')}
             data-perspective={travelView.perspective}
           >
-            <div>
+            <PanelToggle
+              locale={locale}
+              title={tr('travelCamera')}
+              expanded={!collapsedPanels.camera}
+              onToggle={() => togglePanel('camera')}
+            />
+            <div className="panel-collapse-heading">
               <Camera size={15} />
               <strong>
                 {tr(
@@ -1613,10 +1644,17 @@ function Home() {
         )}
       {ready && settings.mode === 'orbit' && returnMode && (
         <aside
-          className="travel-camera-card glass ui-chrome"
+          className="travel-camera-card glass ui-chrome collapsible-panel"
+          data-panel-collapsed={collapsedPanels.camera}
           aria-label={tr('returnToTravel')}
         >
-          <div>
+          <PanelToggle
+            locale={locale}
+            title={tr('returnToTravel')}
+            expanded={!collapsedPanels.camera}
+            onToggle={() => togglePanel('camera')}
+          />
+          <div className="panel-collapse-heading">
             <Camera size={15} />
             <strong>
               {tr(
@@ -1632,7 +1670,7 @@ function Home() {
         </aside>
       )}
       <div
-        className={`map-labels ${!settings.labels || clean || (touchUI && mobileHudHidden) ? 'hide-labels' : ''}`}
+        className={`map-labels ${!settings.labels || clean || hudHidden ? 'hide-labels' : ''}`}
         ref={labelHost}
       />
       <header className="masthead ui-chrome">
@@ -1692,7 +1730,18 @@ function Home() {
           GitHub <ArrowUpRight size={15} />
         </a>
       </header>
-      <div className="mode-switch glass ui-chrome">
+      <div
+        className="mode-switch glass ui-chrome collapsible-panel"
+        data-panel-collapsed={!touchUI && collapsedPanels.modes}
+      >
+        {!touchUI && (
+          <PanelToggle
+            locale={locale}
+            title={tr('explorationMode')}
+            expanded={!collapsedPanels.modes}
+            onToggle={() => togglePanel('modes')}
+          />
+        )}
         <RadioGroup
           value={
             rocketChoosing || rocket.placing
@@ -1785,7 +1834,8 @@ function Home() {
       {placing && (
         <>
           <section
-            className="placement-panel glass ui-chrome"
+            className="placement-panel glass ui-chrome collapsible-panel"
+            data-panel-collapsed={collapsedPanels.placement}
             aria-label={tr(
               placing === 'walk'
                 ? 'placeWalk'
@@ -1794,6 +1844,18 @@ function Home() {
                   : 'placeDrive',
             )}
           >
+            <PanelToggle
+              locale={locale}
+              title={tr(
+                placing === 'walk'
+                  ? 'placeWalk'
+                  : placing === 'boat'
+                    ? 'placeBoat'
+                    : 'placeDrive',
+              )}
+              expanded={!collapsedPanels.placement}
+              onToggle={() => togglePanel('placement')}
+            />
             <div className="placement-heading">
               <button
                 className="placement-figure figure-handle"
@@ -1937,7 +1999,17 @@ function Home() {
           )}
         </>
       )}
-      <section className="explore-panel glass ui-chrome">
+      <section
+        className="explore-panel glass ui-chrome collapsible-panel"
+        data-panel-collapsed={collapsedPanels.explore}
+        aria-label={tr('exploreTitle')}
+      >
+        <PanelToggle
+          locale={locale}
+          title={tr('exploreTitle')}
+          expanded={!collapsedPanels.explore}
+          onToggle={() => togglePanel('explore')}
+        />
         <div className="explore-heading">
           <div className="eyebrow">{tr('exploreCoast')}</div>
           <h1>{tr('exploreTitle')}</h1>
@@ -1978,7 +2050,18 @@ function Home() {
           <span className="status-dot" /> {tr('originalBuild')}
         </div>
       </section>
-      <div className="nav-tools glass ui-chrome">
+      <div
+        className="nav-tools glass ui-chrome collapsible-panel"
+        data-panel-collapsed={collapsedPanels.tools}
+        role="group"
+        aria-label={panelText(locale, 'tools')}
+      >
+        <PanelToggle
+          locale={locale}
+          title={panelText(locale, 'tools')}
+          expanded={!collapsedPanels.tools}
+          onToggle={() => togglePanel('tools')}
+        />
         <button
           title={tr('zoomIn')}
           aria-label={tr('zoomIn')}
@@ -2076,7 +2159,11 @@ function Home() {
         <button
           title={tr('immersiveView')}
           aria-label={tr('immersiveView')}
-          onClick={() => setClean(true)}
+          onClick={() => {
+            setHudHidden(true);
+            setPanel(null);
+            setMobilePanel(null);
+          }}
         >
           <Maximize size={18} />
         </button>
@@ -2455,9 +2542,18 @@ function Home() {
         </section>
       )}
       <section
-        className="map-inset glass ui-chrome"
+        className="map-inset glass ui-chrome collapsible-panel"
+        data-panel-collapsed={!touchUI && collapsedPanels.map}
         aria-label={tr(settings.mode === 'orbit' ? 'minimap' : 'localMinimap')}
       >
+        {!touchUI && (
+          <PanelToggle
+            locale={locale}
+            title={panelText(locale, 'map')}
+            expanded={!collapsedPanels.map}
+            onToggle={() => togglePanel('map')}
+          />
+        )}
         {touchUI && (
           <button
             className="touch-map-close"
@@ -2561,7 +2657,22 @@ function Home() {
         settings.mode !== 'flight' &&
         settings.mode !== 'rocket' &&
         settings.mode !== 'tesla' && (
-          <div className="street-controls glass ui-chrome">
+          <div
+            className="street-controls glass ui-chrome collapsible-panel"
+            data-panel-collapsed={collapsedPanels.travel}
+          >
+            <PanelToggle
+              locale={locale}
+              title={tr(
+                settings.mode === 'drive'
+                  ? 'streetDrive'
+                  : settings.mode === 'boat'
+                    ? 'streetBoat'
+                    : 'streetWalk',
+              )}
+              expanded={!collapsedPanels.travel}
+              onToggle={() => togglePanel('travel')}
+            />
             <div className="street-title">
               <span>
                 {settings.mode === 'drive'
@@ -2703,7 +2814,16 @@ function Home() {
             : viewText(locale, current.id, 'description')}
         </p>
       </div>
-      <footer className="bottom-bar glass ui-chrome">
+      <footer
+        className="bottom-bar glass ui-chrome collapsible-panel"
+        data-panel-collapsed={collapsedPanels.status}
+      >
+        <PanelToggle
+          locale={locale}
+          title={panelText(locale, 'status')}
+          expanded={!collapsedPanels.status}
+          onToggle={() => togglePanel('status')}
+        />
         <div>
           <MapPin size={15} />
           <b>

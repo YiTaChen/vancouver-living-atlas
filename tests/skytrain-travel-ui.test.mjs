@@ -96,7 +96,15 @@ function setup() {
       if (id === '@/lib/city/touch-input') return touch;
       if (id === '@/lib/i18n/skytrain-travel.json') return catalogs;
       if (id === '@/lib/i18n/interactions.json') return interactions;
+      if (id === '@/lib/i18n/panels.json')
+        return JSON.parse(
+          fs.readFileSync(
+            new URL('../lib/i18n/panels.json', import.meta.url),
+            'utf8',
+          ),
+        );
       if (id === './travel-joystick') return load('travel-joystick');
+      if (id === './panel-toggle') return load('panel-toggle');
       if (id.endsWith('.css')) return {};
       if (id === 'lucide-react')
         return new Proxy({}, { get: () => () => null });
@@ -184,6 +192,45 @@ function state(patch = {}) {
     ...patch,
   };
 }
+
+test('world transit status disclosure keeps live updates and passenger state while collapsed', () => {
+  const h = setup(),
+    { TransitWorldStatus } = h.load('transit-world-status'),
+    { PanelToggle } = h.load('panel-toggle');
+  const props = {
+    locale: 'zh-Hant',
+    train: state({
+      phase: 'riding',
+      stationId: 'waterfront',
+      seated: true,
+      headsign: 'King George',
+      speedMps: 10,
+    }),
+    bus: null,
+    visible: true,
+    touch: false,
+  };
+  const snapshot = JSON.stringify(props.train),
+    host = h.mount(TransitWorldStatus, props),
+    section = () => all(host.tree, (node) => node.type === 'section')[0],
+    toggle = () => all(host.tree, (node) => node.type === PanelToggle)[0];
+  assert.equal(section().props['data-panel-collapsed'], false);
+  toggle().props.onToggle();
+  host.render();
+  assert.equal(section().props['data-panel-collapsed'], true);
+  assert.equal(JSON.stringify(props.train), snapshot);
+  host.render({
+    ...props,
+    touch: true,
+    train: { ...props.train, speedMps: 14 },
+  });
+  assert.equal(section().props['data-panel-collapsed'], true);
+  assert.match(text(host.tree), /50 km\/h/);
+  toggle().props.onToggle();
+  host.render();
+  assert.equal(section().props['data-panel-collapsed'], false);
+  host.unmount();
+});
 function panel(h, snapshot = state(), extra = {}) {
   const calls = [];
   const props = {

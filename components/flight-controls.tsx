@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import { Slider } from './ui/slider';
 import { TravelJoystick } from './travel-joystick';
+import { PanelToggle } from './panel-toggle';
+import './flight-panel-collapse.css';
 import type { FlightController } from '@/lib/city/flight-controller';
 import type { FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { translate, type Locale } from '@/lib/i18n';
@@ -114,6 +116,8 @@ export function FlightControls({
   onCloseOptions?: () => void;
 }) {
   const [help, setHelp] = useState(false);
+  const [placementExpanded, setPlacementExpanded] = useState(true);
+  const [helmExpanded, setHelmExpanded] = useState(true);
   const t = (key: keyof typeof messages.en) => flightText(locale, key);
   const move = useCallback(
     (x: number, y: number) => {
@@ -171,9 +175,16 @@ export function FlightControls({
             </figure>
           )}
           <section
-            className="flight-placement glass ui-chrome"
+            className="flight-placement glass ui-chrome collapsible-panel"
+            data-panel-collapsed={!placementExpanded}
             aria-label={t('fly')}
           >
+            <PanelToggle
+              locale={locale}
+              title={t('fly')}
+              expanded={placementExpanded}
+              onToggle={() => setPlacementExpanded((value) => !value)}
+            />
             {!touch && (
               <>
                 <Plane size={20} />
@@ -296,7 +307,17 @@ export function FlightControls({
           )}
           {canPilot && (
             <>
-              <div className="flight-helm">
+              <section
+                className="flight-helm collapsible-panel"
+                data-panel-collapsed={!helmExpanded}
+                aria-label={t('help')}
+              >
+                <PanelToggle
+                  locale={locale}
+                  title={t('help')}
+                  expanded={helmExpanded}
+                  onToggle={() => setHelmExpanded((value) => !value)}
+                />
                 <button
                   className="flight-cruise glass"
                   aria-label={t('cruise')}
@@ -339,7 +360,7 @@ export function FlightControls({
                   </div>
                   {keyButton('f', 'powerDown', <Minus size={18} />)}
                 </section>
-              </div>
+              </section>
               {touch ? (
                 <TravelJoystick
                   mode="walk"

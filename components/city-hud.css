@@ -1,0 +1,144 @@
+/* Reserve the right-hand tools and map independently of vehicle panels. */
+.atlas {
+  --atlas-right-dock-offset: 96px;
+  --atlas-panel-top: 164px;
+  --atlas-right-bottom-reserve: 340px;
+}
+.atlas.tools-collapsed {
+  --atlas-right-dock-offset: 68px;
+}
+.atlas.map-collapsed {
+  --atlas-right-bottom-reserve: 180px;
+}
+.atlas.rocket-mode {
+  --atlas-right-bottom-reserve: 112px;
+}
+.atlas:not(.touch-ui) .masthead {
+  padding-right: 76px;
+}
+.atlas .hud-visibility-toggle:focus-visible {
+  outline: 2px solid #dce7a2;
+  outline-offset: 3px;
+}
+.atlas .nav-tools {
+  z-index: 36;
+  max-height: calc(100dvh - 204px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.atlas .nav-tools > .panel-toggle {
+  position: static;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+}
+.atlas .nav-tools .panel-toggle-label {
+  display: none;
+}
+.atlas:not(.touch-ui) .nav-tools[data-panel-collapsed='true'] {
+  right: 12px;
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  overflow: visible;
+}
+.atlas:not(.touch-ui) :is(.settings-panel, .map-inset, .travel-camera-card) {
+  right: var(--atlas-right-dock-offset);
+}
+.atlas:not(.touch-ui) .travel-camera-card {
+  top: var(--atlas-panel-top);
+}
+.atlas:not(.touch-ui) .map-inset {
+  width: 194px;
+}
+.atlas:not(.touch-ui)
+  :is(.rocket-panel:not(.rocket-is-collapsed), .flight-panel) {
+  max-height: max(
+    72px,
+    calc(100dvh - var(--atlas-panel-top) - var(--atlas-right-bottom-reserve))
+  );
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.atlas .explore-panel[data-panel-collapsed='true'] {
+  bottom: auto;
+}
+.atlas .travel-camera-card > .panel-collapse-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.atlas .placement-panel[data-panel-collapsed='false'] > .placement-heading {
+  padding-right: 52px;
+  min-height: 44px;
+}
+.atlas .flight-placement.collapsible-panel[data-panel-collapsed='false'] {
+  padding-right: 64px;
+  min-height: 60px;
+}
+.atlas:not(.touch-ui) .mode-switch[data-panel-collapsed='false'] {
+  padding-right: 56px;
+}
+.atlas .bottom-bar[data-panel-collapsed='false'] {
+  padding-right: 76px;
+}
+.atlas .bottom-bar[data-panel-collapsed='true'] {
+  right: auto;
+}
+.atlas .map-inset[data-panel-collapsed='true'] {
+  width: max-content;
+}
+/* A short desktop window has room beside the map rather than above it. */
+@media (max-height: 650px) {
+  .atlas:not(.touch-ui) :is(.flight-panel, .travel-camera-card) {
+    right: calc(var(--atlas-right-dock-offset) + 224px) !important;
+    max-width: calc(100vw - var(--atlas-right-dock-offset) - 564px);
+  }
+  .atlas:not(.touch-ui) .flight-panel {
+    max-height: max(96px, calc(100dvh - var(--atlas-panel-top) - 96px));
+  }
+}
+
+/* A visual preference only: no clean mode, engine pause, or input ownership. */
+.atlas.hud-hidden .ui-chrome,
+.atlas.hud-hidden
+  :is(
+    .flight-helm,
+    .flight-yaw,
+    .flight-stick,
+    .flight-alert,
+    .rocket-contact-cue,
+    .rocket-accident-observation,
+    .rocket-alert,
+    .rocket-countdown,
+    .traffic-stop-caption,
+    .toast
+  ) {
+  display: none !important;
+}
+.atlas.touch-ui.hud-hidden .touch-drive-controls,
+.atlas.touch-ui.hud-hidden .rocket-compact-controls,
+.atlas.touch-ui.hud-hidden .rocket-throttle,
+.atlas.touch-ui.hud-hidden .flight-helm {
+  display: flex !important;
+}
+.atlas.touch-ui {
+  --atlas-panel-top: 116px;
+}
+.atlas.touch-ui .hud-visibility-toggle {
+  top: 6px;
+}
+.atlas.touch-ui .transit-world-status.collapsible-panel {
+  right: 64px;
+  max-width: calc(100vw - 88px);
+}
+@media (max-height: 540px) {
+  .atlas.touch-ui {
+    --atlas-panel-top: 146px;
+  }
+  .atlas.touch-ui .hud-visibility-toggle {
+    top: 2px;
+  }
+}

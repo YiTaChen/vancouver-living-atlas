@@ -82,7 +82,16 @@ function setup() {
         return { jsx, jsxs: jsx, Fragment: Symbol.for('fragment') };
       if (id === '@/lib/city/touch-input') return touch;
       if (id === '@/lib/i18n/tesla.json') return catalogs;
+      if (id === '@/lib/i18n/panels.json')
+        return JSON.parse(
+          fs.readFileSync(
+            new URL('../lib/i18n/panels.json', import.meta.url),
+            'utf8',
+          ),
+        );
       if (id === './travel-joystick') return load('travel-joystick');
+      if (id === './panel-toggle') return load('panel-toggle');
+      if (id.endsWith('.css')) return {};
       if (id === 'lucide-react')
         return new Proxy({}, { get: () => () => null });
       throw new Error(`Unexpected component dependency ${id}`);
@@ -347,4 +356,73 @@ test('Tesla drift uses the same pointer safeguards without requesting jump, reco
   owner.unmount();
   main.unmount();
   assert.equal(input.at(-1), false);
+});
+
+test('Tesla disclosure persists across telemetry updates without changing driving input or touch-sheet recovery', () => {
+  const h = setup(),
+    input = [],
+    commands = [],
+    closed = [];
+  const controller = {
+    setInputEnabled: (value) => input.push(value),
+    command: (value) => commands.push(value),
+    setAxes() {},
+    setButton() {},
+  };
+  const { TeslaControls } = h.load('tesla-controls'),
+    { PanelToggle } = h.load('panel-toggle');
+  const props = {
+    controller,
+    state: {
+      active: true,
+      mode: 'ground',
+      quality: 'auto',
+      view: 'chase',
+      adhesion: true,
+    },
+    locale: 'en',
+    touch: false,
+    controlsEnabled: true,
+    panelVisible: true,
+    optionsOpen: false,
+    onCloseOptions: () => closed.push(true),
+  };
+  const main = h.mount(TeslaControls, props),
+    section = () => find(main.tree, (node) => node.type === 'section'),
+    toggle = () => find(main.tree, (node) => node.type === PanelToggle);
+  assert.equal(section().props['data-panel-collapsed'], false);
+  const disclosure = h.mount(PanelToggle, toggle().props);
+  let stopped = 0;
+  disclosure.tree.props.onKeyDown({
+    key: ' ',
+    stopPropagation: () => stopped++,
+  });
+  disclosure.tree.props.onKeyDown({
+    key: 'Enter',
+    stopPropagation: () => stopped++,
+  });
+  disclosure.tree.props.onClick({ stopPropagation: () => stopped++ });
+  assert.equal(stopped, 3);
+  main.render();
+  assert.equal(section().props['data-panel-collapsed'], true);
+  main.render({
+    ...props,
+    state: { ...props.state, speedKph: 87, mode: 'air' },
+  });
+  assert.equal(section().props['data-panel-collapsed'], true);
+  assert.deepEqual(input, [true]);
+  assert.deepEqual(commands, []);
+  toggle().props.onToggle();
+  main.render();
+  assert.equal(section().props['data-panel-collapsed'], false);
+  main.render({ ...props, touch: true, optionsOpen: true });
+  assert.equal(section().props['data-panel-collapsed'], undefined);
+  assert.equal(toggle(), undefined);
+  find(
+    main.tree,
+    (node) =>
+      node.type === 'button' && node.props['aria-label'] === catalogs.en.close,
+  ).props.onClick();
+  assert.equal(closed.length, 1);
+  main.unmount();
 });
