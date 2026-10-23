@@ -143,6 +143,9 @@ export function createBuildingBodies(e: CityEngine) {
   // Vertex spans permit bounded, reversible launch damage without unbatching the city.
   const rocketParts: {
     key: string;
+    /** Same stable source identity as the mission collision polygon. */
+    polygon: number[][][];
+    bounds: { minX: number; maxX: number; minZ: number; maxZ: number };
     center: [number, number];
     minY: number;
     maxY: number;
@@ -286,8 +289,22 @@ export function createBuildingBodies(e: CityEngine) {
         for (const i of [t[0], t[2], t[1]])
           vertex(flat[i].x, ground + h, flat[i].y, 0, 1, 0, -1, -1, roofLayout);
     }
+    const damageBounds = {
+      minX: Infinity,
+      maxX: -Infinity,
+      minZ: Infinity,
+      maxZ: -Infinity,
+    };
+    for (const [x, z] of polygon[0]) {
+      damageBounds.minX = Math.min(damageBounds.minX, x);
+      damageBounds.maxX = Math.max(damageBounds.maxX, x);
+      damageBounds.minZ = Math.min(damageBounds.minZ, z);
+      damageBounds.maxZ = Math.max(damageBounds.maxZ, z);
+    }
     rocketParts.push({
       key,
+      polygon,
+      bounds: damageBounds,
       center,
       minY: ground + min,
       maxY: ground + h,

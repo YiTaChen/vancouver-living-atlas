@@ -1,4 +1,9 @@
-import type { RocketKind, RocketStage } from './rocket-state';
+import type {
+  RocketKind,
+  RocketStage,
+  RocketContactState,
+  RocketImpactRecord,
+} from './rocket-state';
 
 export type RocketView = 'first' | 'chase';
 export type RocketSpaceFocus = 'rocket' | 'earth' | 'sun' | 'moon';
@@ -40,6 +45,14 @@ export interface RocketSnapshot {
   stabilize: boolean;
   support: string;
   supportIntegrity: number;
+  supportCollapsed?: boolean;
+  integrity?: number;
+  contactDamage?: number;
+  contactState?: RocketContactState;
+  contactImpact?: RocketImpactRecord | null;
+  contactAge?: number;
+  groundSlopeGrade?: number;
+  steepSurface?: boolean;
   failureStage: 'none' | 'support-collapse' | 'freefall' | 'wreckage';
   failureAge: number;
   failureCause: 'impact' | 'fire' | 'aerodynamic' | '';
@@ -79,6 +92,14 @@ export const EMPTY_ROCKET: RocketSnapshot = {
   stabilize: true,
   support: 'ground',
   supportIntegrity: 1,
+  supportCollapsed: false,
+  integrity: 1,
+  contactDamage: 0,
+  contactState: 'none',
+  contactImpact: null,
+  contactAge: 0,
+  groundSlopeGrade: 0,
+  steepSurface: false,
   failureStage: 'none',
   failureAge: 0,
   failureCause: '',

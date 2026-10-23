@@ -117,6 +117,7 @@ function setup(t) {
     collisionHeight = () => null;
     contacts = [];
     onCollision = () => {};
+    collisionSurface = () => null;
     constructor(engine) {
       this.engine = engine;
       this.group = new THREE.Group();
@@ -717,17 +718,72 @@ test('a support-collapse exception never removes collision with a different near
   const adjacent = cells.find((volume) => volume.bounds.min.x === 13);
   assert(adjacent);
   assert.equal(adjacent.bounds.max.y, 45);
-  // The nose now crosses the separate building while its own roof is sagging.
+  // A real high-normal-speed nose strike still ruptures the vehicle while its
+  // own roof is sagging; the separate building is never removed as an exception.
   c.state.attitude.roll = 0.26;
+  c.state.velocity.x = 100;
   c.update(1 / 60);
   assert.equal(c.snapshot.phase, 'crashed');
   assert.equal(c.snapshot.failureCause, 'impact');
   assert(c.state.supportCollapseElapsed < 1.5);
+  assert(c.snapshot.contactImpact.normalSpeed > 50);
   assert.equal(
     adjacent.bounds.max.y,
     45,
     'only the supporting roof is deformed',
   );
+});
+
+test('an Atlas appendage already touching a neighbouring wall retains readable support sag and freefall before its real ground impact', async (t) => {
+  const {
+    controller: c,
+    engine: e,
+    resources,
+  } = await roofLaunch(t, [buildingVolume(8, 12, -2, 2, 17.09)]);
+  const metadata = structuredClone(e.data.flightBuildingVolumes);
+  advanceUntil(
+    c,
+    () => c.snapshot.phase === 'falling' || c.snapshot.phase === 'crashed',
+  );
+  assert.equal(c.snapshot.phase, 'falling');
+  assert.equal(c.snapshot.failureStage, 'support-collapse');
+  assert.equal(c.state.wreckage, null);
+  const contacts = resources.effects[0].contacts.filter(
+    ({ contact, phase }) => phase === 'falling' && contact.bounds?.minX === 8,
+  );
+  assert(
+    contacts.length > 0,
+    'the unchanged neighbouring wall is truly touched',
+  );
+  const initial = contacts[0].contact;
+  assert.equal(initial.source, 'building');
+  assert.equal(initial.part, 'appendage');
+  assert(
+    initial.normalSpeed < 1e-8,
+    'resting side overlap has zero inward energy',
+  );
+  assert.equal(c.snapshot.contactImpact.fatal, false);
+  assert(c.state.integrity > 0.98);
+  advance(c, 1.3);
+  assert.equal(c.snapshot.phase, 'falling');
+  assert.equal(c.snapshot.failureStage, 'support-collapse');
+  assert(c.state.integrity > 0.9, 'the scrape applies bounded continuous wear');
+  advance(c, 0.3);
+  assert.equal(c.snapshot.phase, 'falling');
+  assert.equal(c.snapshot.failureStage, 'freefall');
+  advanceUntil(c, () => c.snapshot.phase === 'crashed', 8);
+  assert.equal(c.snapshot.contactImpact.source, 'terrain');
+  assert(c.snapshot.contactImpact.fatal);
+  assert(c.state.wreckage.velocity.y < -5);
+  const adjacent = [...new Set([...c.world.cells.values()].flat())].find(
+    (volume) => volume.bounds.min.x === 8,
+  );
+  assert.equal(
+    adjacent.bounds.max.y,
+    17.09,
+    'the wall remains physical throughout',
+  );
+  assert.deepEqual(e.data.flightBuildingVolumes, metadata);
 });
 
 test('falling automatically leaves the cabin for chase view while preserving the current mission', async (t) => {
@@ -1101,9 +1157,11 @@ test('Titan detached side boosters retire their collision probes while the remai
   c.update(1 / 60);
   assert.equal(
     c.snapshot.phase,
-    'crashed',
-    'an attached side booster must hit the actual obstacle',
+    'flight',
+    'an attached side booster reports and physically responds to a gentle actual obstacle',
   );
+  assert(c.snapshot.contactDamage > 0);
+  assert.equal(c.snapshot.contactImpact.part, 'strap-on');
   c.start('super-heavy', 0, 0, 0, { kind: 'platform' });
   await tick();
   readyFlight(c, 100, { kind: 'platform' }, 'super-heavy');
@@ -1301,34 +1359,34 @@ test('an already overlapping Titan strap crushes a weak wall over time and follo
   assert.equal(c.contactVolumes.size, 0);
 });
 
-test('a strong initially overlapping building still stops Titan after bounded readable crushing', async (t) => {
+test('a physically blocked massive structure still exhausts Titan through compression instead of a launch-age cutoff', async (t) => {
   const { controller: c, engine: e, resources } = setup(t);
-  e.data.flightBuildingVolumes = [buildingVolume(10, 12, -1, 1, 160)];
+  e.data.flightBuildingVolumes = [
+    { ...buildingVolume(-50, 50, -50, 50, 180), minY: 80 },
+  ];
   c.start('super-heavy', 0, 0.45, 0, { kind: 'ground', groundY: 0, seed: 13 });
   await tick();
   advanceUntil(c, () => c.snapshot.phase === 'ready');
   c.launch();
-  advanceUntil(c, () => c.snapshot.phase === 'flight', 10);
-  assert.equal(c.state.wreckage, null);
+  advanceUntil(c, () => c.snapshot.phase === 'ignition', 10);
   advance(c, 0.5);
-  assert.equal(c.snapshot.phase, 'flight');
-  assert(c.state.integrity < 1);
-  advanceUntil(c, () => c.snapshot.phase === 'crashed', 4);
-  assert(c.state.flightElapsed >= 2.5 && c.state.flightElapsed < 3);
+  assert.equal(c.state.wreckage, null);
+  advanceUntil(c, () => c.snapshot.phase === 'crashed', 12);
   assert.equal(c.snapshot.failureCause, 'impact');
-  assert(
-    resources.effects[0].contacts.length >= 150,
-    'the building receives damage throughout the accident',
+  assert(c.state.failureReason.includes('compression'));
+  assert(c.snapshot.contactDamage > 0.99);
+  assert(c.snapshot.contactImpact.fatal);
+  assert.equal(
+    c.snapshot.supportCollapsed,
+    false,
+    'solid ground did not vanish',
   );
-  assert(
-    resources.effects[0].contacts.some(({ phase }) => phase === 'ignition'),
-  );
-  assert.equal(e.data.flightBuildingVolumes[0].maxY, 160);
+  assert(resources.effects[0].contacts.length > 60);
 });
 
 test('a new high-speed wall impact reports its exact building before rupture and receives no initial-overlap grace', async (t) => {
   const { controller: c, engine: e, resources } = setup(t);
-  e.data.flightBuildingVolumes = [buildingVolume(10, 12, -1, 1, 145)];
+  e.data.flightBuildingVolumes = [buildingVolume(14, 40, -10, 10, 145)];
   c.start('super-heavy', 0, 0, 0, { kind: 'platform' });
   await tick();
   readyFlight(c, 100, { kind: 'platform' }, 'super-heavy');
@@ -1347,12 +1405,12 @@ test('a new high-speed wall impact reports its exact building before rupture and
       ({ contact }) =>
         contact.source === 'building' &&
         contact.speed > 70 &&
-        contact.point.x >= 10,
+        contact.point.x >= 14,
     ),
   );
 });
 
-test('an initially intersecting bridge deck never receives the building crush exception', async (t) => {
+test('an identified bridge deck uses Titan normal energy while still constraining real low-speed overlap', async (t) => {
   const { controller: c, engine: e, resources } = setup(t);
   e.data.flightBridgeVolumes = [
     {
@@ -1366,11 +1424,24 @@ test('an initially intersecting bridge deck never receives the building crush ex
   assert.equal(c.initialContacts.size, 0);
   advanceUntil(c, () => c.snapshot.phase === 'ready');
   c.launch();
-  advanceUntil(c, () => c.snapshot.phase === 'crashed', 10);
-  assert(c.state.flightElapsed < 0.1);
+  advanceUntil(c, () => c.state.phase === 'flight', 10);
+  assert.equal(
+    c.state.wreckage,
+    null,
+    'a known 0.7m/s deck contact does not rupture the entire Titan',
+  );
+  assert.equal(c.snapshot.contactImpact.source, 'bridge');
+  assert(c.snapshot.contactImpact.normalSpeed < 1);
+  assert(
+    c.state.velocity.y <= 0,
+    'the real underside still blocks upward normal motion',
+  );
   assert(
     resources.effects[0].contacts.some(
-      ({ contact }) => contact.source === 'bridge' && !contact.initialOverlap,
+      ({ contact }) =>
+        contact.source === 'bridge' &&
+        !contact.initialOverlap &&
+        contact.normal,
     ),
   );
 });
@@ -1423,9 +1494,11 @@ test('pressure resampling preserves an uncollapsed neighbouring wall and its ori
   c.update(1 / 60);
   assert.equal(
     c.snapshot.phase,
-    'crashed',
-    'the separate intact wall still blocks the surviving vehicle',
+    'flight',
+    'the separate intact wall still produces a graded physical contact',
   );
+  assert(c.snapshot.contactDamage > 0);
+  assert.equal(c.snapshot.contactImpact.objectHeight, 150);
   const samples = resources.effects[0].contacts;
   assert(
     samples.some(
@@ -1440,4 +1513,391 @@ test('pressure resampling preserves an uncollapsed neighbouring wall and its ori
   const volumes = [...new Set([...c.world.cells.values()].flat())];
   assert.equal(volumes.find((v) => v.bounds.min.x === -12).bounds.max.y, 150);
   assert.equal(volumes.find((v) => v.bounds.min.x === 10).bounds.max.y, 30);
+});
+
+test('real road survey grade never reduces solid ground bearing and construction levels common city streets', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  e.elevation = (x, z) => 30 + x * 0.08 + z * 0.03;
+  const support = c.supportAt(new THREE.Vector3(0, 30, 0));
+  assert.equal(support.strength, 1);
+  assert(Math.abs(support.slopeGrade - Math.hypot(0.08, 0.03)) < 1e-10);
+  c.start('super-heavy', 0, 30.45, 0, support);
+  await tick();
+  assert.equal(c.state.attitude.roll, 0);
+  assert.equal(c.snapshot.steepSurface, false);
+  advanceUntil(c, () => c.snapshot.phase === 'ready');
+  c.launch();
+  advanceUntil(c, () => c.snapshot.altitude > 30, 15);
+  assert.equal(c.snapshot.phase, 'flight');
+  assert.equal(c.snapshot.supportIntegrity, 1);
+  assert.equal(c.snapshot.supportCollapsed, false);
+});
+
+test('a new gentle Titan wall scrape after2.51seconds has a real impulse and causal cue without breaking the vehicle', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(10, 12, -1, 1, 160)];
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  assert.equal(c.initialContacts.size, 0);
+  readyFlight(c, 2, { kind: 'ground' }, 'super-heavy');
+  c.state.flightElapsed = 2.51;
+  c.update(1 / 60);
+  assert.equal(c.snapshot.phase, 'flight');
+  assert.equal(c.state.wreckage, null);
+  assert(c.snapshot.contactDamage > 0 && c.snapshot.integrity > 0.99);
+  assert(c.snapshot.contactImpact && !c.snapshot.contactImpact.fatal);
+  assert.equal(c.snapshot.contactImpact.source, 'building');
+  assert(c.snapshot.contactImpact.normalSpeed < 1);
+  assert(
+    resources.effects[0].contacts.some(
+      ({ contact }) => contact.force > 0 && contact.normal,
+    ),
+  );
+  const cameraOffset = e.camera.position.clone().sub(c.state.position);
+  e.data.flightBuildingVolumes = [];
+  c.world.cells.clear();
+  advance(c, 0.1);
+  assert.equal(c.snapshot.contactState, 'none');
+  assert(c.snapshot.contactAge > 0);
+  assert(
+    c.snapshot.contactImpact,
+    'recent real contact remains readable after clearing',
+  );
+  assert(
+    e.camera.position.clone().sub(c.state.position).distanceTo(cameraOffset) <
+      3,
+    'a minor scrape does not reframe or shake chase',
+  );
+});
+
+test('a fast upward Titan tangent uses wall-normal energy and never destroys the vehicle for total ascent speed alone', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(10, 12, -1, 1, 160)];
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.state.flightElapsed = 5;
+  c.state.velocity.y = 210;
+  c.state.speed = 210;
+  c.update(1 / 60);
+  assert.equal(c.snapshot.phase, 'flight');
+  assert(c.state.velocity.y > 200);
+  assert(c.snapshot.contactImpact.normalSpeed < 1);
+  assert(c.snapshot.contactImpact.fatal === false);
+});
+
+test('one physical wall is counted once across its authored probes and duplicated source prisms', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  const wall = buildingVolume(10, 12, -1, 1, 160);
+  async function contact(copies) {
+    e.data.flightBuildingVolumes = Array.from({ length: copies }, () =>
+      structuredClone(wall),
+    );
+    c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+    await tick();
+    readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+    c.state.velocity.y = 200;
+    c.update(1 / 60);
+    return {
+      damage: c.state.contactDamage,
+      impulse: { ...c.state.velocity },
+      count: resources.effects.at(-1).contacts.length,
+    };
+  }
+  const one = await contact(1),
+    duplicate = await contact(8);
+  assert.equal(one.count, 1);
+  assert.equal(duplicate.count, 1);
+  assert(Math.abs(one.damage - duplicate.damage) < 1e-12);
+  assert.deepEqual(one.impulse, duplicate.impulse);
+});
+
+test('eight distinct gentle wall contacts share a bounded continuous structural load budget', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBuildingVolumes = Array.from({ length: 8 }, (_, i) =>
+    buildingVolume(10 + i * 0.01, 12 + i * 0.01, -1, 1, 160),
+  );
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.state.velocity.y = 200;
+  c.update(1 / 60);
+  assert.equal(resources.effects[0].contacts.length, 8);
+  assert.equal(c.snapshot.phase, 'flight');
+  assert(
+    c.snapshot.integrity > 0.995,
+    'one frame of clutter cannot multiply into whole-vehicle failure',
+  );
+  assert(c.snapshot.contactDamage > 0 && c.snapshot.contactDamage < 0.005);
+  assert(
+    resources.effects[0].contacts.every(({ contact }) => contact.force > 0),
+  );
+});
+
+test('contact markers and causal records lie on the real contacted wall surface with its outward normal', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(10, 16, -4, 4, 160)];
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.update(1 / 60);
+  const contact = resources.effects[0].contacts[0].contact;
+  assert.equal(
+    contact.point.x,
+    10,
+    'the nearest facade is the actual polygon edge, not an interior radius sample',
+  );
+  assert(Math.abs(contact.normal.x + 1) < 1e-10);
+  assert(Math.abs(contact.normal.y) < 1e-10);
+  assert(Math.abs(contact.normal.z) < 1e-10);
+  assert(contact.point.y >= 0 && contact.point.y <= 160);
+  assert.deepEqual(c.snapshot.contactImpact.point, contact.point);
+  assert.equal(contact.part, 'strap-on');
+  assert(
+    contact.point.x + contact.normal.x * 0.15 < 10,
+    'an outward contact marker is outside the solid wall',
+  );
+});
+
+function addLandmark(
+  engine,
+  geometry,
+  position = new THREE.Vector3(),
+  quaternion = new THREE.Quaternion(),
+) {
+  const holder = new THREE.Group(),
+    medium = new THREE.Group(),
+    mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial());
+  mesh.name = 'Actual independent landmark surface';
+  mesh.position.copy(position);
+  mesh.quaternion.copy(quaternion);
+  medium.add(mesh);
+  holder.add(medium);
+  engine.landmarks.add(holder);
+  engine.landmarkDetails.push({ holder, medium });
+  holder.updateMatrixWorld(true);
+  return mesh;
+}
+test('a real independent landmark wall gives Titan exact surface normals and a graded low-energy contact', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  addLandmark(
+    e,
+    new THREE.BoxGeometry(20, 200, 20),
+    new THREE.Vector3(23.5, 100, 0),
+  );
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.state.velocity.x = 1;
+  c.update(1 / 60);
+  assert.equal(c.state.phase, 'flight');
+  assert.equal(c.state.wreckage, null);
+  const contact = resources.effects[0].contacts[0].contact;
+  assert.equal(contact.source, 'landmark');
+  assert(Math.abs(contact.point.x - 13.5) < 1e-6);
+  assert(contact.normal.x < -0.99999);
+  assert(contact.normalSpeed < 2);
+  assert(contact.penetration > 0 && contact.force > 0);
+  assert.equal(c.snapshot.contactImpact.source, 'landmark');
+  assert(
+    c.state.velocity.x <= 0,
+    'normal velocity reacts instead of passing through the real wall',
+  );
+});
+test('a new high-normal-energy landmark impact still ruptures Titan with the truthful landmark cause', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  addLandmark(
+    e,
+    new THREE.BoxGeometry(26, 200, 20),
+    new THREE.Vector3(27, 100, 0),
+  );
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.state.velocity.x = 90;
+  c.update(1 / 60);
+  assert.equal(c.state.phase, 'crashed');
+  assert.equal(c.snapshot.contactImpact.source, 'landmark');
+  assert(c.snapshot.contactImpact.normalSpeed > 85);
+  assert(c.state.failureReason.includes('landmark'));
+  assert(
+    c.snapshot.contactImpact.point.x >= 13.99999 &&
+      c.snapshot.contactImpact.point.x <= 14.00001,
+  );
+});
+test('a rotated local bridge box reports its transformed true face rather than an axis-aligned envelope face', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  const angle = 0.38,
+    matrix = new THREE.Matrix4().makeRotationY(angle);
+  matrix.setPosition(13.8, 100, 0);
+  e.data.flightBridgeVolumes = [
+    { min: [-0.2, -100, -10], max: [0.2, 100, 10], matrix: matrix.toArray() },
+  ];
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.update(1 / 60);
+  assert.equal(c.state.phase, 'flight');
+  const contact = c.snapshot.contactImpact,
+    point = new THREE.Vector3(
+      contact.point.x,
+      contact.point.y,
+      contact.point.z,
+    ).applyMatrix4(matrix.clone().invert());
+  assert.equal(contact.source, 'bridge');
+  assert(Math.abs(Math.abs(point.x) - 0.2) < 1e-5);
+  const expected = new THREE.Vector3(
+    point.x < 0 ? -1 : 1,
+    0,
+    0,
+  ).transformDirection(matrix);
+  assert(
+    expected.dot(
+      new THREE.Vector3(contact.normal.x, contact.normal.y, contact.normal.z),
+    ) > 0.99999,
+  );
+});
+test('an open mesh courtyard stays empty even though its broad landmark envelope surrounds the rocket', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(
+      [
+        20, 0, -20, 20, 200, -20, 20, 200, 20, 20, 0, -20, 20, 200, 20, 20, 0,
+        20, -20, 0, -20, -20, 200, 20, -20, 200, -20, -20, 0, -20, -20, 0, 20,
+        -20, 200, 20,
+      ],
+      3,
+    ),
+  );
+  addLandmark(e, g);
+  c.start('super-heavy', 0, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.update(1 / 60);
+  assert.equal(c.state.phase, 'flight');
+  assert.equal(resources.effects[0].contacts.length, 0);
+});
+test('a visibly settled landmark clears its old roof before collision while its real rubble outside the old cells stays physical', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  const mesh = addLandmark(
+    e,
+    new THREE.BoxGeometry(10, 10, 10),
+    new THREE.Vector3(79, 100, 0),
+  );
+  const sourcePositions = mesh.geometry.getAttribute('position').array.slice();
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  const fx = resources.effects[0];
+  let output;
+  fx.collisionSurface = (owner, source) => {
+    assert.equal(owner, mesh);
+    output ??= Float32Array.from(source, (v, i) =>
+      i % 3 === 0 ? v + 12 : i % 3 === 1 ? v - 95 : v,
+    );
+    return {
+      triangles: output,
+      previousTriangles: output,
+      deltaTime: 0,
+      time: 1,
+      revision: 1,
+      bounds: new THREE.Box3().setFromArray(output),
+    };
+  };
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.state.position.x = 79;
+  c.update(1 / 60);
+  assert.equal(c.state.phase, 'flight');
+  assert.equal(
+    fx.contacts.length,
+    0,
+    'empty old roof never falls back to an unknown phantom impact',
+  );
+  const swept = new THREE.Box3().setFromCenterAndSize(
+    new THREE.Vector3(91, 5, 0),
+    new THREE.Vector3(2, 2, 2),
+  );
+  assert(
+    [...c.nearbyVolumes(swept)].length > 0,
+    'deformed structure is indexed beyond its old80m cell edge',
+  );
+  assert(
+    c.world.hit(new THREE.Vector3(91, 3, 0), new THREE.Vector3(91, 7, 0), 0.2),
+    'actual settled rubble is never removed',
+  );
+  assert.deepEqual(
+    mesh.geometry.getAttribute('position').array,
+    sourcePositions,
+  );
+  c.resetDamage();
+  await tick();
+  assert(
+    c.world.hit(
+      new THREE.Vector3(79, 96, 0),
+      new THREE.Vector3(79, 104, 0),
+      0.2,
+    ),
+    'repair restores exact original triangles',
+  );
+  assert(
+    !c.world.hit(new THREE.Vector3(91, 3, 0), new THREE.Vector3(91, 7, 0), 0.2),
+  );
+});
+
+test('moving landmark triangles supply barycentric surface velocity and each later contact rebases to the actual reacted vehicle', async (t) => {
+  const { controller: c, engine: e, resources } = setup(t);
+  addLandmark(
+    e,
+    new THREE.BoxGeometry(20, 200, 20),
+    new THREE.Vector3(23.5, 100, 0),
+  );
+  addLandmark(
+    e,
+    new THREE.BoxGeometry(20, 200, 20),
+    new THREE.Vector3(23.51, 100, 0),
+  );
+  c.start('super-heavy', -100, 0.45, 0, { kind: 'ground', groundY: 0 });
+  await tick();
+  const cache = new Map(),
+    fx = resources.effects[0],
+    samples = [];
+  fx.collisionSurface = (owner, source) => {
+    if (!cache.has(owner)) {
+      const triangles = Float32Array.from(source, (v, i) =>
+        i % 3 === 0 ? v - 0.5 : v,
+      );
+      cache.set(owner, {
+        triangles,
+        previousTriangles: source,
+        deltaTime: 0.1,
+        time: 1,
+        revision: 1,
+        bounds: new THREE.Box3().setFromArray(triangles),
+      });
+    }
+    return cache.get(owner);
+  };
+  fx.onCollision = (contact, state) => {
+    const n = contact.normal,
+      v = state.velocity,
+      sv = contact.surfaceVelocity;
+    const expected = Math.max(
+      0,
+      -((v.x - sv.x) * n.x + (v.y - sv.y) * n.y + (v.z - sv.z) * n.z),
+    );
+    samples.push({ expected, actual: contact.normalSpeed });
+  };
+  readyFlight(c, 100, { kind: 'ground' }, 'super-heavy');
+  c.update(1 / 60);
+  assert.equal(c.state.phase, 'flight');
+  assert.equal(samples.length, 2);
+  assert(samples[0].actual > 4.8 && samples[0].actual < 5.2);
+  assert(
+    samples.every((s) => Math.abs(s.expected - s.actual) < 1e-6),
+    'FX metrics use the current velocity after the preceding surface reaction',
+  );
+  assert.equal(samples[1].actual, 0);
+  assert(c.state.velocity.x < -4.9);
+  assert(Math.abs(fx.contacts[0].contact.surfaceVelocity.x + 5) < 1e-5);
 });

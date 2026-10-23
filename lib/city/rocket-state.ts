@@ -25,6 +25,31 @@ export type RocketFailureStage =
   | 'freefall'
   | 'wreckage';
 export type RocketDestructionCause = 'impact' | 'fire' | 'aerodynamic';
+export type RocketContactState = 'none' | 'scraping' | 'compression' | 'impact';
+export interface RocketImpactRecord {
+  time: number;
+  point: RocketVector;
+  normal: RocketVector;
+  source: 'building' | 'bridge' | 'landmark' | 'terrain' | 'unknown';
+  part: 'core' | 'strap-on' | 'upper' | 'appendage';
+  objectHeight: number;
+  normalSpeed: number;
+  severity: number;
+  fatal: boolean;
+}
+export interface RocketContactLoad {
+  point: RocketVector;
+  normal: RocketVector;
+  penetration: number;
+  obstacleMass: number;
+  yieldProgress: number;
+  /** True movement of the contacted city surface, metres/second. */
+  surfaceVelocity?: RocketVector;
+  source?: RocketImpactRecord['source'];
+  part?: RocketImpactRecord['part'];
+  objectHeight?: number;
+}
+
 export interface RocketWreckage {
   /** Actual destruction pose and incoming momentum, never zeroed by settling. */
   time: number;
@@ -84,6 +109,9 @@ export interface RocketSupport {
   kind: RocketSupportKind;
   /** Optional structural capacity, 0..1; a reinforced platform is 1. */
   strength?: number;
+  /** Surveyed rise/run, separate from material bearing capacity. */
+  slopeGrade?: number;
+  slope?: { x: number; z: number };
   /** Ground collision height below a roof; defaults to the placement height. */
   groundY?: number;
   /** Stable numeric seed, if replaying a placement. Otherwise derived from x/z. */
@@ -387,6 +415,10 @@ export interface RocketState {
   throttle: number;
   targetThrottle: number;
   integrity: number;
+  /** Cumulative structural damage from actual city contact, 0..1. */
+  contactDamage: number;
+  contactState: RocketContactState;
+  contactImpact: RocketImpactRecord | null;
   elapsed: number;
   phaseElapsed: number;
   flightElapsed: number;
@@ -515,7 +547,17 @@ function cloneState(s: RocketState): RocketState {
     origin: { ...s.origin },
     attitude: { ...s.attitude },
     angularVelocity: { ...s.angularVelocity },
-    support: { ...s.support },
+    support: {
+      ...s.support,
+      slope: s.support.slope ? { ...s.support.slope } : undefined,
+    },
+    contactImpact: s.contactImpact
+      ? {
+          ...s.contactImpact,
+          point: { ...s.contactImpact.point },
+          normal: { ...s.contactImpact.normal },
+        }
+      : null,
     acceleration: { ...s.acceleration },
     wind: { ...s.wind },
     events: [...s.events],
@@ -609,6 +651,9 @@ export function createRocket(
     throttle: 0,
     targetThrottle: 1,
     integrity: 1,
+    contactDamage: 0,
+    contactState: 'none',
+    contactImpact: null,
     elapsed: 0,
     phaseElapsed: 0,
     flightElapsed: 0,
@@ -625,6 +670,25 @@ export function createRocket(
     nextEventId: 1,
     failureReason: null,
   };
+  if (
+    support.kind === 'ground' &&
+    (support.slopeGrade ?? 0) > 0.15 &&
+    support.slope
+  ) {
+    // Construction levels ordinary roads. Residual steep ground remains visible
+    // as a bounded lean; a slope is not evidence that solid earth has no bearing.
+    const residual = 1 - 0.15 / support.slopeGrade!;
+    state.attitude.roll = clamp(
+      Math.atan(-support.slope.x * residual),
+      -0.18,
+      0.18,
+    );
+    state.attitude.pitch = clamp(
+      Math.atan(-support.slope.z * residual),
+      -0.18,
+      0.18,
+    );
+  }
   if (support.kind === 'ocean' || support.kind === 'river') {
     state.failureReason = 'Water cannot support a launch vehicle.';
     setPhase(state, 'sinking', 'sinking');
@@ -917,14 +981,169 @@ function updateCollapse(s: RocketState, dt: number): boolean {
   return false;
 }
 
+/** Normal contact energy and continuous compression; tangential ascent is not an impact. */
+export function sampleRocketContact(
+  state: RocketState,
+  contact: RocketContactLoad,
+) {
+  const normalLength = length(contact.normal),
+    normal =
+      normalLength > 1e-8
+        ? {
+            x: contact.normal.x / normalLength,
+            y: contact.normal.y / normalLength,
+            z: contact.normal.z / normalLength,
+          }
+        : { x: 0, y: 1, z: 0 },
+    inwardSpeed = Math.max(
+      0,
+      -(
+        (state.velocity.x - (contact.surfaceVelocity?.x ?? 0)) * normal.x +
+        (state.velocity.y - (contact.surfaceVelocity?.y ?? 0)) * normal.y +
+        (state.velocity.z - (contact.surfaceVelocity?.z ?? 0)) * normal.z
+      ),
+    ),
+    mass = Math.max(1, state.mass),
+    obstacleMass = Math.max(1, finite(contact.obstacleMass, mass)),
+    resistance = obstacleMass / (mass + obstacleMass),
+    reducedMass = mass * resistance,
+    impactEnergy = 0.5 * reducedMass * inwardSpeed ** 2,
+    config = ROCKET_CONFIGS[state.kind],
+    depth = clamp(finite(contact.penetration, 0) / config.radius, 0, 1),
+    yieldProgress = clamp(finite(contact.yieldProgress, 0), 0, 1),
+    direction = rocketDirection(state.attitude),
+    engineCompression =
+      Math.max(
+        0,
+        -(
+          direction.x * normal.x +
+          direction.y * normal.y +
+          direction.z * normal.z
+        ),
+      ) * state.stageThrust,
+    force =
+      resistance *
+      (mass * (0.6 + depth * 2.4) + engineCompression) *
+      (1 - yieldProgress * 0.85),
+    dryMass =
+      config.stages.upper.dryMass +
+      (state.boosterAttached ? config.stages.boost.dryMass : 0) +
+      (state.strapAttached ? (config.strapOns?.dryMass ?? 0) : 0),
+    capacity = Math.max(1, dryMass) * (1800 + config.radius * 100),
+    impactDamage = impactEnergy / capacity,
+    wear =
+      resistance *
+      (0.012 +
+        depth * 0.2 +
+        (engineCompression / Math.max(1, config.maxThrust)) * 0.4) *
+      (1 - yieldProgress * 0.85);
+  return {
+    normal,
+    normalSpeed: inwardSpeed,
+    impactEnergy,
+    force,
+    resistance,
+    depth,
+    impactDamage,
+    wear,
+  };
+}
+
+/** Graded city contact for Titan and unsupported vehicles; no teleport or collider removal. */
+export function resolveRocketContact(
+  state: RocketState,
+  contact: RocketContactLoad,
+  delta: number,
+): RocketState {
+  const s = cloneState(state);
+  if (s.wreckage || ['space', 'sinking'].includes(s.phase)) return s;
+  const dt = clamp(finite(delta, 0), 0, 0.1);
+  if (dt <= 0) return s;
+  const load = sampleRocketContact(s, contact),
+    damage = Math.max(0, load.impactDamage + load.wear * dt);
+  s.contactDamage = clamp(finite(s.contactDamage, 0) + damage, 0, 1);
+  s.integrity = clamp(s.integrity - damage, 0, 1);
+  s.contactState =
+    load.depth > 0.25 || load.force > s.mass * 1.2 ? 'compression' : 'scraping';
+  s.contactImpact = {
+    time: s.elapsed,
+    point: { ...contact.point },
+    normal: { ...load.normal },
+    source: contact.source ?? 'building',
+    part: contact.part ?? (s.boosterAttached ? 'core' : 'upper'),
+    objectHeight: Math.max(0, finite(contact.objectHeight, 0)),
+    normalSpeed: load.normalSpeed,
+    severity: clamp(Math.max(load.impactDamage, load.wear), 0, 1),
+    fatal: false,
+  };
+  if (load.impactDamage >= 1 || s.integrity <= 0) {
+    s.contactImpact.fatal = true;
+    s.contactState = 'impact';
+    crash(
+      s,
+      length(s.velocity),
+      load.impactDamage >= 1
+        ? `A high-energy strike against a ${contact.source ?? 'building'} ruptured the vehicle.`
+        : `Sustained compression against a ${contact.source ?? 'building'} exhausted the vehicle structure.`,
+      false,
+    );
+    return s;
+  }
+  // Remove only inward velocity; upward sliding along a vertical wall is retained.
+  // A bounded reaction pushes clear through subsequent real physics steps.
+  const separationSpeed =
+    Math.min(0.6, Math.max(0, contact.penetration) * 0.7) * load.resistance;
+  const normalVelocity =
+    (s.velocity.x - (contact.surfaceVelocity?.x ?? 0)) * load.normal.x +
+    (s.velocity.y - (contact.surfaceVelocity?.y ?? 0)) * load.normal.y +
+    (s.velocity.z - (contact.surfaceVelocity?.z ?? 0)) * load.normal.z;
+  const impulse = Math.max(0, separationSpeed - normalVelocity);
+  s.velocity.x += load.normal.x * impulse;
+  s.velocity.y += load.normal.y * impulse;
+  s.velocity.z += load.normal.z * impulse;
+  const config = ROCKET_CONFIGS[s.kind],
+    lever = {
+      x: (contact.point.x - s.position.x) / config.height,
+      y:
+        (contact.point.y - s.position.y) / config.height -
+        (s.boosterAttached ? 0.45 : 0.72),
+      z: (contact.point.z - s.position.z) / config.height,
+    },
+    turn =
+      load.resistance * (load.normalSpeed * 0.003 + load.depth * dt * 0.09);
+  s.angularVelocity.pitch = clamp(
+    s.angularVelocity.pitch +
+      (lever.y * load.normal.z - lever.z * load.normal.y) * turn,
+    -0.45,
+    0.45,
+  );
+  s.angularVelocity.roll = clamp(
+    s.angularVelocity.roll +
+      (lever.y * load.normal.x - lever.x * load.normal.y) * turn,
+    -0.45,
+    0.45,
+  );
+  s.speed = length(s.velocity);
+  return s;
+}
+
 /** External swept city/body collision, preserving the actual impact location. */
 export function crashRocket(
   state: RocketState,
   reason = 'The rocket collided with the city.',
+  impact?: RocketImpactRecord,
 ): RocketState {
   const s = cloneState(state);
   if (s.phase === 'crashed' || s.phase === 'space' || s.phase === 'sinking')
     return s;
+  if (impact)
+    s.contactImpact = {
+      ...impact,
+      point: { ...impact.point },
+      normal: { ...impact.normal },
+      fatal: true,
+    };
+  s.contactState = 'impact';
   crash(s, length(s.velocity), reason, false);
   return s;
 }
@@ -933,6 +1152,7 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
   const config = ROCKET_CONFIGS[s.kind];
   s.elapsed += dt;
   s.phaseElapsed += dt;
+  if (!s.wreckage) s.contactState = 'none';
   if (s.phase === 'crashed') {
     updateWreckage(s, dt);
     return;
@@ -1245,6 +1465,28 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
       s.position.y += groundY - groundContactY;
       s.altitude = Math.max(0, s.position.y - s.origin.y);
     }
+    const contactEnd =
+      !s.boosterAttached && direction.y < 0
+        ? config.height
+        : !s.boosterAttached
+          ? remainingBottom
+          : 0;
+    s.contactImpact = {
+      time: s.elapsed,
+      point: {
+        x: s.position.x + direction.x * contactEnd,
+        y: groundY,
+        z: s.position.z + direction.z * contactEnd,
+      },
+      normal: { x: 0, y: 1, z: 0 },
+      source: 'terrain',
+      part: s.boosterAttached ? 'core' : 'upper',
+      objectHeight: 0,
+      normalSpeed: Math.max(0, -s.velocity.y),
+      severity: 1,
+      fatal: true,
+    };
+    s.contactState = 'impact';
     crash(
       s,
       s.speed,

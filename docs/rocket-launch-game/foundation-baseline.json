@@ -1,0 +1,941 @@
+{
+  "sourceCommit": "9c7082040981f58e8477cbbff2902f77285663a3",
+  "method": "Read-only diagnosis of 20 real road junctions using original production updates; records the first eight flight seconds or an earlier crash. This is the previous source, not a final acceptance result.",
+  "startedAt": "2026-10-23T04:20:07.023Z",
+  "finishedAt": "2026-10-23T04:20:51.284Z",
+  "categories": {
+    "tall-initial-overlap": 7,
+    "distributed-obstructed": 7,
+    "distributed-clear": 6
+  },
+  "errors": [],
+  "hmr": [],
+  "crashes": 12,
+  "cases": [
+    {
+      "node": 1998,
+      "roads": ["THURLOW ST", "EIHU LANE"],
+      "category": "tall-initial-overlap",
+      "x": 269.7688969385132,
+      "y": 34.59177610103076,
+      "z": 116.21808000002972,
+      "support": {
+        "kind": "ground",
+        "groundY": 34.14177610103076,
+        "strength": 0.9837243230206165
+      },
+      "initialHeights": [63.7, 15.96, 4.689999999999998],
+      "phase": "flight",
+      "failure": null,
+      "flightSeconds": 8.016666666666644,
+      "altitude": 1061.5402412804244,
+      "supportIntegrity": 0.7119832705332731,
+      "wreckage": null,
+      "renderedBodyCoordinateDelta": 87.17947769165039,
+      "lastContacts": []
+    },
+    {
+      "node": 2049,
+      "roads": ["THURLOW ST", "MELVILLE ST"],
+      "category": "tall-initial-overlap",
+      "x": 396.4699489048762,
+      "y": 30.385409315799823,
+      "z": -12.245199999931913,
+      "support": {
+        "kind": "ground",
+        "groundY": 29.935409315799824,
+        "strength": 0.951514467828601
+      },
+      "initialHeights": [102.00000000000001, 9.490000000000002],
+      "phase": "crashed",
+      "failure": "collision",
+      "flightSeconds": 1.7999999999999985,
+      "altitude": 2.4074166091036595,
+      "coreIntegrityBeforeCollision": 0.8740000000000019,
+      "supportIntegrity": 0,
+      "phaseAtQuery": "falling",
+      "initialAge": 1.7999999999999985,
+      "speedAtQuery": 3.406145042990724,
+      "wreckage": {
+        "time": 24.833333333333204,
+        "position": {
+          "x": 396.47224393328037,
+          "y": 32.79282592490348,
+          "z": -12.240729803679505
+        },
+        "velocity": {
+          "x": 0.004926556344235392,
+          "y": 0,
+          "z": 0.01318380004601034
+        },
+        "attitude": {
+          "pitch": 0.003183737942009025,
+          "roll": 0.0011914829969426203
+        },
+        "angularVelocity": {
+          "pitch": 0.0018700897708571393,
+          "roll": -0.00009817773098235449
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 94.3499984741211,
+      "lastContacts": [
+        {
+          "point": {
+            "x": 407.18581910157735,
+            "y": 35.78704783554832,
+            "z": -9.20717663327196
+          },
+          "source": "building",
+          "initialOverlap": true,
+          "probe": 8,
+          "initialAge": 1.7999999999999985,
+          "originalBounds": {
+            "minX": 392.7659998763181,
+            "maxX": 438.7389708382593,
+            "minY": 28.937073273029245,
+            "maxY": 130.93707327302926,
+            "minZ": -11.354639999807432,
+            "maxZ": 56.65965359992498
+          }
+        }
+      ],
+      "image": "failure-1-node-2049.png"
+    },
+    {
+      "node": 1746,
+      "roads": ["NICOLA ST", "W PENDER ST"],
+      "category": "tall-initial-overlap",
+      "x": -74.43478042994892,
+      "y": 11.517607279477076,
+      "z": -451.25788400000545,
+      "support": {
+        "kind": "ground",
+        "groundY": 11.067607279477077,
+        "strength": 0.9240585488503398
+      },
+      "initialHeights": [30.880000000000003],
+      "phase": "crashed",
+      "failure": "collision",
+      "flightSeconds": 0.7000000000000005,
+      "altitude": 0.8490575824343782,
+      "coreIntegrityBeforeCollision": 0.9510000000000007,
+      "supportIntegrity": 0,
+      "phaseAtQuery": "falling",
+      "initialAge": 0.7000000000000005,
+      "speedAtQuery": 3.231134936565947,
+      "wreckage": {
+        "time": 23.733333333333267,
+        "position": {
+          "x": -74.43392439612852,
+          "y": 12.366664861911454,
+          "z": -451.258542068587
+        },
+        "velocity": {
+          "x": 0.004879669937899694,
+          "y": 0,
+          "z": -0.003975618448910739
+        },
+        "attitude": {
+          "pitch": -0.0008396246725067257,
+          "roll": 0.0010811709242310565
+        },
+        "angularVelocity": {
+          "pitch": -0.001900901032152485,
+          "roll": 0.002204353259450353
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 49.10074234008789,
+      "lastContacts": [
+        {
+          "point": {
+            "x": -74.43066845578961,
+            "y": 13.726002758774303,
+            "z": -437.52707059479366
+          },
+          "source": "building",
+          "initialOverlap": true,
+          "probe": 9,
+          "initialAge": 0.7000000000000005,
+          "originalBounds": {
+            "minX": -86.16964031154131,
+            "maxX": -52.7839966222924,
+            "minY": 11.410002758774304,
+            "maxY": 42.29000275877431,
+            "minZ": -440.279505599691,
+            "maxZ": -407.86534799993177
+          }
+        }
+      ],
+      "image": "failure-2-node-1746.png"
+    },
+    {
+      "node": 2099,
+      "roads": ["500-600 THURLOW ST", "W PENDER ST"],
+      "category": "tall-initial-overlap",
+      "x": 473.89635254579673,
+      "y": 25.64046043896879,
+      "z": -90.72579999953149,
+      "support": {
+        "kind": "ground",
+        "groundY": 25.190460438968792,
+        "strength": 0.9301313800683901
+      },
+      "initialHeights": [31.320000000000004],
+      "phase": "crashed",
+      "failure": "collision",
+      "flightSeconds": 2.249999999999997,
+      "altitude": 0.7188971694960422,
+      "coreIntegrityBeforeCollision": 0.9825000000000003,
+      "supportIntegrity": 0,
+      "phaseAtQuery": "falling",
+      "speedAtQuery": 13.706247837883575,
+      "wreckage": {
+        "time": 26.783333333333093,
+        "position": {
+          "x": 472.87939215801026,
+          "y": 26.359357608464833,
+          "z": -90.70325412860156
+        },
+        "velocity": {
+          "x": -0.7447256234904642,
+          "y": -13.68598056302343,
+          "z": 0.023442861382200586
+        },
+        "attitude": {
+          "pitch": 0.20746895671047266,
+          "roll": -0.3608572798182036
+        },
+        "angularVelocity": {
+          "pitch": 0.07196710197691959,
+          "roll": -0.1197318419570265
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 127.64999771118164,
+      "lastContacts": [
+        {
+          "point": {
+            "x": 457.5781091189767,
+            "y": 25.780659907223423,
+            "z": -89.76886807689188
+          },
+          "source": "building",
+          "initialOverlap": false,
+          "probe": 10,
+          "originalBounds": {
+            "minX": 450.03597907067046,
+            "maxX": 460.5778202793837,
+            "minY": 25.204659907223423,
+            "maxY": 32.88465990722342,
+            "minZ": -97.61539480007627,
+            "maxZ": -86.68488399976752
+          }
+        }
+      ],
+      "image": "failure-3-node-2099.png"
+    },
+    {
+      "node": 2038,
+      "roads": ["W HASTINGS ST", "BUTE ST"],
+      "category": "tall-initial-overlap",
+      "x": 381.0616371239753,
+      "y": 14.324117847688525,
+      "z": -311.9409039997626,
+      "support": {
+        "kind": "ground",
+        "groundY": 13.874117847688526,
+        "strength": 0.9286745135575636
+      },
+      "initialHeights": [10.449999999999998, 31.840000000000003],
+      "phase": "crashed",
+      "failure": "collision",
+      "flightSeconds": 0.8166666666666675,
+      "altitude": 1.0104854741232714,
+      "coreIntegrityBeforeCollision": 0.8856666666666684,
+      "supportIntegrity": 0,
+      "phaseAtQuery": "falling",
+      "initialAge": 0.8166666666666675,
+      "speedAtQuery": 3.2494877883131066,
+      "wreckage": {
+        "time": 23.849999999999927,
+        "position": {
+          "x": 381.0629447957025,
+          "y": 15.334603321811796,
+          "z": -311.94115208967565
+        },
+        "velocity": {
+          "x": 0.007093275642321356,
+          "y": 0,
+          "z": -0.0009442476751696596
+        },
+        "attitude": {
+          "pitch": -0.000284967870694598,
+          "roll": 0.0016090482879439307
+        },
+        "angularVelocity": {
+          "pitch": -0.0001809119780712027,
+          "roll": 0.002890220435401886
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 54.217857360839844,
+      "lastContacts": [
+        {
+          "point": {
+            "x": 381.06778565703297,
+            "y": 18.344651312956156,
+            "z": -298.20800942291334
+          },
+          "source": "building",
+          "initialOverlap": true,
+          "probe": 9,
+          "initialAge": 0.8166666666666675,
+          "originalBounds": {
+            "minX": 357.3849725501566,
+            "maxX": 411.62411793790346,
+            "minY": 15.664853363280363,
+            "maxY": 26.11485336328036,
+            "minZ": -300.44043479975386,
+            "maxZ": -252.9101343998127
+          }
+        },
+        {
+          "point": {
+            "x": 381.07558208414116,
+            "y": 26.11485336328036,
+            "z": -298.20939019704394
+          },
+          "source": "building",
+          "initialOverlap": true,
+          "probe": 9,
+          "initialAge": 0.8166666666666675,
+          "originalBounds": {
+            "minX": 366.4614992826335,
+            "maxX": 401.3327888676184,
+            "minY": 26.11485336328036,
+            "maxY": 57.954853363280364,
+            "minZ": -300.44043479975386,
+            "maxZ": -257.4297263996337
+          }
+        }
+      ],
+      "image": "failure-4-node-2038.png"
+    },
+    {
+      "node": 2122,
+      "roads": ["EVELEIGH ST", "500-600 THURLOW ST", "THURLOW ST"],
+      "category": "tall-initial-overlap",
+      "x": 514.9658207059964,
+      "y": 22.34376426916165,
+      "z": -132.3483479994863,
+      "support": {
+        "kind": "ground",
+        "groundY": 21.89376426916165,
+        "strength": 0.951798572590114
+      },
+      "initialHeights": [36.55],
+      "phase": "flight",
+      "failure": null,
+      "flightSeconds": 8.016666666666644,
+      "altitude": 1323.349200718491,
+      "supportIntegrity": 0.18685737354280846,
+      "wreckage": null,
+      "renderedBodyCoordinateDelta": 126.80484390258789,
+      "lastContacts": []
+    },
+    {
+      "node": 2141,
+      "roads": ["THURLOW ST", "W PENDER ST"],
+      "category": "tall-initial-overlap",
+      "x": 551.3518010715693,
+      "y": 20.367546017369897,
+      "z": -169.23979599952133,
+      "support": {
+        "kind": "ground",
+        "groundY": 19.917546017369897,
+        "strength": 0.939951585160618
+      },
+      "initialHeights": [36.55],
+      "phase": "crashed",
+      "failure": "collision",
+      "flightSeconds": 1.2000000000000006,
+      "altitude": 1.5474275420319934,
+      "coreIntegrityBeforeCollision": 0.9160000000000013,
+      "supportIntegrity": 0,
+      "phaseAtQuery": "falling",
+      "initialAge": 1.2000000000000006,
+      "speedAtQuery": 3.3095504707312635,
+      "wreckage": {
+        "time": 24.23333333333324,
+        "position": {
+          "x": 551.3519642069987,
+          "y": 21.91497355940189,
+          "z": -169.24012997982234
+        },
+        "velocity": {
+          "x": 0.0005605916712070442,
+          "y": 0,
+          "z": -0.0009897055811782527
+        },
+        "attitude": {
+          "pitch": -0.0002460738527164851,
+          "roll": 0.00013703561111085572
+        },
+        "angularVelocity": {
+          "pitch": 0.00022620339827533306,
+          "roll": 0.0001062111825113136
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 83.39225769042969,
+      "lastContacts": [
+        {
+          "point": {
+            "x": 551.3523764536428,
+            "y": 23.109801150944755,
+            "z": -155.50687024814778
+          },
+          "source": "building",
+          "initialOverlap": true,
+          "probe": 9,
+          "initialAge": 1.2000000000000006,
+          "originalBounds": {
+            "minX": 525.7835883275122,
+            "maxX": 566.9503568540821,
+            "minY": 20.368551150944757,
+            "maxY": 56.91855115094475,
+            "minZ": -157.25953760015443,
+            "maxZ": -116.14015599991006
+          }
+        }
+      ],
+      "image": "failure-6-node-2141.png"
+    },
+    {
+      "node": 791,
+      "roads": ["LAGOON DRIVE", "STOVOLD LANE"],
+      "category": "distributed-obstructed",
+      "x": -951.6992421975933,
+      "y": 12.015408803311242,
+      "z": -786.8876839997572,
+      "support": {
+        "kind": "ground",
+        "groundY": 11.565408803311243,
+        "strength": 0.8332480635549058
+      },
+      "initialHeights": [9.400000000000002],
+      "phase": "crashed",
+      "failure": "The falling rocket struck the ground after the platform collapsed.",
+      "flightSeconds": 0.016666666666666666,
+      "altitude": 0,
+      "supportIntegrity": 0,
+      "wreckage": {
+        "time": 24.26666666666657,
+        "position": {
+          "x": -951.7125702469972,
+          "y": 11.565408803311243,
+          "z": -786.8876878694638
+        },
+        "velocity": {
+          "x": -0.7996829642338353,
+          "y": -0.4634341191324919,
+          "z": -0.00023218239414843933
+        },
+        "attitude": {
+          "pitch": 0.04078884458022183,
+          "roll": -0.07342055565387168
+        },
+        "angularVelocity": {
+          "pitch": 0.19733067481330951,
+          "roll": -0.35523333923229816
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 8.695000171661377,
+      "lastContacts": [],
+      "image": "failure-7-node-791.png"
+    },
+    {
+      "node": 1434,
+      "roads": ["DENMAN ST", "ALBERNI ST"],
+      "category": "distributed-obstructed",
+      "x": -434.9979895801475,
+      "y": 11.500434112539,
+      "z": -660.4838240001328,
+      "support": {
+        "kind": "ground",
+        "groundY": 11.050434112539001,
+        "strength": 0.9978536017247815
+      },
+      "initialHeights": [6.15],
+      "phase": "flight",
+      "failure": null,
+      "flightSeconds": 8.016666666666644,
+      "altitude": 1512.497226104543,
+      "supportIntegrity": 1,
+      "wreckage": null,
+      "renderedBodyCoordinateDelta": 41.93025016784668,
+      "lastContacts": []
+    },
+    {
+      "node": 2521,
+      "roads": ["CANADA PLACE", "HOWE ST"],
+      "category": "distributed-obstructed",
+      "x": 990.7355683696438,
+      "y": 19.33939438842438,
+      "z": -31.280920000120886,
+      "support": {
+        "kind": "ground",
+        "groundY": 18.889394388424382,
+        "strength": 0.948866436111196
+      },
+      "initialHeights": [27, 24.68],
+      "phase": "crashed",
+      "failure": "collision",
+      "flightSeconds": 1.6333333333333324,
+      "altitude": 2.1659934275083152,
+      "coreIntegrityBeforeCollision": 0.8215000000000027,
+      "supportIntegrity": 0,
+      "phaseAtQuery": "falling",
+      "initialAge": 1.6333333333333324,
+      "speedAtQuery": 3.3787136591800944,
+      "wreckage": {
+        "time": 24.666666666666547,
+        "position": {
+          "x": 990.7400069720893,
+          "y": 21.505387815932696,
+          "z": -31.280230610863306
+        },
+        "velocity": {
+          "x": 0.01183178072183967,
+          "y": 0,
+          "z": 0.004254801041408796
+        },
+        "attitude": {
+          "pitch": 0.0009325514173627402,
+          "roll": 0.002875428135241697
+        },
+        "angularVelocity": {
+          "pitch": 0.0017540944856286938,
+          "roll": 0.0008440945503147692
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 36.57609558105469,
+      "lastContacts": [
+        {
+          "point": {
+            "x": 1004.4826090932711,
+            "y": 24.481578297855478,
+            "z": -31.277440788512372
+          },
+          "source": "building",
+          "initialOverlap": true,
+          "probe": 8,
+          "initialAge": 1.6333333333333324,
+          "originalBounds": {
+            "minX": 999.6029719264386,
+            "maxX": 1048.8115431385072,
+            "minY": 17.75784754071234,
+            "maxY": 44.75784754071234,
+            "minZ": -51.495518799769684,
+            "maxZ": -2.3254748002034376
+          }
+        }
+      ],
+      "image": "failure-9-node-2521.png"
+    },
+    {
+      "node": 2595,
+      "roads": ["HOMER ST", "W PENDER ST"],
+      "category": "distributed-obstructed",
+      "x": 1133.1571646375814,
+      "y": 26.89624805360014,
+      "z": 395.96524000007776,
+      "support": {
+        "kind": "ground",
+        "groundY": 26.44624805360014,
+        "strength": 0.9589937801645585
+      },
+      "initialHeights": [34.82],
+      "phase": "flight",
+      "failure": null,
+      "flightSeconds": 8.016666666666644,
+      "altitude": 1391.7069525209195,
+      "supportIntegrity": 0.38091451885667466,
+      "wreckage": null,
+      "renderedBodyCoordinateDelta": 76.04425048828125,
+      "lastContacts": []
+    },
+    {
+      "node": 2360,
+      "roads": ["SMITHE ST", "MAINLAND ST"],
+      "category": "distributed-obstructed",
+      "x": 770.996486781303,
+      "y": 14.936206513497995,
+      "z": 924.4124120004119,
+      "support": {
+        "kind": "ground",
+        "groundY": 14.486206513497995,
+        "strength": 0.9127418928152116
+      },
+      "initialHeights": [13.610000000000001],
+      "phase": "crashed",
+      "failure": "The falling rocket struck the ground after the platform collapsed.",
+      "flightSeconds": 1.4166666666666665,
+      "altitude": 0,
+      "supportIntegrity": 0,
+      "wreckage": {
+        "time": 25.949999999999807,
+        "position": {
+          "x": 771.7652879858308,
+          "y": 14.486206513497995,
+          "z": 924.4230836411369
+        },
+        "velocity": {
+          "x": 0.8091215015411821,
+          "y": -9.6133981876242,
+          "z": 0.009710797495086125
+        },
+        "attitude": {
+          "pitch": 0.17242006195948162,
+          "roll": 0.30860771024123035
+        },
+        "angularVelocity": {
+          "pitch": 0.0961459123211493,
+          "roll": 0.17304243034726946
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": 0.896192160557257,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 55.13619613647461,
+      "lastContacts": [],
+      "image": "failure-11-node-2360.png"
+    },
+    {
+      "node": 1518,
+      "roads": ["PACIFIC ST", "HORNBY ST"],
+      "category": "distributed-obstructed",
+      "x": -316.2842811379927,
+      "y": 15.002627471576394,
+      "z": 1152.8633159997758,
+      "support": {
+        "kind": "ground",
+        "groundY": 14.552627471576395,
+        "strength": 0.9157296522196094
+      },
+      "initialHeights": [4.65],
+      "phase": "crashed",
+      "failure": "collision",
+      "flightSeconds": 0.5166666666666666,
+      "altitude": 0.5973568960735332,
+      "coreIntegrityBeforeCollision": 0.9638333333333339,
+      "supportIntegrity": 0,
+      "phaseAtQuery": "falling",
+      "initialAge": 0.5166666666666666,
+      "speedAtQuery": 3.19774294301693,
+      "wreckage": {
+        "time": 23.549999999999944,
+        "position": {
+          "x": -316.2840407012381,
+          "y": 15.599984367649927,
+          "z": 1152.8636025099934
+        },
+        "velocity": {
+          "x": 0.0018930791402973115,
+          "y": 0,
+          "z": 0.0021758298795516613
+        },
+        "attitude": {
+          "pitch": 0.00046899675185660357,
+          "roll": 0.0003940479471871649
+        },
+        "angularVelocity": {
+          "pitch": 0.0014120148648438253,
+          "roll": 0.0012481294006019188
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 7.611272811889648,
+      "lastContacts": [
+        {
+          "point": {
+            "x": -319.30685480957936,
+            "y": 15.59625246636283,
+            "z": 1142.1550139610495
+          },
+          "source": "building",
+          "initialOverlap": true,
+          "probe": 11,
+          "initialAge": 0.5166666666666666,
+          "originalBounds": {
+            "minX": -341.11257542400847,
+            "maxX": -315.4477884342322,
+            "minY": 15.239455614279182,
+            "maxY": 19.889455614279182,
+            "minZ": 1119.4005240002596,
+            "maxZ": 1143.8898108000312
+          }
+        }
+      ],
+      "image": "failure-12-node-1518.png"
+    },
+    {
+      "node": 1325,
+      "roads": ["PANTAGES LANE", "JERVIS ST"],
+      "category": "distributed-obstructed",
+      "x": -542.7980822788137,
+      "y": 43.055930728980975,
+      "z": 396.4327840000047,
+      "support": {
+        "kind": "ground",
+        "groundY": 42.60593072898097,
+        "strength": 0.9662600660045049
+      },
+      "initialHeights": [20.949999999999996, 11.189999999999998],
+      "phase": "flight",
+      "failure": null,
+      "flightSeconds": 8.016666666666644,
+      "altitude": 1402.4909835577948,
+      "supportIntegrity": 0.5135988379326748,
+      "wreckage": null,
+      "renderedBodyCoordinateDelta": 53.47899627685547,
+      "lastContacts": []
+    },
+    {
+      "node": 1046,
+      "roads": ["ROSEMARY BROWN LANE", "GILFORD ST"],
+      "category": "distributed-clear",
+      "x": -692.604340696605,
+      "y": 20.8654742615594,
+      "z": -683.7942319996537,
+      "support": {
+        "kind": "ground",
+        "groundY": 20.4154742615594,
+        "strength": 0.9539737575067678
+      },
+      "initialHeights": [],
+      "phase": "flight",
+      "failure": null,
+      "flightSeconds": 8.016666666666644,
+      "altitude": 1513.3809974193232,
+      "supportIntegrity": 0.4171393346333498,
+      "wreckage": null,
+      "renderedBodyCoordinateDelta": 26.206531524658203,
+      "lastContacts": []
+    },
+    {
+      "node": 1098,
+      "roads": ["ROBSON ST", "GILFORD ST"],
+      "category": "distributed-clear",
+      "x": -654.0182102505976,
+      "y": 17.22149357559951,
+      "z": -723.0122679999843,
+      "support": {
+        "kind": "ground",
+        "groundY": 16.77149357559951,
+        "strength": 0.9071195732472154
+      },
+      "initialHeights": [],
+      "phase": "crashed",
+      "failure": "The falling rocket struck the ground after the platform collapsed.",
+      "flightSeconds": 1.1166666666666676,
+      "altitude": 0,
+      "supportIntegrity": 0,
+      "wreckage": {
+        "time": 25.649999999999824,
+        "position": {
+          "x": -654.6127512996335,
+          "y": 16.77149357559951,
+          "z": -723.0119501213896
+        },
+        "velocity": {
+          "x": -0.7937568954620539,
+          "y": -7.652046026062688,
+          "z": 0.0031130514041347985
+        },
+        "attitude": {
+          "pitch": 0.15075793309907257,
+          "roll": -0.26924666644388473
+        },
+        "angularVelocity": {
+          "pitch": 0.11290460818099328,
+          "roll": -0.19918207005683253
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": 0.7165339142713606,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 12.672499656677246,
+      "lastContacts": [],
+      "image": "failure-15-node-1098.png"
+    },
+    {
+      "node": 2006,
+      "roads": ["JERVIS ST", "JERVIS MEWS", "W CORDOVA ST"],
+      "category": "distributed-clear",
+      "x": 295.2993513323657,
+      "y": 8.436235333772405,
+      "z": -453.940695999718,
+      "support": {
+        "kind": "ground",
+        "groundY": 7.986235333772406,
+        "strength": 0.8717190792735869
+      },
+      "initialHeights": [],
+      "phase": "crashed",
+      "failure": "The falling rocket struck the ground after the platform collapsed.",
+      "flightSeconds": 0.016666666666666666,
+      "altitude": 0,
+      "supportIntegrity": 0,
+      "wreckage": {
+        "time": 24.516666666666556,
+        "position": {
+          "x": 295.3126849230943,
+          "y": 7.986235333772406,
+          "z": -453.9406958415325
+        },
+        "velocity": {
+          "x": 0.8000154437179807,
+          "y": -0.46344201085766235,
+          "z": 0.00000949113020551915
+        },
+        "attitude": {
+          "pitch": 0.04079022012919945,
+          "roll": 0.07342249152178955
+        },
+        "angularVelocity": {
+          "pitch": 0.19741320775196708,
+          "roll": 0.3553494913073702
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 12.256249904632568,
+      "lastContacts": [],
+      "image": "failure-16-node-2006.png"
+    },
+    {
+      "node": 2472,
+      "roads": ["800-900 CANADA PLACE", "BURRARD ST", "CANADA PLACE"],
+      "category": "distributed-clear",
+      "x": 909.1702685387469,
+      "y": 10.251739199997882,
+      "z": -238.58102399989008,
+      "support": {
+        "kind": "ground",
+        "groundY": 9.801739199997824,
+        "strength": 0.6664504782126124
+      },
+      "initialHeights": [],
+      "phase": "crashed",
+      "failure": "The falling rocket struck the ground after the platform collapsed.",
+      "flightSeconds": 0.016666666666666666,
+      "altitude": 0,
+      "supportIntegrity": 0,
+      "wreckage": {
+        "time": 23.749999999999932,
+        "position": {
+          "x": 909.1836059831443,
+          "y": 9.801739199997824,
+          "z": -238.58102717200168
+        },
+        "velocity": {
+          "x": 0.8002466638402531,
+          "y": -0.463435283324261,
+          "z": -0.00019032669666228458
+        },
+        "attitude": {
+          "pitch": 0.04078892874388957,
+          "roll": 0.0734235216837368
+        },
+        "angularVelocity": {
+          "pitch": 0.1973357246333743,
+          "roll": 0.35541130102420526
+        },
+        "cause": "impact",
+        "exploded": false,
+        "explosionDelay": null,
+        "explosionTime": null
+      },
+      "renderedBodyCoordinateDelta": 2.016376495361328,
+      "lastContacts": [],
+      "image": "failure-17-node-2472.png"
+    },
+    {
+      "node": 2459,
+      "roads": ["SEYMOUR ST", "ST. REGIS LANE"],
+      "category": "distributed-clear",
+      "x": 877.5331269594919,
+      "y": 32.26653609970406,
+      "z": 372.30974000047894,
+      "support": {
+        "kind": "ground",
+        "groundY": 31.816536099704063,
+        "strength": 0.9631525041724817
+      },
+      "initialHeights": [],
+      "phase": "flight",
+      "failure": null,
+      "flightSeconds": 8.016666666666644,
+      "altitude": 1513.3701026081033,
+      "supportIntegrity": 0.5475417013092845,
+      "wreckage": null,
+      "renderedBodyCoordinateDelta": 73.93872451782227,
+      "lastContacts": []
+    },
+    {
+      "node": 1876,
+      "roads": ["DAVIE ST", "HOWE ST"],
+      "category": "distributed-clear",
+      "x": 94.04007817259442,
+      "y": 26.684504010876154,
+      "z": 948.6579079997866,
+      "support": {
+        "kind": "ground",
+        "groundY": 26.234504010876154,
+        "strength": 0.957325448755304
+      },
+      "initialHeights": [],
+      "phase": "flight",
+      "failure": null,
+      "flightSeconds": 8.016666666666644,
+      "altitude": 1512.5019384380732,
+      "supportIntegrity": 0.464757817977295,
+      "wreckage": null,
+      "renderedBodyCoordinateDelta": 76.40499877929688,
+      "lastContacts": []
+    }
+  ]
+}

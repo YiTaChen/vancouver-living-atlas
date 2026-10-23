@@ -7,6 +7,8 @@ const {
   stepRocket,
   launchRocket,
   crashRocket,
+  resolveRocketContact,
+  sampleRocketContact,
   sampleRocketEffects,
   rocketDirection,
   ROCKET_CONFIGS,
@@ -1192,4 +1194,221 @@ test('forest fire susceptibility is seeded, deterministic and does not make ever
   assert.equal(warm.heat, 0);
   assert.equal(warm.fireDamage, 0);
   assert.equal(warm.fireIntensity, 0);
+});
+
+function contactFlight(kind = 'super-heavy') {
+  const s = createRocket(kind, 0, 0.45, 0, { kind: 'platform', groundY: 0 });
+  s.phase = 'flight';
+  s.buildProgress = 1;
+  s.position.y = 100;
+  s.altitude = 99.55;
+  s.throttle = 1;
+  s.stageThrust = ROCKET_CONFIGS[kind].maxThrust;
+  return s;
+}
+const wallLoad = (overrides = {}) => ({
+  point: { x: 6, y: 145, z: 0 },
+  normal: { x: -1, y: 0, z: 0 },
+  penetration: 1,
+  obstacleMass: 20_000_000,
+  yieldProgress: 0,
+  source: 'building',
+  part: 'core',
+  objectHeight: 102,
+  ...overrides,
+});
+test('ordinary surveyed ground grades are levelled independently of material bearing while steep residual lean is bounded', () => {
+  for (const grade of [0, 0.0412, 0.079, 0.14, 0.15]) {
+    const s = untilDone(
+      launchRocket(
+        prepared('super-heavy', {
+          kind: 'ground',
+          strength: 1,
+          slopeGrade: grade,
+          slope: { x: grade, z: 0 },
+          seed: 13,
+        }),
+      ),
+    );
+    assert.equal(s.phase, 'space');
+    assert.equal(s.supportIntegrity, 1);
+    assert.equal(s.supportCollapsed, false);
+  }
+  const steep = createRocket('super-heavy', 0, 0, 0, {
+    kind: 'ground',
+    strength: 1,
+    slopeGrade: 0.4,
+    slope: { x: 0.4, z: 0 },
+  });
+  assert(steep.attitude.roll < -0.1 && steep.attitude.roll >= -0.18);
+  assert.equal(steep.supportIntegrity, 1);
+  const roof = createRocket('super-heavy', 0, 8, 0, {
+    kind: 'roof-small',
+    groundY: 0,
+    slopeGrade: 0.4,
+    slope: { x: 0.4, z: 0 },
+  });
+  assert.equal(
+    roof.attitude.roll,
+    0,
+    'ground levelling never silently strengthens roofs',
+  );
+});
+test('a new gentle Titan scrape persists its actual contact without teleporting, changing fuel, or causing instant breakup', () => {
+  const s = contactFlight();
+  s.velocity = { x: 0.7, y: 3, z: 0 };
+  const frozen = structuredClone(s),
+    result = resolveRocketContact(s, wallLoad(), dt);
+  assert.equal(result.phase, 'flight');
+  assert(result.integrity < 1 && result.integrity > 0.99);
+  assert(result.contactDamage > 0);
+  assert.equal(result.contactImpact.fatal, false);
+  assert.equal(result.contactImpact.source, 'building');
+  assert.equal(result.contactImpact.objectHeight, 102);
+  assert.equal(result.contactImpact.normalSpeed, 0.7);
+  assert.deepEqual(result.position, s.position);
+  assert.equal(result.fuel, s.fuel);
+  assert.equal(result.stage, s.stage);
+  assert.equal(result.velocity.y, 3);
+  assert(result.velocity.x < 0 && result.velocity.x >= -0.6);
+  assert.notEqual(result.angularVelocity.roll, 0);
+  assert.deepEqual(s, frozen, 'contact resolution is a pure state transition');
+});
+test('Titan contact response has no launch-age, altitude, or total-speed immunity cutoff', () => {
+  const s = contactFlight();
+  s.velocity = { x: 0.4, y: 220, z: 0 };
+  const first = { ...s, flightElapsed: 2.49 },
+    later = { ...s, flightElapsed: 2.51 };
+  const a = resolveRocketContact(first, wallLoad(), dt),
+    b = resolveRocketContact(later, wallLoad(), dt);
+  assert.equal(a.phase, 'flight');
+  assert.equal(b.phase, 'flight');
+  assert.equal(a.contactDamage, b.contactDamage);
+  assert.equal(b.velocity.y, 220);
+  assert.equal(
+    b.contactImpact.normalSpeed,
+    0.4,
+    'upward tangential speed is not wall impact energy',
+  );
+  assert(sampleRocketContact(s, wallLoad()).impactEnergy < 200_000);
+});
+test('normal high-energy impact remains fatal and preserves exact collision momentum and causal pose', () => {
+  const s = contactFlight();
+  s.velocity = { x: 85, y: 20, z: 0 };
+  const result = resolveRocketContact(s, wallLoad(), dt);
+  assert.equal(result.phase, 'crashed');
+  assert.equal(result.contactState, 'impact');
+  assert(result.contactImpact.fatal);
+  assert.equal(result.contactImpact.normalSpeed, 85);
+  assert.equal(result.contactImpact.source, 'building');
+  assert.deepEqual(result.wreckage.velocity, s.velocity);
+  assert.deepEqual(result.wreckage.position, s.position);
+  assert.deepEqual(result.contactImpact.point, wallLoad().point);
+  assert(result.failureReason.includes('high-energy'));
+});
+test('sustained blocked thrust consumes a finite structural budget while a yielded wall reduces that load', () => {
+  const blocked = wallLoad({ normal: { x: 0, y: -1, z: 0 }, penetration: 5 });
+  let strong = contactFlight(),
+    yielded = contactFlight();
+  for (let frame = 0; frame < 8 * 60 && strong.phase !== 'crashed'; frame++) {
+    strong = resolveRocketContact(strong, blocked, dt);
+    yielded = resolveRocketContact(
+      yielded,
+      { ...blocked, yieldProgress: 0.9 },
+      dt,
+    );
+  }
+  assert.equal(strong.phase, 'crashed');
+  assert(strong.contactImpact.fatal);
+  assert(strong.failureReason.includes('Sustained compression'));
+  assert.equal(yielded.phase, 'flight');
+  assert(yielded.integrity > 0.65);
+  assert(strong.contactDamage > yielded.contactDamage * 3);
+});
+test('real vehicle and obstacle masses grade compression and energy instead of treating Titan as a lightweight toy', () => {
+  const titan = contactFlight(),
+    scout = contactFlight('small');
+  titan.velocity.x = scout.velocity.x = 8;
+  const weak = wallLoad({ obstacleMass: 150_000 }),
+    strong = wallLoad({ obstacleMass: 30_000_000 });
+  const t = sampleRocketContact(titan, weak),
+    small = sampleRocketContact(scout, weak);
+  assert(t.resistance < small.resistance);
+  assert(t.impactDamage < small.impactDamage * 0.2);
+  assert(sampleRocketContact(titan, strong).force > t.force * 4);
+});
+test('fixed-step partitions conserve cumulative contact work and reaction without per-frame impulse acceleration', () => {
+  const start = contactFlight();
+  start.velocity = { x: 2, y: 50, z: 0 };
+  let a = start,
+    b = start;
+  for (let i = 0; i < 60; i++) a = resolveRocketContact(a, wallLoad(), 1 / 60);
+  for (let i = 0; i < 120; i++)
+    b = resolveRocketContact(b, wallLoad(), 1 / 120);
+  assert(Math.abs(a.integrity - b.integrity) < 1e-10);
+  assert(Math.abs(a.contactDamage - b.contactDamage) < 1e-10);
+  assert.deepEqual(a.velocity, b.velocity);
+  assert(Math.abs(a.velocity.x) <= 0.6);
+  assert(Math.abs(a.angularVelocity.roll - b.angularVelocity.roll) < 1e-10);
+});
+test('a completed contact leaves a truthful recent record while current contact state clears and ground impact records actual surface', () => {
+  let s = resolveRocketContact(contactFlight(), wallLoad(), dt);
+  const record = structuredClone(s.contactImpact);
+  s = stepRocket(s, {}, dt);
+  assert.equal(s.contactState, 'none');
+  assert.deepEqual(s.contactImpact, record);
+  let falling = contactFlight();
+  falling.flightElapsed = 1;
+  falling.position.y = 0.001;
+  falling.velocity.y = -20;
+  falling.support.groundY = 0;
+  falling = stepRocket(falling, { abort: true }, dt);
+  assert.equal(falling.phase, 'crashed');
+  assert.equal(falling.contactImpact.source, 'terrain');
+  assert.equal(falling.contactImpact.point.y, 0);
+  assert.equal(falling.contactImpact.normal.y, 1);
+  assert(falling.contactImpact.fatal);
+  assert(falling.contactImpact.normalSpeed > 19);
+});
+
+test('a genuinely moving roof uses relative normal velocity and transfers that normal motion once', () => {
+  const s = contactFlight();
+  s.velocity = { x: 0, y: 0, z: 12 };
+  const roof = wallLoad({
+    source: 'bridge',
+    normal: { x: 0, y: -1, z: 0 },
+    surfaceVelocity: { x: 0, y: -15, z: 0 },
+    penetration: 0.2,
+  });
+  assert.equal(sampleRocketContact(s, roof).normalSpeed, 15);
+  const first = resolveRocketContact(s, roof, dt),
+    second = resolveRocketContact(first, roof, dt);
+  assert.equal(first.phase, 'flight');
+  assert(first.velocity.y <= -15);
+  assert.equal(first.velocity.z, 12, 'tangential motion is retained');
+  assert.equal(
+    sampleRocketContact(first, roof).normalSpeed,
+    0,
+    'the first reaction follows the moving normal surface',
+  );
+  assert(
+    second.contactDamage - first.contactDamage < 0.01,
+    'a constant wall velocity does not apply the original full impact sixty times',
+  );
+  assert.equal(second.contactImpact.source, 'bridge');
+});
+test('static settled rubble and a surface moving only tangentially create no invented normal collision energy', () => {
+  const s = contactFlight();
+  s.velocity = { x: 0, y: 120, z: 0 };
+  const staticWall = wallLoad({
+    source: 'landmark',
+    surfaceVelocity: { x: 0, y: 0, z: 0 },
+  });
+  const slidingWall = {
+    ...staticWall,
+    surfaceVelocity: { x: 0, y: -25, z: 10 },
+  };
+  assert.equal(sampleRocketContact(s, staticWall).normalSpeed, 0);
+  assert.equal(sampleRocketContact(s, slidingWall).normalSpeed, 0);
+  assert.equal(sampleRocketContact(s, slidingWall).impactEnergy, 0);
 });

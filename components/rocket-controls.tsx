@@ -193,6 +193,25 @@ const en = {
   vehicleFire: 'Rocket on fire',
   vehicleHeat: 'Vehicle heat',
   afterImpact: 'After impact / explosion',
+  contactScraping: 'Contact · scraping',
+  contactCompression: 'Contact · structure under load',
+  contactImpact: 'Collision caused the breakup',
+  contactBuilding: 'Building',
+  contactBridge: 'Bridge',
+  contactLandmark: 'City structure',
+  contactTerrain: 'Ground',
+  contactUnknown: 'Obstacle',
+  contactCore: 'Core body',
+  contactBooster: 'Side booster',
+  contactUpper: 'Upper stage',
+  contactAppendage: 'Fin / appendage',
+  contactClosing: 'Impact approach speed',
+  contactMarker: 'Amber rings mark the actual contact points.',
+  vehicleIntegrity: 'Vehicle structure',
+  bodyBreakup: 'Vehicle breakup',
+  foundationImpact: 'Foundation failed · falling vehicle broke on impact',
+  surfaceLeveled: 'Assembly supports level this ground slope',
+  surfaceSteep: 'Steep ground · the rocket may lean. Choose flatter ground.',
 } as const;
 
 type RocketTextKey = keyof typeof en;
@@ -347,6 +366,25 @@ const zh: Record<RocketTextKey, string> = {
   vehicleFire: '箭體起火',
   vehicleHeat: '箭體溫度',
   afterImpact: '撞擊／爆炸後',
+  contactScraping: '發生接觸 · 箭體擦碰',
+  contactCompression: '接觸受阻 · 箭體正在承受擠壓',
+  contactImpact: '碰撞導致箭體解體',
+  contactBuilding: '建築',
+  contactBridge: '橋梁',
+  contactLandmark: '城市構造物',
+  contactTerrain: '地面',
+  contactUnknown: '障礙物',
+  contactCore: '中央箭體',
+  contactBooster: '側助推器',
+  contactUpper: '上面級',
+  contactAppendage: '翼片／附屬部件',
+  contactClosing: '迎面撞擊速度',
+  contactMarker: '琥珀色圓環標示實際接觸位置。',
+  vehicleIntegrity: '箭體結構',
+  bodyBreakup: '箭體破裂',
+  foundationImpact: '地基失效後墜落、撞擊破裂',
+  surfaceLeveled: '發射架已調平此處地面坡度',
+  surfaceSteep: '地面坡度過大，箭體可能傾斜；建議改放較平坦位置。',
 };
 
 const rocketChoices = [
@@ -567,9 +605,44 @@ export function RocketControls({
         ? 'aerodynamicFailure'
         : 'impact';
   const foundationFailure =
+    state.supportCollapsed ||
     state.failureStage === 'support-collapse' ||
     (state.supportIntegrity <= 0 &&
       ['roof-small', 'roof-large', 'lake'].includes(state.support));
+  const contact = state.contactImpact;
+  const fatalContact =
+    wreckage && state.failureCause === 'impact' && contact?.fatal;
+  const liveContact =
+    !observingAccident &&
+    ['ignition', 'flight'].includes(state.phase) &&
+    contact &&
+    !contact.fatal &&
+    ((state.contactState ?? 'none') !== 'none' ||
+      (state.contactAge ?? Infinity) < 2);
+  const contactSource: RocketTextKey = contact
+    ? {
+        building: 'contactBuilding' as const,
+        bridge: 'contactBridge' as const,
+        landmark: 'contactLandmark' as const,
+        terrain: 'contactTerrain' as const,
+        unknown: 'contactUnknown' as const,
+      }[contact.source]
+    : 'contactUnknown';
+  const contactPart: RocketTextKey = contact
+    ? {
+        core: 'contactCore' as const,
+        'strap-on': 'contactBooster' as const,
+        upper: 'contactUpper' as const,
+        appendage: 'contactAppendage' as const,
+      }[contact.part]
+    : 'contactCore';
+  const contactDescription = contact
+    ? `${t(contactPart)} · ${contact.source === 'building' && contact.objectHeight > 0 ? `${Math.round(contact.objectHeight)} m ` : ''}${t(contactSource)}`
+    : '';
+  const collisionBreakup =
+    wreckage && state.failureCause === 'impact' && !foundationFailure;
+  const foundationImpact =
+    wreckage && state.failureCause === 'impact' && foundationFailure;
   const previewSupport =
     state.placing &&
     [
@@ -792,12 +865,35 @@ export function RocketControls({
                 <span className="rocket-risk-compact">{t(shortRisk)}</span>
               </div>
               <p className="rocket-consequence">{t('consequence')}</p>
+              {previewSupport === 'ground' &&
+                (state.groundSlopeGrade ?? 0) > 0.005 && (
+                  <p className="rocket-surface-condition">
+                    {state.steepSurface
+                      ? t('surfaceSteep')
+                      : `${t('surfaceLeveled')} · ${((state.groundSlopeGrade ?? 0) * 100).toFixed(1)}%`}
+                  </p>
+                )}
             </>
           )}
           {failed && (
             <div className="rocket-risk">
               <AlertTriangle size={16} />
-              <span>{t(wreckage ? failureCause : risk)}</span>
+              <span>
+                {t(
+                  foundationImpact
+                    ? 'foundationImpact'
+                    : fatalContact
+                      ? 'contactImpact'
+                      : wreckage
+                        ? failureCause
+                        : risk,
+                )}
+                {fatalContact && (
+                  <small className="rocket-contact-detail">
+                    {contactDescription}
+                  </small>
+                )}
+              </span>
             </div>
           )}
           {state.phase === 'ready' && (
@@ -961,6 +1057,33 @@ export function RocketControls({
         )}
       {state.active && !state.placing && !choosing && (
         <>
+          {liveContact && (
+            <section
+              className={`rocket-contact-cue glass ${manualFlight ? 'rocket-contact-manual' : ''}`}
+              aria-label={t('contactScraping')}
+            >
+              <output aria-live="polite">
+                <strong>
+                  <AlertTriangle size={14} />
+                  {t(
+                    state.contactState === 'compression'
+                      ? 'contactCompression'
+                      : 'contactScraping',
+                  )}
+                </strong>
+              </output>
+              <span>{contactDescription}</span>
+              <small>
+                {t('contactClosing')} {contact.normalSpeed.toFixed(1)} m/s ·{' '}
+                {t('vehicleIntegrity')}{' '}
+                {Math.round(
+                  Math.max(0, Math.min(1, state.integrity ?? 1)) * 100,
+                )}
+                %
+              </small>
+              <small>{t('contactMarker')}</small>
+            </section>
+          )}
           {!showPanel &&
             !observingAccident &&
             state.phase !== 'space' &&
@@ -1202,11 +1325,15 @@ export function RocketControls({
               <output>
                 <strong>
                   {t(
-                    state.failureStage === 'support-collapse'
-                      ? 'supportLost'
-                      : wreckage || state.failureCause
-                        ? failureCause
-                        : 'falling',
+                    foundationImpact
+                      ? 'foundationImpact'
+                      : fatalContact
+                        ? 'contactImpact'
+                        : state.failureStage === 'support-collapse'
+                          ? 'supportLost'
+                          : wreckage || state.failureCause
+                            ? failureCause
+                            : 'falling',
                   )}
                 </strong>
               </output>
@@ -1221,18 +1348,34 @@ export function RocketControls({
                   className={state.failureStage === 'freefall' ? 'current' : ''}
                 >
                   {t(
-                    state.failureCause === 'fire'
-                      ? 'vehicleFire'
-                      : state.failureCause === 'aerodynamic'
-                        ? 'aerodynamicFailure'
-                        : 'falling',
+                    collisionBreakup
+                      ? fatalContact
+                        ? contactSource
+                        : 'impact'
+                      : state.failureCause === 'fire'
+                        ? 'vehicleFire'
+                        : state.failureCause === 'aerodynamic'
+                          ? 'aerodynamicFailure'
+                          : 'falling',
                   )}
                 </span>
                 <span aria-hidden="true">→</span>
                 <span className={wreckage ? 'current' : ''}>
-                  {t(state.failureCause === 'fire' ? 'fireFailure' : 'impact')}
+                  {t(
+                    collisionBreakup
+                      ? 'bodyBreakup'
+                      : state.failureCause === 'fire'
+                        ? 'fireFailure'
+                        : 'impact',
+                  )}
                 </span>
               </div>
+              {fatalContact && (
+                <small className="rocket-contact-detail">
+                  {contactDescription} · {t('contactClosing')}{' '}
+                  {contact.normalSpeed.toFixed(1)} m/s
+                </small>
+              )}
               {wreckage && (
                 <small>
                   {t('afterImpact')} · {failureAge.toFixed(1)} s
@@ -1240,7 +1383,7 @@ export function RocketControls({
               )}
             </section>
           )}
-          {state.phase === 'flight' &&
+          {['ignition', 'flight'].includes(state.phase) &&
             !observingAccident &&
             (state.vehicleFire > 0 || state.fuel < 0.15 || state.tilt > 35) && (
               <output className="rocket-alert glass">

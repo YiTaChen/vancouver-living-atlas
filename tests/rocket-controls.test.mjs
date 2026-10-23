@@ -776,6 +776,179 @@ test('engine aborts and sinking keep their immediate recovery controls without a
   }
 });
 
+const wallContact = {
+  time: 25,
+  point: { x: 18, y: 52, z: 4 },
+  normal: { x: -1, y: 0, z: 0 },
+  source: 'building',
+  part: 'strap-on',
+  objectHeight: 102,
+  normalSpeed: 0.6,
+  severity: 0.2,
+  fatal: false,
+};
+
+test('ordinary surveyed road grade is described as leveled while steep ground gives a placement warning', () => {
+  for (const locale of ['en', 'zh-Hant']) {
+    const { host, props } = setup(
+      {
+        phase: 'ready',
+        kind: 'super-heavy',
+        groundSlopeGrade: 0.08,
+        steepSurface: false,
+      },
+      { locale },
+    );
+    assert.match(text(findClass(host, 'rocket-surface-condition')), /8\.0%/);
+    assert.match(
+      text(host.tree),
+      locale === 'en' ? /level this ground slope/ : /發射架已調平/,
+    );
+    host.render({
+      ...props,
+      snapshot: {
+        ...props.snapshot,
+        groundSlopeGrade: 0.24,
+        steepSurface: true,
+      },
+    });
+    assert.match(
+      text(findClass(host, 'rocket-surface-condition')),
+      locale === 'en' ? /Steep ground.*lean/ : /坡度過大.*傾斜/,
+    );
+    assert(button(host, locale === 'en' ? 'Begin countdown' : '開始倒數'));
+    host.unmount();
+  }
+});
+
+test('a real scrape explains the struck rocket part and building without presenting a fatal accident', () => {
+  for (const locale of ['en', 'zh-Hant']) {
+    const { host, props } = setup(
+      {
+        kind: 'super-heavy',
+        speed: 200,
+        integrity: 0.95,
+        contactState: 'scraping',
+        contactImpact: wallContact,
+        contactAge: 0.1,
+      },
+      { locale, touch: true, minimal: true, panelVisible: false },
+    );
+    const cue = text(findClass(host, 'rocket-contact-cue'));
+    assert.match(
+      cue,
+      locale === 'en' ? /Side booster.*102 m Building/ : /側助推器.*102 m 建築/,
+    );
+    assert.match(cue, /0\.6\s+m\/s.*95/);
+    assert.doesNotMatch(cue, /200 m\/s|breakup|解體|火災/);
+    assert.equal(findClass(host, 'rocket-accident-observation'), undefined);
+    host.render({
+      ...props,
+      snapshot: { ...props.snapshot, contactState: 'none', contactAge: 2.1 },
+    });
+    assert.equal(
+      findClass(host, 'rocket-contact-cue'),
+      undefined,
+      'cleared contacts expire instead of remaining as an unrelated warning',
+    );
+    host.unmount();
+  }
+});
+
+test('a fatal ascending wall strike explains collision then breakup, preserving the five-second observation delay', () => {
+  for (const locale of ['en', 'zh-Hant']) {
+    const { host, props } = setup(
+      {
+        phase: 'crashed',
+        failureStage: 'wreckage',
+        failureCause: 'impact',
+        failureAge: 0.4,
+        contactState: 'impact',
+        contactImpact: { ...wallContact, normalSpeed: 80, fatal: true },
+        supportCollapsed: false,
+      },
+      { locale },
+    );
+    const timeline = text(findClass(host, 'rocket-accident-timeline'));
+    assert.match(
+      timeline,
+      locale === 'en' ? /Building.*Vehicle breakup/ : /建築.*箭體破裂/,
+    );
+    assert.doesNotMatch(
+      timeline,
+      /Uncontrolled descent|失控下墜|Rocket on fire|箭體起火/,
+    );
+    assert.match(
+      text(findClass(host, 'rocket-accident-observation')),
+      /102 m.*80\.0\s+m\/s/,
+    );
+    assert.equal(all(host.tree, (node) => node.type === 'button').length, 0);
+    host.render({ ...props, snapshot: { ...props.snapshot, failureAge: 5 } });
+    assert(findClass(host, 'rocket-failure-panel'));
+    assert.match(
+      text(findClass(host, 'rocket-failure-panel')),
+      locale === 'en'
+        ? /Collision caused the breakup.*Side booster/
+        : /碰撞導致箭體解體.*側助推器/,
+    );
+    host.unmount();
+  }
+});
+
+test('a past scrape cannot replace the actual fire or foundation cause and ignition fire is already visible in the HUD', () => {
+  const { host, props } = setup(
+    {
+      phase: 'ignition',
+      vehicleFire: 0.4,
+      vehicleHeat: 0.76,
+      contactState: 'none',
+      contactImpact: wallContact,
+      contactAge: 4,
+    },
+    { locale: 'zh-Hant' },
+  );
+  assert.match(text(findClass(host, 'rocket-alert')), /箭體起火.*76%/);
+  assert(button(host, '中止發射'));
+  host.render({
+    ...props,
+    snapshot: {
+      ...props.snapshot,
+      phase: 'crashed',
+      failureStage: 'wreckage',
+      failureCause: 'fire',
+      failureAge: 0,
+    },
+  });
+  assert.match(
+    text(findClass(host, 'rocket-accident-timeline')),
+    /箭體起火.*箭體起火／爆炸/,
+  );
+  assert.doesNotMatch(
+    text(findClass(host, 'rocket-accident-timeline')),
+    /建築/,
+  );
+  host.render({
+    ...props,
+    snapshot: {
+      ...props.snapshot,
+      phase: 'crashed',
+      failureStage: 'wreckage',
+      failureCause: 'impact',
+      failureAge: 0,
+      vehicleFire: 0,
+      supportCollapsed: true,
+      support: 'ground',
+      supportIntegrity: 0,
+      contactImpact: { ...wallContact, fatal: true },
+    },
+  });
+  assert.match(
+    text(findClass(host, 'rocket-accident-timeline')),
+    /地基.*垮塌.*失控下墜.*撞擊/,
+  );
+  host.unmount();
+});
+
 const dataModule = (code) =>
   `data:text/javascript;base64,${Buffer.from(code).toString('base64')}`;
 const components = new Map();

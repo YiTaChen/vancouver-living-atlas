@@ -215,12 +215,35 @@ try {
   assert.equal(impact.pieces, 6);
   assert.equal(impact.options, 0);
   assert(impact.elapsed - collapse.elapsed > 1.5);
-  await advance(2, 'explosion');
-  const explosion = await recordRoof('explosion');
-  await shot('accident-roof-explosion.png');
-  assert(explosion.snapshot.failureAge < 0.1);
-  await advance(4.8);
-  const waiting = await recordRoof('post-explosion-4.8s');
+  const aftermath = await advance(2, 'explosion');
+  const scheduledExplosion = aftermath.wreckage.explosionDelay !== null;
+  const observed = await recordRoof(
+    scheduledExplosion ? 'explosion' : 'nonexplosive-wreckage',
+  );
+  await shot(
+    scheduledExplosion
+      ? 'accident-roof-explosion.png'
+      : 'accident-roof-nonexplosive-wreckage.png',
+  );
+  if (scheduledExplosion) {
+    assert.equal(aftermath.wreckage.exploded, true);
+    assert(observed.snapshot.failureAge < 0.1);
+  } else {
+    assert.equal(aftermath.wreckage.exploded, false);
+    assert.equal(aftermath.wreckage.explosionTime, null);
+    assert(!aftermath.events.some((event) => event.type === 'exploded'));
+  }
+  report.roofOutcome = {
+    branch: scheduledExplosion ? 'delayed-explosion' : 'nonexplosive-impact',
+    observationAnchor: scheduledExplosion
+      ? 'actual-explosion'
+      : 'actual-impact',
+    wreckage: aftermath.wreckage,
+  };
+  await advance(Math.max(0, 4.8 - observed.snapshot.failureAge));
+  const waiting = await recordRoof(
+    scheduledExplosion ? 'post-explosion-4.8s' : 'post-impact-4.8s',
+  );
   await shot('accident-roof-observation.png');
   assert.equal(waiting.options, 0);
   await advance(0.35);

@@ -76,6 +76,47 @@
   color: #c3cbd0;
   font-variant-numeric: tabular-nums;
 }
+.rocket-contact-cue {
+  position: absolute;
+  z-index: 33;
+  top: 260px;
+  left: 24px;
+  width: min(286px, calc(100vw - 86px));
+  padding: 10px 12px;
+  border: 1px solid #e4b56980;
+  border-radius: 10px;
+  color: #ffe0b1;
+  pointer-events: none;
+}
+.rocket-contact-cue strong {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.rocket-contact-cue strong svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.rocket-contact-cue > span,
+.rocket-contact-cue > small,
+.rocket-contact-detail {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.rocket-contact-cue > small {
+  color: #cbd3d7;
+}
+.rocket-surface-condition {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #d2d8bd;
+}
 
 .rocket-panel header,
 .rocket-space-panel header,
@@ -1028,6 +1069,14 @@
     width: 232px;
     transform: translateX(-50%);
   }
+  .rocket-contact-cue {
+    top: 274px;
+    left: 12px;
+    width: min(286px, calc(50vw - 24px));
+  }
+  .rocket-contact-manual {
+    top: calc(50dvh + 60px);
+  }
 }
 
 @media (max-width: 900px) and (max-height: 560px) {
@@ -1081,6 +1130,25 @@
     left: 50%;
     width: 250px;
     transform: translateX(-50%);
+  }
+  .rocket-contact-cue {
+    top: 192px;
+    left: 12px;
+    width: min(270px, calc(100vw - 200px));
+    padding: 6px 8px;
+  }
+  .rocket-contact-cue strong {
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  .rocket-contact-cue > span,
+  .rocket-contact-cue > small {
+    font-size: 9px;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .rocket-contact-cue > small:last-child {
+    display: none;
   }
 }
 

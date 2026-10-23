@@ -55,13 +55,25 @@ test('compound building parts retain local damage centres and a failed rooftop c
     },
   };
   e.scene.add(e.buildings);
-  const originalLoad = THREE.TextureLoader.prototype.load;
+  const originalLoad = Object.getOwnPropertyDescriptor(
+    THREE.TextureLoader.prototype,
+    'load',
+  );
   THREE.TextureLoader.prototype.load = () => new THREE.Texture();
   try {
     createBuildingBodies(e);
     const parts = e.data.rocketBuildingParts;
     assert.equal(parts.length, 2);
     assert.equal(parts[0].key, parts[1].key);
+    parts.forEach((part, index) => {
+      assert.equal(
+        part.polygon,
+        e.data.flightBuildingVolumes[index].polygon,
+        'damage and collision share the same source polygon even for compound structures',
+      );
+      assert(Math.abs(part.bounds.minX - index * 1000) < 1e-6);
+      assert(Math.abs(part.bounds.maxX - (index * 1000 + 12)) < 1e-6);
+    });
     assert(Math.abs(parts[0].center[0] - 6) < 1e-6);
     assert(Math.abs(parts[1].center[0] - 1006) < 1e-6);
     const pos = e.data.rocketBuildingMesh.geometry.getAttribute('position'),
@@ -91,6 +103,11 @@ test('compound building parts retain local damage centres and a failed rooftop c
     effects.dispose();
     assert.deepEqual(Array.from(pos.array), original);
   } finally {
-    THREE.TextureLoader.prototype.load = originalLoad;
+    if (originalLoad)
+      Object.defineProperty(
+        THREE.TextureLoader.prototype,
+        'load',
+        originalLoad,
+      );
   }
 });

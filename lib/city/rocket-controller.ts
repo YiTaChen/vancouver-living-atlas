@@ -4,10 +4,17 @@ import { firstVisibleObstacleHit } from './visible-obstacles';
 import { inPolygon } from './geo';
 import { FlightWorld } from './flight-world';
 import {
+  collisionTriangles,
+  hitTriangles,
+  isClosedCollisionMesh,
+} from './flight-collision';
+import {
   createRocket,
   launchRocket,
   stepRocket,
   crashRocket,
+  resolveRocketContact,
+  sampleRocketContact,
   rocketDirection,
   sampleRocketEffects,
   ROCKET_CONFIGS,
@@ -15,6 +22,8 @@ import {
   type RocketState,
   type RocketSupport,
   type RocketInput,
+  type RocketContactLoad,
+  type RocketImpactRecord,
 } from './rocket-state';
 import {
   EMPTY_ROCKET,
@@ -40,6 +49,15 @@ export type RocketCityContact = {
   speed: number;
   mass: number;
   initialOverlap: boolean;
+  part?: RocketImpactRecord['part'];
+  normal?: { x: number; y: number; z: number };
+  penetration?: number;
+  obstacleMass?: number;
+  yieldProgress?: number;
+  normalSpeed?: number;
+  impactEnergy?: number;
+  force?: number;
+  surfaceVelocity?: { x: number; y: number; z: number };
   bounds?: {
     minX: number;
     maxX: number;
@@ -52,8 +70,25 @@ export type RocketCityContact = {
 };
 type RocketVolume =
   FlightWorld['cells'] extends Map<string, (infer V)[]> ? V : never;
-type RocketSweep = { from: THREE.Vector3; to: THREE.Vector3; radius: number };
+type RocketSweep = {
+  from: THREE.Vector3;
+  to: THREE.Vector3;
+  radius: number;
+  part?: RocketImpactRecord['part'];
+};
 type RocketContact = { volume?: RocketVolume; contact: RocketCityContact };
+type RocketSurfaceGeometry = {
+  sourceBounds: THREE.Box3;
+  original: Float32Array | null;
+  current: Float32Array | null;
+  previous: Float32Array | null;
+  deltaTime: number;
+  revision: number;
+  closed: boolean;
+  orientation: number;
+  volume: number;
+  area: number;
+};
 
 /** One active mission. No launch assets are downloaded or compiled during ordinary city startup. */
 export class RocketController {
@@ -69,6 +104,7 @@ export class RocketController {
   private audio: RocketAudio | null = null;
   private space: RocketSpace | null = null;
   private world: FlightWorld | null = null;
+  private missionHit: FlightWorld['hit'] | null = null;
   private supportVolumes: { bounds: THREE.Box3; originalTop: number }[] = [];
   private contactVolumes = new Map<
     RocketVolume,
@@ -76,9 +112,12 @@ export class RocketController {
   >();
   private initialContacts = new Map<RocketVolume, number>();
   private volumeWorlds = new WeakMap<RocketVolume, FlightWorld>();
+  private surfaceKeys = new WeakMap<RocketVolume, string>();
+  private surfaceGeometry = new Map<RocketVolume, RocketSurfaceGeometry>();
   private contactWarning = '';
   private damageFocus: THREE.Vector3 | null = null;
   private accidentFramed = false;
+  private impactFocusBlend = 0;
   private loaded = false;
   private loadError = false;
   private generation = 0;
@@ -225,6 +264,16 @@ export class RocketController {
         ? this.preview || 'ground'
         : (s?.support.kind ?? 'ground'),
       supportIntegrity: s?.supportIntegrity ?? 1,
+      supportCollapsed: s?.supportCollapsed ?? false,
+      integrity: s?.integrity ?? 1,
+      contactDamage: s?.contactDamage ?? 0,
+      contactState: s?.contactState ?? 'none',
+      contactImpact: s?.contactImpact ?? null,
+      contactAge: s?.contactImpact
+        ? Math.max(0, s.elapsed - s.contactImpact.time)
+        : 0,
+      groundSlopeGrade: s?.support.slopeGrade ?? 0,
+      steepSurface: (s?.support.slopeGrade ?? 0) > 0.15,
       failureStage: s?.failureStage ?? 'none',
       failureAge: s?.wreckage
         ? Math.max(0, s.elapsed - (s.wreckage.explosionTime ?? s.wreckage.time))
@@ -386,10 +435,18 @@ export class RocketController {
     return {
       kind: 'ground',
       groundY,
-      strength: Math.max(
-        0.22,
-        1 - (Math.max(...heights) - Math.min(...heights)) / (radius * 1.7),
+      // Grade describes geometry; it is not the bearing capacity of earth.
+      // Assembly levels ordinary roads rather than treating a few percent of
+      // slope as a launch structure that can disappear under exhaust.
+      strength: 1,
+      slopeGrade: Math.hypot(
+        (heights[0] - heights[1]) / (radius * 2),
+        (heights[2] - heights[3]) / (radius * 2),
       ),
+      slope: {
+        x: (heights[0] - heights[1]) / (radius * 2),
+        z: (heights[2] - heights[3]) / (radius * 2),
+      },
     };
   }
   pick(sx: number, sy: number, commit = false) {
@@ -587,6 +644,7 @@ export class RocketController {
       this.audio = new fx.RocketAudio();
       this.space = new sky.RocketSpace();
       this.world = new FlightWorld(this.e);
+      this.prepareCollisionSurfaces();
       this.supportVolumes = [];
       if (this.state.support.kind.startsWith('roof')) {
         const origin = this.state.origin;
@@ -640,6 +698,12 @@ export class RocketController {
   resetDamage() {
     this.effects?.dispose();
     this.effects = null;
+    for (const shape of this.surfaceGeometry.values()) {
+      shape.current = shape.original;
+      shape.previous = shape.original;
+      shape.deltaTime = 0;
+      shape.revision = -1;
+    }
     for (const [volume, contact] of this.contactVolumes)
       volume.bounds.max.y = contact.originalTop;
     this.contactVolumes.clear();
@@ -693,12 +757,14 @@ export class RocketController {
     this.space?.dispose();
     this.space = null;
     this.world = null;
+    this.surfaceGeometry.clear();
     this.supportVolumes = [];
     this.contactVolumes.clear();
     this.initialContacts.clear();
     this.contactWarning = '';
     this.damageFocus = null;
     this.accidentFramed = false;
+    this.impactFocusBlend = 0;
     this.loaded = this.loadError = false;
     this.accumulator = 0;
     this.requestAbort = false;
@@ -733,12 +799,14 @@ export class RocketController {
     this.scaffold = null;
     this.state = null;
     this.world = null;
+    this.surfaceGeometry.clear();
     this.supportVolumes = [];
     this.contactVolumes.clear();
     this.initialContacts.clear();
     this.contactWarning = '';
     this.damageFocus = null;
     this.accidentFramed = false;
+    this.impactFocusBlend = 0;
     this.loaded = this.loadError = this.wasSpace = false;
     this.accumulator = 0;
     this.requestAbort = false;
@@ -769,6 +837,7 @@ export class RocketController {
           from: point(state, direction, lower + config.radius),
           to: point(state, direction, config.height - config.radius),
           radius,
+          part: state.boosterAttached ? 'core' : 'upper',
         },
       ];
     for (const t of [0.18, 0.5, 0.9])
@@ -780,6 +849,7 @@ export class RocketController {
         ),
         to: point(state, direction, lower + (config.height - lower) * t),
         radius,
+        part: state.boosterAttached ? 'core' : 'upper',
       });
     const rotation = new THREE.Quaternion().setFromUnitVectors(
         new THREE.Vector3(0, 1, 0),
@@ -806,12 +876,372 @@ export class RocketController {
       const from = transform(probe.from),
         to = transform(probe.to);
       sweeps.push(
-        { from, to, radius: probe.radius },
-        { from: transform(probe.from, true), to: from, radius: probe.radius },
-        { from: transform(probe.to, true), to, radius: probe.radius },
+        {
+          from,
+          to,
+          radius: probe.radius,
+          part: probe.strapOn ? 'strap-on' : 'appendage',
+        },
+        {
+          from: transform(probe.from, true),
+          to: from,
+          radius: probe.radius,
+          part: probe.strapOn ? 'strap-on' : 'appendage',
+        },
+        {
+          from: transform(probe.to, true),
+          to,
+          radius: probe.radius,
+          part: probe.strapOn ? 'strap-on' : 'appendage',
+        },
       );
     }
     return sweeps;
+  }
+  private nearbyVolumes(bounds: THREE.Box3) {
+    const volumes = new Set<RocketVolume>();
+    for (
+      let x = Math.floor(bounds.min.x / 80);
+      x <= Math.floor(bounds.max.x / 80);
+      x++
+    )
+      for (
+        let z = Math.floor(bounds.min.z / 80);
+        z <= Math.floor(bounds.max.z / 80);
+        z++
+      )
+        for (const volume of this.world?.cells?.get(x + ',' + z) ?? [])
+          volumes.add(volume);
+    return volumes;
+  }
+  /** Private broad envelopes include genuine settled/sheared surfaces, never solid AABB contacts. */
+  private prepareCollisionSurfaces() {
+    const world = this.world;
+    if (!world) return;
+    this.surfaceGeometry.clear();
+    const volumes = [...new Set([...world.cells.values()].flat())];
+    for (const volume of volumes) {
+      if (!volume.mesh && !volume.local) continue;
+      const sourceBounds = volume.bounds.clone(),
+        center = sourceBounds.getCenter(new THREE.Vector3()),
+        base = Math.min(
+          sourceBounds.min.y,
+          this.groundHeight(center.x, center.z),
+        ),
+        height = Math.max(1, sourceBounds.max.y - base),
+        padding = height * 0.2 + 5;
+      this.surfaceGeometry.set(volume, {
+        sourceBounds,
+        original: null,
+        current: null,
+        previous: null,
+        deltaTime: 0,
+        revision: -1,
+        closed: false,
+        orientation: 1,
+        volume: 0,
+        area: 0,
+      });
+      volume.bounds.min.x -= padding;
+      volume.bounds.max.x += padding;
+      volume.bounds.min.z -= padding;
+      volume.bounds.max.z += padding;
+      volume.bounds.min.y = base - 5;
+      volume.bounds.max.y += 3;
+    }
+    world.cells.clear();
+    for (const volume of volumes) world.add(volume);
+    // This adapter belongs only to this mission. Plane worlds and source meshes
+    // retain their original implementation and buffers.
+    const hit = (from: THREE.Vector3, to: THREE.Vector3, radius?: number) => {
+      const r = radius ?? 1.1;
+      const bounds = new THREE.Box3()
+        .setFromPoints([from, to])
+        .expandByScalar(r);
+      for (const volume of this.nearbyVolumes(bounds))
+        if (
+          volume.bounds.intersectsBox(bounds) &&
+          this.hitVolume(volume, from, to, r)
+        )
+          return true;
+      return false;
+    };
+    world.hit = hit;
+    this.missionHit = hit;
+  }
+  private originalSurface(volume: RocketVolume, shape: RocketSurfaceGeometry) {
+    if (shape.original) return shape.original;
+    let points: Float32Array;
+    if (volume.mesh) {
+      points = volume.triangles ?? collisionTriangles(volume.mesh);
+      volume.triangles = points;
+    } else {
+      const box = volume.local!,
+        matrix = volume.inverse!.clone().invert(),
+        corners = [
+          [box.min.x, box.min.y, box.min.z],
+          [box.max.x, box.min.y, box.min.z],
+          [box.max.x, box.max.y, box.min.z],
+          [box.min.x, box.max.y, box.min.z],
+          [box.min.x, box.min.y, box.max.z],
+          [box.max.x, box.min.y, box.max.z],
+          [box.max.x, box.max.y, box.max.z],
+          [box.min.x, box.max.y, box.max.z],
+        ].map((p) => new THREE.Vector3(p[0], p[1], p[2]).applyMatrix4(matrix)),
+        faces = [
+          0, 2, 1, 0, 3, 2, 4, 5, 6, 4, 6, 7, 0, 4, 7, 0, 7, 3, 1, 2, 6, 1, 6,
+          5, 0, 1, 5, 0, 5, 4, 3, 7, 6, 3, 6, 2,
+        ];
+      points = new Float32Array(faces.length * 3);
+      faces.forEach((index, i) => corners[index].toArray(points, i * 3));
+    }
+    let signedVolume = 0,
+      area = 0;
+    const origin = new THREE.Vector3().fromArray(points),
+      a = new THREE.Vector3(),
+      b = new THREE.Vector3(),
+      c = new THREE.Vector3(),
+      cross = new THREE.Vector3();
+    for (let i = 0; i < points.length; i += 9) {
+      a.fromArray(points, i);
+      b.fromArray(points, i + 3);
+      c.fromArray(points, i + 6);
+      area += cross.copy(b).sub(a).cross(c.clone().sub(a)).length() * 0.5;
+      a.sub(origin);
+      b.sub(origin);
+      c.sub(origin);
+      signedVolume += a.dot(cross.copy(b).cross(c)) / 6;
+    }
+    shape.original = shape.current = shape.previous = points;
+    shape.closed = volume.mesh
+      ? (volume.closed ?? isClosedCollisionMesh(points))
+      : true;
+    shape.orientation = signedVolume < 0 ? -1 : 1;
+    shape.volume = Math.abs(signedVolume);
+    shape.area = area;
+    return points;
+  }
+  private refreshCollisionSurfaces(sweeps: RocketSweep[]) {
+    const union = new THREE.Box3();
+    for (const sweep of sweeps)
+      union.union(
+        new THREE.Box3()
+          .setFromPoints([sweep.from, sweep.to])
+          .expandByScalar(sweep.radius),
+      );
+    for (const volume of this.nearbyVolumes(union)) {
+      const shape = this.surfaceGeometry.get(volume);
+      if (!shape || !volume.bounds.intersectsBox(union)) continue;
+      const original = this.originalSurface(volume, shape),
+        surface = this.effects?.collisionSurface?.(
+          volume.mesh ?? volume,
+          original,
+        );
+      shape.current = surface?.triangles ?? original;
+      shape.previous = surface?.previousTriangles ?? shape.current;
+      shape.deltaTime = surface?.deltaTime ?? 0;
+      shape.revision = surface?.revision ?? -1;
+      // Keep the original source envelope plus exact current bounds. Registration
+      // already covers the maximum current deformation, so new cells are rare.
+      if (surface && !volume.bounds.containsBox(surface.bounds)) {
+        const old = volume.bounds.clone();
+        volume.bounds.union(surface.bounds);
+        for (
+          let x = Math.floor(old.min.x / 80);
+          x <= Math.floor(old.max.x / 80);
+          x++
+        )
+          for (
+            let z = Math.floor(old.min.z / 80);
+            z <= Math.floor(old.max.z / 80);
+            z++
+          ) {
+            const key = x + ',' + z,
+              cell = this.world!.cells.get(key);
+            if (cell)
+              this.world!.cells.set(
+                key,
+                cell.filter((v) => v !== volume),
+              );
+          }
+        this.world!.add(volume);
+      }
+    }
+  }
+  /** Exact segment/triangle closest pair. Every returned point lies on a real face. */
+  private surfaceContactLoad(
+    volume: RocketVolume,
+    sweep: RocketSweep,
+    state: RocketState,
+  ): RocketContactLoad | undefined {
+    const shape = this.surfaceGeometry.get(volume);
+    if (!shape?.current) return undefined;
+    const points = shape.current,
+      delta = sweep.to.clone().sub(sweep.from),
+      length = delta.length(),
+      ray = new THREE.Ray(
+        sweep.from,
+        length > 1e-8
+          ? delta.clone().divideScalar(length)
+          : new THREE.Vector3(1, 0, 0),
+      ),
+      triangle = new THREE.Triangle(),
+      nearest = new THREE.Vector3(),
+      onRay = new THREE.Vector3(),
+      bounds = new THREE.Box3()
+        .setFromPoints([sweep.from, sweep.to])
+        .expandByScalar(sweep.radius),
+      triangleBounds = new THREE.Box3(),
+      edge = new THREE.Line3();
+    let bestDistance = Infinity,
+      bestIndex = -1,
+      bestAlong = Infinity;
+    const axis = new THREE.Vector3(),
+      point = new THREE.Vector3();
+    const consider = (
+      index: number,
+      onAxis: THREE.Vector3,
+      onTriangle: THREE.Vector3,
+    ) => {
+      const d = onAxis.distanceToSquared(onTriangle),
+        along = onAxis.distanceToSquared(sweep.from);
+      if (
+        d > bestDistance + 1e-10 ||
+        (Math.abs(d - bestDistance) <= 1e-10 && along >= bestAlong)
+      )
+        return;
+      bestDistance = d;
+      bestAlong = along;
+      bestIndex = index;
+      axis.copy(onAxis);
+      point.copy(onTriangle);
+    };
+    for (let i = 0; i < points.length; i += 9) {
+      triangle.a.fromArray(points, i);
+      triangle.b.fromArray(points, i + 3);
+      triangle.c.fromArray(points, i + 6);
+      triangleBounds.setFromPoints([triangle.a, triangle.b, triangle.c]);
+      if (!triangleBounds.intersectsBox(bounds)) continue;
+      consider(
+        i,
+        sweep.from,
+        triangle.closestPointToPoint(sweep.from, nearest),
+      );
+      consider(i, sweep.to, triangle.closestPointToPoint(sweep.to, nearest));
+      if (length > 1e-8) {
+        const hit = ray.intersectTriangle(
+          triangle.a,
+          triangle.b,
+          triangle.c,
+          false,
+          nearest,
+        );
+        if (hit && hit.distanceToSquared(sweep.from) <= length * length)
+          consider(i, hit, hit);
+        for (const [a, b] of [
+          [triangle.a, triangle.b],
+          [triangle.b, triangle.c],
+          [triangle.c, triangle.a],
+        ]) {
+          ray.distanceSqToSegment(a, b, onRay, nearest);
+          if (onRay.distanceToSquared(sweep.from) <= length * length)
+            consider(i, onRay, nearest);
+          else
+            consider(
+              i,
+              sweep.to,
+              edge.set(a, b).closestPointToPoint(sweep.to, true, nearest),
+            );
+        }
+      }
+    }
+    // A stationary capsule wholly inside a closed solid may have no nearby face.
+    if (bestIndex < 0 && shape.closed)
+      for (let i = 0; i < points.length; i += 9) {
+        triangle.a.fromArray(points, i);
+        triangle.b.fromArray(points, i + 3);
+        triangle.c.fromArray(points, i + 6);
+        consider(
+          i,
+          sweep.from,
+          triangle.closestPointToPoint(sweep.from, nearest),
+        );
+      }
+    if (bestIndex < 0) return undefined;
+    triangle.a.fromArray(points, bestIndex);
+    triangle.b.fromArray(points, bestIndex + 3);
+    triangle.c.fromArray(points, bestIndex + 6);
+    const normal = triangle.getNormal(new THREE.Vector3());
+    if (normal.lengthSq() < 1e-10) return undefined;
+    if (shape.closed) normal.multiplyScalar(shape.orientation);
+    else {
+      const side =
+        bestDistance > 1e-10
+          ? axis.clone().sub(point)
+          : sweep.from.clone().sub(point);
+      if (
+        normal.dot(side) < -1e-8 ||
+        (Math.abs(normal.dot(side)) <= 1e-8 &&
+          normal.dot(
+            new THREE.Vector3(
+              state.velocity.x,
+              state.velocity.y,
+              state.velocity.z,
+            ),
+          ) > 0)
+      )
+        normal.negate();
+    }
+    const inside = shape.closed && axis.clone().sub(point).dot(normal) < -1e-8,
+      distance = Math.sqrt(bestDistance),
+      barycentric = triangle.getBarycoord(point, new THREE.Vector3()),
+      previousPoint = new THREE.Vector3(),
+      previous = shape.previous ?? points;
+    if (barycentric && shape.deltaTime > 1e-6 && previous !== points) {
+      previousPoint
+        .addScaledVector(
+          new THREE.Vector3().fromArray(previous, bestIndex),
+          barycentric.x,
+        )
+        .addScaledVector(
+          new THREE.Vector3().fromArray(previous, bestIndex + 3),
+          barycentric.y,
+        )
+        .addScaledVector(
+          new THREE.Vector3().fromArray(previous, bestIndex + 6),
+          barycentric.z,
+        );
+    } else previousPoint.copy(point);
+    const surfaceVelocity =
+        shape.deltaTime > 1e-6
+          ? point.clone().sub(previousPoint).divideScalar(shape.deltaTime)
+          : new THREE.Vector3(),
+      bridge =
+        !!volume.local ||
+        (this.e.data.flightBridgeSurfaceMeshes ?? []).includes(volume.mesh!),
+      height = Math.max(
+        0.1,
+        shape.sourceBounds.max.y - shape.sourceBounds.min.y,
+      ),
+      mass = shape.closed
+        ? shape.volume * 220
+        : Math.min(shape.area, Math.PI * (sweep.radius * 2.5) ** 2) *
+          (bridge ? 1000 : 350);
+    return {
+      point: { x: point.x, y: point.y, z: point.z },
+      normal: { x: normal.x, y: normal.y, z: normal.z },
+      penetration: Math.max(0, sweep.radius + (inside ? distance : -distance)),
+      obstacleMass: Math.max(10000, mass),
+      yieldProgress: 0,
+      surfaceVelocity: {
+        x: surfaceVelocity.x,
+        y: surfaceVelocity.y,
+        z: surfaceVelocity.z,
+      },
+      source: bridge ? 'bridge' : 'landmark',
+      part: sweep.part ?? 'core',
+      objectHeight: height,
+    };
   }
   /** Reuse the aircraft's exact narrow phase on one mission-owned volume. */
   private hitVolume(
@@ -820,6 +1250,12 @@ export class RocketController {
     to: THREE.Vector3,
     radius: number,
   ) {
+    const shape = this.surfaceGeometry.get(volume);
+    if (shape?.current)
+      return (
+        hitTriangles(shape.current, from, to, radius, shape.closed) ||
+        (shape.closed && hitTriangles(shape.current, from, from, radius, true))
+      );
     let query = this.volumeWorlds.get(volume);
     if (!query) {
       query = Object.create(this.world) as FlightWorld;
@@ -857,15 +1293,140 @@ export class RocketController {
     }
     return volume.bounds.clampPoint(sweep.to, new THREE.Vector3());
   }
+  /** Outward normal and overlap of the exact authored capsule against the prism. */
+  private buildingContactLoad(
+    volume: RocketVolume,
+    sweep: RocketSweep,
+    point: THREE.Vector3,
+  ): RocketContactLoad {
+    const b = volume.bounds,
+      axis = new THREE.Line3(sweep.from, sweep.to).closestPointToPoint(
+        point,
+        true,
+        new THREE.Vector3(),
+      ),
+      inside = inPolygon([axis.x, axis.z], volume.polygon!),
+      edge = new THREE.Vector3();
+    let distance = Infinity;
+    for (const ring of volume.polygon!)
+      for (let i = 0; i < ring.length; i++) {
+        const a = ring[i],
+          q = ring[(i + 1) % ring.length],
+          dx = q[0] - a[0],
+          dz = q[1] - a[1],
+          t = THREE.MathUtils.clamp(
+            ((axis.x - a[0]) * dx + (axis.z - a[1]) * dz) /
+              Math.max(1e-12, dx * dx + dz * dz),
+            0,
+            1,
+          ),
+          x = a[0] + dx * t,
+          z = a[1] + dz * t,
+          d = Math.hypot(axis.x - x, axis.z - z);
+        if (d < distance) {
+          distance = d;
+          edge.set(x, axis.y, z);
+        }
+      }
+    const normal = inside ? edge.clone().sub(axis) : axis.clone().sub(edge);
+    normal.y = 0;
+    if (normal.lengthSq() < 1e-12) normal.set(1, 0, 0);
+    normal.normalize();
+    const surfacePoint = new THREE.Vector3(
+      edge.x,
+      THREE.MathUtils.clamp(axis.y, b.min.y, b.max.y),
+      edge.z,
+    );
+    let penetration = Math.max(
+      0,
+      sweep.radius + (inside ? distance : -distance),
+    );
+    const topDepth = sweep.radius + b.max.y - axis.y,
+      bottomDepth = sweep.radius + axis.y - b.min.y;
+    if (inside && topDepth >= 0 && topDepth < penetration) {
+      normal.set(0, 1, 0);
+      surfacePoint.set(axis.x, b.max.y, axis.z);
+      penetration = topDepth;
+    }
+    if (inside && bottomDepth >= 0 && bottomDepth < penetration) {
+      normal.set(0, -1, 0);
+      surfacePoint.set(axis.x, b.min.y, axis.z);
+      penetration = bottomDepth;
+    }
+    const originalTop = this.contactVolumes.get(volume)?.originalTop ?? b.max.y,
+      height = Math.max(0.1, originalTop - b.min.y),
+      area = Math.max(
+        1,
+        volume.polygon!.reduce((sum, ring, index) => {
+          const a =
+            Math.abs(
+              ring.reduce((v, p, i) => {
+                const q = ring[(i + 1) % ring.length];
+                return v + p[0] * q[1] - q[0] * p[1];
+              }, 0),
+            ) * 0.5;
+          return sum + (index ? -a : a);
+        }, 0),
+      );
+    return {
+      point: { x: surfacePoint.x, y: surfacePoint.y, z: surfacePoint.z },
+      normal: { x: normal.x, y: normal.y, z: normal.z },
+      penetration,
+      obstacleMass: Math.max(10000, area * height * 220),
+      yieldProgress: THREE.MathUtils.clamp(
+        (originalTop - b.max.y) / height,
+        0,
+        1,
+      ),
+      source: 'building',
+      part: sweep.part ?? 'core',
+      objectHeight: height,
+    };
+  }
+  private impactRecord(
+    contact: RocketCityContact,
+    state: RocketState,
+  ): RocketImpactRecord {
+    const normal = contact.normal ?? { x: 0, y: 1, z: 0 };
+    return {
+      time: state.elapsed,
+      point: { ...contact.point },
+      normal: { ...normal },
+      source: contact.source,
+      part: contact.part ?? (state.boosterAttached ? 'core' : 'upper'),
+      objectHeight: contact.bounds
+        ? Math.max(0, contact.bounds.maxY - contact.bounds.minY)
+        : 0,
+      normalSpeed:
+        contact.normalSpeed ??
+        Math.max(
+          0,
+          -(
+            state.velocity.x * normal.x +
+            state.velocity.y * normal.y +
+            state.velocity.z * normal.z
+          ),
+        ),
+      severity: 1,
+      fatal: true,
+    };
+  }
   private queryContacts(
     sweeps: RocketSweep[],
     state: RocketState,
   ): RocketContact[] {
     if (!this.world) return [];
+    this.refreshCollisionSurfaces(sweeps);
     const result: RocketContact[] = [],
-      seen = new Set<RocketVolume>();
+      seen = new Set<RocketVolume>(),
+      seenSurfaces = new Set<string>();
     for (const sweep of sweeps) {
-      if (!this.world.hit(sweep.from, sweep.to, sweep.radius)) continue;
+      const externalAdapter = this.world.hit !== this.missionHit;
+      if (
+        externalAdapter &&
+        !this.world.hit(sweep.from, sweep.to, sweep.radius)
+      )
+        continue;
       const bounds = new THREE.Box3()
           .setFromPoints([sweep.from, sweep.to])
           .expandByScalar(sweep.radius),
@@ -884,6 +1445,10 @@ export class RocketController {
             candidates.add(volume);
       let identified = false;
       for (const volume of candidates) {
+        if (seen.has(volume)) {
+          identified = true;
+          continue;
+        }
         if (
           !volume.bounds.intersectsBox(bounds) ||
           !this.hitVolume(volume, sweep.from, sweep.to, sweep.radius)
@@ -893,7 +1458,9 @@ export class RocketController {
         // Pressure can settle a building before the vehicle ever touches it.
         // Resolve that real rendered surface before deciding this is an impact,
         // rather than discovering its shorter collider one frame too late.
-        let p = this.contactPoint(volume, sweep);
+        let p = volume.polygon
+          ? this.contactPoint(volume, sweep)
+          : sweep.from.clone();
         if (volume.polygon) {
           const top = this.effects?.supportCollisionHeight?.(p.x, p.z, state);
           if (top != null) {
@@ -914,7 +1481,26 @@ export class RocketController {
         }
         if (seen.has(volume)) continue;
         seen.add(volume);
-        const b = volume.bounds;
+        if (volume.polygon) {
+          let key = this.surfaceKeys.get(volume);
+          if (!key) {
+            key = JSON.stringify([
+              volume.bounds.min.y,
+              this.contactVolumes.get(volume)?.originalTop ??
+                volume.bounds.max.y,
+              volume.polygon,
+            ]);
+            this.surfaceKeys.set(volume, key);
+          }
+          if (seenSurfaces.has(key)) continue;
+          seenSurfaces.add(key);
+        }
+        const b =
+            this.surfaceGeometry.get(volume)?.sourceBounds ?? volume.bounds,
+          load = volume.polygon
+            ? this.buildingContactLoad(volume, sweep, p)
+            : this.surfaceContactLoad(volume, sweep, state),
+          metrics = load ? sampleRocketContact(state, load) : undefined;
         result.push({
           volume,
           contact: {
@@ -926,13 +1512,22 @@ export class RocketController {
                   )
                 ? 'bridge'
                 : 'landmark',
-            point: { x: p.x, y: p.y, z: p.z },
+            point: load?.point ?? { x: p.x, y: p.y, z: p.z },
             from: { x: sweep.from.x, y: sweep.from.y, z: sweep.from.z },
             to: { x: sweep.to.x, y: sweep.to.y, z: sweep.to.z },
             radius: sweep.radius,
             speed: state.speed,
             mass: state.mass,
             initialOverlap: this.initialContacts.has(volume),
+            part: sweep.part,
+            normal: load?.normal,
+            penetration: load?.penetration,
+            obstacleMass: load?.obstacleMass,
+            yieldProgress: load?.yieldProgress,
+            normalSpeed: metrics?.normalSpeed,
+            impactEnergy: metrics?.impactEnergy,
+            force: metrics?.force,
+            surfaceVelocity: load?.surfaceVelocity,
             bounds: {
               minX: b.min.x,
               maxX: b.max.x,
@@ -950,6 +1545,7 @@ export class RocketController {
       // Preserve collision with an external narrow-phase adapter even when it
       // cannot expose a building identity; it never receives launch grace.
       if (
+        externalAdapter &&
         !identified &&
         !result.some(({ contact }) => contact.source === 'unknown')
       )
@@ -1049,8 +1645,8 @@ export class RocketController {
       this.state = stepRocket(before, input, 1 / 60);
       this.requestAbort = false;
       input.abort = false;
-      const s = this.state,
-        config = ROCKET_CONFIGS[s.kind];
+      let s = this.state;
+      const config = ROCKET_CONFIGS[s.kind];
       // This mission owns these collider boxes. Follow the same settling roof
       // as the rendered building; nearby buildings keep their full collision.
       if (s.supportCollapsed)
@@ -1083,22 +1679,73 @@ export class RocketController {
         const contacts = this.queryContacts(this.collisionSweeps(before, s), s);
         this.contactWarning = '';
         let collided = false;
-        const crushing = new Set<RocketVolume>();
+        let impact: RocketImpactRecord | undefined;
+        const crushing = new Set<RocketVolume>(),
+          gradedPhase =
+            s.supportCollapsed ||
+            s.phase === 'falling' ||
+            (s.kind === 'super-heavy' &&
+              (s.phase === 'ignition' || s.phase === 'flight')),
+          gradedContact = (contact: RocketCityContact) =>
+            gradedPhase && contact.source !== 'unknown' && !!contact.normal,
+          gradedContacts = contacts.filter(({ contact }) =>
+            gradedContact(contact),
+          ).length;
         for (const { volume, contact } of contacts) {
-          // Notify before retiring the engine or creating wreckage. Even a
-          // high-speed nose/strap strike must visibly affect the actual wall.
+          if (gradedContact(contact) && contact.normal) {
+            const metrics = sampleRocketContact(s, {
+              point: contact.point,
+              normal: contact.normal,
+              penetration: contact.penetration ?? 0,
+              obstacleMass: contact.obstacleMass ?? s.mass,
+              yieldProgress: contact.yieldProgress ?? 0,
+              surfaceVelocity: contact.surfaceVelocity,
+            });
+            contact.normalSpeed = metrics.normalSpeed;
+            contact.impactEnergy = metrics.impactEnergy;
+            contact.force = metrics.force;
+          }
+          if (gradedContact(contact) && contact.force != null)
+            contact.force /= Math.max(1, gradedContacts);
           this.effects?.receiveCollision?.(contact, s, 1 / 60);
           if (volume?.polygon && !this.contactVolumes.has(volume))
             this.contactVolumes.set(volume, {
-              originalTop: volume.bounds.max.y,
+              originalTop: contact.bounds?.maxY ?? volume.bounds.max.y,
               point: new THREE.Vector3(
                 contact.point.x,
                 contact.point.y,
                 contact.point.z,
               ),
             });
+          if (gradedContact(contact) && contact.normal) {
+            s = resolveRocketContact(
+              s,
+              {
+                point: contact.point,
+                normal: contact.normal,
+                penetration: contact.penetration ?? 0,
+                obstacleMass: contact.obstacleMass ?? s.mass,
+                yieldProgress: contact.yieldProgress ?? 0,
+                source: contact.source,
+                surfaceVelocity: contact.surfaceVelocity,
+                part: contact.part,
+                objectHeight: contact.bounds
+                  ? contact.bounds.maxY - contact.bounds.minY
+                  : 0,
+              },
+              1 / (60 * Math.max(1, gradedContacts)),
+            );
+            this.state = s;
+            this.contactWarning =
+              s.contactState === 'compression'
+                ? `The rocket is pushing against a ${contact.source}.`
+                : `The rocket is scraping a ${contact.source}.`;
+            if (s.wreckage) break;
+            continue;
+          }
           const age = volume ? this.initialContacts.get(volume) : undefined;
           const canCrush =
+            s.kind !== 'super-heavy' &&
             contact.source === 'building' &&
             age != null &&
             age < 2.5 &&
@@ -1110,8 +1757,12 @@ export class RocketController {
             crushing.add(volume);
             this.contactWarning =
               'Launch clearance obstructed: the rocket is crushing against a building.';
-          } else if (s.phase !== 'ignition') collided = true;
+          } else if (s.phase !== 'ignition') {
+            collided = true;
+            impact ??= this.impactRecord(contact, s);
+          }
         }
+        // Scout and Atlas retain their existing launch-contact response.
         // Buildings already touching the assembled vehicle can yield under a
         // low-speed shove. This bounded contact response costs velocity and
         // structure; a strong wall that remains after 2.5s is still fatal.
@@ -1160,8 +1811,33 @@ export class RocketController {
           noseImpact ||
           (s.altitude > 3 &&
             lowest.y < this.world.surface(lowest.x, lowest.z).height)
-        )
-          this.state = crashRocket(s, 'collision');
+        ) {
+          const groundPoint = noseImpact ? bodyTip : lowest;
+          impact ??= {
+            time: s.elapsed,
+            point: {
+              x: groundPoint.x,
+              y: this.world.surface(groundPoint.x, groundPoint.z).height,
+              z: groundPoint.z,
+            },
+            normal: { x: 0, y: 1, z: 0 },
+            source: 'terrain',
+            part: s.boosterAttached ? 'core' : 'upper',
+            objectHeight: 0,
+            normalSpeed: Math.max(0, -s.velocity.y),
+            severity: 1,
+            fatal: true,
+          };
+          this.state = crashRocket(
+            s,
+            impact.source === 'terrain'
+              ? 'The rocket struck the ground.'
+              : s.supportCollapsed
+                ? 'The falling rocket struck a city structure.'
+                : `The rocket struck a ${impact.source}.`,
+            impact,
+          );
+        }
       }
     }
     const s = this.state,
@@ -1180,6 +1856,16 @@ export class RocketController {
         this.effects?.supportCollisionHeight?.(x, z, s) ?? -Infinity,
       ),
     );
+    const strike = s.contactImpact,
+      strikeAge = strike ? s.elapsed - strike.time : Infinity,
+      targetStrikeBlend = strike?.fatal && strikeAge < 1.4 ? 0.65 : 0;
+    this.impactFocusBlend +=
+      (targetStrikeBlend - this.impactFocusBlend) * (1 - Math.exp(-dt * 4));
+    if (strike?.fatal && this.damageFocus && this.impactFocusBlend > 0.001)
+      this.damageFocus.lerp(
+        new THREE.Vector3(strike.point.x, strike.point.y, strike.point.z),
+        this.impactFocusBlend,
+      );
     if ((s.phase === 'falling' || s.wreckage) && !this.accidentFramed) {
       this.accidentFramed = true;
       this.setView('chase');
