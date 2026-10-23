@@ -5,6 +5,9 @@ import { cityModule } from './helpers/city-modules.mjs';
 const { TravelCameraCollision, travelLookDirection, TRAVEL_PITCH_LIMIT } =
   await import(cityModule('travel-camera-collision'));
 const { StreetNavigation } = await import(cityModule('navigation'));
+const { SkyTrainWorldTravel } = await import(
+  cityModule('skytrain-world-travel')
+);
 const v = (x, y, z) => new THREE.Vector3(x, y, z);
 const collision = new TravelCameraCollision();
 function box(size, position) {
@@ -78,7 +81,7 @@ test('sphere clearance catches a thin edge missed by the centre ray, respects vi
   dispose(frame);
 });
 
-test('Waterfront actual station roof prevents a raised chase camera from crossing to the other side', async () => {
+test('the sphere utility identifies actual Waterfront roof intersections without changing source geometry', async () => {
   const { stationOwner } = await import('./helpers/skytrain-geometry.mjs');
   const owner = stationOwner('waterfront');
   try {
@@ -221,11 +224,12 @@ test('actual street update uses desktop/touch near-vertical pitch and preserves 
   }
 });
 
-test('actual walking third-person camera stays beneath an interior roof and keeps the standing/seated body in frame', () => {
+test('actual walking third-person camera retains its requested chase ray through an interior roof and wall with the body framed', () => {
   const h = navigationHarness(),
     { navigation: nav, engine } = h;
-  const roof = box([20, 0.25, 20], [0, 2.6, 0]);
-  engine.landmarks.add(roof);
+  const roof = box([20, 0.25, 20], [0, 2.6, 0]),
+    wall = box([20, 8, 0.25], [0, 2, -2]);
+  engine.landmarks.add(roof, wall);
   try {
     for (const seated of [false, true]) {
       if (seated)
@@ -242,11 +246,31 @@ test('actual walking third-person camera stays beneath an interior roof and keep
         nav.cameraDistances.walk = distance;
         nav.snapCamera = true;
         nav.pitch = 0.04;
+        roof.visible = false;
+        wall.visible = false;
+        nav.update(0);
+        const clearPosition = engine.camera.position.clone(),
+          clearDirection = engine.camera.getWorldDirection(v(0, 0, 0));
+        roof.visible = true;
+        wall.visible = true;
+        nav.snapCamera = true;
         nav.update(0);
         engine.camera.updateMatrixWorld(true);
         assert(
-          engine.camera.position.y < 2.295,
-          engine.camera.position.toArray().join(','),
+          engine.camera.position.distanceTo(clearPosition) < 1e-8,
+          'roof/wall opacity never changes camera distance, yaw or elevation',
+        );
+        assert(
+          engine.camera.getWorldDirection(v(0, 0, 0)).dot(clearDirection) >
+            0.999999,
+        );
+        const flat = engine.camera
+          .getWorldDirection(v(0, 0, 0))
+          .setY(0)
+          .normalize();
+        assert(
+          flat.dot(v(Math.sin(nav.yaw), 0, Math.cos(nav.yaw))) > 0.999999,
+          'walking forward always points into the visible world',
         );
         assert(nav.walker.group.visible);
         for (const height of [seated ? 0.08 : 0.02, seated ? 1.35 : 1.82]) {
@@ -262,5 +286,122 @@ test('actual walking third-person camera stays beneath an interior roof and keep
     }
   } finally {
     h.cleanup();
+  }
+});
+
+test('ordinary desktop and touch dragging keeps W/joystick movement aligned with the visible chase heading while descending supported ground', () => {
+  for (const [type, id] of [
+    ['mouse', 1],
+    ['touch', 2],
+  ]) {
+    const h = navigationHarness(),
+      { navigation: nav, engine } = h;
+    engine.interiors.height = (_x, z) => -z * 0.3;
+    try {
+      nav.cameraDistances.walk = 4;
+      nav.pitch = 0.04;
+      h.canvasEvents.get('pointerdown')(h.event(type, 0, id));
+      h.canvasEvents.get('pointermove')({
+        ...h.event(type, 0, id),
+        clientX: -1.1 / 0.004,
+      });
+      nav.pointerUp({ ...h.event(type, 0, id), clientX: -1.1 / 0.004 });
+      nav.update(0);
+      const heading = engine.camera.getWorldDirection(v(0, 0, 0)),
+        flat = heading.clone().setY(0).normalize(),
+        start = nav.position.clone(),
+        initialHeight = nav.walker.group.position.y;
+      if (type === 'mouse') nav.keys.add('w');
+      else nav.setTouchAxes(0, 1);
+      for (let frame = 0; frame < 20; frame++) {
+        nav.update(0.05);
+        assert(
+          engine.camera.getWorldDirection(v(0, 0, 0)).dot(heading) > 0.999999,
+          'descending height cannot turn a rear chase into a front view',
+        );
+      }
+      const displacement = nav.position.clone().sub(start).setY(0);
+      assert(displacement.length() > 1);
+      assert(displacement.normalize().dot(flat) > 0.999999);
+      assert(nav.walker.group.position.y < initialHeight - 0.1);
+    } finally {
+      h.cleanup();
+    }
+  }
+});
+
+test('neutral and dragged third-person pitches retain the same heading, elevation and pivot across street and real station ownership', async () => {
+  const { stationOwner } = await import('./helpers/skytrain-geometry.mjs'),
+    owner = stationOwner('waterfront');
+  try {
+    for (const seated of [false, true])
+      for (const pitch of [0, 0.04, -0.3, 0.8, 1.4, -0.7]) {
+        const h = navigationHarness(),
+          { navigation: nav, engine } = h;
+        try {
+          const seat = owner.benchSeats()[0],
+            foot = seat.stand,
+            feet = new THREE.Vector3(
+              ...owner.toWorld(seated ? seat.position : foot),
+            ),
+            yaw = seated ? seat.yaw : 0.71,
+            lookYaw = seated ? 0.63 : 0;
+          engine.navigation = nav;
+          nav.position.copy(feet);
+          nav.surface = 'bridge';
+          nav.yaw = owner.yaw + yaw + lookYaw;
+          nav.pitch = pitch;
+          nav.cameraDistances.walk = 4;
+          nav.snapCamera = true;
+          if (seated)
+            assert(
+              nav.sitOnSeat({
+                id: 'handoff-bench',
+                floor: feet.toArray(),
+                yaw: owner.yaw + yaw,
+                height: seat.seatHeight,
+                stand: () => feet.clone(),
+              }),
+            );
+          nav.update(0);
+          const beforePosition = engine.camera.position.clone(),
+            beforeDirection = engine.camera.getWorldDirection(v(0, 0, 0)),
+            view = Object.assign(Object.create(SkyTrainWorldTravel.prototype), {
+              city: engine,
+              owner,
+              occupied: null,
+              phase: 'station',
+              foot,
+              stationSeat: seated ? seat : null,
+              yaw,
+              lookYaw,
+              pitch: -pitch,
+              distanceView: 4,
+              avatarSeated: seated,
+            });
+          view.updateCamera();
+          assert(
+            engine.camera.getWorldDirection(v(0, 0, 0)).dot(beforeDirection) >
+              0.999999,
+            `pitch ${pitch}: station ownership cannot rotate the requested street chase`,
+          );
+          assert(
+            engine.camera.position.distanceTo(beforePosition) < 1e-7,
+            'the same supported feet and neutral/dragged pitch retain the same raised body pivot',
+          );
+          nav.position.copy(feet);
+          nav.snapCamera = true;
+          nav.update(0);
+          assert(engine.camera.position.distanceTo(beforePosition) < 1e-7);
+          assert(
+            engine.camera.getWorldDirection(v(0, 0, 0)).dot(beforeDirection) >
+              0.999999,
+          );
+        } finally {
+          h.cleanup();
+        }
+      }
+  } finally {
+    owner.dispose();
   }
 });

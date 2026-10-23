@@ -52,6 +52,8 @@ import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
 import { createRoadSurfaces } from './road-surfaces';
 import { harmonizeGround } from './harmonize-ground';
 import { TravelReturn } from './travel-return';
+import { TravelOcclusion } from './travel-occlusion';
+import { prepareScenePrograms } from './prepare-scene-programs';
 import type { TravelMode } from './placement-geometry';
 import type { TravelView } from './travel-camera';
 import * as THREE from 'three';
@@ -234,6 +236,8 @@ export class CityEngine {
   onFlightMode: (mode: 'orbit' | 'flight') => void = () => {};
   placement: MapPlacement | null = null;
   travelReturn: TravelReturn;
+  travelOcclusion: TravelOcclusion | null = null;
+  private readonly occlusionSubject = new THREE.Vector3();
   settings = { ...DEFAULT_SETTINGS };
   readonly autoQuality = new AutoQualityController();
   private autoTimingNeedsAnchor = true;
@@ -730,6 +734,9 @@ export class CityEngine {
     this.impactFeedback = new ImpactFeedback(this.scene);
     this.driftEffects = new VehicleDriftEffects(this);
     this.navigation = new StreetNavigation(this);
+    this.travelOcclusion = new TravelOcclusion([
+      this.buildings, this.landmarks, this.roads, this.terrain, this.vegetation,
+    ]);
     this.busVisit = new BusCabinVisit(
       this,
       this.traffic.busAssets,
@@ -788,12 +795,12 @@ export class CityEngine {
     this.applySettings(this.settings);
     if (!(await advance(95))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
-      this.startupQA?.phase('render.scene-compileAsync', 'async-wall');
+      this.startupQA?.phase('render.scene-programs', 'async-wall');
     }
-    await this.renderer.compileAsync(this.scene, this.camera);
+    await this.prepareScenePrograms();
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.endPhase();
-      this.startupQA?.mark('render.scene-compileAsync.resolved');
+      this.startupQA?.mark('render.scene-programs.resolved');
     }
 
     if (this.disposed || this.contextLost) return;
@@ -822,10 +829,21 @@ export class CityEngine {
       unavailable: () => this.disposed || this.contextLost,
     });
     this.prepareLandmark = (group, signal, holder) => {
-      this.skyTrainTravel?.prepareCityGeometry(group);
-      if (!this.landmarkWarmup)
-        return Promise.reject(new Error('GPU preparation unavailable'));
-      return this.landmarkWarmup.prepare(group, signal, holder);
+      const cutaway = this.travelOcclusion;
+      const releaseStaged = () => {
+        if (!group.parent) cutaway?.releaseSubtree(group);
+      };
+      try {
+        this.skyTrainTravel?.prepareCityGeometry(group);
+        this.prepareTravelOccluders(group);
+        if (!this.landmarkWarmup) throw new Error('GPU preparation unavailable');
+        // Staged roots are not yet owned by a watched city parent. Release them
+        // on every settlement; a successful attachment re-enrolls via childadded.
+        return this.landmarkWarmup.prepare(group, signal, holder).finally(releaseStaged);
+      } catch (error) {
+        releaseStaged();
+        return Promise.reject(error);
+      }
     };
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.endPhase();
@@ -1060,7 +1078,13 @@ export class CityEngine {
     const restorePedestrianNormals = installPedestrianOverrideMaterial(
       this.ssao.normalMaterial,
     );
-    trackSSAOResources(this.ssao).restores.add(restorePedestrianNormals);
+    const restoreCutawayNormals = this.travelOcclusion?.prepareMaterial(
+      this.ssao.normalMaterial, { normalPass: true },
+    );
+    trackSSAOResources(this.ssao).restores.add(() => {
+      restoreCutawayNormals?.();
+      restorePedestrianNormals();
+    });
     const exclusions = new SSAOExclusions(this.scene);
     this.aoExclusions = exclusions;
     const visibility = installSSAOVisibility(this.ssao, exclusions);
@@ -1123,6 +1147,11 @@ export class CityEngine {
     );
   }
   renderScene() {
+    const avatar = this.navigation?.walker.group;
+    if (avatar && this.settings.mode === 'walk' && avatar.visible) {
+      avatar.getWorldPosition(this.occlusionSubject);
+      this.travelOcclusion?.update(this.camera.position, this.occlusionSubject);
+    } else this.travelOcclusion?.clear();
     this.runtimePerformance?.setRenderContext({
       mode:
         this.skyTrainTravel?.active && this.settings.mode === 'walk'
@@ -1253,6 +1282,22 @@ export class CityEngine {
   prepareNightReceivers(group: THREE.Object3D) {
     if (this.traffic && !this.disposed)
       wrapNightStreetMaterials(group, this.traffic.streetLighting);
+    // Detached loader results may be cancelled before reaching GPU preparation.
+    // Their watched city parent enrolls them only when actually attached.
+    for (let parent: THREE.Object3D | null = group; parent; parent = parent.parent)
+      if (parent === this.scene) {
+        this.prepareTravelOccluders(group);
+        break;
+      }
+  }
+  prepareTravelOccluders(group: THREE.Object3D) {
+    this.travelOcclusion?.refresh([group]);
+  }
+  prepareScenePrograms() {
+    return prepareScenePrograms(this.renderer, this.scene, this.camera, {
+      signal: this.loadAbort.signal,
+      unavailable: () => this.disposed || this.contextLost,
+    });
   }
   onLand(x: number, z: number) {
     // On MHWS itself use the explicit beach water convention.
@@ -1574,6 +1619,14 @@ export class CityEngine {
   }
   completeLocalMapTransition() {
     finishLocalMapTransition(this);
+  }
+  /** Explicit placement leaves passenger ownership, keeping the current map
+   * camera and autonomous transit service intact. It never restores an old trip. */
+  prepareTravelPlacement() {
+    if (this.skyTrainTravel?.active && !this.skyTrainTravel.releaseForPlacement())
+      return false;
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return false;
+    return this.closeBusVisit();
   }
   leaveTravelAtLocation(remember = false) {
     if (this.rocket?.active) {
@@ -2343,6 +2396,8 @@ export class CityEngine {
     this.tesla?.destroy();
     this.rocket?.destroy();
     this.interactions?.dispose();
+    this.travelOcclusion?.dispose();
+    this.travelOcclusion = null;
     this.interactions = null;
     this.busWorldService?.dispose();
     this.busWorldService = null;

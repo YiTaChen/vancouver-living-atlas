@@ -95,6 +95,7 @@ function fixture(t) {
     camera,
     scene,
     water,
+    occlusionSubject: new THREE.Vector3(),
     controls: {
       target: new THREE.Vector3(),
       _pointers: [],
@@ -178,6 +179,7 @@ function fixture(t) {
     soundscapeWorld: { update: call('sound-update') },
     navigation: {
       mode: 'orbit',
+      walker: { group: new THREE.Group() },
       speed: 0,
       position: new THREE.Vector3(),
       blur: call('navigation-input'),

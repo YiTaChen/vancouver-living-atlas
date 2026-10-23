@@ -68,6 +68,12 @@ async function harness(run, { groundHeight = cityElevation } = {}) {
     camera: new THREE.PerspectiveCamera(),
     controls: { target: new THREE.Vector3(), enabled: true, update() {} },
     renderer: { domElement: canvas },
+    prepareScenePrograms() {
+      return (
+        this.renderer.compileAsync?.(this.scene, this.camera) ??
+        Promise.resolve()
+      );
+    },
     settings: {
       mode: 'orbit',
       quality: 'balanced',
