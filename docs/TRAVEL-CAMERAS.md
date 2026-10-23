@@ -38,18 +38,28 @@ look heading, including joystick input. Sitting and standing preserve the viewed
 heading while the seated body still follows its chair. First-person ±88° look is
 retained.
 
-`TravelOcclusion` removes only a bounded sightline opening between camera and
-avatar torso. Opaque walls, roofs, foliage and individual instances can become
-locally see-through; whole instanced city batches do not fade. Geometry, physical
-collision, shadows, material opacity and transparent sorting stay intact. A shared
-normal/depth hook keeps SSAO from shading the removed obstruction while retaining
-actual standing/seated avatar normals. First-person and Overview clear the effect.
+`TravelOcclusion` now makes an entire obstructing wall, roof or logical building
+part fully invisible. It does not open a circular hole or leave a dithered outline
+around the avatar. Individual instances and disconnected geometry pieces are
+classified separately; the measured GIS batch uses its existing per-building
+vertex spans, so one obstruction cannot erase the whole city. Rendered ground at
+the player's feet stays visible. Geometry, physical collision, shadows, material
+opacity and transparent sorting stay intact. The same piece classification in the
+normal/depth pass keeps SSAO consistent and preserves the avatar. First-person and
+Overview clear the effect. Boardable bus cabins register alongside stations and
+train cabins, including children such as accessibility ramps added afterward.
 
-The opening uses uniforms and shader discard without extra draw calls or lights.
-Its maximum length is 32 m; the station chase boom is at most 14 m. Per-frame work
-updates fixed uniforms; scene traversal happens on initial registration and streamed
-child events. Existing night, geographic-entrance and deformation hooks are chained,
-and disposal restores owned hooks/listeners. Detached warmup registrations are
+Piece bounds are prepared during registration. The GPU checks them against the
+bounded camera-to-avatar sightline and removes all fragments of the selected
+piece, rather than masking a region of screen pixels. This adds no draw calls or
+lights. The sightline is at most 32 m; the station chase boom is at most 14 m.
+Per-frame work updates fixed uniforms; scene traversal happens on initial
+registration and streamed child events. Existing night, geographic-entrance and
+deformation hooks are chained, and disposal restores owned hooks/listeners.
+Bounds metadata has weak resource ownership. Inert uploaded attributes remain
+available until the source geometry owner disposes them, so Three can free their
+GPU buffers before a deferred, guarded restoration of the original attributes.
+Detached warmup registrations are
 released on success, cancellation and failure; watched city parents re-enroll
 successfully attached geometry. Cancelled decoded night receivers are never
 registered, and a dynamic train root releases its listeners when removed even

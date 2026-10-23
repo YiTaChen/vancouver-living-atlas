@@ -1,23 +1,39 @@
 import * as THREE from 'three';
+import {
+  OCCLUDER_MIN,
+  OCCLUDER_MAX,
+  occluderBounds,
+  type TravelOcclusionPart,
+} from './travel-occluder-bounds';
+
+export type { TravelOcclusionPart } from './travel-occluder-bounds';
 
 const MAX_LENGTH = 32;
-const SUBJECT_RADIUS = 0.7;
-const CACHE_KEY = '|travel-local-cutaway-v1';
+const CACHE_KEY = '|travel-full-occluder-v2';
 const PROJECT = '#include <project_vertex>';
 const CLIPPING = '#include <clipping_planes_fragment>';
 type Compile = THREE.Material['onBeforeCompile'];
 type ProgramKey = THREE.Material['customProgramCacheKey'];
 type Point = readonly [number, number, number];
+type AttributeDefaults = Record<string, number[]>;
+type MaterialWithDefaults = THREE.Material & {
+  defaultAttributeValues?: AttributeDefaults;
+};
 
 export interface TravelOcclusionOptions {
   enabled?: boolean;
-  /** Radius around the player's torso, in metres; bounded to 0.25–1.8. */
+  /** World-space margin around the sightline, bounded to 0.05–1.8 metres. */
   radius?: number;
   subjectHeight?: number;
-  /** Fraction of covered pixels removed, without changing material opacity. */
+  /** Zero disables the effect; any positive value removes whole obstructions. */
   strength?: number;
-  /** A short local opening also works when camera and torso coincide. */
+  /** Permit a coincident camera/torso point, for explicit near-view callers. */
   firstPerson?: boolean;
+}
+
+export interface TravelOcclusionParts {
+  mesh: THREE.Mesh;
+  parts: readonly TravelOcclusionPart[];
 }
 
 interface Patch {
@@ -28,18 +44,55 @@ interface Patch {
   cacheKey: ProgramKey;
   release: () => void;
 }
+interface GeometryMetadata {
+  min: THREE.BufferAttribute;
+  max: THREE.BufferAttribute;
+  previousMin:
+    | THREE.BufferAttribute
+    | THREE.InterleavedBufferAttribute
+    | undefined;
+  previousMax:
+    | THREE.BufferAttribute
+    | THREE.InterleavedBufferAttribute
+    | undefined;
+  pieces: number;
+  sourceParts: readonly TravelOcclusionPart[] | undefined;
+  owners: Set<WeakRef<GeometryPatch>>;
+  pendingDisposal: boolean;
+  disposed: () => void;
+}
+interface GeometryPatch {
+  metadata: GeometryMetadata;
+  release: () => void;
+}
+// The geometry, not an individual camera controller, owns uploaded metadata.
+// Weak keys allow detached source buffers to be collected without owner dispose.
+const metadataByGeometry = new WeakMap<
+  THREE.BufferGeometry,
+  GeometryMetadata
+>();
 
-/** A render-only opening along the chase camera's sightline. Supply world roots
- * without the player's avatar. Refresh when a loader adds geometry/materials;
- * update only writes a fixed set of uniforms, never traverses or raycasts.
- *
- * Existing material objects are retained so their live lighting/color/texture
- * updates continue. Materials deliberately shared with an excluded object must
- * not also be supplied through an eligible root. Collision, shadows, geometry,
- * opacity and transparent sorting are unchanged. */
+interface CoverageOptions {
+  object?: THREE.Mesh;
+  vertexIndex?: number;
+  instanceId?: number;
+  normalPass?: boolean;
+}
+
+/** Removes complete logical walls, roofs or instances that obstruct the chase
+ * sightline. Classification is per vertex against the piece's local bounds,
+ * then constant across every fragment of that piece: no hole, border or dither.
+ * Metadata is prepared once; update never traverses or raycasts the city.
+ * Original material/geometry ownership, collision, opacity and sorting remain.
+ */
 export class TravelOcclusion {
   private readonly roots: readonly THREE.Object3D[];
   private readonly patches = new Map<THREE.Material, Patch>();
+  private readonly geometryPatches = new WeakMap<
+    THREE.BufferGeometry,
+    GeometryPatch
+  >();
+  private readonly geometryReferences = new Set<WeakRef<GeometryPatch>>();
   private readonly meshes = new WeakSet<THREE.Object3D>();
   private readonly watched = new Set<THREE.Object3D>();
   private readonly unsupported = new WeakSet<THREE.Material>();
@@ -47,10 +100,8 @@ export class TravelOcclusion {
     uTravelCutawayEnabled: { value: 0 },
     uTravelCutawayStart: { value: new THREE.Vector3() },
     uTravelCutawayEnd: { value: new THREE.Vector3() },
-    uTravelCutawayBoundsMin: { value: new THREE.Vector3() },
-    uTravelCutawayBoundsMax: { value: new THREE.Vector3() },
-    // near radius, torso radius, retained floor Y, strength
-    uTravelCutawayShape: { value: new THREE.Vector4() },
+    // sightline margin, preserved floor Y
+    uTravelOccluderShape: { value: new THREE.Vector2() },
   };
   private disposed = false;
   private meshCount = 0;
@@ -73,22 +124,31 @@ export class TravelOcclusion {
     this.unwatch(event.target);
   };
 
-  constructor(roots: readonly THREE.Object3D[] = []) {
+  constructor(
+    roots: readonly THREE.Object3D[] = [],
+    parts: readonly TravelOcclusionParts[] = [],
+  ) {
     this.roots = roots;
+    // GIS source spans must precede generic component discovery: adjacent city
+    // buildings can touch, and the whole city deliberately shares one draw.
+    for (const binding of parts)
+      this.registerParts(binding.mesh, binding.parts);
     this.refresh();
   }
 
-  /** Explicit refresh supports late-loaded stations, vehicles and landmarks.
-   * Transparent materials, portal visuals and opted-out subtrees are ignored. */
+  /** Source vertex spans isolate logical objects inside a merged city mesh. */
+  registerParts(mesh: THREE.Mesh, parts: readonly TravelOcclusionPart[]) {
+    if (!this.disposed) this.prepareGeometry(mesh.geometry, parts);
+  }
+
   refresh(additionalRoots: readonly THREE.Object3D[] = this.roots) {
     if (this.disposed) return;
     for (const root of additionalRoots)
       if (allowedAncestors(root)) this.visit(root);
   }
 
-  /** Release a staged/cancelled subtree's listeners and node references only.
-   * Resource disposal remains with its owner; shared material hooks remain
-   * installed. A later attachment to a watched parent enrolls it again. */
+  /** Release listeners/references only; the resource owner disposes its assets.
+   * Successful attachment to a watched parent automatically enrolls them again. */
   releaseSubtree(root: THREE.Object3D) {
     if (!this.disposed) this.unwatch(root);
   }
@@ -101,16 +161,104 @@ export class TravelOcclusion {
       object.addEventListener('childremoved', this.removed);
       object.addEventListener('removed', this.detached);
     }
-    if (object instanceof THREE.Mesh) {
+    if (object instanceof THREE.Mesh && !groundSurface(object)) {
       if (!this.meshes.has(object)) {
         this.meshes.add(object);
         this.meshCount++;
       }
-      if (Array.isArray(object.material)) {
-        for (const material of object.material) this.patch(material);
-      } else this.patch(object.material);
+      const materials = Array.isArray(object.material)
+        ? object.material
+        : [object.material];
+      if (materials.some(eligibleMaterial))
+        this.prepareGeometry(object.geometry);
+      for (const material of materials) this.patch(material);
     }
     for (const child of object.children) this.visit(child);
+  }
+
+  private prepareGeometry(
+    geometry: THREE.BufferGeometry,
+    parts?: readonly TravelOcclusionPart[],
+  ) {
+    const previous = this.geometryPatches.get(geometry);
+    let metadata = metadataByGeometry.get(geometry);
+    if (!metadata) {
+      const bounds = occluderBounds(geometry, parts);
+      const previousMin = geometry.getAttribute(OCCLUDER_MIN);
+      const previousMax = geometry.getAttribute(OCCLUDER_MAX);
+      geometry.setAttribute(OCCLUDER_MIN, bounds.min);
+      geometry.setAttribute(OCCLUDER_MAX, bounds.max);
+      // This closure owns only geometry/metadata, never a controller or city.
+      const disposed = () => {
+        state.pendingDisposal = true;
+        for (const owner of state.owners) owner.deref()?.release();
+        state.owners.clear();
+        geometry.removeEventListener('dispose', disposed);
+        // Our listener can precede Three's renderer listener. Every synchronous
+        // handler must enumerate the uploaded attrs before they are restored.
+        queueMicrotask(() => {
+          // A new owner can synchronously re-enroll an already-disposed source
+          // before this callback. Its future render reuploads these same attrs.
+          if (!state.pendingDisposal) return;
+          if (geometry.getAttribute(OCCLUDER_MIN) === state.min) {
+            if (previousMin) geometry.setAttribute(OCCLUDER_MIN, previousMin);
+            else geometry.deleteAttribute(OCCLUDER_MIN);
+          }
+          if (geometry.getAttribute(OCCLUDER_MAX) === state.max) {
+            if (previousMax) geometry.setAttribute(OCCLUDER_MAX, previousMax);
+            else geometry.deleteAttribute(OCCLUDER_MAX);
+          }
+          if (metadataByGeometry.get(geometry) === state)
+            metadataByGeometry.delete(geometry);
+        });
+      };
+      const state: GeometryMetadata = {
+        ...bounds,
+        previousMin,
+        previousMax,
+        sourceParts: parts,
+        owners: new Set(),
+        pendingDisposal: false,
+        disposed,
+      };
+      metadata = state;
+      metadataByGeometry.set(geometry, state);
+      geometry.addEventListener('dispose', disposed);
+    } else {
+      // Only module-owned metadata is reused; arbitrary preexisting attributes
+      // with these names remain borrowed originals and are restored unchanged.
+      if (parts !== undefined && metadata.sourceParts !== parts) {
+        const bounds = occluderBounds(geometry, parts);
+        metadata.min.copyArray(bounds.min.array);
+        metadata.max.copyArray(bounds.max.array);
+        metadata.min.needsUpdate = true;
+        metadata.max.needsUpdate = true;
+        metadata.pieces = bounds.pieces;
+        metadata.sourceParts = parts;
+      }
+      if (metadata.pendingDisposal) {
+        metadata.pendingDisposal = false;
+        geometry.addEventListener('dispose', metadata.disposed);
+      }
+    }
+    if (previous?.metadata === metadata) return;
+    previous?.release();
+    const controller = new WeakRef(this);
+    const state = metadata;
+    const release = () => {
+      const owner = controller.deref();
+      if (owner?.geometryPatches.get(geometry) === patch)
+        owner.geometryPatches.delete(geometry);
+      owner?.geometryReferences.delete(reference);
+      state.owners.delete(reference);
+      // The resource owner eventually disposes the geometry. Keep its uploaded
+      // metadata attached for renderer buffer deletion and controller handoff.
+    };
+    const patch: GeometryPatch = { metadata: state, release };
+    const reference = new WeakRef(patch);
+    state.owners.add(reference);
+    this.geometryPatches.set(geometry, patch);
+    this.geometryReferences.add(reference);
   }
 
   private unwatch(object: THREE.Object3D) {
@@ -123,10 +271,9 @@ export class TravelOcclusion {
     for (const child of object.children) this.unwatch(child);
   }
 
-  /** Optional render override (SSAO normal/depth). Release before disposing the
-   * pass, or let the material's own dispose event release its borrowed hook.
-   * Normal passes remove the local obstruction without a lower-resolution
-   * dither mismatch and preserve the player's body normals at the endpoint. */
+  /** The normal/depth pass receives the identical whole-piece selection.
+   * Missing bounds are zero/default attributes, so unrelated avatars and
+   * pedestrians remain in SSAO even though it uses one override material. */
   prepareMaterial(
     material: THREE.Material,
     options?: { normalPass?: boolean },
@@ -137,13 +284,7 @@ export class TravelOcclusion {
   }
 
   private patch(material: THREE.Material, normalPass = false) {
-    if (
-      this.patches.has(material) ||
-      material.transparent ||
-      material.opacity < 1 ||
-      material.userData.travelOcclusion === false
-    )
-      return;
+    if (this.patches.has(material) || !eligibleMaterial(material)) return;
     if (material instanceof THREE.ShaderMaterial) {
       if (!this.unsupported.has(material)) {
         this.unsupported.add(material);
@@ -155,6 +296,16 @@ export class TravelOcclusion {
     const before = material.onBeforeCompile;
     // oxlint-disable-next-line typescript/unbound-method
     const key = material.customProgramCacheKey;
+    const defaultsMaterial = material as MaterialWithDefaults;
+    const previousDefaults = defaultsMaterial.defaultAttributeValues;
+    const defaults = {
+      ...previousDefaults,
+      [OCCLUDER_MIN]: [0, 0, 0],
+      [OCCLUDER_MAX]: [0, 0, 0],
+    };
+    // Generic GL attribute constants can survive unrelated shader programs.
+    // Set explicit zero defaults instead of assuming a missing attribute is 0.
+    defaultsMaterial.defaultAttributeValues = defaults;
     const uniforms = this.uniforms;
     const compile: Compile = (shader, renderer) => {
       before.call(material, shader, renderer);
@@ -166,69 +317,76 @@ export class TravelOcclusion {
         return;
       }
       Object.assign(shader.uniforms, uniforms);
-      // transformed already includes source deformation, morphing and skinning.
-      // Match Three's worldpos_vertex order, including BatchedMesh/InstancedMesh.
-      shader.vertexShader =
-        `varying vec3 vTravelCutawayWorld;\n${shader.vertexShader}`.replace(
-          PROJECT,
-          `vec4 travelCutawayPosition = vec4(transformed, 1.0);
-        #ifdef USE_BATCHING
-          travelCutawayPosition = batchingMatrix * travelCutawayPosition;
-        #endif
-        #ifdef USE_INSTANCING
-          travelCutawayPosition = instanceMatrix * travelCutawayPosition;
-        #endif
-        vTravelCutawayWorld = (modelMatrix * travelCutawayPosition).xyz;
-        ${PROJECT}`,
-        );
-      shader.fragmentShader = `
+      shader.vertexShader = `
+        attribute vec3 ${OCCLUDER_MIN};
+        attribute vec3 ${OCCLUDER_MAX};
+        varying float vTravelOccluderSelected;
         varying vec3 vTravelCutawayWorld;
         uniform float uTravelCutawayEnabled;
         uniform vec3 uTravelCutawayStart;
         uniform vec3 uTravelCutawayEnd;
-        uniform vec3 uTravelCutawayBoundsMin;
-        uniform vec3 uTravelCutawayBoundsMax;
-        uniform vec4 uTravelCutawayShape;
+        uniform vec2 uTravelOccluderShape;
+        ${shader.vertexShader}`.replace(
+        PROJECT,
+        `
+        mat4 travelOccluderTransform = mat4(1.0);
+        #ifdef USE_BATCHING
+          travelOccluderTransform = batchingMatrix * travelOccluderTransform;
+        #endif
+        #ifdef USE_INSTANCING
+          travelOccluderTransform = instanceMatrix * travelOccluderTransform;
+        #endif
+        travelOccluderTransform = modelMatrix * travelOccluderTransform;
+        vTravelCutawayWorld = (travelOccluderTransform * vec4(transformed, 1.0)).xyz;
+        vTravelOccluderSelected = 0.0;
+        vec3 travelOccluderSize = ${OCCLUDER_MAX} - ${OCCLUDER_MIN};
+        // All-zero/missing bounds cannot select the avatar in an override pass.
+        if (uTravelCutawayEnabled > 0.5
+          && all(greaterThanEqual(travelOccluderSize, vec3(0.0)))
+          && dot(travelOccluderSize, travelOccluderSize) > 0.00000001) {
+          mat3 travelOccluderLinear = mat3(travelOccluderTransform);
+          // Affine inverse rows handle rotation, nonuniform scale and shear.
+          vec3 travelOccluderRow0 = cross(travelOccluderLinear[1], travelOccluderLinear[2]);
+          vec3 travelOccluderRow1 = cross(travelOccluderLinear[2], travelOccluderLinear[0]);
+          vec3 travelOccluderRow2 = cross(travelOccluderLinear[0], travelOccluderLinear[1]);
+          float travelOccluderDet = dot(travelOccluderLinear[0], travelOccluderRow0);
+          if (abs(travelOccluderDet) > 0.00000001) {
+            vec3 travelOccluderOrigin = travelOccluderTransform[3].xyz;
+            vec3 travelOccluderFrom = uTravelCutawayStart - travelOccluderOrigin;
+            vec3 travelOccluderTo = uTravelCutawayEnd - travelOccluderOrigin;
+            vec3 travelOccluderStart = vec3(dot(travelOccluderRow0, travelOccluderFrom),
+              dot(travelOccluderRow1, travelOccluderFrom), dot(travelOccluderRow2, travelOccluderFrom)) / travelOccluderDet;
+            vec3 travelOccluderEnd = vec3(dot(travelOccluderRow0, travelOccluderTo),
+              dot(travelOccluderRow1, travelOccluderTo), dot(travelOccluderRow2, travelOccluderTo)) / travelOccluderDet;
+            vec3 travelOccluderMargin = vec3(length(travelOccluderRow0), length(travelOccluderRow1),
+              length(travelOccluderRow2)) * (uTravelOccluderShape.x / abs(travelOccluderDet));
+            vec3 travelOccluderDelta = travelOccluderEnd - travelOccluderStart;
+            vec3 travelOccluderSafeDelta = mix(vec3(-1.0), vec3(1.0), step(vec3(0.0), travelOccluderDelta))
+              * max(abs(travelOccluderDelta), vec3(0.00001));
+            vec3 travelOccluderA = (${OCCLUDER_MIN} - travelOccluderMargin - travelOccluderStart) / travelOccluderSafeDelta;
+            vec3 travelOccluderB = (${OCCLUDER_MAX} + travelOccluderMargin - travelOccluderStart) / travelOccluderSafeDelta;
+            vec3 travelOccluderNear = min(travelOccluderA, travelOccluderB);
+            vec3 travelOccluderFar = max(travelOccluderA, travelOccluderB);
+            float travelOccluderEnter = max(0.0, max(travelOccluderNear.x, max(travelOccluderNear.y, travelOccluderNear.z)));
+            float travelOccluderExit = min(1.0, min(travelOccluderFar.x, min(travelOccluderFar.y, travelOccluderFar.z)));
+            vTravelOccluderSelected = step(travelOccluderEnter, travelOccluderExit);
+          }
+        }
+        ${PROJECT}`,
+      );
+      shader.fragmentShader = `
+        varying float vTravelOccluderSelected;
+        varying vec3 vTravelCutawayWorld;
+        uniform float uTravelCutawayEnabled;
+        uniform vec2 uTravelOccluderShape;
         ${shader.fragmentShader}`.replace(
         CLIPPING,
         `${CLIPPING}
-        if (uTravelCutawayEnabled > 0.5
-          && all(greaterThanEqual(vTravelCutawayWorld, uTravelCutawayBoundsMin))
-          && all(lessThanEqual(vTravelCutawayWorld, uTravelCutawayBoundsMax))
-          && vTravelCutawayWorld.y > uTravelCutawayShape.z
-          ${
-            normalPass
-              ? `&& !(distance(vTravelCutawayWorld.xz, uTravelCutawayEnd.xz) < ${SUBJECT_RADIUS.toFixed(2)}
-            && vTravelCutawayWorld.y < uTravelCutawayShape.z + 2.2)`
-              : ''
-          }) {
-          vec3 travelCutawayAxis = uTravelCutawayEnd - uTravelCutawayStart;
-          float travelCutawayLengthSq = dot(travelCutawayAxis, travelCutawayAxis);
-          float travelCutawayT = travelCutawayLengthSq > 0.0001
-            ? dot(vTravelCutawayWorld - uTravelCutawayStart, travelCutawayAxis) / travelCutawayLengthSq : 0.0;
-          // Do not cut background architecture beyond the player's torso.
-          if (travelCutawayT <= 1.0) {
-            float travelCutawayAlong = clamp(travelCutawayT, 0.0, 1.0);
-            float travelCutawayRadius = mix(uTravelCutawayShape.x, uTravelCutawayShape.y, travelCutawayAlong);
-            float travelCutawayDistance = distance(vTravelCutawayWorld,
-              uTravelCutawayStart + travelCutawayAlong * travelCutawayAxis);
-            float travelCutawayCoverage = (1.0 - smoothstep(0.7 * travelCutawayRadius,
-              travelCutawayRadius, travelCutawayDistance)) * uTravelCutawayShape.w;
-            ${
-              normalPass
-                ? `if (travelCutawayCoverage > 0.001) discard;`
-                : `vec2 travelCutawayPixel = mod(floor(gl_FragCoord.xy), 4.0);
-            float travelCutawayThreshold = (4.0 * mod(2.0 * travelCutawayPixel.x + 3.0 * travelCutawayPixel.y, 4.0)
-              + mod(2.0 * floor(travelCutawayPixel.x / 2.0) + 3.0 * floor(travelCutawayPixel.y / 2.0), 4.0) + 0.5) / 16.0;
-            if (travelCutawayThreshold < travelCutawayCoverage) discard;`
-            }
-          }
-        }`,
+        if (uTravelCutawayEnabled > 0.5 && vTravelOccluderSelected > 0.5
+          && vTravelCutawayWorld.y > uTravelOccluderShape.y) discard;`,
       );
     };
     const cacheKey: ProgramKey = () => {
-      // The default key reads this.onBeforeCompile. Present the preceding hook
-      // while invoking the original key, retaining dynamic source variants too.
       // oxlint-disable-next-line typescript/unbound-method
       const current = material.onBeforeCompile;
       material.onBeforeCompile = before;
@@ -245,6 +403,11 @@ export class TravelOcclusion {
         material.onBeforeCompile = before;
       if (material.customProgramCacheKey === cacheKey)
         material.customProgramCacheKey = key;
+      if (defaultsMaterial.defaultAttributeValues === defaults) {
+        if (previousDefaults)
+          defaultsMaterial.defaultAttributeValues = previousDefaults;
+        else delete defaultsMaterial.defaultAttributeValues;
+      }
       material.removeEventListener('dispose', release);
       material.needsUpdate = true;
       this.patches.delete(material);
@@ -278,16 +441,18 @@ export class TravelOcclusion {
       this.clear();
       return;
     }
-    const radius = finiteClamp(options?.radius, 0.9, 0.25, 1.8);
+    const radius = finiteClamp(options?.radius, 0.25, 0.05, 1.8);
     const height = finiteClamp(options?.subjectHeight, 1.1, 0.2, 2.2);
-    const strength = finiteClamp(options?.strength, 0.94, 0, 1);
     const start = this.uniforms.uTravelCutawayStart.value;
     const end = this.uniforms.uTravelCutawayEnd.value;
     start.copy(cameraPosition);
     end.copy(subjectFeet);
     end.y += height;
     this.length = start.distanceTo(end);
-    if (strength === 0 || (this.length < 0.15 && !options?.firstPerson)) {
+    if (
+      finiteClamp(options?.strength, 1, 0, 1) === 0 ||
+      (this.length < 0.15 && !options?.firstPerson)
+    ) {
       this.clear();
       return;
     }
@@ -298,23 +463,7 @@ export class TravelOcclusion {
         .add(end);
       this.length = MAX_LENGTH;
     }
-    const nearRadius = options?.firstPerson
-      ? radius
-      : Math.max(0.22, radius * 0.42);
-    this.uniforms.uTravelCutawayShape.value.set(
-      nearRadius,
-      radius,
-      subjectFeet.y + 0.08,
-      strength,
-    );
-    this.uniforms.uTravelCutawayBoundsMin.value
-      .copy(start)
-      .min(end)
-      .addScalar(-radius);
-    this.uniforms.uTravelCutawayBoundsMax.value
-      .copy(start)
-      .max(end)
-      .addScalar(radius);
+    this.uniforms.uTravelOccluderShape.value.set(radius, subjectFeet.y + 0.08);
     this.uniforms.uTravelCutawayEnabled.value = 1;
   }
 
@@ -323,57 +472,93 @@ export class TravelOcclusion {
     this.length = 0;
   }
 
-  /** Diagnostic coverage before screen-space dither; no scene inspection. */
-  coverageAt(point: THREE.Vector3, options?: { normalPass?: boolean }): number {
+  /** Read-only CPU equivalent of the shader for a particular piece/instance.
+   * Off-ray points on a selected piece are fully removed as well. Unregistered
+   * geometry (such as an avatar in SSAO) always has zero coverage. */
+  coverageAt(point: THREE.Vector3, options?: CoverageOptions): number {
     if (!this.uniforms.uTravelCutawayEnabled.value || !finitePoint(point))
       return 0;
-    const start = this.uniforms.uTravelCutawayStart.value;
-    const end = this.uniforms.uTravelCutawayEnd.value;
-    const shape = this.uniforms.uTravelCutawayShape.value;
-    if (point.y <= shape.z) return 0;
-    if (
-      options?.normalPass &&
-      Math.hypot(point.x - end.x, point.z - end.z) < SUBJECT_RADIUS &&
-      point.y < shape.z + 2.2
-    )
+    const shape = this.uniforms.uTravelOccluderShape.value;
+    if (point.y <= shape.y) return 0;
+    const object = options?.object;
+    if (!object) return 0;
+    const min = object.geometry.getAttribute(OCCLUDER_MIN);
+    const max = object.geometry.getAttribute(OCCLUDER_MAX);
+    const index = options?.vertexIndex ?? 0;
+    if (!min || !max || index < 0 || index >= min.count || index >= max.count)
       return 0;
-    const dx = end.x - start.x,
-      dy = end.y - start.y,
-      dz = end.z - start.z;
-    const lengthSq = dx * dx + dy * dy + dz * dz;
-    const t =
-      lengthSq > 0.0001
-        ? ((point.x - start.x) * dx +
-            (point.y - start.y) * dy +
-            (point.z - start.z) * dz) /
-          lengthSq
-        : 0;
-    if (t > 1) return 0;
-    const along = Math.max(0, t);
-    const radius = shape.x + (shape.y - shape.x) * along;
-    const distance = Math.hypot(
-      point.x - start.x - along * dx,
-      point.y - start.y - along * dy,
-      point.z - start.z - along * dz,
-    );
-    const edge = THREE.MathUtils.clamp((distance / radius - 0.7) / 0.3, 0, 1);
-    return (1 - edge * edge * (3 - 2 * edge)) * shape.w;
+    const lower = new THREE.Vector3().fromBufferAttribute(min, index);
+    const upper = new THREE.Vector3().fromBufferAttribute(max, index);
+    const size = upper.clone().sub(lower);
+    if (size.x < 0 || size.y < 0 || size.z < 0 || size.lengthSq() <= 1e-8)
+      return 0;
+    object.updateWorldMatrix(true, false);
+    const transform = object.matrixWorld.clone();
+    if (object instanceof THREE.InstancedMesh) {
+      const instance = options?.instanceId ?? 0;
+      if (instance < 0 || instance >= object.count) return 0;
+      const matrix = new THREE.Matrix4();
+      object.getMatrixAt(instance, matrix);
+      transform.multiply(matrix);
+    }
+    if (Math.abs(transform.determinant()) <= 1e-8) return 0;
+    const inverse = transform.invert();
+    const elements = inverse.elements;
+    const margin = new THREE.Vector3(
+      Math.hypot(elements[0], elements[4], elements[8]),
+      Math.hypot(elements[1], elements[5], elements[9]),
+      Math.hypot(elements[2], elements[6], elements[10]),
+    ).multiplyScalar(shape.x);
+    lower.sub(margin);
+    upper.add(margin);
+    const start = this.uniforms.uTravelCutawayStart.value
+      .clone()
+      .applyMatrix4(inverse);
+    const end = this.uniforms.uTravelCutawayEnd.value
+      .clone()
+      .applyMatrix4(inverse);
+    let enter = 0,
+      exit = 1;
+    for (const axis of ['x', 'y', 'z'] as const) {
+      const delta = end[axis] - start[axis];
+      const safe = (delta >= 0 ? 1 : -1) * Math.max(Math.abs(delta), 1e-5);
+      const a = (lower[axis] - start[axis]) / safe;
+      const b = (upper[axis] - start[axis]) / safe;
+      enter = Math.max(enter, Math.min(a, b));
+      exit = Math.min(exit, Math.max(a, b));
+    }
+    return enter <= exit ? 1 : 0;
+  }
+
+  private geometrySnapshot() {
+    let count = 0,
+      pieces = 0;
+    for (const reference of this.geometryReferences) {
+      const patch = reference.deref();
+      if (patch) {
+        count++;
+        pieces += patch.metadata.pieces;
+      } else this.geometryReferences.delete(reference);
+    }
+    return { count, pieces };
   }
 
   snapshot() {
-    const shape = this.uniforms.uTravelCutawayShape.value;
     return {
       active: this.uniforms.uTravelCutawayEnabled.value === 1,
+      mode: 'full-occluder' as const,
       disposed: this.disposed,
       materialCount: this.patches.size,
       meshCount: this.meshCount,
       watchedObjects: this.watched.size,
+      geometryCount: this.geometrySnapshot().count,
+      pieceCount: this.geometrySnapshot().pieces,
       unsupportedMaterialCount: this.unsupportedCount,
       shaderFailures: this.shaderFailures,
       updates: this.updates,
       length: this.length,
-      radius: shape.y,
-      strength: shape.w,
+      radius: this.uniforms.uTravelOccluderShape.value.x,
+      strength: this.uniforms.uTravelCutawayEnabled.value,
       start:
         this.uniforms.uTravelCutawayStart.value.toArray() as unknown as Point,
       end: this.uniforms.uTravelCutawayEnd.value.toArray() as unknown as Point,
@@ -392,10 +577,20 @@ export class TravelOcclusion {
     this.watched.clear();
     this.meshCount = 0;
     for (const patch of this.patches.values()) patch.release();
+    for (const reference of this.geometryReferences)
+      reference.deref()?.release();
+    this.geometryReferences.clear();
   }
 }
 
 function noRelease() {}
+function eligibleMaterial(material: THREE.Material) {
+  return (
+    !material.transparent &&
+    material.opacity >= 1 &&
+    material.userData.travelOcclusion !== false
+  );
+}
 function excluded(object: THREE.Object3D) {
   return (
     object.userData.travelOcclusion === false ||
@@ -411,7 +606,6 @@ function allowedAncestors(object: THREE.Object3D) {
   }
   return true;
 }
-
 function finitePoint(point: THREE.Vector3) {
   return (
     Number.isFinite(point.x) &&
@@ -431,5 +625,15 @@ function finiteClamp(
       max,
       value !== undefined && Number.isFinite(value) ? value : fallback,
     ),
+  );
+}
+
+function groundSurface(object: THREE.Object3D) {
+  return (
+    object.userData.walkSurface === true ||
+    object.userData.groundObstruction === true ||
+    object.name.startsWith('Road paint ') ||
+    object.name.startsWith('South motor ramp white edges ') ||
+    object.name.startsWith('Northbound exit white edges ')
   );
 }

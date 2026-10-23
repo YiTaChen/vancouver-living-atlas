@@ -179,6 +179,31 @@ const open = (visit) => {
   for (let i = 0; i < 25; i++) visit.update(0.05);
 };
 
+test('a real boardable bus enrolls its cabin in walking occlusion and releases it when closed', async () => {
+  const { TravelOcclusion } = await import(cityModule('travel-occlusion'));
+  const f = await fixture(),
+    occlusion = new TravelOcclusion(),
+    prepared = [];
+  f.city.prepareTravelOccluders = (group) => {
+    assert.equal(group.parent, f.city.scene);
+    prepared.push(group);
+    occlusion.refresh([group]);
+  };
+  try {
+    assert.equal(await f.visit.prepare(), true);
+    assert.deepEqual(prepared, [f.owner.group]);
+    assert(occlusion.snapshot().meshCount > 0);
+    assert(occlusion.snapshot().materialCount > 0);
+    assert.equal(f.visit.close(), true);
+    assert.equal(occlusion.snapshot().watchedObjects, 0);
+    assert.equal(occlusion.snapshot().meshCount, 0);
+    assert.equal(occlusion.snapshot().materialCount, 0);
+  } finally {
+    f.visit.dispose();
+    occlusion.dispose();
+  }
+});
+
 test('parking checks front/rear clearance, entire footprint and exact ground identity', () => {
   const { city } = cityFixture();
   const placement = findBusVisitPlacement(city, routes);
