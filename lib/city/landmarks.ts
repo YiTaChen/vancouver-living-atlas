@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { SECONDARY_LANDMARK_PLACEMENTS } from './assets/secondary-landmarks';
 import { VANCOUVER_HOUSE_CONTRACT } from './assets/vancouver-house';
 import { LandmarkDetail } from './landmark-detail';
+import { SiwashRockDetail } from './siwash-rock-detail';
 import {
   createLandmarkGroundSampler,
   landmarkLocalXZ,
@@ -248,12 +249,9 @@ export function createLandmarks(engine: CityEngine) {
   for (const s of engine.data.bridges.mainSpines)
     bridge(b, engine, s.start, s.end, s.estimatedDeckM, s.kind);
   b.collisionScope = false;
-  // Siwash Rock, the outcrop off Stanley Park's western cliffs.
-  b.at(-123.15987, 49.30552, 0, 0);
-  b.cylinder(4.2, 9.5, 17, 0x756d5b, 0, 8.5, 0, 7);
-  b.cylinder(4, 4.8, 1.4, 0x56713b, 0, 17.5, 0, 7);
-  b.cylinder(0, 3.6, 9, 0x2d523f, 0, 22, 0, 6);
   b.finish();
+  // Terrain-aligned offshore anchor, without new boat/flight solids.
+  engine.siwashRock = new SiwashRockDetail(engine);
 }
 function bridge(
   b: Builder,

@@ -308,6 +308,7 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       'Furniture: focus',
       'Street furniture QA ready',
       'city-street-furniture-webgl-v1',
+      'Park scenery QA:',
       'Tesla QA: spawn Robson',
       'Tesla QA ready',
       'city-tesla-webgl-v1',
@@ -323,10 +324,15 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       await f.put(f.output, 'assets/auto-qa.js', JSON.stringify(marker));
       await assert.rejects(
         verifyFirebaseBuild(f.output, options),
-        /(?:Auto quality|Street furniture|Tesla|Runtime performance) diagnostics/,
+        /(?:Auto quality|Street furniture|Park scenery|Tesla|Runtime performance) diagnostics/,
       );
     }
     await f.put(f.output, 'assets/auto-qa.js', '');
+    for (const name of ['assets/park-scenery-qa.js', 'assets/park-scenery-qa-deadbeef.js']) {
+      await f.put(f.output, name, 'export const instrumented = true;');
+      await assert.rejects(verifyFirebaseBuild(f.output, options), /Park scenery diagnostics/);
+      await rm(path.join(f.output, name));
+    }
     for (const name of ['assets/runtime-performance.js', 'assets/runtime-performance-deadbeef.js', 'assets/runtime-gpu-timing-deadbeef.js']) {
       await f.put(f.output, name, 'export const instrumented = true;');
       await assert.rejects(verifyFirebaseBuild(f.output, options), /Runtime performance diagnostics/);
