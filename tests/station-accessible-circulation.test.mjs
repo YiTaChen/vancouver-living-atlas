@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { rebuildWaterfront } from '../tools/station-interiors/waterfront.mjs';
 import {
   rebuildBurrard,
   rebuildGranville,
@@ -14,6 +15,11 @@ const packet = JSON.parse(
   readFileSync('tools/assets/skytrain-stations-stage2/station-layout.json'),
 );
 for (const [id, rebuild, entryNames] of [
+  [
+    'waterfront',
+    rebuildWaterfront,
+    ['waterfront-cordova-entry', 'cordova-lobby'],
+  ],
   ['burrard', rebuildBurrard, []],
   ['granville', rebuildGranville, ['granville-dunsmuir-entry']],
   [

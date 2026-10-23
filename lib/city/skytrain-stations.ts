@@ -98,6 +98,9 @@ export interface StationPart {
   quaternion?: StationQuaternion;
   material: string;
   role: string;
+  /** Explicit visible slab generated from this exact walking triangle mesh.
+   * Source cut-piece ownership uses a different, non-rendering field. */
+  renderFloorSurfaceId?: string;
 }
 interface StationObstacle {
   id: string;
@@ -120,6 +123,16 @@ interface AuthoredStationInterior {
   dimensions: 'representative';
   primaryEntrance?: string;
   streetEntranceMap?: Record<string, string>;
+  /** Physical continuations into an existing public pedestrian interior.
+   * The portal is derived from the actual floor edge, after frame adaptation. */
+  publicInteriorLinks?: {
+    id: string;
+    surfaceId: string;
+    endEdge: [number, number];
+    insetM: number;
+    widthM: number;
+    publicInterior: string;
+  }[];
   [key: string]: unknown;
 }
 export interface RuntimeStationData {
@@ -176,6 +189,9 @@ export interface SkyTrainStationOptions {
   streetHeightAt?: (x: number, z: number) => number;
   scene?: THREE.Scene;
   fetchStation?: (id: StationId, signal: AbortSignal) => Promise<unknown>;
+  /** Prepare a completed owner immediately before construction; release on
+   * failure or disposal. Metadata-only describe() never invokes this hook. */
+  prepareOwner?: (data: RuntimeStationData) => (() => void) | undefined;
 }
 const ids = new Set(SKYTRAIN_STATIONS.map((s) => s.id));
 const finiteVector = (value: unknown, n = 3): value is StationVector =>
@@ -355,9 +371,35 @@ export function validateRuntimeStation(
     )
       fail();
   }
+  const renderedFloors = new Set<string>();
   for (const raw of d.parts) {
     const p = record(raw);
     if (typeof p.material !== 'string' || typeof p.role !== 'string') fail();
+    if (p.renderFloorSurfaceId !== undefined) {
+      if (
+        !d.authoredInterior ||
+        p.role !== 'floor' ||
+        typeof p.renderFloorSurfaceId !== 'string' ||
+        !floorIds.has(p.renderFloorSurfaceId) ||
+        renderedFloors.has(p.renderFloorSurfaceId)
+      )
+        fail();
+      const floor = (floors as StationFloor[]).find(
+        (floor) => floor.id === p.renderFloorSurfaceId,
+      )!;
+      for (let i = 0; i < floor.indices.length; i += 3) {
+        const [a, b, c] = floor.indices
+          .slice(i, i + 3)
+          .map((index) => floor.vertices[index]);
+        if (
+          Math.abs(
+            (b[0] - a[0]) * (c[2] - a[2]) - (b[2] - a[2]) * (c[0] - a[0]),
+          ) < 1e-9
+        )
+          fail();
+      }
+      renderedFloors.add(p.renderFloorSurfaceId as string);
+    }
   }
   if (d.authoredInterior !== undefined) {
     const interior = record(d.authoredInterior);
@@ -381,6 +423,51 @@ export function validateRuntimeStation(
     if (interior.streetEntranceMap !== undefined) {
       const mapping = record(interior.streetEntranceMap);
       if (!Object.values(mapping).every((id) => typeof id === 'string')) fail();
+    }
+    if (interior.publicInteriorLinks !== undefined) {
+      if (
+        !Array.isArray(interior.publicInteriorLinks) ||
+        interior.publicInteriorLinks.length > 8
+      )
+        fail();
+      const linkIds = new Set<string>();
+      for (const raw of interior.publicInteriorLinks) {
+        const link = record(raw),
+          floor = (d.floors as StationFloor[]).find(
+            (floor) => floor.id === link.surfaceId,
+          );
+        if (
+          typeof link.id !== 'string' ||
+          !link.id ||
+          linkIds.has(link.id) ||
+          typeof link.publicInterior !== 'string' ||
+          !link.publicInterior ||
+          !floor ||
+          floor.vertices.length !== 4 ||
+          !Array.isArray(link.endEdge) ||
+          link.endEdge.length !== 2 ||
+          link.endEdge[0] === link.endEdge[1] ||
+          !link.endEdge.every(
+            (i) => Number.isInteger(i) && i >= 0 && i < floor.vertices.length,
+          ) ||
+          typeof link.insetM !== 'number' ||
+          !Number.isFinite(link.insetM) ||
+          link.insetM < 0.6 ||
+          link.insetM > 3 ||
+          typeof link.widthM !== 'number' ||
+          !Number.isFinite(link.widthM) ||
+          link.widthM < 0.8 ||
+          link.widthM > 20
+        )
+          fail();
+        const [a, b] = link.endEdge.map((i) => floor.vertices[i]);
+        if (
+          Math.hypot(a[0] - b[0], a[2] - b[2]) < link.widthM - 1e-6 ||
+          floor.vertices.some((p) => Math.abs(p[1] - a[1]) > 1e-6)
+        )
+          fail();
+        linkIds.add(link.id);
+      }
     }
     for (const raw of interior.references) {
       const reference = record(raw);
@@ -498,6 +585,8 @@ const palette: Record<string, number> = {
   gate: 0x87989e,
   escalator: 0x354047,
   cream: 0xe4dfd2,
+  heritageRose: 0xb98f9b,
+  heritageBlue: 0xaab7c2,
   white: 0xf0eee6,
   red: 0x963d36,
   black: 0x20282b,
@@ -563,6 +652,115 @@ export function stationWorldPose(
       .multiply(new THREE.Quaternion().fromArray(quaternion))
       .toArray(),
   };
+}
+
+/** Bake an explicitly declared walking slab into the existing material batch.
+ * A tilted box cannot represent a non-planar miter: its rectangular overhang
+ * can project above the actual foot plane or leave a wedge unsupported visually.
+ * Top triangles are the unchanged walking mesh; extrusion is strictly vertical.
+ */
+function authoredFloorGeometry(
+  parts: readonly StationPart[],
+  floors: readonly StationFloor[],
+  cube: THREE.BufferGeometry,
+) {
+  const positions: number[] = [],
+    trianglePartIds: string[] = [],
+    partRanges: {
+      id: string;
+      role: string;
+      vertexStart: number;
+      vertexCount: number;
+      renderFloorSurfaceId?: string;
+    }[] = [],
+    floorMap = new Map(floors.map((floor) => [floor.id, floor])),
+    vertex = cube.getAttribute('position'),
+    index = cube.getIndex()!;
+  const triangle = (
+    id: string,
+    a: THREE.Vector3,
+    b: THREE.Vector3,
+    c: THREE.Vector3,
+  ) => {
+    positions.push(...a.toArray(), ...b.toArray(), ...c.toArray());
+    trianglePartIds.push(id);
+  };
+  for (const part of parts) {
+    const vertexStart = positions.length / 3,
+      floor =
+        part.renderFloorSurfaceId && floorMap.get(part.renderFloorSurfaceId);
+    if (floor) {
+      const vertices = floor.vertices.map((p) => new THREE.Vector3(...p)),
+        edges = new Map<string, { a: number; b: number; count: number }>(),
+        down = (p: THREE.Vector3) =>
+          p.clone().add(new THREE.Vector3(0, -0.3, 0));
+      for (let i = 0; i < floor.indices.length; i += 3) {
+        const ids = floor.indices.slice(i, i + 3),
+          normal = vertices[ids[1]]
+            .clone()
+            .sub(vertices[ids[0]])
+            .cross(vertices[ids[2]].clone().sub(vertices[ids[0]]));
+        if (normal.y < 0) [ids[1], ids[2]] = [ids[2], ids[1]];
+        const [a, b, c] = ids.map((id) => vertices[id]);
+        triangle(part.id, a, b, c);
+        triangle(part.id, down(a), down(c), down(b));
+        for (let e = 0; e < 3; e++) {
+          const a = ids[e],
+            b = ids[(e + 1) % 3],
+            key = a < b ? `${a}:${b}` : `${b}:${a}`,
+            previous = edges.get(key);
+          if (previous) previous.count++;
+          else edges.set(key, { a, b, count: 1 });
+        }
+      }
+      for (const edge of edges.values()) {
+        if (edge.count !== 1) continue;
+        const a = vertices[edge.a],
+          b = vertices[edge.b];
+        triangle(part.id, a, down(a), down(b));
+        triangle(part.id, a, down(b), b);
+      }
+    } else {
+      const rotation = part.quaternion
+          ? new THREE.Quaternion(...part.quaternion)
+          : new THREE.Quaternion().setFromAxisAngle(
+              new THREE.Vector3(0, 1, 0),
+              (part.yaw * Math.PI) / 180,
+            ),
+        matrix = new THREE.Matrix4().compose(
+          new THREE.Vector3(...part.position),
+          rotation,
+          new THREE.Vector3(...part.size),
+        );
+      for (let i = 0; i < index.count; i += 3)
+        triangle(
+          part.id,
+          ...([0, 1, 2].map((j) =>
+            new THREE.Vector3()
+              .fromBufferAttribute(vertex, index.getX(i + j))
+              .applyMatrix4(matrix),
+          ) as [THREE.Vector3, THREE.Vector3, THREE.Vector3]),
+        );
+    }
+    partRanges.push({
+      id: part.id,
+      role: part.role,
+      vertexStart,
+      vertexCount: positions.length / 3 - vertexStart,
+      ...(part.renderFloorSurfaceId
+        ? { renderFloorSurfaceId: part.renderFloorSurfaceId }
+        : {}),
+    });
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(positions, 3),
+  );
+  geometry.computeVertexNormals();
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+  return { geometry, trianglePartIds, partRanges };
 }
 
 /** An owner exposes only foot origins on exact station-owned pedestrian floors.
@@ -760,6 +958,81 @@ export class SkyTrainStationOwner {
       mesh?.userData.stationFloorIds?.includes(surfaceId),
     );
   }
+  /** Resolve continuation portals from the adapted flat overlap itself. No
+   * untransformed survey coordinate or additional street entrance is used. */
+  private publicInteriorPortals() {
+    if (!this.openWorld || this.disposed) return [];
+    return (this.geometryData.authoredInterior?.publicInteriorLinks ?? [])
+      .map((link) => {
+        const floor = this.floorMap.get(link.surfaceId),
+          slab = this.geometryData.parts.find(
+            (part) =>
+              part.id === `floor-${link.surfaceId}` && part.role === 'floor',
+          );
+        if (!floor || !slab) return null;
+        const end = new THREE.Vector3()
+            .fromArray(floor.vertices[link.endEdge[0]])
+            .add(new THREE.Vector3(...floor.vertices[link.endEdge[1]]))
+            .multiplyScalar(0.5),
+          start = new THREE.Vector3();
+        for (let i = 0; i < floor.vertices.length; i++)
+          if (!link.endEdge.includes(i))
+            start.add(new THREE.Vector3(...floor.vertices[i]));
+        start.multiplyScalar(0.5);
+        const inward = start.sub(end).setY(0),
+          length = inward.length();
+        if (length < link.insetM - 1e-6) return null;
+        inward.divideScalar(length);
+        return {
+          surfaceId: link.surfaceId,
+          point: end.addScaledVector(inward, link.insetM),
+          inward,
+          halfWidth: link.widthM / 2 - 0.24,
+        };
+      })
+      .filter((portal) => portal !== null);
+  }
+  private enterPublicInteriorLink(local: StationVector, maxSnap: number) {
+    for (const portal of this.publicInteriorPortals()) {
+      const delta = new THREE.Vector3(...local).sub(portal.point),
+        along = delta.dot(portal.inward),
+        across = delta.x * portal.inward.z - delta.z * portal.inward.x;
+      // Leave a physical hysteresis band before the -0.35 m release line.
+      // Otherwise a still-held outward key immediately reacquires the owner.
+      if (along < -0.15 || along > 1.8 || Math.abs(across) > portal.halfWidth)
+        continue;
+      for (const surfaceId of [
+        portal.surfaceId,
+        ...(this.adjacency.get(portal.surfaceId) ?? []),
+      ]) {
+        const foot = this.floorAt(local, surfaceId);
+        if (
+          foot &&
+          Math.abs(foot.position[1] - local[1]) <= maxSnap &&
+          this.supported(foot)
+        )
+          return foot;
+      }
+    }
+    return null;
+  }
+  private exitPublicInteriorLink(point: StationPoint) {
+    for (const portal of this.publicInteriorPortals()) {
+      const foot = this.floorAt(point.position, portal.surfaceId);
+      if (!foot || Math.abs(foot.position[1] - point.position[1]) > 1e-6)
+        continue;
+      const delta = new THREE.Vector3(...point.position).sub(portal.point),
+        along = delta.dot(portal.inward),
+        across = delta.x * portal.inward.z - delta.z * portal.inward.x;
+      if (
+        along <= -0.35 &&
+        Math.abs(across) <= portal.halfWidth &&
+        this.supported(foot)
+      )
+        return this.toWorld(point);
+    }
+    return null;
+  }
   tryEnterFromStreet(
     worldPosition: StationVector,
     maxSnap = 0.22,
@@ -785,7 +1058,7 @@ export class SkyTrainStationOwner {
       )
         return foot;
     }
-    return null;
+    return this.enterPublicInteriorLink(local, maxSnap);
   }
   streetExit(point: StationPoint): StationVector | null {
     if (!this.streetAccess || !this.isClearFoot(point)) return null;
@@ -799,7 +1072,7 @@ export class SkyTrainStationOwner {
       const release = this.hasRenderedStreetApron(e.surfaceId) ? -3 : -2.45;
       if (along <= release) return this.toWorld(point);
     }
-    return null;
+    return this.exitPublicInteriorLink(point);
   }
   worldWalk(from: StationPoint, dx: number, dz: number): StationPoint {
     const direction = new THREE.Vector3(dx, 0, dz).applyQuaternion(
@@ -1041,11 +1314,19 @@ export class SkyTrainStationOwner {
       const alongX = part.size[0] > part.size[2];
       const length = alongX ? part.size[0] : part.size[2];
       const slots = Math.max(1, Math.floor(length / 0.6));
-      const angle = (part.yaw * Math.PI) / 180;
-      const rotate = (x: number, z: number): [number, number] => [
-        x * Math.cos(angle) + z * Math.sin(angle),
-        -x * Math.sin(angle) + z * Math.cos(angle),
-      ];
+      // Authored assembly transforms store a quaternion instead of yaw. Match
+      // the rendered cushion/body frame for both the seats and their fronts.
+      const rotation = part.quaternion
+          ? new THREE.Quaternion(...part.quaternion)
+          : new THREE.Quaternion().setFromAxisAngle(
+              new THREE.Vector3(0, 1, 0),
+              (part.yaw * Math.PI) / 180,
+            ),
+        offsetVector = new THREE.Vector3();
+      const rotate = (x: number, z: number): [number, number] => {
+        offsetVector.set(x, 0, z).applyQuaternion(rotation);
+        return [offsetVector.x, offsetVector.z];
+      };
       for (let slot = 0; slot < slots; slot++) {
         const along = (slot - (slots - 1) / 2) * 0.58;
         const [sx, sz] = rotate(alongX ? along : 0, alongX ? 0 : along);
@@ -1110,6 +1391,18 @@ export class SkyTrainStationOwner {
     const floor = this.floorAt(point.position, point.surfaceId);
     return Boolean(
       floor && floor.layer === point.layer && this.supported(floor),
+    );
+  }
+  /** Collision guard for a capsule supported jointly by a declared station
+   * continuation and the adjacent, physically retained public floor. */
+  isClearBody(position: StationVector, radius = 0.24) {
+    return (
+      !this.disposed &&
+      finiteVector(position) &&
+      Number.isFinite(radius) &&
+      radius >= 0 &&
+      radius <= 2 &&
+      !this.blocked(position, radius)
     );
   }
   floorAt(position: StationVector, surfaceId?: string): StationPoint | null {
@@ -1509,6 +1802,26 @@ export class SkyTrainStationOwner {
                 clipShadows: true,
               });
       this.resources.add(material);
+      if (items.some((part) => part.renderFloorSurfaceId !== undefined)) {
+        const baked = authoredFloorGeometry(
+            items,
+            this.geometryData.floors,
+            geometry,
+          ),
+          mesh = new THREE.Mesh(baked.geometry, material);
+        this.resources.add(baked.geometry);
+        mesh.name = `station-authored-${key.replace(':', '-')}`;
+        mesh.userData.stationPartIds = items.map((part) => part.id);
+        mesh.userData.stationPartRoles = items.map((part) => part.role);
+        mesh.userData.stationTrianglePartIds = baked.trianglePartIds;
+        mesh.userData.stationPartRanges = baked.partRanges;
+        mesh.userData.stationOverhead = false;
+        mesh.userData.stationCutawayPlane = this.cutawayPlane;
+        mesh.castShadow = false;
+        mesh.receiveShadow = true;
+        this.group.add(mesh);
+        continue;
+      }
       const mesh = new THREE.InstancedMesh(geometry, material, items.length),
         matrix = new THREE.Matrix4(),
         rotation = new THREE.Quaternion();
@@ -2466,6 +2779,7 @@ export class SkyTrainStations {
     StationId,
     Promise<SkyTrainStationOwner>
   >();
+  private readonly ownerReleases = new Map<StationId, () => void>();
   private worldMode = false;
   private readonly cache = new Map<StationId, RuntimeStationData>();
   private controller: AbortController | null = null;
@@ -2494,16 +2808,23 @@ export class SkyTrainStations {
     const request = this.describe(id)
       .then((data) => {
         if (this.disposed) throw new Error('Station load superseded');
-        const owner = new SkyTrainStationOwner(
-          data,
-          this.options.heightAt,
-          quality,
-          true,
-          this.options.streetHeightAt,
-        );
-        this.ownersById.set(id, owner);
-        this.options.scene?.add(owner.group);
-        return owner;
+        const release = this.options.prepareOwner?.(data);
+        try {
+          const owner = new SkyTrainStationOwner(
+            data,
+            this.options.heightAt,
+            quality,
+            true,
+            this.options.streetHeightAt,
+          );
+          this.ownersById.set(id, owner);
+          if (release) this.ownerReleases.set(id, release);
+          this.options.scene?.add(owner.group);
+          return owner;
+        } catch (error) {
+          release?.();
+          throw error;
+        }
       })
       .finally(() => this.ownerRequests.delete(id));
     this.ownerRequests.set(id, request);
@@ -2546,6 +2867,7 @@ export class SkyTrainStations {
         ? this.options.fetchStation(id, controller.signal)
         : fetch(`/models/skytrain-stations/${id}.json`, {
             signal: controller.signal,
+            cache: 'no-cache',
           }).then((r) => {
             if (!r.ok) throw new Error(`Station layout ${r.status}`);
             return r.json() as Promise<unknown>;
@@ -2583,6 +2905,7 @@ export class SkyTrainStations {
         ? this.options.fetchStation(id, controller.signal)
         : fetch(`/models/skytrain-stations/${id}.json`, {
             signal: controller.signal,
+            cache: 'no-cache',
           }).then((r) => {
             if (!r.ok) throw new Error(`Station layout ${r.status}`);
             return r.json() as Promise<unknown>;
@@ -2631,6 +2954,8 @@ export class SkyTrainStations {
     this.active?.dispose();
     for (const owner of this.ownersById.values()) owner.dispose();
     this.ownersById.clear();
+    for (const release of this.ownerReleases.values()) release();
+    this.ownerReleases.clear();
     this.ownerRequests.clear();
     this.active = null;
     this.cache.clear();

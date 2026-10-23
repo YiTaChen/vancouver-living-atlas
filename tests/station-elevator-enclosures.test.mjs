@@ -5,6 +5,7 @@ import {
   makeRuntimeStation,
   SOURCE,
 } from '../tools/build-skytrain-runtime-stations.mjs';
+import { rebuildWaterfront } from '../tools/station-interiors/waterfront.mjs';
 import {
   rebuildBurrard,
   rebuildGranville,
@@ -17,6 +18,7 @@ import { cityModule } from './helpers/city-modules.mjs';
 const { SkyTrainStationOwner } = await import(cityModule('skytrain-stations'));
 const packet = JSON.parse(readFileSync(SOURCE));
 for (const [id, rebuild] of [
+  ['waterfront', rebuildWaterfront],
   ['burrard', rebuildBurrard],
   ['granville', rebuildGranville],
   ['stadium-chinatown', rebuildStadium],

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: 'Vancouver · Living Atlas',
   description:
     'Explore Downtown Vancouver, Stanley Park and Science World in an original interactive 3D city built from geographic data, with terrain, buildings, beaches and parks.',
+  icons: { icon: '/favicon.svg' },
 };
 export default function RootLayout({
   children,

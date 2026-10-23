@@ -164,6 +164,186 @@ function assertStableChase(h, seat, label, checkFraming = true) {
     }
 }
 
+test('real station camera modes raise only the active floor-footprint opening and clear it immediately on first person, city exit and placement', () => {
+  const owner = new SkyTrainStationOwner(
+      station('waterfront'),
+      cityElevation,
+      'balanced',
+      true,
+    ),
+    h = controller(null, null),
+    calls = [],
+    link = owner.geometryData.authoredInterior.publicInteriorLinks[0],
+    floor = owner.geometryData.floors.find((f) => f.id === link.surfaceId),
+    end = new THREE.Vector3(...floor.vertices[1])
+      .add(new THREE.Vector3(...floor.vertices[2]))
+      .multiplyScalar(0.5),
+    start = new THREE.Vector3(...floor.vertices[0])
+      .add(new THREE.Vector3(...floor.vertices[3]))
+      .multiplyScalar(0.5),
+    outward = end.clone().sub(start).normalize(),
+    release = owner.floorAt(
+      start.clone().addScaledVector(outward, 0.4).toArray(),
+      floor.id,
+    );
+  assert(release && owner.isClearFoot(release));
+  Object.assign(h.view, {
+    occupied: null,
+    phase: 'station',
+    owner,
+    foot: release,
+    station: 'waterfront',
+    cabinSeat: null,
+    stationSeat: null,
+    keys: new Set(),
+    axes: { x: 0, y: 0 },
+    openings: {
+      setViewCutaway: (active, ceiling, camera) =>
+        calls.push({ owner: active, ceiling, camera: camera?.clone() }),
+    },
+    clearInput() {
+      this.keys.clear();
+      this.axes = { x: 0, y: 0 };
+    },
+    publish() {},
+    resetSeat() {},
+    clearTube() {},
+  });
+  Object.assign(h.city, {
+    elevation: cityElevation,
+    onLocalOrbit() {},
+    onTravelResume() {},
+  });
+  h.city.controls.update = () => {};
+  Object.assign(h.city.navigation, {
+    keys: new Set(),
+    blur() {
+      this.keys.clear();
+    },
+    setTouchAxes() {},
+  });
+  try {
+    assertStableChase(h, null, 'footprint cutaway retains exact chase');
+    assert.equal(calls.at(-1).owner, owner);
+    assert.equal(calls.at(-1).ceiling, h.city.camera.position.y + 0.2);
+    assert.deepEqual(
+      calls.at(-1).camera.toArray(),
+      h.city.camera.position.toArray(),
+    );
+    h.view.distanceView = 0.8;
+    h.view.updateCamera();
+    assert.equal(calls.at(-1).owner, null);
+    assert.equal(calls.at(-1).camera, undefined);
+    h.view.distanceView = 7;
+    h.view.updateCamera();
+    assert.equal(calls.at(-1).owner, owner);
+    assert(h.view.setOverview(true));
+    assert.equal(calls.at(-1).owner, owner);
+    h.city.camera.position.y += 37;
+    h.view.updateCamera();
+    assert.equal(
+      calls.at(-1).ceiling,
+      h.city.camera.position.y + 0.2,
+      'orbit movement updates the actual camera bound',
+    );
+    assert.deepEqual(
+      calls.at(-1).camera.toArray(),
+      h.city.camera.position.toArray(),
+    );
+    assert(h.view.setOverview(false));
+    assert.equal(calls.at(-1).owner, owner);
+    h.city.settings.mode = 'drive';
+    h.view.updateCamera();
+    assert.equal(calls.at(-1).owner, null);
+    h.city.settings.mode = 'orbit';
+    h.view.occupied = {};
+    h.view.updateCamera();
+    assert.equal(
+      calls.at(-1).owner,
+      null,
+      'a train passenger cannot cut a station footprint',
+    );
+    h.view.occupied = null;
+    h.city.settings.mode = 'walk';
+    h.view.updateCamera();
+    assert(
+      h.view.leave(),
+      'actual supported public connector releases to the city',
+    );
+    assert.equal(calls.at(-1).owner, null);
+    Object.assign(h.view, {
+      phase: 'station',
+      owner,
+      foot: release,
+      station: 'waterfront',
+    });
+    h.view.updateCamera();
+    assert.equal(calls.at(-1).owner, owner);
+    assert(h.view.releaseForPlacement());
+    assert.equal(calls.at(-1).owner, null);
+  } finally {
+    owner.dispose();
+  }
+});
+
+test('normal material registration survives either load order and pending/disposed composer cleanup never replays a stale material', () => {
+  const h = controller(null, null),
+    registered = [],
+    released = [],
+    openings = {
+      prepareGroundMaterial(material) {
+        registered.push(material);
+        return () => released.push(material);
+      },
+    };
+  h.view.groundOpeningMaterials = new Map();
+  const cancelled = new THREE.MeshNormalMaterial(),
+    pending = new THREE.MeshNormalMaterial(),
+    disposed = new THREE.MeshNormalMaterial();
+  const cancel = h.view.prepareGroundOpeningMaterial(cancelled),
+    pendingRelease = h.view.prepareGroundOpeningMaterial(pending);
+  h.view.prepareGroundOpeningMaterial(disposed);
+  disposed.dispose();
+  cancel();
+  cancel();
+  assert.equal(
+    registered.length,
+    0,
+    'registration before async station loading is deferred',
+  );
+  h.view.openings = openings;
+  h.view.bindGroundOpeningMaterials();
+  assert.deepEqual(
+    registered,
+    [pending],
+    'only a still-live composer is replayed after openings creation',
+  );
+  h.view.bindGroundOpeningMaterials();
+  assert.equal(registered.length, 1, 'late replay is idempotent');
+  const secondLease = h.view.prepareGroundOpeningMaterial(pending);
+  pendingRelease();
+  assert.equal(
+    released.length,
+    0,
+    'another live registration retains its shared patch',
+  );
+  secondLease();
+  secondLease();
+  assert.deepEqual(released, [pending]);
+  const ready = new THREE.MeshNormalMaterial(),
+    readyRelease = h.view.prepareGroundOpeningMaterial(ready);
+  assert.deepEqual(
+    registered,
+    [pending, ready],
+    'openings-first order binds immediately',
+  );
+  ready.dispose();
+  readyRelease();
+  assert.deepEqual(released, [pending, ready]);
+  assert.equal(h.view.groundOpeningMaterials.size, 0);
+  for (const material of [cancelled, pending, ready]) material.dispose();
+});
+
 for (const line of ['expo', 'canada']) {
   test(`${line}: all actual seats keep the requested rear chase through walls at every zoom and aspect without camera searches`, async () => {
     const train = await actualTrain(line);
@@ -285,6 +465,7 @@ test('every actual station bench retains a stable rear camera beneath its roof w
 test('all physical station stair routes retain chase heading on ascent and descent through actual treads and roofs', () => {
   let checkedRoutes = 0,
     heightChanges = 0;
+  const checkedByStation = {};
   for (const id of stationIds) {
     const owner = new SkyTrainStationOwner(
       station(id),
@@ -293,6 +474,7 @@ test('all physical station stair routes retain chase heading on ascent and desce
       true,
     );
     try {
+      checkedByStation[id] = owner.streetRoutes().length;
       for (const route of owner.streetRoutes()) {
         checkedRoutes++;
         for (const points of [route.points, [...route.points].reverse()]) {
@@ -309,7 +491,10 @@ test('all physical station stair routes retain chase heading on ascent and desce
           let previousY;
           for (const point of points) {
             const foot = owner.floorAt(point);
-            assert(foot && owner.isClearFoot(foot));
+            assert(
+              foot && owner.isClearFoot(foot),
+              `${id}/${route.entranceId}: unsupported camera route point ${point}; foot ${JSON.stringify(foot)}`,
+            );
             h.view.foot = foot;
             if (
               previousY !== undefined &&
@@ -325,7 +510,20 @@ test('all physical station stair routes retain chase heading on ascent and desce
       owner.dispose();
     }
   }
-  assert.equal(checkedRoutes, 20);
+  assert.deepEqual(
+    checkedByStation,
+    {
+      waterfront: 6,
+      burrard: 4,
+      granville: 6,
+      'stadium-chinatown': 3,
+      'main-street-science-world': 1,
+      'vancouver-city-centre': 1,
+      'yaletown-roundhouse': 1,
+    },
+    'every true walking entrance serves its reachable platform; separate street lifts require native F instead',
+  );
+  assert.equal(checkedRoutes, 22);
   assert(
     heightChanges > 20,
     'the actual route samples include rising and descending station geometry',

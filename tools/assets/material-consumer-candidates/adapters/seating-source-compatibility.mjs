@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { projectBeforeWalkCamera } from './camera-source-compatibility.mjs';
+import { projectBeforeWaterfrontAuthority } from './waterfront-authority-source-compatibility.mjs';
 
 export const SEATING_REVIEW_BASE = '53bb3c6';
 const sha = (value) => createHash('sha256').update(value).digest('hex');
@@ -16,9 +17,10 @@ function exact(source, before, after, label) {
 
 /** Remove only the reviewed character delta; seated-source baselines keep seats. */
 export function projectBeforeCharacter(path, source) {
-  const camera = projectBeforeWalkCamera(path, source);
+  const authority = projectBeforeWaterfrontAuthority(path, source);
+  const camera = projectBeforeWalkCamera(path, authority.source);
   source = camera.source;
-  const reviewed = [...camera.reviewed];
+  const reviewed = [...authority.reviewed, ...camera.reviewed];
   const remove = (before, after, label) => {
     source = exact(source, before, after, label);
     reviewed.push(label);
@@ -26,7 +28,10 @@ export function projectBeforeCharacter(path, source) {
   if (path === 'lib/city/navigation.ts') {
     // The prior seating-only source remains valid. If any character-selection
     // marker is present, require the complete reviewed delta at its exact sites.
-    if (source.includes('CitizenCharacter') || source.includes('setCharacter(')) {
+    if (
+      source.includes('CitizenCharacter') ||
+      source.includes('setCharacter(')
+    ) {
       remove(
         "import { makeCitizen, type CitizenCharacter } from './citizen';",
         "import { makeCitizen } from './citizen';",

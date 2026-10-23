@@ -53,3 +53,19 @@ sills, platform edges, rails and threshold bridges are unchanged. The dedicated
 regression also walks the actual lift portal in both directions, keeps solid
 jambs, and distinguishes the standalone 41-step stair from the two lower
 escalators.
+
+The standalone platform stair also retains the stainless central handrail and
+posts visible in IMG_1074. The physical stair remains 2.9 m wide with 41 risers;
+its navigation endpoints use a side lane 0.7 m from the physical centre so the
+walker never passes through the divider. Rail height, post spacing and lane
+offset are proportional reconstructions. The rail and every post have physical
+colliders. Capture viewpoints project onto that actual navigation line while
+keeping the real tread height.
+
+The south platform name/arrival-board pair occupies a flat end bay at source
+Z 20.4 m (arrival board at 21.7 m), beyond the stair's Z 14 m lower endpoint and
+the separate lift core at Z 18 m. The northern pair remains at Z −19 m. The old
+south positions, Z 9/10.22 m, placed signs through the sloping staircase and are
+rejected by the regression. Both retained pairs are checked against every
+actual flight and have standing clearance over the platform. These authored
+sign offsets are not claimed to be surveyed locations.

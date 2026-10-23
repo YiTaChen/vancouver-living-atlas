@@ -11,6 +11,17 @@ export interface TravelOcclusionPart {
   maxY: number;
 }
 
+/** An explicit sentinel enrolls a real terrain surface without assigning one
+ * city-sized logical object. Its render-only cutaway is bounded per fragment. */
+export function terrainOccluderBounds(geometry: THREE.BufferGeometry) {
+  const count = geometry.getAttribute('position')?.count ?? 0;
+  return {
+    min: new THREE.BufferAttribute(new Float32Array(count * 3).fill(1), 3),
+    max: new THREE.BufferAttribute(new Float32Array(count * 3), 3),
+    pieces: count ? 1 : 0,
+  };
+}
+
 /** Repeated per-vertex bounds identify logical pieces without splitting a draw.
  * An absent/all-zero pair is deliberately ineligible in the SSAO override. */
 export function occluderBounds(

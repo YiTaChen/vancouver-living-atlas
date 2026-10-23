@@ -254,6 +254,8 @@ function stadiumNorthwestGuideways(b) {
         [0.22, 4.5, 11.2],
         'concrete',
         'wall',
+        0,
+        true,
       );
     b.box(
       `${id}-tunnel-roof`,
@@ -269,6 +271,8 @@ function stadiumNorthwestGuideways(b) {
         [0.34, 4.5, 0.5],
         'concrete',
         'wall',
+        0,
+        true,
       );
   }
   b.s.authoredInterior.northwestGuidewayInference = {
@@ -388,7 +392,10 @@ export function rebuildStadium(source) {
     [0.5, 0, 7.7],
     [1.41, -4.5, 20.74],
     4.4,
-    { enclosed: false },
+    // The photographed centre handrail divides this wide physical flight.
+    // Use its east walking lane for navigation, retaining the mapped axis
+    // and every physical tread/rail at their original coordinates.
+    { enclosed: false, walkLaneOffsetM: 0.9 },
   );
   supportedFlight(
     b,
@@ -507,6 +514,8 @@ export function rebuildStadium(source) {
       [0.055, 0.9, 0.055],
       'red',
       'handrail',
+      0,
+      true,
     );
   }
   b.sign(
@@ -559,41 +568,55 @@ export function rebuildStadium(source) {
     'lift-landing',
     'stadium-street',
   );
+  // The level bypass stays east of the inclined escalator's complete body
+  // envelope. Its earlier west edge at X=6.1 put the deck/guard through the
+  // upper half of that flight. These inferred inner bounds fit inside the
+  // retained east shaft wall at X=8.7; the mapped lift itself stays fixed.
+  const upperHallX = 7.55,
+    upperHallWidth = 1.7;
   const upperLiftHall = b.floor(
     'stadium-lift-upper-hall',
-    [7.1, 0, 14.15],
-    2,
+    [upperHallX, 0, 14.15],
+    upperHallWidth,
     12.9,
     'corridor',
     'stadium-street',
   );
-  b.walk('stadium-lift-street-link', street, upperLiftHall, [7.1, 0, 7.7]);
+  b.walk('stadium-lift-street-link', street, upperLiftHall, [
+    upperHallX,
+    0,
+    7.7,
+  ]);
   const upperLiftCross = b.floor(
     'stadium-lift-upper-cross-hall',
-    [(liftX + 7.1) / 2, 0, 20.6],
-    7.1 - liftX + 0.1,
+    [(liftX + upperHallX) / 2, 0, 20.6],
+    upperHallX - liftX + 0.1,
     2.2,
     'corridor',
     'stadium-street',
   );
-  b.walk(
-    'stadium-lift-upper-cross-link',
-    upperLiftHall,
-    upperLiftCross,
-    [7.1, 0, 20.6],
-  );
+  b.walk('stadium-lift-upper-cross-link', upperLiftHall, upperLiftCross, [
+    upperHallX,
+    0,
+    20.6,
+  ]);
   b.walk('stadium-lift-upper-door', upperLiftCross, upperLift, [
     liftX + 1,
     0,
     20.6,
   ]);
-  for (const x of [6.05, 8.15])
+  for (const x of [
+    upperHallX - upperHallWidth / 2 - 0.05,
+    upperHallX + upperHallWidth / 2 + 0.05,
+  ])
     b.box(
       `stadium-upper-lift-bypass-guard-${x}`,
       [x, 0.5, 13.55],
       [0.06, 1, 11.7],
       'glass',
       'balustrade',
+      0,
+      true,
     );
   const midLift = b.floor(
     'stadium-lift-mid',
@@ -1430,8 +1453,39 @@ export function rebuildYaletown(source) {
     [0, -16.2, 14],
     [0, -9.4, 2.5],
     2.9,
-    { enclosed: false },
+    { enclosed: false, walkLaneOffsetM: 0.7 },
   );
+  // IMG_1074 shows the continuous central stainless divider. Keep the physical
+  // 2.9 m / 41-riser stair and use an actual side lane for the navigation axis.
+  b.beam(
+    'yaletown-platform-stair-central-handrail',
+    [0, -16.2 + 0.95, 14],
+    [0, -9.4 + 0.95, 2.5],
+    0.055,
+    0.065,
+    'steel',
+    'handrail',
+  );
+  const platformStair = b.s.connections.at(-1);
+  for (const i of [0, 8, 16, 24, 32, 40]) {
+    const tread = platformStair.treadSurfaces[i],
+      p = tread.verticesM.reduce(
+        (sum, v) => sum.map((n, axis) => n + v[axis] / 4),
+        [0, 0, 0],
+      ),
+      t = (14 - p[2]) / 11.5,
+      railY = -16.2 + t * 6.8 + 0.95,
+      height = railY - p[1];
+    b.box(
+      `yaletown-platform-stair-central-post-${i}`,
+      [0, p[1] + height / 2, p[2]],
+      [0.065, height, 0.065],
+      'steel',
+      'handrail',
+      0,
+      true,
+    );
+  }
   supportedFlight(
     b,
     'yaletown-platform-up-escalator',
@@ -1570,7 +1624,7 @@ export function rebuildYaletown(source) {
     });
   for (const [i, z] of [
     [0, -19],
-    [1, 9],
+    [1, 20.4],
   ]) {
     b.sign('Yaletown–Roundhouse', [0, -13.05, z], 0, 4.9, 0.38);
     b.box(
@@ -1589,6 +1643,16 @@ export function rebuildYaletown(source) {
       '#090d0f',
     );
   }
+  b.s.authoredInterior.platformStairDivider = {
+    photo:
+      'http://www.seataf.com/blogs/canadaline/2009-08-18/images/IMG_1074.jpg',
+    physicalWidthM: 2.9,
+    risers: 41,
+    walkLaneOffsetM: 0.7,
+    railHeightM: 0.95,
+    status:
+      'Photographed central stainless divider is physical. Rail/post dimensions and the side walking line are representative, not surveyed. Signs occupy flat end bays outside both lower access wells and lift core.',
+  };
   // Circular bored-tunnel rings at each track end; openings remain train-clear.
   for (const side of [-1, 1])
     for (const end of [-1, 1])

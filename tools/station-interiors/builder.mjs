@@ -59,7 +59,16 @@ export class InteriorBuilder {
       });
     return id;
   }
-  beam(id, a, b, width, height, material = 'steel', role = 'detail') {
+  beam(
+    id,
+    a,
+    b,
+    width,
+    height,
+    material = 'steel',
+    role = 'detail',
+    collision = role === 'handrail',
+  ) {
     const av = new THREE.Vector3(...a),
       bv = new THREE.Vector3(...b),
       d = bv.clone().sub(av);
@@ -78,7 +87,7 @@ export class InteriorBuilder {
       material,
       role,
       0,
-      false,
+      collision,
       q.toArray(),
     );
   }
@@ -416,6 +425,7 @@ export class InteriorBuilder {
         0.065,
         'steel',
         'handrail',
+        true,
       );
     }
     if (roof)
@@ -477,11 +487,20 @@ export class InteriorBuilder {
       enclosed = true,
       material = 'wall',
       handrails = true,
+      walkLaneOffsetM = 0,
       // Existing dark metal palette; a photo-specific yellow strip or null
       // can replace it where a station authors its own safety nosings.
       nosingMaterial = kind === 'escalator' ? 'yellow' : 'escalator',
     } = {},
   ) {
+    if (
+      !Number.isFinite(walkLaneOffsetM) ||
+      !Number.isFinite(width) ||
+      Math.abs(walkLaneOffsetM) + 0.24 > width / 2
+    )
+      throw new Error(
+        'A flight walking lane must fit a full body inside its physical tread width',
+      );
     const a = new THREE.Vector3(...start),
       b = new THREE.Vector3(...end),
       delta = b.clone().sub(a),
@@ -549,8 +568,15 @@ export class InteriorBuilder {
       toSurfaceId: to,
       type: kind,
       frameId: this.s.stationId,
-      startPointM: [...start],
-      endPointM: [...end],
+      startPointM:
+        walkLaneOffsetM === 0
+          ? [...start]
+          : a.clone().addScaledVector(lateral, walkLaneOffsetM).toArray(),
+      endPointM:
+        walkLaneOffsetM === 0
+          ? [...end]
+          : b.clone().addScaledVector(lateral, walkLaneOffsetM).toArray(),
+      ...(walkLaneOffsetM === 0 ? {} : { walkLaneOffsetM }),
       clearWidthM: width,
       bidirectional: true,
       runtimeEnabled: true,
@@ -579,6 +605,7 @@ export class InteriorBuilder {
           0.085,
           kind === 'escalator' ? 'black' : 'steel',
           'handrail',
+          true,
         );
         if (kind === 'escalator')
           this.beam(
@@ -595,6 +622,7 @@ export class InteriorBuilder {
             0.86,
             'glass',
             'balustrade',
+            true,
           );
       }
     return id;

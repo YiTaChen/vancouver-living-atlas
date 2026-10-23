@@ -7,6 +7,12 @@ import type { PlacementPoint } from './placement-geometry';
 import { LightLabExhibit } from './light-lab-exhibit';
 import type { WorldSeat } from './world-seats';
 import type { LightLevels } from './light-lab';
+import { carveApertures } from './interior-apertures';
+import type {
+  RuntimeStationData,
+  SkyTrainStationOwner,
+} from './skytrain-stations';
+import { GroundSurfaceIndex, walkableGroundMeshes } from './ground-surface';
 export type InteriorId = 'science' | 'canada' | 'waterfront';
 type P = [number, number, number];
 type XZ = [number, number];
@@ -229,12 +235,37 @@ interface Site {
   entryYaw: number;
   approach: Rect;
   approachOuter: number;
+  legacyHall?: THREE.Group;
+  legacyHallObstacles?: Rect[];
+}
+interface WaterfrontAuthority {
+  data: RuntimeStationData;
+  matrix: THREE.Matrix4;
+  inverse: THREE.Matrix4;
+  floors: { id: string; triangles: THREE.Vector3[][] }[];
+  doorway: THREE.Vector3;
+  inward: THREE.Vector3;
+  installed: boolean;
+  groundMeshes: THREE.Mesh[];
+  originalShellGeometry: Map<THREE.Mesh, THREE.BufferGeometry>;
+  infill?: THREE.Group;
+  continuation?: {
+    surfaceId: string;
+    end: THREE.Vector3;
+    across: THREE.Vector3;
+    along: THREE.Vector3;
+    width: number;
+    ground: GroundSurfaceIndex;
+  };
 }
 export class PublicInteriors {
   sites: Site[] = [];
   cutawayEnabled = true;
   private lightLab: LightLabExhibit | null = null;
-  setLightLabMix(levels: LightLevels) { this.lightLab?.setLevels(levels); }
+  private waterfrontAuthority: WaterfrontAuthority | null = null;
+  setLightLabMix(levels: LightLevels) {
+    this.lightLab?.setLevels(levels);
+  }
   constructor(private e: CityEngine) {
     e.renderer.localClippingEnabled = true;
     for (const id of ['science', 'canada', 'waterfront'] as InteriorId[])
@@ -308,8 +339,14 @@ export class PublicInteriors {
           : { x: 0, z: 22, w: 7, d: 12 };
     const entry: XZ =
       id === 'science' ? [40, -59] : id === 'canada' ? [-46, -64] : [0, 26];
-    const parts = new Parts(),
-      group = parts.group;
+    const rootParts = new Parts(),
+      parts = id === 'waterfront' ? new Parts() : rootParts,
+      transport = id === 'waterfront' ? rootParts : parts,
+      group = rootParts.group;
+    if (parts !== rootParts) {
+      parts.group.name = 'Waterfront legacy heritage hall';
+      group.add(parts.group);
+    }
     group.name = 'Public interior / ' + id;
     group.position.set(wx, base, wz);
     group.rotation.y = place[2];
@@ -329,21 +366,22 @@ export class PublicInteriors {
       entryYaw: id === 'science' ? 0 : id === 'canada' ? Math.PI / 2 : Math.PI,
       approach,
       approachOuter: 0,
+      ...(id === 'waterfront' ? { legacyHall: parts.group } : {}),
     };
     const outer = this.world(site, ...entry);
     site.approachOuter = this.e.elevation(outer[0], outer[1]) - base;
     const f = floor,
       cream = 0xe1d8c7,
       steel = 0x47606c;
-    polys.forEach((poly) =>
-      parts.floor(
+    polys.forEach((poly, index) =>
+      (id === 'waterfront' && index > 0 ? transport : parts).floor(
         poly,
         id === 'waterfront' ? (x, z) => this.localHeight(site, x, z) : f,
         id === 'science' ? 0xc7c3b0 : id === 'canada' ? 0xa8bfc2 : 0xd8cbb9,
       ),
     );
-    doors.forEach((d) =>
-      parts.floor(
+    doors.forEach((d, index) =>
+      (id === 'waterfront' && index > 0 ? transport : parts).floor(
         rect(d.x, d.z, d.w, d.d),
         (x, z) => this.localHeight(site, x, z) + 0.002,
         0xb9bdb7,
@@ -378,9 +416,13 @@ export class PublicInteriors {
       parts.box([w, 0.55, 0.12], [x, f + 0.78, z - 0.32], 0x8d6e4e);
       const seats = (this.e.data.walkSeats ??= []) as WorldSeat[];
       const point = group.localToWorld(new THREE.Vector3(x, f, z));
-      seats.push({ id: `interior-seat:${id}:${x}:${z}`, floor: point.toArray(),
-        yaw: site.yaw, height: 0.48,
-        visible: () => group.visible && this.e.landmarks.visible,
+      seats.push({
+        id: `interior-seat:${id}:${x}:${z}`,
+        floor: point.toArray(),
+        yaw: site.yaw,
+        height: 0.48,
+        visible: () =>
+          group.visible && parts.group.visible && this.e.landmarks.visible,
       });
     };
     if (id === 'science') {
@@ -594,12 +636,15 @@ export class PublicInteriors {
       parts.sign('TICKETS  /  CUSTOMER SERVICE', [-42, f + 2.5, -10.8], 12);
       envelope.sign('WATERFRONT STATION', [0, f + 9.1, 18.1], 22);
       this.enrichStation(parts, envelope, site);
-      this.addSkyWalk(parts, envelope, site);
+      site.legacyHallObstacles = [...site.obstacles];
+      site.obstacles = [];
+      this.addSkyWalk(transport, envelope, site);
       site.envelope = envelope.finish();
       this.e.landmarks.add(site.envelope);
     }
     if (id === 'canada') this.enrichCanada(parts, site);
     parts.finish();
+    if (transport !== parts) transport.finish();
     this.e.landmarks.add(group);
     this.sites.push(site);
   }
@@ -996,6 +1041,235 @@ export class PublicInteriors {
       Math.abs(p[1] - r.z) <= r.d / 2 + margin
     );
   }
+  /** A validated, fully authored packet replaces only the provisional station
+   * hall. Preparation precedes owner construction so its street apron cannot
+   * sample the obsolete higher public floor. Other public sites are unaffected. */
+  prepareWaterfrontStationAuthority(data: RuntimeStationData) {
+    if (
+      data.id !== 'waterfront' ||
+      !data.authoredInterior?.heritageHallOrientation ||
+      this.waterfrontAuthority?.data.source.sha256 === data.source.sha256
+    )
+      return;
+    const ids = new Set([
+        'waterfront-heritage-entry-vestibule',
+        'waterfront-heritage-hall',
+        'waterfront-heritage-expo-vestibule-0',
+        'waterfront-expo-paid-annex',
+      ]),
+      floors = data.floors.filter(
+        (f) =>
+          ids.has(f.id) ||
+          f.id.startsWith('waterfront-seabus-heritage-connector-'),
+      ),
+      door = data.entrances.find((e) => e.id === 'cordova-lobby');
+    if (
+      !Array.from(ids).every((id) => floors.some((f) => f.id === id)) ||
+      !door?.inwardDirection
+    )
+      return;
+    const [x, z] = project(data.lonlat),
+      matrix = new THREE.Matrix4().compose(
+        new THREE.Vector3(x, this.e.elevation(x, z), z),
+        new THREE.Quaternion(...data.quaternion),
+        new THREE.Vector3(1, 1, 1),
+      );
+    this.waterfrontAuthority = {
+      data,
+      matrix,
+      inverse: matrix.clone().invert(),
+      floors: floors.map((floor) => ({
+        id: floor.id,
+        triangles: Array.from({ length: floor.indices.length / 3 }, (_, i) =>
+          floor.indices
+            .slice(i * 3, i * 3 + 3)
+            .map((index) =>
+              new THREE.Vector3(...floor.vertices[index]).applyMatrix4(matrix),
+            ),
+        ),
+      })),
+      doorway: new THREE.Vector3(...door.point).applyMatrix4(matrix),
+      inward: new THREE.Vector3(...door.inwardDirection).transformDirection(
+        matrix,
+      ),
+      installed: false,
+      groundMeshes: [],
+      originalShellGeometry: new Map(),
+    };
+    const authority = this.waterfrontAuthority;
+    const legacy = this.sites.find((s) => s.id === 'waterfront')?.legacyHall;
+    legacy?.traverse((object) => {
+      if (object instanceof THREE.Mesh && object.userData.walkSurface) {
+        authority.groundMeshes.push(object);
+        object.userData.walkSurface = false;
+      }
+    });
+    // GroundSurfaceIndex caches triangle coordinates and does not consult
+    // visibility. Remove the retired floor from its source set and rebuild it.
+    if (this.e.navigation) this.e.navigation.groundSurface = null;
+    return () => {
+      if (this.waterfrontAuthority !== authority) return;
+      const site = this.sites.find((s) => s.id === 'waterfront');
+      if (site?.legacyHall) site.legacyHall.visible = true;
+      for (const mesh of authority.groundMeshes)
+        mesh.userData.walkSurface = true;
+      for (const [mesh, original] of authority.originalShellGeometry) {
+        mesh.geometry.dispose();
+        mesh.geometry = original;
+      }
+      authority.infill?.removeFromParent();
+      authority.infill?.traverse((object) => {
+        if (object instanceof THREE.Mesh) {
+          object.geometry.dispose();
+          for (const material of Array.isArray(object.material)
+            ? object.material
+            : [object.material])
+            material.dispose();
+        }
+      });
+      this.waterfrontAuthority = null;
+      if (this.e.navigation) this.e.navigation.groundSurface = null;
+    };
+  }
+  private waterfrontOwner(): SkyTrainStationOwner | null {
+    const authority = this.waterfrontAuthority,
+      owner = this.e.skyTrainTravel?.stations.get('waterfront');
+    return authority &&
+      owner?.data.source.sha256 === authority.data.source.sha256
+      ? owner
+      : null;
+  }
+  private authoredWaterfrontFloor(x: number, z: number) {
+    const authority = this.waterfrontAuthority;
+    if (!authority) return null;
+    // The real street datum owns the doorway and outside approach. The 44.6 mm
+    // inferred hall slab is not allowed to redefine that surveyed threshold.
+    const delta = new THREE.Vector3(x, authority.doorway.y, z).sub(
+      authority.doorway,
+    );
+    if (
+      delta.dot(authority.inward) <= 0.15 &&
+      Math.abs(
+        delta.dot(
+          new THREE.Vector3(authority.inward.z, 0, -authority.inward.x),
+        ),
+      ) < 2.8
+    )
+      return null;
+    const point = new THREE.Vector3(x, 0, z),
+      weights = new THREE.Vector3();
+    let best: { id: string; y: number } | null = null;
+    for (const floor of authority.floors)
+      for (const triangle of floor.triangles) {
+        const flat = triangle.map((p) => new THREE.Vector3(p.x, 0, p.z));
+        if (
+          THREE.Triangle.getBarycoord(
+            point,
+            ...(flat as [THREE.Vector3, THREE.Vector3, THREE.Vector3]),
+            weights,
+          ) &&
+          Math.min(weights.x, weights.y, weights.z) >= -1e-7
+        ) {
+          const y =
+            triangle[0].y * weights.x +
+            triangle[1].y * weights.y +
+            triangle[2].y * weights.z;
+          if (!best || y > best.y) best = { id: floor.id, y };
+        }
+      }
+    return best;
+  }
+  private installWaterfrontAuthority(site: Site) {
+    const authority = this.waterfrontAuthority;
+    if (!authority || !this.waterfrontOwner()) return;
+    if (site.legacyHall) site.legacyHall.visible = false;
+    if (authority.installed || !site.envelope) return;
+    // Close the superseded centred proxy door, then subtract a real opening at
+    // the mapped Cordova door. The brick façade, portico, roof and SkyWalk remain.
+    const infill = new Parts();
+    infill.box([7, 8.5, 0.5], [0, site.floor + 4.25, 16], 0x8f4c3b);
+    authority.infill = infill.finish();
+    site.envelope.add(authority.infill);
+    site.envelope.traverse((object) => {
+      if (
+        object instanceof THREE.Mesh &&
+        !authority.infill!.children.includes(object)
+      )
+        authority.originalShellGeometry.set(object, object.geometry.clone());
+    });
+    const [x, z] = this.local(site, authority.doorway.x, authority.doorway.z),
+      bottom = authority.doorway.y - site.origin.y - 0.09;
+    carveApertures(site.envelope, [
+      {
+        min: [x - 2.65, bottom, z - 3.5],
+        max: [x + 2.65, bottom + 3.9, z + 7],
+      },
+    ]);
+    const connector = authority.data.floors.find(
+      (f) => f.id === 'waterfront-seabus-heritage-connector-1',
+    );
+    if (connector) {
+      const world = connector.vertices.map((p) =>
+          new THREE.Vector3(...p).applyMatrix4(authority.matrix),
+        ),
+        start = world[0].clone().add(world[3]).multiplyScalar(0.5),
+        end = world[1].clone().add(world[2]).multiplyScalar(0.5),
+        across = world[2].clone().sub(world[1]).setY(0).normalize(),
+        along = end.clone().sub(start).setY(0).normalize(),
+        frame = new THREE.Matrix4()
+          .makeBasis(across, new THREE.Vector3(0, 1, 0), along)
+          .setPosition(end);
+      // The graded, covered source connector replaces this short beginning of
+      // the old flat bridge. Clip actual triangles in its exact end-plane frame,
+      // not a camera shader or a widened whole-building navigation exemption.
+      for (const root of [site.group, site.envelope]) {
+        root.updateMatrixWorld(true);
+        const proxies = new THREE.Group(),
+          pairs: [THREE.Mesh, THREE.Mesh][] = [];
+        proxies.matrixAutoUpdate = false;
+        proxies.matrix.copy(frame);
+        root.traverse((object) => {
+          if (
+            !(object instanceof THREE.Mesh) ||
+            (root === site.group && object.parent !== site.group)
+          )
+            return;
+          if (!authority.originalShellGeometry.has(object))
+            authority.originalShellGeometry.set(
+              object,
+              object.geometry.clone(),
+            );
+          const proxy = new THREE.Mesh(
+            object.geometry.clone(),
+            object.material,
+          );
+          proxy.matrixAutoUpdate = false;
+          proxy.matrix.copy(
+            frame.clone().invert().multiply(object.matrixWorld),
+          );
+          proxies.add(proxy);
+          pairs.push([object, proxy]);
+        });
+        carveApertures(proxies, [
+          { min: [-3.3, -0.55, -12], max: [3.3, 4.5, 0] },
+        ]);
+        for (const [object, proxy] of pairs) {
+          object.geometry.dispose();
+          object.geometry = proxy.geometry;
+        }
+      }
+      if (this.e.navigation) this.e.navigation.groundSurface = null;
+      authority.continuation = {
+        surfaceId: connector.id,
+        end,
+        across,
+        along,
+        width: world[1].distanceTo(world[2]),
+        ground: new GroundSurfaceIndex(walkableGroundMeshes(site.group)),
+      };
+    }
+    authority.installed = true;
+  }
   private localHeight(site: Site, x: number, z: number) {
     if (site.id === 'waterfront' && z < -140)
       return THREE.MathUtils.lerp(
@@ -1020,27 +1294,94 @@ export class PublicInteriors {
   private siteAt(x: number, z: number) {
     for (const site of this.sites) {
       const p = this.local(site, x, z);
+      const authority = site.id === 'waterfront' && this.waterfrontAuthority;
       if (
-        site.polys.some((poly) => inside(p, poly)) ||
-        site.doors.some((r) => this.inRect(p, r)) ||
-        this.inRect(p, site.approach)
+        site.polys.some(
+          (poly, index) => (!authority || index > 0) && inside(p, poly),
+        ) ||
+        site.doors.some(
+          (r, index) => (!authority || index > 0) && this.inRect(p, r),
+        ) ||
+        (!authority && this.inRect(p, site.approach))
       )
         return { site, p };
     }
     return null;
   }
   height(x: number, z: number) {
+    const authored = this.authoredWaterfrontFloor(x, z);
+    if (authored) return authored.y;
     const hit = this.siteAt(x, z);
     return hit
       ? hit.site.origin.y + this.localHeight(hit.site, ...hit.p)
       : undefined;
   }
   clear(x: number, z: number, mode: string): boolean | undefined {
+    const continuation = this.waterfrontAuthority?.continuation,
+      owner = this.waterfrontOwner();
+    if (continuation && owner) {
+      const delta = new THREE.Vector3(x, continuation.end.y, z).sub(
+        continuation.end,
+      );
+      if (
+        Math.abs(delta.dot(continuation.along)) < 0.5 &&
+        Math.abs(delta.dot(continuation.across)) <
+          continuation.width / 2 + 0.5 &&
+        !owner.isClearBody(owner.toLocal([x, continuation.end.y, z]))
+      )
+        return false;
+    }
+    const authored = this.authoredWaterfrontFloor(x, z);
+    if (authored) {
+      if (mode !== 'walk') return false;
+      if (!owner) return undefined;
+      const point = owner.toLocal([x, authored.y, z]),
+        foot = owner.floorAt(point, authored.id);
+      if (foot && owner.isClearFoot(foot)) return true;
+      // Only the declared same-height flat connector can combine source floor
+      // support with the retained physical bridge after native ownership ends.
+      if (foot && continuation && authored.id === continuation.surfaceId) {
+        const delta = new THREE.Vector3(x, authored.y, z).sub(continuation.end),
+          along = delta.dot(continuation.along);
+        if (
+          along >= -0.4 &&
+          along <= 0.001 &&
+          Math.abs(delta.dot(continuation.across)) <=
+            continuation.width / 2 - 0.24 &&
+          owner.isClearBody(point) &&
+          this.legacyClear(x, z, mode) === true
+        ) {
+          return [
+            [0, 0],
+            [0.24, 0],
+            [-0.24, 0],
+            [0, 0.24],
+            [0, -0.24],
+          ].every(([dx, dz]) => {
+            const source = this.authoredWaterfrontFloor(x + dx, z + dz),
+              height =
+                source?.y ??
+                continuation.ground.sample(x + dx, z + dz, authored.y);
+            return (
+              height !== undefined && Math.abs(height - authored.y) < 0.025
+            );
+          });
+        }
+      }
+      return false;
+    }
+    return this.legacyClear(x, z, mode);
+  }
+  private legacyClear(x: number, z: number, mode: string): boolean | undefined {
     const hit = this.siteAt(x, z);
     if (!hit) return undefined;
     const { site, p } = hit;
     if (mode !== 'walk') return false;
-    if (site.obstacles.some((r) => this.inRect(p, r, 0.35))) return false;
+    const obstacles =
+      this.waterfrontAuthority && site.id === 'waterfront'
+        ? site.obstacles
+        : [...site.obstacles, ...(site.legacyHallObstacles ?? [])];
+    if (obstacles.some((r) => this.inRect(p, r, 0.35))) return false;
     const door = site.doors.some((r) => this.inRect(p, r, -0.35));
     if (
       !door &&
@@ -1056,6 +1397,21 @@ export class PublicInteriors {
     return true;
   }
   entry(id: InteriorId): PlacementPoint {
+    const owner = id === 'waterfront' ? this.waterfrontOwner() : null,
+      entry = owner?.streetEntrances().find((e) => e.id === 'cordova-lobby');
+    if (owner && entry) {
+      const { inward } = this.waterfrontAuthority!,
+        point = new THREE.Vector3(...entry.outward);
+      return {
+        x: point.x,
+        z: point.z,
+        y: point.y + 1.25,
+        yaw: Math.atan2(inward.x, inward.z),
+        surface: 'ground',
+        name: id,
+        snappedDistance: 0,
+      };
+    }
     const site = this.sites.find((s) => s.id === id)!;
     const [x, z] = this.world(site, ...site.entry);
     return {
@@ -1070,6 +1426,7 @@ export class PublicInteriors {
   }
   update() {
     for (const site of this.sites) {
+      if (site.id === 'waterfront') this.installWaterfrontAuthority(site);
       const local = this.local(
         site,
         this.e.camera.position.x,

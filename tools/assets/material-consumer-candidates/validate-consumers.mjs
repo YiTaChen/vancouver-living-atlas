@@ -10,6 +10,7 @@ import { metricError } from './adapters/metre-uv.mjs';
 import { SURFACES, configureSharedMaps } from './adapters/shared-surfaces.mjs';
 import { assertProtectedSources } from './adapters/seating-source-compatibility.mjs';
 import { assertConsumerFixtureEqual } from './adapters/fixture-equality.mjs';
+import { reviewedWaterfrontConsumerFixture } from './adapters/waterfront-authority-source-compatibility.mjs';
 const sha = v => createHash('sha256').update(v).digest('hex');
 const recordFixtures = process.argv.includes('--record-fixtures');
 const writeEvidence = recordFixtures || process.argv.includes('--write-evidence');
@@ -109,7 +110,7 @@ const ea=engine(),eb=engine(),a=new PublicInteriors(ea),b=await makeInteriorsCan
 const interiors=[];let queries=0;uvMax=0;uvEdges=0;
 for(let i=0;i<a.sites.length;i++){
  const A=a.sites[i],B=b.sites[i];
- const fields=s=>({id:s.id,origin:s.origin.toArray(),yaw:s.yaw,floor:s.floor,polys:s.polys,doors:s.doors,obstacles:s.obstacles,entry:s.entry,entryYaw:s.entryYaw,approach:s.approach,approachOuter:s.approachOuter});
+ const fields=s=>({id:s.id,origin:s.origin.toArray(),yaw:s.yaw,floor:s.floor,polys:s.polys,doors:s.doors,obstacles:[...(s.legacyHallObstacles??[]),...s.obstacles],entry:s.entry,entryYaw:s.entryYaw,approach:s.approach,approachOuter:s.approachOuter});
  assert.deepEqual(fields(A),fields(B));assert.deepEqual(a.entry(A.id),b.entry(B.id));
  const geo=sameTriangles(A.group,B.group);
  sameTriangles(A.group,B.group,o=>o.userData.walkSurface);
@@ -125,11 +126,15 @@ for(let i=0;i<a.sites.length;i++){
 assert(uvMax<1e-4,`interior uv ${uvMax}`);
 pass('E04 current floor, doors, furniture collision, entry and circulation anchors unchanged',{queries,sites:interiors.map(s=>({id:s.id,obstacles:s.obstacles.length,doorAnchors:s.doors.length,geometry:s.geometry}))});
 pass('E04 floor/wood/plaster UV retained with original normals and colour fallback',{maxAbsoluteEdgeErrorM:uvMax,measuredEdges:uvEdges});
-for(const s of b.sites){
- assert(s.group.children.some(o=>o.userData.semanticRole==='wood'));
- assert(s.group.children.some(o=>o.userData.semanticRole==='plaster'));
- assert(s.group.children.some(o=>o.userData.semanticRole==='floor-terrazzo'));
-}
+// Waterfront's independently disposable legacy nave is now one nested group.
+// Inspect every actual descendant rather than assuming one merged root batch.
+const roleMeshes=(root,role)=>{
+ const meshes=[];
+ root.traverse(o=>{if(o.isMesh&&o.userData.semanticRole===role)meshes.push(o);});
+ return meshes;
+};
+for(const s of b.sites)for(const role of ['wood','plaster','floor-terrazzo'])
+ assert(roleMeshes(s.group,role).length,`${s.id}: actual ${role} material batch`);
 const screenA=ea.landmarks.getObjectByName('Atlas original light-mixing exhibit'),screenB=eb.landmarks.getObjectByName('Atlas original light-mixing exhibit');
 assert.deepEqual(screenA.position.toArray(),screenB.position.toArray());assert.deepEqual(screenA.userData,screenB.userData);
 a.setLightLabMix([10,70,35]);b.setLightLabMix([10,70,35]);assert.deepEqual(screenA.userData,screenB.userData);
@@ -143,7 +148,7 @@ for(const [id,maps]of Object.entries(shared)){
 }
 const bound=bindCandidateMaps(candidate.group,shared);assert.equal(bound,3);
 assert.equal(head.material,originalSkin);assert.equal(candidate.group.getObjectByName('roadster/dark').material,originalDark);assert(!head.material.map&&!originalDark.map);
-for(const s of b.sites){const m=s.group.children.find(o=>o.userData.semanticRole==='wood').material;const hook=m.onBeforeCompile;bindCandidateMaps(s.group,shared);assert.equal(m.onBeforeCompile,hook);assert.equal(m.vertexColors,false);assert.equal(m.color.getHex(),0xffffff);}
+for(const s of b.sites){const materials=roleMeshes(s.group,'wood').map(o=>o.material),hooks=materials.map(m=>m.onBeforeCompile);bindCandidateMaps(s.group,shared);for(const [i,m]of materials.entries()){assert.equal(m.onBeforeCompile,hooks[i]);assert.equal(m.vertexColors,false);assert.equal(m.color.getHex(),0xffffff);}}
 pass('F05 eight shared IDs and channel/repeat contract; opt-in binding excludes skin/glass/light',{surfaceCount:Object.keys(SURFACES).length,roadsterBoundMaterials:bound,duplicateMapsAdded:0});
 
 const harbour=await load('harbour-models'), flight=await load('assets/aircraft-models'), flightGeometry=await load('flight-geometry');
@@ -171,7 +176,8 @@ else {
  // anchors and current clearGround outputs below retain strict structure and
  // hashes, with only finite numeric leaves allowing 1e-12 absolute V8 noise.
  const geometryFixture={...fixtures,sourceHashes:baselineFixtures.sourceHashes};
- assertConsumerFixtureEqual(JSON.parse(JSON.stringify(geometryFixture)),baselineFixtures);
+ const reviewedFixture=reviewedWaterfrontConsumerFixture(baselineFixtures,sourceTexts['lib/city/interiors.ts']);
+ assertConsumerFixtureEqual(JSON.parse(JSON.stringify(geometryFixture)),reviewedFixture);
 }
 pass('Current-source regression fixtures checked',{recorded:recordFixtures,sourceAudit});
 const textures=JSON.parse(readFileSync(resolve(ROOT,'tools/assets/role-materials/exports/manifest.json'),'utf8')).roles.map(r=>({...r,maps:Object.fromEntries(Object.entries(r.maps).map(([channel,path])=>{const actual=resolve(ROOT,'tools/assets/role-materials/exports',path);return [channel,{path:'../role-materials/exports/'+path,sha256:sha(readFileSync(actual)),bytes:readFileSync(actual).length,colorSpace:channel==='basecolor'?'sRGB':'Non-Color',channel:channel==='orm'?'R=1,G=roughness,B=metallic':channel==='normal'?'OpenGL +Y tangent-space':'RGB'}];}))}));

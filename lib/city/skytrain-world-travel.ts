@@ -63,6 +63,11 @@ interface ServiceTrain {
   path: SkyTrainMotionPath | null;
   progress: number;
 }
+interface GroundOpeningMaterial {
+  references: number;
+  restore: (() => void) | undefined;
+  disposed: () => void;
+}
 const UP = new THREE.Vector3(0, 1, 0);
 const pair = (line: LineId, from: StationId, to: StationId) =>
   `${line}:${from}:${to}`;
@@ -74,6 +79,10 @@ const separation = (a: readonly number[], b: readonly number[]) =>
 export class SkyTrainWorldTravel extends SkyTrainTravel {
   ready = false;
   private openings: SkyTrainWorldOpenings | null = null;
+  private readonly groundOpeningMaterials = new Map<
+    THREE.Material,
+    GroundOpeningMaterial
+  >();
   private readonly previewTrain = this.train;
   private worldData: WorldSkyTrainData | null = null;
   private fleet: ServiceTrain[] = [];
@@ -220,12 +229,16 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
         }
       }
       this.ready = true;
-      this.openings = applySkyTrainWorldOpenings([
-        this.city.terrain,
-        this.city.roads,
-        this.city.buildings,
-        this.city.landmarks,
-      ]);
+      this.openings = applySkyTrainWorldOpenings(
+        [
+          this.city.terrain,
+          this.city.roads,
+          this.city.buildings,
+          this.city.landmarks,
+        ],
+        this.city.water ? [this.city.water] : [],
+      );
+      this.bindGroundOpeningMaterials();
       // Retain the seven actual geographic stations. Construction is spread
       // over turns; a camera change never disposes the station under a rider.
       for (const station of SKYTRAIN_STATIONS) {
@@ -256,6 +269,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
           }
         }
         this.openings.update(this.stations.owners);
+        this.syncViewCutaway();
         this.updateBuildingReplacement();
         await new Promise<void>((resolve) => setTimeout(resolve, 0));
       }
@@ -1085,6 +1099,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       this.foot = null;
       this.owner = null;
     }
+    this.syncViewCutaway();
     this.city.interactions?.clear();
     this.publish();
     return true;
@@ -1232,6 +1247,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     this.foot = null;
     this.owner = null;
     this.clearInput();
+    this.syncViewCutaway();
     this.publish();
     return true;
   }
@@ -1476,6 +1492,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       else if (this.city.settings.mode === 'orbit' && this.foot)
         owner.updateCutaway(this.city.camera.position, this.foot.position[1]);
     }
+    this.syncViewCutaway();
     const constructionOrigin =
       this.phase === 'station' && this.city.settings.mode === 'walk'
         ? this.interactionOrigin
@@ -1542,6 +1559,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     this.clearTube();
     this.overviewAnchor = null;
     this.overviewMoved = true;
+    this.syncViewCutaway();
     const nav = this.city.navigation;
     if (nav) {
       nav.blur();
@@ -1557,6 +1575,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     if (!this.active) return false;
     if (enabled && this.city.settings.mode === 'orbit') {
       this.observeOverviewMoved();
+      this.syncViewCutaway();
       return true;
     }
     if (!enabled && !this.canResumeOverview) return false;
@@ -1589,6 +1608,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       this.city.camera.updateProjectionMatrix();
       this.city.controls.enabled = true;
       this.city.controls.update();
+      this.syncViewCutaway();
       this.city.onLocalOrbit();
     } else {
       this.overviewAnchor = null;
@@ -1629,7 +1649,10 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     this.zoom(Math.exp(THREE.MathUtils.clamp(event.deltaY * 0.003, -0.7, 0.7)));
   };
   protected updateCamera() {
-    if (!this.active || this.city.settings.mode !== 'walk') return;
+    if (!this.active || this.city.settings.mode !== 'walk') {
+      this.syncViewCutaway();
+      return;
+    }
     const origin = this.interactionOrigin;
     if (!origin) return;
     const third = !firstPerson('walk', this.distanceView),
@@ -1724,6 +1747,7 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     this.city.camera.lookAt(target);
     this.city.controls.target.copy(target);
     this.city.controls.enabled = false;
+    this.syncViewCutaway();
     const nav = this.city.navigation;
     if (nav) {
       nav.position.copy(feet);
@@ -1744,12 +1768,65 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       third ? 'third-person' : 'first-person',
     );
   }
+  /** The render-only city opening follows the actual requested view. Source
+   * floor footprints and physical station ceilings remain independently owned. */
+  private syncViewCutaway() {
+    const revealing =
+      this.active &&
+      !this.aboard &&
+      this.owner &&
+      this.foot &&
+      (this.city.settings.mode === 'orbit' ||
+        (this.city.settings.mode === 'walk' &&
+          !firstPerson('walk', this.distanceView)));
+    this.openings?.setViewCutaway(
+      revealing ? this.owner : null,
+      revealing ? this.city.camera.position.y + 0.2 : undefined,
+      revealing ? this.city.camera.position : undefined,
+    );
+  }
+  /** Composer creation and station loading may complete in either order.
+   * A disposed/replaced composer unregisters even before station data arrives. */
+  prepareGroundOpeningMaterial(material: THREE.Material) {
+    if (this.disposed) return () => {};
+    let registration = this.groundOpeningMaterials.get(material);
+    if (!registration) {
+      const entry: GroundOpeningMaterial = {
+        references: 0,
+        restore: this.openings?.prepareGroundMaterial(material),
+        disposed: () => {
+          if (this.groundOpeningMaterials.get(material) !== entry) return;
+          entry.restore?.();
+          material.removeEventListener('dispose', entry.disposed);
+          this.groundOpeningMaterials.delete(material);
+        },
+      };
+      registration = entry;
+      this.groundOpeningMaterials.set(material, entry);
+      material.addEventListener('dispose', entry.disposed);
+    }
+    const entry = registration;
+    entry.references++;
+    let active = true;
+    return () => {
+      if (!active) return;
+      active = false;
+      if (this.groundOpeningMaterials.get(material) !== entry) return;
+      if (--entry.references === 0) entry.disposed();
+    };
+  }
+  private bindGroundOpeningMaterials() {
+    for (const [material, entry] of this.groundOpeningMaterials)
+      entry.restore ??= this.openings?.prepareGroundMaterial(material);
+  }
   dispose() {
     this.city.renderer.domElement.removeEventListener(
       'wheel',
       this.worldWheel,
       true,
     );
+    this.openings?.setViewCutaway(null);
+    for (const entry of this.groundOpeningMaterials.values()) entry.disposed();
     this.openings?.dispose();
     for (const visuals of this.constructionVisuals.values()) visuals.dispose();
     this.constructionVisuals.clear();

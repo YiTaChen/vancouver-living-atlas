@@ -1,0 +1,264 @@
+{
+  "schema": "station-phase4-final-cpu-validation/v1",
+  "status": "cpu-passed",
+  "finalAcceptance": true,
+  "gpuAcceptance": "All five stations manually accepted; exact source/client/report/image hashes are recorded in final-runtime-pin.json",
+  "nodeVersion": "v24.22.1",
+  "startedUtc": "2026-10-23T16:21:31.859607+00:00",
+  "completedUtc": "2026-10-23T16:34:18.867168+00:00",
+  "gitHead": {
+    "before": "a2eb6d463530341f27928e1a321683f617e9305d",
+    "after": "a2eb6d463530341f27928e1a321683f617e9305d"
+  },
+  "inputs": {
+    "fileCountBefore": 2071,
+    "fileCountAfter": 2071,
+    "manifestSha256Before": "38bc2b3c42d2e657443ba9c676b15f8eba7d71c87aa70c51745c3dc5b6324c79",
+    "manifestSha256After": "38bc2b3c42d2e657443ba9c676b15f8eba7d71c87aa70c51745c3dc5b6324c79",
+    "unchanged": true,
+    "changedFiles": [],
+    "scope": "Tracked and untracked nonignored code/source/public/config and asset files; prose and QA directories are excluded because validation reports are written there.",
+    "source": {
+      "before": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "after": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf"
+    },
+    "waterfrontPacket": {
+      "before": "dd1e1f6ff8889e7ec9eceaec8053223c7811991accbfcf50463b9bbdd58facba",
+      "after": "dd1e1f6ff8889e7ec9eceaec8053223c7811991accbfcf50463b9bbdd58facba"
+    },
+    "runtime": {
+      "lib/city/interiors.ts": {
+        "before": "440459ff4dbf3dbec047c7490d16c7e25342ceab21682c7d088af1f9f4678cd2",
+        "after": "440459ff4dbf3dbec047c7490d16c7e25342ceab21682c7d088af1f9f4678cd2"
+      },
+      "lib/city/skytrain-stations.ts": {
+        "before": "4f9a8ab2e1cbca0bc4f4cc4efb75b10b938de166f348cbca9027913bb935350e",
+        "after": "4f9a8ab2e1cbca0bc4f4cc4efb75b10b938de166f348cbca9027913bb935350e"
+      },
+      "lib/city/skytrain-street-access.ts": {
+        "before": "7c9687a7bbba727cf5a1bb05d0cdb783518f46e87b3426326e297d56df29ddc5",
+        "after": "7c9687a7bbba727cf5a1bb05d0cdb783518f46e87b3426326e297d56df29ddc5"
+      },
+      "lib/city/skytrain-travel.ts": {
+        "before": "14959d8185c061e39dcb1955671755c00100475ec7af226c99ed738a040a1d83",
+        "after": "14959d8185c061e39dcb1955671755c00100475ec7af226c99ed738a040a1d83"
+      },
+      "lib/city/skytrain-world-openings.ts": {
+        "before": "85705ce5986a165fabd8789a10ca824d7d0c5d651b405c73bbc5bcd41f2e72bc",
+        "after": "85705ce5986a165fabd8789a10ca824d7d0c5d651b405c73bbc5bcd41f2e72bc"
+      },
+      "firebase.json": {
+        "before": "4046cf8d4ff3a3e3041763d144f5ef8c27c87784618a2a116a307ab4affe3801",
+        "after": "4046cf8d4ff3a3e3041763d144f5ef8c27c87784618a2a116a307ab4affe3801"
+      }
+    },
+    "beforeFile": "/tmp/station-phase4-final-inputs-before.json",
+    "afterFile": "/tmp/station-phase4-final-inputs-after.json"
+  },
+  "commands": {
+    "fullTests": {
+      "command": "npm exec --yes --package=node@24.22.1 -- node --test tests/*.test.mjs",
+      "exitCode": 0,
+      "skippedCases": [
+        "\ufe63 generator exactly reproduces the committed export from the supplied official archive (0.203411ms) # SKIP"
+      ],
+      "tests": 2573,
+      "suites": 0,
+      "pass": 2572,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0,
+      "duration_ms": 683016.43494,
+      "path": "/tmp/station-phase4-full-tests.log",
+      "sha256": "5823a53f0b81bfb92cdd2f8a72a6c0971aecdf57715d424acf949deafec57ffc",
+      "bytes": 288456
+    },
+    "typecheck": {
+      "command": "npm exec --yes --package=node@24.22.1 -- node node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "exitCode": 0,
+      "path": "/tmp/station-phase4-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "productionBuild": {
+      "command": "npm exec --yes --package=node@24.22.1 -- node --run build:firebase",
+      "exitCode": 0,
+      "path": "/tmp/station-phase4-build.log",
+      "sha256": "ac77420be29a469dd71ea6f71dfad1c29348fcc613bc35c415ef443e15464857",
+      "bytes": 15598
+    }
+  },
+  "reviewedFixes": [
+    "Actual rendered bench quaternion alignment, with strict seat/capsule guards.",
+    "Private ride-test helper now supplies actual rendered station envelopes like production.",
+    "Exact signed quaternion components replace invalid non-unit self-angle comparisons while preserving raw endpoint, car-frame, position and genuine heading-change checks.",
+    "Offline material audit accepts only exact reviewed authority source bytes and explicit mesh3\u21926/Box3 metadata; original triangle digest/count and all other fixture bytes remain exact.",
+    "AST ownership fixtures include the real production syncViewCutaway method and imports.",
+    "Stadium call-button approaches use the real capsule-bounded native walkway, unchanged interaction range and actual F/touch actions.",
+    "Centre-divider regression uses the authored side navigation lane and retains the physical divider; portal assertions follow actual current shader behavior."
+  ],
+  "validationLimit": "CPU regression coverage plus separately hashed full-city GPU/photo-reference acceptance. Reconstructed dimensions and photographic inference limits remain recorded in station reference documents.",
+  "acceptedGpuPin": {
+    "path": "docs/qa/station-interiors-20261023/final-runtime-pin.json",
+    "sha256": "abf7388a9a309b7b82fac3a840cbe8ecbb8e3af443b2e9f15bf8d52ef3f2c503",
+    "sourcePacketSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+    "frontendTree": {
+      "directories": [
+        "app",
+        "components",
+        "hooks",
+        "lib"
+      ],
+      "files": 447,
+      "sha256": "9141adf8bd5ac3432215b91e3d8b1b470ca8fdc6b3c25046911be9a98d68c709",
+      "canonicalization": "SHA-256 over UTF-8 lines: relative path, tab, file SHA-256, tab, bytes, newline; paths sorted by JavaScript string code-unit order."
+    },
+    "totals": {
+      "stations": 5,
+      "images": 234,
+      "nativeDoorExitReentries": 15,
+      "actualLiftTrips": 28
+    },
+    "reports": {
+      "yaletown-roundhouse": {
+        "file": "final/game-yaletown-roundhouse-browser.json",
+        "sha256": "1a88a34a5d053fb8caaa638170664bd3ba7eeb7dc485c1ad79a8db741caf4b1e",
+        "bytes": 82972,
+        "capturedAt": "2026-10-23T15:33:18.194Z",
+        "captures": 27,
+        "nativeDoorExitReentries": 2,
+        "actualLiftTrips": 4,
+        "errors": 0,
+        "warnings": 0,
+        "failedHttp": 0,
+        "contextLost": false,
+        "stationPacketSha256": "fbf1a4c22d794af3378fbde2c11625eeba0ef0d9aab09e0592318c048e426c5e",
+        "verifiedAfterCapture": "fbf1a4c22d794af3378fbde2c11625eeba0ef0d9aab09e0592318c048e426c5e",
+        "manualReview": {
+          "accepted": true,
+          "reviewedAtUtc": "2026-10-23T15:36:41.013Z",
+          "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame."
+        }
+      },
+      "stadium-chinatown": {
+        "file": "final/game-stadium-chinatown-browser.json",
+        "sha256": "16cdb212d460f1425004a51569e339778912e7abb28ceb96cff1b43e2b625b15",
+        "bytes": 89229,
+        "capturedAt": "2026-10-23T15:35:24.578Z",
+        "captures": 29,
+        "nativeDoorExitReentries": 3,
+        "actualLiftTrips": 4,
+        "errors": 0,
+        "warnings": 0,
+        "failedHttp": 0,
+        "contextLost": false,
+        "stationPacketSha256": "845ef953203cb0bc8eb9708b7014eea9ca797d68247f9f84f8b26e4ceb40ca8d",
+        "verifiedAfterCapture": "845ef953203cb0bc8eb9708b7014eea9ca797d68247f9f84f8b26e4ceb40ca8d",
+        "manualReview": {
+          "accepted": true,
+          "reviewedAtUtc": "2026-10-23T15:43:03.528Z",
+          "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame."
+        }
+      },
+      "burrard": {
+        "file": "final/game-burrard-browser.json",
+        "sha256": "47f80ba4d40f32c17bd7bc09a29f1d46a132f225fbb5d49ff5fc12bed3a1489c",
+        "bytes": 88369,
+        "capturedAt": "2026-10-23T15:37:24.475Z",
+        "captures": 28,
+        "nativeDoorExitReentries": 3,
+        "actualLiftTrips": 6,
+        "errors": 0,
+        "warnings": 0,
+        "failedHttp": 0,
+        "contextLost": false,
+        "stationPacketSha256": "614ed920cd5dc8b9d1a1ad74567187c2d16e0c3212c94785f2d53605947cf190",
+        "verifiedAfterCapture": "614ed920cd5dc8b9d1a1ad74567187c2d16e0c3212c94785f2d53605947cf190",
+        "manualReview": {
+          "accepted": true,
+          "reviewedAtUtc": "2026-10-23T15:46:01.947Z",
+          "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame.",
+          "limitations": [
+            "The overview is a partial geographic cutaway dominated by a neighboring facade, with a thin visible platform strip. Stacked topology is accepted from the dedicated upper/lower platform, bank, physical geometry and route evidence rather than a complete-station overview."
+          ]
+        }
+      },
+      "granville": {
+        "file": "final/game-granville-browser.json",
+        "sha256": "5643f4538a2b2bdb32a0134402d753352f467018d68712151b55b0c08719e76e",
+        "bytes": 84508,
+        "capturedAt": "2026-10-23T15:41:37.739Z",
+        "captures": 27,
+        "nativeDoorExitReentries": 3,
+        "actualLiftTrips": 4,
+        "errors": 0,
+        "warnings": 0,
+        "failedHttp": 0,
+        "contextLost": false,
+        "stationPacketSha256": "46451eed5a522c9311d45e62fe96f7ca32a9f3e16a5b663b15af3a041928aecd",
+        "verifiedAfterCapture": "46451eed5a522c9311d45e62fe96f7ca32a9f3e16a5b663b15af3a041928aecd",
+        "manualReview": {
+          "accepted": true,
+          "reviewedAtUtc": "2026-10-23T15:52:37.858Z",
+          "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame.",
+          "limitations": [
+            "The overview is a partial geographic narrow strip, not a complete stacked-station section. Teal excavation background outside the authored Dunsmuir/Seymour pads does not cover source architecture or the walking avatar; topology acceptance uses the dedicated hall, banks, platforms, geometry and routes."
+          ]
+        }
+      },
+      "waterfront": {
+        "file": "final/game-waterfront-browser.json",
+        "sha256": "891a28a5e6e81f4c3a7488a0dc5975605f48a9c3d9fcf96cfdeb9e154cace5e4",
+        "bytes": 381872,
+        "capturedAt": "2026-10-23T15:43:33.398Z",
+        "captures": 123,
+        "nativeDoorExitReentries": 4,
+        "actualLiftTrips": 10,
+        "errors": 0,
+        "warnings": 0,
+        "failedHttp": 0,
+        "contextLost": false,
+        "stationPacketSha256": "dd1e1f6ff8889e7ec9eceaec8053223c7811991accbfcf50463b9bbdd58facba",
+        "verifiedAfterCapture": "dd1e1f6ff8889e7ec9eceaec8053223c7811991accbfcf50463b9bbdd58facba",
+        "manualReview": {
+          "accepted": true,
+          "reviewedAtUtc": "2026-10-23T16:03:24.885Z",
+          "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame.",
+          "limitations": [
+            "The overview is a partial geographic cutaway dominated by surrounding building facades and a narrow platform strip; it does not establish a complete two-line station section. Architecture acceptance uses the dedicated hall, platform and bank views, actual source-photo comparisons, physical geometry and continuous routes."
+          ],
+          "reviewedFrames": {
+            "inventory": 123,
+            "fullResolutionWalkingThirdPerson": 59,
+            "fullResolutionOverview": 1,
+            "fullResolutionFirstPerson": 24
+          },
+          "independentCrossCheck": {
+            "reviewers": 2,
+            "frames": 60,
+            "sameReportAndPngHashesVerified": true
+          }
+        }
+      }
+    }
+  },
+  "generatedQaRestoration": {
+    "snapshot": "/tmp/station-phase4-final-generated-qa-9141-rerun-before",
+    "createdUtc": "2026-10-23T16:34:07.862665+00:00",
+    "scope": "Only tools/**/qa/*.json exact pre-run bytes; docs and accepted pin are untouched.",
+    "unchangedFiles": 295,
+    "restoredFiles": [
+      {
+        "path": "tools/assets/citizen-character-variants/qa/cpu-tests.json",
+        "testOutputSha256": "e3a4798cc3916ed9d560758f907f60405710b7bf0907473a40970b837678b86a",
+        "restoredSha256": "76e1d5bb8f9704aee99cf320584e5b49fe2294769b5b86399416888c5769b553"
+      },
+      {
+        "path": "tools/assets/roadster-driver-fit/qa/adapter-preservation.json",
+        "testOutputSha256": "46fa8e3812f39eba5961ff39463b52c67cb67e4abdaa1f2703253cd19e8a469c",
+        "restoredSha256": "4ef0a357cefee63ae61e60ba693558d5174a0ec1c723afa7b1f76dd97d4f8934"
+      }
+    ]
+  }
+}

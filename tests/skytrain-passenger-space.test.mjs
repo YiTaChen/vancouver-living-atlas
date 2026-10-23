@@ -207,6 +207,80 @@ test('all seven authored station bench inventories produce floor-verified seats 
   }
 });
 
+test('Waterfront quaternion-rotated bench seats and approaches match the actual rendered cushion instances', () => {
+  const owner = stationOwner('waterfront');
+  try {
+    let benches = 0,
+      checked = 0;
+    for (const part of owner.data.parts.filter(
+      (p) => /bench/.test(p.id) && p.role === 'static' && p.quaternion,
+    )) {
+      const mesh = owner.group.children.find((m) =>
+          m.userData.stationPartIds?.includes(part.id),
+        ),
+        matrix = new THREE.Matrix4();
+      assert(mesh?.isInstancedMesh);
+      mesh.getMatrixAt(mesh.userData.stationPartIds.indexOf(part.id), matrix);
+      const inverse = matrix.clone().invert(),
+        front = new THREE.Vector3(0, 0, 1).transformDirection(matrix),
+        seats = owner
+          .benchSeats()
+          .filter((s) => s.id.startsWith(part.id + ':'));
+      assert(seats.length > 0, part.id);
+      for (const seat of seats) {
+        const cushionLocal = new THREE.Vector3(...seat.position).applyMatrix4(
+            inverse,
+          ),
+          cushionTop = new THREE.Vector3(cushionLocal.x, 0.5, 0).applyMatrix4(
+            matrix,
+          ),
+          towardStand = new THREE.Vector3(...seat.stand.position)
+            .sub(new THREE.Vector3(...seat.position))
+            .setY(0)
+            .normalize(),
+          facing = new THREE.Vector3(Math.sin(seat.yaw), 0, Math.cos(seat.yaw));
+        assert(
+          Math.abs(cushionLocal.x) < 0.5,
+          'the slot lies within the actual rendered cushion length',
+        );
+        assert(
+          Math.abs(cushionLocal.z) < 1e-4,
+          'the seat lies on the rendered cushion spine, including its quaternion',
+        );
+        assert(
+          Math.hypot(
+            cushionTop.x - seat.position[0],
+            cushionTop.z - seat.position[2],
+          ) < 1e-4,
+        );
+        assert(
+          Math.abs(cushionTop.y - seat.position[1] - seat.seatHeight) < 1e-4,
+        );
+        assert(Math.abs(towardStand.dot(front)) > 0.999999);
+        assert(facing.dot(towardStand) > 0.999999);
+        assert(owner.isClearFoot(seat.stand));
+        assert(owner.canApproachSeat(seat, seat.stand));
+        assert.equal(
+          owner.canApproachSeat(
+            seat,
+            owner.floorAt(seat.position, seat.stand.surfaceId),
+          ),
+          false,
+          'the actual rotated body still blocks a walking approach through the cushion',
+        );
+        checked++;
+      }
+      benches++;
+    }
+    assert(
+      benches >= 3 && checked >= 12,
+      'both Expo benches and the rotated Canada bench expose real usable seats',
+    );
+  } finally {
+    owner.dispose();
+  }
+});
+
 test('the actual central glass partition blocks sitting from the boarding pocket until the passenger walks into the aisle', async () => {
   const train = await actualTrain('expo'),
     space = train.passengerSpace;

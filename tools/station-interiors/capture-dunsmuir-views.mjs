@@ -2,6 +2,75 @@ import {
   captureStationEntrances,
   captureStationLifts,
 } from './capture-station-access.mjs';
+
+export const DUNSMUIR_HALL_VIEWPOINTS = [
+  {
+    stationId: 'burrard',
+    floorId: 'burrard-ticket-atrium',
+    label: 'ticket-atrium-glass-trusses-and-machines',
+    offsetFromBoundsCenter: [4, 0, -4.5],
+    targetPartPrefix: 'burrard-ticket-atrium-ticket-machine-',
+    targetOffset: [0, 3.2, 4],
+    thirdDistance: 6,
+  },
+  {
+    stationId: 'granville',
+    floorId: 'granville-original-ticket-hall',
+    label: 'original-ticket-hall-round-column-and-grid',
+    offsetFromBoundsCenter: [-0.45, 0, 1.4],
+    targetPartPrefix: 'granville-original-ticket-machine-',
+    targetOffset: [0, 0.65, 0],
+    thirdDistance: 4.2,
+  },
+];
+
+/** Shared by headless source QA and the actual full-city browser capture.
+ * Inspect placement establishes architecture, independently of native routes.
+ */
+export function prepareDunsmuirHallViewpoint(spec, testOwner) {
+  const travel = testOwner ? null : window.__atlas.skyTrainTravel,
+    owner = testOwner ?? travel.owner,
+    floor = owner.geometryData.floors.find((f) => f.id === spec.floorId);
+  if (!floor) throw new Error(`Missing actual ticket hall ${spec.floorId}`);
+  const center = [0, 1, 2].map(
+      (axis) =>
+        (Math.min(...floor.vertices.map((p) => p[axis])) +
+          Math.max(...floor.vertices.map((p) => p[axis]))) /
+        2,
+    ),
+    desired = center.map((v, axis) => v + spec.offsetFromBoundsCenter[axis]),
+    foot = owner.floorAt(desired, floor.id),
+    machines = owner.geometryData.parts.filter((p) =>
+      p.id.startsWith(spec.targetPartPrefix),
+    );
+  if (!foot || !owner.isClearFoot(foot))
+    throw new Error(`Unsupported ticket-hall viewpoint ${spec.label}`);
+  if (machines.length !== 3)
+    throw new Error(`Missing actual ticket machines ${spec.targetPartPrefix}`);
+  const target = [0, 1, 2].map(
+      (axis) =>
+        machines.reduce(
+          (sum, p) => sum + p.position[axis] / machines.length,
+          0,
+        ) + spec.targetOffset[axis],
+    ),
+    dx = target[0] - foot.position[0],
+    dz = target[2] - foot.position[2],
+    yaw = Math.atan2(dx, dz),
+    pitch = Math.atan2(target[1] - foot.position[1] - 1.65, Math.hypot(dx, dz)),
+    view = { ...spec, foot, target, yaw, pitch, thirdPitch: -0.45 };
+  if (travel) {
+    travel.foot = foot;
+    travel.level = 'concourse';
+    travel.yaw = yaw;
+    travel.lookYaw = 0;
+    travel.pitch = pitch;
+    travel.distanceView = 0;
+    travel.updateCamera();
+  }
+  return view;
+}
+
 /** Additional full-city evidence for the two stacked Dunsmuir tunnel stations.
  * Interior viewpoints use supported inspect placements. Doorway exits use the
  * production controller's touch input from an actual accepted street entry.
@@ -14,6 +83,20 @@ export async function captureDunsmuirStation(
 ) {
   await captureStationEntrances(page, snapshot, report, stationId);
   await captureStationLifts(page, snapshot, report);
+  const spec = DUNSMUIR_HALL_VIEWPOINTS.find((v) => v.stationId === stationId);
+  if (!spec) throw new Error(`No maintained ticket-hall view: ${stationId}`);
+  report.ticketHallView = await page.evaluate(
+    prepareDunsmuirHallViewpoint,
+    spec,
+  );
+  await snapshot(`${spec.label}-firstperson`);
+  await page.evaluate(({ thirdDistance }) => {
+    const travel = window.__atlas.skyTrainTravel;
+    travel.distanceView = thirdDistance;
+    travel.pitch = -0.45;
+    travel.updateCamera();
+  }, spec);
+  await snapshot(`${spec.label}-thirdperson`);
 
   const platforms = await page.evaluate(() => {
     const unique = new Map();

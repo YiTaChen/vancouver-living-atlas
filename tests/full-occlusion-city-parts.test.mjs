@@ -182,14 +182,11 @@ test('real Waterfront instancing removes full roof and wall widths while retaini
     owner.group.updateWorldMatrix(true, true);
     const roof = instance(
         owner.group,
-        (id) =>
-          id ===
-          'waterfront-canada-southbound-portal-roof-1',
+        (id) => id === 'waterfront-canada-southbound-portal-roof-1',
       ),
       otherRoof = instance(
         owner.group,
-        (id) =>
-          id === 'waterfront-expo-westbound-portal-roof-1',
+        (id) => id === 'waterfront-expo-westbound-portal-roof-1',
       );
     assert(roof && otherRoof);
     assert.strictEqual(roof.mesh, otherRoof.mesh, 'actual shared wall batch');
@@ -230,8 +227,7 @@ test('real Waterfront instancing removes full roof and wall widths while retaini
     );
     const wall = instance(
       owner.group,
-      (id) =>
-        id === 'canada-dark-track-wall-16.4',
+      (id) => id === 'canada-dark-track-wall-16.4',
     );
     assert(wall, 'exercise an authored opaque underground enclosure wall');
     const wallCenter = vector(0, 0, 0).applyMatrix4(wall.matrix),
@@ -259,19 +255,82 @@ test('real Waterfront instancing removes full roof and wall widths while retaini
         'the entire wall panel is transparent rather than a circular cutout',
       );
     }
+    // Exact floor prisms share their material batch with the ordinary floor
+    // boxes. Inspect the emitted floor range when that batch is a merged mesh.
     const floor = instance(
       owner.group,
       (id) => id === 'floor-waterfront-canada',
     );
-    assert(floor);
-    assert.equal(
-      cutaway.coverageAt(vector(0, 0.5, 0).applyMatrix4(floor.matrix), {
-        object: floor.mesh,
-        instanceId: floor.index,
-      }),
-      0,
-      'actual walking floor remains rendered',
+    let mergedFloor;
+    owner.group.traverse((mesh) => {
+      if (!(mesh instanceof THREE.Mesh) || mesh instanceof THREE.InstancedMesh)
+        return;
+      const range = mesh.userData.stationPartRanges?.find(
+        (part) => part.id === 'floor-waterfront-canada',
+      );
+      if (range) mergedFloor = { mesh, range };
+    });
+    assert(
+      floor || mergedFloor,
+      'the real Canada walking slab must be emitted',
     );
+    if (floor) {
+      assert.equal(
+        cutaway.coverageAt(vector(0, 0.5, 0).applyMatrix4(floor.matrix), {
+          object: floor.mesh,
+          instanceId: floor.index,
+        }),
+        0,
+        'actual instanced walking floor remains rendered',
+      );
+    } else {
+      const { mesh, range } = mergedFloor,
+        positions = mesh.geometry.getAttribute('position'),
+        originalPositions = positions.array.slice(),
+        originalWorld = mesh.matrixWorld.clone();
+      let topTriangle;
+      for (
+        let vertex = range.vertexStart;
+        vertex < range.vertexStart + range.vertexCount;
+        vertex += 3
+      ) {
+        assert.equal(
+          mesh.userData.stationTrianglePartIds[vertex / 3],
+          range.id,
+          'actual triangle provenance must remain tied to the source walking floor',
+        );
+        const triangle = new THREE.Triangle(
+          ...[0, 1, 2].map((offset) =>
+            new THREE.Vector3().fromBufferAttribute(positions, vertex + offset),
+          ),
+        );
+        if (triangle.getNormal(new THREE.Vector3()).y > 0.99) {
+          topTriangle = {
+            vertex,
+            point: triangle
+              .getMidpoint(new THREE.Vector3())
+              .applyMatrix4(mesh.matrixWorld),
+          };
+          break;
+        }
+      }
+      assert(
+        topTriangle,
+        'test the real upper face, rather than a batch bounding box',
+      );
+      for (const normalPass of [false, true])
+        assert.equal(
+          cutaway.coverageAt(topTriangle.point, {
+            object: mesh,
+            vertexIndex: topTriangle.vertex,
+            normalPass,
+          }),
+          0,
+          'actual merged walking floor remains rendered in color and normals',
+        );
+      assert.deepEqual(positions.array, originalPositions);
+      assert.deepEqual(mesh.matrixWorld, originalWorld);
+    }
     assert.deepEqual(roof.mesh.instanceMatrix.array, originalMatrices);
     assert.equal(roof.mesh.visible, true);
     assert.equal(roof.mesh.material.opacity, 1);

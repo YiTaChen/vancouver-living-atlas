@@ -16,6 +16,7 @@ const mapEvidence = JSON.parse(
 );
 
 for (const id of [
+  'waterfront',
   'burrard',
   'granville',
   'stadium-chinatown',
@@ -29,6 +30,17 @@ for (const id of [
     const data = adaptSkyTrainStationFrame(raw, routes),
       [x, z] = project(data.lonlat),
       q = new THREE.Quaternion(...data.quaternion);
+    if (id === 'waterfront')
+      assert.deepEqual(
+        SKYTRAIN_STREET_ENTRANCES[id].map((entry) => entry.id).sort(),
+        [
+          'cordova-lobby',
+          'howe-expo',
+          'granville-canada',
+          'granville-canada-lift',
+        ].sort(),
+        'all four distinct maintained Waterfront public portals require map evidence',
+      );
     for (const ref of SKYTRAIN_STREET_ENTRANCES[id]) {
       const record = mapEvidence.stations[id].find(
         (r) => r.url === ref.coordinateSource,

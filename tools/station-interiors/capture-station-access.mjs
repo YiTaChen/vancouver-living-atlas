@@ -109,7 +109,26 @@ export async function captureStationEntrances(
           nav.update(0.05);
           travel.update(0.05);
         }
-        const entered = travel.active && travel.station === stationId;
+        const handedOff = travel.active && travel.station === stationId;
+        let insideSteps = 0,
+          insideDistance = -Infinity;
+        if (handedOff) {
+          const threshold = owner.toLocal(entry.threshold);
+          travel.setTouchAxes(0, 1);
+          // Automatic ownership begins on the supported exterior apron. Keep
+          // walking through the physical doorway before calling this inside.
+          while (insideSteps++ < 100 && travel.active) {
+            insideDistance = travel.foot.position.reduce(
+              (sum, v, i) => sum + (v - threshold[i]) * entry.localDirection[i],
+              0,
+            );
+            if (insideDistance >= 0.35) break;
+            travel.update(0.05);
+            if (!owner.isClearFoot(travel.foot))
+              throw new Error(`Unsupported native doorway step: ${entryId}`);
+          }
+        }
+        const entered = handedOff && travel.active && insideDistance >= 0.35;
         nav.blur();
         travel.clearInput();
         travel.distanceView = 4;
@@ -118,6 +137,8 @@ export async function captureStationEntrances(
         return {
           entered,
           steps,
+          insideSteps,
+          insideDistance,
           start,
           position: nav.position.toArray(),
           walkingHeight: nav.walkingHeight(),

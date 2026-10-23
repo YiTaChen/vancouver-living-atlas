@@ -1,0 +1,3113 @@
+{
+  "stationId": "yaletown-roundhouse",
+  "url": "http://127.0.0.1:3205/?inspect",
+  "capturedAt": "2026-10-23T15:33:18.194Z",
+  "placements": "Inspect-only supported-floor placements; separate route tests verify circulation.",
+  "captures": [
+    {
+      "label": "entrance-thirdperson",
+      "file": "game-yaletown-roundhouse-entrance-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -2.575000000000136,
+          1.0334122515958772,
+          7.461464129730518e-14
+        ],
+        "surfaceId": "yaletown-roundhouse-davie-mainland-street-apron",
+        "layer": 13,
+        "yaw": 0
+      },
+      "camera": [
+        435.1936310493172,
+        11.68616118130341,
+        1281.4959165181456
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          437.71588288454655,
+          8.805470224169005,
+          1278.932066512336
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1599,
+        "watchedObjects": 2650,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 46,
+        "length": 4.013220833374109,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          435.1936310493172,
+          11.68616118130341,
+          1281.4959165181456
+        ],
+        "end": [
+          437.71588288454655,
+          9.905470224169004,
+          1278.932066512336
+        ]
+      },
+      "render": {
+        "frame": 594,
+        "calls": 507,
+        "triangles": 1830600,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-davie-mainland-outside-thirdperson",
+      "file": "game-yaletown-roundhouse-entrance-davie-mainland-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        439.844894205981,
+        11.779783952937873,
+        1276.767942528922
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          437.34770036030534,
+          8.827517169880732,
+          1279.3063212769591
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 104,
+        "length": 4.013755847953828,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          439.844894205981,
+          11.779783952937873,
+          1276.767942528922
+        ],
+        "end": [
+          437.34770036030534,
+          9.927517169880732,
+          1279.3063212769591
+        ]
+      },
+      "render": {
+        "frame": 768,
+        "calls": 169,
+        "triangles": 1261707,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-davie-mainland-inside-thirdperson",
+      "file": "game-yaletown-roundhouse-entrance-davie-mainland-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.42499999999986393,
+          0,
+          6.092055050936256e-14
+        ],
+        "surfaceId": "yaletown-davie-street",
+        "layer": 2,
+        "yaw": 0
+      },
+      "camera": [
+        437.3225891773921,
+        10.72432475563027,
+        1279.3318466053818
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          439.81978302306777,
+          7.772057972573128,
+          1276.7934678573447
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 162,
+        "length": 4.013755847953829,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          437.3225891773921,
+          10.72432475563027,
+          1279.3318466053818
+        ],
+        "end": [
+          439.81978302306777,
+          8.872057972573128,
+          1276.7934678573447
+        ]
+      },
+      "render": {
+        "frame": 942,
+        "calls": 489,
+        "triangles": 1828088,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-davie-elevator-outside-thirdperson",
+      "file": "game-yaletown-roundhouse-entrance-davie-elevator-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        443.9207878061153,
+        11.51992681047556,
+        1277.834244321906
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          446.3992266106732,
+          8.56766002741842,
+          1280.390938449765
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 219,
+        "length": 4.013755847953839,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          443.9207878061153,
+          11.51992681047556,
+          1277.834244321906
+        ],
+        "end": [
+          446.3992266106732,
+          9.66766002741842,
+          1280.390938449765
+        ]
+      },
+      "render": {
+        "frame": 1113,
+        "calls": 187,
+        "triangles": 1170250,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-davie-elevator-inside-thirdperson",
+      "file": "game-yaletown-roundhouse-entrance-davie-elevator-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.5582512359736143,
+          0,
+          3.689160899828197
+        ],
+        "surfaceId": "yaletown-street-lift-lobby",
+        "layer": 3,
+        "yaw": 0
+      },
+      "camera": [
+        446.42414919738724,
+        10.72432475563027,
+        1280.4166479532578
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          443.94571039282926,
+          7.772057972573128,
+          1277.859953825399
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 272,
+        "length": 4.01375584795373,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          446.42414919738724,
+          10.72432475563027,
+          1280.4166479532578
+        ],
+        "end": [
+          443.94571039282926,
+          8.872057972573128,
+          1277.859953825399
+        ]
+      },
+      "render": {
+        "frame": 1272,
+        "calls": 533,
+        "triangles": 3153625,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-core-1-call-firstperson",
+      "file": "game-yaletown-roundhouse-elevator-core-1-call-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.9981715099999118,
+          0,
+          2.914041350000056
+        ],
+        "surfaceId": "yaletown-street-lift-lobby",
+        "layer": 3,
+        "yaw": 0
+      },
+      "camera": [
+        443.7016699590767,
+        9.422057972573128,
+        1277.0027581472025
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          443.7016699590767,
+          7.772057972573128,
+          1277.0027581472025
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 284,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          446.42414919738724,
+          10.72432475563027,
+          1280.4166479532578
+        ],
+        "end": [
+          443.94571039282926,
+          8.872057972573128,
+          1277.859953825399
+        ]
+      },
+      "render": {
+        "frame": 1440,
+        "calls": 412,
+        "triangles": 1288312,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-core-1-lowest-landing-firstperson",
+      "file": "game-yaletown-roundhouse-elevator-core-1-lowest-landing-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.5481715099999995,
+          -9.400000000000002,
+          2.9140413499999998
+        ],
+        "surfaceId": "yaletown-street-lift-concourse-hall",
+        "layer": 6,
+        "yaw": 1.6091703133392646e-13
+      },
+      "camera": [
+        443.38608493829855,
+        0.022057972573125806,
+        1277.323547945451
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          443.38608493829855,
+          -1.627942027426874,
+          1277.323547945451
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 284,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          446.42414919738724,
+          10.72432475563027,
+          1280.4166479532578
+        ],
+        "end": [
+          443.94571039282926,
+          8.872057972573128,
+          1277.859953825399
+        ]
+      },
+      "render": {
+        "frame": 1632,
+        "calls": 231,
+        "triangles": 1400732,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-core-1-returned-to-entry-level-firstperson",
+      "file": "game-yaletown-roundhouse-elevator-core-1-returned-to-entry-level-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.5481715099999995,
+          0,
+          2.9140413499999998
+        ],
+        "surfaceId": "yaletown-street-lift-lobby",
+        "layer": 3,
+        "yaw": -1.5707963267949254
+      },
+      "camera": [
+        443.38608493829855,
+        9.422057972573128,
+        1277.323547945451
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          443.38608493829855,
+          7.772057972573128,
+          1277.323547945451
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 284,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          446.42414919738724,
+          10.72432475563027,
+          1280.4166479532578
+        ],
+        "end": [
+          443.94571039282926,
+          8.872057972573128,
+          1277.859953825399
+        ]
+      },
+      "render": {
+        "frame": 1809,
+        "calls": 415,
+        "triangles": 1285008,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-core-2-call-firstperson",
+      "file": "game-yaletown-roundhouse-elevator-core-2-call-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -10.983021469999919,
+          -9.400000000000002,
+          29.695874949999958
+        ],
+        "surfaceId": "yaletown-paid-rear-landing",
+        "layer": 11,
+        "yaw": 0
+      },
+      "camera": [
+        452.98852311502515,
+        0.022057972573125806,
+        1305.7515794549001
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          452.98852311502515,
+          -1.627942027426874,
+          1305.7515794549001
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 284,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          446.42414919738724,
+          10.72432475563027,
+          1280.4166479532578
+        ],
+        "end": [
+          443.94571039282926,
+          8.872057972573128,
+          1277.859953825399
+        ]
+      },
+      "render": {
+        "frame": 2001,
+        "calls": 188,
+        "triangles": 1354472,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-core-2-lowest-landing-firstperson",
+      "file": "game-yaletown-roundhouse-elevator-core-2-lowest-landing-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -10.98302147,
+          -16.2,
+          29.24587495
+        ],
+        "surfaceId": "yaletown-canada",
+        "layer": 1,
+        "yaw": -1.5707963267947838
+      },
+      "camera": [
+        452.66773331677643,
+        -6.777942027426871,
+        1305.435994434122
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          452.66773331677643,
+          -8.427942027426871,
+          1305.435994434122
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 284,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          446.42414919738724,
+          10.72432475563027,
+          1280.4166479532578
+        ],
+        "end": [
+          443.94571039282926,
+          8.872057972573128,
+          1277.859953825399
+        ]
+      },
+      "render": {
+        "frame": 2169,
+        "calls": 617,
+        "triangles": 3260927,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-core-2-returned-to-entry-level-firstperson",
+      "file": "game-yaletown-roundhouse-elevator-core-2-returned-to-entry-level-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -10.98302147,
+          -9.4,
+          29.24587495
+        ],
+        "surfaceId": "yaletown-paid-rear-landing",
+        "layer": 11,
+        "yaw": 3.141592653589762
+      },
+      "camera": [
+        452.66773331677643,
+        0.022057972573127582,
+        1305.435994434122
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          452.66773331677643,
+          -1.6279420274268723,
+          1305.435994434122
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 284,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          446.42414919738724,
+          10.72432475563027,
+          1280.4166479532578
+        ],
+        "end": [
+          443.94571039282926,
+          8.872057972573128,
+          1277.859953825399
+        ]
+      },
+      "render": {
+        "frame": 2364,
+        "calls": 187,
+        "triangles": 1348744,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "2026-gates-firstperson",
+      "file": "game-yaletown-roundhouse-2026-gates-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.6169785299999997,
+          -9.400000000000002,
+          4.045874949999998
+        ],
+        "surfaceId": "yaletown-unpaid-concourse",
+        "layer": 5,
+        "yaw": 0
+      },
+      "camera": [
+        442.8385851504654,
+        0.022057972573125806,
+        1279.4939851379108
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          442.8385851504654,
+          -1.627942027426874,
+          1279.4939851379108
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 284,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          446.42414919738724,
+          10.72432475563027,
+          1280.4166479532578
+        ],
+        "end": [
+          443.94571039282926,
+          8.872057972573128,
+          1277.859953825399
+        ]
+      },
+      "render": {
+        "frame": 2553,
+        "calls": 262,
+        "triangles": 1516132,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "2026-gates-thirdperson",
+      "file": "game-yaletown-roundhouse-2026-gates-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.6169785299999997,
+          -9.400000000000002,
+          4.045874949999998
+        ],
+        "surfaceId": "yaletown-unpaid-concourse",
+        "layer": 5,
+        "yaw": 0
+      },
+      "camera": [
+        447.83756320845896,
+        4.133563482721441,
+        1277.894180435716
+      ],
+      "cutaway": true,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          442.8385851504654,
+          -1.627942027426874,
+          1279.4939851379108
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 338,
+        "length": 7.019885350246754,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          447.83756320845896,
+          4.133563482721441,
+          1277.894180435716
+        ],
+        "end": [
+          442.8385851504654,
+          -0.527942027426874,
+          1279.4939851379108
+        ]
+      },
+      "render": {
+        "frame": 2751,
+        "calls": 153,
+        "triangles": 1075939,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "upper-entry-switchback-firstperson",
+      "file": "game-yaletown-roundhouse-upper-entry-switchback-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          12.51697853,
+          -4.65,
+          -1.2541250500000007
+        ],
+        "surfaceId": "yaletown-entry-turn-landing",
+        "layer": 4,
+        "yaw": 0
+      },
+      "camera": [
+        447.4058647427818,
+        4.772057972573128,
+        1267.2939868950582
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          447.4058647427818,
+          3.1220579725731277,
+          1267.2939868950582
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 349,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          447.83756320845896,
+          4.133563482721441,
+          1277.894180435716
+        ],
+        "end": [
+          442.8385851504654,
+          -0.527942027426874,
+          1279.4939851379108
+        ]
+      },
+      "render": {
+        "frame": 2943,
+        "calls": 248,
+        "triangles": 1416494,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "upper-entry-switchback-thirdperson",
+      "file": "game-yaletown-roundhouse-upper-entry-switchback-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          12.51697853,
+          -4.65,
+          -1.2541250500000007
+        ],
+        "surfaceId": "yaletown-entry-turn-landing",
+        "layer": 4,
+        "yaw": 0
+      },
+      "camera": [
+        451.08679867252005,
+        8.883563482721442,
+        1263.5523452614477
+      ],
+      "cutaway": true,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          447.4058647427818,
+          3.1220579725731277,
+          1267.2939868950582
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 400,
+        "length": 7.019885350246739,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          451.08679867252005,
+          8.883563482721442,
+          1263.5523452614477
+        ],
+        "end": [
+          447.4058647427818,
+          4.222057972573127,
+          1267.2939868950582
+        ]
+      },
+      "render": {
+        "frame": 3132,
+        "calls": 160,
+        "triangles": 1094666,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "long-lower-concourse-firstperson",
+      "file": "game-yaletown-roundhouse-long-lower-concourse-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -6.483021470000001,
+          -9.4,
+          24.24587495
+        ],
+        "surfaceId": "yaletown-paid-east-aisle",
+        "layer": 10,
+        "yaw": 0
+      },
+      "camera": [
+        452.25925243290624,
+        0.022057972573127582,
+        1298.7215962207665
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          452.25925243290624,
+          -1.6279420274268723,
+          1298.7215962207665
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 412,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          451.08679867252005,
+          8.883563482721442,
+          1263.5523452614477
+        ],
+        "end": [
+          447.4058647427818,
+          4.222057972573127,
+          1267.2939868950582
+        ]
+      },
+      "render": {
+        "frame": 3297,
+        "calls": 547,
+        "triangles": 3256647,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "long-lower-concourse-thirdperson",
+      "file": "game-yaletown-roundhouse-long-lower-concourse-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -6.483021470000001,
+          -9.4,
+          24.24587495
+        ],
+        "surfaceId": "yaletown-paid-east-aisle",
+        "layer": 10,
+        "yaw": 0
+      },
+      "camera": [
+        456.0008940665167,
+        4.133563482721443,
+        1302.4025301505048
+      ],
+      "cutaway": true,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          452.25925243290624,
+          -1.6279420274268723,
+          1298.7215962207665
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 462,
+        "length": 7.019885350246769,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          456.0008940665167,
+          4.133563482721443,
+          1302.4025301505048
+        ],
+        "end": [
+          452.25925243290624,
+          -0.5279420274268722,
+          1298.7215962207665
+        ]
+      },
+      "render": {
+        "frame": 3474,
+        "calls": 149,
+        "triangles": 1305865,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "island-platform-firstperson",
+      "file": "game-yaletown-roundhouse-island-platform-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -8.68302147,
+          -16.2,
+          29.24587495
+        ],
+        "surfaceId": "yaletown-canada",
+        "layer": 1,
+        "yaw": 0
+      },
+      "camera": [
+        454.28072342297605,
+        -6.777942027426871,
+        1303.7964021319622
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          454.28072342297605,
+          -8.427942027426871,
+          1303.7964021319622
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 472,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          456.0008940665167,
+          4.133563482721443,
+          1302.4025301505048
+        ],
+        "end": [
+          452.25925243290624,
+          -0.5279420274268722,
+          1298.7215962207665
+        ]
+      },
+      "render": {
+        "frame": 3627,
+        "calls": 537,
+        "triangles": 3254827,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "island-platform-thirdperson",
+      "file": "game-yaletown-roundhouse-island-platform-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -8.68302147,
+          -16.2,
+          29.24587495
+        ],
+        "surfaceId": "yaletown-canada",
+        "layer": 1,
+        "yaw": 0
+      },
+      "camera": [
+        458.0223650565865,
+        -2.666436517278556,
+        1307.4773360617005
+      ],
+      "cutaway": true,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          454.28072342297605,
+          -8.427942027426871,
+          1303.7964021319622
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 525,
+        "length": 7.019885350246769,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          458.0223650565865,
+          -2.666436517278556,
+          1307.4773360617005
+        ],
+        "end": [
+          454.28072342297605,
+          -7.327942027426872,
+          1303.7964021319622
+        ]
+      },
+      "render": {
+        "frame": 3819,
+        "calls": 124,
+        "triangles": 1291561,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "yaletown-upper-entry-stair-firstperson",
+      "file": "game-yaletown-roundhouse-yaletown-upper-entry-stair-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          7.159835672857142,
+          -2.325,
+          -1.95412505
+        ],
+        "surfaceId": "yaletown-upper-entry-stair:step:14",
+        "layer": 31,
+        "yaw": 0
+      },
+      "camera": [
+        443.1498938568769,
+        7.097057972573127,
+        1270.6220030323636
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          443.1498938568769,
+          5.447057972573128,
+          1270.6220030323636
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 536,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          458.0223650565865,
+          -2.666436517278556,
+          1307.4773360617005
+        ],
+        "end": [
+          454.28072342297605,
+          -7.327942027426872,
+          1303.7964021319622
+        ]
+      },
+      "render": {
+        "frame": 4002,
+        "calls": 283,
+        "triangles": 1766666,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "yaletown-upper-entry-stair-overhead-thirdperson",
+      "file": "game-yaletown-roundhouse-yaletown-upper-entry-stair-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          7.159835672857142,
+          -2.325,
+          -1.95412505
+        ],
+        "surfaceId": "yaletown-upper-entry-stair:step:14",
+        "layer": 31,
+        "yaw": 0
+      },
+      "camera": [
+        440.4710240445378,
+        13.6061866366499,
+        1273.3450540330598
+      ],
+      "cutaway": true,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          443.1498938568769,
+          5.447057972573128,
+          1270.6220030323636
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 582,
+        "length": 8.026372014792507,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          440.4710240445378,
+          13.6061866366499,
+          1273.3450540330598
+        ],
+        "end": [
+          443.1498938568769,
+          6.547057972573128,
+          1270.6220030323636
+        ]
+      },
+      "render": {
+        "frame": 4173,
+        "calls": 103,
+        "triangles": 1092386,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "yaletown-lower-entry-stair-firstperson",
+      "file": "game-yaletown-roundhouse-yaletown-lower-entry-stair-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          7.166978529999998,
+          -6.9431034482758625,
+          0.7458749499999993
+        ],
+        "surfaceId": "yaletown-lower-entry-stair:step:14",
+        "layer": 87,
+        "yaw": 0
+      },
+      "camera": [
+        445.0796419324131,
+        2.4789545242972655,
+        1272.5104212554734
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          445.0796419324131,
+          0.8289545242972656,
+          1272.5104212554734
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 597,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          440.4710240445378,
+          13.6061866366499,
+          1273.3450540330598
+        ],
+        "end": [
+          443.1498938568769,
+          6.547057972573128,
+          1270.6220030323636
+        ]
+      },
+      "render": {
+        "frame": 4377,
+        "calls": 163,
+        "triangles": 1297119,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "yaletown-lower-entry-stair-overhead-thirdperson",
+      "file": "game-yaletown-roundhouse-yaletown-lower-entry-stair-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          7.166978529999998,
+          -6.9431034482758625,
+          0.7458749499999993
+        ],
+        "surfaceId": "yaletown-lower-entry-stair:step:14",
+        "layer": 87,
+        "yaw": 0
+      },
+      "camera": [
+        447.7585117447522,
+        8.988083188374038,
+        1269.7873702547772
+      ],
+      "cutaway": true,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          445.0796419324131,
+          0.8289545242972656,
+          1272.5104212554734
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 648,
+        "length": 8.026372014792507,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          447.7585117447522,
+          8.988083188374038,
+          1269.7873702547772
+        ],
+        "end": [
+          445.0796419324131,
+          1.9289545242972657,
+          1272.5104212554734
+        ]
+      },
+      "render": {
+        "frame": 4560,
+        "calls": 97,
+        "triangles": 879817,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "yaletown-platform-stair-firstperson",
+      "file": "game-yaletown-roundhouse-yaletown-platform-stair-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -11.68302147,
+          -12.717073170731705,
+          19.49587495
+        ],
+        "surfaceId": "yaletown-platform-stair:step:20",
+        "layer": 151,
+        "yaw": 0
+      },
+      "camera": [
+        445.2263776557333,
+        -3.2950151981585774,
+        1299.0973253367592
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          445.2263776557333,
+          -4.945015198158577,
+          1299.0973253367592
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 660,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          447.7585117447522,
+          8.988083188374038,
+          1269.7873702547772
+        ],
+        "end": [
+          445.0796419324131,
+          1.9289545242972657,
+          1272.5104212554734
+        ]
+      },
+      "render": {
+        "frame": 4761,
+        "calls": 174,
+        "triangles": 1177024,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "yaletown-platform-stair-overhead-thirdperson",
+      "file": "game-yaletown-roundhouse-yaletown-platform-stair-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -11.68302147,
+          -12.717073170731705,
+          19.49587495
+        ],
+        "surfaceId": "yaletown-platform-stair:step:20",
+        "layer": 151,
+        "yaw": 0
+      },
+      "camera": [
+        442.50332665503714,
+        3.214113465918195,
+        1296.41845552442
+      ],
+      "cutaway": true,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          445.2263776557333,
+          -4.945015198158577,
+          1299.0973253367592
+        ]
+      },
+      "occlusion": {
+        "active": true,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 713,
+        "length": 8.026372014792525,
+        "radius": 0.25,
+        "strength": 1,
+        "start": [
+          442.50332665503714,
+          3.214113465918195,
+          1296.41845552442
+        ],
+        "end": [
+          445.2263776557333,
+          -3.845015198158577,
+          1299.0973253367592
+        ]
+      },
+      "render": {
+        "frame": 4956,
+        "calls": 91,
+        "triangles": 864414,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "separate-two-escalator-bank-from-top",
+      "file": "game-yaletown-roundhouse-separate-two-escalator-bank-from-top.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -10.98302147,
+          -9.4,
+          -4.35412505
+        ],
+        "surfaceId": "yaletown-paid-north-landing",
+        "layer": 8,
+        "yaw": 0
+      },
+      "camera": [
+        428.7154283808745,
+        0.022057972573127582,
+        1281.8723128826844
+      ],
+      "cutaway": false,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          428.7154283808745,
+          -1.6279420274268723,
+          1281.8723128826844
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 727,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          442.50332665503714,
+          3.214113465918195,
+          1296.41845552442
+        ],
+        "end": [
+          445.2263776557333,
+          -3.845015198158577,
+          1299.0973253367592
+        ]
+      },
+      "render": {
+        "frame": 5142,
+        "calls": 426,
+        "triangles": 1341624,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "overview-cutaway",
+      "file": "game-yaletown-roundhouse-overview-cutaway.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "yaletown-roundhouse",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -11.58302147,
+          -16.2,
+          12.14587495
+        ],
+        "surfaceId": "yaletown-canada",
+        "layer": 1,
+        "yaw": 0
+      },
+      "camera": [
+        495.0569409556221,
+        76.57205797257313,
+        1358.8714833755494
+      ],
+      "cutaway": true,
+      "authoredSource": "yaletown-opening-plan-v3",
+      "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+      "authoredGeometry": "yaletown-opening-plan-v3",
+      "openWorld": true,
+      "geometryParts": 1516,
+      "mode": "orbit",
+      "cameraView": "orbit",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          440.0569409556221,
+          -8.427942027426871,
+          1293.8714833755494
+        ]
+      },
+      "occlusion": {
+        "active": false,
+        "mode": "full-occluder",
+        "disposed": false,
+        "materialCount": 528,
+        "meshCount": 1605,
+        "watchedObjects": 2659,
+        "geometryCount": 888,
+        "pieceCount": 55940,
+        "unsupportedMaterialCount": 0,
+        "shaderFailures": 0,
+        "updates": 727,
+        "length": 0,
+        "radius": 0.25,
+        "strength": 0,
+        "start": [
+          442.50332665503714,
+          3.214113465918195,
+          1296.41845552442
+        ],
+        "end": [
+          445.2263776557333,
+          -3.845015198158577,
+          1299.0973253367592
+        ]
+      },
+      "render": {
+        "frame": 5337,
+        "calls": 118,
+        "triangles": 1139756,
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "errors": [],
+  "responses": [],
+  "warnings": [],
+  "consoleMessages": [],
+  "runtimePacket": {
+    "url": "http://127.0.0.1:3205/models/skytrain-stations/yaletown-roundhouse.json",
+    "bytes": 453723,
+    "sha256": "fbf1a4c22d794af3378fbde2c11625eeba0ef0d9aab09e0592318c048e426c5e",
+    "sourceSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+    "verifiedAfterCapture": "fbf1a4c22d794af3378fbde2c11625eeba0ef0d9aab09e0592318c048e426c5e"
+  },
+  "startup": [
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "0"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "48"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "88"
+    },
+    {
+      "ready": false,
+      "engine": true
+    }
+  ],
+  "initial": {
+    "ready": true,
+    "authorityCheckpoint": {
+      "installed": true,
+      "legacyHallVisible": false,
+      "prepareOwner": "function"
+    },
+    "stationCount": 7,
+    "fleetCount": 51,
+    "worldPaths": 64,
+    "entries": [
+      {
+        "id": "davie-mainland",
+        "stationId": "yaletown-roundhouse",
+        "label": "Davie / Mainland · station pavilion",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/yaletown_roundhouse_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "yaletown-roundhouse-davie-mainland-street-apron",
+        "threshold": [
+          439.52173050344396,
+          8.94035550898246,
+          1277.0964360001349
+        ],
+        "inward": [
+          439.1009504757397,
+          7.772057972573128,
+          1277.524155731133
+        ],
+        "outward": [
+          437.34770036030534,
+          8.807517169880732,
+          1279.3063212769591
+        ],
+        "localDirection": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "davie-elevator",
+        "stationId": "yaletown-roundhouse",
+        "label": "Davie Street · independent elevator pavilion door",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/yaletown_roundhouse_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "yaletown-roundhouse-davie-elevator-street-apron",
+        "threshold": [
+          444.2415244049098,
+          8.65526238930342,
+          1278.1651079999679
+        ],
+        "inward": [
+          444.65914418667046,
+          7.772057972573128,
+          1278.595913893477
+        ],
+        "outward": [
+          446.3992266106732,
+          8.54766002741842,
+          1280.390938449765
+        ],
+        "localDirection": [
+          0.023716993180772514,
+          0,
+          -0.9997187125559185
+        ]
+      }
+    ],
+    "sourceRevision": "yaletown-opening-plan-v3",
+    "geometryRevision": "yaletown-opening-plan-v3",
+    "sourceFloors": 12,
+    "geometryFloors": 16,
+    "entryCandidate": null,
+    "entryDiagnostics": {
+      "walkingHeight": 8.827517169880732,
+      "floorAtInward": {
+        "position": [
+          -0.599999999999985,
+          -1.0156193060192659e-14,
+          -4.5574655160862676e-14
+        ],
+        "surfaceId": "yaletown-roundhouse-davie-mainland-street-apron",
+        "layer": 13,
+        "yaw": 0
+      },
+      "clearAtInward": true,
+      "localStreetFoot": [
+        -3.0999999999999908,
+        1.055459197307604,
+        -3.530509218307998e-14
+      ]
+    },
+    "error": null
+  },
+  "enteredByStreet": true,
+  "entryTransitions": [
+    {
+      "entryId": "davie-mainland",
+      "left": true,
+      "walked": 2.250000000000001,
+      "maxStep": 0.18164598024112663,
+      "outside": [
+        437.34770036030534,
+        8.807517169880732,
+        1279.3063212769591
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "insideSteps": 25,
+        "insideDistance": 0.42499999999986393,
+        "start": [
+          437.34770036030534,
+          8.807517169880732,
+          1279.3063212769591
+        ],
+        "position": [
+          439.81978302306777,
+          7.772057972573128,
+          1276.7934678573447
+        ],
+        "walkingHeight": 8.962396706902844,
+        "stationFoot": {
+          "position": [
+            0.42499999999986393,
+            0,
+            6.092055050936256e-14
+          ],
+          "surfaceId": "yaletown-davie-street",
+          "layer": 2,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    },
+    {
+      "entryId": "davie-elevator",
+      "left": true,
+      "walked": 2.2499999999999982,
+      "maxStep": 0.13149235647562044,
+      "outside": [
+        446.3992266106732,
+        8.547660027418422,
+        1280.390938449765
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "insideSteps": 25,
+        "insideDistance": 0.42499999999989274,
+        "start": [
+          446.3992266106732,
+          8.547660027418422,
+          1280.390938449765
+        ],
+        "position": [
+          443.94571039282926,
+          7.772057972573128,
+          1277.859953825399
+        ],
+        "walkingHeight": 7.7746733384655915,
+        "stationFoot": {
+          "position": [
+            2.5582512359736143,
+            0,
+            3.689160899828197
+          ],
+          "surfaceId": "yaletown-street-lift-lobby",
+          "layer": 3,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    }
+  ],
+  "liftTrips": [
+    {
+      "core": "core-1",
+      "id": "yaletown-lift-street-concourse",
+      "candidateId": "skytrain:elevator:yaletown-roundhouse:yaletown-lift-street-concourse:forward",
+      "action": "elevatorDown",
+      "from": [
+        2.9981715099999118,
+        0,
+        2.914041350000056
+      ],
+      "destination": [
+        2.5481715099999995,
+        -9.4,
+        2.9140413499999998
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:yaletown-roundhouse:yaletown-lift-street-concourse:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          444.30760624465756,
+          8.922057972573128,
+          1277.59886318645
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        2.5481715099999995,
+        -9.400000000000002,
+        2.9140413499999998
+      ],
+      "surfaceId": "yaletown-street-lift-concourse-hall",
+      "direction": "northbound"
+    },
+    {
+      "core": "core-1",
+      "id": "yaletown-lift-street-concourse",
+      "candidateId": "skytrain:elevator:yaletown-roundhouse:yaletown-lift-street-concourse:return",
+      "action": "elevatorUp",
+      "from": [
+        2.5481715099999573,
+        -9.4,
+        2.4640413500000338
+      ],
+      "destination": [
+        2.5481715099999995,
+        0,
+        2.9140413499999998
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:yaletown-roundhouse:yaletown-lift-street-concourse:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          442.46919010080217,
+          -0.47794202742687375,
+          1277.6138992102537
+        ],
+        "distance": 1.7763568394002505e-15
+      },
+      "arrived": true,
+      "to": [
+        2.5481715099999995,
+        0,
+        2.9140413499999998
+      ],
+      "surfaceId": "yaletown-street-lift-lobby",
+      "direction": "northbound"
+    },
+    {
+      "core": "core-2",
+      "id": "yaletown-lift-concourse-platform",
+      "candidateId": "skytrain:elevator:yaletown-roundhouse:yaletown-lift-concourse-platform:forward",
+      "action": "elevatorDown",
+      "from": [
+        -10.983021469999919,
+        -9.400000000000002,
+        29.695874949999958
+      ],
+      "destination": [
+        -10.98302147,
+        -16.2,
+        29.24587495
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:yaletown-roundhouse:yaletown-lift-concourse-platform:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          452.3924180757774,
+          -0.477942027426872,
+          1306.3575157404812
+        ],
+        "distance": 1.7763568394002505e-15
+      },
+      "arrived": true,
+      "to": [
+        -10.98302147,
+        -16.2,
+        29.24587495
+      ],
+      "surfaceId": "yaletown-canada",
+      "direction": "northbound"
+    },
+    {
+      "core": "core-2",
+      "id": "yaletown-lift-concourse-platform",
+      "candidateId": "skytrain:elevator:yaletown-roundhouse:yaletown-lift-concourse-platform:return",
+      "action": "elevatorUp",
+      "from": [
+        -10.533021470000023,
+        -16.2,
+        29.245874950000044
+      ],
+      "destination": [
+        -10.98302147,
+        -9.4,
+        29.24587495
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:yaletown-roundhouse:yaletown-lift-concourse-platform:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          452.37738205197377,
+          -7.277942027426871,
+          1304.5190995966257
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        -10.98302147,
+        -9.4,
+        29.24587495
+      ],
+      "surfaceId": "yaletown-paid-rear-landing",
+      "direction": "southbound"
+    }
+  ],
+  "liftCores": [
+    {
+      "id": "core-1",
+      "initial": {
+        "surfaceId": "yaletown-street-lift-lobby",
+        "position": [
+          2.5481715099999995,
+          0,
+          2.9140413499999998
+        ]
+      },
+      "trips": [
+        {
+          "id": "yaletown-lift-street-concourse",
+          "reverse": false
+        },
+        {
+          "id": "yaletown-lift-street-concourse",
+          "reverse": true
+        }
+      ],
+      "lowestY": -9.4,
+      "connectionIds": [
+        "yaletown-lift-street-concourse"
+      ]
+    },
+    {
+      "id": "core-2",
+      "initial": {
+        "surfaceId": "yaletown-paid-rear-landing",
+        "position": [
+          -10.98302147,
+          -9.4,
+          29.24587495
+        ]
+      },
+      "trips": [
+        {
+          "id": "yaletown-lift-concourse-platform",
+          "reverse": false
+        },
+        {
+          "id": "yaletown-lift-concourse-platform",
+          "reverse": true
+        }
+      ],
+      "lowestY": -16.2,
+      "connectionIds": [
+        "yaletown-lift-concourse-platform"
+      ]
+    }
+  ],
+  "escalatorBanks": [
+    {
+      "laneIds": [
+        "yaletown-platform-up-escalator",
+        "yaletown-platform-added-escalator"
+      ],
+      "from": [
+        "yaletown-canada",
+        "yaletown-canada"
+      ],
+      "to": [
+        "yaletown-paid-north-landing",
+        "yaletown-paid-north-landing"
+      ],
+      "foot": {
+        "position": [
+          -10.98302147,
+          -9.4,
+          -4.35412505
+        ],
+        "surfaceId": "yaletown-paid-north-landing",
+        "layer": 8,
+        "yaw": 0
+      }
+    }
+  ],
+  "overviewViewpoint": {
+    "platformId": "yaletown-canada-northbound",
+    "floorId": "yaletown-canada",
+    "foot": {
+      "position": [
+        -11.58302147,
+        -16.2,
+        12.14587495
+      ],
+      "surfaceId": "yaletown-canada",
+      "layer": 1,
+      "yaw": 0
+    },
+    "placement": "Inspect-only supported lowest-platform viewpoint"
+  },
+  "final": {
+    "snapshot": {
+      "phase": "station",
+      "stationId": "yaletown-roundhouse",
+      "lineId": "canada",
+      "plannedLineId": null,
+      "destinationId": "main-street-science-world",
+      "nextStationId": null,
+      "level": "platform",
+      "doorsOpen": false,
+      "canBoard": false,
+      "canAlight": false,
+      "canExit": false,
+      "canChangeLevel": false,
+      "speedMps": 0,
+      "travelProgress": 0,
+      "error": null,
+      "busy": false,
+      "seated": false,
+      "canWalkCabin": false,
+      "availableLines": [
+        "canada"
+      ],
+      "hint": "approach-door",
+      "atStop": null
+    },
+    "contextLost": false,
+    "stationOwners": [
+      {
+        "id": "waterfront",
+        "authored": "waterfront-mapped-circulation-v3",
+        "parts": 2862
+      },
+      {
+        "id": "burrard",
+        "authored": "burrard-reference-interior-v2",
+        "parts": 2061
+      },
+      {
+        "id": "granville",
+        "authored": "granville-reference-interior-v3",
+        "parts": 3509
+      },
+      {
+        "id": "stadium-chinatown",
+        "authored": "stadium-mapped-circulation-v4",
+        "parts": 1132
+      },
+      {
+        "id": "main-street-science-world",
+        "parts": 143
+      },
+      {
+        "id": "vancouver-city-centre",
+        "parts": 124
+      },
+      {
+        "id": "yaletown-roundhouse",
+        "authored": "yaletown-opening-plan-v3",
+        "parts": 1516
+      }
+    ]
+  },
+  "debugReport": ".cache/station-interior-debug/game-yaletown-roundhouse-browser-debug.json",
+  "passed": true,
+  "acceptanceBoundary": "passed covers native input, runtime and shader checks. Visible avatar pixels, enclosing architecture and photo correspondence require the separate manual image review."
+}

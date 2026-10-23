@@ -119,10 +119,13 @@ export class SkyTrainTravel {
       heightAt: (x, z) => city.elevation(x, z),
       streetHeightAt: (x, z) =>
         city.navigation?.groundHeight(x, z) ?? city.elevation(x, z),
+      prepareOwner: (data) =>
+        city.interiors?.prepareWaterfrontStationAuthority?.(data),
       scene: city.scene,
       fetchStation: async (id, signal) => {
         const response = await fetch(`/models/skytrain-stations/${id}.json`, {
           signal,
+          cache: 'no-cache',
         });
         if (!response.ok) throw new Error('Station unavailable');
         const data = validateRuntimeStation(await response.json(), id);

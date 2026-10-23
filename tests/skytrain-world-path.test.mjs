@@ -183,10 +183,15 @@ for (const line of ['expo', 'canada']) {
         path.sampleDistance(path.length).position.distanceTo(end.position) <
           1e-8,
       );
-      assert(
-        path.sampleDistance(path.length).quaternion.angleTo(start.quaternion) <
-          1e-7,
-      );
+      // Authored quaternion products can be a few ulps below unit length;
+      // angleTo(q, q) then reports a spurious rotation. Endpoint components
+      // must still return to the exact unchanged authored car frame.
+      path
+        .sampleDistance(path.length)
+        .quaternion.toArray()
+        .forEach((value, index) =>
+          assert(Math.abs(value - start.quaternion.toArray()[index]) < 1e-12),
+        );
       for (const offset of [-26.85, 26.85]) {
         const a = path.sampleCarDistance(path.length * (0.5 - 1e-5), offset),
           b = path.sampleCarDistance(path.length * (0.5 + 1e-5), offset);

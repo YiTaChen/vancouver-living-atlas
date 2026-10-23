@@ -744,6 +744,7 @@ export class CityEngine {
             parts: this.data.rocketBuildingParts ?? [],
           }]
         : [],
+      [this.terrain, this.roads],
     );
     this.busVisit = new BusCabinVisit(
       this,
@@ -1089,7 +1090,10 @@ export class CityEngine {
     const restoreCutawayNormals = this.travelOcclusion?.prepareMaterial(
       this.ssao.normalMaterial, { normalPass: true },
     );
+    const restoreStationGroundNormals =
+      this.skyTrainTravel?.prepareGroundOpeningMaterial(this.ssao.normalMaterial);
     trackSSAOResources(this.ssao).restores.add(() => {
+      restoreStationGroundNormals?.();
       restoreCutawayNormals?.();
       restorePedestrianNormals();
     });

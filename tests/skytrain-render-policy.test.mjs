@@ -41,6 +41,7 @@ const code = ts.transpileModule(
   `
   import * as THREE from '${import.meta.resolve('three')}';
   import { project } from '${cityModule('geo')}';
+  import { firstPerson } from '${cityModule('travel-camera')}';
   export class RenderHarness {
     ${members('engine', 'CityEngine', ['renderScene', 'fly', 'navigateMinimap'], ts.isMethodDeclaration)}
   }
@@ -51,7 +52,7 @@ const code = ts.transpileModule(
     ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['aboard'], ts.isGetAccessorDeclaration)}
     ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['canResumeOverview'], ts.isGetAccessorDeclaration)}
     ${members('skytrain-travel', 'SkyTrainTravel', ['interactionOrigin', 'passengerSeated'], ts.isGetAccessorDeclaration)}
-    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['observeOverviewMoved', 'setOverview'], ts.isMethodDeclaration)}
+    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['observeOverviewMoved', 'setOverview', 'syncViewCutaway'], ts.isMethodDeclaration)}
     ${members('skytrain-travel', 'SkyTrainTravel', ['publish'], ts.isMethodDeclaration)}
     ${members('skytrain-travel', 'SkyTrainTravel', ['clearInput'], ts.isPropertyDeclaration)}
   }
