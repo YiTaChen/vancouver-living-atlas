@@ -38,7 +38,13 @@ export function planFlat(o, initial, goal, check = () => {}) {
   )
     return [goal];
   if (process.env.STATION_WALK_DEBUG)
-    console.log('Planning flat route', o.data.id, initial.position, goal, initial.surfaceId);
+    console.log(
+      'Planning flat route',
+      o.data.id,
+      initial.position,
+      goal,
+      initial.surfaceId,
+    );
   while (queue.length && iterations++ < 20000) {
     queue.sort((a, b) => b.score - a.score);
     const node = queue.pop();

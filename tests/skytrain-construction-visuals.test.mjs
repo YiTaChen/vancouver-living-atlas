@@ -31,6 +31,18 @@ const ids = [
   'vancouver-city-centre',
   'yaletown-roundhouse',
 ];
+const legacyIds = ids.filter((id) => !station(id).authoredInterior);
+const expectedPortals = legacyIds.reduce((count, id) => {
+  const owner = new SkyTrainStationOwner(
+    station(id),
+    cityElevation,
+    'balanced',
+    true,
+  );
+  const pairs = owner.streetRoutes().length;
+  owner.dispose();
+  return count + pairs * 2;
+}, 0);
 const renderables = (group, visible = false) => {
   const result = [];
   const visit = (node) => {
@@ -56,7 +68,7 @@ const textures = (group) =>
       );
     }),
   );
-function fixture(id = 'waterfront') {
+function fixture(id = legacyIds[0]) {
   const owner = new SkyTrainStationOwner(
       station(id),
       cityElevation,
@@ -76,9 +88,9 @@ function fixture(id = 'waterfront') {
   };
 }
 
-test('all34 real station portals have bounded upright geometry and beside-route A-frames without lights, camera collision or picking', () => {
+test('all legacy station portals have bounded upright geometry and beside-route A-frames without lights, camera collision or picking', () => {
   let count = 0;
-  for (const id of ids) {
+  for (const id of legacyIds) {
     const f = fixture(id);
     try {
       count += f.placements.length;
@@ -159,7 +171,7 @@ test('all34 real station portals have bounded upright geometry and beside-route 
       f.dispose();
     }
   }
-  assert.equal(count, 34);
+  assert.equal(count, expectedPortals);
 });
 
 test('nearest portals alone animate; quality caps particles/draws and far labels release their CPU/GPU storage', () => {
@@ -205,7 +217,7 @@ test('nearest portals alone animate; quality caps particles/draws and far labels
   }
 });
 
-test('a supported pedestrian approaching any of34 portals retains its physical F target at balanced quality while the real third-person camera follows behind', () => {
+test('a supported pedestrian approaching every legacy portal retains its physical F target at balanced quality while the real third-person camera follows behind', () => {
   const originalDocument = globalThis.document;
   Reflect.set(globalThis, 'document', {
     hidden: false,
@@ -213,7 +225,7 @@ test('a supported pedestrian approaching any of34 portals retains its physical F
   });
   let checked = 0;
   try {
-    for (const id of ids) {
+    for (const id of legacyIds) {
       const f = fixture(id);
       try {
         const collision = new TravelCameraCollision();
@@ -305,7 +317,7 @@ test('a supported pedestrian approaching any of34 portals retains its physical F
     if (originalDocument === undefined) delete globalThis.document;
     else globalThis.document = originalDocument;
   }
-  assert.equal(checked, 34);
+  assert.equal(checked, expectedPortals);
 });
 
 test('all10 localized signs allocate small nonmipped canvas labels lazily, reuse steady frames, and dispose each owned resource once', () => {

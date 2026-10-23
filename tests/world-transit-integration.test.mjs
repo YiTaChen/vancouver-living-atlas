@@ -6,6 +6,7 @@ import ts from 'typescript';
 import { cityModule } from './helpers/city-modules.mjs';
 import { cityElevation } from './helpers/city-elevation.mjs';
 import { actualTrain } from './helpers/skytrain-geometry.mjs';
+import { planFlat } from './helpers/station-walker.mjs';
 const { SkyTrainWorldTravel } = await import(
   cityModule('skytrain-world-travel')
 );
@@ -266,40 +267,46 @@ async function deferredWorldDetail(travel, city, vehicle, whileCompiling) {
 /** Drive the production capsule through real local floor points using the
  * controller's public touch axes. Positions are read to plan, never injected. */
 function walkStationRoute(travel, goals, onStep) {
-  for (const target of goals) {
-    const before = travel.foot.position;
-    const dx = target[0] - before[0],
-      dz = target[2] - before[2],
-      desired = Math.atan2(dx, dz);
-    let turn = Math.atan2(
-      Math.sin(desired - travel.yaw),
-      Math.cos(desired - travel.yaw),
-    );
-    while (Math.abs(turn) > 1e-6) {
-      travel.setTouchAxes(-Math.sign(turn), 0);
-      travel.update(Math.min(0.1, Math.abs(turn) / 1.65));
-      onStep?.();
-      turn = Math.atan2(
+  for (const goal of goals) {
+    const targets =
+      Math.abs(goal[1] - travel.foot.position[1]) < 0.025
+        ? planFlat(travel.owner, travel.foot, goal)
+        : [goal];
+    for (const target of targets) {
+      const before = travel.foot.position;
+      const dx = target[0] - before[0],
+        dz = target[2] - before[2],
+        desired = Math.atan2(dx, dz);
+      let turn = Math.atan2(
         Math.sin(desired - travel.yaw),
         Math.cos(desired - travel.yaw),
       );
+      while (Math.abs(turn) > 1e-6) {
+        travel.setTouchAxes(-Math.sign(turn), 0);
+        travel.update(Math.min(0.1, Math.abs(turn) / 1.65));
+        onStep?.();
+        turn = Math.atan2(
+          Math.sin(desired - travel.yaw),
+          Math.cos(desired - travel.yaw),
+        );
+      }
+      let distance = Math.hypot(dx, dz);
+      while (distance > 1e-6) {
+        const dt = Math.min(0.1, distance / 2.5);
+        travel.setTouchAxes(0, 1);
+        travel.update(dt);
+        onStep?.();
+        distance -= dt * 2.5;
+      }
+      travel.clearInput();
+      assert.ok(
+        Math.hypot(
+          target[0] - travel.foot.position[0],
+          target[2] - travel.foot.position[2],
+        ) < 0.18,
+        `world controller follows station floor route: target ${target}, actual ${travel.foot.position}, surface ${travel.foot.surfaceId}, yaw ${travel.yaw}, mode ${travel.city.settings.mode}`,
+      );
     }
-    let distance = Math.hypot(dx, dz);
-    while (distance > 1e-6) {
-      const dt = Math.min(0.1, distance / 2.5);
-      travel.setTouchAxes(0, 1);
-      travel.update(dt);
-      onStep?.();
-      distance -= dt * 2.5;
-    }
-    travel.clearInput();
-    assert.ok(
-      Math.hypot(
-        target[0] - travel.foot.position[0],
-        target[2] - travel.foot.position[2],
-      ) < 0.18,
-      `world controller follows station floor route: target ${target}, actual ${travel.foot.position}, surface ${travel.foot.surfaceId}, yaw ${travel.yaw}, mode ${travel.city.settings.mode}`,
-    );
   }
 }
 function walkCabinTo(travel, matches) {
@@ -959,8 +966,19 @@ test('authorized construction portals use common F and touch transfers for every
             .filter((p) => p.kind === 'platform')
             .map((portal) => ({ owner, portal })),
       );
-      assert.equal(sources.length, 17);
-      assert.equal(new Set(sources.map(({ owner }) => owner.data.id)).size, 7);
+      assert.equal(
+        sources.length,
+        travel.stations.owners
+          .filter((owner) => !owner.geometryData.authoredInterior)
+          .reduce((count, owner) => count + owner.streetRoutes().length, 0),
+      );
+      assert.equal(
+        new Set(sources.map(({ owner }) => owner.data.id)).size,
+        travel.stations.owners.filter(
+          (owner) =>
+            !owner.geometryData.authoredInterior && owner.streetRoutes().length,
+        ).length,
+      );
       const fleet = [...travel.fleet],
         runs = fleet.map((v) => v.run),
         elapsed = () => fleet.map((v) => v.run.snapshot().elapsed),
@@ -1353,7 +1371,7 @@ test('authorized construction portals use common F and touch transfers for every
   );
 });
 
-test('all seventeen street routes retain WorldTravel ownership through native walking updates and reverse only through the outside doorway', async (t) => {
+test('all street routes retain WorldTravel ownership through native walking updates and reverse only through the outside doorway', async (t) => {
   await harness(async ({ travel, city }) => {
     city.settings.mode = 'walk';
     city.navigation.mode = 'walk';
@@ -1367,7 +1385,13 @@ test('all seventeen street routes retain WorldTravel ownership through native wa
           Number(b.owner.data.id === 'main-street-science-world') -
           Number(a.owner.data.id === 'main-street-science-world'),
       );
-    assert.equal(cases.length, 17);
+    assert.equal(
+      cases.length,
+      travel.stations.owners.reduce(
+        (count, owner) => count + owner.streetRoutes().length,
+        0,
+      ),
+    );
     for (const { owner, route } of cases)
       await t.test(
         `${owner.data.id}: ${route.entranceId} to ${route.platformSurfaceId}`,

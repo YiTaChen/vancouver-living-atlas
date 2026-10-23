@@ -7,6 +7,7 @@ import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { launchOptionsForProfile } from '../hosted-browser-qa.mjs';
+import { captureDunsmuirStation } from './capture-dunsmuir-views.mjs';
 
 // The canvas is the subject of this evidence. A stalled remote UI font must
 // not prevent a screenshot of an already rendered city.
@@ -79,10 +80,10 @@ const report = {
 };
 async function snapshot(label) {
   await page.waitForTimeout(1200);
-  const data = await page.evaluate(() => {
+  const data = await page.evaluate((stationId) => {
     const engine = window.__atlas,
       travel = engine.skyTrainTravel,
-      owner = travel.owner,
+      owner = travel.owner ?? travel.stations.get(stationId),
       walker = engine.navigation.walker;
     let meshes = 0,
       skinnedMeshes = 0;
@@ -115,7 +116,7 @@ async function snapshot(label) {
       },
       render: engine.renderer.info.render,
     };
-  });
+  }, stationId);
   const file = `game-${stationId}-${label}.png`;
   const diagnostic = label.includes('owner-only');
   await page.screenshot({
@@ -504,7 +505,7 @@ try {
       }
     }
   } else {
-    await captureDunsmuirStation();
+    await captureDunsmuirStation(page, snapshot, report, stationId);
   }
   await page.evaluate(() => window.__atlas.skyTrainTravel.setOverview(true));
   await snapshot('overview-cutaway');
@@ -608,6 +609,8 @@ try {
     errors.length === 0 &&
     !report.final?.contextLost &&
     captures.length >= 10 &&
+    (report.entryTransitions?.every((entry) => entry.entered && entry.left) ??
+      true) &&
     captures
       .filter((capture) => capture.cameraView === 'third-person')
       .every(
