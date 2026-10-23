@@ -43,6 +43,11 @@ import {
 } from './travel-camera-collision';
 import type { SkyTrainTravelSnapshot } from './skytrain-travel-types';
 import type { InteractionCandidate } from './proximity-interactions';
+import {
+  stationConstructionPortals,
+  type StationConstructionPortal,
+} from './skytrain-construction-access';
+import { SkyTrainConstructionVisuals } from './skytrain-construction-visuals';
 
 interface ServiceTrain {
   id: string;
@@ -81,6 +86,15 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
   private nextPublish = 0;
   private nextProximity = 0;
   private distanceView = 4;
+  private readonly constructionAccess = new Map<
+    SkyTrainStationOwner,
+    readonly StationConstructionPortal[]
+  >();
+  private readonly constructionVisuals = new Map<
+    SkyTrainStationOwner,
+    SkyTrainConstructionVisuals
+  >();
+  private readonly constructionFocus = new THREE.Vector3();
   private readonly lightSources = new WeakMap<
     THREE.Object3D,
     THREE.PointLight[]
@@ -222,6 +236,22 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
           this.city.settings.quality,
         );
         this.captureLights(owner.group);
+        try {
+          const portals = stationConstructionPortals(
+            owner,
+            (x, z) =>
+              this.city.navigation?.groundHeight(x, z) ??
+              this.city.elevation(x, z),
+          );
+          const visuals = new SkyTrainConstructionVisuals(owner, portals);
+          this.constructionAccess.set(owner, portals);
+          this.constructionVisuals.set(owner, visuals);
+        } catch (error) {
+          // An optional shortcut must not prevent the other geographic stations
+          // and their autonomous service from loading.
+          this.error = `Construction access unavailable: ${station.name}`;
+          console.warn(this.error, error);
+        }
         this.openings.update(this.stations.owners);
         this.updateBuildingReplacement();
         await new Promise<void>((resolve) => setTimeout(resolve, 0));
@@ -536,7 +566,17 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     );
   }
   private boardingDoor(): StationBoardingDoor | null {
-    if (!this.owner || !this.foot) return null;
+    if (
+      !this.owner ||
+      !this.foot ||
+      !this.owner.geometryData.platforms.some(
+        (p) =>
+          p.line === this.line &&
+          p.direction === this.direction &&
+          p.surfaceId === this.foot!.surfaceId,
+      )
+    )
+      return null;
     return this.platformDoors(
       this.line,
       this.direction,
@@ -611,7 +651,10 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     );
   }
   interactionCandidates(): readonly InteractionCandidate[] {
-    const seats = super.interactionCandidates();
+    const seats = [
+      ...super.interactionCandidates(),
+      ...this.constructionCandidates(),
+    ];
     if (!this.active || !this.inputEnabled || this.passengerSeated)
       return seats;
     const vehicle = this.nearestBoardingTrain();
@@ -677,6 +720,125 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     }
     return seats;
   }
+  /** The temporary shortcuts are physical nearby objects, independent of the
+   * legacy station planner. Their destinations never modify a service run. */
+  private canUseConstructionPortal(
+    owner: SkyTrainStationOwner,
+    portal: StationConstructionPortal,
+  ) {
+    const foot = this.foot;
+    return Boolean(
+      !this.disposed &&
+      !this.busy &&
+      !this.city.contextLost &&
+      !this.city.pageSuspended &&
+      !document.hidden &&
+      this.phase === 'station' &&
+      this.city.settings.mode === 'walk' &&
+      this.inputEnabled &&
+      !this.passengerSeated &&
+      !this.aboard &&
+      this.owner === owner &&
+      this.station === portal.stationId &&
+      this.constructionAccess.get(owner)?.includes(portal) &&
+      foot &&
+      separation(foot.position, portal.point.position) <= 2.2 &&
+      this.onConstructionSurface(owner, portal) &&
+      owner.isClearFoot(foot) &&
+      owner.isClearFoot(portal.point) &&
+      (portal.target.kind === 'platform'
+        ? owner.isClearFoot(portal.target.point)
+        : this.clearConstructionStreetTarget(portal.target.position)),
+    );
+  }
+  private onConstructionSurface(
+    owner: SkyTrainStationOwner,
+    portal: StationConstructionPortal,
+  ) {
+    const foot = this.foot;
+    if (!foot) return false;
+    if (foot.surfaceId === portal.point.surfaceId) return true;
+    if (portal.kind !== 'platform') return false;
+    // The public vestibule and street apron overlap as one physical doorway.
+    // Walking may adopt either polygon; stacked floors cannot pass this test.
+    const apron = owner.floorAt(foot.position, portal.point.surfaceId);
+    return Boolean(
+      apron &&
+      Math.abs(apron.position[1] - foot.position[1]) <= 0.22 &&
+      owner.isClearFoot(apron),
+    );
+  }
+  private clearConstructionStreetTarget(position: readonly number[]) {
+    const nav = this.city.navigation;
+    return Boolean(
+      nav &&
+      position.every(Number.isFinite) &&
+      Number.isFinite(nav.groundHeight(position[0], position[2])) &&
+      nav.clearGround(position[0], position[2], 'walk', true),
+    );
+  }
+  private constructionCandidates(): InteractionCandidate[] {
+    if (!this.owner || this.aboard || this.phase !== 'station') return [];
+    const owner = this.owner;
+    return (this.constructionAccess.get(owner) ?? [])
+      .filter((portal) => this.canUseConstructionPortal(owner, portal))
+      .map<InteractionCandidate>((portal) => {
+        const point = owner.toWorld(portal.point);
+        return {
+          id: `skytrain:portal:${portal.stationId}:${portal.id}`,
+          kind: 'scene',
+          action: portal.kind === 'platform' ? 'portalPlatform' : 'portalExit',
+          anchor: [point[0], point[1] + 1.2, point[2]],
+          proximityPoint: point,
+          range: 2.2,
+          priority: 10,
+          canInteract: () => this.canUseConstructionPortal(owner, portal),
+          execute: () => this.useConstructionPortal(owner, portal),
+        };
+      });
+  }
+  private useConstructionPortal(
+    owner: SkyTrainStationOwner,
+    portal: StationConstructionPortal,
+  ) {
+    if (!this.canUseConstructionPortal(owner, portal)) return false;
+    const target = portal.target;
+    this.clearInput();
+    this.resetSeat();
+    if (target.kind === 'platform') {
+      this.foot = {
+        ...target.point,
+        position: [...target.point.position],
+      };
+      this.line = portal.lineId;
+      this.direction = portal.directions[0];
+      this.level = 'platform';
+      this.yaw = target.point.yaw;
+      this.lookYaw = 0;
+      this.updateCamera();
+    } else {
+      const nav = this.city.navigation!;
+      nav.blur();
+      nav.mode = 'walk';
+      nav.surface = 'ground';
+      nav.surfaceId = undefined;
+      nav.surfaceLayer = undefined;
+      nav.position.fromArray(target.position);
+      nav.position.y = nav.groundHeight(nav.position.x, nav.position.z);
+      nav.yaw = target.yaw;
+      nav.pitch = -this.pitch;
+      if (nav.cameraDistances) nav.cameraDistances.walk = this.distanceView;
+      nav.snapCamera = true;
+      nav.walker.group.position.copy(nav.position);
+      this.phase = 'idle';
+      this.station = null;
+      this.foot = null;
+      this.owner = null;
+    }
+    this.city.interactions?.clear();
+    this.publish();
+    return true;
+  }
   async enter(id: StationId) {
     const nav = this.city.navigation,
       owner = this.stations.get(id);
@@ -697,6 +859,12 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     if (!point) return false;
     this.owner = owner;
     this.station = id;
+    const platform =
+      owner.geometryData.platforms.find(
+        (p) => p.line === this.line && p.direction === this.direction,
+      ) ?? owner.geometryData.platforms[0];
+    this.line = platform.line;
+    this.direction = platform.direction;
     this.phase = 'station';
     this.foot = point;
     this.level = 'concourse';
@@ -1040,6 +1208,23 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
     for (const owner of this.stations.owners)
       owner.group.visible =
         this.city.settings.buildings || (this.active && owner === this.owner);
+    const constructionOrigin =
+      this.phase === 'station' && this.city.settings.mode === 'walk'
+        ? this.interactionOrigin
+        : null;
+    if (constructionOrigin)
+      this.constructionFocus.fromArray(constructionOrigin);
+    for (const [owner, visuals] of this.constructionVisuals)
+      visuals.update(
+        dt,
+        // Near-object visibility follows the person inside this station, so a
+        // chase camera cannot hide the portal currently offering F/tap.
+        constructionOrigin && owner === this.owner
+          ? this.constructionFocus
+          : this.city.camera.position,
+        this.city.settings.quality,
+        this.city.locale ?? 'en',
+      );
     if (this.worldTime >= this.nextPublish) {
       this.nextPublish = this.worldTime + 0.25;
       this.publish();
@@ -1345,6 +1530,9 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       true,
     );
     this.openings?.dispose();
+    for (const visuals of this.constructionVisuals.values()) visuals.dispose();
+    this.constructionVisuals.clear();
+    this.constructionAccess.clear();
     this.lightPool.forEach((light) => light.removeFromParent());
     const activeTrain = this.train;
     for (const v of this.fleet) {

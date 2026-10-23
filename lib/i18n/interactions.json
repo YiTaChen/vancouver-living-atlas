@@ -9,7 +9,9 @@
     "cabinHint": "Walk along the aisle and approach an empty seat to sit down.",
     "shortcut": "{action} (F)",
     "board": "Board",
-    "alight": "Alight"
+    "alight": "Alight",
+    "portalPlatform": "Teleport to platform",
+    "portalExit": "Return to station entrance"
   },
   "fr": {
     "sit": "S’asseoir",
@@ -21,7 +23,9 @@
     "cabinHint": "Avancez dans l’allée et approchez-vous d’un siège libre pour vous asseoir.",
     "shortcut": "{action} (F)",
     "board": "Monter",
-    "alight": "Descendre"
+    "alight": "Descendre",
+    "portalPlatform": "Se téléporter au quai",
+    "portalExit": "Revenir à l’entrée de la station"
   },
   "es": {
     "sit": "Sentarse",
@@ -33,7 +37,9 @@
     "cabinHint": "Camina por el pasillo y acércate a un asiento libre para sentarte.",
     "shortcut": "{action} (F)",
     "board": "Subir",
-    "alight": "Bajar"
+    "alight": "Bajar",
+    "portalPlatform": "Teletransportarse al andén",
+    "portalExit": "Volver a la entrada de la estación"
   },
   "zh-Hant": {
     "sit": "坐下",
@@ -45,7 +51,9 @@
     "cabinHint": "沿走道行走，靠近空座位即可坐下。",
     "shortcut": "{action}（F）",
     "board": "上車",
-    "alight": "下車"
+    "alight": "下車",
+    "portalPlatform": "傳送至候車月台",
+    "portalExit": "返回車站門口"
   },
   "zh-Hans": {
     "sit": "坐下",
@@ -57,7 +65,9 @@
     "cabinHint": "沿走道行走，靠近空座位即可坐下。",
     "shortcut": "{action}（F）",
     "board": "上车",
-    "alight": "下车"
+    "alight": "下车",
+    "portalPlatform": "传送至候车站台",
+    "portalExit": "返回车站门口"
   },
   "de": {
     "sit": "Hinsetzen",
@@ -69,7 +79,9 @@
     "cabinHint": "Gehe durch den Gang und nähere dich einem freien Sitz, um dich hinzusetzen.",
     "shortcut": "{action} (F)",
     "board": "Einsteigen",
-    "alight": "Aussteigen"
+    "alight": "Aussteigen",
+    "portalPlatform": "Zum Bahnsteig teleportieren",
+    "portalExit": "Zum Bahnhofseingang zurückkehren"
   },
   "ja": {
     "sit": "座る",
@@ -81,7 +93,9 @@
     "cabinHint": "通路を歩き、空いている座席に近づくと座れます。",
     "shortcut": "{action}（F）",
     "board": "乗車する",
-    "alight": "降車する"
+    "alight": "降車する",
+    "portalPlatform": "ホームへ転送",
+    "portalExit": "駅の入口へ戻る"
   },
   "ko": {
     "sit": "앉기",
@@ -93,7 +107,9 @@
     "cabinHint": "통로를 따라 걸으며 빈 좌석에 다가가면 앉을 수 있습니다.",
     "shortcut": "{action} (F)",
     "board": "탑승",
-    "alight": "하차"
+    "alight": "하차",
+    "portalPlatform": "승강장으로 순간이동",
+    "portalExit": "역 입구로 돌아가기"
   },
   "uk": {
     "sit": "Сісти",
@@ -105,7 +121,9 @@
     "cabinHint": "Ідіть проходом і підійдіть до вільного сидіння, щоб сісти.",
     "shortcut": "{action} (F)",
     "board": "Сісти в транспорт",
-    "alight": "Вийти"
+    "alight": "Вийти",
+    "portalPlatform": "Телепортуватися на платформу",
+    "portalExit": "Повернутися до входу на станцію"
   },
   "ru": {
     "sit": "Сесть",
@@ -117,6 +135,8 @@
     "cabinHint": "Пройдите по проходу и подойдите к свободному сиденью, чтобы сесть.",
     "shortcut": "{action} (F)",
     "board": "Сесть в транспорт",
-    "alight": "Выйти"
+    "alight": "Выйти",
+    "portalPlatform": "Телепортироваться на платформу",
+    "portalExit": "Вернуться ко входу на станцию"
   }
 }
