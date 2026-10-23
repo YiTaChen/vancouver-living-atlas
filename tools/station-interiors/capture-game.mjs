@@ -173,6 +173,12 @@ try {
     }
     await page.waitForTimeout(5000);
   }
+  // __atlas is exposed just before React's onReady callback commits its initial
+  // Orbit settings. Let that commit finish before selecting a travel mode.
+  await page
+    .locator('.loading-overlay')
+    .waitFor({ state: 'detached', timeout: 30000 });
+  await page.waitForTimeout(300);
   report.initial = await page.evaluate((stationId) => {
     const engine = window.__atlas;
     if (!engine) throw new Error('City inspect engine did not load');
@@ -243,6 +249,15 @@ try {
       error: travel.error,
     };
   }, stationId);
+  await page.waitForFunction(
+    () =>
+      window.__atlas?.settings.mode === 'walk' &&
+      [...document.querySelectorAll('.mode-pill.active')].some(
+        (item) => item.textContent.trim() === 'Walk',
+      ),
+    undefined,
+    { timeout: 15000 },
+  );
   const entered = await page.evaluate(async (stationId) => {
     const travel = window.__atlas.skyTrainTravel;
     return travel.active || (await travel.enter(stationId));
@@ -365,11 +380,15 @@ try {
             owner = travel.owner,
             connection = owner.geometryData.connections.find(
               (item) =>
-                (item.type === 'stairs' || item.type === 'escalator') &&
-                item.id.includes(line) &&
-                item.treads.length,
+                item.id ===
+                (line === 'expo'
+                  ? 'waterfront-expo-platform-stairs'
+                  : 'waterfront-canada-north-stairs'),
             ),
-            index = Math.floor(connection.treads.length / 2),
+            index = Math.min(
+              connection.treads.length - 2,
+              Math.floor(connection.treads.length / 2) + 3,
+            ),
             tread = connection.treads[index],
             point = tread.vertices.reduce(
               (sum, vertex) =>
@@ -389,15 +408,25 @@ try {
             connection.end[2] - connection.start[2],
           );
           travel.lookYaw = 0;
-          travel.pitch = -0.18;
+          travel.pitch = Math.max(
+            -1.4,
+            Math.atan2(
+              connection.end[1] - connection.start[1],
+              Math.hypot(
+                connection.end[0] - connection.start[0],
+                connection.end[2] - connection.start[2],
+              ),
+            ) - 0.08,
+          );
           travel.distanceView = 0;
           travel.updateCamera();
-          return connection.id;
+          return { id: connection.id, treadIndex: index };
         },
         { line },
       );
       await snapshot(`${label}-stairs-firstperson`);
-      captures.at(-1).connection = stair;
+      captures.at(-1).connection = stair.id;
+      captures.at(-1).treadIndex = stair.treadIndex;
       if (line === 'expo') {
         report.expoStairRayHits = await page.evaluate(() => {
           const engine = window.__atlas,

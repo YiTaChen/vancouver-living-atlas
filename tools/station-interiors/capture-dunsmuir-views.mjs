@@ -229,7 +229,7 @@ export async function captureDunsmuirStation(
           lane.start[1],
           lane.start[2] - (dz / length) * 2,
         ],
-        foot = owner.floorAt(point, lane.fromSurfaceId);
+        foot = owner.floorAt(point, lane.fromSurfaceId) ?? owner.floorAt(point);
       if (!foot || !owner.isClearFoot(foot))
         throw new Error(`No clear bank-top viewpoint: ${prefix}`);
       travel.foot = foot;
