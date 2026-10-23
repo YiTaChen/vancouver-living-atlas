@@ -317,6 +317,7 @@ test('the local QA panel can hide for native controls and reopen without invokin
     let inputCalls = 0;
     const e = {
       data: {},
+      controls: { minDistance: 24 },
       tesla: new Proxy(
         {},
         {
@@ -336,6 +337,11 @@ test('the local QA panel can hide for native controls and reopen without invokin
       },
     };
     installVisualQA(e);
+    assert.equal(
+      e.controls.minDistance,
+      24,
+      'install preserves the native orbit distance',
+    );
     assert.equal(intervals.size, 1, 'the native input observer owns one bounded sampler');
     assert.equal(getEventListeners(window, 'keydown').length, 1);
     assert.equal(getEventListeners(window, 'keyup').length, 1);
@@ -353,9 +359,19 @@ test('the local QA panel can hide for native controls and reopen without invokin
     assert.match(show.style.cssText, /min-height:48px/);
     for (let repeat = 0; repeat < 3; repeat++) {
       click(wrapper, 'Hide QA panel');
+      assert.equal(
+        e.controls.minDistance,
+        24,
+        'hiding leaves the native orbit distance unchanged',
+      );
       assert.equal(panel.style.display, 'none');
       assert.equal(show.style.display, '');
       click(wrapper, 'Show QA panel');
+      assert.equal(
+        e.controls.minDistance,
+        24,
+        'reopening leaves the native orbit distance unchanged',
+      );
       assert.equal(panel.style.display, '');
       assert.equal(show.style.display, 'none');
     }
