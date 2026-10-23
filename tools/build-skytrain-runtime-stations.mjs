@@ -29,6 +29,12 @@ export function makeRuntimeStation(source, sourceSha256) {
     id: source.stationId,
     name: source.name,
     topology: source.layoutKind,
+    ...(source.authoredInterior
+      ? {
+          authoredInterior: source.authoredInterior,
+          signs: source.interiorSigns ?? [],
+        }
+      : {}),
     source: {
       package: 'skytrain-stations-stage2',
       layout: SOURCE,
@@ -56,6 +62,9 @@ export function makeRuntimeStation(source, sourceSha256) {
       label: entry.label,
       point: entry.pointM,
       surfaceId: entry.surfaceId,
+      ...(entry.inwardDirectionM
+        ? { inwardDirection: entry.inwardDirectionM }
+        : {}),
     })),
     platforms: source.platforms.map((platform) => ({
       id: platform.platformId,
@@ -95,12 +104,18 @@ export function makeRuntimeStation(source, sourceSha256) {
         o.centerM ?? o.boundsM.min.map((v, i) => (v + o.boundsM.max[i]) / 2),
       size: o.sizeM ?? o.boundsM.min.map((v, i) => o.boundsM.max[i] - v),
       yaw: o.yawDegrees ?? 0,
+      ...(o.rotationQuaternionXYZW
+        ? { quaternion: o.rotationQuaternionXYZW }
+        : {}),
     })),
     parts: source.geometryParts.map((part) => ({
       id: part.id,
       position: part.centerM,
       size: part.sizeM,
       yaw: part.yawDegrees,
+      ...(part.rotationQuaternionXYZW
+        ? { quaternion: part.rotationQuaternionXYZW }
+        : {}),
       material: part.material,
       role: part.role,
     })),

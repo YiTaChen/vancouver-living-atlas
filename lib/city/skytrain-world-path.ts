@@ -216,8 +216,22 @@ export class SkyTrainTerminalPath implements SkyTrainMotionPath {
       );
     const forward = travelForward(start),
       finish = travelForward(end).negate(),
-      tailDistance = line === 'expo' ? 220 : 200,
       lead = line === 'expo' ? 75 : 65,
+      stationOffset = end.position.clone().sub(start.position),
+      alongOffset = stationOffset.dot(forward),
+      lateralSpacing = stationOffset
+        .clone()
+        .addScaledVector(forward, -alongOffset)
+        .length(),
+      // Keep the entire consist straight beyond the platform, then allow at
+      // least eight metres of crossover run per metre between track centres.
+      // A fixed tail length made wider authored islands create a sharper join.
+      // The quintic lane change stays below a 14-degree heading deviation at
+      // this ratio without narrowing the platform or moving any train stop.
+      tailDistance = Math.max(
+        line === 'expo' ? 220 : 200,
+        50 + (lead + lateralSpacing * 8 - alongOffset) / finish.dot(forward),
+      ),
       first = start.position.clone().addScaledVector(forward, lead),
       joined = end.position.clone().addScaledVector(finish, tailDistance - 50),
       joinLength = first.distanceTo(joined),

@@ -1,0 +1,1283 @@
+{
+  "stationId": "waterfront",
+  "url": "http://127.0.0.1:3200/?inspect",
+  "capturedAt": "2026-10-23T09:39:54.072Z",
+  "placements": "Inspect-only supported-floor placements; separate route tests verify circulation.",
+  "captures": [
+    {
+      "label": "heritage-thirdperson",
+      "file": "game-waterfront-heritage-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -5.040412531798211e-14,
+          0.5639810169114021,
+          1.0999999999999184
+        ],
+        "surfaceId": "waterfront-cordova-lobby-street-apron",
+        "layer": 14,
+        "yaw": 0
+      },
+      "camera": [
+        1164.9344675854518,
+        16.550280751192982,
+        43.17077791747749
+      ],
+      "cutaway": false,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1161.8768085908448,
+          13.669589794058577,
+          41.27715634881408
+        ]
+      },
+      "render": {
+        "frame": 426,
+        "calls": 751,
+        "triangles": 3145331,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "expo-platform-thirdperson",
+      "file": "game-waterfront-expo-platform-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -27.3,
+          -7.000000000000001,
+          94.85
+        ],
+        "surfaceId": "waterfront-expo",
+        "layer": 1,
+        "yaw": -1.5707963267948966
+      },
+      "camera": [
+        1099.5430934375315,
+        9.128722503710396,
+        -29.43770704913018
+      ],
+      "cutaway": false,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1096.5473995874004,
+          6.105608777147174,
+          -31.292953333207763
+        ]
+      },
+      "render": {
+        "frame": 564,
+        "calls": 420,
+        "triangles": 2961086,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "expo-platform-firstperson",
+      "file": "game-waterfront-expo-platform-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -27.3,
+          -7.000000000000001,
+          94.85
+        ],
+        "surfaceId": "waterfront-expo",
+        "layer": 1,
+        "yaw": -1.5707963267948966
+      },
+      "camera": [
+        1096.5473995874004,
+        7.755608777147174,
+        -31.292953333207763
+      ],
+      "cutaway": false,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1096.5473995874004,
+          6.105608777147174,
+          -31.292953333207763
+        ]
+      },
+      "render": {
+        "frame": 681,
+        "calls": 629,
+        "triangles": 3032916,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "expo-stairs-firstperson",
+      "file": "game-waterfront-expo-stairs-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -25.3,
+          -5.166666666666666,
+          29.888888888888886
+        ],
+        "surfaceId": "waterfront-expo-platform-stairs:step:16",
+        "layer": 64,
+        "yaw": 0
+      },
+      "camera": [
+        1150.7221965133854,
+        9.58894211048051,
+        4.610212750278492
+      ],
+      "cutaway": false,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1150.7221965133854,
+          7.938942110480509,
+          4.610212750278492
+        ]
+      },
+      "render": {
+        "frame": 825,
+        "calls": 410,
+        "triangles": 2960240,
+        "points": 0,
+        "lines": 0
+      },
+      "connection": "waterfront-expo-platform-stairs",
+      "treadIndex": 16
+    },
+    {
+      "label": "expo-stairs-look-down",
+      "file": "game-waterfront-expo-stairs-look-down.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -25.3,
+          -5.166666666666666,
+          29.888888888888886
+        ],
+        "surfaceId": "waterfront-expo-platform-stairs:step:16",
+        "layer": 64,
+        "yaw": 0
+      },
+      "camera": [
+        1150.7221965133854,
+        9.58894211048051,
+        4.610212750278492
+      ],
+      "cutaway": false,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1150.7221965133854,
+          7.938942110480509,
+          4.610212750278492
+        ]
+      },
+      "render": {
+        "frame": 1155,
+        "calls": 635,
+        "triangles": 3101207,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "canada-platform-thirdperson",
+      "file": "game-waterfront-canada-platform-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          42.5,
+          -13,
+          79.3
+        ],
+        "surfaceId": "waterfront-canada",
+        "layer": 2,
+        "yaw": 0
+      },
+      "camera": [
+        1074.8721833649984,
+        3.1287225037103967,
+        33.240308341170284
+      ],
+      "cutaway": false,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1073.0169370809208,
+          0.1056087771471752,
+          36.23600219130154
+        ]
+      },
+      "render": {
+        "frame": 1305,
+        "calls": 357,
+        "triangles": 2516895,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "canada-overhead-thirdperson",
+      "file": "game-waterfront-canada-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          42.5,
+          -13,
+          79.3
+        ],
+        "surfaceId": "waterfront-canada",
+        "layer": 2,
+        "yaw": 0
+      },
+      "camera": [
+        1075.7590129050761,
+        9.772396932780179,
+        31.80833145372095
+      ],
+      "cutaway": true,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1073.0169370809208,
+          0.1056087771471752,
+          36.23600219130154
+        ]
+      },
+      "render": {
+        "frame": 1476,
+        "calls": 119,
+        "triangles": 1054451,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "canada-platform-firstperson",
+      "file": "game-waterfront-canada-platform-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          42.5,
+          -13,
+          79.3
+        ],
+        "surfaceId": "waterfront-canada",
+        "layer": 2,
+        "yaw": 0
+      },
+      "camera": [
+        1073.0169370809208,
+        1.7556087771471751,
+        36.23600219130154
+      ],
+      "cutaway": false,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1073.0169370809208,
+          0.1056087771471752,
+          36.23600219130154
+        ]
+      },
+      "render": {
+        "frame": 1629,
+        "calls": 517,
+        "triangles": 2780674,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "canada-stairs-firstperson",
+      "file": "game-waterfront-canada-stairs-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          10.569444444444445,
+          -10.5,
+          74.5
+        ],
+        "surfaceId": "waterfront-canada-north-stairs:step:21",
+        "layer": 207,
+        "yaw": 0
+      },
+      "camera": [
+        1093.9095745814325,
+        4.255608777147176,
+        11.616942981847032
+      ],
+      "cutaway": false,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1093.9095745814325,
+          2.605608777147175,
+          11.616942981847032
+        ]
+      },
+      "render": {
+        "frame": 1779,
+        "calls": 478,
+        "triangles": 2608549,
+        "points": 0,
+        "lines": 0
+      },
+      "connection": "waterfront-canada-north-stairs",
+      "treadIndex": 21
+    },
+    {
+      "label": "overview-cutaway",
+      "file": "game-waterfront-overview-cutaway.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "waterfront",
+        "lineId": "canada",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo",
+          "canada"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          10.569444444444445,
+          -10.5,
+          74.5
+        ],
+        "surfaceId": "waterfront-canada-north-stairs:step:21",
+        "layer": 207,
+        "yaw": 0
+      },
+      "camera": [
+        1273.9095745814325,
+        245.70744829686478,
+        251.61694298184705
+      ],
+      "cutaway": true,
+      "authoredSource": "waterfront-2026-10-23-v1",
+      "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+      "authoredGeometry": "waterfront-2026-10-23-v1",
+      "openWorld": true,
+      "geometryParts": 1337,
+      "mode": "orbit",
+      "cameraView": "orbit",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1093.9095745814325,
+          2.605608777147175,
+          11.616942981847032
+        ]
+      },
+      "render": {
+        "frame": 1923,
+        "calls": 386,
+        "triangles": 1999087,
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "errors": [],
+  "responses": [],
+  "warnings": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "runtimePacket": {
+    "url": "http://127.0.0.1:3200/models/skytrain-stations/waterfront.json",
+    "bytes": 363100,
+    "sha256": "732553a9efa8909a7734b32de824d93326916fd9343a9c8115b2c63082da176b",
+    "sourceSha256": "ecf490600c927bf2cad64dcae0376a0cd06e7a622d1394a00944a803aa9c86bf",
+    "verifiedAfterCapture": "732553a9efa8909a7734b32de824d93326916fd9343a9c8115b2c63082da176b"
+  },
+  "startup": [
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "0"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "48"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "82"
+    },
+    {
+      "ready": false,
+      "engine": true
+    }
+  ],
+  "initial": {
+    "ready": true,
+    "stationCount": 7,
+    "fleetCount": 51,
+    "worldPaths": 64,
+    "entries": [
+      {
+        "id": "cordova-lobby",
+        "stationId": "waterfront",
+        "label": "Cordova Street · heritage station lobby",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "waterfront-cordova-lobby-street-apron",
+        "threshold": [
+          1162.8119927784685,
+          13.669589794058577,
+          41.85632000031376
+        ],
+        "inward": [
+          1161.8768085908448,
+          13.669589794058577,
+          41.27715634881408
+        ],
+        "outward": [
+          1165.1924616196927,
+          13.669589794058577,
+          43.33055474958566
+        ],
+        "localDirection": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": "granville-canada",
+        "stationId": "waterfront",
+        "label": "Granville Street · Canada Line entrance",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "waterfront-granville-canada-street-apron",
+        "threshold": [
+          1072.0467254516352,
+          18.144651247111756,
+          50.539280000538724
+        ],
+        "inward": [
+          1071.2795860710244,
+          18.22760390271473,
+          51.327630919048985
+        ],
+        "outward": [
+          1073.9994438750084,
+          16.819883777983378,
+          48.53256857160352
+        ],
+        "localDirection": [
+          0.9764897174985745,
+          0,
+          0.2155639849779039
+        ]
+      }
+    ],
+    "sourceRevision": "waterfront-2026-10-23-v1",
+    "geometryRevision": "waterfront-2026-10-23-v1",
+    "sourceFloors": 13,
+    "geometryFloors": 17,
+    "entryCandidate": {
+      "position": [
+        -5.040412531798211e-14,
+        0.5639810169114021,
+        1.0999999999999184
+      ],
+      "surfaceId": "waterfront-cordova-lobby-street-apron",
+      "layer": 14,
+      "yaw": 0
+    },
+    "entryDiagnostics": {
+      "walkingHeight": 13.689589794058577,
+      "floorAtInward": {
+        "position": [
+          -5.040412531798211e-14,
+          0.5639810169114021,
+          1.0999999999999184
+        ],
+        "surfaceId": "waterfront-cordova-lobby-street-apron",
+        "layer": 14,
+        "yaw": 0
+      },
+      "clearAtInward": true,
+      "localStreetFoot": [
+        -5.040412531798211e-14,
+        0.5839810169114017,
+        1.0999999999999184
+      ]
+    },
+    "error": null
+  },
+  "enteredByStreet": true,
+  "expoStairRayHits": [
+    {
+      "ndc": [
+        0,
+        0
+      ],
+      "fullScene": [
+        {
+          "distance": 6.238676523881387,
+          "local": [
+            -25.299999999998683,
+            -7.000000089406967,
+            35.06455049255364
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 6.775978815794343,
+          "local": [
+            -25.299999999998544,
+            -7.300000101327896,
+            35.51030125894936
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 8.799817533178524,
+          "local": [
+            -25.29999999999826,
+            -8.430000193417072,
+            37.18929588248504
+          ],
+          "mesh": "station-authored-ballast-structure",
+          "part": "waterfront-expo-structural-base",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        }
+      ],
+      "ownerOnly": [
+        {
+          "distance": 6.238676523881387,
+          "local": [
+            -25.299999999998683,
+            -7.000000089406967,
+            35.06455049255364
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor"
+        },
+        {
+          "distance": 6.775978815794343,
+          "local": [
+            -25.299999999998544,
+            -7.300000101327896,
+            35.51030125894936
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor"
+        }
+      ]
+    },
+    {
+      "ndc": [
+        0,
+        0.35
+      ],
+      "fullScene": [
+        {
+          "distance": 9.55872044154463,
+          "local": [
+            -25.299999999998118,
+            -7.000000089406967,
+            38.79032274785929
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 10.3819595342171,
+          "local": [
+            -25.29999999999793,
+            -7.300000101327896,
+            39.55695342592509
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 13.482826912770221,
+          "local": [
+            -25.29999999999756,
+            -8.430000193417072,
+            42.44459576722246
+          ],
+          "mesh": "station-authored-ballast-structure",
+          "part": "waterfront-expo-structural-base",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        }
+      ],
+      "ownerOnly": [
+        {
+          "distance": 9.55872044154463,
+          "local": [
+            -25.299999999998118,
+            -7.000000089406967,
+            38.79032274785929
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor"
+        },
+        {
+          "distance": 10.3819595342171,
+          "local": [
+            -25.29999999999793,
+            -7.300000101327896,
+            39.55695342592509
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor"
+        }
+      ]
+    },
+    {
+      "ndc": [
+        0,
+        -0.35
+      ],
+      "fullScene": [
+        {
+          "distance": 4.801219963097919,
+          "local": [
+            -25.299999999998935,
+            -7.000000089406967,
+            33.19314393353522
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 5.214722166694416,
+          "local": [
+            -25.29999999999883,
+            -7.300000101327896,
+            33.47772092703012
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 6.772247198614134,
+          "local": [
+            -25.29999999999867,
+            -8.430000193417072,
+            34.54962764728846
+          ],
+          "mesh": "station-authored-ballast-structure",
+          "part": "waterfront-expo-structural-base",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        }
+      ],
+      "ownerOnly": [
+        {
+          "distance": 4.801219963097919,
+          "local": [
+            -25.299999999998935,
+            -7.000000089406967,
+            33.19314393353522
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor"
+        },
+        {
+          "distance": 5.214722166694416,
+          "local": [
+            -25.29999999999883,
+            -7.300000101327896,
+            33.47772092703012
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor"
+        }
+      ]
+    },
+    {
+      "ndc": [
+        -0.3,
+        0.15
+      ],
+      "fullScene": [
+        {
+          "distance": 7.573358927953184,
+          "local": [
+            -23.298895276588997,
+            -7.000000089406967,
+            36.30899275125527
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 8.225609945279057,
+          "local": [
+            -23.1265513266934,
+            -7.300000101327896,
+            36.861920364405904
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 10.682422213132226,
+          "local": [
+            -22.47738908831218,
+            -8.430000193417072,
+            38.94461446090979
+          ],
+          "mesh": "station-authored-ballast-structure",
+          "part": "waterfront-expo-structural-base",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        }
+      ],
+      "ownerOnly": [
+        {
+          "distance": 7.573358927953184,
+          "local": [
+            -23.298895276588997,
+            -7.000000089406967,
+            36.30899275125527
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor"
+        },
+        {
+          "distance": 8.225609945279057,
+          "local": [
+            -23.1265513266934,
+            -7.300000101327896,
+            36.861920364405904
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo-cut-2",
+          "role": "floor"
+        }
+      ]
+    },
+    {
+      "ndc": [
+        0.3,
+        0.15
+      ],
+      "fullScene": [
+        {
+          "distance": 7.573358927954138,
+          "local": [
+            -27.30110472341503,
+            -7.000000089406967,
+            36.308992751255104
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 8.225609945280148,
+          "local": [
+            -27.47344867331086,
+            -7.300000101327896,
+            36.86192036440583
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        },
+        {
+          "distance": 10.682422213133801,
+          "local": [
+            -28.122610911693524,
+            -8.430000193417072,
+            38.944614460909854
+          ],
+          "mesh": "station-authored-ballast-structure",
+          "part": "waterfront-expo-structural-base",
+          "role": "floor",
+          "owner": true,
+          "publicWaterfront": false
+        }
+      ],
+      "ownerOnly": [
+        {
+          "distance": 7.573358927954138,
+          "local": [
+            -27.30110472341503,
+            -7.000000089406967,
+            36.308992751255104
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo",
+          "role": "floor"
+        },
+        {
+          "distance": 8.225609945280148,
+          "local": [
+            -27.47344867331086,
+            -7.300000101327896,
+            36.86192036440583
+          ],
+          "mesh": "station-authored-warmfloor-structure",
+          "part": "floor-waterfront-expo",
+          "role": "floor"
+        }
+      ]
+    }
+  ],
+  "final": {
+    "snapshot": {
+      "phase": "station",
+      "stationId": "waterfront",
+      "lineId": "canada",
+      "plannedLineId": null,
+      "destinationId": "main-street-science-world",
+      "nextStationId": null,
+      "level": "concourse",
+      "doorsOpen": false,
+      "canBoard": false,
+      "canAlight": false,
+      "canExit": false,
+      "canChangeLevel": false,
+      "speedMps": 0,
+      "travelProgress": 0,
+      "error": null,
+      "busy": false,
+      "seated": false,
+      "canWalkCabin": false,
+      "availableLines": [
+        "expo",
+        "canada"
+      ],
+      "hint": "approach-door",
+      "atStop": null
+    },
+    "contextLost": false,
+    "stationOwners": [
+      {
+        "id": "waterfront",
+        "authored": "waterfront-2026-10-23-v1",
+        "parts": 1337
+      },
+      {
+        "id": "burrard",
+        "parts": 245
+      },
+      {
+        "id": "granville",
+        "parts": 456
+      },
+      {
+        "id": "stadium-chinatown",
+        "parts": 239
+      },
+      {
+        "id": "main-street-science-world",
+        "parts": 143
+      },
+      {
+        "id": "vancouver-city-centre",
+        "parts": 124
+      },
+      {
+        "id": "yaletown-roundhouse",
+        "parts": 158
+      }
+    ]
+  },
+  "debugReport": ".cache/station-interior-debug/game-waterfront-browser-debug.json",
+  "passed": true
+}

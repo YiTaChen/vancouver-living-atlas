@@ -133,6 +133,12 @@ function assertStableChase(h, seat, label, checkFraming = true) {
     `${label}: rendering never rotates the pedestrian`,
   );
   assert.equal(h.view.lookYaw, lookYaw);
+  if (h.view.owner?.geometryData.authoredInterior)
+    assert.equal(
+      h.view.owner.group.userData.stationCutaway,
+      camera.position.y > points.feet.y + 3.3,
+      'authored roof cutaway follows the exact preserved chase pose',
+    );
   assert.equal(
     h.calls(),
     0,

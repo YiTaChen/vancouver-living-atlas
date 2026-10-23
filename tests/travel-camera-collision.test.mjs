@@ -81,12 +81,14 @@ test('sphere clearance catches a thin edge missed by the centre ray, respects vi
   dispose(frame);
 });
 
-test('the sphere utility identifies actual Waterfront roof intersections without changing source geometry', async () => {
+test('the sphere utility identifies the actual Waterfront ceiling with its cutaway disabled without changing source geometry', async () => {
   const { stationOwner } = await import('./helpers/skytrain-geometry.mjs');
   const owner = stationOwner('waterfront');
   try {
     const roof = owner.data.parts.find(
-      (part) => part.id === 'waterfront-expo-roof',
+      (part) =>
+        part.id === 'waterfront-expo-ceiling' ||
+        part.id === 'waterfront-expo-roof',
     );
     assert(roof);
     const [x, y, z] = roof.position,

@@ -3,6 +3,7 @@
  * granted a platform, vehicle or underground navigation permission. */
 import * as THREE from 'three';
 import type { SkyTrainStationOwner } from './skytrain-stations';
+import type { StationTerrainOpening } from './skytrain-street-access';
 const CAPACITY = 96;
 const STATIONS = 7;
 const PER_STATION = 48;
@@ -18,6 +19,88 @@ export interface SkyTrainWorldOpenings {
   refresh(additionalRoots?: readonly THREE.Object3D[]): void;
   update(owners: readonly SkyTrainStationOwner[]): void;
   dispose(): void;
+}
+/** Existing city slabs must yield to the complete authored passenger space,
+ * including flat landings between flights and the entire multi-lane bank.
+ * These volumes never patch the station's own walls, ceilings or stair slabs.
+ */
+export function stationCityOpenings(
+  owner: SkyTrainStationOwner,
+): readonly StationTerrainOpening[] {
+  const original = owner.terrainOpenings();
+  if (!owner.geometryData.authoredInterior) return original;
+  const openings: StationTerrainOpening[] = original.filter(
+    (opening) => !opening.id.endsWith('-authored-opening'),
+  );
+  const add = (
+    id: string,
+    polygon: THREE.Vector3[],
+    minY: number,
+    maxY: number,
+  ) =>
+    openings.push({
+      id,
+      stationId: owner.data.id,
+      polygon: polygon.map((point) => owner.toWorld(point.toArray())),
+      minY: owner.baseY + minY,
+      maxY: owner.baseY + maxY,
+    });
+  // Each authored floor describes a bounded room or landing. Its footprint
+  // also bounds the space above any intentionally carved stairwell in it.
+  for (const floor of owner.data.floors) {
+    const box = new THREE.Box3().setFromPoints(
+      floor.vertices.map((point) => new THREE.Vector3(...point)),
+    );
+    add(
+      `${floor.id}-authored-room-clearance`,
+      [
+        new THREE.Vector3(box.min.x - 0.03, box.min.y, box.min.z - 0.03),
+        new THREE.Vector3(box.min.x - 0.03, box.min.y, box.max.z + 0.03),
+        new THREE.Vector3(box.max.x + 0.03, box.min.y, box.max.z + 0.03),
+        new THREE.Vector3(box.max.x + 0.03, box.min.y, box.min.z - 0.03),
+      ],
+      box.min.y - 0.4,
+      box.max.y + 3.8,
+    );
+  }
+  for (const part of owner.geometryData.parts) {
+    if (part.role !== 'soffit' || !part.id.endsWith('-soffit')) continue;
+    const slab = owner.geometryData.parts.find(
+      (candidate) => candidate.id === part.id.replace(/-soffit$/, '-underslab'),
+    );
+    if (!slab) continue;
+    const rotation = slab.quaternion
+        ? new THREE.Quaternion(...slab.quaternion)
+        : new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(0, 1, 0),
+            (slab.yaw * Math.PI) / 180,
+          ),
+      center = new THREE.Vector3(...slab.position),
+      a = new THREE.Vector3(0, 0, -slab.size[2] / 2)
+        .applyQuaternion(rotation)
+        .add(center),
+      b = new THREE.Vector3(0, 0, slab.size[2] / 2)
+        .applyQuaternion(rotation)
+        .add(center),
+      tangent = b.clone().sub(a).setY(0).normalize(),
+      across = new THREE.Vector3(tangent.z, 0, -tangent.x),
+      halfWidth = part.size[0] / 2 + 0.03;
+    if (tangent.lengthSq() < 0.5) continue;
+    a.addScaledVector(tangent, -0.25);
+    b.addScaledVector(tangent, 0.25);
+    add(
+      part.id.replace(/-soffit$/, '-authored-bank-clearance'),
+      [
+        a.clone().addScaledVector(across, -halfWidth),
+        b.clone().addScaledVector(across, -halfWidth),
+        b.clone().addScaledVector(across, halfWidth),
+        a.clone().addScaledVector(across, halfWidth),
+      ],
+      Math.min(a.y, b.y) - 0.4,
+      Math.max(a.y, b.y) + 4,
+    );
+  }
+  return openings;
 }
 /** Chain material hooks, including architectural seed replacement, PBR atlases
  * and terrain finishing. Only matching world-space portal volumes are removed. */
@@ -131,7 +214,7 @@ export function applySkyTrainWorldOpenings(
           box = new THREE.Box3();
         let minY = Infinity,
           maxY = -Infinity;
-        for (const opening of owner.terrainOpenings()) {
+        for (const opening of stationCityOpenings(owner)) {
           if (i === CAPACITY)
             throw new Error('SkyTrain entrance aperture capacity exceeded');
           const polygon = opening.polygon;

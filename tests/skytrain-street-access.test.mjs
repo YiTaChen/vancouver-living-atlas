@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 import { cityElevation } from './helpers/city-elevation.mjs';
+import { walkFlat } from './helpers/station-walker.mjs';
 const { SkyTrainStationOwner, SkyTrainStations } = await import(
   cityModule('skytrain-stations')
 );
@@ -13,7 +14,7 @@ const { SKYTRAIN_STREET_ENTRANCES } = await import(
 const { adaptSkyTrainStationFrame, validateSkyTrainRoutes } = await import(
   cityModule('skytrain-ride-path')
 );
-const { applySkyTrainWorldOpenings } = await import(
+const { applySkyTrainWorldOpenings, stationCityOpenings } = await import(
   cityModule('skytrain-world-openings')
 );
 const { SKYTRAIN_WORLD_STOCK } = await import(
@@ -33,6 +34,7 @@ const owner = (data) =>
 function follow(o, foot, goals, checkFoot = () => {}) {
   let maxRise = 0;
   for (const goal of goals) {
+    const origin = foot;
     const dx = goal[0] - foot.position[0],
       dz = goal[2] - foot.position[2],
       steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / 0.06));
@@ -46,6 +48,13 @@ function follow(o, foot, goals, checkFoot = () => {}) {
       checkFoot(next);
       foot = next;
     }
+    if (
+      o.data.authoredInterior &&
+      Math.hypot(goal[0] - foot.position[0], goal[2] - foot.position[2]) >=
+        0.16 &&
+      Math.abs(goal[1] - origin.position[1]) < 0.23
+    )
+      foot = walkFlat(o, origin, goal, checkFoot);
     assert(
       Math.hypot(goal[0] - foot.position[0], goal[2] - foot.position[2]) < 0.16,
       `${o.data.id}: failed physical waypoint ${goal} at ${foot.position}`,
@@ -58,7 +67,7 @@ function follow(o, foot, goals, checkFoot = () => {}) {
   );
   return foot;
 }
-test('all eleven map-interpreted street entrances preserve raw platform provenance and hand off at the actual terrain foot height', () => {
+test('all map-interpreted street entrances preserve raw platform provenance and hand off at the actual terrain foot height', () => {
   let entries = 0;
   for (const data of catalog) {
     const before = structuredClone(data),
@@ -98,14 +107,14 @@ test('all eleven map-interpreted street entrances preserve raw platform provenan
         null,
       );
     }
-    assert(o.stats().drawCalls <= 24);
+    assert(o.stats().drawCalls <= (data.authoredInterior ? 38 : 24));
     assert(o.stats().triangles < 40_000);
     assert(o.stats().instances < 3_100);
     o.dispose();
   }
-  assert.equal(entries, 11);
+  assert.equal(entries, Object.values(SKYTRAIN_STREET_ENTRANCES).flat().length);
 });
-test('all seventeen street-to-platform routes and their reverse exits are continuous supported walking paths', () => {
+test('all street-to-platform routes and their reverse exits are continuous supported walking paths', () => {
   let total = 0;
   for (const data of catalog) {
     const o = owner(data);
@@ -145,7 +154,13 @@ test('all seventeen street-to-platform routes and their reverse exits are contin
     }
     o.dispose();
   }
-  assert.equal(total, 17);
+  const expected = catalog.reduce((n, d) => {
+    const station = owner(d),
+      count = station.streetRoutes().length;
+    station.dispose();
+    return n + count;
+  }, 0);
+  assert.equal(total, expected);
 });
 test('Waterfront line transfer uses the shared public concourse and two separate platform descents', () => {
   const o = owner(catalog.find((d) => d.id === 'waterfront')),
@@ -252,12 +267,12 @@ test('portal material apertures retain previous hooks and use seven coarse rejec
   assert.equal(shader.uniforms.uStationRegionCount.value, 7);
   assert.equal(
     shader.uniforms.uStationOpeningCount.value,
-    owners.reduce((sum, o) => sum + o.terrainOpenings().length, 0),
+    owners.reduce((sum, o) => sum + stationCityOpenings(o).length, 0),
   );
   assert(shader.uniforms.uStationOpeningCount.value <= 96);
   assert(material.customProgramCacheKey().startsWith('existing-atlas-key|'));
   for (const o of owners)
-    for (const cut of o.terrainOpenings()) {
+    for (const cut of stationCityOpenings(o)) {
       assert.equal(cut.polygon.length, 4);
       assert(cut.maxY > cut.minY);
       assert(cut.polygon.flat().every(Number.isFinite));
@@ -436,7 +451,7 @@ test('the visible centre-bank handrails stop sideways passage while keeping the 
       foot = o.walk(foot, lateral[0] * 0.07, lateral[1] * 0.07);
     assert(
       Math.hypot(foot.position[0] - center[0], foot.position[2] - center[2]) <
-        0.4,
+        (data.authoredInterior ? c.width / 2 - 0.22 : 0.4),
       `${data.id}: body cannot pass through the actual handrail`,
     );
     const moved = o.walk(foot, -lateral[0] * 0.2, -lateral[1] * 0.2);
@@ -473,6 +488,13 @@ test('same-height platform ownership permits continuous walking to every directi
         ) < 1e-8,
       );
       assert.equal(foot.yaw, initial.yaw);
+      if (data.authoredInterior) {
+        const target = o.boardingPoint(platform.line, platform.direction);
+        foot = follow(o, foot, [target.position]);
+        assert.equal(foot.surfaceId, platform.surfaceId);
+        count++;
+        continue;
+      }
       const target = o.boardingPoint(platform.line, platform.direction),
         floor = o.geometryData.floors.find((f) => f.id === platform.surfaceId),
         bounds = new THREE.Box3().setFromPoints(

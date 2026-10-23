@@ -201,6 +201,18 @@ export class TravelCameraCollision {
       const geometry = mesh.geometry;
       if (!geometry.boundingBox) geometry.computeBoundingBox();
       inverse.copy(matrix).invert();
+      // Station cutaways clip only above the occupied level. Apply that same
+      // plane to camera triangles so hidden ceilings cannot shorten the boom,
+      // while all remaining lower walls retain their physical camera boundary.
+      const stationPlane = mesh.userData.stationCutawayPlane as
+          | THREE.Plane
+          | undefined,
+        activeClip =
+          stationPlane && stationPlane.constant !== 1e7
+            ? stationPlane
+            : undefined,
+        contactOrigin = stationPlane ? pivot : origin,
+        contactDelta = stationPlane ? desired.clone().sub(pivot) : delta;
       origin.copy(pivot).applyMatrix4(inverse);
       end.copy(desired).applyMatrix4(inverse);
       delta.copy(end).sub(origin);
@@ -238,10 +250,57 @@ export class TravelCameraCollision {
         const minY = Math.min(triangle.a.y, triangle.b.y, triangle.c.y),
           maxY = Math.max(triangle.a.y, triangle.b.y, triangle.c.y);
         if (minY > region.max.y || maxY < region.min.y) continue;
-        fraction = Math.min(
-          fraction,
-          sphereTriangleFraction(origin, delta, localRadius, triangle),
-        );
+        // Authored station boxes use nonuniform instance scales. A sphere
+        // expanded by the largest inverse scale is useful for broad phase, but
+        // using it for contact would turn a thin wall into a huge camera block.
+        // Test the few nearby station triangles in world metres instead.
+        if (stationPlane) {
+          triangle.a.applyMatrix4(matrix);
+          triangle.b.applyMatrix4(matrix);
+          triangle.c.applyMatrix4(matrix);
+        }
+        const contactRadius = stationPlane ? radius : localRadius;
+        if (activeClip) {
+          const vertices = [triangle.a, triangle.b, triangle.c],
+            polygon: THREE.Vector3[] = [];
+          for (let i = 0; i < vertices.length; i++) {
+            const current = vertices[i],
+              previous = vertices[(i + vertices.length - 1) % vertices.length],
+              currentDistance = activeClip.distanceToPoint(current),
+              previousDistance = activeClip.distanceToPoint(previous);
+            if (currentDistance >= 0 !== previousDistance >= 0)
+              polygon.push(
+                previous
+                  .clone()
+                  .lerp(
+                    current,
+                    previousDistance / (previousDistance - currentDistance),
+                  ),
+              );
+            if (currentDistance >= 0) polygon.push(current.clone());
+          }
+          for (let i = 1; i + 1 < polygon.length; i++) {
+            triangle.set(polygon[0], polygon[i], polygon[i + 1]);
+            fraction = Math.min(
+              fraction,
+              sphereTriangleFraction(
+                contactOrigin,
+                contactDelta,
+                contactRadius,
+                triangle,
+              ),
+            );
+          }
+        } else
+          fraction = Math.min(
+            fraction,
+            sphereTriangleFraction(
+              contactOrigin,
+              contactDelta,
+              contactRadius,
+              triangle,
+            ),
+          );
       }
     };
     const instance = new THREE.Matrix4(),

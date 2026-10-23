@@ -13,6 +13,9 @@ import {
 const { loadSkyTrainRoutes, SkyTrainRidePath, adaptSkyTrainStationFrame } =
   await import(cityModule('skytrain-ride-path'));
 const { project } = await import(cityModule('geo'));
+const { SKYTRAIN_STREET_ENTRANCES } = await import(
+  cityModule('skytrain-street-access')
+);
 const { trainStopFor, stationWorldPose, validateRuntimeStation } = await import(
   cityModule('skytrain-stations')
 );
@@ -177,16 +180,63 @@ test('runtime station headings follow the real track while preserving authored p
       before,
       'protected authored source stays unchanged',
     );
-    assert.deepEqual(adapted.floors, raw.floors);
-    assert.deepEqual(adapted.entrances, raw.entrances);
-    assert.deepEqual(adapted.connections, raw.connections);
-    assert.deepEqual(adapted.parts, raw.parts);
-    assert.deepEqual(adapted.exclusions, raw.exclusions);
+    const entrance =
+      raw.authoredInterior &&
+      raw.entrances.find((e) => e.id === raw.authoredInterior.primaryEntrance);
+    const offset = entrance?.point ?? [0, 0, 0];
+    // Rebasing to the surveyed street doorway is one rigid X/Z translation;
+    // interior shape, heights, identities and carriage-local vectors survive.
+    const shifted = (p) => [p[0] - offset[0], p[1], p[2] - offset[2]];
+    assert.deepEqual(
+      adapted.floors,
+      raw.floors.map((f) => ({ ...f, vertices: f.vertices.map(shifted) })),
+    );
+    assert.deepEqual(
+      adapted.entrances,
+      raw.entrances.map((e) => ({ ...e, point: shifted(e.point) })),
+    );
+    assert.deepEqual(
+      adapted.connections,
+      raw.connections.map((c) => ({
+        ...c,
+        start: shifted(c.start),
+        end: shifted(c.end),
+        treads: c.treads.map((t) => ({
+          ...t,
+          vertices: t.vertices.map(shifted),
+        })),
+      })),
+    );
+    assert.deepEqual(
+      adapted.parts,
+      raw.parts.map((p) => ({ ...p, position: shifted(p.position) })),
+    );
+    assert.deepEqual(
+      adapted.obstacles,
+      raw.obstacles.map((p) => ({ ...p, position: shifted(p.position) })),
+    );
+    assert.deepEqual(
+      adapted.exclusions,
+      raw.exclusions.map((e) => ({ ...e, polygon: e.polygon.map(shifted) })),
+    );
+    if (entrance)
+      assert.deepEqual(
+        adapted.entrances.find((e) => e.id === entrance.id).point,
+        [0, entrance.point[1], 0],
+      );
     for (const platform of adapted.platforms) {
       const original = raw.platforms.find((p) => p.id === platform.id);
-      assert.deepEqual(platform.position, original.position);
+      assert.deepEqual(platform.position, shifted(original.position));
       assert.deepEqual(platform.quaternion, original.quaternion);
-      assert.deepEqual(platform.doors, original.doors);
+      assert.deepEqual(
+        platform.doors,
+        original.doors.map((d) => ({
+          ...d,
+          sill: shifted(d.sill),
+          edge: shifted(d.edge),
+          waiting: shifted(d.waiting),
+        })),
+      );
       assert.equal(platform.surfaceId, original.surfaceId);
       assert.equal(
         platform.motionSign,
@@ -223,7 +273,7 @@ test('runtime station headings follow the real track while preserving authored p
   }
 });
 
-test('only the elevated Main Street runtime origin derives from both directional GTFS platform anchors', () => {
+test('Main Street uses both GTFS platform anchors and authored interiors use their mapped primary doorway', () => {
   const id = 'main-street-science-world',
     raw = JSON.parse(
       readFileSync(`public/models/skytrain-stations/${id}.json`),
@@ -270,9 +320,18 @@ test('only the elevated Main Street runtime origin derives from both directional
     const data = JSON.parse(
       readFileSync(`public/models/skytrain-stations/${station.id}.json`),
     );
+    const entry =
+      data.authoredInterior &&
+      SKYTRAIN_STREET_ENTRANCES[station.id].find(
+        (e) =>
+          e.id ===
+          (data.authoredInterior.streetEntranceMap[
+            data.authoredInterior.primaryEntrance
+          ] ?? data.authoredInterior.primaryEntrance),
+      );
     assert.deepEqual(
       adaptSkyTrainStationFrame(data, routes).lonlat,
-      data.lonlat,
+      entry?.lonlat ?? data.lonlat,
     );
   }
   const missingReverse = structuredClone(routes);

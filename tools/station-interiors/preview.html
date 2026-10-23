@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>Station interior reference review</title
+  ><style>
+    body {
+      margin: 0;
+      background: #10202b;
+      color: #fff;
+      font: 14px system-ui;
+    }
+    canvas {
+      display: block;
+    }
+    #bar {
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      max-width: 720px;
+      padding: 12px 16px;
+      background: #10202be8;
+      border: 1px solid #526371;
+      border-radius: 8px;
+    }
+    button,
+    select {
+      background: #243e51;
+      border: 1px solid #718696;
+      color: white;
+      padding: 7px 11px;
+      margin: 3px;
+      border-radius: 4px;
+    }
+    #note {
+      color: #c3d4e0;
+      margin-top: 8px;
+      max-width: 660px;
+      font-size: 12px;
+    }
+    a {
+      color: #8ed7ec;
+    }
+    #status {
+      margin-top: 7px;
+    }
+    #refs {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      background: #10202be0;
+      padding: 8px 12px;
+      border-radius: 5px;
+      max-width: 780px;
+      font-size: 12px;
+    }
+  </style>
+  <div id="bar">
+    <b>Vancouver Living Atlas · station interior review</b><br /><select
+      id="station"
+    >
+      <option value="waterfront">Waterfront</option>
+      <option value="burrard">Burrard</option>
+      <option value="granville">Granville</option>
+      <option value="stadium-chinatown">Stadium–Chinatown</option>
+      <option value="yaletown-roundhouse">Yaletown–Roundhouse</option></select
+    ><button id="overview">Cutaway</button><button id="entry">Entrance</button
+    ><button id="platform">Platform</button
+    ><button id="flight">Stair / escalator</button
+    ><button id="next">Next flight</button>
+    <div id="note">
+      Exact game renderer and collision data. Reference-backed topology;
+      representative dimensions, not a measured survey. Drag to orbit, scroll to
+      zoom.
+    </div>
+    <div id="status">Loading…</div>
+  </div>
+  <div id="refs"></div>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { SkyTrainStationOwner } from '/lib/city/skytrain-stations.ts';
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#354854');
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      preserveDrawingBuffer: true,
+    });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(1);
+    renderer.localClippingEnabled = true;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 0.95;
+    document.body.prepend(renderer.domElement);
+    const camera = new THREE.PerspectiveCamera(
+        55,
+        innerWidth / innerHeight,
+        0.05,
+        800,
+      ),
+      controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    scene.add(new THREE.HemisphereLight(0xf0f7ff, 0x62615a, 1.1));
+    const sun = new THREE.DirectionalLight(0xffffff, 1.2);
+    sun.position.set(30, 60, 50);
+    scene.add(sun);
+    const grid = new THREE.GridHelper(300, 60, 0x59717c, 0x405763);
+    grid.position.y = -30;
+    scene.add(grid);
+    let owner,
+      data,
+      flightIndex = 0,
+      view = 'overview';
+    function pose(eye, target, cutaway) {
+      camera.position.copy(owner.group.localToWorld(new THREE.Vector3(...eye)));
+      controls.target.copy(
+        owner.group.localToWorld(new THREE.Vector3(...target)),
+      );
+      camera.lookAt(controls.target);
+      owner.setCutaway(cutaway);
+      controls.update();
+    }
+    function setView(type, index = flightIndex) {
+      view = type;
+      const first = data.platforms[0],
+        f = data.floors.find((f) => f.id === first.surfaceId),
+        box = new THREE.Box3().setFromPoints(
+          f.vertices.map((p) => new THREE.Vector3(...p)),
+        ),
+        center = box.getCenter(new THREE.Vector3());
+      if (type === 'overview') {
+        const all = new THREE.Box3().setFromPoints(
+            data.floors.flatMap((f) =>
+              f.vertices.map((p) => new THREE.Vector3(...p)),
+            ),
+          ),
+          c = all.getCenter(new THREE.Vector3()),
+          span = all.getSize(new THREE.Vector3()).length();
+        pose(
+          [c.x + span * 0.35, span * 0.65, c.z + span * 0.6],
+          [c.x, c.y, c.z],
+          0,
+        );
+        owner.group.traverse((m) => {
+          if (m.userData.stationOverhead) m.visible = false;
+        });
+      } else if (type === 'entry') {
+        const e = data.entrances[0],
+          p = e.point;
+        pose(
+          [p[0], p[1] + 1.7, p[2] + 0.2],
+          [p[0], p[1] + 1.6, p[2] + 12],
+          null,
+        );
+      } else if (type === 'platform') {
+        const alongX =
+            box.getSize(new THREE.Vector3()).x >
+            box.getSize(new THREE.Vector3()).z,
+          p = alongX
+            ? [box.min.x + 5, center.y + 1.65, center.z + 1]
+            : [center.x + 1, center.y + 1.65, box.min.z + 11],
+          t = alongX
+            ? [box.max.x - 4, center.y + 1.5, center.z]
+            : [center.x, center.y + 1.5, box.max.z - 4];
+        pose(p, t, null);
+      } else {
+        const flights = data.connections.filter(
+          (c) => c.type === 'stairs' || c.type === 'escalator',
+        );
+        const c = flights[index % flights.length];
+        let a = new THREE.Vector3(...c.start),
+          b = new THREE.Vector3(...c.end);
+        if (a.y < b.y) [a, b] = [b, a];
+        const dir = b.clone().sub(a).setY(0).normalize();
+        const eye = a
+            .clone()
+            .addScaledVector(dir, -1.1)
+            .add(new THREE.Vector3(0, 1.65, 0)),
+          target = a
+            .clone()
+            .lerp(b, 0.55)
+            .add(new THREE.Vector3(0, 1.1, 0));
+        pose(eye.toArray(), target.toArray(), null);
+        document.getElementById('status').textContent = c.id;
+      }
+      window.__stationQA.view = type;
+    }
+    async function load(id) {
+      owner?.dispose();
+      data = await fetch('/models/skytrain-stations/' + id + '.json').then(
+        (r) => r.json(),
+      );
+      owner = new SkyTrainStationOwner(data, () => 0, 'high', false);
+      owner.group.position.set(0, 0, 0);
+      owner.group.quaternion.identity();
+      owner.group.updateMatrixWorld(true);
+      scene.add(owner.group);
+      flightIndex = 0;
+      window.__stationQA = {
+        owner,
+        data,
+        renderer,
+        camera,
+        controls,
+        ready: true,
+        setView,
+        load,
+      };
+      document.getElementById('status').textContent =
+        `${data.name} · ${data.connections.filter((c) => c.type === 'escalator').length} escalator flights · ${owner.stats().instances} parts`;
+      document.getElementById('refs').innerHTML = (
+        data.authoredInterior?.references ?? []
+      )
+        .slice(0, 4)
+        .map(
+          (r, i) =>
+            `<a href="${r.url}" target="_blank">Reference ${i + 1}</a>: ${r.note}`,
+        )
+        .join('<br>');
+      setView('overview');
+    }
+    document.getElementById('station').onchange = (e) => load(e.target.value);
+    for (const t of ['overview', 'entry', 'platform', 'flight'])
+      document.getElementById(t).onclick = () => setView(t);
+    document.getElementById('next').onclick = () =>
+      setView('flight', ++flightIndex);
+    window.addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+    renderer.setAnimationLoop(() => {
+      controls.update();
+      renderer.render(scene, camera);
+    });
+    await load(
+      new URLSearchParams(location.search).get('station') ?? 'waterfront',
+    );
+  </script>
+</html>

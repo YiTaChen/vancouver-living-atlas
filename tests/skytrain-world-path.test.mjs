@@ -200,3 +200,52 @@ for (const line of ['expo', 'canada']) {
     }
   });
 }
+
+test('terminal crossover adapts to the authored track spacing without sharper turns or folding real Canada Line cars', async () => {
+  const train = await actualTrain('canada');
+  try {
+    let previousTail = 0;
+    for (const spacing of [9.4, 12, 18]) {
+      const start = {
+          position: new THREE.Vector3(),
+          quaternion: new THREE.Quaternion(),
+          motionSign: -1,
+        },
+        end = {
+          position: new THREE.Vector3(spacing, 0, 0),
+          quaternion: new THREE.Quaternion(),
+          motionSign: 1,
+        },
+        path = new SkyTrainTerminalPath(start, end, 'canada');
+      assert(path.tail.distanceTo(end.position) >= previousTail);
+      previousTail = path.tail.distanceTo(end.position);
+      for (let i = 0; i <= 200; i++) {
+        const distance = (path.length * i) / 200,
+          actual = path.sampleDistance(distance);
+        assert(
+          new THREE.Vector3(0, 0, 1).applyQuaternion(actual.quaternion).z >
+            0.97,
+          `${spacing} m track centres retain the same heading envelope`,
+        );
+        train.setPathPose(path, i / 200);
+        const gap = train.carFrames[0]
+          .getWorldPosition(new THREE.Vector3())
+          .distanceTo(train.carFrames[1].getWorldPosition(new THREE.Vector3()));
+        assert(
+          Math.abs(gap - 21) < 0.15,
+          `${spacing} m track centres retain real articulated car spacing`,
+        );
+      }
+      for (const offset of [-10.5, 10.5]) {
+        const actual = path.sampleCarDistance(0, offset),
+          expected = new THREE.Vector3(0, 0, offset);
+        assert(
+          actual.position.distanceTo(expected) < 1e-7,
+          'crossover length adjustment preserves the exact stopped consist',
+        );
+      }
+    }
+  } finally {
+    train.dispose();
+  }
+});

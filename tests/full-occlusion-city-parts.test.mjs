@@ -184,12 +184,12 @@ test('real Waterfront instancing removes full roof and wall widths while retaini
         owner.group,
         (id) =>
           id ===
-          'underground-waterfront-canada-southbound-rail-buffer-1-roof-0',
+          'waterfront-canada-southbound-portal-roof-1',
       ),
       otherRoof = instance(
         owner.group,
         (id) =>
-          id === 'underground-waterfront-expo-westbound-rail-buffer-1-roof-3',
+          id === 'waterfront-expo-westbound-portal-roof-1',
       );
     assert(roof && otherRoof);
     assert.strictEqual(roof.mesh, otherRoof.mesh, 'actual shared wall batch');
@@ -231,8 +231,7 @@ test('real Waterfront instancing removes full roof and wall widths while retaini
     const wall = instance(
       owner.group,
       (id) =>
-        id.startsWith('platform-enclosure-1-') &&
-        (id.endsWith('-left') || id.endsWith('-right')),
+        id === 'canada-dark-track-wall-16.4',
     );
     assert(wall, 'exercise an authored opaque underground enclosure wall');
     const wallCenter = vector(0, 0, 0).applyMatrix4(wall.matrix),

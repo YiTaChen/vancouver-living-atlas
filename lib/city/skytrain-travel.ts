@@ -113,7 +113,8 @@ export class SkyTrainTravel {
   constructor(protected readonly city: CityEngine) {
     this.stations = new SkyTrainStations({
       heightAt: (x, z) => city.elevation(x, z),
-      streetHeightAt: (x, z) => city.navigation?.groundHeight(x, z) ?? city.elevation(x, z),
+      streetHeightAt: (x, z) =>
+        city.navigation?.groundHeight(x, z) ?? city.elevation(x, z),
       scene: city.scene,
       fetchStation: async (id, signal) => {
         const response = await fetch(`/models/skytrain-stations/${id}.json`, {
@@ -154,7 +155,7 @@ export class SkyTrainTravel {
     return {
       position: [...position] as [number, number, number],
       space: `skytrain:${this.line}:${this.aboard ? 'cabin' : `${this.station}:${this.level}`}`,
-      surface: this.aboard ? 'metal' as const : 'pavement' as const,
+      surface: this.aboard ? ('metal' as const) : ('pavement' as const),
       active: this.inputEnabled && !this.busy && !this.passengerSeated,
     };
   }
@@ -1167,6 +1168,12 @@ export class SkyTrainTravel {
     );
     this.city.camera.position.copy(eye);
     this.city.camera.lookAt(eye.clone().add(direction));
+    this.owner.updateCutaway(
+      this.city.camera.position,
+      this.aboard
+        ? null
+        : (this.stationSeat?.position[1] ?? this.foot?.position[1] ?? null),
+    );
     this.city.controls.target.copy(eye).addScaledVector(direction, 0.8);
     this.city.controls.enabled = false;
     const navigation = this.city.navigation;

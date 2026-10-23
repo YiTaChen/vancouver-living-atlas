@@ -234,21 +234,25 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
           this.city.settings.quality,
         );
         this.captureLights(owner.group);
-        try {
-          const portals = stationConstructionPortals(
-            owner,
-            (x, z) =>
-              this.city.navigation?.groundHeight(x, z) ??
-              this.city.elevation(x, z),
-          );
-          const visuals = new SkyTrainConstructionVisuals(owner, portals);
-          this.constructionAccess.set(owner, portals);
-          this.constructionVisuals.set(owner, visuals);
-        } catch (error) {
-          // An optional shortcut must not prevent the other geographic stations
-          // and their autonomous service from loading.
-          this.error = `Construction access unavailable: ${station.name}`;
-          console.warn(this.error, error);
+        // Restored interiors have complete walking routes. Construction
+        // shortcuts belong only to the legacy provisional station layouts.
+        if (!owner.geometryData.authoredInterior) {
+          try {
+            const portals = stationConstructionPortals(
+              owner,
+              (x, z) =>
+                this.city.navigation?.groundHeight(x, z) ??
+                this.city.elevation(x, z),
+            );
+            const visuals = new SkyTrainConstructionVisuals(owner, portals);
+            this.constructionAccess.set(owner, portals);
+            this.constructionVisuals.set(owner, visuals);
+          } catch (error) {
+            // An optional shortcut must not prevent the other geographic stations
+            // and their autonomous service from loading.
+            this.error = `Construction access unavailable: ${station.name}`;
+            console.warn(this.error, error);
+          }
         }
         this.openings.update(this.stations.owners);
         this.updateBuildingReplacement();
@@ -1222,9 +1226,14 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       }
     }
     this.updateTransitLights();
-    for (const owner of this.stations.owners)
+    for (const owner of this.stations.owners) {
       owner.group.visible =
         this.city.settings.buildings || (this.active && owner === this.owner);
+      if (!this.active || owner !== this.owner || this.aboard)
+        owner.setCutaway(null);
+      else if (this.city.settings.mode === 'orbit' && this.foot)
+        owner.updateCutaway(this.city.camera.position, this.foot.position[1]);
+    }
     const constructionOrigin =
       this.phase === 'station' && this.city.settings.mode === 'walk'
         ? this.interactionOrigin
@@ -1329,6 +1338,10 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       this.city.camera.position
         .copy(target)
         .add(new THREE.Vector3(180, 230, 240));
+      this.owner?.updateCutaway(
+        this.city.camera.position,
+        this.aboard ? null : (this.foot?.position[1] ?? null),
+      );
       this.city.camera.near = 2;
       this.city.camera.fov = 48;
       this.city.camera.updateProjectionMatrix();
@@ -1454,6 +1467,12 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       }
       fov = Math.min(100, THREE.MathUtils.radToDeg(2 * Math.atan(tangent)));
     }
+    // The requested chase pose is preserved by whole-object occlusion. Use
+    // that exact pose for the authored station's higher roof cutaway too.
+    this.owner?.updateCutaway(
+      camera,
+      !this.aboard && third ? this.owner.toLocal(feet.toArray())[1] : null,
+    );
     delete this.city.camera.userData.skyTrainBodyView;
     this.city.camera.near = 0.05;
     this.city.camera.fov = fov;

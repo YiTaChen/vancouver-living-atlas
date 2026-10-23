@@ -46,6 +46,7 @@ export default defineConfig(async () => {
   const { cloudflare } = await import('@cloudflare/vite-plugin');
 
   return {
+    cacheDir: '.cache/vite-game',
     define: {
       'process.env.VANCOUVER_VISUAL_QA': JSON.stringify(
         process.env.VANCOUVER_VISUAL_QA || '0',

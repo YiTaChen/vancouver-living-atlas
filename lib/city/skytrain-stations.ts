@@ -3,6 +3,7 @@
  * Floors belong only to a station walker and never grant vehicle permissions. */
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { OBB } from 'three/addons/math/OBB.js';
 import { project } from './geo';
 import {
   SKYTRAIN_STREET_ENTRANCES,
@@ -57,7 +58,7 @@ export interface StationConnection {
   id: string;
   from: string;
   to: string;
-  type: 'walk' | 'stairs' | 'elevator';
+  type: 'walk' | 'stairs' | 'escalator' | 'elevator';
   start: StationVector;
   end: StationVector;
   width: number;
@@ -94,6 +95,7 @@ export interface StationPart {
   position: StationVector;
   size: StationVector;
   yaw: number;
+  quaternion?: StationQuaternion;
   material: string;
   role: string;
 }
@@ -102,6 +104,23 @@ interface StationObstacle {
   position: StationVector;
   size: StationVector;
   yaw: number;
+  quaternion?: StationQuaternion;
+}
+interface StationInteriorSign {
+  text: string;
+  position: StationVector;
+  yaw: number;
+  width: number;
+  height: number;
+  background?: string;
+}
+interface AuthoredStationInterior {
+  revision: string;
+  references: { url: string; note: string }[];
+  dimensions: 'representative';
+  primaryEntrance?: string;
+  streetEntranceMap?: Record<string, string>;
+  [key: string]: unknown;
 }
 export interface RuntimeStationData {
   schema: 1;
@@ -125,6 +144,7 @@ export interface RuntimeStationData {
     label: string;
     point: StationVector;
     surfaceId: string;
+    inwardDirection?: StationVector;
   }[];
   platforms: StationPlatform[];
   connections: StationConnection[];
@@ -136,6 +156,8 @@ export interface RuntimeStationData {
   }[];
   obstacles: StationObstacle[];
   parts: StationPart[];
+  authoredInterior?: AuthoredStationInterior;
+  signs?: StationInteriorSign[];
 }
 export interface StationTrainStop {
   position: StationVector;
@@ -285,6 +307,7 @@ export function validateRuntimeStation(
       typeof e.id !== 'string' ||
       typeof e.label !== 'string' ||
       !finiteVector(e.point) ||
+      (e.inwardDirection !== undefined && !finiteVector(e.inwardDirection)) ||
       !floorIds.has(String(e.surfaceId))
     )
       fail();
@@ -296,7 +319,7 @@ export function validateRuntimeStation(
       typeof c.id !== 'string' ||
       !floorIds.has(String(c.from)) ||
       !floorIds.has(String(c.to)) ||
-      !['walk', 'stairs', 'elevator'].includes(String(c.type)) ||
+      !['walk', 'stairs', 'escalator', 'elevator'].includes(String(c.type)) ||
       !finiteVector(c.start) ||
       !finiteVector(c.end) ||
       typeof c.width !== 'number' ||
@@ -310,9 +333,9 @@ export function validateRuntimeStation(
   if (
     !Array.isArray(d.parts) ||
     !d.parts.length ||
-    d.parts.length > 1000 ||
+    d.parts.length > (d.authoredInterior ? 6000 : 1000) ||
     !Array.isArray(d.obstacles) ||
-    d.obstacles.length > 100 ||
+    d.obstacles.length > (d.authoredInterior ? 1000 : 100) ||
     !Array.isArray(d.exclusions) ||
     d.exclusions.length > 10
   )
@@ -325,13 +348,70 @@ export function validateRuntimeStation(
       !finiteVector(p.size) ||
       p.size.some((v) => v <= 0) ||
       typeof p.yaw !== 'number' ||
-      !Number.isFinite(p.yaw)
+      !Number.isFinite(p.yaw) ||
+      (p.quaternion !== undefined &&
+        (!finiteVector(p.quaternion, 4) ||
+          Math.abs(Math.hypot(...p.quaternion) - 1) > 0.0001))
     )
       fail();
   }
   for (const raw of d.parts) {
     const p = record(raw);
     if (typeof p.material !== 'string' || typeof p.role !== 'string') fail();
+  }
+  if (d.authoredInterior !== undefined) {
+    const interior = record(d.authoredInterior);
+    if (
+      typeof interior.revision !== 'string' ||
+      !interior.revision ||
+      interior.dimensions !== 'representative' ||
+      !Array.isArray(interior.references) ||
+      !interior.references.length ||
+      interior.references.length > 100
+    )
+      fail();
+    if (
+      interior.primaryEntrance !== undefined &&
+      (typeof interior.primaryEntrance !== 'string' ||
+        !d.entrances.some(
+          (entry: unknown) => record(entry).id === interior.primaryEntrance,
+        ))
+    )
+      fail();
+    if (interior.streetEntranceMap !== undefined) {
+      const mapping = record(interior.streetEntranceMap);
+      if (!Object.values(mapping).every((id) => typeof id === 'string')) fail();
+    }
+    for (const raw of interior.references) {
+      const reference = record(raw);
+      if (
+        typeof reference.url !== 'string' ||
+        !/^https?:\/\//.test(reference.url) ||
+        typeof reference.note !== 'string'
+      )
+        fail();
+    }
+  }
+  if (d.signs !== undefined) {
+    if (!Array.isArray(d.signs) || d.signs.length > 150) fail();
+    for (const raw of d.signs) {
+      const sign = record(raw);
+      if (
+        typeof sign.text !== 'string' ||
+        sign.text.length > 200 ||
+        !finiteVector(sign.position) ||
+        typeof sign.yaw !== 'number' ||
+        !Number.isFinite(sign.yaw) ||
+        ![sign.width, sign.height].every(
+          (v) =>
+            typeof v === 'number' && Number.isFinite(v) && v > 0 && v < 100,
+        ) ||
+        (sign.background !== undefined &&
+          (typeof sign.background !== 'string' ||
+            !/^#[\da-f]{6}$/i.test(sign.background)))
+      )
+        fail();
+    }
   }
   for (const raw of d.exclusions) {
     const v = record(raw);
@@ -417,6 +497,21 @@ const palette: Record<string, number> = {
   tile: 0x939d9d,
   gate: 0x87989e,
   escalator: 0x354047,
+  cream: 0xe4dfd2,
+  white: 0xf0eee6,
+  red: 0x963d36,
+  black: 0x20282b,
+  stainless: 0xa4adb0,
+  rib: 0xdddcd4,
+  granite: 0x7d8583,
+  panel: 0xd4d4cb,
+  acoustic: 0x6b7474,
+  warmfloor: 0x9a8a7e,
+  ballast: 0x41464a,
+  poster: 0x476a78,
+  blue: 0x17547e,
+  expo: 0x005daa,
+  canada: 0x007e9f,
 };
 
 /** Pure local stop metadata can be read while another interior is active. */
@@ -485,6 +580,13 @@ export class SkyTrainStationOwner {
   private readonly adjacency = new Map<string, Set<string>>();
   private readonly layerMap = new Map<string, number>();
   private readonly collisionObstacles: StationObstacle[];
+  private readonly orientedObstacles = new Map<StationObstacle, OBB>();
+  private readonly cutawayPlane = new THREE.Plane(
+    new THREE.Vector3(0, -1, 0),
+    1e7,
+  );
+  private readonly overheadMeshes: { mesh: THREE.Mesh; minimumY: number }[] =
+    [];
   private readonly resources = new Set<
     THREE.BufferGeometry | THREE.Material | THREE.Texture
   >();
@@ -516,6 +618,22 @@ export class SkyTrainStationOwner {
       ...o,
       size: runtimeAccessSize(data.id, o.id, o.size),
     }));
+    for (const obstacle of this.collisionObstacles) {
+      if (!obstacle.quaternion) continue;
+      const rotation = new THREE.Matrix3().setFromMatrix4(
+        new THREE.Matrix4().makeRotationFromQuaternion(
+          new THREE.Quaternion(...obstacle.quaternion),
+        ),
+      );
+      this.orientedObstacles.set(
+        obstacle,
+        new OBB(
+          new THREE.Vector3(...obstacle.position),
+          new THREE.Vector3(...obstacle.size).multiplyScalar(0.5),
+          rotation,
+        ),
+      );
+    }
     const [x, z] = project(data.lonlat),
       y = heightAt(x, z);
     if (!Number.isFinite(y))
@@ -580,6 +698,31 @@ export class SkyTrainStationOwner {
     this.group.add(this.bridge);
     this.buildBoardingMarker();
     this.group.updateMatrixWorld(true);
+  }
+  /** Reveal the occupied level from above while retaining every wall below
+   * head height. Null restores the complete architecture for walking views. */
+  setCutaway(localFootY: number | null) {
+    const active = localFootY !== null && Number.isFinite(localFootY);
+    if (active) {
+      const normal = new THREE.Vector3(0, -1, 0).applyQuaternion(
+          this.group.quaternion,
+        ),
+        point = new THREE.Vector3(0, localFootY + 2.8, 0)
+          .applyQuaternion(this.group.quaternion)
+          .add(this.group.position);
+      this.cutawayPlane.setFromNormalAndCoplanarPoint(normal, point);
+    } else this.cutawayPlane.constant = 1e7;
+    for (const { mesh, minimumY } of this.overheadMeshes)
+      mesh.visible = !active || minimumY <= localFootY + 2.8;
+    this.group.userData.stationCutaway = active;
+  }
+  /** First-person eyes stay below the trigger, so stair walls and ceilings
+   * never vanish during an entrance-to-platform walk. */
+  updateCutaway(cameraWorld: THREE.Vector3, localFootY: number | null) {
+    const camera = this.toLocal(cameraWorld.toArray());
+    this.setCutaway(
+      localFootY !== null && camera[1] > localFootY + 3.3 ? localFootY : null,
+    );
   }
   toWorld(point: readonly number[] | StationPoint): StationVector {
     const p = Array.isArray(point) ? point : (point as StationPoint).position;
@@ -789,10 +932,7 @@ export class SkyTrainStationOwner {
     if (!doors) {
       doors = platform.doors.map((door) => {
         const carDoor: StationVector = [...door.carDoor];
-        if (
-          line === 'expo' &&
-          Math.abs(Math.abs(carDoor[2]) - 5.5) < 0.0001
-        )
+        if (line === 'expo' && Math.abs(Math.abs(carDoor[2]) - 5.5) < 0.0001)
           carDoor[2] = Math.sign(carDoor[2]) * 4.9;
         const shift = new THREE.Vector3(0, 0, carDoor[2] - door.carDoor[2])
           .applyQuaternion(new THREE.Quaternion(...door.carQuaternion))
@@ -948,6 +1088,15 @@ export class SkyTrainStationOwner {
       if (p[1] + 1.65 > e.minY && p[1] < e.maxY && inside(p, e.polygon))
         return true;
     for (const o of this.collisionObstacles) {
+      const oriented = this.orientedObstacles.get(o);
+      if (oriented) {
+        const body = new OBB(
+          new THREE.Vector3(p[0], p[1] + 0.85, p[2]),
+          new THREE.Vector3(radius, 0.85, radius),
+        );
+        if (oriented.intersectsOBB(body)) return true;
+        continue;
+      }
       if (
         p[1] + 1.7 <= o.position[1] - o.size[1] / 2 ||
         p[1] >= o.position[1] + o.size[1] / 2
@@ -1197,7 +1346,13 @@ export class SkyTrainStationOwner {
     if (!c) return;
     c.fillStyle = color;
     c.fillRect(0, 0, 1024, 128);
-    c.fillStyle = '#fff';
+    const background = /^#([\da-f]{6})$/i.exec(color)?.[1],
+      luminance = background
+        ? parseInt(background.slice(0, 2), 16) * 0.2126 +
+          parseInt(background.slice(2, 4), 16) * 0.7152 +
+          parseInt(background.slice(4, 6), 16) * 0.0722
+        : 0;
+    c.fillStyle = luminance > 175 ? '#152b36' : '#fff';
     c.font = 'bold 57px system-ui,sans-serif';
     c.textAlign = 'center';
     c.textBaseline = 'middle';
@@ -1226,6 +1381,7 @@ export class SkyTrainStationOwner {
     const material = new THREE.MeshBasicMaterial({
         map: texture,
         side: THREE.FrontSide,
+        clippingPlanes: [this.cutawayPlane],
       }),
       mesh = new THREE.Mesh(geometry, material);
     mesh.name = `station-sign-${text}`;
@@ -1235,7 +1391,114 @@ export class SkyTrainStationOwner {
     this.resources.add(material);
     this.resources.add(geometry);
   }
+  private buildAuthoredInterior() {
+    // These parts are the station-specific architectural model. Do not invent
+    // corridors, extra escalator lanes, ticket readers or platform enclosures
+    // around a graph which already describes those spaces explicitly.
+    const groups = new Map<string, StationPart[]>();
+    const overhead = (part: StationPart) =>
+      /(?:roof|ceiling|soffit)/i.test(part.role);
+    for (const part of this.geometryData.parts) {
+      if (part.role === 'threshold') continue;
+      const key = `${part.material}:${overhead(part) ? 'overhead' : 'structure'}`;
+      const items = groups.get(key) ?? [];
+      items.push(part);
+      groups.set(key, items);
+    }
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    geometry.computeBoundingBox();
+    this.resources.add(geometry);
+    for (const [key, items] of groups) {
+      const name = items[0].material,
+        color = palette[name] ?? palette.concrete,
+        metal = ['steel', 'stainless', 'escalator'].includes(name),
+        glass = name === 'glass',
+        material =
+          name === 'light'
+            ? new THREE.MeshBasicMaterial({
+                color,
+                clippingPlanes: [this.cutawayPlane],
+              })
+            : new THREE.MeshStandardMaterial({
+                color,
+                roughness: metal ? 0.42 : glass ? 0.2 : 0.85,
+                metalness: metal ? 0.55 : 0.02,
+                emissive: color,
+                emissiveIntensity:
+                  name === 'white' || name === 'light' ? 0.3 : 0.16,
+                transparent: glass,
+                opacity: glass ? 0.32 : 1,
+                depthWrite: !glass,
+                side: THREE.DoubleSide,
+                clippingPlanes: [this.cutawayPlane],
+                clipShadows: true,
+              });
+      this.resources.add(material);
+      const mesh = new THREE.InstancedMesh(geometry, material, items.length),
+        matrix = new THREE.Matrix4(),
+        rotation = new THREE.Quaternion();
+      mesh.name = `station-authored-${key.replace(':', '-')}`;
+      mesh.userData.stationPartIds = items.map((part) => part.id);
+      mesh.userData.stationPartRoles = items.map((part) => part.role);
+      mesh.userData.stationOverhead = overhead(items[0]);
+      mesh.userData.stationCutawayPlane = this.cutawayPlane;
+      mesh.castShadow = false;
+      mesh.receiveShadow = true;
+      let minimumY = Infinity;
+      items.forEach((part, index) => {
+        if (part.quaternion) rotation.fromArray(part.quaternion);
+        else
+          rotation.setFromAxisAngle(
+            new THREE.Vector3(0, 1, 0),
+            (part.yaw * Math.PI) / 180,
+          );
+        matrix.compose(
+          new THREE.Vector3(...part.position),
+          rotation,
+          new THREE.Vector3(...part.size),
+        );
+        mesh.setMatrixAt(index, matrix);
+        if (overhead(part))
+          minimumY = Math.min(
+            minimumY,
+            geometry.boundingBox!.clone().applyMatrix4(matrix).min.y,
+          );
+      });
+      mesh.computeBoundingSphere();
+      if (mesh.userData.stationOverhead)
+        this.overheadMeshes.push({ mesh, minimumY });
+      this.group.add(mesh);
+    }
+    for (const sign of this.geometryData.signs ?? [])
+      this.sign(
+        sign.text,
+        sign.position,
+        sign.yaw,
+        sign.width,
+        sign.height,
+        sign.background ?? '#073c62',
+      );
+    // Emissive luminaires make the authored fixture pattern visible; bounded
+    // local fill lights illuminate the occupied platform without changing city
+    // exposure or creating a light for every individual fluorescent strip.
+    for (const surfaceId of new Set(
+      this.geometryData.platforms.map((platform) => platform.surfaceId),
+    )) {
+      const floor = this.floorMap.get(surfaceId)!,
+        bounds = new THREE.Box3().setFromPoints(
+          floor.vertices.map((point) => new THREE.Vector3(...point)),
+        ),
+        center = bounds.getCenter(new THREE.Vector3()),
+        light = new THREE.PointLight(0xe5edf1, 22, 24, 2);
+      light.position.set(center.x, center.y + 2.8, center.z);
+      this.group.add(light);
+    }
+  }
   private build(quality: 'balanced' | 'high' | 'ultra') {
+    if (this.geometryData.authoredInterior) {
+      this.buildAuthoredInterior();
+      return;
+    }
     const parts: StationPart[] = this.geometryData.parts
       .filter(
         (p) =>

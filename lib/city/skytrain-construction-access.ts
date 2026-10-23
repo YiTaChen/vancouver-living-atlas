@@ -96,12 +96,13 @@ function signFits(
 
 /** One outward and return portal per existing entrance/distinct-platform route.
  * Pass the city's rendered groundHeight callback for exact outside support.
- * Legacy owners without the street overlay expose no construction portals. */
+ * Authored interiors and owners without the street overlay expose no
+ * construction portals; authored routes are traversed by ordinary walking. */
 export function stationConstructionPortals(
   owner: SkyTrainStationOwner,
   streetHeightAt?: (x: number, z: number) => number,
 ): readonly StationConstructionPortal[] {
-  if (owner.stats().disposed) return [];
+  if (owner.stats().disposed || owner.geometryData.authoredInterior) return [];
   const routes = owner.streetRoutes(),
     entrances = owner.streetEntrances(),
     portals: StationConstructionPortal[] = [],
