@@ -40,6 +40,7 @@ export function installStreetPilotQA(
   parent.insertBefore(section, parent.firstChild);
   let pose: Pose = 'robson-drive',
     sequence = 0;
+  let suiteRunning = false;
 
   const fixedResolution = () => {
     e.renderer.setPixelRatio(1);
@@ -56,6 +57,7 @@ export function installStreetPilotQA(
     pose = next;
     nav.keys.clear();
     nav.setMode('orbit');
+    nav.car.visible = false;
     e.transition = null;
     e.setAtmosphere('clear');
     e.applySettings({
@@ -133,7 +135,7 @@ export function installStreetPilotQA(
     b.textContent = label;
     b.style.cssText = 'padding:6px;margin:3px;border:1px solid #aac4bc';
     b.onclick = () => {
-      if (!lease.isRunning()) action();
+      if (!lease.isRunning() && !suiteRunning) action();
     };
     section.appendChild(b);
   };
@@ -279,5 +281,50 @@ export function installStreetPilotQA(
   button('Pilot capture: 12s drive', () => {
     void capture(true);
   });
+  button('Pilot run: matched suite', () => {
+    void runSuite();
+  });
+  async function runSuite() {
+    if (suiteRunning || lease.isRunning()) return;
+    suiteRunning = true;
+    const cases: readonly [Pose, number, boolean][] = [
+      ['corner-eye', 14, false],
+      ['corner-eye', 14, false],
+      ['robson-drive', 14, false],
+      ['robson-drive', 23, false],
+      ['burrard-eye', 14, false],
+      ['roadster-detail', 14, false],
+      ['robson-drive', 14, true],
+    ];
+    try {
+      for (let i = 0; i < cases.length; i++) {
+        const [next, hour, drive] = cases[i];
+        select(next);
+        e.setClock({ hour, running: false });
+        status.textContent = `Suite ${i + 1}/${cases.length}: settling ${next} / ${hour}h / 12s`;
+        await new Promise<void>((resolve, reject) => {
+          const start = performance.now();
+          const tick = (now: number) => {
+            if (document.hidden || e.disposed || e.contextLost) {
+              reject(new Error('Pilot suite interrupted or hidden'));
+              return;
+            }
+            if (now - start >= 12000) resolve();
+            else requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+        await capture(drive);
+        if (!status.textContent?.startsWith('Saved'))
+          throw new Error(status.textContent ?? 'Pilot capture failed');
+      }
+      status.textContent = `Suite complete: ${cases.length} saved windows; each has 12s settling + 12s visible capture`;
+    } catch (error) {
+      status.textContent = String(error);
+    } finally {
+      e.navigation?.keys.clear();
+      suiteRunning = false;
+    }
+  }
   section.appendChild(output);
 }
