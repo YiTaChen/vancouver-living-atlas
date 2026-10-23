@@ -67,6 +67,8 @@ const pageSource = readFileSync('app/page.tsx', 'utf8'),
     'switchInScene',
     'beginFlight',
     'beginTesla',
+    'chooseRocket',
+    'beginRocket',
     'switchMode',
     'dragAircraft',
     'dragFigure',
@@ -88,9 +90,9 @@ assert.equal(pageDeclarations.size, pageNames.length);
 const pageCode = ts.transpileModule(
   `
   export function pageActions(deps) {
-    const {engine,teslaEntering,ready,setNotice,setSettings,setTour,setPanel,setClean,setPlacing,setMobilePanel,setTeslaPreparing} = deps;
+    const {engine,teslaEntering,ready,setNotice,setSettings,setTour,setPanel,setClean,setPlacing,setMobilePanel,setTeslaPreparing,setRocketChoosing,setMobileHudHidden,setLocalOrbit} = deps;
     ${pageNames.map((name) => pageDeclarations.get(name)).join('\n')}
-    return {switchMode,beginPlacement,switchInScene,beginFlight,beginTesla,dragAircraft,dragFigure};
+    return {switchMode,beginPlacement,switchInScene,beginFlight,beginTesla,chooseRocket,beginRocket,dragAircraft,dragFigure};
   }
 `,
   {
@@ -124,6 +126,9 @@ function findModeElements(node) {
       modeElements.set('radio', node);
     if (tag === 'RadioGroupItem' && className?.includes('mode-radio-dot'))
       modeElements.set('item', node);
+    if (tag === 'button' && className?.includes('rocket-mode-button'))
+      modeElements.set('rocket-button', node);
+    if (tag === 'RocketControls') modeElements.set('rocket-controls', node);
   }
   ts.forEachChild(node, findModeElements);
 }
@@ -140,13 +145,19 @@ function modeExpression(element, name) {
 const modeBindingCode = ts.transpileModule(
   `
   export function renderedModeBindings(m, actions, state) {
-    const {dragFigure,dragAircraft,beginFlight,switchMode} = actions;
+    const {dragFigure,dragAircraft,beginFlight,switchMode,chooseRocket,beginRocket,engine,setRocketChoosing} = actions;
     const {skyTrainActive,ready,teslaPreparing} = state;
     return {
       onPointerDownCapture: ${modeExpression('label', 'onPointerDownCapture')},
       onClickCapture: ${modeExpression('label', 'onClickCapture')},
       onValueChange: ${modeExpression('radio', 'onValueChange')},
       disabled: ${modeExpression('item', 'disabled')},
+      rocket: {
+        onClick: ${modeExpression('rocket-button', 'onClick')},
+        disabled: ${modeExpression('rocket-button', 'disabled')},
+        onChoose: ${modeExpression('rocket-controls', 'onChoose')},
+        onCloseChoosing: ${modeExpression('rocket-controls', 'onCloseChoosing')},
+      },
     };
   }
 `,
@@ -565,6 +576,21 @@ function actionsFor(f) {
       return true;
     },
   };
+  city.rocket = {
+    active: false,
+    placing: false,
+    returnToCity() {
+      this.active = this.placing = false;
+    },
+    cancelPlacement() {
+      this.placing = false;
+      events.push('rocket-cancel');
+    },
+    beginPlacement(kind) {
+      this.placing = true;
+      events.push(['placement', 'rocket', kind]);
+    },
+  };
   city.leaveTravelAtLocation = () => {
     assert.equal(city.navigation.mode, 'orbit');
   };
@@ -580,7 +606,7 @@ function actionsFor(f) {
     assert.fail(
       'a new placement cannot commit an unvalidated navigation point',
     );
-  return pageActions({
+  const deps = {
     engine: { current: city },
     teslaEntering: { current: false },
     ready: true,
@@ -595,6 +621,15 @@ function actionsFor(f) {
     setPlacing() {},
     setMobilePanel() {},
     setTeslaPreparing() {},
+    setRocketChoosing(value) {
+      city.rocketChoosing = value;
+    },
+    setMobileHudHidden() {},
+    setLocalOrbit() {},
+  };
+  return Object.assign(pageActions(deps), {
+    engine: deps.engine,
+    setRocketChoosing: (value) => deps.setRocketChoosing(value),
   });
 }
 
@@ -814,6 +849,99 @@ test('rendered Walk label supports new mouse/touch drag placement after map move
         `${id} still respects an in-progress Tesla entry`,
       );
     }
+  } finally {
+    owner.dispose();
+    train.dispose();
+    if (originalWindow === undefined) delete globalThis.window;
+    else globalThis.window = originalWindow;
+  }
+});
+
+test('rendered Rocket button and chooser release transit ownership before all rocket placements and retain the map on cancel', async () => {
+  const originalWindow = globalThis.window;
+  globalThis.window = new BrowserEvents();
+  const owner = stationOwner('waterfront'),
+    train = await actualTrain('expo');
+  try {
+    for (const aboard of [false, true])
+      for (const moved of [false, true])
+        for (const pointerType of ['mouse', 'touch', 'keyboard'])
+          for (const choice of ['cancel', 'small', 'large', 'super-heavy']) {
+            const f = fixture(owner, train, { aboard, seated: true });
+            try {
+              f.passenger.setOverview(true);
+              if (moved) {
+                f.city.controls.target.z += 130;
+                f.city.camera.position.z += 130;
+                f.city.controls.update();
+              }
+              const actions = actionsFor(f),
+                bindings = renderedModeBindings({ id: 'walk' }, actions, {
+                  skyTrainActive: true,
+                  ready: true,
+                  teslaPreparing: false,
+                }).rocket,
+                camera = f.city.camera.position.toArray(),
+                target = f.city.controls.target.toArray(),
+                elapsed = f.vehicle.run.snapshot().elapsed;
+              assert.equal(bindings.disabled, false);
+              bindings.onClick({
+                pointerType,
+                detail: pointerType === 'keyboard' ? 0 : 1,
+              });
+              assert.equal(f.city.rocketChoosing, true);
+              assert.equal(f.passenger.active, false);
+              assert.equal(f.passenger.occupied, null);
+              assert.equal(f.passenger.passengerSeated, false);
+              assert.equal(f.city.navigation.mode, 'orbit');
+              assert.equal(f.city.settings.mode, 'orbit');
+              assert.equal(f.vehicle.run.snapshot().elapsed, elapsed);
+              assert.equal(owner.stats().disposed, false);
+              assert.equal(f.city.rocket.placing, false);
+              assert.equal(
+                f.events.some(
+                  (row) => Array.isArray(row) && row[0] === 'placement',
+                ),
+                false,
+                'opening the chooser must not select or commit a launch site',
+              );
+              if (choice === 'cancel') {
+                bindings.onCloseChoosing();
+                assert.equal(f.city.rocketChoosing, false);
+                assert.equal(f.city.rocket.placing, false);
+                f.city.travelReturn.update();
+                assert.equal(f.passenger.setOverview(false), false);
+              } else {
+                bindings.onChoose(choice);
+                assert.equal(f.city.rocketChoosing, false);
+                assert.equal(f.city.rocket.placing, true);
+                assert.deepEqual(
+                  f.events.filter(
+                    (row) => Array.isArray(row) && row[0] === 'placement',
+                  ),
+                  [['placement', 'rocket', choice]],
+                );
+              }
+              assert.deepEqual(f.city.camera.position.toArray(), camera);
+              assert.deepEqual(f.city.controls.target.toArray(), target);
+              assert.equal(f.city.settings.mode, 'orbit');
+              assert.equal(f.vehicle.run.advance(5).elapsed, elapsed + 5);
+            } finally {
+              f.close();
+            }
+          }
+    assert.equal(
+      renderedModeBindings(
+        { id: 'walk' },
+        {},
+        {
+          skyTrainActive: true,
+          ready: true,
+          teslaPreparing: true,
+        },
+      ).rocket.disabled,
+      true,
+    );
   } finally {
     owner.dispose();
     train.dispose();
