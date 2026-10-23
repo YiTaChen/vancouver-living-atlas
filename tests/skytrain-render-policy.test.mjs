@@ -14,8 +14,8 @@ import {
 const { project } = await import(cityModule('geo'));
 
 // Execute the actual engine render method and passenger underground getters.
-// Only the GPU renderer/composer is recorded; no second visibility policy is
-// implemented in this fixture, and these CPU checks make no visual/FPS claim.
+// The GPU renderer/composer and unrelated lighting stage are recorded; no second
+// visibility policy is implemented, and these CPU checks make no visual/FPS claim.
 function members(file, className, names, predicate) {
   const source = readFileSync(
     new URL(`../lib/city/${file}.ts`, import.meta.url),
@@ -130,7 +130,8 @@ function fixture({
     assertStationAndRail();
     if (failure) throw failure;
   };
-  let preparations = 0;
+  let preparations = 0,
+    lightingStages = 0;
   const engine = Object.assign(new RenderHarness(), {
     scene,
     camera,
@@ -140,6 +141,9 @@ function fixture({
     skyTrainTravel: passenger,
     water,
     landmarkDetails: [],
+    applyStreetPilotLighting() {
+      lightingStages++;
+    },
     updateShadowFrustum() {},
     renderer: {
       info: { reset() {} },
@@ -170,6 +174,7 @@ function fixture({
     passenger,
     draws,
     prepared: () => preparations,
+    lightingStages: () => lightingStages,
     assertStationAndRail,
     dispose() {
       for (const object of [water, station, rail]) {
@@ -227,6 +232,7 @@ for (const composer of [false, true]) {
         try {
           f.engine.renderScene();
           assert.deepEqual(f.draws, [path]);
+          assert.equal(f.lightingStages(), 1);
           assert.equal(f.water.visible, waterVisible);
           assert.equal(f.prepared(), 1);
           f.assertStationAndRail();
@@ -247,6 +253,7 @@ for (const composer of [false, true]) {
             (error) => error === failure,
           );
           assert.deepEqual(f.draws, [path]);
+          assert.equal(f.lightingStages(), 1);
           assert.equal(f.water.visible, waterVisible);
           assert.equal(f.prepared(), 0);
           f.assertStationAndRail();
