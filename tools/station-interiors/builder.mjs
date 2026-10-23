@@ -54,6 +54,7 @@ export class InteriorBuilder {
         centerM: [...center],
         sizeM: [...size],
         yawDegrees: yaw,
+        ...(quaternion ? { rotationQuaternionXYZW: [...quaternion] } : {}),
         type: 'oriented-box',
       });
     return id;
@@ -270,6 +271,39 @@ export class InteriorBuilder {
       yaw,
       true,
     );
+  }
+  /** Open fare lanes retain solid reader housings and accessible wide gaps. */
+  fareGates(id, center, offsets, yaw = 0) {
+    const [x, y, z] = center,
+      a = (yaw * Math.PI) / 180;
+    for (const [i, offset] of offsets.entries()) {
+      const p = [x + offset * Math.cos(a), y + 0.53, z - offset * Math.sin(a)];
+      this.box(
+        `${id}-reader-${i}`,
+        p,
+        [0.23, 1.06, 0.82],
+        'gate',
+        'faregate',
+        yaw,
+        true,
+      );
+      this.box(
+        `${id}-tap-${i}`,
+        [p[0], y + 1.075, p[2]],
+        [0.19, 0.035, 0.24],
+        'blue',
+        'detail',
+        yaw,
+      );
+      this.box(
+        `${id}-indicator-${i}`,
+        [p[0], y + 0.86, p[2] + 0.42 * Math.cos(a)],
+        [0.13, 0.09, 0.025],
+        'light',
+        'detail',
+        yaw,
+      );
+    }
   }
   /** Flat room enclosure. Door intervals are measured along each wall's axis. */
   room(

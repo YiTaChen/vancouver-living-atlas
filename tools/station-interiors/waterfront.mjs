@@ -140,6 +140,11 @@ export function rebuildWaterfront(source) {
     material: 'cream',
     doors: { north: [[-4, 4]], south: [[-3, 3]] },
   });
+  b.fareGates(
+    'waterfront-expo-fares',
+    [-24, -2.5, -46.1],
+    [-3.25, -1.6, 0, 1.6, 3.25],
+  );
   b.flight(
     'waterfront-expo-hall-stairs',
     'waterfront-heritage-hall',
@@ -266,6 +271,11 @@ export function rebuildWaterfront(source) {
     material: 'white',
     doors: { north: [[-2, 4]], east: [[0.3, 5.8]] },
   });
+  b.fareGates(
+    'waterfront-canada-north-fares',
+    [-3, -7, 1.6],
+    [-5.6, -3.7, -1.85, 0, 1.85, 3.7, 5.6],
+  );
   b.walk(
     'canada-passage-to-fares',
     'waterfront-under-cordova-passage',
@@ -362,6 +372,12 @@ export function rebuildWaterfront(source) {
     material: 'white',
     doors: { east: [[-3, 3]], west: [[-3, 3]] },
   });
+  b.fareGates(
+    'waterfront-canada-south-fares',
+    [55, -7, 8],
+    [-3.65, -1.8, 0, 1.8, 3.65],
+    90,
+  );
   for (const [suffix, z, width, kind] of [
     ['stairs', 6.6, 2.1, 'stairs'],
     ['up', 9, 1.1, 'escalator'],

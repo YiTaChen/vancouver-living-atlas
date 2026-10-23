@@ -195,6 +195,16 @@ export function rebuildStadium(source) {
   for (const z of [79, 110]) b.bench(`stadium-island-seat-${z}`, [2.77, -8, z], 2.4, 90, { material: 'steel' });
   b.s.authoredInterior.primaryEntrance = 'stadium-beatty-entry';
   b.s.authoredInterior.streetEntranceMap = { 'beatty-upper': 'stadium-beatty-entry', 'pacific-lower': 'stadium-expo-boulevard-entry', 'keefer-place': 'stadium-keefer-entry' };
+  b.s.authoredInterior.raisedStreetApproaches = {
+    'keefer-place': {
+      topLonLat: [-123.1097920, 49.2799124],
+      stairBottomLonLat: [-123.1097145, 49.2798668],
+      deckLonLat: [[-123.1096174, 49.2798108], [-123.1096652, 49.2797771], [-123.1096709, 49.2797741], [-123.1096980, 49.2797570]],
+      risers: 20,
+      source: 'https://www.openstreetmap.org/way/367513829; https://www.openstreetmap.org/way/367513830',
+      heightBasis: 'External stairhead and bottom use project terrain. The mapped concrete approach meets the inferred raised concourse; its residual grade is representative, not surveyed.',
+    },
+  };
   b.s.entrances[0].inwardDirectionM = [0, 0, 1];
   b.s.entrances[1].inwardDirectionM = [-1, 0, 0];
   b.s.entrances[1].streetAttachmentStatus = 'Raised concourse/pedestrian bridge: attach to the public deck surface, not raw terrain underneath';

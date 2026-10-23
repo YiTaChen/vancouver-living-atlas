@@ -104,6 +104,9 @@ export function makeRuntimeStation(source, sourceSha256) {
         o.centerM ?? o.boundsM.min.map((v, i) => (v + o.boundsM.max[i]) / 2),
       size: o.sizeM ?? o.boundsM.min.map((v, i) => o.boundsM.max[i] - v),
       yaw: o.yawDegrees ?? 0,
+      ...(o.rotationQuaternionXYZW
+        ? { quaternion: o.rotationQuaternionXYZW }
+        : {}),
     })),
     parts: source.geometryParts.map((part) => ({
       id: part.id,
