@@ -172,6 +172,8 @@ export function makeStationStreetAccess(
   heightAt: (x: number, z: number) => number,
   streetHeightAt: (x: number, z: number) => number = heightAt,
 ): StationStreetAccess {
+  if (source.authoredInterior)
+    return attachAuthoredStation(source, heightAt, streetHeightAt);
   const [ox, oz] = project(source.lonlat),
     base = heightAt(ox, oz),
     rotation = new THREE.Quaternion(...source.quaternion),
@@ -770,5 +772,338 @@ export function makeStationStreetAccess(
     ),
     exclusions: source.exclusions,
   };
+  return { geometry, entrances, openings, routes };
+}
+
+/** Keep reference-authored passenger circulation intact in the open city. Only
+ * the short street/apron attachment is generated; no interior flight is replaced. */
+function attachAuthoredStation(
+  source: RuntimeStationData,
+  heightAt: (x: number, z: number) => number,
+  streetHeightAt: (x: number, z: number) => number,
+): StationStreetAccess {
+  const geometry = structuredClone(source),
+    [ox, oz] = project(source.lonlat),
+    base = heightAt(ox, oz),
+    rotation = new THREE.Quaternion(...source.quaternion),
+    inverse = rotation.clone().invert(),
+    origin = new THREE.Vector3(ox, base, oz),
+    local = (p: THREE.Vector3) =>
+      p.clone().sub(origin).applyQuaternion(inverse),
+    world = (p: THREE.Vector3) =>
+      p.clone().applyQuaternion(rotation).add(origin),
+    entrances: StreetEntrance[] = [],
+    openings: StationTerrainOpening[] = [],
+    routes: StationStreetAccess['routes'] = [],
+    mapping = source.authoredInterior?.streetEntranceMap as
+      | Record<string, string>
+      | undefined;
+  const addBeam = (
+    id: string,
+    a: THREE.Vector3,
+    b: THREE.Vector3,
+    width: number,
+    height: number,
+    material: string,
+    role: string,
+  ) => {
+    const d = b.clone().sub(a),
+      q = new THREE.Quaternion().setFromEuler(
+        new THREE.Euler(
+          -Math.atan2(d.y, Math.hypot(d.x, d.z)),
+          Math.atan2(d.x, d.z),
+          0,
+          'YXZ',
+        ),
+      );
+    geometry.parts.push({
+      id,
+      position: tuple(a.clone().add(b).multiplyScalar(0.5)),
+      size: [width, height, d.length()],
+      yaw: 0,
+      quaternion: q.toArray(),
+      material,
+      role,
+    });
+  };
+  const link = (id: string, from: string, to: string, p: THREE.Vector3) =>
+    geometry.connections.push({
+      id,
+      from,
+      to,
+      type: 'walk',
+      start: tuple(p),
+      end: tuple(p),
+      width: 3.8,
+      treads: [],
+    });
+  for (const ref of SKYTRAIN_STREET_ENTRANCES[source.id]) {
+    const target =
+      source.entrances.find((e) => e.id === (mapping?.[ref.id] ?? ref.id)) ??
+      (SKYTRAIN_STREET_ENTRANCES[source.id].length === 1
+        ? source.entrances[0]
+        : undefined);
+    if (!target) continue;
+    const [x, z] = project(ref.lonlat),
+      p = local(new THREE.Vector3(x, streetHeightAt(x, z), z)),
+      inward = target.inwardDirection
+        ? vector(target.inwardDirection).normalize()
+        : new THREE.Vector3(
+            Math.sin((ref.bearing * Math.PI) / 180),
+            0,
+            -Math.cos((ref.bearing * Math.PI) / 180),
+          ).applyQuaternion(inverse),
+      outside = p.clone().addScaledVector(inward, -2.8),
+      join = vector(target.point),
+      direction = join.clone().sub(p).setY(0);
+    if (direction.length() > 2) {
+      const floor = source.floors.find((f) => f.id === target.surfaceId)!;
+      const box = new THREE.Box3().setFromPoints(floor.vertices.map(vector)),
+        center = box.getCenter(new THREE.Vector3());
+      // Meet the edge of the entrance hall, rather than overlaying its flat
+      // floor with a rising attachment ramp across the entire room.
+      if (Math.abs(direction.x) > Math.abs(direction.z))
+        join.set(
+          THREE.MathUtils.clamp(p.x, box.min.x + 0.6, box.max.x - 0.6),
+          target.point[1],
+          center.z,
+        );
+      else
+        join.set(
+          center.x,
+          target.point[1],
+          THREE.MathUtils.clamp(p.z, box.min.z + 0.6, box.max.z - 0.6),
+        );
+      direction.copy(join).sub(p).setY(0);
+    }
+    if (direction.length() < 0.2)
+      join.addScaledVector(
+        inward,
+        Math.max(3.2, 2 + Math.abs(p.y - join.y) * 2.1),
+      );
+    else if (direction.length() > 2) inward.copy(direction).normalize();
+    outside.copy(p).addScaledVector(inward, -2.8);
+    const apronId = `${source.id}-${ref.id}-street-apron`,
+      throatId = `${source.id}-${ref.id}-authored-threshold`,
+      vertices = strip(
+        p.clone().addScaledVector(inward, -2.8),
+        p.clone().addScaledVector(inward, 0.6),
+        3.8,
+      );
+    const grid: StationVector[] = [],
+      gridIndices: number[] = [];
+    const across = new THREE.Vector3(inward.z, 0, -inward.x);
+    for (const along of [-3.2, -1, 0, 1.1, 2.2])
+      for (const side of [-1.9, 0, 1.9]) {
+        const v = p
+            .clone()
+            .addScaledVector(inward, along)
+            .addScaledVector(across, side),
+          w = world(v);
+        v.y = streetHeightAt(w.x, w.z) - base;
+        grid.push(tuple(v));
+      }
+    for (let row = 0; row < 4; row++)
+      for (let col = 0; col < 2; col++) {
+        const a = row * 3 + col,
+          b = a + 3;
+        gridIndices.push(a, b, b + 1, a, b + 1, a + 1);
+      }
+    geometry.floors.push({
+      id: apronId,
+      level: 'street',
+      kind: 'street-apron',
+      vertices: grid,
+      indices: gridIndices,
+    });
+    vertices.splice(0, vertices.length, grid[0], grid[12], grid[14], grid[2]);
+    const rampStart = p.clone().addScaledVector(inward, 2),
+      rampWorld = world(rampStart);
+    rampStart.y = streetHeightAt(rampWorld.x, rampWorld.z) - base;
+    const throat = strip(rampStart, join, 3.8);
+    geometry.floors.push({
+      id: throatId,
+      level: 'street-attachment',
+      kind: 'corridor',
+      vertices: throat,
+      indices,
+    });
+    link(`${apronId}-join`, apronId, throatId, rampStart);
+    link(`${throatId}-join`, throatId, target.surfaceId, join);
+    if (direction.length() < 2 && Math.abs(p.y - target.point[1]) < 0.25)
+      link(`${apronId}-authored-overlap`, apronId, target.surfaceId, p);
+    const d = join.clone().sub(p),
+      side = new THREE.Vector3(d.z, 0, -d.x).normalize();
+    // Fully enclosed attachment. It is recorded separately from the maintained
+    // station interior so it cannot silently replace its photographed topology.
+    if (d.length() > 2) {
+      for (const sign of [-1, 1])
+        addBeam(
+          `${throatId}-wall-${sign}`,
+          p
+            .clone()
+            .addScaledVector(side, sign * 2)
+            .add(new THREE.Vector3(0, 1.6, 0)),
+          join
+            .clone()
+            .addScaledVector(side, sign * 2)
+            .add(new THREE.Vector3(0, 1.6, 0)),
+          0.18,
+          3.2,
+          'wall',
+          'wall',
+        );
+      addBeam(
+        `${throatId}-ceiling`,
+        p.clone().add(new THREE.Vector3(0, 3.2, 0)),
+        join.clone().add(new THREE.Vector3(0, 3.2, 0)),
+        4.2,
+        0.16,
+        'wall',
+        'ceiling',
+      );
+      addBeam(
+        `${throatId}-floor`,
+        p.clone().add(new THREE.Vector3(0, -0.12, 0)),
+        join.clone().add(new THREE.Vector3(0, -0.12, 0)),
+        3.8,
+        0.2,
+        'floor',
+        'floor',
+      );
+    }
+    const threshold = world(p),
+      outer = world(outside),
+      inner = world(p.clone().addScaledVector(inward, 1.1));
+    inner.y = streetHeightAt(inner.x, inner.z);
+    outer.y = streetHeightAt(outer.x, outer.z);
+    entrances.push({
+      id: ref.id,
+      stationId: source.id,
+      label: ref.label,
+      source: ref.source,
+      accuracy:
+        'Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.',
+      surfaceId: apronId,
+      threshold: tuple(threshold),
+      inward: tuple(inner),
+      outward: tuple(outer),
+      localDirection: tuple(inward),
+    });
+    for (const [i, polygon] of [vertices, throat].entries()) {
+      const points = polygon.map((v) => world(vector(v))),
+        ys = points.map((v) => v.y),
+        ground = points.map((v) => heightAt(v.x, v.z));
+      openings.push({
+        id: `${throatId}-opening-${i}`,
+        stationId: source.id,
+        polygon: points.map(tuple),
+        minY: Math.min(...ys) - 0.4,
+        maxY: Math.max(...ground, ...ys) + 3.8,
+      });
+    }
+    // A graph path records the actual authored flights. Elevator-only links are
+    // excluded from walking routes; the lift interaction remains separate.
+    for (const platformId of new Set(
+      source.platforms.map((v) => v.surfaceId),
+    )) {
+      const queue = [target.surfaceId],
+        previous = new Map<
+          string,
+          { floor: string; connection: StationConnection }
+        >();
+      const visited = new Set(queue);
+      while (queue.length && !visited.has(platformId)) {
+        const f = queue.shift()!;
+        for (const c of source.connections) {
+          if (c.type === 'elevator') continue;
+          const next = c.from === f ? c.to : c.to === f ? c.from : undefined;
+          if (next && !visited.has(next)) {
+            visited.add(next);
+            previous.set(next, { floor: f, connection: c });
+            queue.push(next);
+          }
+        }
+      }
+      if (!visited.has(platformId)) continue;
+      const chain: { floor: string; connection: StationConnection }[] = [];
+      let f = platformId;
+      while (f !== target.surfaceId) {
+        const step = previous.get(f)!;
+        chain.unshift(step);
+        f = step.floor;
+      }
+      const points: StationVector[] = [tuple(p), tuple(rampStart), tuple(join)];
+      for (const { floor, connection: c } of chain) {
+        const forward = c.from === floor;
+        const departure = vector(forward ? c.start : c.end),
+          arrival = vector(forward ? c.end : c.start),
+          travel = arrival.clone().sub(departure).setY(0).normalize();
+        const onFloor = (id: string, point: THREE.Vector3) => {
+          const f = source.floors.find((f) => f.id === id);
+          if (!f) return false;
+          return [
+            [0, 0],
+            [0.26, 0],
+            [-0.26, 0],
+            [0, 0.26],
+            [0, -0.26],
+          ].every(([dx, dz]) => {
+            const q = point.clone().add(new THREE.Vector3(dx, 0, dz));
+            for (let i = 0; i < f.indices.length; i += 3) {
+              const triangle = new THREE.Triangle(
+                ...(f.indices
+                  .slice(i, i + 3)
+                  .map((index) => vector(f.vertices[index])) as [
+                  THREE.Vector3,
+                  THREE.Vector3,
+                  THREE.Vector3,
+                ]),
+              );
+              if (triangle.containsPoint(q)) return true;
+            }
+            return false;
+          });
+        };
+        if (c.treads.length) {
+          const approach = departure.clone().addScaledVector(travel, -1.2);
+          if (onFloor(floor, approach)) points.push(tuple(approach));
+        }
+        points.push(tuple(departure), tuple(arrival));
+        if (c.treads.length) {
+          const clear = arrival.clone().addScaledVector(travel, 0.9);
+          if (onFloor(forward ? c.to : c.from, clear))
+            points.push(tuple(clear));
+        }
+      }
+      routes.push({
+        entranceId: ref.id,
+        platformSurfaceId: platformId,
+        points,
+      });
+    }
+  }
+  geometry.entrances = entrances.map((e) => ({
+    id: e.id,
+    label: e.label,
+    point: tuple(local(vector(e.threshold))),
+    surfaceId: e.surfaceId,
+    inwardDirection: e.localDirection,
+  }));
+  // Near-street authored shafts open terrain at their actual footprint only.
+  for (const c of source.connections.filter(
+    (c) => c.type === 'stairs' || c.type === 'escalator',
+  )) {
+    const polygon = strip(vector(c.start), vector(c.end), c.width + 0.45),
+      points = polygon.map((v) => world(vector(v)));
+    if (points.some((v) => v.y + 2.5 >= heightAt(v.x, v.z)))
+      openings.push({
+        id: c.id + '-authored-opening',
+        stationId: source.id,
+        polygon: points.map(tuple),
+        minY: Math.min(...points.map((v) => v.y)) - 0.4,
+        maxY: Math.max(...points.map((v) => heightAt(v.x, v.z))) + 3.6,
+      });
+  }
   return { geometry, entrances, openings, routes };
 }

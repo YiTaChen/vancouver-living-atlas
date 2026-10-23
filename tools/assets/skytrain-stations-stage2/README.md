@@ -75,3 +75,18 @@ Official TransLink PDFs, article pages and photos were downloaded, rasterized an
 - Continuous collision throughout threshold motion and interaction with moving passengers
 
 Night lighting, SeaBus, WCE, Millennium Line and out-of-core stations are excluded.
+
+## Runtime interior reconstruction (2026-10-23)
+
+The maintained in-game interior authoring now lives in `tools/station-interiors/`.
+Run `node tools/rebuild-station-interiors.mjs` to apply the reference-based
+circulation modules to `station-layout.json` and regenerate the public runtime
+packets. Individual stages may be rebuilt by passing station IDs.
+
+The historical `.blend`/`.glb` exports and their offline QA above remain the old
+representative package snapshot. They are not loaded by the station game renderer
+and are not claimed to contain these new interiors. The runtime source packet,
+its per-station provenance, connected walking surfaces, matching stairwell slab
+holes and the full-game screenshots are the evidence for this reconstruction.
+See `docs/qa/station-interiors-20261023/` for the inspected real photographs,
+measured-versus-representative distinctions, camera and pedestrian checks.

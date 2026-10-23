@@ -200,9 +200,14 @@ test('fixed instancing budgets remain small at all world qualities and disposal 
     for (const data of catalog) {
       const o = owner(data.id, quality),
         stats = o.stats();
-      assert(stats.drawCalls <= 24, `${data.id}: ${stats.drawCalls}`);
-      assert(stats.triangles < 20_000);
-      assert(stats.instances < 1600);
+      // Complete enclosures replace the former few generic corridor boxes;
+      // batching remains bounded independently of world quality.
+      assert(
+        stats.drawCalls <= (data.authoredInterior ? 32 : 24),
+        `${data.id}: ${stats.drawCalls}`,
+      );
+      assert(stats.triangles < (data.authoredInterior ? 50_000 : 20_000));
+      assert(stats.instances < (data.authoredInterior ? 4_000 : 1600));
       assert(o.group.children.some((c) => c instanceof THREE.InstancedMesh));
       assert(!o.group.children.some((c) => c instanceof THREE.AmbientLight));
       assert(
@@ -391,8 +396,9 @@ test('one selected boarding marker follows the safe waiting floor, hides with do
   assert.deepEqual(disposed, [1, 1]);
 });
 
-test('underground shells block outside views while retaining every access-floor body clearance and full train portal', () => {
+test('legacy underground shells retain access-floor clearance and full train portals', () => {
   for (const d of catalog) {
+    if (d.authoredInterior) continue; // Exact authored enclosures have physical circulation sweeps.
     const o = owner(d.id),
       structural = [];
     for (const mesh of o.group.children) {
@@ -655,54 +661,36 @@ test('the integrated Main Street walker cannot enter the retained west display b
   o.dispose();
 });
 
-test('Waterfront transfer portals have matching square support geometry and collision with clear body routes on both sides', () => {
+test('Waterfront heritage columns render at authored scale and stop bodies while the hall remains traversable', () => {
   const o = owner('waterfront'),
     before = get('waterfront');
-  for (const portal of [
-    {
-      id: 'waterfront-expo-entry-post-3.4',
-      from: [-26.5, 0, -59.4],
-      dx: -0.1,
-      dz: 0,
-      axis: 0,
-      goal: -28.5,
-    },
-    {
-      id: 'waterfront-canada-entry-post3.4',
-      from: [-29.8, 0, 3.6],
-      dx: 0,
-      dz: 0.1,
-      axis: 2,
-      goal: 5.6,
-    },
-  ]) {
+  for (const id of ['heritage-column--13--67', 'heritage-column-13--55']) {
+    const support = before.obstacles.find((b) => b.id === id);
+    assert(support);
     const mesh = o.group.children.find(
       (m) =>
         m instanceof THREE.InstancedMesh &&
-        m.userData.stationPartIds?.includes(portal.id),
+        m.userData.stationPartIds?.includes(id),
     );
-    assert(mesh instanceof THREE.InstancedMesh);
-    const index = mesh.userData.stationPartIds.indexOf(portal.id),
-      matrix = new THREE.Matrix4(),
+    assert(mesh);
+    const matrix = new THREE.Matrix4(),
       scale = new THREE.Vector3();
-    mesh.getMatrixAt(index, matrix);
+    mesh.getMatrixAt(mesh.userData.stationPartIds.indexOf(id), matrix);
     matrix.decompose(new THREE.Vector3(), new THREE.Quaternion(), scale);
-    assert(Math.abs(scale.x - 0.22) < 1e-5);
-    assert(Math.abs(scale.z - 0.22) < 1e-5);
-    close(scale.y, 3.4);
-    let p = o.floorAt(portal.from);
-    assert(p);
-    for (let i = 0; i < 20; i++) p = o.walk(p, portal.dx, portal.dz);
-    close(p.position[portal.axis], portal.goal);
-    const support = before.obstacles.find((b) => b.id === portal.id),
-      foot = o.floorAt([support.position[0], 0, support.position[2] - 0.8]);
-    assert(foot);
-    let blocked = foot;
-    for (let i = 0; i < 20; i++) blocked = o.walk(blocked, 0, 0.1);
-    assert(
-      blocked.position[2] < support.position[2] - 0.25,
-      'square support remains physically solid',
+    scale.toArray().forEach((n, i) => close(n, support.size[i]));
+    let foot = o.floorAt(
+      [support.position[0], 0, support.position[2] - 1.5],
+      'waterfront-heritage-hall',
     );
+    assert(foot);
+    for (let i = 0; i < 30; i++) foot = o.walk(foot, 0, 0.1);
+    assert(foot.position[2] < support.position[2] - 0.6);
+    let aisle = o.floorAt(
+      [support.position[0] + 1.2, 0, support.position[2] - 1.5],
+      'waterfront-heritage-hall',
+    );
+    for (let i = 0; i < 30; i++) aisle = o.walk(aisle, 0, 0.1);
+    assert(aisle.position[2] > support.position[2] + 1.4);
   }
   assert.deepEqual(o.data, before);
   o.dispose();

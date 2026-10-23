@@ -33,6 +33,19 @@ const makeOwner = (data, streetHeightAt = cityElevation) =>
     true,
     streetHeightAt,
   );
+const legacyCatalog = catalog.filter((data) => !data.authoredInterior),
+  expectedLegacyPairs = legacyCatalog.reduce((sum, data) => {
+    const owner = makeOwner(data),
+      count = owner.streetRoutes().length;
+    owner.dispose();
+    return sum + count;
+  }, 0),
+  expectedLegacyEntrances = legacyCatalog.reduce((sum, data) => {
+    const owner = makeOwner(data),
+      count = owner.streetEntrances().length;
+    owner.dispose();
+    return sum + count;
+  }, 0);
 
 function walk(owner, foot, goals) {
   for (const goal of goals) {
@@ -54,9 +67,9 @@ function walk(owner, foot, goals) {
   return foot;
 }
 
-test('all seventeen construction pairs retain real entrance/platform provenance and clear separate displays', () => {
+test('all legacy construction pairs retain real entrance/platform provenance and clear separate displays', () => {
   let pairCount = 0;
-  for (const data of catalog) {
+  for (const data of legacyCatalog) {
     const owner = makeOwner(data),
       before = JSON.stringify({ data, geometry: owner.geometryData }),
       portals = stationConstructionPortals(owner, cityElevation),
@@ -145,7 +158,20 @@ test('all seventeen construction pairs retain real entrance/platform provenance 
     owner.dispose();
     assert.deepEqual(stationConstructionPortals(owner, cityElevation), []);
   }
-  assert.equal(pairCount, 17);
+  assert.equal(pairCount, expectedLegacyPairs);
+});
+
+test('authored interiors retain their walking routes without construction teleport pairs', () => {
+  const authored = catalog.filter((data) => data.authoredInterior);
+  assert(authored.length > 0);
+  for (const data of authored) {
+    const owner = makeOwner(data),
+      before = JSON.stringify(owner.geometryData);
+    assert(owner.streetRoutes().length > 0);
+    assert.deepEqual(stationConstructionPortals(owner, cityElevation), []);
+    assert.equal(JSON.stringify(owner.geometryData), before);
+    owner.dispose();
+  }
 });
 
 /** Find an ordinary floor route around the retained benches/columns, then
@@ -217,7 +243,7 @@ function platformPath(owner, start, goal) {
 
 test('all platform arrivals can physically walk to their return portals around actual benches and columns', () => {
   let count = 0;
-  for (const data of catalog) {
+  for (const data of legacyCatalog) {
     const owner = makeOwner(data),
       portals = stationConstructionPortals(owner, cityElevation);
     for (const source of portals.filter((p) => p.kind === 'platform')) {
@@ -232,7 +258,7 @@ test('all platform arrivals can physically walk to their return portals around a
     }
     owner.dispose();
   }
-  assert.equal(count, 17);
+  assert.equal(count, expectedLegacyPairs);
 });
 
 test('every outside return uses real GIS-clear ground beyond automatic entry and preserves exact rendered height', async () => {
@@ -280,7 +306,7 @@ test('every outside return uses real GIS-clear ground beyond automatic entry and
   }
   const seen = new Set(),
     renderedGround = (x, z) => cityElevation(x, z) + 1.9;
-  for (const data of catalog) {
+  for (const data of legacyCatalog) {
     const owner = makeOwner(data, renderedGround),
       portals = stationConstructionPortals(owner, renderedGround);
     for (const portal of portals.filter((p) => p.kind === 'exit')) {
@@ -307,7 +333,7 @@ test('every outside return uses real GIS-clear ground beyond automatic entry and
     }
     owner.dispose();
   }
-  assert.equal(seen.size, 11);
+  assert.equal(seen.size, expectedLegacyEntrances);
 });
 
 test('legacy station displays have no construction portals', () => {
@@ -320,13 +346,15 @@ test('nonuniform rendered street heights resolve the actual vestibule floor inst
   const renderedGround = (x, z) =>
     cityElevation(x, z) + 1.9 + Math.sin(x * 1.3 + z * 0.7) * 0.75;
   let count = 0;
-  for (const data of catalog) {
+  for (const data of legacyCatalog) {
     const owner = makeOwner(data, renderedGround),
       portals = stationConstructionPortals(owner, renderedGround);
     for (const portal of portals.filter((p) => p.kind === 'platform')) {
       count++;
       assert(owner.isClearFoot(portal.point));
-      const entrance = owner.streetEntrances().find((e) => e.id === portal.entranceId),
+      const entrance = owner
+          .streetEntrances()
+          .find((e) => e.id === portal.entranceId),
         threshold = owner.toLocal(entrance.threshold),
         vestibule = owner.floorAt(threshold);
       assert(vestibule);
@@ -334,5 +362,5 @@ test('nonuniform rendered street heights resolve the actual vestibule floor inst
     }
     owner.dispose();
   }
-  assert.equal(count, 17);
+  assert.equal(count, expectedLegacyPairs);
 });

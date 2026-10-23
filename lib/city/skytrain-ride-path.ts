@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { project } from './geo';
+import { SKYTRAIN_STREET_ENTRANCES } from './skytrain-street-access';
 import {
   SKYTRAIN_LINES,
   SKYTRAIN_STATIONS,
@@ -141,6 +142,67 @@ export function adaptSkyTrainStationFrame(
     .setFromAxisAngle(new THREE.Vector3(0, 1, 0), heading - local)
     .toArray();
   let lonlat = data.lonlat;
+  if (data.authoredInterior) {
+    // Place the maintained entrance hall at its official street anchor. The
+    // entire local frame (including every train stop) moves together, so route
+    // metadata and the live station use exactly the same world transform.
+    const primary =
+      data.entrances.find(
+        (e) => e.id === data.authoredInterior!.primaryEntrance,
+      ) ?? data.entrances[0];
+    const mapping = data.authoredInterior.streetEntranceMap as
+      | Record<string, string>
+      | undefined;
+    const ref =
+      SKYTRAIN_STREET_ENTRANCES[data.id].find(
+        (r) => r.id === primary.id || mapping?.[r.id] === primary.id,
+      ) ?? SKYTRAIN_STREET_ENTRANCES[data.id][0];
+    // Rebase local X/Z at the doorway so the street datum is sampled at the
+    // entrance itself, not at a distant City selection point on sloping ground.
+    const shift = (p: readonly number[]): [number, number, number] => [
+      p[0] - primary.point[0],
+      p[1],
+      p[2] - primary.point[2],
+    ];
+    data = {
+      ...data,
+      floors: data.floors.map((f) => ({
+        ...f,
+        vertices: f.vertices.map(shift),
+      })),
+      entrances: data.entrances.map((e) => ({ ...e, point: shift(e.point) })),
+      connections: data.connections.map((c) => ({
+        ...c,
+        start: shift(c.start),
+        end: shift(c.end),
+        treads: c.treads.map((t) => ({
+          ...t,
+          vertices: t.vertices.map(shift),
+        })),
+      })),
+      parts: data.parts.map((p) => ({ ...p, position: shift(p.position) })),
+      obstacles: data.obstacles.map((o) => ({
+        ...o,
+        position: shift(o.position),
+      })),
+      exclusions: data.exclusions.map((e) => ({
+        ...e,
+        polygon: e.polygon.map(shift),
+      })),
+      platforms: data.platforms.map((p) => ({
+        ...p,
+        position: shift(p.position),
+        doors: p.doors.map((d) => ({
+          ...d,
+          sill: shift(d.sill),
+          edge: shift(d.edge),
+          waiting: shift(d.waiting),
+        })),
+      })),
+      signs: data.signs?.map((s) => ({ ...s, position: shift(s.position) })),
+    };
+    lonlat = [...ref.lonlat];
+  }
   if (data.id === 'main-street-science-world') {
     // The City selection point sits west of the two retained GTFS platform
     // anchors. Centring the elevated runtime frame between those anchors keeps

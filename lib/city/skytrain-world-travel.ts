@@ -236,21 +236,25 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
           this.city.settings.quality,
         );
         this.captureLights(owner.group);
-        try {
-          const portals = stationConstructionPortals(
-            owner,
-            (x, z) =>
-              this.city.navigation?.groundHeight(x, z) ??
-              this.city.elevation(x, z),
-          );
-          const visuals = new SkyTrainConstructionVisuals(owner, portals);
-          this.constructionAccess.set(owner, portals);
-          this.constructionVisuals.set(owner, visuals);
-        } catch (error) {
-          // An optional shortcut must not prevent the other geographic stations
-          // and their autonomous service from loading.
-          this.error = `Construction access unavailable: ${station.name}`;
-          console.warn(this.error, error);
+        // Restored interiors have complete walking routes. Construction
+        // shortcuts belong only to the legacy provisional station layouts.
+        if (!owner.geometryData.authoredInterior) {
+          try {
+            const portals = stationConstructionPortals(
+              owner,
+              (x, z) =>
+                this.city.navigation?.groundHeight(x, z) ??
+                this.city.elevation(x, z),
+            );
+            const visuals = new SkyTrainConstructionVisuals(owner, portals);
+            this.constructionAccess.set(owner, portals);
+            this.constructionVisuals.set(owner, visuals);
+          } catch (error) {
+            // An optional shortcut must not prevent the other geographic stations
+            // and their autonomous service from loading.
+            this.error = `Construction access unavailable: ${station.name}`;
+            console.warn(this.error, error);
+          }
         }
         this.openings.update(this.stations.owners);
         this.updateBuildingReplacement();
@@ -1205,9 +1209,14 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       }
     }
     this.updateTransitLights();
-    for (const owner of this.stations.owners)
+    for (const owner of this.stations.owners) {
       owner.group.visible =
         this.city.settings.buildings || (this.active && owner === this.owner);
+      if (!this.active || owner !== this.owner || this.aboard)
+        owner.setCutaway(null);
+      else if (this.city.settings.mode === 'orbit' && this.foot)
+        owner.updateCutaway(this.city.camera.position, this.foot.position[1]);
+    }
     const constructionOrigin =
       this.phase === 'station' && this.city.settings.mode === 'walk'
         ? this.interactionOrigin
@@ -1250,6 +1259,10 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       this.city.camera.position
         .copy(target)
         .add(new THREE.Vector3(180, 230, 240));
+      this.owner?.updateCutaway(
+        this.city.camera.position,
+        this.aboard ? null : (this.foot?.position[1] ?? null),
+      );
       this.city.camera.near = 2;
       this.city.camera.fov = 48;
       this.city.camera.updateProjectionMatrix();
@@ -1321,6 +1334,22 @@ export class SkyTrainWorldTravel extends SkyTrainTravel {
       bodyForward = new THREE.Vector3(0, 0, 1).applyQuaternion(
         avatarQuaternion,
       );
+    if (this.owner) {
+      const localFoot = this.owner.toLocal(feet.toArray()),
+        elevation = THREE.MathUtils.clamp(0.14 - this.pitch, -0.18, 0.85),
+        pivotHeight = this.passengerSeated
+          ? (this.stationSeat?.seatHeight ?? 0.46) + 0.72
+          : 1.05;
+      // Decide before the boom collision: a roof removed by the cutaway must
+      // not force the camera back below that same roof on every frame.
+      this.owner.setCutaway(
+        !this.aboard &&
+          third &&
+          pivotHeight + this.distanceView * Math.sin(elevation) > 3.3
+          ? localFoot[1]
+          : null,
+      );
+    }
     let camera = eye,
       target = eye.clone().add(direction),
       fov = 65;
