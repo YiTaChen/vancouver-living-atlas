@@ -748,6 +748,18 @@ export class SkyTrainStationOwner {
   streetRoutes() {
     return this.streetAccess?.routes ?? [];
   }
+  /** Only the exact emitted exterior floor can extend the ownership window.
+   * A legacy unrendered access strip keeps its original handoff distances. */
+  private hasRenderedStreetApron(surfaceId: string) {
+    const mesh = this.group.getObjectByName(
+      'station-authored-street-apron-support',
+    );
+    return Boolean(
+      this.geometryData.authoredInterior &&
+      this.floorMap.get(surfaceId)?.kind === 'street-apron' &&
+      mesh?.userData.stationFloorIds?.includes(surfaceId),
+    );
+  }
   tryEnterFromStreet(
     worldPosition: StationVector,
     maxSnap = 0.22,
@@ -762,7 +774,9 @@ export class SkyTrainStationOwner {
         dz = local[2] - threshold[2],
         along = dx * d[0] + dz * d[2],
         across = dx * d[2] - dz * d[0];
-      if (along < -2.3 || along > 1.8 || Math.abs(across) > 1.45) continue;
+      const entryLimit = this.hasRenderedStreetApron(e.surfaceId) ? 2.85 : 2.3;
+      if (along < -entryLimit || along > 1.8 || Math.abs(across) > 1.45)
+        continue;
       const foot = this.floorAt(local, e.surfaceId);
       if (
         foot &&
@@ -782,7 +796,8 @@ export class SkyTrainStationOwner {
         along =
           (point.position[0] - threshold[0]) * d[0] +
           (point.position[2] - threshold[2]) * d[2];
-      if (along <= -2.45) return this.toWorld(point);
+      const release = this.hasRenderedStreetApron(e.surfaceId) ? -3 : -2.45;
+      if (along <= release) return this.toWorld(point);
     }
     return null;
   }
@@ -895,6 +910,45 @@ export class SkyTrainStationOwner {
       [0, 0, 0] as StationVector,
     );
     const d = Math.hypot(center[0] - raw[0], center[2] - raw[2]) || 1;
+    const yaw = Math.atan2(raw[0] - center[0], raw[2] - center[2]);
+    if (this.geometryData.authoredInterior && connection) {
+      const other =
+          connection.from === p.surfaceId ? connection.end : connection.start,
+        away = new THREE.Vector3(...raw)
+          .sub(new THREE.Vector3(...other))
+          .setY(0),
+        candidates: StationVector[] = [];
+      if (away.lengthSq() > 1e-8)
+        candidates.push(
+          new THREE.Vector3(...raw)
+            .addScaledVector(away.normalize(), 0.8)
+            .toArray(),
+        );
+      candidates.push([
+        raw[0] + ((center[0] - raw[0]) / d) * 0.8,
+        raw[1],
+        raw[2] + ((center[2] - raw[2]) / d) * 0.8,
+      ]);
+      // Prefer an inset landing over the tread/platform boundary. Otherwise
+      // a native walker can stop within its arrival tolerance on the last
+      // tread and never acquire the requested platform identity.
+      candidates.push(raw);
+      let seed: StationPoint | null = null;
+      for (const candidate of candidates) {
+        const foot = this.floorAt(candidate, p.surfaceId);
+        if (!foot) continue;
+        foot.yaw = yaw;
+        seed ??= foot;
+        if (this.supported(foot)) return foot;
+      }
+      // A carved stairwell may contain the old centroid-directed candidate.
+      // Search only from a real floor triangle; never manufacture support or
+      // call point() on a hole before the safe-origin search can take place.
+      if (seed) return this.safePoint(seed);
+      throw new Error(
+        'Station access connection has no supported platform endpoint',
+      );
+    }
     return this.safePoint(
       this.point(
         [
@@ -903,7 +957,7 @@ export class SkyTrainStationOwner {
           raw[2] + ((center[2] - raw[2]) / d) * 0.8,
         ],
         p.surfaceId,
-        Math.atan2(raw[0] - center[0], raw[2] - center[2]),
+        yaw,
       ),
     );
   }

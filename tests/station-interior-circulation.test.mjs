@@ -139,6 +139,27 @@ test('Stadium spare platform is excluded from public navigation and all Yaletown
   } finally { o.dispose(); }
 });
 
+test('Stadium and Yaletown platform seats have physically reachable boarding-free stand positions', () => {
+  for (const id of builders.keys()) {
+    const s = data.find(s => s.id === id), o = owner(s);
+    try {
+      const seats = o.benchSeats();
+      assert(seats.length >= 8, `${id}: platform waiting seats must be usable`);
+      for (const seat of seats) {
+        assert(o.isClearFoot(seat.stand));
+        const front = [Math.sin(seat.yaw), 0, Math.cos(seat.yaw)];
+        const near = seat.stand.position.map((v, i) => v + front[i] * .6);
+        const from = o.floorAt(near, seat.stand.surfaceId);
+        assert(from && o.isClearFoot(from), `${id}: a seat requires an unobstructed approach`);
+        assert(o.canApproachSeat(seat, from));
+      }
+      for (const platform of s.platforms) for (const door of o.boardingDoors(platform.line, platform.direction)) {
+        assert(o.isClearFoot(door.waiting), `${id}: seating obstructs a train door`);
+      }
+    } finally { o.dispose(); }
+  }
+});
+
 test('Stadium uses mapped stair runs and keeps carriage-local geometry while translating the complete boarding assembly', () => {
   const original = source.stations.find(s => s.stationId === 'stadium-chinatown');
   const rebuilt = rebuildStadium(original), runtime = makeRuntimeStation(rebuilt, '0'.repeat(64));
@@ -164,6 +185,11 @@ test('Stadium uses mapped stair runs and keeps carriage-local geometry while tra
       for (const key of ['carLocalSillPointM', 'consistLocalSillPointM', 'carPoseInConsist']) assert.deepEqual(door[key], before[key]);
       for (const key of ['stationSillPointM', 'platformEdgePointM', 'stationWaitingPointM']) for (let k = 0; k < 3; k++) assert(Math.abs(door[key][k] - before[key][k] - shift[k]) < 1e-9);
     }
+    for (const [j, region] of platform.waitingRegions.entries()) for (const [n, point] of region.polygonM.entries()) for (let k = 0; k < 3; k++) assert(Math.abs(point[k] - old.waitingRegions[j].polygonM[n][k] - shift[k]) < 1e-9);
+    for (const anchor of rebuilt.anchors.filter(a => a.kind === 'vehicle-root-stop' || a.kind === 'platform-door')) {
+      const before = original.anchors.find(a => a.id === anchor.id);
+      for (let k = 0; k < 3; k++) assert(Math.abs(anchor.pointM[k] - before.pointM[k] - shift[k]) < 1e-9);
+    }
   }
   const deltaY = rebuilt.platforms[0].floorHeightM - original.platforms[0].floorHeightM;
   for (const [i, exclusion] of rebuilt.trackExclusionVolumes.entries()) {
@@ -174,4 +200,80 @@ test('Stadium uses mapped stair runs and keeps carriage-local geometry while tra
   const o = owner(runtime);
   try { for (const p of runtime.platforms) for (const d of o.boardingDoors(p.line, p.direction)) assert(o.isClearFoot(d.waiting), 'shifted Stadium boarding point remains physically clear'); }
   finally { o.dispose(); }
+});
+
+test('Yaletown follows counted 57/41 stair proportions and moves every boarding component together', () => {
+  const original = source.stations.find(s => s.stationId === 'yaletown-roundhouse');
+  const rebuilt = rebuildYaletown(original), runtime = makeRuntimeStation(rebuilt, '0'.repeat(64));
+  const upper = rebuilt.connections.find(c => c.connectionId === 'yaletown-upper-entry-stair');
+  const lowerEntry = rebuilt.connections.find(c => c.connectionId === 'yaletown-lower-entry-stair');
+  const platformStair = rebuilt.connections.find(c => c.connectionId === 'yaletown-platform-stair');
+  assert.equal(upper.riserCount, 28);
+  assert.equal(lowerEntry.riserCount, 29);
+  assert.equal(upper.riserCount + lowerEntry.riserCount, 57);
+  assert.equal(platformStair.riserCount, 41);
+  assert.equal(upper.endPointM[1], -4.65);
+  assert.equal(lowerEntry.endPointM[1], -9.4);
+  assert.equal(platformStair.startPointM[1], -16.2);
+  assert((upper.endPointM[0] - upper.startPointM[0]) * (lowerEntry.endPointM[0] - lowerEntry.startPointM[0]) < 0, 'photographed entry stairs reverse perpendicular to the platform across their shared landing');
+  assert(rebuilt.authoredInterior.verticalInference.status.includes('not surveyed'));
+  assert(rebuilt.authoredInterior.horizontalInference.status.includes('representative'));
+  const deltaY = -16.2 - original.platforms[0].floorHeightM;
+  const checkPoint = (after, before) => {
+    assert.equal(after[0], before[0]); assert.equal(after[2], before[2]);
+    assert(Math.abs(after[1] - before[1] - deltaY) < 1e-9);
+  };
+  for (const [i, platform] of rebuilt.platforms.entries()) {
+    const old = original.platforms[i];
+    checkPoint(platform.stopPosition.translationM, old.stopPosition.translationM);
+    assert(Math.abs(platform.railHeightM - old.railHeightM - deltaY) < 1e-9);
+    for (const [j, door] of platform.doorAlignmentPoints.entries()) {
+      const before = old.doorAlignmentPoints[j];
+      for (const key of ['carLocalSillPointM', 'consistLocalSillPointM', 'carPoseInConsist']) assert.deepEqual(door[key], before[key]);
+      for (const key of ['stationSillPointM', 'platformEdgePointM']) checkPoint(door[key], before[key]);
+      assert.equal(Math.abs(door.stationWaitingPointM[0]), 2.3, 'Yaletown waiting centres occupy the clear aisle beside the real stair shaft');
+      assert.equal(door.stationWaitingPointM[2], before.stationWaitingPointM[2]);
+      assert(Math.abs(door.stationWaitingPointM[1] - before.stationWaitingPointM[1] - deltaY) < 1e-9);
+      assert(platform.waitingRegions.some(region => {
+        const xs = region.polygonM.map(p => p[0]), zs = region.polygonM.map(p => p[2]), point = door.stationWaitingPointM;
+        return point[0] >= Math.min(...xs) && point[0] <= Math.max(...xs) && point[2] >= Math.min(...zs) && point[2] <= Math.max(...zs);
+      }), 'the new nominal origin remains inside an authored waiting region');
+    }
+    for (const [j, region] of platform.waitingRegions.entries()) for (const [n, point] of region.polygonM.entries()) checkPoint(point, old.waitingRegions[j].polygonM[n]);
+  }
+  for (const anchor of rebuilt.anchors) checkPoint(anchor.pointM, original.anchors.find(a => a.id === anchor.id).pointM);
+  for (const old of original.geometryParts.filter(p => ['rail', 'trackbed'].includes(p.role) || p.id.startsWith('tactile-'))) checkPoint(rebuilt.geometryParts.find(p => p.id === old.id).centerM, old.centerM);
+  for (const [i, exclusion] of rebuilt.trackExclusionVolumes.entries()) {
+    assert(Math.abs(exclusion.minY - original.trackExclusionVolumes[i].minY - deltaY) < 1e-9);
+    assert(Math.abs(exclusion.maxY - original.trackExclusionVolumes[i].maxY - deltaY) < 1e-9);
+    exclusion.footprintM.forEach((p, j) => checkPoint(p, original.trackExclusionVolumes[i].footprintM[j]));
+  }
+  for (const [i, bridge] of rebuilt.thresholdBridges.entries()) {
+    const old = original.thresholdBridges[i];
+    for (const pose of ['storedTransform', 'deployedTransform']) checkPoint(bridge[pose].translationM, old[pose].translationM);
+    bridge.deployedFloor.verticesM.forEach((p, j) => checkPoint(p, old.deployedFloor.verticesM[j]));
+    bridge.sequence.forEach((p, j) => checkPoint(p.translationM, old.sequence[j].translationM));
+  }
+  const again = rebuildYaletown(rebuilt);
+  assert.deepEqual(again.platforms, rebuilt.platforms, 'rebuilds cannot accumulate another depth shift');
+  assert.equal(again.geometryParts.length, rebuilt.geometryParts.length);
+  const o = owner(runtime);
+  try { for (const p of runtime.platforms) for (const door of o.boardingDoors(p.line, p.direction)) assert(o.isClearFoot(door.waiting)); }
+  finally { o.dispose(); }
+});
+
+test('Yaletown lift cabins have actual floor-supported entry and exit portals on every level', () => {
+  const s = data.find(s => s.id === 'yaletown-roundhouse'), o = owner(s);
+  try {
+    assert.equal(s.authoredInterior.elevatorLandings.length, 4);
+    for (const landing of s.authoredInterior.elevatorLandings) {
+      const outside = landing.pointM.map((v, i) => v + landing.outwardDirectionM[i] * 1.8);
+      let foot = o.floorAt(outside, landing.floorId);
+      assert(foot && o.isClearFoot(foot), `lift on ${landing.floorId} needs a supported public approach`);
+      foot = straight(o, foot, landing.pointM);
+      assert(o.isClearFoot(foot), 'lift cabin centre must support its passenger');
+      foot = straight(o, foot, outside);
+      assert(o.isClearFoot(foot));
+    }
+  } finally { o.dispose(); }
 });

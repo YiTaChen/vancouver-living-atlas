@@ -1,0 +1,33 @@
+✔ all actual articulated cars and the occupied eye remain inside the emitted tunnel on every underground direction (4324.424574ms)
+✔ all 24 actual station approaches retain clear articulated cabins, occupied eyes and overlapping rail buffers (7443.88934ms)
+✔ public route JSON exactly reproduces the retained GTFS snapshot and its declared provenance (5.113219ms)
+✔ all twelve directed adjacent edges use the correct source shape, platform stops and interval distances (2.168555ms)
+✔ GTFS curved alignments retain substantial geographic bends rather than direct station chords (139.583476ms)
+✔ runtime station headings follow the real track while preserving authored pedestrian and door identities (370.14436ms)
+✔ Main Street uses both GTFS platform anchors and authored interiors use their mapped primary doorway (36.451464ms)
+✔ actual authored platform endpoints remain exact and all sampled poses are finite, normalized and bounded (453.014999ms)
+✔ actual station-to-GTFS joins cannot snap the train orientation over a fraction of a metre (429.262935ms)
+✔ actual articulated GLB car frames retain strict outside terrain clearance and clear their real station cover (8241.002941ms)
+✔ station approaches stay straight and level until each articulated car clears the portal buffer (5.686577ms)
+✔ per-car physical arc sampling reuses poses and preserves every stationary car at both exact platform frames (1.420267ms)
+✔ actual emitted eight-metre tunnel mesh never breaks the underground terrain surface (33.57918ms)
+✔ invalid or impossible terrain fails without changing a fixed station or the source alignment (21.129634ms)
+✔ pose progress clamps invalid values to a stable finite endpoint and never mutates returned poses (21.124086ms)
+✔ the route loader forwards cancellation and loads the exact same-origin authored route resource (26.57717ms)
+✔ the route loader rejects unavailable, malformed or incomplete directed networks (9.007037ms)
+✔ path construction rejects nonfinite, non-unit or impossible stop poses before producing a moving train (56.826845ms)
+✔ the deterministic source generator rejects missing paths, duplicated services and nonadjacent replacements (6.089791ms)
+✔ actual Waterfront deck and daylight Stadium use bounded rendered track structure with unchanged stops (2143.239778ms)
+✔ missing or displaced real trackbed cannot be replaced by a nearby ceiling or a station-name exemption (79.759885ms)
+✔ a physically low rendered station roof still rejects the real train envelope (33.174648ms)
+✔ only the selected platform concrete guideway authorizes support and solid upper floors constrain its roof gap (6.572012ms)
+✔ outside every exact source structure the raw terrain requirement remains strict (14211.709678ms)
+✔ all twelve directed routes emit only tunnel vertices below the unchanged raw terrain (1968.608317ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20248.988689

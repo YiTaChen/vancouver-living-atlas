@@ -9,10 +9,21 @@ async function floorView(
   snapshot,
   floorId,
   label,
-  { targetFloor, targetPartPrefix, direction = [0, 0, 1] } = {},
+  {
+    targetFloor,
+    targetPartPrefix,
+    direction = [0, 0, 1],
+    offsetFromFloorCenter = [0, 0, 0],
+  } = {},
 ) {
   await page.evaluate(
-    ({ floorId, targetFloor, targetPartPrefix, direction }) => {
+    ({
+      floorId,
+      targetFloor,
+      targetPartPrefix,
+      direction,
+      offsetFromFloorCenter,
+    }) => {
       const travel = window.__atlas.skyTrainTravel,
         owner = travel.owner,
         floor = owner.geometryData.floors.find((f) => f.id === floorId);
@@ -22,7 +33,16 @@ async function floorView(
             (sum, p) => sum.map((v, a) => v + p[a] / vertices.length),
             [0, 0, 0],
           ),
-        desired = center(floor.vertices),
+        // Bounds stay stable after real stairwell carving and the runtime's
+        // primary-door rebase. Offsets are reference-informed view positions,
+        // then verified against the real supported capsule before placement.
+        desired = [0, 1, 2].map(
+          (axis) =>
+            (Math.min(...floor.vertices.map((p) => p[axis])) +
+              Math.max(...floor.vertices.map((p) => p[axis]))) /
+              2 +
+            offsetFromFloorCenter[axis],
+        ),
         candidates = [desired];
       for (let i = 0; i < floor.indices.length; i += 3) {
         const triangle = floor.indices
@@ -80,7 +100,13 @@ async function floorView(
       travel.distanceView = 0;
       travel.updateCamera();
     },
-    { floorId, targetFloor, targetPartPrefix, direction },
+    {
+      floorId,
+      targetFloor,
+      targetPartPrefix,
+      direction,
+      offsetFromFloorCenter,
+    },
   );
   await snapshot(`${label}-firstperson`);
   await page.evaluate(() => {
@@ -370,16 +396,27 @@ export async function captureSoutheastStation(
       );
     await floorView(page, snapshot, 'yaletown-unpaid-concourse', '2026-gates', {
       targetPartPrefix: 'yaletown-2026-fare-gate-',
+      offsetFromFloorCenter: [1.45, 0, 2.1],
     });
     await floorView(
       page,
       snapshot,
-      'yaletown-paid-rear-landing',
+      'yaletown-entry-turn-landing',
+      'upper-entry-switchback',
+      {
+        direction: [-1, 0, 0],
+      },
+    );
+    await floorView(
+      page,
+      snapshot,
+      'yaletown-paid-east-aisle',
       'long-lower-concourse',
-      { targetFloor: 'yaletown-paid-north-landing' },
+      { direction: [0, 0, -1], offsetFromFloorCenter: [0, 0, 12] },
     );
     await floorView(page, snapshot, 'yaletown-canada', 'island-platform', {
-      direction: [0, 0, 1],
+      direction: [0, 0, -1],
+      offsetFromFloorCenter: [2.3, 0, 18],
     });
     for (const id of [
       'yaletown-upper-entry-stair',

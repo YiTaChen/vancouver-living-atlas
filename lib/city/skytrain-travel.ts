@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import {
+  stationRailEnvelope,
+  type StationRailEnvelope,
+} from './skytrain-station-rail-envelope';
 import type { CityEngine } from './engine';
 import {
   SkyTrainJourney,
@@ -669,6 +673,15 @@ export class SkyTrainTravel {
           pose(a),
           pose(b),
           (x, z) => this.city.elevation(x, z),
+          [a, b]
+            .map((data) =>
+              stationRailEnvelope(data, segment.lineId, direction, (x, z) =>
+                this.city.elevation(x, z),
+              ),
+            )
+            .filter(
+              (envelope): envelope is StationRailEnvelope => envelope !== null,
+            ),
         ),
       );
     }
@@ -1216,16 +1229,67 @@ export class SkyTrainTravel {
       run = [];
     };
     const count = Math.ceil(path.length / 8);
+    let previousStructure: boolean | null = null;
+    const stationBoundary = (
+      from: number,
+      to: number,
+      fromStructure: boolean,
+    ) => {
+      let a = from,
+        b = to;
+      for (let step = 0; step < 20; step++) {
+        const mid = (a + b) / 2,
+          pose = path.sample(mid),
+          covered = path.hasStationRailStructure(
+            pose.position,
+            pose.quaternion,
+          );
+        if (covered === fromStructure) a = mid;
+        else b = mid;
+      }
+      // Start on the outside of the real source structure. Sharing this edge
+      // avoids an unlined eight-metre sampling gap without inserting a larger
+      // circular tunnel into the maintained station roof.
+      return path.sample(fromStructure ? b : a).position.clone();
+    };
     for (let i = 0; i <= count; i++) {
       const p = path.curve.getPointAt(i / count),
         distanceAlong = (i / count) * path.length,
-        underground = p.y + 3.6 < this.city.elevation(p.x, p.z);
+        underground = p.y + 3.6 < this.city.elevation(p.x, p.z),
+        stationStructure = path.hasStationRailStructure(
+          p,
+          path.sample(i / count).quaternion,
+        );
+      if (
+        i > 0 &&
+        previousStructure !== stationStructure &&
+        (stationStructure || previousStructure)
+      ) {
+        const boundary = stationBoundary(
+          (i - 1) / count,
+          i / count,
+          Boolean(previousStructure),
+        );
+        if (
+          boundary.y + 3.6 < this.city.elevation(boundary.x, boundary.z) &&
+          distanceAlong > 32 &&
+          path.length - distanceAlong > 32
+        )
+          run.push(boundary.add(new THREE.Vector3(0, 1.4, 0)));
+        if (stationStructure) flush();
+      }
       // Canada platforms plus their authored rail buffers cover 47 m. Start
       // within 40 m at this sampling interval, leaving an overlap at both
       // portals instead of exposing a narrow strip of the outside world.
-      if (underground && distanceAlong > 32 && path.length - distanceAlong > 32)
+      if (
+        underground &&
+        !stationStructure &&
+        distanceAlong > 32 &&
+        path.length - distanceAlong > 32
+      )
         run.push(p.clone().add(new THREE.Vector3(0, 1.4, 0)));
       else flush();
+      previousStructure = stationStructure;
     }
     flush();
     this.tube = group;

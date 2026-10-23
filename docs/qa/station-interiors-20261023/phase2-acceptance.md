@@ -24,19 +24,17 @@ and same-height platform walking. The corrected street-approach fixture
 constructs the production public interiors and uses their actual ground height;
 it does not weaken building collision or the station's step-height limits.
 
-The earlier complete repository run reported **2,376 tests: 2,374 pass, one fail,
-one skipped** (`/tmp/station-phase2-index-all-tests.log`). Its sole failure was
-the old Yaletown template receiving new lift enclosure geometry implicitly. Lift
-enclosure authoring is now explicitly enabled by completed templates, preserving
-legacy template behavior. The complete generic authored-circulation file passes
-**12/12** after that fix; the focused legacy Yaletown and new Burrard/Granville
-lift checks also pass **3/3**
-(`/tmp/station-phase2-index-fixed-lift-review.log`). A subsequent complete run exposed one separate legacy-construction issue:
-its unrendered, undulating height probe must not receive priority over its real
-vestibule. The priority now applies to rendered authored interiors, with the
-six legacy-construction and six authored-apron cases passing together (12/12).
-The full-suite and CI runs at the final commit provide the remaining gate;
-targeted results above do not claim that a failed earlier run was wholly green.
+The complete repository gate is **green** on reviewed head
+`ce4e38feacb95103a4d46190f2b24cd7514d8a32`:
+[Validate city run 117](https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/39948647790).
+It includes TypeScript, the complete `npm test` suite, architectural GLB contracts
+and the verified Firebase production build. [PR 41](https://github.com/YiTaChen/vancouver-living-atlas/pull/41)
+was merged as `78f897f852d1486f34fa0782de79b01552aa8efe` after this gate passed.
+
+Legacy compatibility is explicit: templates opt into completed elevator cabins,
+and unrendered construction aprons retain nearest-height vestibule selection.
+Those corrections keep unfinished legacy displays separate from the rendered
+physical floors used by the reconstructed stations.
 
 ## Provenance and geometry review
 

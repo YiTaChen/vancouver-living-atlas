@@ -1,0 +1,2577 @@
+{
+  "stationId": "stadium-chinatown",
+  "url": "http://127.0.0.1:3204/?inspect",
+  "capturedAt": "2026-10-23T12:00:54.980Z",
+  "placements": "Inspect-only supported-floor placements; separate route tests verify circulation.",
+  "captures": [
+    {
+      "label": "entrance-thirdperson",
+      "file": "game-stadium-chinatown-entrance-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          5.3179682879545e-14,
+          0.06292772069928121,
+          -2.5749999999999162
+        ],
+        "surfaceId": "stadium-chinatown-beatty-upper-street-apron",
+        "layer": 16,
+        "yaw": 0
+      },
+      "camera": [
+        1294.7527074146883,
+        19.990582022559185,
+        678.234334456881
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1297.331442605765,
+          17.10989106542478,
+          680.7413657664005
+        ]
+      },
+      "render": {
+        "frame": 285,
+        "calls": 326,
+        "triangles": 1266902,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-beatty-upper-outside-thirdperson",
+      "file": "game-stadium-chinatown-entrance-beatty-upper-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        1299.5081310474582,
+        20.17738047716959,
+        682.8575295715395
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1296.9550149950326,
+          17.225113694112448,
+          680.3754050391655
+        ]
+      },
+      "render": {
+        "frame": 315,
+        "calls": 394,
+        "triangles": 3787239,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-beatty-upper-inside-thirdperson",
+      "file": "game-stadium-chinatown-entrance-beatty-upper-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          -1.939004512507836e-13,
+          0.06292772069930484,
+          -2.575
+        ],
+        "surfaceId": "stadium-chinatown-beatty-upper-street-apron",
+        "layer": 16,
+        "yaw": 0
+      },
+      "camera": [
+        1294.7783265533392,
+        20.06215784848194,
+        678.2592412340264
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1297.3314426057648,
+          17.1098910654248,
+          680.7413657664006
+        ]
+      },
+      "render": {
+        "frame": 372,
+        "calls": 327,
+        "triangles": 1282262,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-pacific-lower-outside-thirdperson",
+      "file": "game-stadium-chinatown-entrance-pacific-lower-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        1416.3697420502374,
+        7.252410810682249,
+        793.0801478313634
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1418.922858102663,
+          4.300144027625107,
+          795.5622723637376
+        ]
+      },
+      "render": {
+        "frame": 456,
+        "calls": 125,
+        "triangles": 980908,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-pacific-lower-inside-thirdperson",
+      "file": "game-stadium-chinatown-entrance-pacific-lower-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.430330110954664,
+          -12.762452296729561,
+          164.11963524037924
+        ],
+        "surfaceId": "stadium-chinatown-pacific-lower-street-apron",
+        "layer": 18,
+        "yaw": 0
+      },
+      "camera": [
+        1421.0995465443564,
+        7.236777831053078,
+        797.6784361688767
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1418.5464304919308,
+          4.284511047995936,
+          795.1963116365025
+        ]
+      },
+      "render": {
+        "frame": 510,
+        "calls": 741,
+        "triangles": 4132473,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-keefer-place-outside-thirdperson",
+      "file": "game-stadium-chinatown-entrance-keefer-place-outside-thirdperson.png",
+      "snapshot": {
+        "phase": "idle",
+        "stationId": null,
+        "lineId": null,
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": null,
+      "camera": [
+        1322.428230257383,
+        18.91234027377809,
+        677.9467910691184
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1319.7841896019272,
+          15.960073490720948,
+          675.5617558946054
+        ]
+      },
+      "render": {
+        "frame": 588,
+        "calls": 399,
+        "triangles": 3853337,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "entrance-keefer-place-inside-thirdperson",
+      "file": "game-stadium-chinatown-entrance-keefer-place-inside-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          19.384507107382912,
+          -1.296915998907631,
+          10.43782437645517
+        ],
+        "surfaceId": "stadium-chinatown-keefer-place-street-apron",
+        "layer": 20,
+        "yaw": 0
+      },
+      "camera": [
+        1317.5299823446308,
+        18.70231412887501,
+        673.5283667376718
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1320.1740230000862,
+          15.750047345817867,
+          675.9134019121851
+        ]
+      },
+      "render": {
+        "frame": 681,
+        "calls": 319,
+        "triangles": 1236606,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-call-firstperson",
+      "file": "game-stadium-chinatown-elevator-call-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          3.9886923699999492,
+          0,
+          19.94999999999998
+        ],
+        "surfaceId": "stadium-lift-upper",
+        "layer": 6,
+        "yaw": 0
+      },
+      "camera": [
+        1316.2623696384983,
+        18.696963344725496,
+        693.5829113705644
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1316.2623696384983,
+          17.046963344725498,
+          693.5829113705644
+        ]
+      },
+      "render": {
+        "frame": 819,
+        "calls": 182,
+        "triangles": 1996461,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-lowest-landing-firstperson",
+      "file": "game-stadium-chinatown-elevator-lowest-landing-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          3.98869237,
+          -8,
+          20.400000000000002
+        ],
+        "surfaceId": "stadium-lift-lower",
+        "layer": 10,
+        "yaw": 2.0898315757650144e-15
+      },
+      "camera": [
+        1316.5850218762687,
+        10.696963344725498,
+        693.8965919939087
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1316.5850218762687,
+          9.046963344725498,
+          693.8965919939087
+        ]
+      },
+      "render": {
+        "frame": 942,
+        "calls": 328,
+        "triangles": 1271785,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "elevator-returned-to-entry-level-firstperson",
+      "file": "game-stadium-chinatown-elevator-returned-to-entry-level-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          3.98869237,
+          0,
+          20.400000000000002
+        ],
+        "surfaceId": "stadium-lift-upper",
+        "layer": 6,
+        "yaw": 0
+      },
+      "camera": [
+        1316.5850218762687,
+        18.696963344725496,
+        693.8965919939087
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1316.5850218762687,
+          17.046963344725498,
+          693.8965919939087
+        ]
+      },
+      "render": {
+        "frame": 1029,
+        "calls": 182,
+        "triangles": 1996013,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "ticket-concourse-firstperson",
+      "file": "game-stadium-chinatown-ticket-concourse-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2,
+          -4.5,
+          26.485
+        ],
+        "surfaceId": "stadium-main-concourse",
+        "layer": 3,
+        "yaw": 0
+      },
+      "camera": [
+        1319.5617432197607,
+        14.196963344725498,
+        699.5641534082822
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1319.5617432197607,
+          12.546963344725498,
+          699.5641534082822
+        ]
+      },
+      "render": {
+        "frame": 1104,
+        "calls": 357,
+        "triangles": 1293210,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "ticket-concourse-thirdperson",
+      "file": "game-stadium-chinatown-ticket-concourse-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2,
+          -4.5,
+          26.485
+        ],
+        "surfaceId": "stadium-main-concourse",
+        "layer": 3,
+        "yaw": 0
+      },
+      "camera": [
+        1315.6792357956656,
+        18.308468854873812,
+        696.0321153547907
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1319.5617432197607,
+          12.546963344725498,
+          699.5641534082822
+        ]
+      },
+      "render": {
+        "frame": 1203,
+        "calls": 142,
+        "triangles": 1104735,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "daylight-island-firstperson",
+      "file": "game-stadium-chinatown-daylight-island-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.77,
+          -8,
+          96
+        ],
+        "surfaceId": "stadium-expo",
+        "layer": 1,
+        "yaw": 0
+      },
+      "camera": [
+        1369.9410863055123,
+        10.696963344725498,
+        747.4687452053964
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1369.9410863055123,
+          9.046963344725498,
+          747.4687452053964
+        ]
+      },
+      "render": {
+        "frame": 1302,
+        "calls": 325,
+        "triangles": 1117274,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "daylight-island-thirdperson",
+      "file": "game-stadium-chinatown-daylight-island-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.77,
+          -8,
+          96
+        ],
+        "surfaceId": "stadium-expo",
+        "layer": 1,
+        "yaw": 0
+      },
+      "camera": [
+        1366.1777214709373,
+        14.808468854873812,
+        743.810023867094
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1369.9410863055123,
+          9.046963344725498,
+          747.4687452053964
+        ]
+      },
+      "render": {
+        "frame": 1419,
+        "calls": 144,
+        "triangles": 968059,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "west-spare-platform-fence-firstperson",
+      "file": "game-stadium-chinatown-west-spare-platform-fence-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.77,
+          -8,
+          96
+        ],
+        "surfaceId": "stadium-expo",
+        "layer": 1,
+        "yaw": 0
+      },
+      "camera": [
+        1369.9410863055123,
+        10.696963344725498,
+        747.4687452053964
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1369.9410863055123,
+          9.046963344725498,
+          747.4687452053964
+        ]
+      },
+      "render": {
+        "frame": 1503,
+        "calls": 390,
+        "triangles": 1984546,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "west-spare-platform-fence-thirdperson",
+      "file": "game-stadium-chinatown-west-spare-platform-fence-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "platform",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.77,
+          -8,
+          96
+        ],
+        "surfaceId": "stadium-expo",
+        "layer": 1,
+        "yaw": 0
+      },
+      "camera": [
+        1374.0029673904735,
+        14.808468854873812,
+        744.1445492483114
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1369.9410863055123,
+          9.046963344725498,
+          747.4687452053964
+        ]
+      },
+      "render": {
+        "frame": 1632,
+        "calls": 140,
+        "triangles": 1132183,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "keefer-raised-passage-firstperson",
+      "file": "game-stadium-chinatown-keefer-raised-passage-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          10.17,
+          -4.5,
+          29.810000000000002
+        ],
+        "surfaceId": "stadium-keefer-entry",
+        "layer": 5,
+        "yaw": 0
+      },
+      "camera": [
+        1327.6408307382283,
+        14.196963344725498,
+        696.0239740528056
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1327.6408307382283,
+          12.546963344725498,
+          696.0239740528056
+        ]
+      },
+      "render": {
+        "frame": 1707,
+        "calls": 404,
+        "triangles": 2195024,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "keefer-raised-passage-thirdperson",
+      "file": "game-stadium-chinatown-keefer-raised-passage-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          10.17,
+          -4.5,
+          29.810000000000002
+        ],
+        "surfaceId": "stadium-keefer-entry",
+        "layer": 5,
+        "yaw": 0
+      },
+      "camera": [
+        1332.448272586607,
+        18.308468854873812,
+        693.9173987315974
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1327.6408307382283,
+          12.546963344725498,
+          696.0239740528056
+        ]
+      },
+      "render": {
+        "frame": 1803,
+        "calls": 145,
+        "triangles": 1227891,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-beatty-main-stair-firstperson",
+      "file": "game-stadium-chinatown-stadium-beatty-main-stair-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.9550000000000001,
+          -2.1666666666666665,
+          14.02
+        ],
+        "surfaceId": "stadium-beatty-main-stair:step:13",
+        "layer": 44,
+        "yaw": 0
+      },
+      "camera": [
+        1309.8958401193083,
+        16.530296678058832,
+        691.6244703382432
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1309.8958401193083,
+          14.880296678058832,
+          691.6244703382432
+        ]
+      },
+      "render": {
+        "frame": 1890,
+        "calls": 366,
+        "triangles": 1330916,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-beatty-main-stair-overhead-thirdperson",
+      "file": "game-stadium-chinatown-stadium-beatty-main-stair-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          0.9550000000000001,
+          -2.1666666666666665,
+          14.02
+        ],
+        "surfaceId": "stadium-beatty-main-stair:step:13",
+        "layer": 44,
+        "yaw": 0
+      },
+      "camera": [
+        1306.9782577615024,
+        23.039425342135605,
+        689.1588946632183
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1309.8958401193083,
+          14.880296678058832,
+          691.6244703382432
+        ]
+      },
+      "render": {
+        "frame": 2052,
+        "calls": 100,
+        "triangles": 966582,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-concourse-island-stair-firstperson",
+      "file": "game-stadium-chinatown-stadium-concourse-island-stair-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.3,
+          -6.166666666666666,
+          36.64999999999999
+        ],
+        "surfaceId": "stadium-concourse-island-stair:step:10",
+        "layer": 95,
+        "yaw": 0
+      },
+      "camera": [
+        1327.0592191840717,
+        12.530296678058832,
+        706.4347486637589
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1327.0592191840717,
+          10.880296678058832,
+          706.4347486637589
+        ]
+      },
+      "render": {
+        "frame": 2205,
+        "calls": 341,
+        "triangles": 1242047,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-concourse-island-stair-overhead-thirdperson",
+      "file": "game-stadium-chinatown-stadium-concourse-island-stair-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.3,
+          -6.166666666666666,
+          36.64999999999999
+        ],
+        "surfaceId": "stadium-concourse-island-stair:step:10",
+        "layer": 95,
+        "yaw": 0
+      },
+      "camera": [
+        1324.228446525195,
+        19.039425342135605,
+        703.8699725765321
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1327.0592191840717,
+          10.880296678058832,
+          706.4347486637589
+        ]
+      },
+      "render": {
+        "frame": 2271,
+        "calls": 111,
+        "triangles": 916843,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-expo-east-upper-stair-firstperson",
+      "file": "game-stadium-chinatown-stadium-expo-east-upper-stair-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.685,
+          -9.120000000000001,
+          136.65
+        ],
+        "surfaceId": "stadium-expo-east-upper-stair:step:7",
+        "layer": 134,
+        "yaw": 0
+      },
+      "camera": [
+        1399.0280876663671,
+        9.576963344725497,
+        775.8655069368622
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1399.0280876663671,
+          7.926963344725497,
+          775.8655069368622
+        ]
+      },
+      "render": {
+        "frame": 2352,
+        "calls": 273,
+        "triangles": 1044054,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-expo-east-upper-stair-overhead-thirdperson",
+      "file": "game-stadium-chinatown-stadium-expo-east-upper-stair-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.685,
+          -9.120000000000001,
+          136.65
+        ],
+        "surfaceId": "stadium-expo-east-upper-stair:step:7",
+        "layer": 134,
+        "yaw": 0
+      },
+      "camera": [
+        1396.3519609259627,
+        16.086092008802268,
+        773.1397600863372
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1399.0280876663671,
+          7.926963344725497,
+          775.8655069368622
+        ]
+      },
+      "render": {
+        "frame": 2430,
+        "calls": 81,
+        "triangles": 823691,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-expo-east-lower-stair-firstperson",
+      "file": "game-stadium-chinatown-stadium-expo-east-lower-stair-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.515,
+          -11.543333333333333,
+          146.55
+        ],
+        "surfaceId": "stadium-expo-east-lower-stair:step:7",
+        "layer": 149,
+        "yaw": 0
+      },
+      "camera": [
+        1406.007935328498,
+        7.153630011392165,
+        782.8883714958184
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1406.007935328498,
+          5.503630011392165,
+          782.8883714958184
+        ]
+      },
+      "render": {
+        "frame": 2511,
+        "calls": 273,
+        "triangles": 1043606,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-expo-east-lower-stair-overhead-thirdperson",
+      "file": "game-stadium-chinatown-stadium-expo-east-lower-stair-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          2.515,
+          -11.543333333333333,
+          146.55
+        ],
+        "surfaceId": "stadium-expo-east-lower-stair:step:7",
+        "layer": 149,
+        "yaw": 0
+      },
+      "camera": [
+        1403.339627246635,
+        13.662758675468936,
+        780.1549702804608
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1406.007935328498,
+          5.503630011392165,
+          782.8883714958184
+        ]
+      },
+      "render": {
+        "frame": 2592,
+        "calls": 81,
+        "triangles": 837363,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-chinatown-keefer-place-mapped-approach-stair-firstperson",
+      "file": "game-stadium-chinatown-stadium-chinatown-keefer-place-mapped-approach-stair-firstperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          19.63647734016259,
+          -3.4318175656462504,
+          17.17940658116779
+        ],
+        "surfaceId": "stadium-chinatown-keefer-place-mapped-approach-stair:step:10",
+        "layer": 167,
+        "yaw": 0
+      },
+      "camera": [
+        1325.1834113648565,
+        15.265145779079248,
+        680.4320795762823
+      ],
+      "cutaway": false,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "first-person",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1325.1834113648565,
+          13.615145779079247,
+          680.4320795762823
+        ]
+      },
+      "render": {
+        "frame": 2727,
+        "calls": 351,
+        "triangles": 1286778,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "stadium-chinatown-keefer-place-mapped-approach-stair-overhead-thirdperson",
+      "file": "game-stadium-chinatown-stadium-chinatown-keefer-place-mapped-approach-stair-overhead-thirdperson.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          19.63647734016259,
+          -3.4318175656462504,
+          17.17940658116779
+        ],
+        "surfaceId": "stadium-chinatown-keefer-place-mapped-approach-stair:step:10",
+        "layer": 167,
+        "yaw": 0
+      },
+      "camera": [
+        1322.3470113365756,
+        21.77427444315602,
+        677.8735282081401
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "walk",
+      "cameraView": "third-person",
+      "avatar": {
+        "visible": true,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1325.1834113648565,
+          13.615145779079247,
+          680.4320795762823
+        ]
+      },
+      "render": {
+        "frame": 2901,
+        "calls": 104,
+        "triangles": 966681,
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "label": "overview-cutaway",
+      "file": "game-stadium-chinatown-overview-cutaway.png",
+      "snapshot": {
+        "phase": "station",
+        "stationId": "stadium-chinatown",
+        "lineId": "expo",
+        "plannedLineId": null,
+        "destinationId": "main-street-science-world",
+        "nextStationId": null,
+        "level": "concourse",
+        "doorsOpen": false,
+        "canBoard": false,
+        "canAlight": false,
+        "canExit": false,
+        "canChangeLevel": false,
+        "speedMps": 0,
+        "travelProgress": 0,
+        "error": null,
+        "busy": false,
+        "seated": false,
+        "canWalkCabin": false,
+        "availableLines": [
+          "expo"
+        ],
+        "hint": "approach-door",
+        "atStop": null
+      },
+      "foot": {
+        "position": [
+          19.63647734016259,
+          -3.4318175656462504,
+          17.17940658116779
+        ],
+        "surfaceId": "stadium-chinatown-keefer-place-mapped-approach-stair:step:10",
+        "layer": 167,
+        "yaw": 0
+      },
+      "camera": [
+        1505.1834113648563,
+        245.22264280283244,
+        920.4320795762821
+      ],
+      "cutaway": true,
+      "authoredSource": "stadium-mapped-circulation-v4",
+      "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+      "authoredGeometry": "stadium-mapped-circulation-v4",
+      "openWorld": true,
+      "geometryParts": 1132,
+      "mode": "orbit",
+      "cameraView": "orbit",
+      "avatar": {
+        "visible": false,
+        "assetState": "ready",
+        "assetVariant": "candidate-1024",
+        "meshes": 4,
+        "skinnedMeshes": 1,
+        "position": [
+          1325.1834113648565,
+          13.615145779079247,
+          680.4320795762823
+        ]
+      },
+      "render": {
+        "frame": 3057,
+        "calls": 414,
+        "triangles": 2523430,
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "errors": [],
+  "responses": [],
+  "warnings": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "runtimePacket": {
+    "url": "http://127.0.0.1:3204/models/skytrain-stations/stadium-chinatown.json",
+    "bytes": 303476,
+    "sha256": "afefe5161dec3bdd532607a71d4987253e3b52cc3b0d86bb7524e45842cd5d51",
+    "sourceSha256": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+    "verifiedAfterCapture": "afefe5161dec3bdd532607a71d4987253e3b52cc3b0d86bb7524e45842cd5d51"
+  },
+  "startup": [
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "0"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "27"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "48"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "64"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "75"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "82"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "88"
+    },
+    {
+      "ready": false,
+      "engine": false,
+      "progress": "95"
+    },
+    {
+      "ready": false,
+      "engine": true
+    },
+    {
+      "ready": false,
+      "engine": true
+    }
+  ],
+  "initial": {
+    "ready": true,
+    "stationCount": 7,
+    "fleetCount": 51,
+    "worldPaths": 64,
+    "entries": [
+      {
+        "id": "beatty-upper",
+        "stationId": "stadium-chinatown",
+        "label": "Beatty Street · upper entrance",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "stadium-chinatown-beatty-upper-street-apron",
+        "threshold": [
+          1299.1777304107848,
+          16.642846743766416,
+          682.5363159999822
+        ],
+        "inward": [
+          1298.7475274270907,
+          17.046963344725498,
+          682.1180751688564
+        ],
+        "outward": [
+          1296.9550149950328,
+          17.205113694112427,
+          680.3754050391653
+        ],
+        "localDirection": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": "pacific-lower",
+        "stationId": "stadium-chinatown",
+        "label": "Expo Boulevard · lower entrance",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf",
+        "accuracy": "Official street anchor and preserved reference-authored interior; secondary attachment extents are representative, not a survey.",
+        "surfaceId": "stadium-chinatown-pacific-lower-street-apron",
+        "threshold": [
+          1416.6642924382695,
+          4.306346149850084,
+          793.3665080003266
+        ],
+        "inward": [
+          1415.875586968164,
+          4.320663679892172,
+          792.5997331432625
+        ],
+        "outward": [
+          1418.8870078540215,
+          4.280559934327096,
+          795.5274189611434
+        ],
+        "localDirection": [
+          0,
+          0,
+          -1
+        ]
+      },
+      {
+        "id": "keefer-place",
+        "stationId": "stadium-chinatown",
+        "label": "Keefer Place · raised concourse entrance via external steps",
+        "source": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf",
+        "accuracy": "Mapped external stair and raised pedestrian approach; deck elevations and widths remain representative, not a survey. Street threshold is the public stairhead, not terrain below the station door.",
+        "surfaceId": "stadium-chinatown-keefer-place-street-apron",
+        "threshold": [
+          1322.1231899908826,
+          14.926612420692631,
+          677.6716320000833
+        ],
+        "inward": [
+          1322.1974439714843,
+          14.893320746286607,
+          677.738612193908
+        ],
+        "outward": [
+          1319.8213165922282,
+          15.929487915075736,
+          675.5952459915177
+        ],
+        "localDirection": [
+          0.03734945549163632,
+          0,
+          0.999302265670642
+        ]
+      }
+    ],
+    "sourceRevision": "stadium-mapped-circulation-v4",
+    "geometryRevision": "stadium-mapped-circulation-v4",
+    "sourceFloors": 15,
+    "geometryFloors": 30,
+    "entryCandidate": null,
+    "entryDiagnostics": {
+      "walkingHeight": 17.225113694112427,
+      "floorAtInward": {
+        "position": [
+          -9.486855745421963e-14,
+          -1.4109886047059236e-15,
+          -0.6000000000000185
+        ],
+        "surfaceId": "stadium-chinatown-beatty-upper-street-apron",
+        "layer": 16,
+        "yaw": 0
+      },
+      "clearAtInward": true,
+      "localStreetFoot": [
+        4.4297898682543746e-14,
+        0.17815034938692875,
+        -3.0999999999999814
+      ]
+    },
+    "error": null
+  },
+  "enteredByStreet": true,
+  "entryTransitions": [
+    {
+      "entryId": "beatty-upper",
+      "left": true,
+      "walked": 2.2500000000000004,
+      "maxStep": 0.04534410889886774,
+      "outside": [
+        1296.9550149950326,
+        17.20511369411243,
+        680.3754050391655
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          1296.9550149950326,
+          17.20511369411243,
+          680.3754050391655
+        ],
+        "position": [
+          1297.3314426057648,
+          17.1098910654248,
+          680.7413657664006
+        ],
+        "walkingHeight": 17.129891065424815,
+        "stationFoot": {
+          "position": [
+            -1.939004512507836e-13,
+            0.06292772069930484,
+            -2.575
+          ],
+          "surfaceId": "stadium-chinatown-beatty-upper-street-apron",
+          "layer": 16,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    },
+    {
+      "entryId": "pacific-lower",
+      "left": true,
+      "walked": 4.000000000000455,
+      "maxStep": 0.0032539841004766146,
+      "outside": [
+        1418.922858102663,
+        4.280144027625106,
+        795.5622723637376
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          1418.922858102663,
+          4.280144027625106,
+          795.5622723637376
+        ],
+        "position": [
+          1418.5464304919308,
+          4.284511047995936,
+          795.1963116365025
+        ],
+        "walkingHeight": 4.304511047995936,
+        "stationFoot": {
+          "position": [
+            2.430330110954664,
+            -12.762452296729561,
+            164.11963524037924
+          ],
+          "surfaceId": "stadium-chinatown-pacific-lower-street-apron",
+          "layer": 18,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    },
+    {
+      "entryId": "keefer-place",
+      "left": true,
+      "walked": 3.000000000000005,
+      "maxStep": 0.08322918601505558,
+      "outside": [
+        1319.7841896019272,
+        15.908522450469627,
+        675.5617558946054
+      ],
+      "reentry": {
+        "entered": true,
+        "steps": 2,
+        "start": [
+          1319.7841896019272,
+          15.908522450469627,
+          675.5617558946054
+        ],
+        "position": [
+          1320.1740230000862,
+          15.750047345817867,
+          675.9134019121851
+        ],
+        "walkingHeight": 15.820518376592796,
+        "stationFoot": {
+          "position": [
+            19.384507107382912,
+            -1.296915998907631,
+            10.43782437645517
+          ],
+          "surfaceId": "stadium-chinatown-keefer-place-street-apron",
+          "layer": 20,
+          "yaw": 0
+        }
+      },
+      "entered": true
+    }
+  ],
+  "liftTrips": [
+    {
+      "core": "core-1",
+      "id": "stadium-main-lift-street-concourse",
+      "candidateId": "skytrain:elevator:stadium-chinatown:stadium-main-lift-street-concourse:forward",
+      "action": "elevatorDown",
+      "from": [
+        3.9886923699999492,
+        0,
+        19.94999999999998
+      ],
+      "destination": [
+        3.98869237,
+        -4.5,
+        20.400000000000002
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:stadium-chinatown:stadium-main-lift-street-concourse:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          1316.8548774825933,
+          18.196963344725496,
+          692.9734571436646
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        3.98869237,
+        -4.5,
+        20.400000000000002
+      ],
+      "surfaceId": "stadium-lift-mid",
+      "direction": "eastbound"
+    },
+    {
+      "core": "core-1",
+      "id": "stadium-main-lift-concourse-platform",
+      "candidateId": "skytrain:elevator:stadium-chinatown:stadium-main-lift-concourse-platform:forward",
+      "action": "elevatorDown",
+      "from": [
+        4.438692369999954,
+        -4.5,
+        20.400000000000006
+      ],
+      "destination": [
+        3.98869237,
+        -8,
+        20.400000000000002
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:stadium-chinatown:stadium-main-lift-concourse-platform:forward",
+        "kind": "scene",
+        "action": "elevatorDown",
+        "anchor": [
+          1317.5081567265129,
+          13.696963344725498,
+          694.1664476002333
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        3.98869237,
+        -8,
+        20.400000000000002
+      ],
+      "surfaceId": "stadium-lift-lower",
+      "direction": "eastbound"
+    },
+    {
+      "core": "core-1",
+      "id": "stadium-main-lift-concourse-platform",
+      "candidateId": "skytrain:elevator:stadium-chinatown:stadium-main-lift-concourse-platform:return",
+      "action": "elevatorUp",
+      "from": [
+        3.5386923700000077,
+        -8,
+        20.400000000000063
+      ],
+      "destination": [
+        3.98869237,
+        -4.5,
+        20.400000000000002
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:stadium-chinatown:stadium-main-lift-concourse-platform:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          1316.8807954798242,
+          10.196963344725498,
+          694.8117520757742
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        3.98869237,
+        -4.5,
+        20.400000000000002
+      ],
+      "surfaceId": "stadium-lift-mid",
+      "direction": "eastbound"
+    },
+    {
+      "core": "core-1",
+      "id": "stadium-main-lift-street-concourse",
+      "candidateId": "skytrain:elevator:stadium-chinatown:stadium-main-lift-street-concourse:return",
+      "action": "elevatorUp",
+      "from": [
+        3.5386923700000077,
+        -4.5,
+        20.400000000000063
+      ],
+      "destination": [
+        3.98869237,
+        0,
+        20.400000000000002
+      ],
+      "prompt": {
+        "id": "skytrain:elevator:stadium-chinatown:stadium-main-lift-street-concourse:return",
+        "kind": "scene",
+        "action": "elevatorUp",
+        "anchor": [
+          1316.8807954798242,
+          13.696963344725498,
+          694.8117520757742
+        ],
+        "distance": 0
+      },
+      "arrived": true,
+      "to": [
+        3.98869237,
+        0,
+        20.400000000000002
+      ],
+      "surfaceId": "stadium-lift-upper",
+      "direction": "eastbound"
+    }
+  ],
+  "liftCores": [
+    {
+      "id": "core-1",
+      "initial": {
+        "surfaceId": "stadium-lift-upper",
+        "position": [
+          3.98869237,
+          0,
+          20.400000000000002
+        ]
+      },
+      "trips": [
+        {
+          "id": "stadium-main-lift-street-concourse",
+          "reverse": false
+        },
+        {
+          "id": "stadium-main-lift-concourse-platform",
+          "reverse": false
+        },
+        {
+          "id": "stadium-main-lift-concourse-platform",
+          "reverse": true
+        },
+        {
+          "id": "stadium-main-lift-street-concourse",
+          "reverse": true
+        }
+      ],
+      "lowestY": -8,
+      "connectionIds": [
+        "stadium-main-lift-street-concourse",
+        "stadium-main-lift-concourse-platform"
+      ]
+    }
+  ],
+  "keeferPassageReturn": {
+    "entryId": "keefer-place",
+    "reachedConcourse": true,
+    "returned": true,
+    "frames": 1432,
+    "maxStep": 0.12115916183953379
+  },
+  "final": {
+    "snapshot": {
+      "phase": "station",
+      "stationId": "stadium-chinatown",
+      "lineId": "expo",
+      "plannedLineId": null,
+      "destinationId": "main-street-science-world",
+      "nextStationId": null,
+      "level": "concourse",
+      "doorsOpen": false,
+      "canBoard": false,
+      "canAlight": false,
+      "canExit": false,
+      "canChangeLevel": false,
+      "speedMps": 0,
+      "travelProgress": 0,
+      "error": null,
+      "busy": false,
+      "seated": false,
+      "canWalkCabin": false,
+      "availableLines": [
+        "expo"
+      ],
+      "hint": "approach-door",
+      "atStop": null
+    },
+    "contextLost": false,
+    "stationOwners": [
+      {
+        "id": "waterfront",
+        "authored": "waterfront-2026-10-23-v1",
+        "parts": 1333
+      },
+      {
+        "id": "burrard",
+        "authored": "burrard-reference-interior-v2",
+        "parts": 2037
+      },
+      {
+        "id": "granville",
+        "authored": "granville-reference-interior-v3",
+        "parts": 3387
+      },
+      {
+        "id": "stadium-chinatown",
+        "authored": "stadium-mapped-circulation-v4",
+        "parts": 1132
+      },
+      {
+        "id": "main-street-science-world",
+        "parts": 143
+      },
+      {
+        "id": "vancouver-city-centre",
+        "parts": 124
+      },
+      {
+        "id": "yaletown-roundhouse",
+        "authored": "yaletown-opening-plan-v3",
+        "parts": 1509
+      }
+    ]
+  },
+  "debugReport": ".cache/station-interior-debug/game-stadium-chinatown-browser-debug.json",
+  "passed": true
+}

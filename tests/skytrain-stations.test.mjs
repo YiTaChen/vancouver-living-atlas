@@ -198,6 +198,73 @@ test('every real line/direction has clear entry, exact platform foot origin and 
   }
 });
 
+test('Yaletown platform access follows the real staircase endpoint without stepping into its carved well', () => {
+  const o = owner('yaletown-roundhouse');
+  try {
+    const c = o.data.connections.find(
+        (c) => c.id === 'yaletown-platform-stair',
+      ),
+      floor = o.data.floors.find((f) => f.id === 'yaletown-canada'),
+      center = floor.vertices.reduce(
+        (a, b) => a.map((v, axis) => v + b[axis] / floor.vertices.length),
+        [0, 0, 0],
+      ),
+      raw = c.from === floor.id ? c.start : c.end,
+      towardCenter = new THREE.Vector3(...center)
+        .sub(new THREE.Vector3(...raw))
+        .setY(0)
+        .normalize(),
+      oldCandidate = new THREE.Vector3(...raw)
+        .addScaledVector(towardCenter, 0.8)
+        .toArray();
+    assert.equal(
+      o.floorAt(oldCandidate, floor.id),
+      null,
+      'the real stairwell remains a hole',
+    );
+    for (const platform of o.data.platforms) {
+      const access = o.accessPoint(
+        'platform',
+        platform.line,
+        platform.direction,
+      );
+      assert(o.floorAt(access.position, floor.id));
+      assert(o.isClearFoot(access));
+      assert.equal(access.surfaceId, floor.id);
+      const rawPoint = new THREE.Vector3(...raw),
+        inset = new THREE.Vector3(...access.position).sub(rawPoint),
+        awayFromWell = rawPoint
+          .clone()
+          .sub(new THREE.Vector3(...(c.from === floor.id ? c.end : c.start)))
+          .setY(0)
+          .normalize();
+      assert(
+        inset.length() <= 1,
+        'platform access stays within one metre of its actual stair endpoint',
+      );
+      assert(
+        inset.dot(awayFromWell) >= 0.24,
+        'the supported platform inset lies at least one body radius away from the stairwell',
+      );
+      const reached = walkSegment(o, access, raw);
+      assert(
+        new THREE.Vector3(...reached.position).distanceTo(rawPoint) < 0.24,
+        'the platform inset physically reaches the actual stair endpoint',
+      );
+      const returned = walkSegment(o, reached, access.position);
+      assert(
+        new THREE.Vector3(...returned.position).distanceTo(
+          new THREE.Vector3(...access.position),
+        ) < 0.24,
+        'the actual stair endpoint physically returns to the supported platform inset',
+      );
+    }
+    assertFlightBothWays(o, c);
+  } finally {
+    o.dispose();
+  }
+});
+
 test('each authored Dunsmuir station retains all24 clear train-door approaches around its actual platform fixtures', () => {
   for (const id of ['burrard', 'granville']) {
     if (!get(id).authoredInterior) continue;
@@ -996,9 +1063,16 @@ test('boarding text billboards and overhead station signs have correctly oriente
       o = owner(data.id);
       const boarding = o.group.getObjectByName('station-sign-SkyTrain');
       assert(boarding instanceof THREE.Sprite);
+      const normalized = (text) =>
+        text
+          .normalize('NFKC')
+          .replace(/[‐‑‒–—−]/g, '-')
+          .toLowerCase();
       const sourceSign = o.data.authoredInterior
         ? o.data.signs.find((sign) =>
-            sign.text.includes(o.data.name.replace(' Station', '')),
+            normalized(sign.text).includes(
+              normalized(o.data.name.replace(' Station', '')),
+            ),
           )
         : null;
       if (o.data.authoredInterior)
@@ -1101,14 +1175,32 @@ test('other stations retain their existing authored entrance and first platform 
         ),
         distance = Math.hypot(center[0] - raw[0], center[2] - raw[2]),
         access = o.accessPoint('platform', p.line, p.direction);
-      close(
-        access.position[0],
-        raw[0] + ((center[0] - raw[0]) / distance) * 0.8,
-      );
-      close(
-        access.position[2],
-        raw[2] + ((center[2] - raw[2]) / distance) * 0.8,
-      );
+      if (data.authoredInterior) {
+        assert(o.floorAt(access.position, p.surfaceId));
+        assert(o.isClearFoot(access));
+        close(access.position[1], p.floorHeight);
+        assert(
+          Math.hypot(
+            access.position[0] - raw[0],
+            access.position[2] - raw[2],
+          ) <= 2.5,
+        );
+        const endpoint = walkSegment(o, access, raw);
+        assert(
+          Math.hypot(...endpoint.position.map((v, axis) => v - raw[axis])) <
+            0.24,
+          `${data.id}: supported platform access physically reaches its real connection endpoint`,
+        );
+      } else {
+        close(
+          access.position[0],
+          raw[0] + ((center[0] - raw[0]) / distance) * 0.8,
+        );
+        close(
+          access.position[2],
+          raw[2] + ((center[2] - raw[2]) / distance) * 0.8,
+        );
+      }
       const e = data.entrances.find((e) =>
           p.line === 'expo' ? !e.id.includes('canada') : !e.id.includes('expo'),
         ),

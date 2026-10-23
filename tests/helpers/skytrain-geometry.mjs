@@ -12,6 +12,9 @@ const { SkyTrainRideTrain } = await import(cityModule('skytrain-ride-train'));
 const { SkyTrainTravel } = await import(cityModule('skytrain-travel'));
 const { adaptSkyTrainStationFrame, SkyTrainRidePath, validateSkyTrainRoutes } =
   await import(cityModule('skytrain-ride-path'));
+const { stationRailEnvelope } = await import(
+  cityModule('skytrain-station-rail-envelope')
+);
 const {
   SkyTrainStationOwner,
   trainStopFor,
@@ -60,6 +63,16 @@ export function ridePath(segment) {
     stop(segment, segment.from),
     stop(segment, segment.to),
     cityElevation,
+    [segment.from, segment.to]
+      .map((id) =>
+        stationRailEnvelope(
+          station(id),
+          segment.lineId,
+          segment.direction,
+          cityElevation,
+        ),
+      )
+      .filter(Boolean),
   );
 }
 export function stationOwner(id) {
@@ -102,6 +115,39 @@ export async function actualTrain(line) {
   assert(await train.load(line, 'balanced', false));
   assert.equal(train.carFrames.length, line === 'expo' ? 4 : 2);
   return train;
+}
+/** Bounds measured from the loaded GLB hierarchy and rendered one-per-car
+ * exterior instances, in each real car's frame. Empty Expo clone frames still
+ * include their actual shared service-shell geometry. */
+export function actualCarBounds(train) {
+  train.group.updateMatrixWorld(true);
+  return train.carFrames.map((car, carIndex) => {
+    const bounds = new THREE.Box3(),
+      inverse = car.matrixWorld.clone().invert(),
+      include = (mesh, matrix) => {
+        mesh.geometry.computeBoundingBox();
+        bounds.union(
+          mesh.geometry.boundingBox
+            .clone()
+            .applyMatrix4(inverse.clone().multiply(matrix)),
+        );
+      };
+    car.traverse((mesh) => {
+      if (mesh instanceof THREE.Mesh) include(mesh, mesh.matrixWorld);
+    });
+    for (const mesh of train.group.children) {
+      if (
+        !(mesh instanceof THREE.InstancedMesh) ||
+        mesh.count !== train.carFrames.length
+      )
+        continue;
+      const matrix = new THREE.Matrix4();
+      mesh.getMatrixAt(carIndex, matrix);
+      include(mesh, matrix.premultiply(mesh.matrixWorld));
+    }
+    assert(!bounds.isEmpty());
+    return bounds;
+  });
 }
 export function actualTunnel(path) {
   // Exercise the actual product method, including its sampling, terrain gate,

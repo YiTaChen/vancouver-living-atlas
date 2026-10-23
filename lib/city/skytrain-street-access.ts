@@ -103,16 +103,26 @@ export const SKYTRAIN_STREET_ENTRANCES: Readonly<
     {
       id: 'beatty-upper',
       label: 'Beatty Street · upper entrance',
-      lonlat: [-123.110421, 49.280156],
+      lonlat: [-123.110108, 49.2798687],
       bearing: 135,
       source: stationMap('stadium_chinatown'),
+      coordinateSource: 'https://www.openstreetmap.org/node/3714304769',
     },
     {
       id: 'pacific-lower',
-      label: 'Pacific / Expo Boulevard · lower entrance',
-      lonlat: [-123.108764, 49.278603],
+      label: 'Expo Boulevard · lower entrance',
+      lonlat: [-123.10849, 49.2788731],
       bearing: 315,
       source: stationMap('stadium_chinatown'),
+      coordinateSource: 'https://www.openstreetmap.org/node/3830176079',
+    },
+    {
+      id: 'keefer-place',
+      label: 'Keefer Place · raised concourse entrance via external steps',
+      lonlat: [-123.109698, 49.279757],
+      bearing: 225,
+      source: stationMap('stadium_chinatown'),
+      coordinateSource: 'https://www.openstreetmap.org/node/3714304773',
     },
   ],
   'main-street-science-world': [
@@ -137,9 +147,20 @@ export const SKYTRAIN_STREET_ENTRANCES: Readonly<
     {
       id: 'davie-mainland',
       label: 'Davie / Mainland · station pavilion',
-      lonlat: [-123.121813, 49.274484],
+      lonlat: [-123.121947, 49.2745277],
       bearing: 45,
       source: stationMap('yaletown_roundhouse'),
+      coordinateSource: 'https://www.openstreetmap.org/node/2383770178',
+    },
+    {
+      id: 'davie-elevator',
+      label: 'Davie Street · independent elevator pavilion door',
+      lonlat: [-123.121882, 49.2745181],
+      bearing: 315.8903568785,
+      source: stationMap('yaletown_roundhouse'),
+      coordinateSource: 'https://www.openstreetmap.org/node/9133604358',
+      coordinateAccuracy:
+        'Mapped doorway; inward direction follows exterior footway https://www.openstreetmap.org/way/988151952, not a surveyed shaft bearing.',
     },
   ],
 };
@@ -908,6 +929,436 @@ function attachAuthoredStation(
         ? source.entrances[0]
         : undefined);
     if (!target) continue;
+    const raised = (
+      source.authoredInterior?.raisedStreetApproaches as
+        | Record<
+            string,
+            {
+              topLonLat: [number, number];
+              stairBottomLonLat: [number, number];
+              deckLonLat: [number, number][];
+              risers: number;
+              source: string;
+            }
+          >
+        | undefined
+    )?.[ref.id];
+    if (raised) {
+      // This entrance is on a pedestrian deck above the DEM. Street ownership
+      // starts at the mapped external stairhead, never on terrain below the door.
+      const pointAt = (ll: [number, number]) => {
+        const [x, z] = project(ll);
+        return local(new THREE.Vector3(x, streetHeightAt(x, z), z));
+      };
+      const top = pointAt(raised.topLonLat),
+        bottom = pointAt(raised.stairBottomLonLat),
+        deck = raised.deckLonLat.map(pointAt),
+        door = vector(target.point),
+        inward = bottom.clone().sub(top).setY(0).normalize(),
+        side = new THREE.Vector3(inward.z, 0, -inward.x),
+        width = 2.6,
+        apronId = `${source.id}-${ref.id}-street-apron`,
+        stairId = `${source.id}-${ref.id}-mapped-approach-stair`;
+      const addBox = (
+        id: string,
+        p: THREE.Vector3,
+        size: StationVector,
+        material: string,
+        role: string,
+        yaw = 0,
+        collision = false,
+      ) => {
+        geometry.parts.push({
+          id,
+          position: tuple(p),
+          size,
+          yaw,
+          material,
+          role,
+        });
+        if (collision)
+          geometry.obstacles.push({ id, position: tuple(p), size, yaw });
+      };
+      const addFloor = (
+        id: string,
+        vertices: StationVector[],
+        kind = 'corridor',
+      ) => {
+        geometry.floors.push({
+          id,
+          level: 'keefer-raised-approach',
+          kind,
+          vertices,
+          indices,
+        });
+      };
+      const opening = (id: string, vertices: StationVector[]) => {
+        const p = vertices.map((v) => world(vector(v)));
+        openings.push({
+          id,
+          stationId: source.id,
+          polygon: p.map(tuple),
+          minY: Math.min(...p.map((v) => v.y)) - 0.4,
+          maxY:
+            Math.max(...p.map((v) => Math.max(v.y, heightAt(v.x, v.z)))) + 3,
+        });
+      };
+      const grid: StationVector[] = [],
+        gridIndices: number[] = [];
+      for (const along of [-3.5, -1, 0, 0.3])
+        for (const across of [-1.7, 0, 1.7]) {
+          const p = top
+              .clone()
+              .addScaledVector(inward, along)
+              .addScaledVector(side, across),
+            w = world(p);
+          p.y = streetHeightAt(w.x, w.z) - base;
+          grid.push(tuple(p));
+        }
+      for (let r = 0; r < 3; r++)
+        for (let c = 0; c < 2; c++) {
+          const a = r * 3 + c,
+            b = a + 3;
+          gridIndices.push(a, b, b + 1, a, b + 1, a + 1);
+        }
+      geometry.floors.push({
+        id: apronId,
+        level: 'street',
+        kind: 'street-apron',
+        vertices: grid,
+        indices: gridIndices,
+      });
+      const start = top.clone().addScaledVector(inward, 0.3),
+        startWorld = world(start);
+      start.y = streetHeightAt(startWorld.x, startWorld.z) - base;
+      const horizontal = Math.hypot(bottom.x - start.x, bottom.z - start.z),
+        yaw = (Math.atan2(inward.x, inward.z) * 180) / Math.PI,
+        treads: StationConnection['treads'] = [];
+      for (let i = 0; i < raised.risers; i++) {
+        const a = start.clone().lerp(bottom, i / raised.risers),
+          b = start.clone().lerp(bottom, (i + 1) / raised.risers),
+          y = start.y + ((bottom.y - start.y) * i) / raised.risers,
+          center = a.clone().add(b).multiplyScalar(0.5).setY(y),
+          id = `${stairId}-tread-${i}`;
+        a.y = y;
+        b.y = y;
+        treads.push({ id, vertices: strip(a, b, width), indices });
+        addBox(
+          id,
+          center.clone().add(new THREE.Vector3(0, -0.09, 0)),
+          [width, 0.18, horizontal / raised.risers + 0.002],
+          'concrete',
+          'stair-tread',
+          yaw,
+        );
+        addBox(
+          id + '-nosing',
+          a.clone().add(new THREE.Vector3(0, 0.006, 0)),
+          [width, 0.012, 0.035],
+          'yellow',
+          'detail',
+          yaw,
+        );
+        const supportBottom = Math.min(start.y, bottom.y) - 0.2,
+          h = Math.max(0.12, y - supportBottom - 0.52);
+        addBox(
+          id + '-support',
+          center.clone().setY(supportBottom + h / 2),
+          [width, h, horizontal / raised.risers + 0.003],
+          'concrete',
+          'stair-support',
+          yaw,
+          true,
+        );
+        const visibleHeight = Math.max(0.12, y - supportBottom - 0.16);
+        addBox(
+          id + '-riser',
+          center.clone().setY(supportBottom + visibleHeight / 2),
+          [width, visibleHeight, horizontal / raised.risers + 0.003],
+          'concrete',
+          'stair-support',
+          yaw,
+        );
+      }
+      const landingId = stairId + '-landing',
+        landingEnd = bottom.clone().addScaledVector(inward, 1.8);
+      addFloor(landingId, strip(bottom, landingEnd, width), 'landing');
+      addBeam(
+        landingId + '-slab',
+        bottom.clone().add(new THREE.Vector3(0, -0.15, 0)),
+        landingEnd.clone().add(new THREE.Vector3(0, -0.15, 0)),
+        width,
+        0.3,
+        'concrete',
+        'floor',
+      );
+      geometry.connections.push({
+        id: stairId,
+        from: apronId,
+        to: landingId,
+        type: 'stairs',
+        start: tuple(start),
+        end: tuple(bottom),
+        width,
+        treads,
+      });
+      for (const sign of [-1, 1]) {
+        const a = start
+            .clone()
+            .addScaledVector(side, sign * (width / 2 + 0.07)),
+          b = bottom.clone().addScaledVector(side, sign * (width / 2 + 0.07));
+        addBeam(
+          `${stairId}-parapet-${sign}`,
+          a.clone().add(new THREE.Vector3(0, 0.43, 0)),
+          b.clone().add(new THREE.Vector3(0, 0.43, 0)),
+          0.16,
+          0.86,
+          'concrete',
+          'wall',
+        );
+        addBeam(
+          `${stairId}-handrail-${sign}`,
+          a.clone().add(new THREE.Vector3(0, 0.98, 0)),
+          b.clone().add(new THREE.Vector3(0, 0.98, 0)),
+          0.065,
+          0.07,
+          'red',
+          'handrail',
+        );
+        const d = b.clone().sub(a),
+          q = new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(
+              -Math.atan2(d.y, Math.hypot(d.x, d.z)),
+              Math.atan2(d.x, d.z),
+              0,
+              'YXZ',
+            ),
+          );
+        geometry.obstacles.push({
+          id: `${stairId}-parapet-${sign}`,
+          position: tuple(
+            a
+              .clone()
+              .add(b)
+              .multiplyScalar(0.5)
+              .add(new THREE.Vector3(0, 0.43, 0)),
+          ),
+          size: [0.16, 0.86, d.length()],
+          yaw: 0,
+          quaternion: q.toArray(),
+        });
+      }
+      opening(stairId + '-terrain', strip(start, bottom, width + 0.4));
+      // The small residual rise follows the mapped concrete approach, not a
+      // fabricated five-metre ramp from the ground directly under the station.
+      const bottomY = bottom.y,
+        polyline = [bottom, ...deck],
+        total = polyline
+          .slice(1)
+          .reduce(
+            (n, p, i) =>
+              n + Math.hypot(p.x - polyline[i].x, p.z - polyline[i].z),
+            0,
+          );
+      let accumulated = 0,
+        previous = landingId;
+      for (let i = 1; i < polyline.length; i++) {
+        const a = polyline[i - 1],
+          b = polyline[i],
+          length = Math.hypot(b.x - a.x, b.z - a.z);
+        a.y = bottomY + ((door.y - bottomY) * accumulated) / total;
+        accumulated += length;
+        b.y = bottomY + ((door.y - bottomY) * accumulated) / total;
+        const id = `${source.id}-${ref.id}-mapped-deck-${i}`,
+          vertices = strip(a, b, width);
+        const previousCorner = previous;
+        addFloor(id, vertices);
+        link(id + '-from', previous, id, a);
+        previous = id;
+        addBeam(
+          id + '-slab',
+          a.clone().add(new THREE.Vector3(0, -0.16, 0)),
+          b.clone().add(new THREE.Vector3(0, -0.16, 0)),
+          width,
+          0.3,
+          'concrete',
+          'floor',
+        );
+        const corner = id + '-landing',
+          cornerHalf = 1.4;
+        addFloor(
+          corner,
+          [
+            [b.x - cornerHalf, b.y, b.z - cornerHalf],
+            [b.x - cornerHalf, b.y, b.z + cornerHalf],
+            [b.x + cornerHalf, b.y, b.z + cornerHalf],
+            [b.x + cornerHalf, b.y, b.z - cornerHalf],
+          ],
+          'landing',
+        );
+        addBox(
+          corner + '-slab',
+          b.clone().add(new THREE.Vector3(0, -0.15, 0)),
+          [2.8, 0.3, 2.8],
+          'concrete',
+          'floor',
+        );
+        link(id + '-to', id, corner, b);
+        if (length < cornerHalf * 2)
+          link(id + '-overlap', previousCorner, corner, b);
+        previous = corner;
+        opening(id + '-terrain', vertices);
+      }
+      const edgeAt = (index: number, sign: number) => {
+        const p = polyline[index],
+          before = polyline[Math.max(0, index - 1)],
+          after = polyline[Math.min(polyline.length - 1, index + 1)],
+          t0 = p.clone().sub(before).setY(0).normalize(),
+          t1 = after.clone().sub(p).setY(0).normalize();
+        if (!t0.lengthSq()) t0.copy(t1);
+        if (!t1.lengthSq()) t1.copy(t0);
+        const l0 = new THREE.Vector3(t0.z, 0, -t0.x),
+          l1 = new THREE.Vector3(t1.z, 0, -t1.x),
+          m = l0.clone().add(l1).normalize();
+        return p
+          .clone()
+          .addScaledVector(
+            m,
+            (sign * (width / 2 + 0.08)) / Math.max(0.35, m.dot(l0)),
+          );
+      };
+      for (let i = 1; i < polyline.length; i++)
+        for (const sign of [-1, 1]) {
+          const a = edgeAt(i - 1, sign),
+            b = edgeAt(i, sign),
+            d = b.clone().sub(a),
+            id = `${source.id}-${ref.id}-deck-guard-${i}-${sign}`,
+            q = new THREE.Quaternion().setFromEuler(
+              new THREE.Euler(
+                -Math.atan2(d.y, Math.hypot(d.x, d.z)),
+                Math.atan2(d.x, d.z),
+                0,
+                'YXZ',
+              ),
+            );
+          addBeam(
+            id + '-parapet',
+            a.clone().add(new THREE.Vector3(0, 0.43, 0)),
+            b.clone().add(new THREE.Vector3(0, 0.43, 0)),
+            0.16,
+            0.86,
+            'concrete',
+            'wall',
+          );
+          addBeam(
+            id + '-handrail',
+            a.clone().add(new THREE.Vector3(0, 0.98, 0)),
+            b.clone().add(new THREE.Vector3(0, 0.98, 0)),
+            0.06,
+            0.07,
+            'steel',
+            'handrail',
+          );
+          geometry.obstacles.push({
+            id,
+            position: tuple(
+              a
+                .clone()
+                .add(b)
+                .multiplyScalar(0.5)
+                .add(new THREE.Vector3(0, 0.43, 0)),
+            ),
+            size: [0.16, 0.86, d.length()],
+            yaw: 0,
+            quaternion: q.toArray(),
+          });
+        }
+      const join = door
+          .clone()
+          .addScaledVector(vector(target.inwardDirection ?? [-1, 0, 0]), 0.8),
+        throatId = `${source.id}-${ref.id}-raised-door-threshold`;
+      addFloor(throatId, strip(polyline.at(-1)!, join, width));
+      addBeam(
+        throatId + '-slab',
+        polyline
+          .at(-1)!
+          .clone()
+          .add(new THREE.Vector3(0, -0.15, 0)),
+        join.clone().add(new THREE.Vector3(0, -0.15, 0)),
+        width,
+        0.3,
+        'concrete',
+        'floor',
+      );
+      link(throatId + '-from', previous, throatId, polyline.at(-1)!);
+      link(throatId + '-to', throatId, target.surfaceId, join);
+      const outside = top.clone().addScaledVector(inward, -3.1),
+        inner = top.clone().addScaledVector(inward, 0.1),
+        outsideWorld = world(outside),
+        innerWorld = world(inner);
+      outsideWorld.y = streetHeightAt(outsideWorld.x, outsideWorld.z);
+      innerWorld.y = streetHeightAt(innerWorld.x, innerWorld.z);
+      entrances.push({
+        id: ref.id,
+        stationId: source.id,
+        label: ref.label,
+        source: ref.source,
+        accuracy:
+          'Mapped external stair and raised pedestrian approach; deck elevations and widths remain representative, not a survey. Street threshold is the public stairhead, not terrain below the station door.',
+        surfaceId: apronId,
+        threshold: tuple(world(top)),
+        inward: tuple(innerWorld),
+        outward: tuple(outsideWorld),
+        localDirection: tuple(inward),
+      });
+      for (const platformId of new Set(
+        source.platforms.map((v) => v.surfaceId),
+      )) {
+        const queue = [target.surfaceId],
+          seen = new Set(queue),
+          previous = new Map<
+            string,
+            { floor: string; connection: StationConnection }
+          >();
+        for (const floor of queue) {
+          if (floor === platformId) break;
+          for (const c of source.connections) {
+            if (c.type === 'elevator') continue;
+            const next =
+              c.from === floor ? c.to : c.to === floor ? c.from : undefined;
+            if (next && !seen.has(next)) {
+              seen.add(next);
+              previous.set(next, { floor, connection: c });
+              queue.push(next);
+            }
+          }
+        }
+        if (!seen.has(platformId)) continue;
+        const chain: { floor: string; connection: StationConnection }[] = [];
+        let floor = platformId;
+        while (floor !== target.surfaceId) {
+          const p = previous.get(floor)!;
+          chain.unshift(p);
+          floor = p.floor;
+        }
+        const points: StationVector[] = [
+          tuple(top),
+          tuple(start),
+          ...polyline.map(tuple),
+          tuple(join),
+        ];
+        for (const { floor, connection: c } of chain) {
+          const forward = c.from === floor;
+          points.push(forward ? c.start : c.end, forward ? c.end : c.start);
+        }
+        routes.push({
+          entranceId: ref.id,
+          platformSurfaceId: platformId,
+          points,
+        });
+      }
+      continue;
+    }
     const [x, z] = project(ref.lonlat),
       p = local(new THREE.Vector3(x, streetHeightAt(x, z), z)),
       inward = target.inwardDirection
@@ -917,7 +1368,7 @@ function attachAuthoredStation(
             0,
             -Math.cos((ref.bearing * Math.PI) / 180),
           ).applyQuaternion(inverse),
-      outside = p.clone().addScaledVector(inward, -2.8),
+      outside = p.clone().addScaledVector(inward, -3.1),
       join = vector(target.point),
       direction = join.clone().sub(p).setY(0);
     const mappedDoor = direction.length() < 0.2;
@@ -947,11 +1398,11 @@ function attachAuthoredStation(
         Math.max(3.2, 2 + Math.abs(p.y - join.y) * 2.1),
       );
     else if (direction.length() > 2) inward.copy(direction).normalize();
-    outside.copy(p).addScaledVector(inward, -2.8);
+    outside.copy(p).addScaledVector(inward, -3.1);
     const apronId = `${source.id}-${ref.id}-street-apron`,
       throatId = `${source.id}-${ref.id}-authored-threshold`,
       vertices = strip(
-        p.clone().addScaledVector(inward, -2.8),
+        p.clone().addScaledVector(inward, -3.5),
         p.clone().addScaledVector(inward, 0.6),
         3.8,
       );
@@ -961,8 +1412,8 @@ function attachAuthoredStation(
     // A mapped door may be the head of a descending staircase. Its outside
     // apron must end at that door, never overlay the first real stair flight.
     const apronRows = mappedDoor
-      ? [-3.2, -2.8, -2.2, -1.2, -0.6, 0]
-      : [-3.2, -2.8, -1, 0, 1.1, 2.2];
+      ? [-3.5, -2.8, -2.2, -1.2, -0.6, 0]
+      : [-3.5, -2.8, -1, 0, 1.1, 2.2];
     for (const along of apronRows)
       for (const side of [-1.9, 0, 1.9]) {
         const v = p

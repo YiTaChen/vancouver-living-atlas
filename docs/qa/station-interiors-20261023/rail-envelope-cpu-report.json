@@ -1,0 +1,47 @@
+{
+  "verifiedAt": "2026-10-23T12:13:03.367901+00:00",
+  "node": "v24.22.1",
+  "suite": {
+    "command": "node --test tests/skytrain-articulated-clearance.test.mjs tests/skytrain-ride-path.test.mjs tests/station-rail-envelope.test.mjs",
+    "tests": 25,
+    "pass": 25,
+    "fail": 0,
+    "scope": [
+      "Actual published station packets, without in-memory source substitution",
+      "All 24 station approaches: actual GLB articulated cabins, carriage matrices, occupied eyes and roof clearances",
+      "All twelve directed emitted tunnel meshes remain below unchanged raw terrain",
+      "Exact source-backed trackbed footprint; missing/moved beds and low roofs or upper floors reject invalid clearances",
+      "Unchanged exact stop poses and protected GTFS alignments"
+    ]
+  },
+  "rules": {
+    "outsideStructure": "original 4.9m tube crown and >=0.25m terrain clearance",
+    "insideStructure": "selected platform exact rendered trackbed; conservative real car roof clears solid roof, ceiling, soffit and floor by >=0.25m",
+    "carFrames": "production SkyTrainRideTrain arc-distance sampling and existing per-car offsets",
+    "tubeBoundary": "binary-located exact support edge, without an eight-metre unlined gap",
+    "fallback": "no DEM edits, station-name exemptions or invisible cover boxes"
+  },
+  "limitations": [
+    "This phase uses the published earlier Waterfront packet; its final mapped-hall reconstruction has a separate phase-4 acceptance.",
+    "Dimensions and elevations without survey evidence remain representative. CPU geometry results do not replace photo and full-game acceptance."
+  ],
+  "sourceCheckpointSha256": {
+    "tools/assets/skytrain-stations-stage2/station-layout.json": "e51e9f7d7a220ecd04f9f178966763a98e1ab35ead5aa85d9cab27558bc1231f",
+    "lib/city/skytrain-station-rail-envelope.ts": "9cb77efe7485009497ac313670b50caeec92934b5ba6b2fbb120fc2e41eef0a7",
+    "lib/city/skytrain-service-stock.ts": "5fd6f64163de54afd7ac5eca224e9f54fcf2c21d8f001993114d8e263785f6a2",
+    "lib/city/skytrain-ride-path.ts": "19685e3e25740fd5e290fd87b993c9d53b32cab063cfac029020ad671109f0a5",
+    "lib/city/skytrain-ride-train.ts": "b32c2bd3ebd58b58591200d61d72ca34a87cdbca86f4e2a81106cc4eebf710e9",
+    "lib/city/skytrain-travel.ts": "df0b76676a63597c02d6846a43dcc36df9be4b2df11b748bb41034b54c0f3182",
+    "tests/skytrain-articulated-clearance.test.mjs": "26c65480a86effc85f67aa0c678d14b0d5d3baab5bc9a58ed06f4e0455682ecd",
+    "tests/skytrain-ride-path.test.mjs": "71f361aaa2545917b078c1859c4f510eb746287cdfb3cc4b9facbcb663027f74",
+    "tests/station-rail-envelope.test.mjs": "90adea6005abf06ddcc6fbadbd2e588b203c7c42ed48a9c19fb846690a2a8d69",
+    "public/models/skytrain-stations/burrard.json": "93a289dd488c2eb425e716ed8c3737608556cf83ab2970e590ff87fdbccbd980",
+    "public/models/skytrain-stations/granville.json": "74c21fb172e252d54e30c2b81235d10d0804ca6e13dd1690eb39b4b4cf422022",
+    "public/models/skytrain-stations/main-street-science-world.json": "1006453de74cac8815dc7738691779600699b84b50723a5b78b88e1895f37ccb",
+    "public/models/skytrain-stations/manifest.json": "509679b7daa4c76dd8877dd9e1db0fdc84d132664d65895c16e7ebcce8b2044d",
+    "public/models/skytrain-stations/stadium-chinatown.json": "afefe5161dec3bdd532607a71d4987253e3b52cc3b0d86bb7524e45842cd5d51",
+    "public/models/skytrain-stations/vancouver-city-centre.json": "0f9c5338731e0c467b3162cd5d671398b7db02e0f9b0d976fe0df86111c520e8",
+    "public/models/skytrain-stations/waterfront.json": "34fc50f6c793e89fa355dd0b80abfee7be3d6ff121125e3c57ef29b10589c282",
+    "public/models/skytrain-stations/yaletown-roundhouse.json": "a9309cdf625d2f20446957343f311638e19ab45c6d8e5062a949c63712126c45"
+  }
+}

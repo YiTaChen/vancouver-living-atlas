@@ -5,6 +5,10 @@ import {
   rebuildBurrard,
   rebuildGranville,
 } from '../tools/station-interiors/dunsmuir.mjs';
+import {
+  rebuildStadium,
+  rebuildYaletown,
+} from '../tools/station-interiors/southeast.mjs';
 
 const packet = JSON.parse(
   readFileSync('tools/assets/skytrain-stations-stage2/station-layout.json'),
@@ -12,6 +16,12 @@ const packet = JSON.parse(
 for (const [id, rebuild, entryNames] of [
   ['burrard', rebuildBurrard, []],
   ['granville', rebuildGranville, ['granville-dunsmuir-entry']],
+  [
+    'stadium-chinatown',
+    rebuildStadium,
+    ['stadium-beatty-entry', 'stadium-keefer-entry'],
+  ],
+  ['yaletown-roundhouse', rebuildYaletown, []],
 ])
   test(`${id}: accessible street entrances reach all boarding surfaces without stairs or escalators`, () => {
     const station = rebuild(packet.stations.find((s) => s.stationId === id));

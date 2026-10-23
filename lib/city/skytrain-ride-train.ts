@@ -5,13 +5,11 @@ import type { LineId } from './skytrain-network';
 import type { VisualQuality } from './quality';
 import { openSkyTrainDoorApertures } from './skytrain-door-aperture';
 import type { SkyTrainMotionPath } from './skytrain-motion-path';
+import { SKYTRAIN_SERVICE_STOCK } from './skytrain-service-stock';
 import {
   SkyTrainPassengerSpace,
   type CabinPoint,
 } from './skytrain-passenger-space';
-
-const EXPO_OFFSETS = [26.85, 8.95, -8.95, -26.85] as const;
-const CANADA_OFFSETS = [10.5, -10.5] as const;
 
 /** The exhibit assets remain immutable. This adapter supplies a separate moving
  * consist and selected-car passenger frame for the regional service. */
@@ -90,13 +88,13 @@ export class SkyTrainRideTrain {
     return this.staticFrames;
   }
   private get offsets(): readonly number[] {
-    return this.line === 'expo' ? EXPO_OFFSETS : CANADA_OFFSETS;
+    return SKYTRAIN_SERVICE_STOCK[this.line].carOffsetsM;
   }
   get carOffset() {
     return this.line === 'expo' ? 26.85 : 10.5;
   }
   get floorAboveRail() {
-    return this.line === 'expo' ? 0.95 : 1.1;
+    return SKYTRAIN_SERVICE_STOCK[this.line].floorAboveRailM;
   }
   constructor(assets = new SkyTrainCabinAssets()) {
     this.assets = assets;

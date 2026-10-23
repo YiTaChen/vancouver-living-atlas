@@ -8,6 +8,8 @@ import {
   type StationId,
 } from './skytrain-network';
 import type { RuntimeStationData } from './skytrain-stations';
+import type { StationRailEnvelope } from './skytrain-station-rail-envelope';
+import { SKYTRAIN_SERVICE_STOCK } from './skytrain-service-stock';
 
 export interface SkyTrainStopPose {
   position: THREE.Vector3;
@@ -345,15 +347,18 @@ export class SkyTrainRidePath {
     depressionM: number;
     minimumTubeClearanceM: number;
     maximumPitchDegrees: number;
+    stationStructureSamples: number;
+    minimumStationRoofClearanceM: number;
   } | null;
   constructor(
     data: SkyTrainRouteData,
-    line: LineId,
+    private readonly line: LineId,
     from: StationId,
     to: StationId,
     readonly start: SkyTrainStopPose,
     readonly end: SkyTrainStopPose,
     heightAt?: HeightAt,
+    private readonly stationEnvelopes: readonly StationRailEnvelope[] = [],
   ) {
     validateSkyTrainRoutes(data);
     for (const pose of [start, end])
@@ -458,15 +463,43 @@ export class SkyTrainRidePath {
     this.terrainProfile = null;
     if (heightAt && ![from, to].includes('main-street-science-world')) {
       const sampleCount = Math.ceil(base.getLength()),
-        halfLength = line === 'expo' ? 35.35 : 20.3,
+        stock = SKYTRAIN_SERVICE_STOCK[line],
+        halfLength =
+          Math.max(...stock.carOffsetsM.map(Math.abs)) + stock.carHalfLengthM,
         longitudinalCount = Math.ceil(halfLength),
         point = new THREE.Vector3(),
-        tangent = new THREE.Vector3(),
         anchor = new THREE.Vector3(),
         quaternion = new THREE.Quaternion(),
-        rotation = new THREE.Matrix4(),
-        up = new THREE.Vector3(0, 1, 0),
-        zero = new THREE.Vector3();
+        railAnchor = new THREE.Vector3(),
+        carRoof = new THREE.Vector3(),
+        carPose = { position: point, quaternion };
+      // No interior depression can repair a violation in either fixed rigid
+      // stop envelope. Reject missing station structure before trial fitting.
+      for (const stop of [start, end])
+        for (let j = 0; j <= longitudinalCount; j++)
+          for (const x of [-1.4, 0, 1.4]) {
+            const z = -halfLength + (2 * halfLength * j) / longitudinalCount;
+            railAnchor
+              .set(x, 0, z)
+              .applyQuaternion(stop.quaternion)
+              .add(stop.position);
+            carRoof
+              .set(x, this.trainRoofHeight(line), z)
+              .applyQuaternion(stop.quaternion)
+              .add(stop.position);
+            anchor
+              .set(x, 4.9, z)
+              .applyQuaternion(stop.quaternion)
+              .add(stop.position);
+            const ground = heightAt(anchor.x, anchor.z),
+              structure = this.stationRoofClearance(railAnchor, carRoof);
+            if (!Number.isFinite(ground))
+              throw new Error('Invalid SkyTrain terrain height');
+            if ((structure ?? ground - anchor.y) < 0.25)
+              throw new Error(
+                'SkyTrain terrain clearance cannot preserve station stops',
+              );
+          }
       let fitted = false;
       for (let depression = 0; depression <= 80; depression += 0.5) {
         const candidate = new UndergroundCurve(
@@ -477,29 +510,63 @@ export class SkyTrainRidePath {
           depression,
         );
         let minimum = Infinity,
+          minimumStationRoof = Infinity,
+          stationSamples = 0,
           maximumPitch = 0;
-        for (let i = 0; i <= sampleCount; i++) {
-          const t = i / sampleCount;
-          candidate.getPoint(t, point);
-          candidate.getTangent(t, tangent).normalize();
+        const candidateLength = candidate.getLength(),
+          // Across a complete trip each real car traverses this union of arc
+          // distances, including the exact tangent extensions beyond stops.
+          // Sampling the union once also avoids rechecking four overlapping
+          // car-centre ranges. It matches the renderer's sampleDistance poses.
+          firstCar = Math.min(...stock.carOffsetsM),
+          lastCar = Math.max(...stock.carOffsetsM),
+          arcStart = firstCar,
+          arcSpan = candidateLength + lastCar - firstCar,
+          carSamples = Math.max(sampleCount, Math.ceil(arcSpan)),
+          carLongitudinalCount = Math.ceil(2 * stock.carHalfLengthM);
+        for (let i = 0; i <= carSamples; i++) {
+          this.sampleCurveDistance(
+            candidate,
+            candidateLength,
+            arcStart + (arcSpan * i) / carSamples,
+            carPose,
+          );
+          this.sampleForward.set(0, 0, 1).applyQuaternion(quaternion);
           maximumPitch = Math.max(
             maximumPitch,
-            Math.abs(Math.asin(tangent.y)) * (180 / Math.PI),
+            Math.abs(Math.asin(this.sampleForward.y)) * (180 / Math.PI),
           );
-          rotation.lookAt(zero, tangent.multiplyScalar(-start.motionSign), up);
-          quaternion.setFromRotationMatrix(rotation);
-          for (let j = 0; j <= longitudinalCount; j++)
+          for (let j = 0; j <= carLongitudinalCount; j++)
             for (const x of [-1.4, 0, 1.4]) {
-              // Tube crown 1.4 + radius 3.5 also conservatively encloses the
-              // lower actual train roof, including its rigid end overhang.
-              anchor
-                .set(
-                  x,
-                  4.9,
-                  -halfLength + (2 * halfLength * j) / longitudinalCount,
-                )
+              const z =
+                -stock.carHalfLengthM +
+                (2 * stock.carHalfLengthM * j) / carLongitudinalCount;
+              railAnchor.set(x, 0, z).applyQuaternion(quaternion).add(point);
+              carRoof
+                .set(x, this.trainRoofHeight(line), z)
                 .applyQuaternion(quaternion)
                 .add(point);
+              const stationClearance = this.stationRoofClearance(
+                railAnchor,
+                carRoof,
+              );
+              if (stationClearance !== null) {
+                // A real station trackbed can be above the DEM (a deck or a
+                // daylight island). It supports the actual train, not a larger
+                // procedural tube. The rendered roof still must clear the car.
+                if (!Number.isFinite(heightAt(carRoof.x, carRoof.z)))
+                  throw new Error('Invalid SkyTrain terrain height');
+                stationSamples++;
+                minimumStationRoof = Math.min(
+                  minimumStationRoof,
+                  stationClearance,
+                );
+                if (stationClearance < 0.25) minimum = -Infinity;
+                continue;
+              }
+              // Tube crown 1.4 + radius 3.5 also conservatively encloses the
+              // lower actual train roof, including its rigid end overhang.
+              anchor.set(x, 4.9, z).applyQuaternion(quaternion).add(point);
               const ground = heightAt(anchor.x, anchor.z);
               if (!Number.isFinite(ground))
                 throw new Error('Invalid SkyTrain terrain height');
@@ -515,6 +582,8 @@ export class SkyTrainRidePath {
             depressionM: depression,
             minimumTubeClearanceM: minimum,
             maximumPitchDegrees: maximumPitch,
+            stationStructureSamples: stationSamples,
+            minimumStationRoofClearanceM: minimumStationRoof,
           };
           fitted = true;
           break;
@@ -526,6 +595,35 @@ export class SkyTrainRidePath {
         );
     }
     this.length = this.curve.getLength();
+  }
+  private trainRoofHeight(line: LineId) {
+    // Conservative top of the current authored GLB stock above its rail datum;
+    // the full emitted bodies and all24 articulated door approaches are also
+    // tested against the actual station meshes, independently of this fitter.
+    return SKYTRAIN_SERVICE_STOCK[line].roofAboveRailM;
+  }
+  private stationRoofClearance(rail: THREE.Vector3, roof: THREE.Vector3) {
+    let clearance: number | null = null;
+    for (const envelope of this.stationEnvelopes) {
+      const value = envelope.roofClearance(rail, roof);
+      if (value !== null) clearance = Math.min(clearance ?? Infinity, value);
+    }
+    return clearance;
+  }
+  /** Procedural tunnel rings must not intrude into a maintained station shell
+   * or its genuinely open track deck. Both car sides need actual rail support. */
+  hasStationRailStructure(point: THREE.Vector3, quaternion: THREE.Quaternion) {
+    const rail = new THREE.Vector3(),
+      roof = new THREE.Vector3();
+    return [-1.4, 0, 1.4].every((x) => {
+      rail.set(x, 0, 0).applyQuaternion(quaternion).add(point);
+      roof
+        .set(x, this.trainRoofHeight(this.line), 0)
+        .applyQuaternion(quaternion)
+        .add(point);
+      const clearance = this.stationRoofClearance(rail, roof);
+      return clearance !== null && clearance >= 0.25;
+    });
   }
   sample(
     progress: number,
@@ -539,8 +637,22 @@ export class SkyTrainRidePath {
       0,
       1,
     );
-    this.curve.getPointAt(u, target.position);
-    this.curve
+    return this.sampleCurveDistance(
+      this.curve,
+      this.length,
+      u * this.length,
+      target,
+    );
+  }
+  private sampleCurveDistance(
+    curve: THREE.Curve<THREE.Vector3>,
+    length: number,
+    distance: number,
+    target: SkyTrainPathPose,
+  ) {
+    const u = THREE.MathUtils.clamp(distance / length, 0, 1);
+    curve.getPointAt(u, target.position);
+    curve
       .getTangentAt(u, this.sampleForward)
       .multiplyScalar(this.start.motionSign)
       .normalize()
@@ -553,6 +665,14 @@ export class SkyTrainRidePath {
     target.quaternion.setFromRotationMatrix(this.sampleRotation);
     if (u === 0) target.quaternion.copy(this.start.quaternion);
     if (u === 1) target.quaternion.copy(this.end.quaternion);
+    if (distance < 0 || distance > length) {
+      const stop = distance < 0 ? this.start : this.end,
+        excess = distance < 0 ? distance : distance - length;
+      this.sampleForward
+        .set(0, 0, stop.motionSign)
+        .applyQuaternion(stop.quaternion);
+      target.position.addScaledVector(this.sampleForward, excess);
+    }
     return target;
   }
   /** Each articulated car follows its own physical arc distance. Cars beyond a
@@ -561,15 +681,14 @@ export class SkyTrainRidePath {
   sampleDistance(distance: number, target?: SkyTrainPathPose) {
     if (!Number.isFinite(distance))
       throw new Error('Invalid SkyTrain arc distance');
-    const pose = this.sample(distance / this.length, target);
-    if (distance < 0 || distance > this.length) {
-      const stop = distance < 0 ? this.start : this.end,
-        excess = distance < 0 ? distance : distance - this.length;
-      this.sampleForward
-        .set(0, 0, stop.motionSign)
-        .applyQuaternion(stop.quaternion);
-      pose.position.addScaledVector(this.sampleForward, excess);
-    }
-    return pose;
+    return this.sampleCurveDistance(
+      this.curve,
+      this.length,
+      distance,
+      target ?? {
+        position: new THREE.Vector3(),
+        quaternion: new THREE.Quaternion(),
+      },
+    );
   }
 }

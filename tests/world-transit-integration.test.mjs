@@ -1485,10 +1485,18 @@ test('all street routes retain WorldTravel ownership through native walking upda
               delta[2] * entrance.localDirection[2],
             across =
               delta[0] * entrance.localDirection[2] -
-              delta[2] * entrance.localDirection[0];
+              delta[2] * entrance.localDirection[0],
+            rendered = owner.group.getObjectByName(
+              'station-authored-street-apron-support',
+            ),
+            boundary =
+              owner.data.authoredInterior &&
+              rendered?.userData.stationFloorIds.includes(entrance.surfaceId)
+                ? -3
+                : -2.45;
           assert.ok(
-            along <= -2.45 && along > -2.75,
-            `${label}: exit happens on the first normal walking step beyond the public boundary`,
+            along <= boundary + 1e-9 && along > boundary - 0.3 - 1e-9,
+            `${label}: exit happens on the first normal walking step beyond the public boundary; along=${along}, boundary=${boundary}`,
           );
           assert.ok(Math.abs(across) < 0.2);
           assert.ok(
@@ -1860,7 +1868,7 @@ test('every authored SkyTrain door boards its actual carriage and retained seats
     );
 });
 
-test('native city steps cannot skip a short physically supported station handoff window', async () => {
+test('the first supported native city movement frame immediately hands off to the station', async () => {
   const groundHeight = (x, z) => cityElevation(x, z) + 1.1;
   await harness(
     ({ travel, city }) => {
@@ -1877,23 +1885,39 @@ test('native city steps cannot skip a short physically supported station handoff
           p.y = groundHeight(p.x, p.z);
           return p;
         },
-        samples = [-2.45, -2.25, -2.05, -1.85].map((distance) =>
+        samples = [-3.1, -2.9, -2.7].map((distance) =>
           Boolean(owner.tryEnterFromStreet(pointAt(distance).toArray())),
         );
       assert.deepEqual(
         samples,
-        [false, true, true, false],
-        'the real raised apron has a short .22m-supported city-height window',
+        [false, false, true],
+        'the exterior points remain in the city until the real supported entry window',
       );
+      const supported = owner.tryEnterFromStreet(pointAt(-2.7).toArray()),
+        exactSupport = owner.toWorld(supported);
+      assert(owner.isClearFoot(supported));
       assert(
-        samples.every((eligible, index) => index % 3 !== 0 || !eligible),
-        'a .15s poll at .05s native frames misses both valid opportunities',
+        owner.tryEnterFromStreet([
+          exactSupport[0],
+          exactSupport[1] + 0.219,
+          exactSupport[2],
+        ]),
+        'the bounded .22m snap accepts the actual support height',
+      );
+      assert.equal(
+        owner.tryEnterFromStreet([
+          exactSupport[0],
+          exactSupport[1] + 0.22001,
+          exactSupport[2],
+        ]),
+        null,
+        'a wider horizontal entry window never widens the vertical snap guard',
       );
       city.settings.mode = 'walk';
       const nav = city.navigation;
       nav.mode = 'walk';
       nav.blur();
-      nav.position.copy(pointAt(-2.65));
+      nav.position.copy(pointAt(-3.1));
       nav.yaw = Math.atan2(direction.x, direction.z);
       nav.keys.add('w');
       const start = nav.position.clone();
@@ -1910,7 +1934,15 @@ test('native city steps cannot skip a short physically supported station handoff
           ) < 1e-6,
           'the production street walker advances at its native walking speed',
         );
+        const eligible = Boolean(
+          owner.tryEnterFromStreet(nav.position.toArray()),
+        );
         travel.update(0.05);
+        assert.equal(
+          travel.active,
+          eligible,
+          'each native movement frame immediately reflects its actual supported eligibility',
+        );
       }
       assert.equal(travel.active, true);
       assert.equal(travel.owner, owner);
@@ -1955,7 +1987,7 @@ test('per-frame automatic street handoff retains input, bus, street-seat and act
         nav = city.navigation;
       city.settings.mode = 'walk';
       nav.mode = 'walk';
-      nav.position.fromArray(entry.threshold).addScaledVector(direction, -2.25);
+      nav.position.fromArray(entry.threshold).addScaledVector(direction, -2.7);
       nav.position.y = groundHeight(nav.position.x, nav.position.z);
       assert(
         owner.tryEnterFromStreet(nav.position.toArray()),

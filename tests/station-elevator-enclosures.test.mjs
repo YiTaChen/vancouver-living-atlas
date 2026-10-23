@@ -9,12 +9,18 @@ import {
   rebuildBurrard,
   rebuildGranville,
 } from '../tools/station-interiors/dunsmuir.mjs';
+import {
+  rebuildStadium,
+  rebuildYaletown,
+} from '../tools/station-interiors/southeast.mjs';
 import { cityModule } from './helpers/city-modules.mjs';
 const { SkyTrainStationOwner } = await import(cityModule('skytrain-stations'));
 const packet = JSON.parse(readFileSync(SOURCE));
 for (const [id, rebuild] of [
   ['burrard', rebuildBurrard],
   ['granville', rebuildGranville],
+  ['stadium-chinatown', rebuildStadium],
+  ['yaletown-roundhouse', rebuildYaletown],
 ]) {
   test(`${id}: enclosed elevator landings retain open approach doors and solid rear walls`, () => {
     const source = rebuild(packet.stations.find((s) => s.stationId === id)),

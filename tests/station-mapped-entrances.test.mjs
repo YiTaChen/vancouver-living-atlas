@@ -15,7 +15,12 @@ const mapEvidence = JSON.parse(
   readFileSync('tools/station-interiors/references/street-map-20261023.json'),
 );
 
-for (const id of ['burrard', 'granville'])
+for (const id of [
+  'burrard',
+  'granville',
+  'stadium-chinatown',
+  'yaletown-roundhouse',
+])
   test(`${id}: every maintained street doorway occupies its referenced map location`, () => {
     const raw = JSON.parse(
       readFileSync(`public/models/skytrain-stations/${id}.json`),

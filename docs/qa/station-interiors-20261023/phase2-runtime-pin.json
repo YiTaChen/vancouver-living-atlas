@@ -41,5 +41,12 @@
     "sha256": "e4268d2a5f781bae92c2bd50e9c3fcfc2bfdf0ceaf67ad330f41bcddc56e017d",
     "change": "Apply visible-apron priority only to rendered authored interiors. Unrendered legacy construction aprons retain nearest-height vestibule behavior.",
     "verification": "All six threshold/body regressions and six legacy construction-access tests pass (12/12); Burrard/Granville authored branch is unchanged."
+  },
+  "reviewedHeadCommit": "ce4e38feacb95103a4d46190f2b24cd7514d8a32",
+  "mergeCommit": "78f897f852d1486f34fa0782de79b01552aa8efe",
+  "completeValidation": {
+    "workflowRun": 39948647790,
+    "conclusion": "success",
+    "url": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/39948647790"
   }
 }
