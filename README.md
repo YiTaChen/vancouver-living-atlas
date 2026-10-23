@@ -18,6 +18,8 @@ Vancouver Living Atlas is an interactive 3D Vancouver that runs in your browser.
 
 **Ride SkyTrain:** choose the **Ride SkyTrain** launcher, a starting station entrance and a destination. Walk to the platform and the blue boarding marker, then press **E** or **Board**. The regional Expo and Canada Line services stop at seven stations, with a physical transfer at Waterfront. Desktop WASD and mobile joystick controls are supported. [Passenger controls, station scope and verification](docs/SKYTRAIN_PASSENGER_TRAVEL_2026_10.md) · [Official references and geographic source limits](docs/SKYTRAIN_STATION_REFERENCES_2026_10.md).
 
+**Station interiors, October 23:** Waterfront, Burrard, Granville, Stadium–Chinatown and Yaletown–Roundhouse now have separate mapped street entrances, enclosed stairs and escalators, fare boundaries, platform approaches and usable lifts. Close overhead views cut away ceilings for the walking character. [Photograph comparisons, final game captures and verification](docs/qa/station-interiors-20261023/final-acceptance.md) distinguish observed circulation from inferred dimensions.
+
 <a id="explore-vancouver-in-30-seconds"></a>
 
 ## Watch Vancouver 3D City

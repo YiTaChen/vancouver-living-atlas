@@ -9,6 +9,8 @@ import { createHash } from 'node:crypto';
 import { launchOptionsForProfile } from '../hosted-browser-qa.mjs';
 import { captureDunsmuirStation } from './capture-dunsmuir-views.mjs';
 import { captureSoutheastStation } from './capture-southeast-views.mjs';
+import { captureWaterfrontStation } from './capture-waterfront-views.mjs';
+import { prepareStationOverviewViewpoint } from './capture-overview-view.mjs';
 
 // The canvas is the subject of this evidence. A stalled remote UI font must
 // not prevent a screenshot of an already rendered city.
@@ -28,11 +30,14 @@ if (
     'Choose waterfront, burrard, granville, stadium-chinatown or yaletown-roundhouse',
   );
 const origin = process.env.STATION_GAME_URL ?? 'http://127.0.0.1:3200/?inspect',
-  output = resolve('docs/qa/station-interiors-20261023'),
+  output = resolve(
+    process.env.STATION_GAME_OUTPUT ?? 'docs/qa/station-interiors-20261023',
+  ),
   debugOutput = resolve('.cache/station-interior-debug'),
   errors = [],
   responses = [],
   warnings = [],
+  consoleMessages = [],
   captures = [];
 const packetUrl = new URL(
     `/models/skytrain-stations/${stationId}.json`,
@@ -59,6 +64,20 @@ const browser = await chromium.launch({
     viewport: { width: 1440, height: 1000 },
     deviceScaleFactor: 1,
   });
+const network = await page.context().newCDPSession(page);
+await network.send('Network.enable');
+const failedResponse = (url, status) => {
+  if (!responses.some((item) => item.url === url && item.status === status)) {
+    const item = { url, status };
+    responses.push(item);
+    console.error(JSON.stringify(item));
+  }
+};
+// Chromium's automatic favicon request is absent from Playwright's page
+// response events. Include the browser network stream in the HTTP gate.
+network.on('Network.responseReceived', ({ response }) => {
+  if (response.status >= 400) failedResponse(response.url, response.status);
+});
 page.on('pageerror', (error) => {
   const message = String(error.stack ?? error).slice(0, 2000);
   errors.push(message);
@@ -66,14 +85,18 @@ page.on('pageerror', (error) => {
 });
 page.on('response', (response) => {
   if (response.status() >= 400) {
-    const item = { url: response.url(), status: response.status() };
-    responses.push(item);
-    console.error(JSON.stringify(item));
+    failedResponse(response.url(), response.status());
   }
 });
 page.on('console', (message) => {
-  if (message.type() === 'warning' || message.type() === 'error')
+  if (message.type() === 'warning' || message.type() === 'error') {
     warnings.push(message.text().slice(0, 1000));
+    consoleMessages.push({
+      type: message.type(),
+      text: message.text().slice(0, 1000),
+      location: message.location(),
+    });
+  }
 });
 const report = {
   stationId,
@@ -85,6 +108,7 @@ const report = {
   errors,
   responses,
   warnings,
+  consoleMessages,
   runtimePacket,
 };
 async function snapshot(label) {
@@ -123,6 +147,7 @@ async function snapshot(label) {
         skinnedMeshes,
         position: walker.group.position.toArray(),
       },
+      occlusion: engine.travelOcclusion?.snapshot(),
       render: engine.renderer.info.render,
     };
   }, stationId);
@@ -222,6 +247,13 @@ try {
     nav.snapCamera = true;
     return {
       ready: travel.ready,
+      authorityCheckpoint: {
+        installed: engine.interiors?.waterfrontAuthority?.installed ?? null,
+        legacyHallVisible:
+          engine.interiors?.sites.find((site) => site.id === 'waterfront')
+            ?.legacyHall?.visible ?? null,
+        prepareOwner: typeof travel.stations.options.prepareOwner,
+      },
       stationCount: travel.stations.owners.length,
       fleetCount: travel.fleet.length,
       worldPaths: travel.worldPaths.size,
@@ -261,6 +293,9 @@ try {
       error: travel.error,
     };
   }, stationId);
+  console.log(
+    'Runtime authority: ' + JSON.stringify(report.initial.authorityCheckpoint),
+  );
   await page.waitForFunction(
     () =>
       window.__atlas?.settings.mode === 'walk' &&
@@ -353,216 +388,31 @@ try {
   );
   await snapshot(
     stationId === 'waterfront'
-      ? 'heritage-thirdperson'
+      ? 'initial-street-handoff-thirdperson'
       : 'entrance-thirdperson',
   );
   if (stationId === 'waterfront') {
-    for (const [line, label] of [
-      ['expo', 'expo'],
-      ['canada', 'canada'],
-    ]) {
-      await page.evaluate(
-        ({ line }) => {
-          const travel = window.__atlas.skyTrainTravel,
-            owner = travel.owner,
-            platform = owner.geometryData.platforms.find(
-              (item) => item.line === line,
-            );
-          travel.clearInput();
-          travel.foot = owner.boardingPoint(line, platform.direction);
-          travel.line = line;
-          travel.direction = platform.direction;
-          travel.level = 'platform';
-          travel.yaw = travel.foot.yaw + Math.PI / 2;
-          travel.lookYaw = 0;
-          travel.pitch = -0.22;
-          travel.distanceView = 4;
-          travel.updateCamera();
-        },
-        { line },
-      );
-      await snapshot(`${label}-platform-thirdperson`);
-      if (line === 'canada') {
-        await page.evaluate(() => {
-          const travel = window.__atlas.skyTrainTravel;
-          travel.distanceView = 10;
-          travel.pitch = -0.75;
-          travel.updateCamera();
-        });
-        await snapshot('canada-overhead-thirdperson');
-      }
-      await page.evaluate(() => {
-        const travel = window.__atlas.skyTrainTravel;
-        travel.distanceView = 0;
-        travel.pitch = 0.1;
-        travel.updateCamera();
-      });
-      await snapshot(`${label}-platform-firstperson`);
-      const stair = await page.evaluate(
-        ({ line }) => {
-          const travel = window.__atlas.skyTrainTravel,
-            owner = travel.owner,
-            connection = owner.geometryData.connections.find(
-              (item) =>
-                item.id ===
-                (line === 'expo'
-                  ? 'waterfront-expo-platform-stairs'
-                  : 'waterfront-canada-north-stairs'),
-            ),
-            index = Math.min(
-              connection.treads.length - 2,
-              Math.floor(connection.treads.length / 2) + 3,
-            ),
-            tread = connection.treads[index],
-            point = tread.vertices.reduce(
-              (sum, vertex) =>
-                sum.map(
-                  (value, axis) => value + vertex[axis] / tread.vertices.length,
-                ),
-              [0, 0, 0],
-            );
-          const foot = owner.floorAt(point, `${connection.id}:step:${index}`);
-          if (!foot || !owner.isClearFoot(foot))
-            throw new Error(
-              `Stair capture has no clear supported foot: ${connection.id}`,
-            );
-          travel.foot = foot;
-          travel.yaw = Math.atan2(
-            connection.end[0] - connection.start[0],
-            connection.end[2] - connection.start[2],
-          );
-          travel.lookYaw = 0;
-          travel.pitch = Math.max(
-            -1.4,
-            Math.atan2(
-              connection.end[1] - connection.start[1],
-              Math.hypot(
-                connection.end[0] - connection.start[0],
-                connection.end[2] - connection.start[2],
-              ),
-            ) - 0.08,
-          );
-          travel.distanceView = 0;
-          travel.updateCamera();
-          return { id: connection.id, treadIndex: index };
-        },
-        { line },
-      );
-      await snapshot(`${label}-stairs-firstperson`);
-      captures.at(-1).connection = stair.id;
-      captures.at(-1).treadIndex = stair.treadIndex;
-      if (line === 'expo') {
-        report.expoStairRayHits = await page.evaluate(() => {
-          const engine = window.__atlas,
-            owner = engine.skyTrainTravel.owner,
-            ray = new engine.placement.raycaster.constructor(),
-            publicSite = engine.interiors.sites.find(
-              (site) => site.id === 'waterfront',
-            ),
-            ancestor = (object, target) => {
-              for (let current = object; current; current = current.parent)
-                if (current === target) return true;
-              return false;
-            },
-            visible = (object) => {
-              for (let current = object; current; current = current.parent)
-                if (!current.visible) return false;
-              return true;
-            };
-          engine.scene.updateMatrixWorld(true);
-          engine.camera.updateMatrixWorld(true);
-          return [
-            [0, 0],
-            [0, 0.35],
-            [0, -0.35],
-            [-0.3, 0.15],
-            [0.3, 0.15],
-          ].map(([x, y]) => {
-            ray.setFromCamera({ x, y }, engine.camera);
-            ray.far = 25;
-            const describe = (hit) => ({
-              distance: hit.distance,
-              point: hit.point.toArray(),
-              local: owner.toLocal(hit.point.toArray()),
-              mesh: hit.object.name,
-              uuid: hit.object.uuid,
-              instanceId: hit.instanceId,
-              part: hit.object.userData.stationPartIds?.[hit.instanceId],
-              role: hit.object.userData.stationPartRoles?.[hit.instanceId],
-              owner: ancestor(hit.object, owner.group),
-              publicWaterfront:
-                ancestor(hit.object, publicSite?.group) ||
-                ancestor(hit.object, publicSite?.envelope),
-              ancestors: (() => {
-                const result = [];
-                for (let object = hit.object; object; object = object.parent)
-                  result.push(object.name || object.type);
-                return result;
-              })(),
-            });
-            return {
-              ndc: [x, y],
-              fullScene: ray
-                .intersectObject(engine.scene, true)
-                .filter((hit) => visible(hit.object))
-                .slice(0, 8)
-                .map(describe),
-              ownerOnly: ray
-                .intersectObject(owner.group, true)
-                .filter((hit) => visible(hit.object))
-                .slice(0, 8)
-                .map(describe),
-            };
-          });
-        });
-        await page.evaluate(() => {
-          const engine = window.__atlas,
-            owner = engine.skyTrainTravel.owner,
-            walker = engine.navigation.walker.group,
-            inside = (object, target) => {
-              for (let parent = object; parent; parent = parent.parent)
-                if (parent === target) return true;
-              return false;
-            };
-          window.__stationCaptureHidden = [];
-          engine.scene.traverse((object) => {
-            if (
-              object.isMesh &&
-              !inside(object, owner.group) &&
-              !inside(object, walker)
-            ) {
-              window.__stationCaptureHidden.push([object, object.visible]);
-              object.visible = false;
-            }
-          });
-        });
-        await snapshot('expo-stairs-owner-only');
-        await page.evaluate(() => {
-          for (const [object, visible] of window.__stationCaptureHidden)
-            object.visible = visible;
-          delete window.__stationCaptureHidden;
-          const travel = window.__atlas.skyTrainTravel,
-            connection = travel.owner.geometryData.connections.find(
-              (item) => item.id === travel.foot.surfaceId.split(':step:')[0],
-            );
-          travel.pitch = Math.atan2(
-            connection.end[1] - connection.start[1],
-            Math.hypot(
-              connection.end[0] - connection.start[0],
-              connection.end[2] - connection.start[2],
-            ),
-          );
-          travel.updateCamera();
-        });
-        await snapshot('expo-stairs-look-down');
-      }
-    }
+    await captureWaterfrontStation(page, snapshot, report, stationId);
   } else if (stationId === 'burrard' || stationId === 'granville') {
     await captureDunsmuirStation(page, snapshot, report, stationId);
   } else {
     await captureSoutheastStation(page, snapshot, report, stationId);
   }
+  report.overviewViewpoint = await page.evaluate(prepareStationOverviewViewpoint);
   await page.evaluate(() => window.__atlas.skyTrainTravel.setOverview(true));
+  await page.evaluate(() => {
+    const engine = window.__atlas,
+      travel = engine.skyTrainTravel,
+      origin = travel.interactionOrigin;
+    if (!origin || !travel.foot)
+      throw new Error('Missing occupied cutaway level');
+    // Zoom the normal local-map orbit to the occupied interior. The launcher
+    // starts at city scale, beyond the public building's cutaway distance.
+    engine.controls.target.set(...origin);
+    engine.camera.position.set(origin[0] + 55, origin[1] + 85, origin[2] + 65);
+    engine.controls.update();
+    travel.owner.updateCutaway(engine.camera.position, travel.foot.position[1]);
+  });
   await snapshot('overview-cutaway');
   report.final = await page.evaluate(() => ({
     snapshot: window.__atlas.skyTrainTravel.snapshot(),
@@ -662,6 +512,12 @@ try {
     !!report.enteredByStreet &&
     !report.failure &&
     errors.length === 0 &&
+    responses.length === 0 &&
+    !warnings.some((message) =>
+      /(?:THREE\.WebGLProgram|shader error|VALIDATE_STATUS|GL_INVALID_OPERATION)/i.test(
+        message,
+      ),
+    ) &&
     !report.final?.contextLost &&
     captures.length >= 10 &&
     (report.entryTransitions?.every((entry) => entry.entered && entry.left) ??
@@ -672,8 +528,11 @@ try {
         (capture) =>
           capture.avatar.visible &&
           capture.avatar.assetState === 'ready' &&
-          capture.avatar.skinnedMeshes > 0,
+          capture.avatar.skinnedMeshes > 0 &&
+          capture.occlusion?.shaderFailures === 0,
       );
+  report.acceptanceBoundary =
+    'passed covers native input, runtime and shader checks. Visible avatar pixels, enclosing architecture and photo correspondence require the separate manual image review.';
   if (report.passed)
     for (const capture of captures)
       await copyFile(

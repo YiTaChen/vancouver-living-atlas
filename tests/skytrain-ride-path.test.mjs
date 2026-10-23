@@ -39,6 +39,24 @@ const routes = JSON.parse(routeBytes);
 const label = (s) => `${s.lineId}:${s.from}:${s.to}`;
 const near = (a, b, epsilon = 1e-6) =>
   assert(Math.abs(a - b) < epsilon, `${a} != ${b}`);
+// Serialized, rigidly composed source rotations may be a few ulps from unit
+// length. THREE.angleTo(q, q) then reports a false nonzero angle. Compare the
+// represented rotation at a stricter component tolerance without changing the
+// actual station quaternion or weakening physical heading agreement.
+const sameRotation = (actual, expected, label) => {
+  for (const q of [actual, expected])
+    assert(
+      Number.isFinite(q.length()) && Math.abs(q.length() - 1) < 1e-6,
+      label,
+    );
+  const a = actual.clone().normalize().toArray(),
+    b = expected.clone().normalize().toArray(),
+    error = Math.min(
+      Math.max(...a.map((v, i) => Math.abs(v - b[i]))),
+      Math.max(...a.map((v, i) => Math.abs(v + b[i]))),
+    );
+  assert(error < 1e-12, `${label}: rotation component error ${error}`);
+};
 const stationData = (stationId) => {
   const raw = validateRuntimeStation(
     JSON.parse(
@@ -364,6 +382,32 @@ test('Main Street uses both GTFS platform anchors and authored interiors use the
   );
 });
 
+test('strict station rotation comparison accepts the actual serialized orientation and its sign equivalent but rejects a changed heading', () => {
+  const s = routes.segments.find(
+      (s) => s.from === 'vancouver-city-centre' && s.to === 'waterfront',
+    ),
+    q = pose(s, s.to).quaternion,
+    before = q.toArray();
+  sameRotation(q, q.clone(), 'source copy');
+  sameRotation(
+    q,
+    new THREE.Quaternion(...q.toArray().map((v) => -v)),
+    'sign equivalent',
+  );
+  const changed = new THREE.Quaternion()
+    .setFromAxisAngle(new THREE.Vector3(0, 1, 0), 2e-8)
+    .multiply(q);
+  assert.throws(
+    () => sameRotation(q, changed, 'changed heading'),
+    /rotation component error/,
+  );
+  assert.deepEqual(
+    q.toArray(),
+    before,
+    'comparison never normalizes the source in place',
+  );
+});
+
 test('actual authored platform endpoints remain exact and all sampled poses are finite, normalized and bounded', () => {
   const sourceBefore = JSON.stringify(routes);
   for (const s of routes.segments) {
@@ -384,8 +428,14 @@ test('actual authored platform endpoints remain exact and all sampled poses are 
     );
     assert(path.sample(0).position.distanceTo(a.position) < 1e-6, label(s));
     assert(path.sample(1).position.distanceTo(b.position) < 1e-6, label(s));
-    assert(path.sample(0).quaternion.angleTo(a.quaternion) < 1e-6, label(s));
-    assert(path.sample(1).quaternion.angleTo(b.quaternion) < 1e-6, label(s));
+    for (const [u, stop] of [
+      [0, a],
+      [1, b],
+    ]) {
+      const result = path.sample(u);
+      sameRotation(result.quaternion, stop.quaternion, label(s));
+      assert.deepEqual(result.quaternion.toArray(), stop.quaternion.toArray());
+    }
     let last = path.sample(0);
     for (let i = 1; i <= 2000; i++) {
       const p = path.sample(i / 2000);
@@ -528,8 +578,17 @@ test('actual articulated GLB car frames retain strict outside terrain clearance 
       }
       assert(path.sample(0).position.distanceTo(path.start.position) < 1e-6);
       assert(path.sample(1).position.distanceTo(path.end.position) < 1e-6);
-      assert(path.sample(0).quaternion.angleTo(path.start.quaternion) < 1e-6);
-      assert(path.sample(1).quaternion.angleTo(path.end.quaternion) < 1e-6);
+      for (const [u, stop] of [
+        [0, path.start],
+        [1, path.end],
+      ]) {
+        const result = path.sample(u);
+        sameRotation(result.quaternion, stop.quaternion, label(s));
+        assert.deepEqual(
+          result.quaternion.toArray(),
+          stop.quaternion.toArray(),
+        );
+      }
     }
     for (const [from, to] of [
       ['waterfront', 'burrard'],
@@ -570,7 +629,7 @@ test('station approaches stay straight and level until each articulated car clea
           `${label(s)} endpoint lead bends at ${distance}m`,
         );
         assert(Math.abs(p.position.y - stop.position.y) < 1e-6, label(s));
-        assert(p.quaternion.angleTo(stop.quaternion) < 1e-6, label(s));
+        sameRotation(p.quaternion, stop.quaternion, label(s));
       }
     }
   }
@@ -599,7 +658,7 @@ test('per-car physical arc sampling reuses poses and preserves every stationary 
             .add(stop.position);
         assert.equal(result, target);
         assert(result.position.distanceTo(expected) < 0.001, label(s));
-        assert(result.quaternion.angleTo(stop.quaternion) < 1e-6, label(s));
+        sameRotation(result.quaternion, stop.quaternion, label(s));
       }
     assert.equal(path.sample(0.5, target), target);
     assert(target.position.distanceTo(path.curve.getPointAt(0.5)) < 1e-9);
@@ -672,7 +731,7 @@ test('pose progress clamps invalid values to a stable finite endpoint and never 
     const value = p.sample(fraction);
     assert(finitePose(value));
     assert(value.position.distanceTo(start.position) < 1e-6);
-    assert(value.quaternion.angleTo(start.quaternion) < 1e-6);
+    sameRotation(value.quaternion, start.quaternion, 'clamped endpoint');
   }
   assert(p.sample(100).position.distanceTo(end.position) < 1e-6);
   const independent = p.sample(0.5),

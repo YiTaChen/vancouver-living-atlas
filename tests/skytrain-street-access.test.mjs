@@ -322,7 +322,7 @@ test('proximity loads only geographically nearby owners, retains all seven acros
   assert.equal(stations.owners.length, 0);
   await assert.rejects(stations.ensure('waterfront'));
 });
-test('portal material apertures retain previous hooks and use seven coarse rejects before exact bounded station rectangles', () => {
+test('portal material apertures retain previous hooks and use at most thirteen coarse pages before exact bounded station rectangles', () => {
   const material = new THREE.MeshStandardMaterial(),
     root = new THREE.Group(),
     mesh = new THREE.Mesh(new THREE.BoxGeometry(), material);
@@ -348,7 +348,32 @@ test('portal material apertures retain previous hooks and use seven coarse rejec
       `stationRegionIndex<${shader.uniforms.uStationRegionBounds.value.length}`,
     ),
   );
-  assert(shader.fragmentShader.includes('stationDelta.x>stationBounds.z'));
+  assert.equal(shader.uniforms.uStationRegionBounds.value.length, 13);
+  assert(shader.uniforms.uStationRegionCount.value <= 13);
+  assert.equal(shader.uniforms.uStationViewCutaway.value.w, 0);
+  assert.equal(shader.uniforms.uStationViewCamera.value.w, 0);
+  assert(shader.fragmentShader.includes('stationDelta.x<=stationBounds.z'));
+  const pageGuard =
+    'if(!stationVerticalPage && !stationProjectedPage) continue;';
+  assert(shader.fragmentShader.includes(pageGuard));
+  assert(
+    shader.fragmentShader.indexOf(pageGuard) <
+      shader.fragmentShader.indexOf('texelFetch('),
+    'page rejection precedes every bounded per-row texture lookup',
+  );
+  assert(
+    shader.fragmentShader.includes('stationViewPage && stationProjectedView'),
+    'only an explicitly active owner may use the projected broadphase',
+  );
+  const pages = shader.uniforms.uStationRegionRanges.value.slice(
+    0,
+    shader.uniforms.uStationRegionCount.value,
+  );
+  assert(pages.every((range) => range.y > 0 && range.y <= 48));
+  assert.equal(
+    pages.reduce((sum, range) => sum + range.y, 0),
+    shader.uniforms.uStationOpeningCount.value,
+  );
   assert(shader.fragmentShader.includes('stationLocalIndex<48'));
   assert(shader.fragmentShader.includes('vStationOpeningWorld.y>=p.z'));
   assert.equal(
@@ -377,6 +402,11 @@ test('portal material apertures retain previous hooks and use seven coarse rejec
   openings.dispose();
   assert.equal(Reflect.get(material, 'onBeforeCompile'), previous);
   assert.equal(Reflect.get(material, 'customProgramCacheKey'), previousKey);
+  assert(!mesh.geometry.hasAttribute('aStationOpeningSurface'));
+  assert.equal(
+    material.defaultAttributeValues?.aStationOpeningSurface,
+    undefined,
+  );
   for (const o of owners) o.dispose();
   mesh.geometry.dispose();
   material.dispose();
@@ -660,7 +690,7 @@ test('late material refresh preserves distinct default shader keys and restores 
   detachedMaterial.dispose();
 });
 
-test('the visible centre-bank handrails stop sideways passage while keeping the tread centre walkable', () => {
+test('visible bank handrails stop sideways passage while the actual stair walking lane remains clear', () => {
   for (const data of catalog) {
     const o = owner(data),
       c = o.geometryData.connections.find((c) => c.type === 'stairs'),
@@ -674,25 +704,69 @@ test('the visible centre-bank handrails stop sideways passage while keeping the 
       lateral = [
         (c.end[2] - c.start[2]) / length,
         -(c.end[0] - c.start[0]) / length,
+      ],
+      along = Math.max(
+        0,
+        Math.min(
+          1,
+          ((center[0] - c.start[0]) * (c.end[0] - c.start[0]) +
+            (center[2] - c.start[2]) * (c.end[2] - c.start[2])) /
+            (length * length),
+        ),
+      ),
+      lane = [
+        c.start[0] + (c.end[0] - c.start[0]) * along,
+        center[1],
+        c.start[2] + (c.end[2] - c.start[2]) * along,
       ];
-    let foot = o.floorAt(center, `${c.id}:step:${step}`);
-    assert(foot);
-    assert(o.isClearFoot(foot));
-    for (let i = 0; i < 20; i++)
-      foot = o.walk(foot, lateral[0] * 0.07, lateral[1] * 0.07);
-    assert(
-      Math.hypot(foot.position[0] - center[0], foot.position[2] - center[2]) <
-        (data.authoredInterior ? c.width / 2 - 0.22 : 0.4),
-      `${data.id}: body cannot pass through the actual handrail`,
-    );
-    const moved = o.walk(foot, -lateral[0] * 0.2, -lateral[1] * 0.2);
-    assert(
-      Math.hypot(
-        moved.position[0] - foot.position[0],
-        moved.position[2] - foot.position[2],
-      ) > 0.1,
-    );
-    o.dispose();
+    try {
+      const initial = o.floorAt(lane, `${c.id}:step:${step}`);
+      assert(
+        initial && o.isClearFoot(initial),
+        `${data.id}: actual walking lane`,
+      );
+      if (Math.hypot(lane[0] - center[0], lane[2] - center[2]) > 0.05) {
+        const dividedCentre = o.floorAt(center, `${c.id}:step:${step}`);
+        assert(
+          dividedCentre && !o.isClearFoot(dividedCentre),
+          `${data.id}: the photographed central rail still blocks its physical centre`,
+        );
+      }
+      for (const direction of [-1, 1]) {
+        let foot = initial;
+        for (let i = 0; i < 20; i++) {
+          foot = o.walk(
+            foot,
+            direction * lateral[0] * 0.07,
+            direction * lateral[1] * 0.07,
+          );
+          assert(
+            o.isClearFoot(foot),
+            `${data.id}: lateral capsule remains clear`,
+          );
+        }
+        assert(
+          Math.hypot(
+            foot.position[0] - center[0],
+            foot.position[2] - center[2],
+          ) < (data.authoredInterior ? c.width / 2 - 0.22 : 0.4),
+          `${data.id}: body cannot pass through the actual handrail`,
+        );
+        const moved = o.walk(
+          foot,
+          -direction * lateral[0] * 0.2,
+          -direction * lateral[1] * 0.2,
+        );
+        assert(
+          Math.hypot(
+            moved.position[0] - foot.position[0],
+            moved.position[2] - foot.position[2],
+          ) > 0.1,
+        );
+      }
+    } finally {
+      o.dispose();
+    }
   }
 });
 

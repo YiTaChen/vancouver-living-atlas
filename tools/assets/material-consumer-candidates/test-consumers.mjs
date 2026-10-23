@@ -8,6 +8,7 @@ import {roadsterPatch,interiorPatch} from './adapters/source-patches.mjs';
 import {originalSource} from './adapters/harness.mjs';
 import {readFileSync} from 'node:fs';
 import {assertProtectedSources,projectBeforeCharacter,projectBeforeSeating} from './adapters/seating-source-compatibility.mjs';
+import {reviewedWaterfrontConsumerFixture} from './adapters/waterfront-authority-source-compatibility.mjs';
 
 test('Exact metre triangle charts retain transformed box attributes',()=>{
  const original=new THREE.BoxGeometry(2,3,4).rotateY(.54).translate(2,1,9).toNonIndexed();
@@ -67,6 +68,20 @@ function protectedSources() {
   ]));
   return { baseline, sources };
 }
+
+test('Reviewed Waterfront split changes only exact merged-mesh metadata and retains world triangles and fixture guards',()=>{
+ const baseline=JSON.parse(readFileSync(new URL('./qa/current-source-fixtures.json',import.meta.url),'utf8')),
+  source=originalSource('interiors'),reviewed=reviewedWaterfrontConsumerFixture(baseline,source),
+  prior=baseline.interiors.find(s=>s.id==='waterfront').geometry,
+  current=reviewed.interiors.find(s=>s.id==='waterfront').geometry;
+ for(const key of ['hash','triangles','vertices'])assert.equal(current[key],prior[key]);
+ assert.equal(prior.meshes,3);assert.equal(current.meshes,6);
+ const restored=structuredClone(reviewed);restored.interiors.find(s=>s.id==='waterfront').geometry=structuredClone(prior);
+ assert.deepEqual(restored,baseline,'all other stored geometry, navigation and source receipts stay exact');
+ const changed=structuredClone(baseline);changed.interiors.find(s=>s.id==='waterfront').geometry.triangles++;
+ assert.throws(()=>reviewedWaterfrontConsumerFixture(changed,source));
+ assert.throws(()=>reviewedWaterfrontConsumerFixture(baseline,source+'\n// unreviewed\n'),/Protected pre-seating source drift/);
+});
 
 test('Reviewed seating, character selection and camera changes project to unchanged source fixtures while all other bytes stay exact', () => {
   const { baseline, sources } = protectedSources();
@@ -176,10 +191,10 @@ test('Camera compatibility rejects altered, missing or duplicated camera changes
   const path = 'lib/city/navigation.ts', source = sources[path];
   for (const [before, after] of [
     ['this.mode === \'walk\' ? clampTravelPitch(pitch)', 'this.mode === \'walk\' ? pitch'],
-    ['this.e.roads, this.e.terrain], 0.18, pos)', 'this.e.roads, this.e.terrain], 0.01, pos)'],
+    ["if (this.mode !== 'walk' && !this.clearGround(x, z)", "if (!this.clearGround(x, z)"],
     ['    this.e.renderer.domElement.setPointerCapture?.(ev.pointerId);\n', ''],
-    ['  private readonly cameraCollision = new TravelCameraCollision();\n',
-      '  private readonly cameraCollision = new TravelCameraCollision();\n  private readonly cameraCollision = new TravelCameraCollision();\n'],
+    ["    const walkThird = this.mode === 'walk' && !firstPerson('walk', distance);\n",
+      "    const walkThird = this.mode === 'walk' && !firstPerson('walk', distance);\n    const walkThird = true;\n"],
   ]) {
     assert(source.includes(before));
     assert.throws(() => assertProtectedSources({ ...sources, [path]: source.replace(before, after) }, baseline),
@@ -197,7 +212,9 @@ test('Seating compatibility rejects changes to driving, walking, collision, came
     ['lib/city/navigation.ts', 'this.walkSeat.height + 0.78', 'this.walkSeat.height + 0.8'],
     ['lib/city/navigation.ts', 'object.userData.groundObstruction === true', 'object.userData.groundObstruction === false'],
     ['lib/city/interiors.ts', 'parts.box([w, 0.55, 0.12]', 'parts.box([w, 0.56, 0.12]'],
-    ['lib/city/interiors.ts', 'yaw: site.yaw, height: 0.48', 'yaw: site.yaw, height: 0.6'],
+    ['lib/city/interiors.ts', '        height: 0.48,', '        height: 0.6,'],
+    ['lib/city/interiors.ts', 'parts.group.visible && this.e.landmarks.visible', 'this.e.landmarks.visible'],
+    ['lib/city/interiors.ts', 'object.userData.walkSurface = false;', 'object.userData.walkSurface = true;'],
   ]) {
     assert(sources[path].includes(before), `negative fixture anchor exists: ${before}`);
     const mutated = { ...sources, [path]: sources[path].replace(before, after) };

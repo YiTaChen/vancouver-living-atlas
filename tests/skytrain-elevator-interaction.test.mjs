@@ -43,7 +43,7 @@ class Canvas extends EventTarget {
 
 async function harness(
   run,
-  { stationId = 'burrard', rebuild = rebuildBurrard } = {},
+  { stationId = 'burrard', rebuild = rebuildBurrard, published = false } = {},
 ) {
   const saved = new Map(
     ['window', 'document', 'Element'].map((key) => [
@@ -93,10 +93,14 @@ async function harness(
     },
   };
   const runtime = adaptSkyTrainStationFrame(
-      makeRuntimeStation(
-        rebuild(sources.find((s) => s.stationId === stationId)),
-        'a'.repeat(64),
-      ),
+      published
+        ? JSON.parse(
+            readFileSync(`public/models/skytrain-stations/${stationId}.json`),
+          )
+        : makeRuntimeStation(
+            rebuild(sources.find((s) => s.stationId === stationId)),
+            'a'.repeat(64),
+          ),
       routes,
     ),
     owner = new SkyTrainStationOwner(runtime, cityElevation, 'balanced', true),
@@ -236,6 +240,7 @@ for (const { stationId, rebuild } of [
             2,
             'the street and platform lifts remain physically separate',
           );
+        let boundedButtonApproaches = 0;
         for (const [index, { connection, reverse }] of sequence.entries()) {
           const source = reverse ? connection.end : connection.start,
             destination = reverse ? connection.start : connection.end,
@@ -272,11 +277,36 @@ for (const { stationId, rebuild } of [
           assert(candidate, `${connection.id}: real landing offers ${action}`);
           // Distinct call buttons allow the middle landings' up and down destinations
           // to be selected by physically approaching that side of the cabin.
-          walkTo(travel, owner.toLocal(candidate.proximityPoint));
+          const buttonPoint = owner.toLocal(candidate.proximityPoint),
+            approach = owner.walk(
+              travel.foot,
+              buttonPoint[0] - travel.foot.position[0],
+              buttonPoint[2] - travel.foot.position[2],
+            );
+          assert(owner.isClearFoot(approach));
+          // The selector's proximity point is beside the cabin centre. A real
+          // landing wall can bound that sidestep before the selector, while the
+          // call button remains visible and within its unchanged native range.
+          // Plan against the actual capsule, then reach it with normal input.
+          if (
+            Math.hypot(
+              approach.position[0] - buttonPoint[0],
+              approach.position[2] - buttonPoint[2],
+            ) > 0.025
+          )
+            boundedButtonApproaches++;
+          walkTo(travel, approach.position);
           candidate = elevatorCandidates(travel).find(
             (c) => c.id === candidate.id,
           );
           assert(candidate);
+          assert(candidate.canInteract());
+          assert(
+            new THREE.Vector3(...owner.toWorld(travel.foot)).distanceTo(
+              new THREE.Vector3(...candidate.proximityPoint),
+            ) <= candidate.range,
+            'the real capsule remains inside the unchanged call-button range',
+          );
           aimAt(travel, owner, candidate);
           host.clear();
           host.update(performance.now(), true);
@@ -350,6 +380,11 @@ for (const { stationId, rebuild } of [
           );
         }
         assert.equal(travel.foot.surfaceId, connections[0].from);
+        if (stationId === 'stadium-chinatown')
+          assert(
+            boundedButtonApproaches > 0,
+            'the physical middle-landing wall bounds its call-button approach',
+          );
         assert(
           travel.walkDistance > originalDistance,
           'approaches used actual native walking input',
@@ -668,4 +703,200 @@ test('both completed source landing records and both real door-leaf pairs are re
       });
     }
   });
+});
+
+test('waterfront: all five published shafts use native F and touch in both directions through one continuous step-free route', async () => {
+  await harness(
+    ({ owner, travel, host, connections, view }) => {
+      assert.equal(connections.length, 5);
+      assert.equal(
+        new Set(connections.map((c) => `${c.start[0]},${c.start[2]}`)).size,
+        5,
+        'five physically separate source cabins remain distinct',
+      );
+      const data = owner.geometryData,
+        entry = owner.streetEntrances().find((e) => e.id === 'cordova-lobby'),
+        worldInward = new THREE.Vector3(
+          ...entry.localDirection,
+        ).applyQuaternion(owner.group.quaternion),
+        outside = new THREE.Vector3(...entry.threshold).addScaledVector(
+          worldInward,
+          -2.2,
+        ),
+        coverage = new Set();
+      outside.y = cityElevation(outside.x, outside.z);
+      // The only initial placement is on the actual supported exterior apron.
+      // Thereafter every room, core and platform is reached by native walking
+      // and the visible real lift prompt; no foot or floor identity is replaced.
+      travel.foot = owner.tryEnterFromStreet(outside.toArray());
+      assert(travel.foot && owner.isClearFoot(travel.foot));
+      let rideIndex = 0;
+      const walk = (goal) => {
+        for (const waypoint of planFlat(owner, travel.foot, goal))
+          walkTo(travel, waypoint);
+        assert(
+          new THREE.Vector3(...travel.foot.position).distanceTo(
+            new THREE.Vector3(...goal),
+          ) < 0.23,
+          `native body reaches actual supported waypoint ${goal}`,
+        );
+      };
+      const ride = (connection, reverse, method) => {
+        const source = reverse ? connection.end : connection.start,
+          destination = reverse ? connection.start : connection.end,
+          action = destination[1] > source[1] ? 'elevatorUp' : 'elevatorDown';
+        walk(source);
+        let candidate = elevatorCandidates(travel).find(
+          (c) => c.id.includes(`:${connection.id}:`) && c.action === action,
+        );
+        assert(
+          candidate,
+          `${connection.id}: the actual source cabin offers ${action}`,
+        );
+        walkTo(travel, owner.toLocal(candidate.proximityPoint));
+        candidate = elevatorCandidates(travel).find(
+          (c) => c.id === candidate.id,
+        );
+        assert(candidate?.canInteract());
+        aimAt(travel, owner, candidate);
+        host.clear();
+        host.update(performance.now(), true);
+        assert.equal(
+          view().snapshot?.id,
+          candidate.id,
+          'the visible prompt selects this actual cabin',
+        );
+        const before = travel.walkDistance;
+        if (method === 'F') {
+          const event = new Event('keydown', { cancelable: true });
+          Object.assign(event, { key: 'f', code: 'KeyF', repeat: false });
+          window.dispatchEvent(event);
+          assert(
+            event.defaultPrevented,
+            'the common keyboard handler dispatches the shown lift prompt',
+          );
+        } else
+          assert(
+            host.interact(view().snapshot),
+            'the shown lift prompt accepts touch',
+          );
+        assert(
+          new THREE.Vector3(...travel.foot.position).distanceTo(
+            new THREE.Vector3(...destination),
+          ) < 1e-9,
+        );
+        assert.equal(
+          travel.foot.surfaceId,
+          reverse ? connection.from : connection.to,
+        );
+        assert(owner.isClearFoot(travel.foot));
+        assert.equal(
+          travel.walkDistance,
+          before,
+          'lift movement cannot synthesize walking',
+        );
+        assert.equal(travel.owner, owner);
+        assert.equal(travel.aboard, false);
+        assert.equal(
+          candidate.execute(),
+          false,
+          'a departed landing cannot replay',
+        );
+        coverage.add(`${connection.id}:${reverse}:${method}`);
+        rideIndex++;
+      };
+      const navigate = (floorId, goal, method) => {
+        const starts = data.floors
+            .filter((f) => {
+              const point = owner.floorAt(travel.foot.position, f.id);
+              return (
+                point &&
+                Math.abs(point.position[1] - travel.foot.position[1]) < 0.02 &&
+                owner.isClearFoot(point)
+              );
+            })
+            .map((f) => f.id),
+          queue = [...starts],
+          visited = new Set(starts),
+          previous = new Map();
+        while (queue.length && !visited.has(floorId)) {
+          const floor = queue.shift();
+          for (const c of data.connections.filter(
+            (c) => c.type === 'walk' || c.type === 'elevator',
+          )) {
+            const reverse = c.to === floor;
+            if (c.from !== floor && !reverse) continue;
+            const next = reverse ? c.from : c.to;
+            if (visited.has(next)) continue;
+            visited.add(next);
+            previous.set(next, { floor, connection: c, reverse });
+            queue.push(next);
+          }
+        }
+        assert(
+          visited.has(floorId),
+          `actual step-free graph connects ${travel.foot.surfaceId} to ${floorId}`,
+        );
+        const chain = [];
+        for (let id = floorId; !starts.includes(id);) {
+          const leg = previous.get(id);
+          assert(leg);
+          chain.unshift(leg);
+          id = leg.floor;
+        }
+        for (const { connection: c, reverse } of chain) {
+          const source = reverse ? c.end : c.start,
+            destination = reverse ? c.start : c.end;
+          if (c.type === 'elevator') ride(c, reverse, method);
+          else {
+            walk(source);
+            walk(destination);
+          }
+        }
+        walk(goal);
+      };
+      walk(owner.toLocal(entry.threshold));
+      for (const method of ['F', 'touch'])
+        for (const connection of connections)
+          for (const reverse of [false, true]) {
+            navigate(
+              reverse ? connection.to : connection.from,
+              reverse ? connection.end : connection.start,
+              method,
+            );
+            ride(connection, reverse, method);
+          }
+      for (const connection of connections)
+        for (const reverse of [false, true])
+          for (const method of ['F', 'touch'])
+            assert(
+              coverage.has(`${connection.id}:${reverse}:${method}`),
+              'every cabin endpoint supports both native interaction methods',
+            );
+      assert(rideIndex >= 20);
+      for (const line of ['expo', 'canada']) {
+        const platform = data.platforms.find((p) => p.line === line),
+          point = owner.boardingPoint(line, platform.direction);
+        navigate(platform.surfaceId, point.position, 'F');
+        assert(owner.floorAt(travel.foot.position, platform.surfaceId));
+        assert.equal(travel.level, 'platform');
+        assert.equal(travel.line, line);
+      }
+      const sourceEntry = data.entrances.find((e) => e.id === 'cordova-lobby');
+      navigate(sourceEntry.surfaceId, sourceEntry.point, 'touch');
+      travel.yaw = Math.atan2(
+        -entry.localDirection[0],
+        -entry.localDirection[2],
+      );
+      travel.lookYaw = 0;
+      travel.setTouchAxes(0, 1);
+      for (let i = 0; i < 100 && travel.active; i++) travel.update(0.025);
+      assert(
+        !travel.active,
+        'the same native walker returns through the true Cordova portal to the city',
+      );
+      assert(travel.walkDistance > 0);
+    },
+    { stationId: 'waterfront', published: true },
+  );
 });

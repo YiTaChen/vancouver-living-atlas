@@ -28,11 +28,11 @@ function members(file, className, names, predicate) {
 const code = ts.transpileModule(
   `
   import * as THREE from '${import.meta.resolve('three')}';
-  import { zoomTravel } from '${cityModule('travel-camera')}';
+  import { zoomTravel, firstPerson } from '${cityModule('travel-camera')}';
   export class PassengerPolicy {
     ${members('skytrain-travel', 'SkyTrainTravel', ['active', 'passengerSeated', 'interactionOrigin'], ts.isGetAccessorDeclaration)}
     ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['aboard', 'canResumeOverview'], ts.isGetAccessorDeclaration)}
-    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['observeOverviewMoved', 'releaseForPlacement', 'setOverview', 'zoom'], ts.isMethodDeclaration)}
+    ${members('skytrain-world-travel', 'SkyTrainWorldTravel', ['observeOverviewMoved', 'releaseForPlacement', 'setOverview', 'zoom', 'syncViewCutaway'], ts.isMethodDeclaration)}
     ${members('skytrain-travel', 'SkyTrainTravel', ['resetSeat', 'clearTube', 'publish'], ts.isMethodDeclaration)}
     ${members('skytrain-travel', 'SkyTrainTravel', ['clearInput'], ts.isPropertyDeclaration)}
   }

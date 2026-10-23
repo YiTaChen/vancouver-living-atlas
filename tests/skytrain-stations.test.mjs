@@ -301,7 +301,7 @@ test('each authored Dunsmuir station retains all24 clear train-door approaches a
   }
 });
 
-test('terrain street datum and station quaternion are applied exactly once, including perpendicular Waterfront lines', () => {
+test('terrain street datum and station quaternion are applied exactly once, including independently mapped Waterfront line axes', () => {
   const o = owner('waterfront');
   for (const line of ['expo', 'canada']) {
     const stop = o.trainStop(line);
@@ -334,7 +334,32 @@ test('terrain street datum and station quaternion are applied exactly once, incl
     b = new THREE.Vector3(0, 0, 1).applyQuaternion(
       new THREE.Quaternion(...canada.quaternion),
     );
-  close(a.dot(b), 0);
+  const localExpo = new THREE.Vector3(0, 0, 1).applyQuaternion(
+      new THREE.Quaternion(...o.trainStop('expo').quaternion),
+    ),
+    localCanada = new THREE.Vector3(0, 0, 1).applyQuaternion(
+      new THREE.Quaternion(...o.trainStop('canada').quaternion),
+    );
+  close(a.dot(b), localExpo.dot(localCanada));
+  assert(
+    Math.abs(a.dot(b)) < 0.95,
+    'independent source-backed line axes remain nonparallel',
+  );
+  for (const line of ['expo', 'canada']) {
+    const stop = o.trainStop(line),
+      actual = stationWorldPose(
+        o.data,
+        () => 42,
+        stop.position,
+        stop.quaternion,
+      ),
+      expected = new THREE.Quaternion(...o.data.quaternion)
+        .multiply(new THREE.Quaternion(...stop.quaternion))
+        .toArray();
+    // angleTo assumes perfectly unit quaternions; an identical product with
+    // norm² 0.9999999999999978 otherwise has a false 1.33e-7 self-angle.
+    actual.quaternion.forEach((value, i) => close(value, expected[i], 1e-12));
+  }
   o.dispose();
 });
 
@@ -1273,37 +1298,46 @@ test('the integrated Main Street walker cannot enter the retained west display b
   o.dispose();
 });
 
-test('Waterfront heritage columns render at authored scale and stop bodies while the hall remains traversable', () => {
+test('every maintained Waterfront heritage column renders at source scale and stops a real body without freezing reverse input', () => {
   const o = owner('waterfront'),
-    before = get('waterfront');
-  for (const id of ['heritage-column--13--67', 'heritage-column-13--55']) {
-    const support = before.obstacles.find((b) => b.id === id);
-    assert(support);
-    const mesh = o.group.children.find(
-      (m) =>
-        m instanceof THREE.InstancedMesh &&
-        m.userData.stationPartIds?.includes(id),
+    before = get('waterfront'),
+    columns = before.obstacles.filter((b) =>
+      b.id.startsWith('heritage-column'),
     );
-    assert(mesh);
-    const matrix = new THREE.Matrix4(),
-      scale = new THREE.Vector3();
-    mesh.getMatrixAt(mesh.userData.stationPartIds.indexOf(id), matrix);
-    matrix.decompose(new THREE.Vector3(), new THREE.Quaternion(), scale);
-    scale.toArray().forEach((n, i) => close(n, support.size[i]));
-    let foot = o.floorAt(
-      [support.position[0], 0, support.position[2] - 1.5],
-      'waterfront-heritage-hall',
-    );
-    assert(foot);
-    for (let i = 0; i < 30; i++) foot = o.walk(foot, 0, 0.1);
-    assert(foot.position[2] < support.position[2] - 0.6);
-    let aisle = o.floorAt(
-      [support.position[0] + 1.2, 0, support.position[2] - 1.5],
-      'waterfront-heritage-hall',
-    );
-    for (let i = 0; i < 30; i++) aisle = o.walk(aisle, 0, 0.1);
-    assert(aisle.position[2] > support.position[2] + 1.4);
+  try {
+    assert(columns.length >= 4);
+    for (const support of columns) {
+      const rendered = renderedPart(o, support.id),
+        expected = new THREE.Matrix4().compose(
+          new THREE.Vector3(...support.position),
+          partRotation(support),
+          new THREE.Vector3(...support.size),
+        );
+      rendered.matrix.elements.forEach((v, i) =>
+        close(v, expected.elements[i]),
+      );
+      assertColliderStopsAndReverses(o, support);
+      const rotation = partRotation(support),
+        forward = new THREE.Vector3(0, 0, 1).applyQuaternion(rotation),
+        start = new THREE.Vector3(1.2, -support.size[1] / 2, -1.5)
+          .applyQuaternion(rotation)
+          .add(new THREE.Vector3(...support.position));
+      let aisle = o.floorAt(start.toArray(), 'waterfront-heritage-hall');
+      assert(
+        aisle && o.isClearFoot(aisle),
+        `${support.id}: real side aisle supports the complete body`,
+      );
+      for (let i = 0; i < 30; i++) {
+        aisle = o.walk(aisle, forward.x * 0.1, forward.z * 0.1);
+        assert(o.isClearFoot(aisle));
+      }
+      assert(
+        new THREE.Vector3(...aisle.position).sub(start).dot(forward) > 2.9,
+        `${support.id}: real native side aisle remains traversable`,
+      );
+    }
+    assert.deepEqual(o.data, before);
+  } finally {
+    o.dispose();
   }
-  assert.deepEqual(o.data, before);
-  o.dispose();
 });

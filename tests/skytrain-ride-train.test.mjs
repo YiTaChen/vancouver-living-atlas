@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { cityModule } from './helpers/city-modules.mjs';
-import { cityElevation } from './helpers/city-elevation.mjs';
+import { ridePath as renderedRidePath } from './helpers/skytrain-geometry.mjs';
 const { SkyTrainCabinAssets } = await import(
   cityModule('skytrain-cabin-assets')
 );
@@ -16,12 +16,17 @@ const manifest = JSON.parse(
   await readFile('public/models/blender/metro/manifest.json', 'utf8'),
 );
 const close = (a, b, e = 1e-5) => assert(Math.abs(a - b) < e, `${a} != ${b}`);
-const { SkyTrainRidePath, adaptSkyTrainStationFrame } = await import(
-  cityModule('skytrain-ride-path')
-);
-const { trainStopFor, stationWorldPose } = await import(
-  cityModule('skytrain-stations')
-);
+function sameQuaternion(actual, expected) {
+  // Authored products retain their exact floating-point components. angleTo()
+  // assumes unit inputs and reports a false rotation even for identical copies
+  // whose norm differs from one by 1.4e-13. Compare the real components instead.
+  const sign = actual.dot(expected) < 0 ? -1 : 1;
+  actual
+    .toArray()
+    .forEach((value, index) =>
+      assert(Math.abs(value - sign * expected.toArray()[index]) < 1e-12),
+    );
+}
 const routes = JSON.parse(
   await readFile('public/models/skytrain-routes.json', 'utf8'),
 );
@@ -30,33 +35,9 @@ async function ridePath(from, to) {
   const key = `${from}:${to}`;
   if (pathCache.has(key)) return pathCache.get(key);
   const segment = routes.segments.find((s) => s.from === from && s.to === to);
-  const pose = async (id) => {
-    const raw = JSON.parse(
-      await readFile(`public/models/skytrain-stations/${id}.json`, 'utf8'),
-    );
-    const data = adaptSkyTrainStationFrame(raw, routes),
-      stop = trainStopFor(data, segment.lineId, segment.direction);
-    const world = stationWorldPose(
-      data,
-      cityElevation,
-      stop.position,
-      stop.quaternion,
-    );
-    return {
-      position: new THREE.Vector3(...world.position),
-      quaternion: new THREE.Quaternion(...world.quaternion),
-      motionSign: stop.motionSign,
-    };
-  };
-  const path = new SkyTrainRidePath(
-    routes,
-    segment.lineId,
-    from,
-    to,
-    await pose(from),
-    await pose(to),
-    cityElevation,
-  );
+  // Use the same exact rendered station envelopes as production and the other
+  // actual-GLB tests. A daylight station/deck cannot be fitted from bare DEM.
+  const path = renderedRidePath(segment);
   pathCache.set(key, path);
   return path;
 }
@@ -449,7 +430,7 @@ test('actual loaded cars follow individual physical arc frames in both direction
         train.setPathPose(path, u);
         const reference = path.sample(u);
         assert(train.group.position.distanceTo(reference.position) < 1e-6);
-        assert(train.group.quaternion.angleTo(reference.quaternion) < 1e-6);
+        sameQuaternion(train.group.quaternion, reference.quaternion);
         for (let i = 0; i < offsets.length; i++) {
           const expected = path.sampleDistance(
             u * path.length + offsets[i] * path.start.motionSign,
@@ -460,10 +441,9 @@ test('actual loaded cars follow individual physical arc frames in both direction
               .getWorldPosition(new THREE.Vector3())
               .distanceTo(expected.position) < 1e-6,
           );
-          assert(
-            car
-              .getWorldQuaternion(new THREE.Quaternion())
-              .angleTo(expected.quaternion) < 1e-6,
+          sameQuaternion(
+            car.getWorldQuaternion(new THREE.Quaternion()),
+            expected.quaternion,
           );
           if (u === 0 || u === 1) {
             assert(

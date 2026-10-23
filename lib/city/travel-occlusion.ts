@@ -3,13 +3,14 @@ import {
   OCCLUDER_MIN,
   OCCLUDER_MAX,
   occluderBounds,
+  terrainOccluderBounds,
   type TravelOcclusionPart,
 } from './travel-occluder-bounds';
 
 export type { TravelOcclusionPart } from './travel-occluder-bounds';
 
 const MAX_LENGTH = 32;
-const CACHE_KEY = '|travel-full-occluder-v2';
+const CACHE_KEY = '|travel-full-occluder-v3-terrain';
 const PROJECT = '#include <project_vertex>';
 const CLIPPING = '#include <clipping_planes_fragment>';
 type Compile = THREE.Material['onBeforeCompile'];
@@ -57,6 +58,7 @@ interface GeometryMetadata {
     | undefined;
   pieces: number;
   sourceParts: readonly TravelOcclusionPart[] | undefined;
+  terrain: boolean;
   owners: Set<WeakRef<GeometryPatch>>;
   pendingDisposal: boolean;
   disposed: () => void;
@@ -87,6 +89,7 @@ interface CoverageOptions {
  */
 export class TravelOcclusion {
   private readonly roots: readonly THREE.Object3D[];
+  private readonly terrainRoots: ReadonlySet<THREE.Object3D>;
   private readonly patches = new Map<THREE.Material, Patch>();
   private readonly geometryPatches = new WeakMap<
     THREE.BufferGeometry,
@@ -127,8 +130,10 @@ export class TravelOcclusion {
   constructor(
     roots: readonly THREE.Object3D[] = [],
     parts: readonly TravelOcclusionParts[] = [],
+    terrainRoots: readonly THREE.Object3D[] = [],
   ) {
     this.roots = roots;
+    this.terrainRoots = new Set(terrainRoots);
     // GIS source spans must precede generic component discovery: adjacent city
     // buildings can touch, and the whole city deliberately shares one draw.
     for (const binding of parts)
@@ -161,7 +166,9 @@ export class TravelOcclusion {
       object.addEventListener('childremoved', this.removed);
       object.addEventListener('removed', this.detached);
     }
-    if (object instanceof THREE.Mesh && !groundSurface(object)) {
+    const ground = groundSurface(object),
+      terrain = ground && this.isTerrain(object);
+    if (object instanceof THREE.Mesh && (!ground || terrain)) {
       if (!this.meshes.has(object)) {
         this.meshes.add(object);
         this.meshCount++;
@@ -170,20 +177,33 @@ export class TravelOcclusion {
         ? object.material
         : [object.material];
       if (materials.some(eligibleMaterial))
-        this.prepareGeometry(object.geometry);
+        this.prepareGeometry(object.geometry, undefined, terrain);
       for (const material of materials) this.patch(material);
     }
     for (const child of object.children) this.visit(child);
   }
 
+  private isTerrain(object: THREE.Object3D) {
+    for (
+      let parent: THREE.Object3D | null = object;
+      parent;
+      parent = parent.parent
+    )
+      if (this.terrainRoots.has(parent)) return true;
+    return false;
+  }
+
   private prepareGeometry(
     geometry: THREE.BufferGeometry,
     parts?: readonly TravelOcclusionPart[],
+    terrain = false,
   ) {
     const previous = this.geometryPatches.get(geometry);
     let metadata = metadataByGeometry.get(geometry);
     if (!metadata) {
-      const bounds = occluderBounds(geometry, parts);
+      const bounds = terrain
+        ? terrainOccluderBounds(geometry)
+        : occluderBounds(geometry, parts);
       const previousMin = geometry.getAttribute(OCCLUDER_MIN);
       const previousMax = geometry.getAttribute(OCCLUDER_MAX);
       geometry.setAttribute(OCCLUDER_MIN, bounds.min);
@@ -217,6 +237,7 @@ export class TravelOcclusion {
         previousMin,
         previousMax,
         sourceParts: parts,
+        terrain,
         owners: new Set(),
         pendingDisposal: false,
         disposed,
@@ -227,14 +248,20 @@ export class TravelOcclusion {
     } else {
       // Only module-owned metadata is reused; arbitrary preexisting attributes
       // with these names remain borrowed originals and are restored unchanged.
-      if (parts !== undefined && metadata.sourceParts !== parts) {
-        const bounds = occluderBounds(geometry, parts);
+      if (
+        (parts !== undefined && metadata.sourceParts !== parts) ||
+        (terrain && !metadata.terrain)
+      ) {
+        const bounds = terrain
+          ? terrainOccluderBounds(geometry)
+          : occluderBounds(geometry, parts);
         metadata.min.copyArray(bounds.min.array);
         metadata.max.copyArray(bounds.max.array);
         metadata.min.needsUpdate = true;
         metadata.max.needsUpdate = true;
         metadata.pieces = bounds.pieces;
         metadata.sourceParts = parts;
+        metadata.terrain = terrain;
       }
       if (metadata.pendingDisposal) {
         metadata.pendingDisposal = false;
@@ -321,6 +348,7 @@ export class TravelOcclusion {
         attribute vec3 ${OCCLUDER_MIN};
         attribute vec3 ${OCCLUDER_MAX};
         varying float vTravelOccluderSelected;
+        varying float vTravelTerrainSurface;
         varying vec3 vTravelCutawayWorld;
         uniform float uTravelCutawayEnabled;
         uniform vec3 uTravelCutawayStart;
@@ -339,6 +367,8 @@ export class TravelOcclusion {
         travelOccluderTransform = modelMatrix * travelOccluderTransform;
         vTravelCutawayWorld = (travelOccluderTransform * vec4(transformed, 1.0)).xyz;
         vTravelOccluderSelected = 0.0;
+        vTravelTerrainSurface = float(all(equal(${OCCLUDER_MIN}, vec3(1.0)))
+          && all(equal(${OCCLUDER_MAX}, vec3(0.0))));
         vec3 travelOccluderSize = ${OCCLUDER_MAX} - ${OCCLUDER_MIN};
         // All-zero/missing bounds cannot select the avatar in an override pass.
         if (uTravelCutawayEnabled > 0.5
@@ -376,13 +406,30 @@ export class TravelOcclusion {
       );
       shader.fragmentShader = `
         varying float vTravelOccluderSelected;
+        varying float vTravelTerrainSurface;
         varying vec3 vTravelCutawayWorld;
         uniform float uTravelCutawayEnabled;
         uniform vec2 uTravelOccluderShape;
+        uniform vec3 uTravelCutawayStart;
+        uniform vec3 uTravelCutawayEnd;
         ${shader.fragmentShader}`.replace(
         CLIPPING,
         `${CLIPPING}
-        if (uTravelCutawayEnabled > 0.5 && vTravelOccluderSelected > 0.5
+        float travelTerrainSelected = 0.0;
+        if (uTravelCutawayEnabled > 0.5 && vTravelTerrainSurface > 0.5) {
+          vec3 travelTerrainRay = uTravelCutawayEnd - uTravelCutawayStart;
+          float travelTerrainT = clamp(dot(vTravelCutawayWorld - uTravelCutawayStart,
+            travelTerrainRay) / max(dot(travelTerrainRay, travelTerrainRay), 0.00000001), 0.0, 1.0);
+          vec3 travelTerrainClosest = uTravelCutawayStart + travelTerrainT * travelTerrainRay;
+          // Enclose the standing body's head/feet and shoulder silhouette, not
+          // only its torso ray. The cone narrows to the requested camera lens.
+          float travelTerrainHeight = uTravelCutawayEnd.y - uTravelOccluderShape.y + 0.08;
+          float travelTerrainRadius = uTravelOccluderShape.x
+            + travelTerrainT * max(travelTerrainHeight, 2.0 - travelTerrainHeight);
+          travelTerrainSelected = step(distance(vTravelCutawayWorld, travelTerrainClosest), travelTerrainRadius);
+        }
+        if (uTravelCutawayEnabled > 0.5
+          && (vTravelOccluderSelected > 0.5 || travelTerrainSelected > 0.5)
           && vTravelCutawayWorld.y > uTravelOccluderShape.y) discard;`,
       );
     };
@@ -489,6 +536,21 @@ export class TravelOcclusion {
       return 0;
     const lower = new THREE.Vector3().fromBufferAttribute(min, index);
     const upper = new THREE.Vector3().fromBufferAttribute(max, index);
+    if (lower.equals(new THREE.Vector3(1, 1, 1)) && upper.lengthSq() === 0) {
+      const start = this.uniforms.uTravelCutawayStart.value,
+        end = this.uniforms.uTravelCutawayEnd.value,
+        ray = end.clone().sub(start),
+        t = THREE.MathUtils.clamp(
+          point.clone().sub(start).dot(ray) / Math.max(ray.lengthSq(), 1e-8),
+          0,
+          1,
+        ),
+        height = end.y - shape.y + 0.08,
+        radius = shape.x + t * Math.max(height, 2 - height);
+      return point.distanceTo(start.clone().addScaledVector(ray, t)) <= radius
+        ? 1
+        : 0;
+    }
     const size = upper.clone().sub(lower);
     if (size.x < 0 || size.y < 0 || size.z < 0 || size.lengthSq() <= 1e-8)
       return 0;

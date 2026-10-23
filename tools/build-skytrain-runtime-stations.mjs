@@ -118,6 +118,9 @@ export function makeRuntimeStation(source, sourceSha256) {
         : {}),
       material: part.material,
       role: part.role,
+      ...(part.renderFloorSurfaceId !== undefined
+        ? { renderFloorSurfaceId: part.renderFloorSurfaceId }
+        : {}),
     })),
   };
 }

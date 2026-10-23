@@ -1,0 +1,1942 @@
+{
+  "schema": "vancouver-living-atlas.station-interior-runtime-pin.v1",
+  "scope": "Final five-station acceptance: Waterfront, Burrard, Granville, Stadium–Chinatown and Yaletown–Roundhouse, using one frozen browser client and all seven published packets.",
+  "capturedAtUtc": "2026-10-23T16:33:07.825Z",
+  "exportRoot": ".cache/phase4-browser",
+  "browserOrigin": "http://127.0.0.1:3205",
+  "nodeVersion": "24.22.1",
+  "algorithm": "SHA-256",
+  "sourcePacketSha256": "31701d5f7cda6933af604965690bf3da085a47e4eadf7546182b5c5e03a5cebf",
+  "runtimeFiles": {
+    "lib/city/skytrain-stations.ts": {
+      "sha256": "4f9a8ab2e1cbca0bc4f4cc4efb75b10b938de166f348cbca9027913bb935350e",
+      "bytes": 103644
+    },
+    "lib/city/skytrain-street-access.ts": {
+      "sha256": "7c9687a7bbba727cf5a1bb05d0cdb783518f46e87b3426326e297d56df29ddc5",
+      "bytes": 56415
+    },
+    "lib/city/skytrain-world-travel.ts": {
+      "sha256": "60ff1ffa4d96f46492ea9c5f54241924098fc2f86112e7ead17cbc5500c7ed3f",
+      "bytes": 63700
+    },
+    "lib/city/skytrain-world-openings.ts": {
+      "sha256": "85705ce5986a165fabd8789a10ca824d7d0c5d651b405c73bbc5bcd41f2e72bc",
+      "bytes": 34453
+    },
+    "lib/city/skytrain-station-rail-envelope.ts": {
+      "sha256": "9cb77efe7485009497ac313670b50caeec92934b5ba6b2fbb120fc2e41eef0a7",
+      "bytes": 4174
+    },
+    "lib/city/skytrain-world-path.ts": {
+      "sha256": "44e922ca1577f7bf490d8e459e0c861621a2c274f3d504120ed41ff21fdc11fe",
+      "bytes": 11150
+    },
+    "lib/city/skytrain-ride-path.ts": {
+      "sha256": "19685e3e25740fd5e290fd87b993c9d53b32cab063cfac029020ad671109f0a5",
+      "bytes": 25750
+    },
+    "lib/city/skytrain-ride-train.ts": {
+      "sha256": "b32c2bd3ebd58b58591200d61d72ca34a87cdbca86f4e2a81106cc4eebf710e9",
+      "bytes": 17428
+    },
+    "lib/city/skytrain-service-stock.ts": {
+      "sha256": "5fd6f64163de54afd7ac5eca224e9f54fcf2c21d8f001993114d8e263785f6a2",
+      "bytes": 980
+    },
+    "lib/city/skytrain-travel.ts": {
+      "sha256": "14959d8185c061e39dcb1955671755c00100475ec7af226c99ed738a040a1d83",
+      "bytes": 46403
+    },
+    "lib/city/travel-camera-collision.ts": {
+      "sha256": "b7fff24f254b5298d85911611403a1fc95c8ca36128aa5a7b4b468ed455e2f40",
+      "bytes": 12088
+    },
+    "lib/city/interiors.ts": {
+      "sha256": "440459ff4dbf3dbec047c7490d16c7e25342ceab21682c7d088af1f9f4678cd2",
+      "bytes": 53604
+    },
+    "lib/city/interior-apertures.ts": {
+      "sha256": "d3b023e11cb252f9d8958496cc3ba81aa4973bca736d4c2e8624619ac9e09756",
+      "bytes": 4789
+    },
+    "lib/city/ground-surface.ts": {
+      "sha256": "d9dbd9c1d2345dff70a37d785c02550df4760a88f03d41f12ce832a7fe606835",
+      "bytes": 13398
+    },
+    "lib/city/navigation.ts": {
+      "sha256": "9934aeb891d8016eebc1832ca9bab86a87c7057fda594a740b32908f3505a222",
+      "bytes": 60017
+    },
+    "lib/city/geo.ts": {
+      "sha256": "60c01edb97732574f980770a2f0499f2eb9021a0d8075eb272ea18785570494e",
+      "bytes": 2769
+    },
+    "lib/city/engine.ts": {
+      "sha256": "47d5cc49acd84afa40323c1fc727627c8f0aacf92ca2f4eee87ee37912dcc2fb",
+      "bytes": 91083
+    },
+    "lib/city/skytrain-world-service.ts": {
+      "sha256": "d55a53cbb89d6504399fbd12372a1a82c1d7402ea46d4aa39ea024fb3259778a",
+      "bytes": 7657
+    },
+    "lib/city/skytrain-world-exterior.ts": {
+      "sha256": "042c17f56034e89c5486a995bffdad139acf74c8af566eecc8d28d901661e116",
+      "bytes": 12757
+    },
+    "lib/city/skytrain-network.ts": {
+      "sha256": "3d021d5e79a966cf5126fb076813fab2db8b4cf1d96dac598b45d2e945eaf03d",
+      "bytes": 17202
+    },
+    "lib/city/travel-occlusion.ts": {
+      "sha256": "2afd0eb37ea7507475bdb354c35899b9011410a2225a3a9f4ec18752116f9a34",
+      "bytes": 27039
+    },
+    "lib/city/travel-occluder-bounds.ts": {
+      "sha256": "7228f282d81c63268596cdb46b3356f127ede5d1acea24607a9cd1e02bcbd920",
+      "bytes": 4748
+    }
+  },
+  "publicFiles": {
+    "public/models/skytrain-stations/manifest.json": {
+      "sha256": "d9ba85a502d236ee3c8ad5f3e1b802e48334786be0e0b00e6e9cfbaf2765c6c1",
+      "bytes": 1603
+    },
+    "public/models/skytrain-stations/waterfront.json": {
+      "sha256": "dd1e1f6ff8889e7ec9eceaec8053223c7811991accbfcf50463b9bbdd58facba",
+      "bytes": 980400
+    },
+    "public/models/skytrain-stations/burrard.json": {
+      "sha256": "614ed920cd5dc8b9d1a1ad74567187c2d16e0c3212c94785f2d53605947cf190",
+      "bytes": 604951
+    },
+    "public/models/skytrain-stations/granville.json": {
+      "sha256": "46451eed5a522c9311d45e62fe96f7ca32a9f3e16a5b663b15af3a041928aecd",
+      "bytes": 1076613
+    },
+    "public/models/skytrain-stations/stadium-chinatown.json": {
+      "sha256": "845ef953203cb0bc8eb9708b7014eea9ca797d68247f9f84f8b26e4ceb40ca8d",
+      "bytes": 312500
+    },
+    "public/models/skytrain-stations/main-street-science-world.json": {
+      "sha256": "67d4ebbf6d00e86f633401d6dbb9f9aea366cde0d3a34074d7467686202d6893",
+      "bytes": 61798
+    },
+    "public/models/skytrain-stations/vancouver-city-centre.json": {
+      "sha256": "ba586078b8a3cc28c8a739f62871c4172099593e6a862355313687518795b101",
+      "bytes": 39161
+    },
+    "public/models/skytrain-stations/yaletown-roundhouse.json": {
+      "sha256": "fbf1a4c22d794af3378fbde2c11625eeba0ef0d9aab09e0592318c048e426c5e",
+      "bytes": 453723
+    },
+    "public/models/skytrain-routes.json": {
+      "sha256": "04941b1e7d3295c7e4ffacfe8ae63e4830aef2a055a8cf8a620b24d4143529d4",
+      "bytes": 8081
+    }
+  },
+  "reports": {
+    "yaletown-roundhouse": {
+      "file": "final/game-yaletown-roundhouse-browser.json",
+      "sha256": "1a88a34a5d053fb8caaa638170664bd3ba7eeb7dc485c1ad79a8db741caf4b1e",
+      "bytes": 82972,
+      "capturedAt": "2026-10-23T15:33:18.194Z",
+      "captures": 27,
+      "nativeDoorExitReentries": 2,
+      "actualLiftTrips": 4,
+      "errors": 0,
+      "warnings": 0,
+      "failedHttp": 0,
+      "contextLost": false,
+      "stationPacketSha256": "fbf1a4c22d794af3378fbde2c11625eeba0ef0d9aab09e0592318c048e426c5e",
+      "verifiedAfterCapture": "fbf1a4c22d794af3378fbde2c11625eeba0ef0d9aab09e0592318c048e426c5e",
+      "images": [
+        {
+          "file": "final/game-yaletown-roundhouse-entrance-thirdperson.png",
+          "sha256": "1d69db6baa44e47a324010cb239cc6db119e337841155c6bd5452dc656f9f884",
+          "bytes": 507960,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-entrance-davie-mainland-outside-thirdperson.png",
+          "sha256": "00521d1320ca4f2d01d834959151ada33cae1ff82ca73956a9378913fdb141f0",
+          "bytes": 588547,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-entrance-davie-mainland-inside-thirdperson.png",
+          "sha256": "044dc90109f1b2d2f2e547ffcda7e84e4829198ab62d401ab6d0e5709d2b6eed",
+          "bytes": 349769,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-entrance-davie-elevator-outside-thirdperson.png",
+          "sha256": "a1e910d8add772fb3791cc78298e49b732b2c48e2ec3e4ca10bee8dd99cba1e7",
+          "bytes": 564965,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-entrance-davie-elevator-inside-thirdperson.png",
+          "sha256": "d3ea443c7d598ee2e317aac1dea8856bf42812e5183aca5e8ee96c1f5e054c26",
+          "bytes": 347656,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-elevator-core-1-call-firstperson.png",
+          "sha256": "dc1076c6c6ec2508dfe89bb8c6535322617c907543b5720b9b075237a1d820ee",
+          "bytes": 275291,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-elevator-core-1-lowest-landing-firstperson.png",
+          "sha256": "583dc197d8763dbb378e88854967b6b5f182dc5733f439b2b486a165962239e4",
+          "bytes": 264432,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-elevator-core-1-returned-to-entry-level-firstperson.png",
+          "sha256": "1a9fdbac93d46a22f89d4678da4d4db35b066b5231aaba728cad5b21fd462758",
+          "bytes": 431321,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-elevator-core-2-call-firstperson.png",
+          "sha256": "0a194c904a8e6296795b61a02bfe0aae0a753e33ccf92a96558f6c5ddfa75916",
+          "bytes": 202145,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-elevator-core-2-lowest-landing-firstperson.png",
+          "sha256": "b4e4aa585a9c9bbb54171487aa99b20cbdf52f19396841a00f573070406874e0",
+          "bytes": 353029,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-elevator-core-2-returned-to-entry-level-firstperson.png",
+          "sha256": "6f686986e52201d30d54b76d7d1c5a2ad5e297ed27822a8df4625731e50a6baf",
+          "bytes": 207447,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-2026-gates-firstperson.png",
+          "sha256": "30a61bb5b45a0fc63e7147049748916fbeee22cb2c11ae1069c0867c22e6cc51",
+          "bytes": 298296,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-2026-gates-thirdperson.png",
+          "sha256": "24e23e5a568b8393651ab4fffb2f06409cecd08331ad757e39bbb22a707d4196",
+          "bytes": 398603,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-upper-entry-switchback-firstperson.png",
+          "sha256": "1496cd4cf1c72110635046611c27a2856de05e86b7c302321da21fc228d441b1",
+          "bytes": 367939,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-upper-entry-switchback-thirdperson.png",
+          "sha256": "aa79ebf72bd40a21db22635a7e5d852c2740dd147bf2423238bb5f11dd45120e",
+          "bytes": 321066,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-long-lower-concourse-firstperson.png",
+          "sha256": "d2c21ceb1004da14e4398ed3324059666fb14d5b0c9c5b7353f6face4b8e85b2",
+          "bytes": 218827,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-long-lower-concourse-thirdperson.png",
+          "sha256": "8c9b91c0b5c8d2bca8bbd4bec30639bb070a7863601a902a5e8ad5a3f943e898",
+          "bytes": 263245,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-island-platform-firstperson.png",
+          "sha256": "0dd90aa7a4950ad9a03b510c38df14bf5dedb1623c47aff1f7c9e08e277b6be6",
+          "bytes": 394122,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-island-platform-thirdperson.png",
+          "sha256": "47e7340257b44d0154f31eca94a76e81f91a0b05b3e9507c07efb7994bb14403",
+          "bytes": 395384,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-yaletown-upper-entry-stair-firstperson.png",
+          "sha256": "6a8d4e3f32a7e8f0ddcde63b34c2bddc0f77e7fee4068a8829a885349225fee1",
+          "bytes": 315191,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-yaletown-upper-entry-stair-overhead-thirdperson.png",
+          "sha256": "a7841df1f1ac2ae36a229f94573eec47a6f80c383c765415411f3827941352d8",
+          "bytes": 612442,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-yaletown-lower-entry-stair-firstperson.png",
+          "sha256": "b58cfd808052221cabe5777712fede5c38457011eebd33421ee7db4a82a90bc8",
+          "bytes": 285692,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-yaletown-lower-entry-stair-overhead-thirdperson.png",
+          "sha256": "fe6ffaeb3952770dcb6e418dd626a5e6613ee67ac15c026034432d40fcdd9cb8",
+          "bytes": 352932,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-yaletown-platform-stair-firstperson.png",
+          "sha256": "58a04c4b9128e4f3e0e63aa5280edfff1d6b12f4082f64acd1b3563e35f6502a",
+          "bytes": 333787,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-yaletown-platform-stair-overhead-thirdperson.png",
+          "sha256": "911016fde020363a0f506a7d7c888fda2ebf3b0bc80f523e08a4fd2cb2302a31",
+          "bytes": 439076,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-separate-two-escalator-bank-from-top.png",
+          "sha256": "5b50f4ac235cdd21e71d10b6882d0841123a7943341cda86780f87d1194f2c48",
+          "bytes": 314798,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-yaletown-roundhouse-overview-cutaway.png",
+          "sha256": "fbfdf449baa89fc1f262a2280062db0d8784e66e10ad61b4ace53bf72f3299dc",
+          "bytes": 1008675,
+          "width": 1440,
+          "height": 1000
+        }
+      ],
+      "manualReview": {
+        "accepted": true,
+        "reviewedAtUtc": "2026-10-23T15:36:41.013Z",
+        "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame."
+      }
+    },
+    "stadium-chinatown": {
+      "file": "final/game-stadium-chinatown-browser.json",
+      "sha256": "16cdb212d460f1425004a51569e339778912e7abb28ceb96cff1b43e2b625b15",
+      "bytes": 89229,
+      "capturedAt": "2026-10-23T15:35:24.578Z",
+      "captures": 29,
+      "nativeDoorExitReentries": 3,
+      "actualLiftTrips": 4,
+      "errors": 0,
+      "warnings": 0,
+      "failedHttp": 0,
+      "contextLost": false,
+      "stationPacketSha256": "845ef953203cb0bc8eb9708b7014eea9ca797d68247f9f84f8b26e4ceb40ca8d",
+      "verifiedAfterCapture": "845ef953203cb0bc8eb9708b7014eea9ca797d68247f9f84f8b26e4ceb40ca8d",
+      "images": [
+        {
+          "file": "final/game-stadium-chinatown-entrance-thirdperson.png",
+          "sha256": "aabecb3e289cf0a117a8232ef37181cbfe4c0468ea947bd55644bd520ea9597b",
+          "bytes": 373930,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-entrance-beatty-upper-outside-thirdperson.png",
+          "sha256": "01899ab9c1e6efa6742951015f6019388a0153691c9123a639ed5d7432a06f56",
+          "bytes": 363596,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-entrance-beatty-upper-inside-thirdperson.png",
+          "sha256": "61b81f810bbb1a8d05bdd4f7d9f3476035752273e4cdbf2df4d8215e06ef6bbf",
+          "bytes": 323719,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-entrance-pacific-lower-outside-thirdperson.png",
+          "sha256": "92bf8c5cd046ed55d1c96b389977dc9c7fd1689f867c0ae0d89a028ad9b6ce47",
+          "bytes": 376098,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-entrance-pacific-lower-inside-thirdperson.png",
+          "sha256": "da1a01c15117ef6685cae4470b81263e7542e350327f70f1ed96ef4ade8a5074",
+          "bytes": 253181,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-entrance-keefer-place-outside-thirdperson.png",
+          "sha256": "fb4c9a29c9c8035763b354f26471b2e8030279788e7d4b4eee4f75b8e2a42a76",
+          "bytes": 928855,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-entrance-keefer-place-inside-thirdperson.png",
+          "sha256": "abf0018909bec69d7f561cfcf50afde23ddf80d3f2d8e18e59ffcdfb165c4697",
+          "bytes": 676693,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-elevator-call-firstperson.png",
+          "sha256": "8403e12be72eefb098e30f931ede0ad55fa652cf16cc9d90290cdef8c66ffce6",
+          "bytes": 204904,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-elevator-lowest-landing-firstperson.png",
+          "sha256": "0b0a950ed9f44731af0066d64cde56681043996c8e75495ca9507e502ac77d05",
+          "bytes": 266520,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-elevator-returned-to-entry-level-firstperson.png",
+          "sha256": "2918d3b6a700f0dcacde3722cd785bf904c731ba01c9e7642e283e8f9a03f1e3",
+          "bytes": 207709,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-ticket-concourse-firstperson.png",
+          "sha256": "0a96661ccb9f6b3868d63ab75f951ade87090903cfc45df1ce644483cbb9b416",
+          "bytes": 498919,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-ticket-concourse-thirdperson.png",
+          "sha256": "c7eb9c2e89b781dbbf1b2d76f69ed2d0c35717aaaa67f89fb9c791f75fe9a204",
+          "bytes": 336876,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-daylight-island-firstperson.png",
+          "sha256": "ac18128d432d12dbc0e2a4547fdb63a3dfc389c166a3d698543908185344a6fa",
+          "bytes": 529558,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-daylight-island-thirdperson.png",
+          "sha256": "3d2b934f6257c538db79355d30672bede7c93eaf702da8632a5e0c8805cf57ea",
+          "bytes": 534716,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-west-spare-platform-fence-firstperson.png",
+          "sha256": "2d66ebf8612eec0db9f6b838cf549ba9ca4324f4cd40b31b75668e1e4c27de46",
+          "bytes": 462280,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-west-spare-platform-fence-thirdperson.png",
+          "sha256": "2ee378a58b00f1817d513b4756dcfaa2b1180821728b64e68d22ba5e1e171ea6",
+          "bytes": 410608,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-keefer-raised-passage-firstperson.png",
+          "sha256": "62a6fac18747824a2c2045643f10abc3f06a9db7bff33c4793d00c7975f70d61",
+          "bytes": 286231,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-keefer-raised-passage-thirdperson.png",
+          "sha256": "3c4aaeea25cf2ae99e081ff9a7e63ebf08ac60f73b40ed1b1973e675e99eaadf",
+          "bytes": 412376,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-beatty-main-stair-firstperson.png",
+          "sha256": "766a82e89dc86f90755e8968ee9385fa143b2a1048ef405a1f567502d1f34a02",
+          "bytes": 436851,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-beatty-main-stair-overhead-thirdperson.png",
+          "sha256": "5ae95099a71ac0724b1ab6a4751d499d5ee69b54d5f22ea82d07014ebe6db557",
+          "bytes": 462661,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-concourse-island-stair-firstperson.png",
+          "sha256": "222a66fe1e2bf069a3d6b507c828dc36ecf7506f18e3578d17f5545f70308772",
+          "bytes": 275820,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-concourse-island-stair-overhead-thirdperson.png",
+          "sha256": "adae900671138ad267a553a1a110e042e01627ab3715977a62f42a32ba6c0bbf",
+          "bytes": 509440,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-expo-east-upper-stair-firstperson.png",
+          "sha256": "caac681d384acac54ab131d9a2cb8960aa84eb1ca337e6d9fabff116ce451083",
+          "bytes": 236739,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-expo-east-upper-stair-overhead-thirdperson.png",
+          "sha256": "7984f46010b1752697669b5f089f49dc5677a62a491f635fa8a14a354282c9a2",
+          "bytes": 348222,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-expo-east-lower-stair-firstperson.png",
+          "sha256": "08f6d9169611282d3dade4dc8837d78e4bb47b37d7f22c13035146b7b07339c0",
+          "bytes": 228723,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-expo-east-lower-stair-overhead-thirdperson.png",
+          "sha256": "a49f67aa04be5467ccc079c608327e115e2c0759a54cdd13410b5cf389f0df00",
+          "bytes": 272263,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-chinatown-keefer-place-mapped-approach-stair-firstperson.png",
+          "sha256": "bbf85d25d32146b32b25c73ae12879a8dc0b644fb447dc18dfcf6fe5c52eef53",
+          "bytes": 571240,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-stadium-chinatown-keefer-place-mapped-approach-stair-overhead-thirdperson.png",
+          "sha256": "6478e126afd2bcca3932150ee5ee8b1b467a83d74ce88eea43b56831cb5bfa01",
+          "bytes": 552340,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-stadium-chinatown-overview-cutaway.png",
+          "sha256": "62762972b9747311dbe08e2e4c6400117f944107fdbee1b74437cc09cab93ac9",
+          "bytes": 939865,
+          "width": 1440,
+          "height": 1000
+        }
+      ],
+      "manualReview": {
+        "accepted": true,
+        "reviewedAtUtc": "2026-10-23T15:43:03.528Z",
+        "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame."
+      }
+    },
+    "burrard": {
+      "file": "final/game-burrard-browser.json",
+      "sha256": "47f80ba4d40f32c17bd7bc09a29f1d46a132f225fbb5d49ff5fc12bed3a1489c",
+      "bytes": 88369,
+      "capturedAt": "2026-10-23T15:37:24.475Z",
+      "captures": 28,
+      "nativeDoorExitReentries": 3,
+      "actualLiftTrips": 6,
+      "errors": 0,
+      "warnings": 0,
+      "failedHttp": 0,
+      "contextLost": false,
+      "stationPacketSha256": "614ed920cd5dc8b9d1a1ad74567187c2d16e0c3212c94785f2d53605947cf190",
+      "verifiedAfterCapture": "614ed920cd5dc8b9d1a1ad74567187c2d16e0c3212c94785f2d53605947cf190",
+      "images": [
+        {
+          "file": "final/game-burrard-entrance-thirdperson.png",
+          "sha256": "d742f8e1eedd0e3a683055766a54c8eab96d3d654ba24f2b0523b2a52fd9f27d",
+          "bytes": 373183,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-entrance-burrard-plaza-outside-thirdperson.png",
+          "sha256": "b4454c2d09a1758b9c8b865d4f2950fe1d5202e19c8d811b057cdc0c96342a8b",
+          "bytes": 384349,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-entrance-burrard-plaza-inside-thirdperson.png",
+          "sha256": "f850755e57b3c23cd43d549ff24a5afb6e766e522ff4dc1ac75ede378a0ab76a",
+          "bytes": 364920,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-entrance-burrard-park-outside-thirdperson.png",
+          "sha256": "5e9133f38cc77d39e08e07a1cdf71bce5bc0652e9300e55862c49e8f9cdc1e64",
+          "bytes": 405843,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-entrance-burrard-park-inside-thirdperson.png",
+          "sha256": "bf70cc93bf6df706835a4f9540336b72c1c0dfb2d23203c10f478b2490fd7fc2",
+          "bytes": 364602,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-entrance-burrard-elevator-outside-thirdperson.png",
+          "sha256": "000eb6ed4e3ab9b4bf2c4b789470adc3b4fa4aa321429a27f7b5c1cc6d9d9943",
+          "bytes": 384792,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-entrance-burrard-elevator-inside-thirdperson.png",
+          "sha256": "f55c136484cfd54fc20d39a716e1f920de3873f2da8d0bd234d8c960fdc64b45",
+          "bytes": 286843,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-elevator-call-firstperson.png",
+          "sha256": "bc8dcb3465205739dc8278de9cce3b0da084cb54ca03cc68da89d8c134334a0e",
+          "bytes": 403734,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-elevator-lowest-landing-firstperson.png",
+          "sha256": "8ed7be88d4282464a2bf7956349b643b3788ed6bf240d742aa609f98c0eca24e",
+          "bytes": 223150,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-elevator-returned-to-entry-level-firstperson.png",
+          "sha256": "a00f3a019b0f6e49ba43049a8ff16e6f9e9551b0559e1a49fb56f07c43b9bc69",
+          "bytes": 410217,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-ticket-atrium-glass-trusses-and-machines-firstperson.png",
+          "sha256": "7eef457032431a3d1b1db9d18e16b0165ad05b0e3acbc00cf535cf4b5b97dbcc",
+          "bytes": 704637,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-ticket-atrium-glass-trusses-and-machines-thirdperson.png",
+          "sha256": "f6529febe5811b0bac91ec6671fa11d70a37bdcaa937ddb3ab4f27763a318536",
+          "bytes": 320838,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-upper-platform-thirdperson.png",
+          "sha256": "529703f7da5fcae6810cd138be988d842b2c90c43e5022120efdf185db319dbd",
+          "bytes": 414893,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-upper-platform-firstperson.png",
+          "sha256": "ae3dd706c08d5c4162bd74536b364a19cd4bc1d1144aa5a9f89f8a4a7bc7051b",
+          "bytes": 349138,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-lower-platform-thirdperson.png",
+          "sha256": "60252425b4c5e904ee20a23880b25398e623b718fbf3589ddc7d50ffd22d1f91",
+          "bytes": 395076,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-lower-platform-firstperson.png",
+          "sha256": "37b8aae97a8d813a2eb1c59104ffa907b6cd991aee5d4cd2ba70ee952fde4f04",
+          "bytes": 339109,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-street-stairs-firstperson.png",
+          "sha256": "df26af2a884a3b6467d866fa7a873ba987212ea58330309782efecbf1f70bd7f",
+          "bytes": 406673,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-street-stairs-overhead-thirdperson.png",
+          "sha256": "7b6442079c8441d324a5514ac7302778b80864d771a2de301ce4acb265e6b79f",
+          "bytes": 426604,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-park-stairs-1-firstperson.png",
+          "sha256": "a0ac82f14bfe6c453a637915df5f34483e74d41665ac5e5afa573b65ac0675a8",
+          "bytes": 287821,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-park-stairs-1-overhead-thirdperson.png",
+          "sha256": "5c6529dc0d3ca79967b8134563307e63c13e6481636761ae1af4bdad0da98bd6",
+          "bytes": 300227,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-park-stairs-3-firstperson.png",
+          "sha256": "b80b7c9385738c07c902a0ffa03f7371506c8fd0d65b5f4d245a142d9c35ab04",
+          "bytes": 219703,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-park-stairs-3-overhead-thirdperson.png",
+          "sha256": "d670b54d79c25ad79802f1f32c12e7a66f163d84a5e7db79a54011ebb7d99606",
+          "bytes": 293723,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-interplatform-stairs-firstperson.png",
+          "sha256": "f9777654f5a3c6cc3bb3d14a07e21efe4bb3aad68674c5a41dc4481ff6ade10a",
+          "bytes": 254829,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-interplatform-stairs-overhead-thirdperson.png",
+          "sha256": "edd6f86edf6a7e4633a88a7a36ebcf88b928051cda257b71ebc063a769049620",
+          "bytes": 370406,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-main-escalator-bank-2-firstperson.png",
+          "sha256": "55da4ac72bff87be58ff930c05b74b434f1781cf521f76faea3b6264bfa4e4e6",
+          "bytes": 390025,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-main-escalator-bank-2-overhead-thirdperson.png",
+          "sha256": "7cb415e37b30b74f31aac2515fcd3cc85761bdf0ca2ffeedbcc06cc3105afadb",
+          "bytes": 520437,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-burrard-main-escalator-bank-three-lanes-from-top.png",
+          "sha256": "0c7d54bd9e0b088131d7c3384391796ef1e22e3772922a1545e166a8a351932d",
+          "bytes": 332004,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-burrard-overview-cutaway.png",
+          "sha256": "9ad6cd4393bd067680338fb18bc9e54cd5219e01a385bed1c4bc346bd4baa494",
+          "bytes": 778858,
+          "width": 1440,
+          "height": 1000
+        }
+      ],
+      "manualReview": {
+        "accepted": true,
+        "reviewedAtUtc": "2026-10-23T15:46:01.947Z",
+        "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame.",
+        "limitations": [
+          "The overview is a partial geographic cutaway dominated by a neighboring facade, with a thin visible platform strip. Stacked topology is accepted from the dedicated upper/lower platform, bank, physical geometry and route evidence rather than a complete-station overview."
+        ]
+      }
+    },
+    "granville": {
+      "file": "final/game-granville-browser.json",
+      "sha256": "5643f4538a2b2bdb32a0134402d753352f467018d68712151b55b0c08719e76e",
+      "bytes": 84508,
+      "capturedAt": "2026-10-23T15:41:37.739Z",
+      "captures": 27,
+      "nativeDoorExitReentries": 3,
+      "actualLiftTrips": 4,
+      "errors": 0,
+      "warnings": 0,
+      "failedHttp": 0,
+      "contextLost": false,
+      "stationPacketSha256": "46451eed5a522c9311d45e62fe96f7ca32a9f3e16a5b663b15af3a041928aecd",
+      "verifiedAfterCapture": "46451eed5a522c9311d45e62fe96f7ca32a9f3e16a5b663b15af3a041928aecd",
+      "images": [
+        {
+          "file": "final/game-granville-entrance-thirdperson.png",
+          "sha256": "bfc917b6eeaa9c9579a238309f000c869689936a5c7e9b167789c695a8908fed",
+          "bytes": 513916,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-entrance-granville-street-outside-thirdperson.png",
+          "sha256": "939dd0822e95dbfdc3c75c0997527690384ba1a251906592a68222f2ea153d9f",
+          "bytes": 846349,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-entrance-granville-street-inside-thirdperson.png",
+          "sha256": "f01755f6a8d5f3bca1f9984da88eb89565175992d995e8b960c0596a354f2a74",
+          "bytes": 279636,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-entrance-dunsmuir-street-outside-thirdperson.png",
+          "sha256": "2e71fe3c8da3b2387f77dff5504cd48c393af544a30690b894a620dcefce4197",
+          "bytes": 587158,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-entrance-dunsmuir-street-inside-thirdperson.png",
+          "sha256": "024e5d602166f16626ed1073ca690fc875cac9317e474a05a29621c5db3e2cd1",
+          "bytes": 257005,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-entrance-seymour-street-outside-thirdperson.png",
+          "sha256": "6cbbedd14c88cb73c4756a7ab93016e73531aed72a64260402c30b36be86a180",
+          "bytes": 799937,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-entrance-seymour-street-inside-thirdperson.png",
+          "sha256": "998a5ec5b177e9c5635b981339c30ca1021c208d56bbe0aa10ff7fabcd25ef48",
+          "bytes": 269752,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-elevator-call-firstperson.png",
+          "sha256": "a6402af6b1fec0da70820719970c93686e481b441ffcf02f9c38032141410bac",
+          "bytes": 221764,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-elevator-lowest-landing-firstperson.png",
+          "sha256": "d6afe32d2b648046bc5793febde2c77ea1fa7d263d15fb3228488423be3922bb",
+          "bytes": 220769,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-elevator-returned-to-entry-level-firstperson.png",
+          "sha256": "eb0f27038734dda894fc7825c26eec9a2498c5c4141c65aa4eb884e857e74725",
+          "bytes": 227721,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-original-ticket-hall-round-column-and-grid-firstperson.png",
+          "sha256": "1c9820af4bfc1bdc1f3e43db7c9ac5e7bf9f849a692258d8aef7bcf83084df11",
+          "bytes": 313189,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-original-ticket-hall-round-column-and-grid-thirdperson.png",
+          "sha256": "42310fcf14e9db34898d6fb130d2ec8f4392174a8264f7e5c09056556eb36d74",
+          "bytes": 278531,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-upper-platform-thirdperson.png",
+          "sha256": "e403d42806869d22f6c9434d07f48d97d7487de8237f440d1b60ea7c4bfb20d4",
+          "bytes": 396595,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-upper-platform-firstperson.png",
+          "sha256": "f653e9ec0e8661948193601576595965064438112bdd0ff86bbce6831f5be42c",
+          "bytes": 338852,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-lower-platform-thirdperson.png",
+          "sha256": "675b9a6cf4399d0a3a04307522fe74e7fcc40091b15ac31e0cad9ee67decd69c",
+          "bytes": 396280,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-lower-platform-firstperson.png",
+          "sha256": "c7f271b9936e91f0295ee9adcc569a8e3e5e0dbed45b8b43845ab96a2cd2af6d",
+          "bytes": 339640,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-seymour-stairs-firstperson.png",
+          "sha256": "b34874aec4e2883a3ac63d0edbb5fd7ac8dd0b8c3bf1771a0456e4139feeaa7c",
+          "bytes": 232458,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-seymour-stairs-overhead-thirdperson.png",
+          "sha256": "9f996e58e58638512b3d87f1c04941ec25cbac8dbd07eceac83f1eae8cf3b124",
+          "bytes": 793541,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-interplatform-stairs-firstperson.png",
+          "sha256": "e9c1825a123e61467d374787516e554e21619c2766f6c809370882f3e6e46ac1",
+          "bytes": 249075,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-interplatform-stairs-overhead-thirdperson.png",
+          "sha256": "67f2f7a5eedf7615a1e502da884ea3b63c6d4f068bf09377beacdcbc8a5b64ee",
+          "bytes": 355865,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-big-three-2-firstperson.png",
+          "sha256": "28780e4ffd9d8104112a5f035bdbf1edbd25296360eb8663f431881a7716b955",
+          "bytes": 406496,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-big-three-2-overhead-thirdperson.png",
+          "sha256": "c1a6cd1202384badf55228f02d1da20df910ae6d4f6e9d4769056a6e12fd16fb",
+          "bytes": 600195,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-dunsmuir-main-triple-2-firstperson.png",
+          "sha256": "2b5bd62482afb6639cae1d6a4b04d0effe81e29001ebc8f52d90e2a24ed3e276",
+          "bytes": 376707,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-dunsmuir-main-triple-2-overhead-thirdperson.png",
+          "sha256": "394bae02a292004fc52737ab4faa9fc8b05bb83736dd47ebf437ffb042b06c78",
+          "bytes": 527303,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-big-three-three-lanes-from-top.png",
+          "sha256": "53310bffc7ffa486602574f7bfc82367a17320b88228e97d1ca70f61f3fe06fa",
+          "bytes": 335304,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-granville-dunsmuir-main-triple-three-lanes-from-top.png",
+          "sha256": "39e7250dfa49cfbd2bf06f8f50f98af051b9b1a4f9af91ce21041c4e132b5940",
+          "bytes": 313988,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-granville-overview-cutaway.png",
+          "sha256": "07341ccc47eaf76b1336eaafee522f477435f4741e51b29d5453c00164de6ef0",
+          "bytes": 982250,
+          "width": 1440,
+          "height": 1000
+        }
+      ],
+      "manualReview": {
+        "accepted": true,
+        "reviewedAtUtc": "2026-10-23T15:52:37.858Z",
+        "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame.",
+        "limitations": [
+          "The overview is a partial geographic narrow strip, not a complete stacked-station section. Teal excavation background outside the authored Dunsmuir/Seymour pads does not cover source architecture or the walking avatar; topology acceptance uses the dedicated hall, banks, platforms, geometry and routes."
+        ]
+      }
+    },
+    "waterfront": {
+      "file": "final/game-waterfront-browser.json",
+      "sha256": "891a28a5e6e81f4c3a7488a0dc5975605f48a9c3d9fcf96cfdeb9e154cace5e4",
+      "bytes": 381872,
+      "capturedAt": "2026-10-23T15:43:33.398Z",
+      "captures": 123,
+      "nativeDoorExitReentries": 4,
+      "actualLiftTrips": 10,
+      "errors": 0,
+      "warnings": 0,
+      "failedHttp": 0,
+      "contextLost": false,
+      "stationPacketSha256": "dd1e1f6ff8889e7ec9eceaec8053223c7811991accbfcf50463b9bbdd58facba",
+      "verifiedAfterCapture": "dd1e1f6ff8889e7ec9eceaec8053223c7811991accbfcf50463b9bbdd58facba",
+      "images": [
+        {
+          "file": "final/game-waterfront-initial-street-handoff-thirdperson.png",
+          "sha256": "d5dc6585c016286d3da2d5c778b29798c192feb1083db278e27aa91e5d84b9bb",
+          "bytes": 271393,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-entrance-cordova-lobby-outside-thirdperson.png",
+          "sha256": "61c9e4c4b0f52786686b9782502294d822a460cb9b6ff8f333d8644289d27d2e",
+          "bytes": 392103,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-entrance-cordova-lobby-inside-thirdperson.png",
+          "sha256": "bb5d97453b4d78deca68d0b9700f5b8435cd2c13eecbdb547a0abe604fe3d853",
+          "bytes": 272877,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-entrance-howe-expo-outside-thirdperson.png",
+          "sha256": "840218962672a5e393cacba03c2c9ec07725b09e5c60f1e58c25e98c9cc10d51",
+          "bytes": 907637,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-entrance-howe-expo-inside-thirdperson.png",
+          "sha256": "ea06fd26cf5032c3c766419ccbc84a4dbdd9c296d0b2855550509a34c57fba5f",
+          "bytes": 324299,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-entrance-granville-canada-outside-thirdperson.png",
+          "sha256": "db34e62e6c9357d7c7de5f895518fd947149d2ee51a235aad94aecd2d537f746",
+          "bytes": 919914,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-entrance-granville-canada-inside-thirdperson.png",
+          "sha256": "e7ffaf583d0acd0df03dbdddcd756671a3dd5c2f709b08c0193409fd3679e242",
+          "bytes": 354115,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-entrance-granville-canada-lift-outside-thirdperson.png",
+          "sha256": "b0262eef4072ca6277b0a96bfe78736445614e5efb21a8b9f1e4f481bc03496e",
+          "bytes": 531299,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-entrance-granville-canada-lift-inside-thirdperson.png",
+          "sha256": "1d945252b39198353a82c7046af142b751b0c0acd785a03ab778579fd16d30ae",
+          "bytes": 400622,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-1-call-firstperson.png",
+          "sha256": "9da5e77d972b7d393260b0e57c383707f1800be3d15eb73275e85fb0aeb40650",
+          "bytes": 208955,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-1-lowest-landing-firstperson.png",
+          "sha256": "7150b80ca18b175709ee089c86310695ad5724595e292d05c5822a894d10547d",
+          "bytes": 223705,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-1-returned-to-entry-level-firstperson.png",
+          "sha256": "fa7bb9d11cda5f2adaf4439bb7d83b51c7c96dfcbbff12487bf869e71869b667",
+          "bytes": 212786,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-2-call-firstperson.png",
+          "sha256": "7799febbf3cc735961b02765fc1da469816c98337b93a29a66b16e9a3d6d70fe",
+          "bytes": 258536,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-2-lowest-landing-firstperson.png",
+          "sha256": "52cd5bcda038d3e2f9fddb1c2b47a6de974a8df70cdcfc8d74450c429dfbe189",
+          "bytes": 206116,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-2-returned-to-entry-level-firstperson.png",
+          "sha256": "e85e3f71bb2d063aff97b4cfc5f9ab841b4857cedaac0de21a40cafda84b05bb",
+          "bytes": 254392,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-3-call-firstperson.png",
+          "sha256": "8b306fa01332800de9326f53740a403ada95c57f55b4efadfab193ee24656da4",
+          "bytes": 215547,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-3-lowest-landing-firstperson.png",
+          "sha256": "95668369f52a781719d1a27359ea848ca84b81ae9e9e7f1e7308571049fbaa6b",
+          "bytes": 382789,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-3-returned-to-entry-level-firstperson.png",
+          "sha256": "894b671552efcee5c00eeed81da185e4609f018763dddf48114b6bed1a174fdb",
+          "bytes": 219307,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-4-call-firstperson.png",
+          "sha256": "65fc904f228a9340f2232abefa92a39e26a4665aeceab64af4766d4d39144432",
+          "bytes": 285285,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-4-lowest-landing-firstperson.png",
+          "sha256": "c64cd65126b9f4b5fcf22b3c0e6c370d4dbad4d0bffc01ec18cf55e4baab5f16",
+          "bytes": 239341,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-4-returned-to-entry-level-firstperson.png",
+          "sha256": "7233a32f4457e7025b55b5447736601ab1029f9ca8e2f00c42c594e3969a27d9",
+          "bytes": 319399,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-5-call-firstperson.png",
+          "sha256": "e8efddf9bf122551149274eb6d2ad3ba758159668c871d968b8f9bc4e27c555d",
+          "bytes": 502206,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-5-lowest-landing-firstperson.png",
+          "sha256": "bd52aa9d4e8a7ad619f4e06342d55224511e8b4344d6c17fdbe23e3f52292b71",
+          "bytes": 344120,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-elevator-core-5-returned-to-entry-level-firstperson.png",
+          "sha256": "db078e4ddccdc9957e88e2c14df096df679e2816c3e8b6d3b0814d6776c9d3c0",
+          "bytes": 539338,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-seabus-native-exit-on-retained-skywalk-thirdperson.png",
+          "sha256": "f2ff8e662c7df7ecca72c7ba7c8367a058562b783d95fa6178b6540c26cb9a00",
+          "bytes": 495488,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-seabus-native-return-through-covered-grade-thirdperson.png",
+          "sha256": "728806ae772a62caf917d5ea196daa4e2f86aef61c4cc7a9a5925ffa5b4b2b35",
+          "bytes": 245964,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-cordova-true-northeast-doorway-into-heritage-nave-firstperson.png",
+          "sha256": "da2fbe2f05f37d951769dca150421b36e0c1de2d1e9dd254fab94227f32593e3",
+          "bytes": 266210,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-cordova-true-northeast-doorway-into-heritage-nave-thirdperson.png",
+          "sha256": "a450096b4584673e759b93f68e636c99311d17b517bfac4698c53d6976a5acc3",
+          "bytes": 290782,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-nave-left-northwest-canada-line-direction-firstperson.png",
+          "sha256": "68cd9a39243bc4ef9de321f1303d8929d909403d03589a263a5b7d1a0e2a7211",
+          "bytes": 259193,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-nave-left-northwest-canada-line-direction-thirdperson.png",
+          "sha256": "23b0827acd681b1194db0d803b357737b2c745c370b255c3ce7eb297c5f229e1",
+          "bytes": 297790,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-nave-retained-columns-and-high-ceiling-firstperson.png",
+          "sha256": "2ef30259e1bf68095f7f2307d3122b65c692959885f0cd12c170a575d17368f2",
+          "bytes": 294436,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-nave-retained-columns-and-high-ceiling-thirdperson.png",
+          "sha256": "6c6ab45e80c9d768fb21b2458badd5cc5f034b005a7f231f6e2c52f3dc35b7d4",
+          "bytes": 233560,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-rear-covered-vestibule-to-expo-annex-firstperson.png",
+          "sha256": "b8a06f82e494393e75c8ba74aa39e83f345fffc8db840b9a4901a72e11d1ad06",
+          "bytes": 222400,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-rear-covered-vestibule-to-expo-annex-thirdperson.png",
+          "sha256": "b9da4432d47fd2183ece7fa7556aa6bbd68992c48aa6c15512b3c5020ab4859a",
+          "bytes": 309503,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-rear-covered-grade-to-retained-seabus-skywalk-firstperson.png",
+          "sha256": "d1a772ca26c19d927b2f0f33a4c3e5412cd918806b9ea4a8d7f78084c62acab0",
+          "bytes": 298805,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-rear-covered-grade-to-retained-seabus-skywalk-thirdperson.png",
+          "sha256": "6a17502f27acad50892433bf7de339568af737b28993390972b6162d3c0e738f",
+          "bytes": 255764,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-expo-annex-toward-east-fares-firstperson.png",
+          "sha256": "ecc8fbc00dec24e4acb819df18b6ebe35c73fe4e56cd7ad08aadd757a1f89108",
+          "bytes": 299677,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-expo-annex-toward-east-fares-thirdperson.png",
+          "sha256": "d0f9f0863f93203d0127ca29a3dcc9c3384eb05cf5ca073a1598ede969323e5a",
+          "bytes": 327759,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-expo-upper-lift-clear-apron-beside-paid-fares-firstperson.png",
+          "sha256": "14afd4e55e25ab7db908bead04d394ce6ccea6c10271f3c49b210a06e434aec4",
+          "bytes": 238702,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-expo-upper-lift-clear-apron-beside-paid-fares-thirdperson.png",
+          "sha256": "4617522c886390d20bb948045165aa78b43319b563abcf700f2bd49a55b175cc",
+          "bytes": 421158,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-east-stair-and-two-escalators-firstperson.png",
+          "sha256": "2613652f9c4b8ed59a30598239e93a5bd05a2c05be42e39bbcfb7c773f8111ec",
+          "bytes": 298145,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-east-stair-and-two-escalators-thirdperson.png",
+          "sha256": "d8c5dc1a8328c04a340ddb8a4cd1a4cd53bbabeaddead55207900e200c93d3cc",
+          "bytes": 386839,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-upper-central-stair-and-two-escalators-firstperson.png",
+          "sha256": "23c3883d202adab6433612d37ed1b9a516521389db6be362fdf928c20170d0f0",
+          "bytes": 323565,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-upper-central-stair-and-two-escalators-thirdperson.png",
+          "sha256": "da6268c5a667828cf15910d3d164fd885b5eba30e0fdf9b045014ff6106d487d",
+          "bytes": 554118,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-low-ceiling-junction-and-left-mall-branch-firstperson.png",
+          "sha256": "78d8aa2130caf9c30492155adfa3a7a9e915247a3d507e9f8c03c669ce6b8416",
+          "bytes": 240419,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-low-ceiling-junction-and-left-mall-branch-thirdperson.png",
+          "sha256": "417410936a6813de335e92875690bde27643c51eb7a0045a1a717dbb63e94540",
+          "bytes": 431894,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-unpaid-mall-side-five-gate-boundary-firstperson.png",
+          "sha256": "51e2426f7115bcf3ef2d021006043fb4480a4c84d890711f599be15f0f51d5bd",
+          "bytes": 310249,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-unpaid-mall-side-five-gate-boundary-thirdperson.png",
+          "sha256": "b0a7b36faefbef6831cc1e61209b71b82c60a529573ca29a42295c2f670e6ce3",
+          "bytes": 431018,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-paid-platform-side-five-gate-boundary-firstperson.png",
+          "sha256": "41f1cc303cd4f9b55c3e2ff686db0b95445035878ad5af87d2b9cd789d25c686",
+          "bytes": 319071,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-paid-platform-side-five-gate-boundary-thirdperson.png",
+          "sha256": "2b042d8cdcc8d08f87de756dbb8d82730eee976befa65e7ed6abd909b2e2614c",
+          "bytes": 476402,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-lower-stair-and-single-escalator-firstperson.png",
+          "sha256": "7d322fae6c38ff3f05565db017f0e34fe57de1841a633a17474530c4bfba4476",
+          "bytes": 293746,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-lower-stair-and-single-escalator-thirdperson.png",
+          "sha256": "653dfbc94b9489a01311992d0ba51561df754b8a6c7feb3ca59a0a7aeb14215f",
+          "bytes": 313867,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-29m-platform-tunnel-toward-island-firstperson.png",
+          "sha256": "d350c6817c1726a792c606da0e66c4305f34786f58e01907f3bc8e83b1537fb0",
+          "bytes": 228625,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-29m-platform-tunnel-toward-island-thirdperson.png",
+          "sha256": "94c5f2cad5a083fb47105959aaac1e9bca4da8e0e06f57fca39384d0ea167102",
+          "bytes": 331178,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-29m-platform-tunnel-return-to-lower-bank-firstperson.png",
+          "sha256": "cf2cacc5a0b9799ef3a0d0b441fe780030e69771eb65339003f0f22fa33338ce",
+          "bytes": 221878,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-howe-29m-platform-tunnel-return-to-lower-bank-thirdperson.png",
+          "sha256": "310ce083729b8f3eb10eb9960026468dab2d525b9579d2e036ba4142903ddcd2",
+          "bytes": 316663,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-expo-island-east-track-walkway-firstperson.png",
+          "sha256": "2792ef0adc12b852fe97cf2579bc1846dfd4ed3d5cefc7fced3ffbea08a37500",
+          "bytes": 371832,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-expo-island-east-track-walkway-thirdperson.png",
+          "sha256": "cd50ff0c448f48c6bbdfbe18a4d2b968117a7c728194fdf30ab1636ad8d285e0",
+          "bytes": 413437,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-expo-island-west-track-walkway-firstperson.png",
+          "sha256": "995fe71e29aa2fe767a04b39f14deeff42d306dfec6ad3156299d62b8ecb25f3",
+          "bytes": 410191,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-expo-island-west-track-walkway-thirdperson.png",
+          "sha256": "d94291c95c44d64b7dbe92ce5a472f95d56bf5b07f32a50cc99614cb43d84cbc",
+          "bytes": 438302,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-granville-42-riser-stair-and-escalator-firstperson.png",
+          "sha256": "84eda1ece66e98af48561fff89d7f0ff182b063d2e6ecf1b0802c1b16bbdbd61",
+          "bytes": 285507,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-granville-42-riser-stair-and-escalator-thirdperson.png",
+          "sha256": "05b533fc87861db05782c12da189d5066fc32d3e2388322cd3839ad1646223ee",
+          "bytes": 410251,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-granville-independent-public-street-lift-firstperson.png",
+          "sha256": "915db4bf02cad56d34484587f7430d132a2615f795509f8f3484c26e4d5b4d72",
+          "bytes": 205529,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-granville-independent-public-street-lift-thirdperson.png",
+          "sha256": "d2214db67bacbdbfe628a72ddfc2c52cdffd93a42b4e88c783cd772ac3d4a44e",
+          "bytes": 373089,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-granville-lift-and-stair-shared-concourse-firstperson.png",
+          "sha256": "9150ac7768c5efa78dfa1e1728c4eb3f548d7c278f6ce74a82bc6470facdc356",
+          "bytes": 218556,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-granville-lift-and-stair-shared-concourse-thirdperson.png",
+          "sha256": "c595a22468728d633fd3138dafdb211aac65698a3d0a6c2c87a4b45f5922001f",
+          "bytes": 269188,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-granville-paid-concourse-firstperson.png",
+          "sha256": "7c124172d0618ec8cec5d076ee97aed9166bb5fecf92e10523261aba2a7bb991",
+          "bytes": 253166,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-granville-paid-concourse-thirdperson.png",
+          "sha256": "415bacdb1d7b59eba6848b5df6bc7a50f80cd11a5a45ea01096579acf15ec9d2",
+          "bytes": 294354,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-granville-24-riser-platform-bank-firstperson.png",
+          "sha256": "0804490a7d43310544f17a3613324ecd0aee4198ddd77decb1c95db309f91a0a",
+          "bytes": 310922,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-granville-24-riser-platform-bank-thirdperson.png",
+          "sha256": "aa5269734a1d6ab1feefee109d3528c1604edea4d10580a6473fdd0b12ee6a95",
+          "bytes": 350776,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-canada-initial-descent-firstperson.png",
+          "sha256": "db42afc1c49eaacca63ce69362ca5641c4ed342b41e18dcb23c0bf839c00674c",
+          "bytes": 259398,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-heritage-canada-initial-descent-thirdperson.png",
+          "sha256": "27dd6defe1ffa583b65c3e74b09a38afcc31bc0928d4aa2cdc4d001327dd1fa0",
+          "bytes": 313651,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-under-cordova-graded-passage-1-of-three-firstperson.png",
+          "sha256": "d5b8bcd03c956f8bdefc1e0f5b345460d31cb520971852c6e669853008eeb236",
+          "bytes": 199714,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-under-cordova-graded-passage-1-of-three-thirdperson.png",
+          "sha256": "72ee7582cb203af921598f0fcef9cf97f06d904221767dfb08224a7b9e62c68c",
+          "bytes": 244165,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-under-cordova-graded-passage-2-of-three-firstperson.png",
+          "sha256": "317ce9fa319fa4509cdc4d19eb44b585ab4b784c6c6b4a0c7aab49a5959db507",
+          "bytes": 207934,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-under-cordova-graded-passage-2-of-three-thirdperson.png",
+          "sha256": "eb550374d9bfd785eab008be9a5688589032531eee61b2feabb31f9b2ba33ac3",
+          "bytes": 258672,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-under-cordova-graded-passage-3-of-three-firstperson.png",
+          "sha256": "88eb52d909bef9a50c4584b97b57cd3c296e49992339d2e9b0889d3cdb452a65",
+          "bytes": 216694,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-under-cordova-graded-passage-3-of-three-thirdperson.png",
+          "sha256": "d9a773135b1b5328cfd426d523cd6103bc6e562430e3dc01fa011016b4e40ebf",
+          "bytes": 244231,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-cordova-north-concourse-firstperson.png",
+          "sha256": "fc1bd6580d7575ea4fda187a2e22644edfb6e492428a8d914a54007692112eb2",
+          "bytes": 261865,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-cordova-north-concourse-thirdperson.png",
+          "sha256": "251cd8285076633ae5a9a05200fefa3c23be2440d7ffac7984a76ade8412df43",
+          "bytes": 258740,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-north-24-riser-platform-bank-firstperson.png",
+          "sha256": "be903ab31ebb7c8313e9b4c2b0b869231082176fb20e56e56d517bb4bb4a9469",
+          "bytes": 348246,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-north-24-riser-platform-bank-thirdperson.png",
+          "sha256": "de57d2e01d326bd2bac9a68bc12c5c01a5038e4e2621881c62de5a1caa48353b",
+          "bytes": 365804,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-island-granville-direction-firstperson.png",
+          "sha256": "6c3579180b987c7ecc726172dec7627f4a9c0b7a9cb7e984571cf6834c22eabe",
+          "bytes": 370413,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-island-granville-direction-thirdperson.png",
+          "sha256": "8fff55a884a04e8fc74e580752674a603523c650a44c2e5a18864b01bb05726d",
+          "bytes": 458374,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-island-cordova-direction-firstperson.png",
+          "sha256": "cb21ff542bb7ee956acb9114f3be19a8860620238956a527ec1a9e628e090771",
+          "bytes": 368259,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-canada-island-cordova-direction-thirdperson.png",
+          "sha256": "529f27ceece9c5a5dadbcd134a911e21a685f0ca500075700928d296227ba285",
+          "bytes": 449952,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-expo-platform-stairs-firstperson.png",
+          "sha256": "f8950272c840bc76c5665568c4f48a2cb5719cd9a15a4de50c1e587d5a2d723a",
+          "bytes": 335191,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-expo-platform-stairs-overhead-thirdperson.png",
+          "sha256": "eb07c47bc4094c103436fbcbe06acd466b1c3209c6b4d65de744a73027690aea",
+          "bytes": 544449,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-expo-platform-up-firstperson.png",
+          "sha256": "89d166c93544810f9a0068513299e3722fa374dff5d1b4212c0d212b3988bb0d",
+          "bytes": 368513,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-expo-platform-up-overhead-thirdperson.png",
+          "sha256": "2f203115c1eb20a185d0ed2552e3c2e5625d2e2dde252a9c71a8c6d5ae40f36d",
+          "bytes": 471684,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-expo-platform-down-firstperson.png",
+          "sha256": "fa62594a81d99d6f7aac910c2e3abb48b8fa48fab19d4cda170b8bee629d351e",
+          "bytes": 349553,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-expo-platform-down-overhead-thirdperson.png",
+          "sha256": "865126ed89b89217de862379f6c5dae725d230ccf63578b83dabcfc6e6c492bb",
+          "bytes": 463185,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-upper-stairs-firstperson.png",
+          "sha256": "451a090dde5ca3d32c8097e4630b5f76d45b279e56c8f717202e280b4d15cfdb",
+          "bytes": 358392,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-upper-stairs-overhead-thirdperson.png",
+          "sha256": "2ec699273707e562cf26c47b70f144e37ec4f1ef4b5761d42ebb6716b7b29a06",
+          "bytes": 602407,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-upper-up-firstperson.png",
+          "sha256": "4d5bbbbee1b790c3788249993540456616a0033dbe84f82b2b517062d00ab410",
+          "bytes": 375031,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-upper-up-overhead-thirdperson.png",
+          "sha256": "e5819af3b148aa66fd0cce6fd2844d57fe3932cc7d373aab7ca0735e22da6417",
+          "bytes": 726996,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-upper-down-firstperson.png",
+          "sha256": "3b08c7ab7bb8f5e228bdc09763d244c0bf12356df617addb118f334d0f7c9c4f",
+          "bytes": 356527,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-upper-down-overhead-thirdperson.png",
+          "sha256": "86357b6433f234d54722c9dc4097bc5550e9fb2ebb81d670956d54005c68f9bc",
+          "bytes": 510060,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-lower-stairs-firstperson.png",
+          "sha256": "2df5d65e4a5cdff1b072993e6a25a55b2557b19920e9b176ebfed37ac7446e7b",
+          "bytes": 293193,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-lower-stairs-overhead-thirdperson.png",
+          "sha256": "626186ba05776ad02895b29b22d87f00e94316d3a7ee8ade9510578b7b9cc11b",
+          "bytes": 420499,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-lower-escalator-firstperson.png",
+          "sha256": "dda6840a25e8b750f2de9b5507051d5b92649b07ed918eee701063415d594e16",
+          "bytes": 314450,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-howe-lower-escalator-overhead-thirdperson.png",
+          "sha256": "07220db8bff59517aff266c596d5d41188d1278d8b4f3996122ff2d1d8f6bf97",
+          "bytes": 396650,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-granville-stairs-firstperson.png",
+          "sha256": "0d70bda9ec18dd6b7d59aa80c7f1801cfdfe9f0f1e880fbf4a98f1afca02edf0",
+          "bytes": 318884,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-granville-stairs-overhead-thirdperson.png",
+          "sha256": "299d98c96678614b09e0785a90aa0e69a3d6c0e8016dd9d071077d13967a9e85",
+          "bytes": 423619,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-granville-up-firstperson.png",
+          "sha256": "ab7bd8867c998c6615bd0ab7e99f429c831fcdfaad09ad5d3ab6a2eb44029bc0",
+          "bytes": 335932,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-granville-up-overhead-thirdperson.png",
+          "sha256": "b89fc7a7c96437ef57b7c030208150c3f18ea7b2a42ce17b8133829570f134cf",
+          "bytes": 555433,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-south-stairs-firstperson.png",
+          "sha256": "750d7db8e4d0fc666f1deb00fb5eb8b12b7bdbf299afdb783bbbc5d4eef6570f",
+          "bytes": 348124,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-south-stairs-overhead-thirdperson.png",
+          "sha256": "eec857637096d0275e492d7eadca984fe5df9ba34dc930236df0a17655ad17a2",
+          "bytes": 407627,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-south-up-firstperson.png",
+          "sha256": "5a435ba85192f7eb38d2887b846dcddefeac4f7f16358484e018816e02424a12",
+          "bytes": 379429,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-south-up-overhead-thirdperson.png",
+          "sha256": "d03e68e0831581805b2e6c0149e6deb142e9ab336213510e2a2fe1c86cab81e4",
+          "bytes": 403941,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-north-stairs-firstperson.png",
+          "sha256": "a75d08e55c4be712195dd7a9ca6d210e1b040634ebc7a1879cadaf0a7d892efc",
+          "bytes": 366358,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-north-stairs-overhead-thirdperson.png",
+          "sha256": "5fbcfeb78eb11fabce38320b5cd1ebd51439fb365eec0b768080d0e3ce06adb5",
+          "bytes": 470256,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-north-up-firstperson.png",
+          "sha256": "d4fbb3fd407445e8436edf716793c87a29857c37d6ea5056500c894716539b60",
+          "bytes": 413646,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-north-up-overhead-thirdperson.png",
+          "sha256": "1e7c451aaa69ee3488f9489ff115279f4fe18c44d663ae864426f8f4d7fe3c01",
+          "bytes": 442956,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-north-down-firstperson.png",
+          "sha256": "0d1427e188694c289c9c83981c6699233550decaa915440044d02a16de8adc05",
+          "bytes": 405991,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-north-down-overhead-thirdperson.png",
+          "sha256": "c5db3e6769aaf9ecb3a22491855e1aa92e606b446bd08ff48115491ff0a2e34c",
+          "bytes": 474161,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-lobby-stairs-firstperson.png",
+          "sha256": "f549d84de3aabe7698726552985752f23d1bd5c7cb6ab834a5d2897ade699549",
+          "bytes": 242791,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-lobby-stairs-overhead-thirdperson.png",
+          "sha256": "6b5774106120cc2dbb4d8563728b67ed002f744803aea9605355fa5fcc45c34d",
+          "bytes": 365541,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-lobby-up-firstperson.png",
+          "sha256": "6bc74eb6abf1be21bbd78c28a88b2d84ac3d21e9dc9e4fbf0baae172add0a082",
+          "bytes": 281437,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-lobby-up-overhead-thirdperson.png",
+          "sha256": "b6158db8ca674f7ca8a4c1fe3b43f08c1c14a575bf1e55d85980a0b70a7de6af",
+          "bytes": 355265,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-lobby-down-firstperson.png",
+          "sha256": "e43774dc62591ad0c561af91c896ade9fbdafefd8594911d07874b63456b9a13",
+          "bytes": 264127,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-waterfront-canada-lobby-down-overhead-thirdperson.png",
+          "sha256": "1677d05a0c9ec4e6d1d931d7be5a6c116c3d4b27384ae04f80e2b0a28837da0b",
+          "bytes": 406114,
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "file": "final/game-waterfront-overview-cutaway.png",
+          "sha256": "5a080bedb943860fa1336f1823ced7f2280ff55ddad9100cd3b19f4a7f7eed1d",
+          "bytes": 869211,
+          "width": 1440,
+          "height": 1000
+        }
+      ],
+      "manualReview": {
+        "accepted": true,
+        "reviewedAtUtc": "2026-10-23T16:03:24.885Z",
+        "scope": "Complete capture inventory reviewed. All walking third-person frames inspected at full resolution for visible avatar and architectural context; overview frames inspected at full resolution from a supported platform viewpoint with the production-hidden avatar and station-specific limitations recorded separately; key photo-comparison and structural-seam first-person frames inspected at full resolution. This does not claim full-resolution inspection of every first-person frame.",
+        "limitations": [
+          "The overview is a partial geographic cutaway dominated by surrounding building facades and a narrow platform strip; it does not establish a complete two-line station section. Architecture acceptance uses the dedicated hall, platform and bank views, actual source-photo comparisons, physical geometry and continuous routes."
+        ],
+        "reviewedFrames": {
+          "inventory": 123,
+          "fullResolutionWalkingThirdPerson": 59,
+          "fullResolutionOverview": 1,
+          "fullResolutionFirstPerson": 24
+        },
+        "independentCrossCheck": {
+          "reviewers": 2,
+          "frames": 60,
+          "sameReportAndPngHashesVerified": true
+        }
+      }
+    }
+  },
+  "note": "Runtime/public hashes come from the frozen client actually served on port 3205. Report and PNG hashes are recorded only after explicit station-specific manual acceptance. Exact publication identities are reported through the pull request, workflow history and final delivery; this pin does not require a self-referential commit hash.",
+  "frontendTree": {
+    "directories": ["app", "components", "hooks", "lib"],
+    "files": 447,
+    "sha256": "9141adf8bd5ac3432215b91e3d8b1b470ca8fdc6b3c25046911be9a98d68c709",
+    "canonicalization": "SHA-256 over UTF-8 lines: relative path, tab, file SHA-256, tab, bytes, newline; paths sorted by JavaScript string code-unit order."
+  },
+  "evidenceToolsRoot": "Repository root; capture tools execute here against the frozen browser client.",
+  "evidenceTools": {
+    "tools/station-interiors/capture-game.mjs": {
+      "sha256": "75f3a5256e2a65bda755f7e4012faebab248173b6f0af5e03063913801c75221",
+      "bytes": 19119
+    },
+    "tools/station-interiors/capture-waterfront-views.mjs": {
+      "sha256": "e8435ab35178b9b5bbbbff4854ec3631330a4b920d64bf66f77e3efc3c7ad0dd",
+      "bytes": 22134
+    },
+    "tools/station-interiors/capture-dunsmuir-views.mjs": {
+      "sha256": "6388a74d8ed161a5ed6f88ef1a3e382c6f687d093a79dc7c0a6a7be67228c674",
+      "bytes": 8506
+    },
+    "tools/station-interiors/capture-southeast-views.mjs": {
+      "sha256": "c86e8d4a95ae1adee7b3852b8aa0b96752de730ac3525289f51fe5b4040596cb",
+      "bytes": 15349
+    },
+    "tools/station-interiors/capture-station-access.mjs": {
+      "sha256": "f09e46787dbdc8ca4c21324d125d3f7288bae7037b87ebf0f275ecc4fc510654",
+      "bytes": 12510
+    },
+    "tools/station-interiors/capture-overview-view.mjs": {
+      "sha256": "da43e2914655b518ec25d29d533a4af069de7589c228998c419535b0872cb1c6",
+      "bytes": 2660
+    }
+  }
+}

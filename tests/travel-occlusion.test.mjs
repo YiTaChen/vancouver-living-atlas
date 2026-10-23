@@ -195,7 +195,7 @@ test('existing real station aperture and night lighting hooks, uniforms and cach
   assert.strictEqual(shader.uniforms.uTravelCutawayEnabled.value, 0);
   assert.equal(
     root.material.customProgramCacheKey(),
-    sourceKey + '|travel-full-occluder-v2',
+    sourceKey + '|travel-full-occluder-v3-terrain',
   );
   root.material.color.set(0x123456);
   root.material.emissiveIntensity = 0.42;
@@ -221,7 +221,7 @@ test('dynamic source cache keys and default compile fingerprints remain valid an
   const cutaway = new TravelOcclusion([root]);
   assert.equal(
     material.customProgramCacheKey(),
-    key + '|travel-full-occluder-v2',
+    key + '|travel-full-occluder-v3-terrain',
   );
   cutaway.dispose();
   assert.strictEqual(material.onBeforeCompile, originalCompile);
@@ -231,12 +231,12 @@ test('dynamic source cache keys and default compile fingerprints remain valid an
   const second = new TravelOcclusion([root]);
   assert.equal(
     material.customProgramCacheKey(),
-    'source-1|travel-full-occluder-v2',
+    'source-1|travel-full-occluder-v3-terrain',
   );
   variant = 2;
   assert.equal(
     material.customProgramCacheKey(),
-    'source-2|travel-full-occluder-v2',
+    'source-2|travel-full-occluder-v3-terrain',
   );
   second.dispose();
   dispose(root);
@@ -758,7 +758,7 @@ test('SSAO override uses identical full-piece removal and explicit zero defaults
   assert.deepEqual(normal.defaultAttributeValues.aTravelOccluderMax, [0, 0, 0]);
   assert.match(
     normal.customProgramCacheKey(),
-    /travel-full-occluder-v2-normal$/,
+    /travel-full-occluder-v3-terrain-normal$/,
   );
   for (const floor of [0, 4.2, -7.5]) {
     wall.position.set(0, floor + 1.5, -4);

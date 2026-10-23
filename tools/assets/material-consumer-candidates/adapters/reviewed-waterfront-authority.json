@@ -1,0 +1,125 @@
+{
+  "schema": "reviewed-waterfront-authority-source-delta/v1",
+  "path": "lib/city/interiors.ts",
+  "priorCommit": "a2eb6d463530341f27928e1a321683f617e9305d",
+  "priorSha256": "d169aed61c7432ed7c45db1ca6ced6ba1388575767768a0f5f32bae4e2cedf1e",
+  "reviewedSha256": "440459ff4dbf3dbec047c7490d16c7e25342ceab21682c7d088af1f9f4678cd2",
+  "scope": "Exact source-only subtraction for the pre-existing offline material prototype fixture. Current source still executes in both actual CPU material consumers; geometry and circulation comparisons remain independent and strict.",
+  "changes": [
+    {
+      "startLine": 9,
+      "endLine": 15,
+      "prior": ""
+    },
+    {
+      "startLine": 237,
+      "endLine": 259,
+      "prior": ""
+    },
+    {
+      "startLine": 264,
+      "endLine": 268,
+      "prior": "  setLightLabMix(levels: LightLevels) { this.lightLab?.setLevels(levels); }\n"
+    },
+    {
+      "startLine": 341,
+      "endLine": 349,
+      "prior": "    const parts = new Parts(),\n      group = parts.group;\n"
+    },
+    {
+      "startLine": 368,
+      "endLine": 369,
+      "prior": ""
+    },
+    {
+      "startLine": 375,
+      "endLine": 377,
+      "prior": "    polys.forEach((poly) =>\n      parts.floor(\n"
+    },
+    {
+      "startLine": 382,
+      "endLine": 384,
+      "prior": "    doors.forEach((d) =>\n      parts.floor(\n"
+    },
+    {
+      "startLine": 418,
+      "endLine": 425,
+      "prior": "      seats.push({ id: `interior-seat:${id}:${x}:${z}`, floor: point.toArray(),\n        yaw: site.yaw, height: 0.48,\n        visible: () => group.visible && this.e.landmarks.visible,\n"
+    },
+    {
+      "startLine": 638,
+      "endLine": 641,
+      "prior": "      this.addSkyWalk(parts, envelope, site);\n"
+    },
+    {
+      "startLine": 646,
+      "endLine": 647,
+      "prior": ""
+    },
+    {
+      "startLine": 1043,
+      "endLine": 1272,
+      "prior": ""
+    },
+    {
+      "startLine": 1296,
+      "endLine": 1297,
+      "prior": ""
+    },
+    {
+      "startLine": 1298,
+      "endLine": 1305,
+      "prior": "        site.polys.some((poly) => inside(p, poly)) ||\n        site.doors.some((r) => this.inRect(p, r)) ||\n        this.inRect(p, site.approach)\n"
+    },
+    {
+      "startLine": 1311,
+      "endLine": 1313,
+      "prior": ""
+    },
+    {
+      "startLine": 1319,
+      "endLine": 1375,
+      "prior": ""
+    },
+    {
+      "startLine": 1379,
+      "endLine": 1384,
+      "prior": "    if (site.obstacles.some((r) => this.inRect(p, r, 0.35))) return false;\n"
+    },
+    {
+      "startLine": 1399,
+      "endLine": 1414,
+      "prior": ""
+    },
+    {
+      "startLine": 1428,
+      "endLine": 1429,
+      "prior": ""
+    }
+  ],
+  "geometryMetadata": {
+    "reason": "The exact same world-space triangles/normals are partitioned into independently retired hall and retained transport batches. Mesh count doubles; Box3 merged local-AABB conservatism shrinks. Hash, triangle count and vertex count remain exact.",
+    "prior": {
+      "hash": "54f6025dd824153bf8f2aad2c6fef5f34d65b62f0cd64dddd4886d6099f770e4",
+      "triangles": 16854,
+      "vertices": 50562,
+      "meshes": 3,
+      "boundsM": {
+        "min": [1115.1708361002281, 3.346286804241822, -184.74261942668159],
+        "max": [1398.4788170019683, 11.795620592137562, 101.80990069161305],
+        "size": [283.30798090174017, 8.449333787895739, 286.55252011829464]
+      }
+    },
+    "reviewed": {
+      "hash": "54f6025dd824153bf8f2aad2c6fef5f34d65b62f0cd64dddd4886d6099f770e4",
+      "triangles": 16854,
+      "vertices": 50562,
+      "meshes": 6,
+      "boundsM": {
+        "min": [1115.1708361002281, 3.346286804241822, -152.02426321119583],
+        "max": [1398.4788170019683, 11.795620592137562, 91.3678721122027],
+        "size": [283.30798090174017, 8.449333787895739, 243.39213532339852]
+      }
+    }
+  }
+}

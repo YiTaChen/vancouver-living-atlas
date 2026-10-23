@@ -37,6 +37,15 @@
         ]
       },
       {
+        "source": "/models/skytrain-stations/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
         "source": "/_next/static/**",
         "headers": [
           {

@@ -118,31 +118,52 @@ async function floorView(
   await snapshot(`${label}-thirdperson`);
 }
 
-async function flightView(page, snapshot, id) {
-  await page.evaluate((id) => {
-    const travel = window.__atlas.skyTrainTravel,
-      owner = travel.owner,
-      c = owner.geometryData.connections.find((c) => c.id === id);
-    if (!c?.treads.length) throw new Error(`Missing real flight ${id}`);
-    const index = Math.floor(c.treads.length / 2),
-      tread = c.treads[index],
-      p = tread.vertices.reduce(
-        (sum, v) => sum.map((n, axis) => n + v[axis] / tread.vertices.length),
-        [0, 0, 0],
+export function prepareSoutheastFlightViewpoint(id, suppliedOwner) {
+  const owner = suppliedOwner ?? window.__atlas.skyTrainTravel.owner,
+    c = owner.geometryData.connections.find((c) => c.id === id);
+  if (!c?.treads.length) throw new Error(`Missing real flight ${id}`);
+  const index = Math.floor(c.treads.length / 2),
+    tread = c.treads[index],
+    p = tread.vertices.reduce(
+      (sum, v) => sum.map((n, axis) => n + v[axis] / tread.vertices.length),
+      [0, 0, 0],
+    ),
+    dx = c.end[0] - c.start[0],
+    dz = c.end[2] - c.start[2],
+    t = Math.max(
+      0,
+      Math.min(
+        1,
+        ((p[0] - c.start[0]) * dx + (p[2] - c.start[2]) * dz) /
+          (dx * dx + dz * dz),
       ),
-      foot = owner.floorAt(p, `${id}:step:${index}`),
-      low = c.start[1] < c.end[1] ? c.start : c.end;
-    if (!foot || !owner.isClearFoot(foot))
-      throw new Error(`No clear tread eye on ${id}`);
+    );
+  // Connections may deliberately use a real side lane beside a physical
+  // central divider. Project onto that axis, retaining the actual tread Y.
+  p[0] = c.start[0] + dx * t;
+  p[2] = c.start[2] + dz * t;
+  const foot = owner.floorAt(p, `${id}:step:${index}`),
+    low = c.start[1] < c.end[1] ? c.start : c.end;
+  if (!foot || !owner.isClearFoot(foot))
+    throw new Error(`No clear tread eye on ${id}`);
+  const yaw = Math.atan2(low[0] - p[0], low[2] - p[2]),
+    pitch =
+      Math.atan2(low[1] - p[1], Math.hypot(low[0] - p[0], low[2] - p[2])) -
+      0.08;
+  if (!suppliedOwner) {
+    const travel = window.__atlas.skyTrainTravel;
     travel.foot = foot;
     travel.lookYaw = 0;
     travel.distanceView = 0;
-    travel.yaw = Math.atan2(low[0] - p[0], low[2] - p[2]);
-    travel.pitch =
-      Math.atan2(low[1] - p[1], Math.hypot(low[0] - p[0], low[2] - p[2])) -
-      0.08;
+    travel.yaw = yaw;
+    travel.pitch = pitch;
     travel.updateCamera();
-  }, id);
+  }
+  return { foot, point: p, yaw, pitch };
+}
+
+async function flightView(page, snapshot, id) {
+  await page.evaluate(prepareSoutheastFlightViewpoint, id);
   await snapshot(`${id}-firstperson`);
   await page.evaluate(() => {
     const travel = window.__atlas.skyTrainTravel;

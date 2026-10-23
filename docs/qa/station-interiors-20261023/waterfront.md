@@ -1,5 +1,7 @@
 # Waterfront: reference-based circulation rebuild
 
+This is the phase 1 implementation record. The subsequent [phase 4 mapped reconstruction](waterfront-mapped-phase4.md) supersedes its original secondary-door, platform-placement and Howe-scope limitations.
+
 This stage replaces the game's generic access chains with a shared heritage hall, a separate Expo fare hall and island descent, an under-Cordova Canada Line passage, a Canada Line concourse and island descent, and the independent Granville Street entrance. The public hall is the interchange; the two rail lines do not share a platform.
 
 ## Evidence inspected

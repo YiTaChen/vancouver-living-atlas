@@ -45,6 +45,10 @@ const references = {
       note: 'Canmenwalker, CC BY 4.0: enclosed triple escalator shaft, pale panels, red rails, curved acoustic vault.',
     },
     {
+      url: `${COMMONS}Granville_Station_Granville_Street_Concourse_2026.JPG`,
+      note: 'Canmenwalker, CC BY 4.0: low rectangular grey metal-mesh ceiling panels, pale framing and round stainless columns. The reconstructed 1.15×1m panel spacing and frame widths are proportional inferences, not measured modules.',
+    },
+    {
       url: `${COMMONS}Granville_station_access_2018.jpg`,
       note: 'Wpcpey, CC BY-SA 4.0: tiled lower Dunsmuir faregate hall; only part of the triple bank is visible.',
     },
@@ -204,6 +208,112 @@ function finishWithStairwells(b) {
   return b.finish({ encloseElevators: true });
 }
 
+/** The shared street bank includes structural cheeks between its two lanes.
+ * A low flat atrium floor cannot continue through that inclined plinth. Derive
+ * the well from the actual retained slab, and stop once its underside provides
+ * two metres of standing headroom so the genuine underpass remains available.
+ */
+function carveBurrardSharedBank(b, floorId) {
+  const slab = b.s.geometryParts.find(
+      (p) => p.id === 'burrard-street-retaining-walls-underslab',
+    ),
+    floor = b.s.floorSurfaces.find((f) => f.surfaceId === floorId),
+    stairs = b.s.connections.find(
+      (c) => c.connectionId === 'burrard-street-stairs',
+    );
+  if (!slab || !floor || !stairs)
+    throw new Error('Missing real Burrard shared street-bank structure');
+  const rotation = new THREE.Quaternion(...slab.rotationQuaternionXYZW),
+    normal = new THREE.Vector3(0, 1, 0).applyQuaternion(rotation).normalize();
+  if (normal.y < 0) normal.negate();
+  const underside = new THREE.Vector3(...slab.centerM).addScaledVector(
+      normal,
+      -slab.sizeM[1] / 2,
+    ),
+    plane = new THREE.Plane().setFromNormalAndCoplanarPoint(normal, underside),
+    bounds = new THREE.Box3();
+  for (const x of [-1, 1])
+    for (const y of [-1, 1])
+      for (const z of [-1, 1])
+        bounds.expandByPoint(
+          new THREE.Vector3(
+            (x * slab.sizeM[0]) / 2,
+            (y * slab.sizeM[1]) / 2,
+            (z * slab.sizeM[2]) / 2,
+          )
+            .applyQuaternion(rotation)
+            .add(new THREE.Vector3(...slab.centerM)),
+        );
+  const floorY = floor.verticesM[0][1],
+    low =
+      stairs.startPointM[1] < stairs.endPointM[1]
+        ? stairs.startPointM
+        : stairs.endPointM,
+    // The tiny X component is retained when solving the worst underside edge.
+    worstX = normal.x >= 0 ? bounds.max.x : bounds.min.x,
+    headroomZ =
+      (-normal.y * (floorY + 2) - normal.x * worstX - plane.constant) /
+      normal.z,
+    cut = {
+      minX: bounds.min.x,
+      maxX: bounds.max.x,
+      minZ: Math.max(bounds.min.z, low[2]),
+      maxZ: Math.min(bounds.max.z, headroomZ),
+    };
+  carveFloorRect(b.s, floorId, cut);
+  b.s.authoredInterior.sharedStreetBankWell = {
+    floorId,
+    structurePart: slab.id,
+    requiredStandingHeadroomM: 2,
+    cutBoundsM: cut,
+    undersidePlane: { normal: normal.toArray(), constant: plane.constant },
+    status:
+      'Bounded by the existing shared slab including its structural cheeks; low endpoint preserved, clear high underpass retained. Source bank dimensions remain proportional, not surveyed.',
+  };
+}
+
+function burrardStreetGlazingPortal(b, floorId) {
+  const floor = b.s.floorSurfaces.find((f) => f.surfaceId === floorId),
+    bank = b.s.authoredInterior.sharedStreetBankWell,
+    planeZ = Math.max(...floor.verticesM.map((p) => p[2])) + 0.1,
+    bodyRadius = 0.24,
+    paneHalfThickness = 0.035,
+    flights = b.s.connections.filter((c) =>
+      ['burrard-street-stairs', 'burrard-street-escalator'].includes(
+        c.connectionId,
+      ),
+    ),
+    crossingTreads = flights
+      .flatMap((c) => c.treadSurfaces)
+      .filter((t) => {
+        const minZ = Math.min(...t.verticesM.map((p) => p[2])),
+          maxZ = Math.max(...t.verticesM.map((p) => p[2]));
+        return (
+          minZ <= planeZ + bodyRadius + paneHalfThickness &&
+          maxZ >= planeZ - bodyRadius - paneHalfThickness
+        );
+      });
+  if (!bank || flights.length !== 2 || !crossingTreads.length)
+    throw new Error('Missing Burrard shared-bank glazing crossing');
+  const highestTreadY = Math.max(
+      ...crossingTreads.flatMap((t) => t.verticesM.map((p) => p[1])),
+    ),
+    portal = {
+      planeZ,
+      minX: bank.cutBoundsM.minX,
+      maxX: bank.cutBoundsM.maxX,
+      topY: highestTreadY + 2,
+      highestTreadY,
+      requiredStandingHeadroomM: 2,
+      bodyRadiusM: bodyRadius,
+      flightIds: flights.map((c) => c.connectionId),
+      status:
+        'A real opening through front glazing and mullions follows the existing shared street bank. Header height derives from actual crossing treads plus standing headroom; dimensions are proportional, not surveyed.',
+    };
+  b.s.authoredInterior.glazedStreetPortal = portal;
+  return portal;
+}
+
 // A shallow elliptical vault, constructed as continuous panels with visible ribs.
 // Each panel is actual geometry, not a floating arch that leaves the tunnel open.
 function vault(
@@ -212,7 +322,14 @@ function vault(
   a,
   c,
   width,
-  { spring = 2.25, rise = 1.15, segments = 12, ribSpacing = 4 } = {},
+  {
+    spring = 2.25,
+    rise = 1.15,
+    segments = 12,
+    ribSpacing = 4,
+    opening,
+    endWallHeight,
+  } = {},
 ) {
   const av = new THREE.Vector3(...a),
     cv = new THREE.Vector3(...c);
@@ -242,29 +359,109 @@ function vault(
     const rotation = new THREE.Quaternion().setFromRotationMatrix(
       new THREE.Matrix4().makeBasis(xAxis, yAxis, zAxis),
     );
-    b.box(
-      `${id}-vault-panel-${j}`,
-      start.clone().add(end).multiplyScalar(0.5).toArray(),
-      [chord.length() + 0.045, 0.12, start.distanceTo(end)],
-      'acoustic',
-      'ceiling',
-      0,
-      false,
-      rotation.toArray(),
-    );
+    const half = (chord.length() + 0.045) / 2,
+      panelRun = start.distanceTo(end),
+      across = start.clone().sub(av).dot(side),
+      acrossScale = xAxis.dot(side),
+      cut =
+        opening &&
+        [opening.minAcrossM, opening.maxAcrossM]
+          .map((u) => (u - across) / acrossScale)
+          .sort((p, q) => p - q),
+      minS = cut ? Math.max(-half, cut[0]) : half,
+      maxS = cut ? Math.min(half, cut[1]) : -half,
+      minT = opening ? Math.max(0, opening.minAlongM) : panelRun,
+      maxT = opening ? Math.min(panelRun, opening.maxAlongM) : 0,
+      ranges =
+        minS < maxS && minT < maxT
+          ? [
+              [-half, half, 0, minT],
+              [-half, half, maxT, panelRun],
+              [-half, minS, minT, maxT],
+              [maxS, half, minT, maxT],
+            ]
+          : [[-half, half, 0, panelRun]];
+    for (const [i, [s0, s1, t0, t1]] of ranges.entries()) {
+      if (s1 - s0 < 1e-8 || t1 - t0 < 1e-8) continue;
+      b.box(
+        `${id}-vault-panel-${j}${ranges.length > 1 ? `-portal-return-${i}` : ''}`,
+        start
+          .clone()
+          .addScaledVector(xAxis, (s0 + s1) / 2)
+          .addScaledVector(zAxis, (t0 + t1) / 2)
+          .toArray(),
+        [s1 - s0, 0.12, t1 - t0],
+        'acoustic',
+        'ceiling',
+        0,
+        false,
+        rotation.toArray(),
+      );
+    }
   }
   for (let k = 0; k <= Math.ceil(run / ribSpacing); k++) {
     const t = Math.min(1, (k * ribSpacing) / run);
-    for (let j = 0; j < segments; j++)
-      b.beam(
-        `${id}-arch-${k}-${j}`,
-        arc(t, (Math.PI * j) / segments),
-        arc(t, (Math.PI * (j + 1)) / segments),
-        0.095,
-        0.11,
-        'steel',
-        'ceiling',
-      );
+    for (let j = 0; j < segments; j++) {
+      const p = new THREE.Vector3(...arc(t, (Math.PI * j) / segments)),
+        q = new THREE.Vector3(...arc(t, (Math.PI * (j + 1)) / segments)),
+        u0 = p.clone().sub(av).dot(side),
+        u1 = q.clone().sub(av).dot(side),
+        along = t * run,
+        cut =
+          opening && along >= opening.minAlongM && along <= opening.maxAlongM
+            ? [opening.minAcrossM, opening.maxAcrossM]
+                .map((u) => (u - u0) / (u1 - u0))
+                .sort((a, z) => a - z)
+            : null,
+        min = cut ? Math.max(0, cut[0]) : 1,
+        max = cut ? Math.min(1, cut[1]) : 0,
+        ranges =
+          min < max
+            ? [
+                [0, min],
+                [max, 1],
+              ]
+            : [[0, 1]];
+      for (const [i, [a, z]] of ranges.entries())
+        if (z - a > 1e-8)
+          b.beam(
+            `${id}-arch-${k}-${j}${ranges.length > 1 ? `-portal-return-${i}` : ''}`,
+            p.clone().lerp(q, a).toArray(),
+            p.clone().lerp(q, z).toArray(),
+            0.095,
+            0.11,
+            'steel',
+            'ceiling',
+          );
+    }
+  }
+  if (endWallHeight !== undefined) {
+    const tangent = new THREE.Vector3(cv.x - av.x, 0, cv.z - av.z).normalize(),
+      yaw = THREE.MathUtils.radToDeg(Math.atan2(tangent.x, tangent.z));
+    for (const end of [0, 1])
+      for (let j = 0; j < segments; j++) {
+        const p = new THREE.Vector3(...arc(end, (Math.PI * j) / segments)),
+          q = new THREE.Vector3(...arc(end, (Math.PI * (j + 1)) / segments)),
+          base = av.clone().lerp(cv, end),
+          bottom = base.y + endWallHeight,
+          top = Math.max(p.y, q.y) + 0.08;
+        if (top <= bottom) continue;
+        const center = p
+          .clone()
+          .add(q)
+          .multiplyScalar(0.5)
+          .addScaledVector(tangent, end ? 0.1 : -0.1);
+        center.y = (bottom + top) / 2;
+        b.box(
+          `${id}-vault-end-infill-${end}-${j}`,
+          center.toArray(),
+          [Math.abs(q.clone().sub(p).dot(side)) + 0.05, top - bottom, 0.2],
+          'cream',
+          'wall',
+          yaw,
+          true,
+        );
+      }
   }
 }
 
@@ -464,7 +661,7 @@ function ticketFurniture(
   b,
   id,
   center,
-  { tiled = false, grid = true, gates = true } = {},
+  { tiled = false, grid = true, gates = true, signOffsetZ = 3.7 } = {},
 ) {
   const [x, y, z] = center;
   for (let i = 0; i < 3; i++) {
@@ -503,7 +700,13 @@ function ticketFurniture(
       'detail',
     );
   }
-  b.sign('Expo Line  ↓  Platforms 1 & 2', [x, y + 2.45, z + 3.7], 0, 6, 0.42);
+  b.sign(
+    'Expo Line  ↓  Platforms 1 & 2',
+    [x, y + 2.45, z + signOffsetZ],
+    0,
+    6,
+    0.42,
+  );
   b.sign(
     'Compass tickets  ·  Tap in / Tap out',
     [x - 5, y + 2.4, z - 3.65],
@@ -554,7 +757,7 @@ function ticketFurniture(
       );
 }
 
-function glazedAtrium(b, id, center) {
+function glazedAtrium(b, id, center, { frontPortal, sideOpenings = {} } = {}) {
   const [x, y, z] = center,
     length = 14;
   for (const side of [-1, 1]) {
@@ -564,6 +767,8 @@ function glazedAtrium(b, id, center) {
       [0.08, 5, length],
       'glass',
       'wall',
+      0,
+      true,
     );
     b.beam(
       `${id}-glass-roof-${side}`,
@@ -580,27 +785,89 @@ function glazedAtrium(b, id, center) {
   // projecting through the roof. Their lower edge meets the masonry enclosure.
   for (const end of [-1, 1]) {
     for (let u = -10.5; u <= 10.5; u += 1) {
-      const top = 9 - (1.5 * Math.min(11, Math.abs(u) + 0.5)) / 11;
+      const top = 9 - (1.5 * Math.min(11, Math.abs(u) + 0.5)) / 11,
+        minX = x + u - 1.005 / 2,
+        maxX = x + u + 1.005 / 2,
+        portal =
+          end === 1 &&
+          frontPortal &&
+          maxX > frontPortal.minX &&
+          minX < frontPortal.maxX
+            ? frontPortal
+            : null,
+        bottom = portal ? Math.max(2.5, portal.topY - y) : 2.5;
       b.box(
         `${id}-gable-pane-${end}-${u}`,
-        [x + u, y + (2.5 + top) / 2, z + end * 7.1],
-        [1.005, top - 2.5, 0.07],
+        [x + u, y + (bottom + top) / 2, z + end * 7.1],
+        [1.005, top - bottom, 0.07],
         'glass',
         'wall',
+        0,
+        true,
       );
+      // Keep the narrow lower side returns outside the true bank opening.
+      if (portal)
+        for (const [side, a, c] of [
+          ['left', minX, Math.min(maxX, portal.minX)],
+          ['right', Math.max(minX, portal.maxX), maxX],
+        ])
+          if (c - a > 0.001)
+            b.box(
+              `${id}-gable-pane-${end}-${u}-portal-return-${side}`,
+              [(a + c) / 2, y + (2.5 + bottom) / 2, z + end * 7.1],
+              [c - a, bottom - 2.5, 0.07],
+              'glass',
+              'wall',
+              0,
+              true,
+            );
     }
     for (let u = -11; u <= 11; u += 3.6666666667) {
-      const top = 9 - (1.5 * Math.abs(u)) / 11;
+      const top = 9 - (1.5 * Math.abs(u)) / 11,
+        insidePortal =
+          end === 1 &&
+          frontPortal &&
+          x + u + 0.075 / 2 > frontPortal.minX &&
+          x + u - 0.075 / 2 < frontPortal.maxX,
+        bottom = insidePortal ? Math.max(2.5, frontPortal.topY - y) : 2.5;
       b.beam(
         `${id}-gable-mullion-${end}-${u}`,
-        [x + u, y + 2.5, z + end * 7.1],
+        [x + u, y + bottom, z + end * 7.1],
         [x + u, y + top, z + end * 7.1],
         0.075,
         0.075,
         'steel',
         'detail',
+        true,
       );
     }
+  }
+  if (frontPortal) {
+    const { minX, maxX, topY, planeZ } = frontPortal;
+    b.beam(
+      `${id}-street-portal-header`,
+      [minX, topY + 0.0375, planeZ],
+      [maxX, topY + 0.0375, planeZ],
+      0.075,
+      0.075,
+      'steel',
+      'detail',
+      true,
+    );
+    for (const [side, xx] of [
+      ['left', minX],
+      ['right', maxX],
+    ])
+      b.beam(
+        `${id}-street-portal-jamb-${side}`,
+        [xx, y + 2.5, planeZ],
+        [xx, topY, planeZ],
+        0.075,
+        0.075,
+        'steel',
+        'detail',
+        true,
+      );
   }
   for (let v = -7; v <= 7; v += 3.5) {
     b.beam(
@@ -630,14 +897,20 @@ function glazedAtrium(b, id, center) {
       'steel',
       'ceiling',
     );
-    for (const u of [-11, 11])
+    for (const u of [-11, 11]) {
+      const openings = sideOpenings[u < 0 ? 'west' : 'east'] ?? [],
+        atDoor = openings.some(([a, c]) => v + 0.055 > a && v - 0.055 < c),
+        bottom = atDoor ? 2.5 : 0.95;
       b.box(
         `${id}-glass-mullion-${u}-${v}`,
-        [x + u, y + 4.7, z + v],
-        [0.11, 7.5, 0.11],
+        [x + u, y + (atDoor ? (bottom + 8.45) / 2 : 4.7), z + v],
+        [0.11, atDoor ? 8.45 - bottom : 7.5, 0.11],
         'steel',
         'detail',
+        0,
+        true,
       );
+    }
   }
   for (let v = -5; v <= 5; v += 5)
     b.box(
@@ -777,6 +1050,18 @@ export function rebuildBurrard(source) {
     [upperCenterX, upperY, northZ - 10],
     [upperCenterX, upperY, northZ],
     upperWidth,
+    {
+      endWallHeight: 2.5,
+      // The actual shared bank enters the west side of this hub. Its own
+      // continuous inclined vault replaces this bounded piece of hub roof;
+      // retaining the complete hub ellipse would cut through all three lanes.
+      opening: {
+        minAcrossM: 10 - upperCenterX,
+        maxAcrossM: 23 - upperCenterX,
+        minAlongM: -105 - 5.25 / 2 - (northZ - 10),
+        maxAlongM: -105 + 5.25 / 2 - (northZ - 10),
+      },
+    },
   );
   b.walk(
     'burrard-upper-platform-portal',
@@ -849,13 +1134,8 @@ export function rebuildBurrard(source) {
   );
   const hall = 'burrard-ticket-atrium',
     street = 'burrard-street-plaza',
-    y = -6.5;
-  b.floor(hall, [-1, y, -105], 22, 14, 'concourse', hall);
-  b.room(hall, [-1, y, -105], 22, 14, {
-    height: 2.5,
-    material: 'concrete',
-    roof: false,
-    doors: {
+    y = -6.5,
+    hallDoors = {
       south: [[-8, 1]],
       north: [
         [-5.1, -1.2],
@@ -866,10 +1146,19 @@ export function rebuildBurrard(source) {
         [-3, 3],
         [4, 6.5],
       ],
-    },
+    };
+  b.floor(hall, [-1, y, -105], 22, 14, 'concourse', hall);
+  b.room(hall, [-1, y, -105], 22, 14, {
+    height: 2.5,
+    material: 'concrete',
+    roof: false,
+    doors: hallDoors,
   });
-  glazedAtrium(b, hall, [-1, y, -105]);
-  ticketFurniture(b, hall, [-1, y, -105], { grid: false, gates: false });
+  ticketFurniture(b, hall, [-1, y, -105], {
+    grid: false,
+    gates: false,
+    signOffsetZ: -3.8,
+  });
   bank(
     b,
     'burrard-main-escalator-bank',
@@ -918,6 +1207,18 @@ export function rebuildBurrard(source) {
     10.2,
     { material: 'concrete', roof: false },
   );
+  carveBurrardSharedBank(b, hall);
+  glazedAtrium(b, hall, [-1, y, -105], {
+    frontPortal: burrardStreetGlazingPortal(b, hall),
+    sideOpenings: hallDoors,
+  });
+  b.s.authoredInterior.glazedDoorPortals = {
+    west: hallDoors.west,
+    east: hallDoors.east,
+    mullionLowerEdgeAboveFloorM: 2.5,
+    status:
+      'Side glazing posts follow the existing masonry door openings and retain all upper framing; room dimensions remain proportional.',
+  };
   entrance(
     b,
     'burrard-burrard-street-entry',
@@ -973,6 +1274,11 @@ export function rebuildBurrard(source) {
         roof: false,
         doors: { north: [[-1.9, 1.9]], south: [[-1.9, 1.9]] },
       });
+      // These are photographed open-air retaining-wall landings, without
+      // overhead beams across the stair mouths. Keep both lateral walls.
+      b.s.geometryParts = b.s.geometryParts.filter(
+        (p) => !new RegExp(`^${to}-(north|south)-lintel-`).test(p.id),
+      );
     }
     b.flight(
       `burrard-park-stairs-${i + 1}`,
@@ -1100,6 +1406,18 @@ export function rebuildBurrard(source) {
     'burrard-park': 'burrard-park-entry',
   };
   b.s.authoredInterior.escalatorCount = 5;
+  b.s.authoredInterior.mainBankVaultPortal = {
+    minX: 10,
+    maxX: 23,
+    minZ: -105 - 5.25 / 2,
+    maxZ: -105 + 5.25 / 2,
+    status:
+      'The shared triple-bank shaft joins the upper hub through a bounded roof opening. The inclined bank vault remains its physical cover; exact joint dimensions are representative, not surveyed.',
+  };
+  b.s.authoredInterior.parkLandingEnclosure = {
+    status:
+      'The two intermediate landings retain lateral concrete walls and open stair mouths, following the actual open-air park photographs; no overhead lintels are inferred across those mouths.',
+  };
   b.s.authoredInterior.platformCalibration = {
     source:
       'OSM approximate platform ways 923508924/925 and mapped entrance nodes 5324651728/9198420892',
@@ -1315,6 +1633,50 @@ export function rebuildGranville(source) {
     3.2,
   );
   b.walk('granville-mall-ticket-hall', originalCross, hall, [72, -3, -106]);
+  // The actual 2026 concourse photograph has a close metal-panel ceiling,
+  // rather than one featureless white slab. Panel modules and frame widths
+  // below are inferred within this already established hall footprint.
+  // Both materials already have ceiling batches elsewhere in this station.
+  for (let column = 0; column < 10; column++)
+    for (let row = 0; row < 10; row++)
+      b.box(
+        `granville-original-ticket-hall-ceiling-panel-${column}-${row}`,
+        [72 + (column + 0.5) * 1.15, 0.08, -110 + row + 0.5],
+        [1.08, 0.025, 0.94],
+        'acoustic',
+        'ceiling',
+      );
+  for (let line = 0; line <= 10; line++) {
+    b.box(
+      `granville-original-ticket-hall-ceiling-grid-x-${line}`,
+      [
+        line === 0 ? 72.02 : line === 10 ? 83.48 : 72 + line * 1.15,
+        0.063,
+        -105,
+      ],
+      [0.04, 0.055, 10],
+      'cream',
+      'ceiling',
+    );
+    b.box(
+      `granville-original-ticket-hall-ceiling-grid-z-${line}`,
+      [
+        77.75,
+        0.063,
+        line === 0 ? -109.98 : line === 10 ? -100.02 : -110 + line,
+      ],
+      [11.5, 0.055, 0.04],
+      'cream',
+      'ceiling',
+    );
+  }
+  b.s.authoredInterior.originalTicketHallCeiling = {
+    reference: `${COMMONS}Granville_Station_Granville_Street_Concourse_2026.JPG`,
+    panelModuleM: [1.15, 1],
+    frameWidthM: 0.04,
+    status:
+      'Grey panels and pale frame grid observed in actual photograph; module spacing, frame depth and finish dimensions inferred, not surveyed. Existing ceiling palette batches reused.',
+  };
   roundConcourseColumn(
     b,
     'granville-original-ticket-hall-round-column',
