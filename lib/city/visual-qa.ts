@@ -1,3 +1,4 @@
+import { installStreetPilotQA } from './street-pilot-qa';
 import { installStreetFurnitureQA } from './street-furniture-qa';
 import { sunAngle } from './clock';
 import * as THREE from 'three';
@@ -284,6 +285,7 @@ export function installVisualQA(e: CityEngine) {
       running = false;
     },
   };
+  installStreetPilotQA(e, panel, runLease);
   installUpgradeQA(e, panel, runLease);
   installAutoQualityQA(e, panel, runLease);
   installTeslaQA(e, panel, runLease);
