@@ -2,6 +2,12 @@
 
 ## Behavior and references
 
+**2026-10-23 extension:** the downtown field and its exclusions remain separate.
+A new source-local Stanley Park field now lights verified pole surroundings;
+see [Stanley Park scenery](STANLEY_PARK_SCENERY_2026_10.md) for inventory, budgets
+and retained dark areas. The original validation below describes the October 11
+downtown release.
+
 The downtown peninsula now has readable asphalt, sidewalk edges and lower building façades at night. Warm pools sit under the existing procedural street-lamp heads, with darker gaps and upper surfaces. The lamp arms and luminous heads now point toward the roadway. The atmosphere, sky exposure and global ambient intensity retain their previous settings; the geographic receiver mask excludes complete park, wood and water polygons, including their hole semantics, and excludes the outer districts.
 
 The design follows the City of Vancouver's [outdoor lighting strategy](https://vancouver.ca/streets-transportation/outdoor-lighting-strategy.aspx) and [2019 public-realm lighting guidelines, Appendix D](https://council.vancouver.ca/20190723/documents/a4.pdf#page=31), which describe warm street/sidewalk/commercial lighting, generally 3000 K, and avoiding unnecessary light in ecological areas. [City streetscape guidance](https://vancouver.ca/streets-transportation/streetscape-design-guidelines.aspx) distinguishes the character of different downtown districts. [Pechet Studio's Granville installation](https://pechetstudio.com/portfolio/granville-lighting/) and [authored Gastown photographs](https://www.lucasjdiackphoto.com/post/top-photography-spots-in-vancouver-landmarks-and-gear-for-stunning-shots) show readable lower streets and localized sources beneath a dark sky. Granville's unusually bright entertainment street is not used as the brightness target for every block. Photographs can include exposure and wet-pavement effects; the implementation borrows their light hierarchy rather than claiming photometric calibration.

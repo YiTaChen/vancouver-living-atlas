@@ -1,0 +1,26 @@
+{
+  "baselineCommit": "d1ff75170c2b39bd47b684e3cdaf591f7fcc27b1",
+  "integrationBaseCommit": "ea76bc5",
+  "baseline": "Original main plus local-only QA controls. No production scenery modifications.",
+  "candidate": "Final frozen source for Siwash and mobile acceptance. Lighting implementation/source admission identical to lighting acceptance receipt.",
+  "files": {
+    "lib/city/environment.ts": "6b348b9594041d4e6ea1fe102b215ebefccb177948bd2a6e5a57e99e2e6bebf7",
+    "lib/city/night-street-lighting.ts": "30d9e96a9ffe80d5e3501ab1ebfb1eaf307898acfbf6ff99d5fc3e07304ef263",
+    "lib/city/stanley-night-lighting.ts": "cc3dabbbe700db71d3e01bc87794fd9b01a7c6fcb21e7c46614295edf93f85f5",
+    "lib/city/stanley-lighting-source.json": "fff8e97c2e5b4ea3f80b7a99c45a17e8cff3c800296093c4dd4add0dee088233",
+    "lib/city/assets/siwash-rock.ts": "acb2b768c232ec66ec17931b70eeb6b276b72a8b162ac805f40314375a316b44",
+    "lib/city/siwash-rock-detail.ts": "4d23dca397d9ae113acb26668aa4316e389c9e4aa33eee4fad8f29f89f6aa286",
+    "lib/city/siwash-coast.ts": "69e1824e5201e5977093563c0c16deec6b5bd005f7bca6cfbd1d12106b646c3b",
+    "lib/city/landmarks.ts": "408db1b00f4ca2a7a7c317691f2ceb1030b55814e463e4167b7223917a67a210",
+    "lib/city/engine.ts": "55f8c9da4ef0769764e3dc15f9243f51ff1a00e473d3f5c21655d95212afd870",
+    "lib/city/park-scenery-qa.ts": "6848887c09f5f3f88fb2c8a1937928a872c1068e0d09dd8e96d9a3a2f9de8cda",
+    "lib/city/visual-qa.ts": "b4a3804db715b090436d4dc157f18fddfa463370a25413b4625feaf44de44f74"
+  },
+  "capture": "Native Codex IAB lighting captures at1280x720; native Chrome Siwash at1280x720 and mobile at390x844. Mobile is a viewport test on desktop GPU, not a physical phone benchmark.",
+  "limits": "Mobile viewport on desktop GPU; not a physical phone benchmark. Traffic, sky animation, and unrelated streaming may differ. No controlled FPS speedup claim. Siwash baseline and final use their respective corrected/legacy anchors; final faces from sea to avoid the real coastal cliff.",
+  "sourceCommit": "decf3109d85de7beb74041b11ae24da3d2187431",
+  "baselineQA": {
+    "lib/city/park-scenery-qa.ts": "4b4f1500c05e03ade9db92dc3d052cffa0446436b78844dbdd4489e7b826b469",
+    "lib/city/visual-qa.ts": "b4a3804db715b090436d4dc157f18fddfa463370a25413b4625feaf44de44f74"
+  }
+}

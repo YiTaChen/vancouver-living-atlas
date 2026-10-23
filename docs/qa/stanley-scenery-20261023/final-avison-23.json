@@ -1,0 +1,84 @@
+{
+  "checkpoint": "Avison",
+  "hour": 23,
+  "quality": "balanced",
+  "qualityMode": "manual",
+  "camera": [
+    -135.82326951913606,
+    27.840425885728315,
+    -1567.03633812021
+  ],
+  "target": [
+    -155.82326951913606,
+    15.84042588572832,
+    -1589.03633812021
+  ],
+  "lighting": {
+    "size": 512,
+    "textureBytes": 2097152,
+    "textures": 2,
+    "activeTexels": 81249,
+    "lampSources": 1530,
+    "roadSources": 1314,
+    "buildMs": 275,
+    "wrappedMaterials": 269,
+    "disabledLamps": 0,
+    "warmStateBytes": 2123248,
+    "disposed": false,
+    "nightAmount": 1,
+    "activity": 0.7542084908999245,
+    "park": {
+      "size": 512,
+      "textureBytes": 1048576,
+      "textures": 1,
+      "activeTexels": 16580,
+      "lampSources": 101,
+      "roadSources": 0,
+      "buildMs": 91.5,
+      "wrappedMaterials": 0,
+      "disabledLamps": 0,
+      "warmStateBytes": 1050192,
+      "disposed": false,
+      "nightAmount": 1,
+      "activity": 0.7542084908999245
+    },
+    "downtownTextureBytes": 1048576
+  },
+  "poleInventory": {
+    "records": 103,
+    "deduplicated": 102,
+    "admitted": 101,
+    "rejected": [
+      {
+        "sourceIds": [
+          "S2:26"
+        ],
+        "coordinates": [
+          -123.13399275704072,
+          49.30645218768322
+        ],
+        "point": [
+          -435.1473558606353,
+          -2276.737532895926
+        ],
+        "lampIndex": null,
+        "reason": "outside-current-runtime-land"
+      }
+    ]
+  },
+  "parkSample": {
+    "street": 0,
+    "warm": 0.8047743928711676,
+    "groundY": 16.85115002301276,
+    "coverage": 1
+  },
+  "siwashLevel": "low",
+  "render": {
+    "calls": 198,
+    "triangles": 1896595
+  },
+  "memory": {
+    "geometries": 737,
+    "textures": 85
+  }
+}
