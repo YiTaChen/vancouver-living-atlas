@@ -168,6 +168,8 @@ Source dates differ: core terrain/shoreline data date to 2002 and measured build
 
 Requires **Node.js 22.23.4+ (22.x) or 24.22.1+ (24.x)**, npm and a browser with **WebGL 2**. The app serves its own geographic assets; no map API key is required.
 
+`npm ci` enforces the supported Node engines. Development, build, preview, typechecking and test commands also check the Node binary actually executing them, including when npm lifecycle hooks are disabled with `ignore-scripts`; unsupported majors (including Node 26) are rejected even with installed dependencies. Use `nvm use` to select the patched Node 24 release in `.nvmrc`. Vendor security fixes can be backported without changing the reported Brotli library version, so the guard checks supported Node releases rather than Brotli version labels.
+
 ```sh
 git clone https://github.com/YiTaChen/vancouver-living-atlas.git
 cd vancouver-living-atlas
@@ -183,7 +185,7 @@ npm test                # Geometry, navigation, simulation and lifecycle checks
 npm run build:firebase  # Static production build, asset/locale verification and generated CSP
 ```
 
-**Stack:** TypeScript, React, Three.js and vinext/Vite. The separate `npm run build` / `npm start` path builds and previews the Worker-based version.
+**Stack:** TypeScript, React, Three.js and vinext/Vite. Local development and the separate `npm run build` / `npm start` production preview run on the guarded Node runtime and bind to `127.0.0.1`. The unused Cloudflare/Wrangler/Miniflare preview stack was removed because its bundled native Brotli decoder had no confirmed CVE-2026-111497 fix; this app uses no D1/R2 bindings. The Firebase static export and Hosting deployment remain the same.
 
 | Area | Source |
 | --- | --- |
