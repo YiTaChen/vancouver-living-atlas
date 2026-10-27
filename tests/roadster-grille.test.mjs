@@ -242,3 +242,45 @@ void test('material disposal and later independent hooks unwind without restorin
   other.onBeforeCompile = source;
   other.dispose();
 });
+
+void test('a failed night-field installation removes the early grille dispose listener', () => {
+  const car = makeRoadster(),
+    parent = new THREE.Group(),
+    lighting = new NightStreetLighting(base);
+  parent.add(car.group);
+  const dark = car.group.getObjectByName('roadster/dark').material;
+  const originalCompile = Reflect.get(dark, 'onBeforeCompile');
+  const originalKey = Reflect.get(dark, 'customProgramCacheKey');
+  const add = dark.addEventListener.bind(dark),
+    remove = dark.removeEventListener.bind(dark);
+  const added = [],
+    removed = [];
+  const existing = () => {};
+  add('dispose', existing);
+  dark.addEventListener = (type, listener) => {
+    if (type === 'dispose') added.push(listener);
+    add(type, listener);
+  };
+  dark.removeEventListener = (type, listener) => {
+    if (type === 'dispose') removed.push(listener);
+    remove(type, listener);
+  };
+  lighting.dispose();
+  try {
+    assert.throws(
+      () => new PilotNightRoadster(parent, car.group, lighting),
+      /Night street lighting has been disposed/,
+    );
+    assert.equal(added.length, 1);
+    assert.deepEqual(removed, added);
+    assert.equal(dark.hasEventListener('dispose', added[0]), false);
+    assert.equal(dark.hasEventListener('dispose', existing), true);
+    assert.strictEqual(Reflect.get(dark, 'onBeforeCompile'), originalCompile);
+    assert.strictEqual(Reflect.get(dark, 'customProgramCacheKey'), originalKey);
+  } finally {
+    delete dark.addEventListener;
+    delete dark.removeEventListener;
+    remove('dispose', existing);
+    disposeCar(car.group);
+  }
+});

@@ -29,16 +29,23 @@ export class PilotNightRoadster {
       'dispose',
       this.grilleDisposeListener,
     );
-    roadster.traverse((object) => {
-      if (!(object instanceof THREE.Mesh)) return;
-      for (const material of Array.isArray(object.material)
-        ? object.material
-        : [object.material])
-        if (material instanceof THREE.MeshStandardMaterial)
-          lighting.wrapMaterial(material, { pilotWeight: this.weight });
-    });
-    if (this.grilleMaterial)
-      this.grilleRestore = installPilotRoadsterGrille(this.grilleMaterial);
+    try {
+      roadster.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return;
+        for (const material of Array.isArray(object.material)
+          ? object.material
+          : [object.material])
+          if (material instanceof THREE.MeshStandardMaterial)
+            lighting.wrapMaterial(material, { pilotWeight: this.weight });
+      });
+      if (this.grilleMaterial)
+        this.grilleRestore = installPilotRoadsterGrille(this.grilleMaterial);
+    } catch (error) {
+      // Construction can fail, for example if the shared lighting field was
+      // already disposed. No receiver exists to remove our early listener then.
+      this.restoreGrille();
+      throw error;
+    }
   }
   private restoreGrille() {
     this.grilleMaterial?.removeEventListener(
