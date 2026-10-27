@@ -212,7 +212,7 @@ test('finish is deterministic source-owned relief, road-facing, above pavement a
   }
 });
 
-test('adjacent source bays form coherent, varied representative shopfront groups', () => {
+void test('adjacent source bays form coherent, varied representative shopfront groups', () => {
   const bays = planRobsonBurrardDetails(planHost());
   const groups = new Map();
   for (const bay of bays) {
@@ -343,7 +343,7 @@ test('real source frontages remain bounded, stable under source reordering, and 
   );
 });
 
-test('fictional signs share one unchanged-size atlas without bleeding across tiles', () => {
+void test('fictional signs share one unchanged-size atlas without bleeding across tiles', () => {
   const h = planHost();
   const labels = [];
   const context = {

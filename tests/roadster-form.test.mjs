@@ -57,7 +57,7 @@ function assertMorphedPointsInsideBounds(geometry) {
   return { moved, peak };
 }
 
-test('pilot reshapes both bonnet and rear deck smoothly within the old collision hull', () => {
+void test('pilot reshapes both bonnet and rear deck smoothly within the old collision hull', () => {
   assert.equal(roadsterFormLift(0, 0.7, 1.2), ROADSTER_FORM_MAX_LIFT_M);
   assert.equal(roadsterFormLift(0, 0.7, -1.5), 0.075);
   assert.equal(roadsterFormLift(0, 0.7, 1.2, 0), 0);
@@ -161,7 +161,7 @@ test('pilot reshapes both bonnet and rear deck smoothly within the old collision
   assert(checked > 1000);
 });
 
-test('the shared form weight follows real world transforms, fades continuously, and resets for hidden or distant models', () => {
+void test('the shared form weight follows real world transforms, fades continuously, and resets for hidden or distant models', () => {
   const asset = makeRoadster(),
     root = new THREE.Group();
   root.add(asset.group);
@@ -203,7 +203,7 @@ test('the shared form weight follows real world transforms, fades continuously, 
   assert.deepEqual(paint.geometry.getAttribute('position').array, source);
 });
 
-test('real roadster damage and original paint share the same form and remain within conservative culling bounds', () => {
+void test('real roadster damage and original paint share the same form and remain within conservative culling bounds', () => {
   const asset = makeRoadster(),
     root = new THREE.Group();
   root.add(asset.group);
@@ -400,7 +400,7 @@ test('real roadster damage and original paint share the same form and remain wit
   assert.equal(sourceDisposals, 0);
 });
 
-test('native Three morph chunks are present in colour, depth, and the actual wrapped SSAO normal material', () => {
+void test('native Three morph chunks are present in colour, depth, and the actual wrapped SSAO normal material', () => {
   for (const name of ['standard', 'normal', 'depth']) {
     const source = THREE.ShaderLib[name].vertexShader;
     assert(
@@ -439,7 +439,7 @@ test('native Three morph chunks are present in colour, depth, and the actual wra
   }
 });
 
-test('damage keeps its history when switching between the pilot roadster and the classic model', () => {
+void test('damage keeps its history when switching between the pilot roadster and the classic model', () => {
   const asset = makeRoadster(),
     root = new THREE.Group();
   const { a, b } = STREET_SHOWCASE_SEGMENTS[0];
@@ -491,7 +491,7 @@ test('damage keeps its history when switching between the pilot roadster and the
   effects.dispose();
 });
 
-test('historical roadster source remains protected by a narrow, fail-closed projection', () => {
+void test('historical roadster source remains protected by a narrow, fail-closed projection', () => {
   const path = 'lib/city/assets/roadster.ts';
   const source = readFileSync(new URL('../' + path, import.meta.url), 'utf8');
   const projected = projectBeforeRound2Roadster(path, source);
@@ -524,7 +524,7 @@ test('historical roadster source remains protected by a narrow, fail-closed proj
   );
 });
 
-test('analytic form gradients match central differences at every shape boundary', () => {
+void test('analytic form gradients match central differences at every shape boundary', () => {
   const around = (values) => values.flatMap((v) => [v - 1e-7, v, v + 1e-7]);
   const xs = around([-0.8, -0.69, -0.58, 0, 0.58, 0.69, 0.8]);
   const ys = around([0.38, 0.48, 0.58, 0.7, 0.83, 0.95, 1.08]);

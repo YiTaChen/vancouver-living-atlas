@@ -71,7 +71,7 @@ function street(i, z) {
   };
 }
 
-test('equal-distance windows retain edge/side order and rerank after camera movement', () => {
+void test('equal-distance windows retain edge/side order and rerank after camera movement', () => {
   const fixture = makeCity(
     [street(0, 50), street(1, 30), street(2, 60), street(3, 20)],
     () => false,
@@ -99,7 +99,7 @@ test('equal-distance windows retain edge/side order and rerank after camera move
   }
 });
 
-test('a full nearby route cache remains stable and still frees only unselected routes after travel', () => {
+void test('a full nearby route cache remains stable and still frees only unselected routes after travel', () => {
   let queries = 0;
   const fixture = makeCity(
     Array.from({ length: 44 }, (_, i) => street(i, (i - 22) * 5)),
@@ -147,7 +147,7 @@ test('a full nearby route cache remains stable and still frees only unselected r
   }
 });
 
-test('opt-in subspans preserve actor behavior through quality changes and restore wrapper ownership', () => {
+void test('opt-in subspans preserve actor behavior through quality changes and restore wrapper ownership', () => {
   const normal = makeCity([street(0, 0)]),
     traced = makeCity([street(0, 0)]);
   let now = 0;
@@ -215,7 +215,7 @@ function smoothWeight(distance) {
   return f(1 - f(f(t * t) * f(3 - f(2 * t))));
 }
 
-test('one square root preserves the original float32 mask across fade bands, ties and bounds', () => {
+void test('one square root preserves the original float32 mask across fade bands, ties and bounds', () => {
   const segments = STREET_SHOWCASE_SEGMENTS.map((s) => ({
     a: s.a.map((v) => f(Number(v.toFixed(6)))),
     b: s.b.map((v) => f(Number(v.toFixed(6)))),
