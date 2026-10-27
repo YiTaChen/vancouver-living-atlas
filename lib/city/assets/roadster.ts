@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { installVehicleSurface } from './vehicle-surface';
+import { installVehicleSurface, vehicleSurfaceWeight } from './vehicle-surface';
+import { installRoadsterFormGeometry } from './roadster-form';
 
 /** Original two-seat open roadster. Metres, +Z forward, +X driver's left. */
 export function makeRoadster() {
@@ -346,6 +347,7 @@ export function makeRoadster() {
   for (const [key, geometries] of batches) {
     const geometry = mergeGeometries(geometries, false)!;
     geometries.forEach((g) => g.dispose());
+    if (key === 'paint') installRoadsterFormGeometry(geometry);
     const mesh = new THREE.Mesh(geometry, palette[key]);
     mesh.name = `roadster/${key}`;
     group.add(mesh);
@@ -407,9 +409,19 @@ export function makeRoadster() {
     }
   group.userData.originalProceduralGeometry = true;
   group.userData.openTop = true;
+  const formWorldPosition = new THREE.Vector3();
+  const paintMesh = group.getObjectByName('roadster/paint') as THREE.Mesh;
   return {
     group,
     update(distance: number, steering: number) {
+      if (group.visible && group.parent) {
+        group.getWorldPosition(formWorldPosition);
+        paintMesh.morphTargetInfluences![0] = vehicleSurfaceWeight(
+          formWorldPosition.x,
+          formWorldPosition.y,
+          formWorldPosition.z,
+        );
+      } else paintMesh.morphTargetInfluences![0] = 0;
       for (const pivot of wheels) {
         pivot.rotation.y = pivot.userData.front ? steering * 0.42 : 0;
         pivot.children[0].rotation.x = distance / 0.35;
