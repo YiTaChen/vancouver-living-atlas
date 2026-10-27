@@ -72,10 +72,10 @@ test('night preserves visibility fill and dawn/sunset transitions remain finite 
     for (let hour = 0; hour <= 24; hour += 0.01) {
       const base = sampleAtmosphere(hour, mode);
       const multipliers = streetPilotLightingMultipliers(base, 1);
-      assert(multipliers.ambientIntensity >= 0.62);
+      assert(multipliers.ambientIntensity >= 0.57);
       assert(multipliers.sunIntensity >= 1);
       assert(multipliers.environmentIntensity >= 2);
-      assert(multipliers.environmentIntensity <= 2.2);
+      assert(multipliers.environmentIntensity <= 3.2);
       assert(multipliers.exposure >= 0.98);
       if (previous)
         for (const key of Object.keys(multipliers))

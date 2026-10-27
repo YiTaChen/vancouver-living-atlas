@@ -23,20 +23,20 @@ export const STREET_PILOT_BASELINE_LIGHTING: StreetPilotLightingMultipliers =
     exposure: 1,
   });
 
-/** Conservative starting values for visual calibration. This redistributes the
- * existing light: less broad fill, more directional shape and roughness-aware
- * sky reflection. It does not change the sky texture, fog, shadows or passes. */
+/** Street-level light calibration. Keep broad overcast fill and night visibility,
+ * while clear daylight has a stronger directional-to-ambient ratio and more of
+ * the existing sky PMREM on glossy surfaces. No extra lights or passes are used. */
 export const STREET_PILOT_LIGHTING_TARGETS = Object.freeze({
   dayClear: Object.freeze({
-    ambientIntensity: 0.62,
-    sunIntensity: 1.14,
-    environmentIntensity: 2.2,
+    ambientIntensity: 0.57,
+    sunIntensity: 1.2,
+    environmentIntensity: 3.2,
     exposure: 0.98,
   }),
   dayOvercast: Object.freeze({
     ambientIntensity: 0.75,
     sunIntensity: 1.1,
-    environmentIntensity: 2,
+    environmentIntensity: 2.6,
     exposure: 0.98,
   }),
   night: Object.freeze({
