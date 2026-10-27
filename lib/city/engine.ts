@@ -1179,6 +1179,7 @@ export class CityEngine {
     if (this.landmarkWarmup)
       diagnostics.wrap(this.landmarkWarmup, 'tick', 'landmark-warmup');
     diagnostics.wrap(this.sceneryPreparation, 'pump', 'scenery-preparation');
+    this.pedestrians?.installPerformanceDiagnostics?.(diagnostics);
     diagnostics.setVisible(
       !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
     );

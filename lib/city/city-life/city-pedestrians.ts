@@ -4,6 +4,7 @@ import type { RoadEdge, RoadGraph } from '../road-graph';
 import { GroundSurfaceIndex } from '../ground-surface';
 import { project } from '../geo';
 import { streetShowcaseWeight } from '../street-quality-profile';
+import type { RuntimePerformanceDiagnostics } from '../runtime-performance';
 import { PathActor } from './actor-state';
 import { SimulationClock } from './simulation-clock';
 import {
@@ -210,6 +211,13 @@ export class CityPedestrians {
       ),
     );
   }
+  /** Called only when the explicit performance recorder is enabled. Wrap the
+   * stable owner and renderer rather than a selector that changes with quality. */
+  installPerformanceDiagnostics(diagnostics: RuntimePerformanceDiagnostics) {
+    const owner = this as unknown as { prepareNearby: () => void };
+    diagnostics.wrap(owner, 'prepareNearby', 'pedestrian-prepare');
+    diagnostics.wrap(this.renderer, 'update', 'pedestrian-renderer');
+  }
   setHidden(hidden: boolean) {
     this.clock.setHidden(hidden);
   }
@@ -222,18 +230,23 @@ export class CityPedestrians {
     );
     return this.frustum.intersectsBox(this.bounds);
   }
-  private makeRouteRoom() {
-    if (this.routes.size < 64) return true;
+  private findStaleRoute(): [string, SidewalkRoute] | undefined {
     const active = new Set(this.selected.map((s) => s.actorId));
-    const stale = [...this.routes].find(
-      ([id, route]) =>
+    for (const [id, route] of this.routes)
+      if (
         !active.has(`${id}:0`) &&
         !active.has(`${id}:1`) &&
         Math.hypot(
           route.points[0][0] - this.center.x,
           route.points[0][2] - this.center.z,
-        ) > 180,
-    );
+        ) > 180
+      )
+        return [id, route];
+    return undefined;
+  }
+  private makeRouteRoom() {
+    if (this.routes.size < 64) return true;
+    const stale = this.findStaleRoute();
     if (!stale) return false;
     this.routes.delete(stale[0]);
     this.attempted.delete(stale[0].split(':span')[0]);
@@ -281,6 +294,12 @@ export class CityPedestrians {
       for (const [key, valid] of this.attempted)
         if (!valid) this.attempted.delete(key);
     }
+    // Once all route slots are occupied, a fixed camera commonly has no stale
+    // route to evict. In that case the original ordered search cannot perform
+    // a probe: avoid collecting and sorting the same neighborhood five times a
+    // second. Keep the stale test identical to makeRouteRoom, after the floor
+    // cell reset above, so camera travel can still free the first eligible slot.
+    if (this.routes.size >= 64 && !this.findStaleRoute()) return;
     const cx = Math.floor(this.center.x / 100),
       cz = Math.floor(this.center.z / 100);
     const nearby = new Map<string, SourceWindow>();
@@ -288,13 +307,20 @@ export class CityPedestrians {
       for (let z = cz - 2; z <= cz + 2; z++)
         for (const source of this.edgeCells.get(`${x},${z}`) ?? [])
           nearby.set(`${source.edge.id}:${source.window.windowIndex}`, source);
-    const windows = [...nearby.values()].sort(
-      (a, b) =>
-        windowDistance2(a.window, this.center.x, this.center.z) -
-          windowDistance2(b.window, this.center.x, this.center.z) ||
-        a.edge.id - b.edge.id ||
-        a.window.windowIndex - b.window.windowIndex,
-    );
+    // Distances are pure for this selection and would otherwise be recomputed
+    // for each comparator invocation. Equal distances retain exactly the same
+    // source-id and window-id tie breakers as the original ordering.
+    const windows = [...nearby.values()]
+      .map((source) => ({
+        ...source,
+        distance2: windowDistance2(source.window, this.center.x, this.center.z),
+      }))
+      .sort(
+        (a, b) =>
+          a.distance2 - b.distance2 ||
+          a.edge.id - b.edge.id ||
+          a.window.windowIndex - b.window.windowIndex,
+      );
     const showcase = streetShowcaseWeight(this.center.x, this.center.z) > 0.01;
     let probes = 0;
     for (const { edge, window } of windows)

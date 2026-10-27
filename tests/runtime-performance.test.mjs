@@ -228,6 +228,8 @@ test('pilot wrapper and late landmark span both survive the actual engine label 
     'render-submit',
     'landmark-warmup',
     'scenery-preparation',
+    'pedestrian-prepare',
+    'pedestrian-renderer',
   ];
   const systems = labels.map((label) => {
     const target = { update: () => h.add(1) };
@@ -252,6 +254,8 @@ test('pilot wrapper and late landmark span both survive the actual engine label 
   assert.equal(Object.keys(spans).length, 48);
   assert.equal(spans['street-showcase'].calls, 1);
   assert.equal(spans['landmark-detail'].totalMs, 1);
+  assert.equal(spans['pedestrian-prepare'].calls, 1);
+  assert.equal(spans['pedestrian-renderer'].calls, 1);
   assert.equal(report.stats.labelLimit, 1);
   assert.equal(spans.overflow, undefined);
   d.dispose();
