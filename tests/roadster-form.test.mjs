@@ -404,6 +404,75 @@ void test('real roadster damage and original paint share the same form and remai
   assert.equal(sourceDisposals, 0);
 });
 
+void test('roadster damage replay transfers only owned attributes while rebuilding and releasing native morph geometry', () => {
+  const asset = makeRoadster(),
+    root = new THREE.Group();
+  root.add(asset.group);
+  const { a, b } = STREET_SHOWCASE_SEGMENTS[0];
+  root.position.set((a[0] + b[0]) / 2, 30, (a[1] + b[1]) / 2);
+  asset.update(0, 0);
+  const paint = asset.group.getObjectByName('roadster/paint');
+  const source = paint.geometry;
+  const sourcePositions = source.getAttribute('position').array.slice();
+  const effects = new VehicleDamageVisuals(root);
+  assert(
+    effects.record({
+      localPoint: [0, 0.79, 1.2],
+      localNormal: [0, 1, 0],
+      severity: 0.65,
+      scrape: false,
+    }),
+  );
+  const before = paint.geometry;
+  const priorAttributes = { ...before.attributes };
+  const priorIndex = before.index;
+  const expectedPositions = before.getAttribute('position').array.slice();
+  const expectedNormals = before.getAttribute('normal').array.slice();
+  const expectedMorphPosition =
+    before.morphAttributes.position[0].array.slice();
+  const expectedMorphNormal = before.morphAttributes.normal[0].array.slice();
+  const expectedMarks = effects.group.children[0].geometry
+    .getAttribute('position')
+    .array.slice();
+  const oldMorph = before.morphAttributes.position[0];
+  let disposed = 0,
+    sourceDisposed = 0;
+  before.addEventListener('dispose', () => disposed++);
+  source.addEventListener('dispose', () => sourceDisposed++);
+  effects.refresh();
+  const after = paint.geometry;
+  assert.notStrictEqual(after, before);
+  assert.equal(disposed, 1);
+  assert.equal(sourceDisposed, 0);
+  assert.strictEqual(after.index, priorIndex);
+  for (const [name, attribute] of Object.entries(priorAttributes))
+    assert.strictEqual(after.getAttribute(name), attribute);
+  assert.notStrictEqual(
+    after.getAttribute('position'),
+    source.getAttribute('position'),
+  );
+  assert.notStrictEqual(after.morphAttributes.position[0], oldMorph);
+  assert.deepEqual(after.groups, before.groups);
+  assert.deepEqual(after.drawRange, before.drawRange);
+  assert.strictEqual(after.userData, before.userData);
+  assert.deepEqual(after.getAttribute('position').array, expectedPositions);
+  assert.deepEqual(after.getAttribute('normal').array, expectedNormals);
+  assert.deepEqual(
+    after.morphAttributes.position[0].array,
+    expectedMorphPosition,
+  );
+  assert.deepEqual(after.morphAttributes.normal[0].array, expectedMorphNormal);
+  assert.deepEqual(
+    effects.group.children[0].geometry.getAttribute('position').array,
+    expectedMarks,
+  );
+  assert.equal(paint.morphTargetInfluences[0], 1);
+  assert.deepEqual(source.getAttribute('position').array, sourcePositions);
+  effects.dispose();
+  assert.strictEqual(paint.geometry, source);
+  assert.equal(sourceDisposed, 0);
+});
+
 void test('native Three morph chunks are present in colour, depth, and the actual wrapped SSAO normal material', () => {
   for (const name of ['standard', 'normal', 'depth']) {
     const source = THREE.ShaderLib[name].vertexShader;

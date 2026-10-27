@@ -712,7 +712,30 @@ export class VehicleDamageVisuals {
    * source geometry and the current morph weight stay intact. */
   private rebuildRoadsterForm(mesh: THREE.Mesh, entry: DentGeometry) {
     const previous = mesh.geometry;
-    const next = previous.clone();
+    // The paint's owned clone has private attributes. Reuse those CPU buffers
+    // across geometry identities instead of copying every attribute and the
+    // old morph arrays only to discard the latter immediately. Disposing the
+    // previous geometry also invalidates its GPU buffers and morph texture;
+    // Three uploads the borrowed attributes for the new identity on render.
+    // Unknown subclasses or additional morph layouts retain the general clone
+    // path so this optimization does not silently discard their semantics.
+    const canTransfer =
+      previous.constructor === THREE.BufferGeometry &&
+      Object.keys(previous.morphAttributes).every(
+        (name) => name === 'position' || name === 'normal',
+      );
+    let next: THREE.BufferGeometry;
+    if (canTransfer) {
+      next = new THREE.BufferGeometry();
+      next.name = previous.name;
+      next.userData = previous.userData;
+      next.setIndex(previous.index);
+      for (const [name, attribute] of Object.entries(previous.attributes))
+        next.setAttribute(name, attribute);
+      for (const group of previous.groups)
+        next.addGroup(group.start, group.count, group.materialIndex);
+      next.setDrawRange(previous.drawRange.start, previous.drawRange.count);
+    } else next = previous.clone();
     const weight = mesh.morphTargetInfluences?.[0] ?? 0;
     installRoadsterFormGeometry(next);
     mesh.geometry = next;
