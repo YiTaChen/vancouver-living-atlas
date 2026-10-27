@@ -489,7 +489,11 @@ export class NightStreetLighting {
    */
   wrapMaterial(
     material: Material,
-    options: { facade?: boolean; parkOnly?: boolean } = {},
+    options: {
+      facade?: boolean;
+      parkOnly?: boolean;
+      pilotWeight?: THREE.IUniform<number>;
+    } = {},
   ) {
     if (this.disposed)
       throw new Error('Night street lighting has been disposed');
@@ -501,12 +505,13 @@ export class NightStreetLighting {
     const originalKey = material.customProgramCacheKey;
     const facade = options.facade === true;
     const parkOnly = options.parkOnly === true;
+    const pilotWeight = options.pilotWeight;
     const compile: Material['onBeforeCompile'] = (shader, renderer) => {
       originalCompile.call(material, shader, renderer);
-      this.installShader(shader, facade, parkOnly);
+      this.installShader(shader, facade, parkOnly, pilotWeight);
     };
     const key = () =>
-      `${originalKey.call(material)}|atlas-night-street-v1-${facade ? 'facade' : 'surface'}${this.park ? '-park-v1' : ''}${parkOnly ? '-park-only' : ''}`;
+      `${originalKey.call(material)}|atlas-night-street-v1-${facade ? 'facade' : 'surface'}${this.park ? '-park-v1' : ''}${parkOnly ? '-park-only' : ''}${pilotWeight ? '-pilot-receiver' : ''}`;
     const disposeListener = () => this.releaseMaterial(material);
     material.onBeforeCompile = compile;
     material.customProgramCacheKey = key;
@@ -523,8 +528,14 @@ export class NightStreetLighting {
     return true;
   }
 
-  private installShader(shader: Shader, facade: boolean, parkOnly: boolean) {
+  private installShader(
+    shader: Shader,
+    facade: boolean,
+    parkOnly: boolean,
+    pilotWeight?: THREE.IUniform<number>,
+  ) {
     Object.assign(shader.uniforms, this.uniforms);
+    if (pilotWeight) shader.uniforms.uAtlasPilotReceiverWeight = pilotWeight;
     if (this.park)
       Object.assign(shader.uniforms, {
         uAtlasParkNightField: this.park.uniforms.uAtlasNightField,
@@ -553,11 +564,12 @@ export class NightStreetLighting {
       uniform vec4 uAtlasNightBounds;
       uniform vec2 uAtlasNightHeights;
       uniform float uAtlasNightAmount, uAtlasNightActivity;
+      ${pilotWeight ? 'uniform float uAtlasPilotReceiverWeight;' : ''}
       vec4 atlasNightFieldSample(vec2 worldXZ) {
         // Coherent day/outside branches avoid a field lookup without creating
         // another shader variant when the clock or camera location changes.
         ${parkOnly ? 'return vec4(0.0); // Preserve existing downtown terrain reception.' : ''}
-        if (uAtlasNightAmount <= 0.001) return vec4(0.0);
+        if (uAtlasNightAmount <= 0.001${pilotWeight ? ' || uAtlasPilotReceiverWeight <= 0.0' : ''}) return vec4(0.0);
         vec2 atlasUv = (worldXZ - uAtlasNightBounds.xy) * uAtlasNightBounds.zw;
         if (any(lessThan(atlasUv, vec2(0.0))) || any(greaterThan(atlasUv, vec2(1.0)))) return vec4(0.0);
         return texture2D(uAtlasNightField, atlasUv);
@@ -569,7 +581,7 @@ export class NightStreetLighting {
       uniform vec4 uAtlasParkNightBounds;
       uniform vec2 uAtlasParkNightHeights;
       vec4 atlasParkNightFieldSample(vec2 worldXZ) {
-        if (uAtlasNightAmount <= 0.001) return vec4(0.0);
+        if (uAtlasNightAmount <= 0.001${pilotWeight ? ' || uAtlasPilotReceiverWeight <= 0.0' : ''}) return vec4(0.0);
         vec2 atlasParkUv = (worldXZ - uAtlasParkNightBounds.xy) * uAtlasParkNightBounds.zw;
         if (any(lessThan(atlasParkUv, vec2(0.0))) || any(greaterThan(atlasParkUv, vec2(1.0)))) return vec4(0.0);
         return texture2D(uAtlasParkNightField, atlasParkUv);
@@ -603,7 +615,7 @@ export class NightStreetLighting {
       vec3 atlasBounce = vec3(0.88, 0.85, 0.75) * atlasField.r * 0.16
         + vec3(1.0, 0.82, 0.60) * atlasField.g * 0.45
         + vec3(1.0, 0.76, 0.44) * atlasField.r * atlasFrontage * uAtlasNightActivity * 0.10;
-      float atlasReceiver = ${hasFacade ? '(1.0 - facadePane)' : '1.0'};
+      float atlasReceiver = ${hasFacade ? '(1.0 - facadePane)' : '1.0'}${pilotWeight ? ' * uAtlasPilotReceiverWeight' : ''};
       reflectedLight.indirectDiffuse += diffuseColor.rgb * atlasBounce * atlasFacing
         * atlasHeightFade * uAtlasNightAmount * atlasReceiver;
       ${

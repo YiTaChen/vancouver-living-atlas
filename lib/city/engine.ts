@@ -93,6 +93,7 @@ import { createBridgeApproaches } from './bridges';
 import { prepareCauseway } from './causeway';
 import { makeContext } from './context';
 import { StreetNavigation } from './navigation';
+import { PilotNightRoadster } from './pilot-night-roadster';
 import { MapPlacement } from './placement';
 import { CityClock, type ClockState } from './clock';
 import { createLandmarks } from './landmarks';
@@ -126,6 +127,7 @@ import {
 } from './types';
 
 export class CityEngine {
+  private pilotNightRoadster: PilotNightRoadster | null = null;
   runtimePerformance: RuntimePerformanceDiagnostics | null = null;
   soundscape: CitySoundscape | null = null;
   private soundscapeWorld: CitySoundscapeWorld | null = null;
@@ -746,6 +748,12 @@ export class CityEngine {
     this.impactFeedback = new ImpactFeedback(this.scene);
     this.driftEffects = new VehicleDriftEffects(this);
     this.navigation = new StreetNavigation(this);
+    if (this.traffic)
+      this.pilotNightRoadster = new PilotNightRoadster(
+        this.navigation.car,
+        this.navigation.roadster.group,
+        this.traffic.streetLighting,
+      );
     this.travelOcclusion = new TravelOcclusion(
       [
         this.buildings,
@@ -2161,6 +2169,7 @@ export class CityEngine {
         !this.skyTrainTravel?.active
       )
         this.navigation?.update((time - this.lastTime) / 1000);
+      this.pilotNightRoadster?.update();
       this.busWorldService?.update(
         this.lastTime ? (time - this.lastTime) / 1000 : 0,
       );
@@ -2486,6 +2495,8 @@ export class CityEngine {
     this.skyTrainTravel = null;
     this.busVisit = null;
     this.navigation?.destroy();
+    this.pilotNightRoadster?.dispose();
+    this.pilotNightRoadster = null;
     this.placement?.destroy();
     this.controls?.dispose();
     this.landmarkDetails.forEach((l) => l.disposePending());
