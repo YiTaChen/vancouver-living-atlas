@@ -95,7 +95,7 @@ const STOREFRONT_STYLES = [
     base: 0xb5b2a6,
     frame: 0x4d605b,
     glass: 0x38565a,
-    fascia: 0x9fa69a,
+    fascia: 0x778b7c,
     fasciaFinish: 'stone',
     canopy: 0x4b6259,
     transom: 0.76,
@@ -105,7 +105,7 @@ const STOREFRONT_STYLES = [
     base: 0xc2b6a3,
     frame: 0x685e51,
     glass: 0x344e4d,
-    fascia: 0xb0a18a,
+    fascia: 0x927c65,
     fasciaFinish: 'stone',
     canopy: 0x795f50,
     transom: 0.82,
@@ -125,7 +125,7 @@ const STOREFRONT_STYLES = [
     base: 0xb8a994,
     frame: 0x5a5549,
     glass: 0x38534c,
-    fascia: 0x9e977f,
+    fascia: 0x827a63,
     fasciaFinish: 'stone',
     canopy: 0x6a6151,
     transom: 0.78,
@@ -144,14 +144,14 @@ const STOREFRONT_STYLES = [
 ] as const;
 
 const TRADE_SIGNS = [
-  { label: 'COFFEE', background: '#304b42', ink: '#eadcc0', serif: false },
-  { label: 'BOOKS', background: '#d6cbb7', ink: '#384744', serif: true },
-  { label: 'BAKERY', background: '#70594a', ink: '#efe1c6', serif: true },
-  { label: 'FLOWERS', background: '#c9cdbd', ink: '#355149', serif: false },
-  { label: 'MARKET', background: '#495b56', ink: '#eadfc9', serif: false },
-  { label: 'MUSIC', background: '#d3c4aa', ink: '#51493e', serif: true },
-  { label: 'STUDIO', background: '#40535b', ink: '#e7e1d2', serif: false },
-  { label: 'CAFE', background: '#c7b49b', ink: '#554a3c', serif: true },
+  { label: 'COFFEE', background: '#243f36', ink: '#fff1d3', serif: false },
+  { label: 'BOOKS', background: '#e6ddca', ink: '#233f38', serif: true },
+  { label: 'BAKERY', background: '#60483a', ink: '#fff0d4', serif: true },
+  { label: 'FLOWERS', background: '#dce2d0', ink: '#254b3d', serif: false },
+  { label: 'MARKET', background: '#324b43', ink: '#fff0d1', serif: false },
+  { label: 'MUSIC', background: '#e2d4ba', ink: '#41352c', serif: true },
+  { label: 'STUDIO', background: '#334d57', ink: '#f4ead7', serif: false },
+  { label: 'CAFE', background: '#ddc9ac', ink: '#49372d', serif: true },
 ] as const;
 const sourcePilotSouthWest = unproject(
   STREET_SHOWCASE_BOUNDS.minX,
@@ -469,7 +469,7 @@ export function planRobsonBurrardDetails(
         };
         const frameColor = style.frame;
         const glassBottom = bottom + 0.36,
-          glassTop = top - 0.46,
+          glassTop = top - 0.7,
           glassHeight = glassTop - glassBottom;
         box(
           'plinth',
@@ -513,7 +513,7 @@ export function planRobsonBurrardDetails(
           box(
             'post',
             'metal',
-            0.065,
+            hasDoor ? 0.095 : 0.065,
             glassHeight,
             0.17,
             along,
@@ -566,14 +566,40 @@ export function planRobsonBurrardDetails(
             0.2,
             PALETTE.bronze,
           );
+        if (hasDoor) {
+          // A restrained kick plate and lintel make the single grouped
+          // entrance legible at street scale without a new opening or collider.
+          box(
+            'trim',
+            'metal',
+            0.84,
+            0.18,
+            0.08,
+            doorU,
+            glassBottom + 0.12,
+            0.2,
+            PALETTE.bronze,
+          );
+          box(
+            'trim',
+            'metal',
+            0.98,
+            0.09,
+            0.08,
+            doorU,
+            glassTop - 0.02,
+            0.2,
+            frameColor,
+          );
+        }
         box(
           'fascia',
           style.fasciaFinish,
           width + 0.06,
-          0.45,
+          0.68,
           0.19,
           0,
-          top - 0.25,
+          top - 0.34,
           0.11,
           style.fascia,
         );
@@ -648,11 +674,11 @@ export function planRobsonBurrardDetails(
           sign: hasDoor
             ? {
                 x: x + nx * 0.217,
-                y: top - 0.25,
+                y: top - 0.34,
                 z: z + nz * 0.217,
                 yaw: Math.atan2(nx, nz),
                 width: Math.min(2.55, width - 0.3),
-                height: 0.29,
+                height: 0.44,
                 index: style.signs[(shopSeed >>> 14) % style.signs.length],
               }
             : null,

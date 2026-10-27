@@ -234,6 +234,30 @@ void test('adjacent source bays form coherent, varied representative shopfront g
       new Set(fascia.map((box) => `${box.finish}:${box.color}`)).size,
       1,
     );
+    for (const bay of group) {
+      const face = bay.boxes.find((box) => box.kind === 'fascia');
+      assert.equal(face.height, 0.68);
+      if (bay.sign) {
+        assert.equal(bay.sign.height, 0.44);
+        assert(bay.sign.y - bay.sign.height / 2 >= face.y - face.height / 2);
+        assert(bay.sign.y + bay.sign.height / 2 <= face.y + face.height / 2);
+        const offset =
+          (bay.sign.x - bay.center[0]) * bay.normal[0] +
+          (bay.sign.z - bay.center[1]) * bay.normal[1];
+        assert(Math.abs(offset - 0.217) < 1e-9);
+      }
+      const entranceTrim = bay.boxes.filter(
+        (box) => box.kind === 'trim' && box.depth === 0.08,
+      );
+      assert.equal(entranceTrim.length, bay.hasDoor ? 2 : 0);
+      for (const trim of entranceTrim) {
+        const offset =
+          (trim.x - bay.center[0]) * bay.normal[0] +
+          (trim.z - bay.center[1]) * bay.normal[1];
+        assert(offset + trim.depth / 2 <= 0.25 + 1e-9);
+        assert(trim.y - trim.height / 2 > bay.pavementY);
+      }
+    }
     const awnings = group.map((bay) =>
       bay.boxes.find((box) => box.kind === 'canopy'),
     );
