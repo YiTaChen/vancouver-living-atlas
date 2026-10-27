@@ -16,6 +16,7 @@ const { vehicleSurfaceWeight } = await import(
 );
 const {
   roadsterFormLift,
+  roadsterFormGradient,
   ROADSTER_FORM_MAX_LIFT_M,
   roadsterMorphTextureBytes,
 } = await import(cityModule('assets/roadster-form'));
@@ -520,5 +521,42 @@ test('historical roadster source remains protected by a narrow, fail-closed proj
       source +
         "\n    if (key === 'paint') installRoadsterFormGeometry(geometry);\n",
     ),
+  );
+});
+
+test('analytic form gradients match central differences at every shape boundary', () => {
+  const around = (values) => values.flatMap((v) => [v - 1e-7, v, v + 1e-7]);
+  const xs = around([-0.8, -0.69, -0.58, 0, 0.58, 0.69, 0.8]);
+  const ys = around([0.38, 0.48, 0.58, 0.7, 0.83, 0.95, 1.08]);
+  const zs = around([
+    -1.97, -1.845, -1.72, -1.5, -1.25, -1.1, -0.95, 0.72, 0.835, 0.95, 1.2,
+    1.45, 1.635, 1.82,
+  ]);
+  const h = 1e-6,
+    gradient = new THREE.Vector3();
+  for (const x of xs)
+    for (const y of ys)
+      for (const z of zs) {
+        const value = roadsterFormGradient(x, y, z, gradient);
+        assert.strictEqual(
+          value,
+          gradient,
+          'the builder reuses its destination vector',
+        );
+        const numeric = [
+          (roadsterFormLift(x + h, y, z) - roadsterFormLift(x - h, y, z)) /
+            (2 * h),
+          (roadsterFormLift(x, y + h, z) - roadsterFormLift(x, y - h, z)) /
+            (2 * h),
+          (roadsterFormLift(x, y, z + h) - roadsterFormLift(x, y, z - h)) /
+            (2 * h),
+        ];
+        assert(Math.abs(gradient.x - numeric[0]) < 1e-5);
+        assert(Math.abs(gradient.y - numeric[1]) < 1e-5);
+        assert(Math.abs(gradient.z - numeric[2]) < 1e-5);
+      }
+  assert.deepEqual(
+    roadsterFormGradient(NaN, 0.7, 1, gradient).toArray(),
+    [0, 0, 0],
   );
 });

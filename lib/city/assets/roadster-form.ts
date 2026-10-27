@@ -26,6 +26,11 @@ const smooth = (a: number, b: number, value: number) => {
   const t = THREE.MathUtils.clamp((value - a) / (b - a), 0, 1);
   return t * t * (3 - 2 * t);
 };
+const smoothSlope = (a: number, b: number, value: number) => {
+  if (value <= a || value >= b) return 0;
+  const t = (value - a) / (b - a);
+  return (6 * t * (1 - t)) / (b - a);
+};
 
 /** Returns the full-weight vertical deformation at one car-local position. */
 export function roadsterFormLift(x: number, y: number, z: number, weight = 1) {
@@ -53,6 +58,43 @@ export function roadsterFormLift(x: number, y: number, z: number, weight = 1) {
   );
 }
 
+/** Exact gradient of roadsterFormLift's full-weight smooth field. The slope
+ * is zero at the clamped ends, so position and normal stay continuous when a
+ * vertex enters or leaves a bonnet, deck, height or width transition. */
+export function roadsterFormGradient(
+  x: number,
+  y: number,
+  z: number,
+  target = new THREE.Vector3(),
+) {
+  if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(z))
+    return target.set(0, 0, 0);
+  const side = 1 - smooth(p.innerX, p.outerX, Math.abs(x));
+  const low = smooth(p.lowY, p.lowFullY, y);
+  const high = smooth(p.highFullY, p.highY, y);
+  const height = low * (1 - high);
+  if (side === 0 || height === 0) return target.set(0, 0, 0);
+  const hoodStart = smooth(p.hoodStartZ, p.hoodFullZ, z);
+  const hoodEnd = smooth(p.hoodEndFullZ, p.hoodEndZ, z);
+  const deckStart = smooth(p.deckStartZ, p.deckFullZ, z);
+  const deckEnd = smooth(p.deckEndFullZ, p.deckEndZ, z);
+  const along =
+    p.hoodM * hoodStart * (1 - hoodEnd) + p.deckM * deckStart * (1 - deckEnd);
+  if (along === 0) return target.set(0, 0, 0);
+  const dx = -smoothSlope(p.innerX, p.outerX, Math.abs(x)) * Math.sign(x);
+  const dy =
+    smoothSlope(p.lowY, p.lowFullY, y) * (1 - high) -
+    low * smoothSlope(p.highFullY, p.highY, y);
+  const dz =
+    p.hoodM *
+      (smoothSlope(p.hoodStartZ, p.hoodFullZ, z) * (1 - hoodEnd) -
+        hoodStart * smoothSlope(p.hoodEndFullZ, p.hoodEndZ, z)) +
+    p.deckM *
+      (smoothSlope(p.deckStartZ, p.deckFullZ, z) * (1 - deckEnd) -
+        deckStart * smoothSlope(p.deckEndFullZ, p.deckEndZ, z));
+  return target.set(along * dx * height, along * side * dy, dz * side * height);
+}
+
 /** Add one native relative morph target to the existing source geometry. Native
  * Three morph chunks are shared by the colour, SSAO-normal, depth and shadow
  * passes; no separate pass can accidentally keep the undeformed body. Optional
@@ -73,8 +115,8 @@ export function installRoadsterFormGeometry(
     );
   const displacement = positionDeltas ?? new Float32Array(position.count * 3);
   const normalDelta = new Float32Array(position.count * 3);
-  const delta = 0.003;
   const n = new THREE.Vector3();
+  const gradient = new THREE.Vector3();
   for (let i = 0; i < position.count; i++) {
     const x = position.getX(i),
       y = position.getY(i),
@@ -84,20 +126,16 @@ export function installRoadsterFormGeometry(
       : roadsterFormLift(x, y, z);
     if (!positionDeltas) displacement[i * 3 + 1] = lift;
     if (Math.abs(lift) <= 1e-9) continue;
-    const gx =
-      (roadsterFormLift(x + delta, y, z) - roadsterFormLift(x - delta, y, z)) /
-      (2 * delta);
-    const gy =
-      (roadsterFormLift(x, y + delta, z) - roadsterFormLift(x, y - delta, z)) /
-      (2 * delta);
-    const gz =
-      (roadsterFormLift(x, y, z + delta) - roadsterFormLift(x, y, z - delta)) /
-      (2 * delta);
+    roadsterFormGradient(x, y, z, gradient);
     const nx = normal.getX(i),
       ny = normal.getY(i),
       nz = normal.getZ(i);
-    const invY = 1 / Math.max(0.25, 1 + gy);
-    n.set(nx - ny * gx * invY, ny * invY, nz - ny * gz * invY).normalize();
+    const invY = 1 / Math.max(0.25, 1 + gradient.y);
+    n.set(
+      nx - ny * gradient.x * invY,
+      ny * invY,
+      nz - ny * gradient.z * invY,
+    ).normalize();
     normalDelta[i * 3] = n.x - nx;
     normalDelta[i * 3 + 1] = n.y - ny;
     normalDelta[i * 3 + 2] = n.z - nz;
