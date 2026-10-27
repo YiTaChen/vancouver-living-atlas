@@ -16,10 +16,10 @@ export function walkableGroundMeshes(root: THREE.Object3D) {
 }
 
 export interface GroundSurfaceIndexOptions {
-  /** Trade 24 bytes per triangle for frequent exact tyre-height queries.
-   * Disabled by default so local/interior/navigation indices retain their
-   * original allocation and arithmetic path. */
-  cacheEdgeTolerances?: boolean;
+  /** Trade 24 bytes per triangle for frequent exact height queries. 'lazy'
+   * adds one readiness byte per triangle and computes thresholds on first use.
+   * Disabled by default so other indices retain their allocation and path. */
+  cacheEdgeTolerances?: boolean | 'lazy';
 }
 
 /** Static, explicitly selected ground meshes; world metres, Y up.
@@ -32,6 +32,7 @@ export class GroundSurfaceIndex {
   private readonly triangles: Uint32Array;
   private readonly inverseAreas: Float64Array;
   private readonly edgeTolerances: Float64Array | null;
+  private readonly edgeToleranceReady: Uint8Array | null;
   readonly edgeCacheBytes: number;
   private readonly cells = new Map<string, number[]>();
 
@@ -55,7 +56,8 @@ export class GroundSurfaceIndex {
     this.vertices = new Float64Array(vertexCount * 3);
     const triangleIndices: number[] = [],
       inverseAreas: number[] = [],
-      edgeTolerances: number[] | null = options.cacheEdgeTolerances ? [] : null;
+      edgeTolerances: number[] | null =
+        options.cacheEdgeTolerances === true ? [] : null;
     const p = new THREE.Vector3();
     let vertexOffset = 0;
     for (const mesh of usable) {
@@ -163,10 +165,42 @@ export class GroundSurfaceIndex {
     }
     this.triangles = new Uint32Array(triangleIndices);
     this.inverseAreas = new Float64Array(inverseAreas);
-    this.edgeTolerances = edgeTolerances
-      ? new Float64Array(edgeTolerances)
-      : null;
-    this.edgeCacheBytes = this.edgeTolerances?.byteLength ?? 0;
+    this.edgeTolerances =
+      options.cacheEdgeTolerances === 'lazy'
+        ? new Float64Array(inverseAreas.length * 3)
+        : edgeTolerances
+          ? new Float64Array(edgeTolerances)
+          : null;
+    this.edgeToleranceReady =
+      options.cacheEdgeTolerances === 'lazy'
+        ? new Uint8Array(inverseAreas.length)
+        : null;
+    this.edgeCacheBytes =
+      (this.edgeTolerances?.byteLength ?? 0) +
+      (this.edgeToleranceReady?.byteLength ?? 0);
+  }
+
+  /** Fill once using the same Float64 operation order as the uncached path.
+   * A separate readiness byte preserves zero, NaN and signed-zero thresholds. */
+  private prepareLazyTolerance(
+    id: number,
+    ax: number,
+    az: number,
+    bx: number,
+    bz: number,
+    cx: number,
+    cz: number,
+    inverse: number,
+  ) {
+    const ready = this.edgeToleranceReady;
+    if (!ready || ready[id]) return;
+    const eps = 0.0005 * Math.abs(inverse),
+      t = id * 3,
+      values = this.edgeTolerances!;
+    values[t] = eps * Math.hypot(cx - ax, cz - az);
+    values[t + 1] = eps * Math.hypot(bx - ax, bz - az);
+    values[t + 2] = eps * Math.hypot(cx - bx, cz - bz);
+    ready[id] = 1;
   }
 
   /** Highest triangle height at XZ within anchorY ±4m, or undefined.
@@ -205,6 +239,8 @@ export class GroundSurfaceIndex {
       // Half a millimetre in world XZ resolves independently rounded Float32
       // path caps at shared source nodes. It never widens the height window.
       if (edgeTolerances) {
+        if (this.edgeToleranceReady)
+          this.prepareLazyTolerance(id, ax, az, bx, bz, cx, cz, inverse);
         if (
           u < -edgeTolerances[t] ||
           v < -edgeTolerances[t + 1] ||
@@ -369,6 +405,8 @@ export class GroundSurfaceIndex {
         else high = Math.min(high, t);
         return low <= high + 1e-12;
       };
+      if (edgeTolerances && this.edgeToleranceReady)
+        this.prepareLazyTolerance(id, ax, az, bx, bz, cx, cz, inverse);
       const eps = edgeTolerances ? 0 : 0.0005 * Math.abs(inverse);
       const edgesCovered = edgeTolerances
         ? clip(u + edgeTolerances[ti], du) &&

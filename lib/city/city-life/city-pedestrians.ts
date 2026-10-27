@@ -3,7 +3,10 @@ import type { CityEngine } from '../engine';
 import type { RoadEdge, RoadGraph } from '../road-graph';
 import { GroundSurfaceIndex } from '../ground-surface';
 import { project } from '../geo';
-import { streetShowcaseWeight } from '../street-quality-profile';
+import {
+  STREET_SHOWCASE_BOUNDS,
+  streetShowcaseWeight,
+} from '../street-quality-profile';
 import type { RuntimePerformanceDiagnostics } from '../runtime-performance';
 import { PathActor } from './actor-state';
 import { SimulationClock } from './simulation-clock';
@@ -72,6 +75,19 @@ export function nearbySidewalkMeshes(
       meshes.push(o);
   });
   return meshes;
+}
+
+/** Select by the existing 600m floor cell rather than the moving camera, so
+ * crossing the pilot fade never rebuilds an otherwise unchanged local index. */
+export function pilotSidewalkFloorCell(cellX: number, cellZ: number) {
+  return (
+    Number.isSafeInteger(cellX) &&
+    Number.isSafeInteger(cellZ) &&
+    cellX * 600 <= STREET_SHOWCASE_BOUNDS.maxX &&
+    (cellX + 1) * 600 >= STREET_SHOWCASE_BOUNDS.minX &&
+    cellZ * 600 <= STREET_SHOWCASE_BOUNDS.maxZ &&
+    (cellZ + 1) * 600 >= STREET_SHOWCASE_BOUNDS.minZ
+  );
 }
 
 interface Walker {
@@ -285,7 +301,13 @@ export class CityPedestrians {
     const floorCell = `${floorX},${floorZ}`;
     if (!this.floor || this.floorCell !== floorCell) {
       const meshes = nearbySidewalkMeshes(this.e.roads, floorX, floorZ);
-      this.floor = new GroundSurfaceIndex(meshes);
+      this.floor = new GroundSurfaceIndex(
+        meshes,
+        [],
+        pilotSidewalkFloorCell(floorX, floorZ)
+          ? { cacheEdgeTolerances: 'lazy' }
+          : {},
+      );
       this.floorCell = floorCell;
       this.floorMeshes = meshes.length;
       // A failed run may extend beyond the previous local floor index. Retry

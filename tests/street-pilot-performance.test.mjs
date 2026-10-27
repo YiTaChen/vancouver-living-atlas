@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 
 const { buildRoadGraph } = await import(cityModule('road-graph'));
-const { CityPedestrians } = await import(
+const { CityPedestrians, pilotSidewalkFloorCell } = await import(
   cityModule('city-life/city-pedestrians')
 );
 const { createRuntimePerformanceDiagnostics } = await import(
@@ -70,6 +70,48 @@ function street(i, z) {
     ],
   };
 }
+
+void test('pilot floor cache is restricted to intersecting 600m cells without rebuilding on the fade', () => {
+  const { minX, maxX, minZ, maxZ } = STREET_SHOWCASE_BOUNDS;
+  const x0 = Math.floor(minX / 600),
+    x1 = Math.floor(maxX / 600);
+  const z0 = Math.floor(minZ / 600),
+    z1 = Math.floor(maxZ / 600);
+  assert(pilotSidewalkFloorCell(x0, z0));
+  assert(pilotSidewalkFloorCell(x1, z1));
+  assert.equal(pilotSidewalkFloorCell(x0 - 1, z0), false);
+  assert.equal(pilotSidewalkFloorCell(x0, z0 - 1), false);
+  assert.equal(pilotSidewalkFloorCell(-1, 0), false);
+  assert.equal(pilotSidewalkFloorCell(NaN, 0), false);
+  assert.equal(pilotSidewalkFloorCell(Number.MAX_VALUE, 0), false);
+  const fixture = makeCity([street(0, 0)]);
+  try {
+    fixture.engine.camera.position.set(1, 6, 100);
+    fixture.city.update(0.2);
+    const floor = fixture.city.floor;
+    assert(
+      floor.edgeToleranceReady,
+      'intersecting pilot cell opts into lazy caching',
+    );
+    fixture.engine.camera.position.set(300, 6, 100);
+    fixture.city.update(0.2);
+    assert.strictEqual(
+      fixture.city.floor,
+      floor,
+      'same cell does not rebuild when crossing the pilot fade',
+    );
+    fixture.engine.camera.position.set(-1, 6, 100);
+    fixture.city.update(0.2);
+    assert.notStrictEqual(fixture.city.floor, floor);
+    assert.equal(
+      fixture.city.floor.edgeCacheBytes,
+      0,
+      'other cells retain the original allocation path',
+    );
+  } finally {
+    fixture.dispose();
+  }
+});
 
 void test('equal-distance windows retain edge/side order and rerank after camera movement', () => {
   const fixture = makeCity(
