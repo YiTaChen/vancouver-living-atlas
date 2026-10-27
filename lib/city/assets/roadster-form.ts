@@ -2,10 +2,10 @@ import * as THREE from 'three';
 
 /** Trial-only deformation of the authored exterior. Local units are metres;
  * all visible geometry stays inside the existing Drive sweep hull. */
-export const ROADSTER_FORM_MAX_LIFT_M = 0.105;
+export const ROADSTER_FORM_MAX_LIFT_M = 0.035;
 const p = Object.freeze({
   hoodM: ROADSTER_FORM_MAX_LIFT_M,
-  deckM: 0.075,
+  deckM: 0.030,
   innerX: 0.58,
   outerX: 0.8,
   lowY: 0.38,

@@ -58,8 +58,9 @@ function assertMorphedPointsInsideBounds(geometry) {
 }
 
 void test('pilot reshapes both bonnet and rear deck smoothly within the old collision hull', () => {
-  assert.equal(roadsterFormLift(0, 0.7, 1.2), ROADSTER_FORM_MAX_LIFT_M);
-  assert.equal(roadsterFormLift(0, 0.7, -1.5), 0.075);
+  assert.equal(ROADSTER_FORM_MAX_LIFT_M, 0.035);
+  assert.equal(roadsterFormLift(0, 0.7, 1.2), 0.035);
+  assert.equal(roadsterFormLift(0, 0.7, -1.5), 0.03);
   assert.equal(roadsterFormLift(0, 0.7, 1.2, 0), 0);
   assert.equal(
     roadsterFormLift(0, 0.7, 1.2, 0.5),
@@ -91,7 +92,10 @@ void test('pilot reshapes both bonnet and rear deck smoothly within the old coll
   const before = new Float32Array(source.array);
   const proof = assertMorphedPointsInsideBounds(paint.geometry);
   assert(proof.moved > 500);
-  assert(proof.peak > 0.1 && proof.peak <= ROADSTER_FORM_MAX_LIFT_M);
+  assert(
+    proof.peak > ROADSTER_FORM_MAX_LIFT_M * 0.95 &&
+      proof.peak <= ROADSTER_FORM_MAX_LIFT_M + 1e-7,
+  );
   assert.deepEqual(
     source.array,
     before,
