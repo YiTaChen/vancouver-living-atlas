@@ -110,6 +110,11 @@ export interface SidewalkRouteOptions {
   /** Optional fixed 20m proof fragment within the same source window. */
   fragmentIndex?: number;
   clearSegment?: (a: Point3, b: Point3) => boolean;
+  /** Optional pure horizontal trunk preflight, for callers that also enforce
+   * this same static index in clearSegment. A failed preflight skips probe calls;
+   * use only when the probe has no observable side effects. Surviving routes
+   * retain every original ground and segment check. */
+  preflightTrunks?: TrunkClearanceIndex;
 }
 
 export const SIDEWALK_WINDOW_M = 80;
@@ -261,6 +266,22 @@ export function validatedSidewalkRoute(
     const previous = points.at(-1);
     if (options.clearSegment && !options.clearSegment(previous ?? point, point))
       return null;
+    // Let the original first-point proof reject clipped ground and furniture
+    // before scanning any trees. A later static trunk can only reject this
+    // fragment; surviving fragments retain all original checks and callbacks.
+    if (i === 0 && options.preflightTrunks) {
+      let prior: Point3 = point;
+      for (let j = 1; j <= count; j++) {
+        const ahead = start + ((end - start) * j) / count;
+        const next: Point3 = [
+          a.point[0] + (dx / length) * ahead - (dz / length) * offset * side,
+          0,
+          a.point[1] + (dz / length) * ahead + (dx / length) * offset * side,
+        ];
+        if (!options.preflightTrunks.clearSegment(prior, next)) return null;
+        prior = next;
+      }
+    }
     if (previous) {
       const horizontal = Math.hypot(x - previous[0], z - previous[2]);
       if (Math.abs(point[1] - previous[1]) > horizontal * 0.2 + 0.001)
@@ -301,7 +322,10 @@ export function validatedSidewalkRuns(
   edge: RoadEdge,
   side: -1 | 1,
   probe: FloorProbe,
-  options: Pick<SidewalkRouteOptions, 'windowIndex' | 'clearSegment'> = {},
+  options: Pick<
+    SidewalkRouteOptions,
+    'windowIndex' | 'clearSegment' | 'preflightTrunks'
+  > = {},
 ): SidewalkRoute[] {
   const runs: SidewalkRoute[] = [];
   const window = sidewalkStationWindow(graph, edge, options.windowIndex ?? 0);

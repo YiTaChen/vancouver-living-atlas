@@ -369,13 +369,10 @@ export class CityPedestrians {
         };
         let proven: SidewalkRoute[] = [];
         if (showcase)
-          proven = validatedSidewalkRuns(
-            this.graph,
-            edge,
-            side,
-            probe,
-            proofOptions,
-          );
+          proven = validatedSidewalkRuns(this.graph, edge, side, probe, {
+            ...proofOptions,
+            preflightTrunks: this.trunks,
+          });
         else {
           for (const offsetFromCurbM of [1, 0.55, 1.45]) {
             const route = validatedSidewalkRoute(
