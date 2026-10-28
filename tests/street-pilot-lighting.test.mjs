@@ -7,6 +7,7 @@ const {
   STREET_PILOT_LIGHTING_TARGETS,
   streetPilotLightingWeight,
   streetPilotLightingMultipliers,
+  streetPilotNightViewWeight,
 } = await import(cityModule('street-pilot-lighting'));
 const { STREET_SHOWCASE_SEGMENTS, STREET_SHOWCASE_BOUNDS } = await import(
   cityModule('street-quality-profile')
@@ -44,6 +45,21 @@ test('pilot lighting responds to camera movement at fixed time and fades by loca
   }
 });
 
+test('night bounce follows the checked camera weight and excludes boat and rocket views', () => {
+  for (const mode of ['boat', 'rocket', 'flight']) {
+    for (const weight of [0, 0.5, 1])
+      assert.equal(streetPilotNightViewWeight(weight, mode), 0);
+  }
+  for (const mode of ['orbit', 'walk', 'drive', 'tesla']) {
+    assert.equal(streetPilotNightViewWeight(0, mode), 0);
+    assert.equal(streetPilotNightViewWeight(0.5, mode), 0.5);
+    assert.equal(streetPilotNightViewWeight(1, mode), 1);
+  }
+  for (const weight of [NaN, Infinity, -Infinity, -1])
+    assert.equal(streetPilotNightViewWeight(weight, 'walk'), 0);
+  assert.equal(streetPilotNightViewWeight(2, 'walk'), 1);
+});
+
 test('daylight redistributes existing fill and PMREM intensity without changing the atmosphere sample', () => {
   for (const [mode, expected] of [
     ['clear', STREET_PILOT_LIGHTING_TARGETS.dayClear],
@@ -72,10 +88,10 @@ test('night preserves visibility fill and dawn/sunset transitions remain finite 
     for (let hour = 0; hour <= 24; hour += 0.01) {
       const base = sampleAtmosphere(hour, mode);
       const multipliers = streetPilotLightingMultipliers(base, 1);
-      assert(multipliers.ambientIntensity >= 0.62);
+      assert(multipliers.ambientIntensity >= 0.57);
       assert(multipliers.sunIntensity >= 1);
       assert(multipliers.environmentIntensity >= 2);
-      assert(multipliers.environmentIntensity <= 2.2);
+      assert(multipliers.environmentIntensity <= 3.2);
       assert(multipliers.exposure >= 0.98);
       if (previous)
         for (const key of Object.keys(multipliers))

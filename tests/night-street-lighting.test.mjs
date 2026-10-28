@@ -10,6 +10,9 @@ const {
   nightStreetActivity,
 } = await import(cityModule('night-street-lighting'));
 const { inPolygon } = await import(cityModule('geo'));
+const { makeRoadster } = await import(cityModule('assets/roadster'));
+const { PilotNightRoadster } = await import(cityModule('pilot-night-roadster'));
+const { STREET_SHOWCASE_SEGMENTS } = await import(cityModule('street-quality-profile'));
 const bounds = { minX: 0, maxX: 100, minZ: 0, maxZ: 100 };
 const base = {
   bounds,
@@ -27,6 +30,104 @@ const shaderFor = (material) => {
   material.onBeforeCompile(shader, {});
   return shader;
 };
+
+test('pilot night view starts disabled, tracks each owner independently and restores materials on disposal', () => {
+  const first = new NightStreetLighting(base);
+  const second = new NightStreetLighting(base);
+  const material = new THREE.MeshStandardMaterial();
+  // Capture method identities to check wrapper ownership on teardown.
+  // oxlint-disable-next-line typescript/unbound-method
+  const originalCompile = material.onBeforeCompile;
+  // oxlint-disable-next-line typescript/unbound-method
+  const originalKey = material.customProgramCacheKey;
+  try {
+    assert.equal(first.uniforms.uAtlasPilotNightView.value, 0);
+    assert.equal(second.uniforms.uAtlasPilotNightView.value, 0);
+    first.wrapMaterial(material);
+    const shader = shaderFor(material);
+    assert.strictEqual(shader.uniforms.uAtlasPilotNightView, first.uniforms.uAtlasPilotNightView);
+    assert.match(material.customProgramCacheKey(), /atlas-night-street-v2/);
+    assert.match(shader.fragmentShader, /uAtlasPilotNightView \* atlasPilotNightStreetShowcaseWeight/);
+    first.update(23, 1);
+    first.setPilotNightViewWeight(0.6);
+    assert.equal(shader.uniforms.uAtlasPilotNightView.value, 0.6);
+    assert.equal(second.uniforms.uAtlasPilotNightView.value, 0);
+    assert.equal(first.uniforms.uAtlasNightAmount.value, 1);
+    first.setPilotNightViewWeight(0);
+    assert.equal(first.uniforms.uAtlasNightAmount.value, 1, 'base street illumination remains enabled');
+    first.setPilotNightViewWeight(NaN);
+    assert.equal(shader.uniforms.uAtlasPilotNightView.value, 0);
+    first.setPilotNightViewWeight(2);
+    assert.equal(shader.uniforms.uAtlasPilotNightView.value, 1);
+    first.dispose();
+    first.setPilotNightViewWeight(1);
+    assert.equal(shader.uniforms.uAtlasPilotNightView.value, 0);
+    // oxlint-disable-next-line typescript/unbound-method
+    assert.strictEqual(material.onBeforeCompile, originalCompile);
+    // oxlint-disable-next-line typescript/unbound-method
+    assert.strictEqual(material.customProgramCacheKey, originalKey);
+  } finally {
+    first.dispose();
+    second.dispose();
+    material.dispose();
+  }
+});
+
+void test('pilot-only roadster receiver composes with the existing paint and restores it on disposal', () => {
+  const lighting = new NightStreetLighting(base);
+  const car = makeRoadster();
+  const parent = new THREE.Group();
+  const scene = new THREE.Scene();
+  scene.add(parent);
+  parent.add(car.group);
+  const paint = car.group.getObjectByName('roadster/paint').material;
+  const beforeKey = paint.customProgramCacheKey();
+  const receiver = new PilotNightRoadster(parent, car.group, lighting);
+  const pilotWeight = receiver.weight;
+  try {
+    assert.equal(lighting.wrapMaterial(paint, { pilotWeight }), false);
+    const shader = shaderFor(paint);
+    assert.equal(shader.uniforms.uAtlasPilotReceiverWeight, pilotWeight);
+    assert.equal(shader.uniforms.uAtlasNightAmount, lighting.uniforms.uAtlasNightAmount);
+    assert(shader.fragmentShader.includes('atlasSurfaceWeight'));
+    assert(shader.fragmentShader.includes('uAtlasPilotReceiverWeight <= 0.0'));
+    assert(shader.fragmentShader.includes('float atlasReceiver = 1.0 * uAtlasPilotReceiverWeight'));
+    assert.match(paint.customProgramCacheKey(), /pilot-receiver/);
+    lighting.update(23, 1);
+    const [x, z] = STREET_SHOWCASE_SEGMENTS[0].a;
+    parent.position.set(x, 2, z);
+    receiver.update();
+    assert.equal(shader.uniforms.uAtlasPilotReceiverWeight.value, 1);
+    car.group.visible = false;
+    receiver.update();
+    assert.equal(shader.uniforms.uAtlasPilotReceiverWeight.value, 0);
+    car.group.visible = true;
+    parent.position.set(x, 301, z);
+    receiver.update();
+    assert.equal(pilotWeight.value, 0);
+    parent.position.set(100000, 2, 100000);
+    receiver.update();
+    assert.equal(pilotWeight.value, 0);
+    parent.position.set(x, 2, z);
+    receiver.update();
+    assert.equal(pilotWeight.value, 1);
+    parent.visible = false;
+    receiver.update();
+    assert.equal(pilotWeight.value, 0);
+    lighting.update(14, 0);
+    assert.equal(shader.uniforms.uAtlasNightAmount.value, 0);
+  } finally {
+    receiver.dispose();
+    lighting.dispose();
+    assert.equal(paint.customProgramCacheKey(), beforeKey);
+    car.group.traverse((object) => {
+      if (object instanceof THREE.Mesh) {
+        object.geometry.dispose();
+        for (const material of Array.isArray(object.material) ? object.material : [object.material]) material.dispose();
+      }
+    });
+  }
+});
 
 test('continuous road fill and stronger local lamp pools are spatial, not a global night lift', () => {
   const lighting = new NightStreetLighting(base);
@@ -582,7 +683,7 @@ test('actual deferred landmarks prepare final night shaders before warmup and re
       assert(
         group.children[0].material
           .customProgramCacheKey()
-          .includes('atlas-night-street-v1'),
+          .includes('atlas-night-street-v2'),
       );
       assert.equal(
         shaderFor(group.children[0].material).uniforms.uAtlasNightAmount.value,

@@ -11,6 +11,7 @@ import {createHash} from 'node:crypto';
 import {assertProtectedSources,projectBeforeCharacter,projectBeforeSeating} from './adapters/seating-source-compatibility.mjs';
 import {reviewedWaterfrontConsumerFixture} from './adapters/waterfront-authority-source-compatibility.mjs';
 import {projectBeforeStreetPilot} from './adapters/street-pilot-source-compatibility.mjs';
+import {projectBeforeRound2Roadster} from './adapters/round2-roadster-source-compatibility.mjs';
 
 test('Exact metre triangle charts retain transformed box attributes',()=>{
  const original=new THREE.BoxGeometry(2,3,4).rotateY(.54).translate(2,1,9).toNonIndexed();
@@ -234,7 +235,9 @@ test('Pilot compatibility rejects missing, duplicated or mutated hooks, finish a
   const { baseline, sources } = protectedSources();
   const review = JSON.parse(readFileSync(new URL('./adapters/reviewed-street-pilot.json', import.meta.url), 'utf8'));
   for (const row of review.files) {
-    const source = sources[row.path];
+    // Check the unchanged first-round receipt after subtracting only the
+    // separately guarded, exact round-two roadster morph callsites.
+    const source = projectBeforeRound2Roadster(row.path, sources[row.path]).source;
     const projected = projectBeforeStreetPilot(row.path, source);
     assert(projected.reviewed.length);
     assert.equal(createHash('sha256').update(source).digest('hex'), row.reviewedSha256);

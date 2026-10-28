@@ -2,6 +2,7 @@ import { lines, project } from './geo';
 import { constrainCarriageway } from './tree-road-clearance';
 import { groupNumberedBlocks } from './numbered-blocks';
 import { trimRoad } from './road-trim';
+import { applyRobsonPilotTreeBlock } from './robson-tree-block';
 import type { FeatureCollection } from './types';
 import {
   buildRoadGraph,
@@ -53,6 +54,7 @@ export function cityRoadGraph(
         });
     });
   });
+  applyRobsonPilotTreeBlock(inputs, trees);
   for (const block of groupNumberedBlocks(inputs).blocks) {
     const width = constrainCarriageway(
       block.points,

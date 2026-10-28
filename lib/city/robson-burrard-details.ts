@@ -32,11 +32,17 @@ export type StreetShowcaseBox = {
   height: number;
   depth: number;
   yaw: number;
+  /** Pitch in local facade space, used for the pitched awning top only. */
+  pitch: number;
   color: number;
 };
 export type StreetShowcaseBay = {
   id: string;
   sourceKey: string;
+  /** A representative frontage group, not an actual surveyed business. */
+  shopId: string;
+  shopStyle: number;
+  hasDoor: boolean;
   roadName: string;
   center: readonly [number, number];
   normal: readonly [number, number];
@@ -81,6 +87,72 @@ export interface StreetShowcasePlanHost {
 
 const clamp = (v: number, lo: number, hi: number) =>
   Math.max(lo, Math.min(hi, v));
+
+// Restrained combinations rather than independent random colours on each bay.
+// Real business names and tenant classifications are deliberately not inferred.
+const STOREFRONT_STYLES = [
+  {
+    base: 0xb5b2a6,
+    frame: 0x4d605b,
+    glass: 0x38565a,
+    fascia: 0x778b7c,
+    fasciaFinish: 'stone',
+    canopy: 0x4b6259,
+    transom: 0.76,
+    signs: [0, 1],
+  },
+  {
+    base: 0xc2b6a3,
+    frame: 0x685e51,
+    glass: 0x344e4d,
+    fascia: 0x927c65,
+    fasciaFinish: 'stone',
+    canopy: 0x795f50,
+    transom: 0.82,
+    signs: [2, 7],
+  },
+  {
+    base: 0xaeb5b1,
+    frame: 0x4d5d60,
+    glass: 0x3b6064,
+    fascia: 0x586a69,
+    fasciaFinish: 'metal',
+    canopy: 0x506476,
+    transom: 0.7,
+    signs: [6, 1],
+  },
+  {
+    base: 0xb8a994,
+    frame: 0x5a5549,
+    glass: 0x38534c,
+    fascia: 0x827a63,
+    fasciaFinish: 'stone',
+    canopy: 0x6a6151,
+    transom: 0.78,
+    signs: [5, 2],
+  },
+  {
+    base: 0xb6b5a9,
+    frame: 0x40584f,
+    glass: 0x365650,
+    fascia: 0x51685a,
+    fasciaFinish: 'metal',
+    canopy: 0x78604c,
+    transom: 0.74,
+    signs: [3, 4],
+  },
+] as const;
+
+const TRADE_SIGNS = [
+  { label: 'COFFEE', background: '#243f36', ink: '#fff1d3', serif: false },
+  { label: 'BOOKS', background: '#e6ddca', ink: '#233f38', serif: true },
+  { label: 'BAKERY', background: '#60483a', ink: '#fff0d4', serif: true },
+  { label: 'FLOWERS', background: '#dce2d0', ink: '#254b3d', serif: false },
+  { label: 'MARKET', background: '#324b43', ink: '#fff0d1', serif: false },
+  { label: 'MUSIC', background: '#e2d4ba', ink: '#41352c', serif: true },
+  { label: 'STUDIO', background: '#334d57', ink: '#f4ead7', serif: false },
+  { label: 'CAFE', background: '#ddc9ac', ink: '#49372d', serif: true },
+] as const;
 const sourcePilotSouthWest = unproject(
   STREET_SHOWCASE_BOUNDS.minX,
   STREET_SHOWCASE_BOUNDS.maxZ,
@@ -356,9 +428,19 @@ export function planRobsonBurrardDetails(
           p.ground + p.height - 0.5,
         );
         if (top - bottom < 2.2) continue;
-        const id = `${p.key}:${edge}:${bay}`,
-          seed = hashId(id),
-          boxes: StreetShowcaseBox[] = [];
+        const id = `${p.key}:${edge}:${bay}`;
+        // Treat consecutive source bays as one representative shop. Its frame,
+        // awning and sign share an identity; a door on every three-metre bay
+        // would otherwise read as an endless sequence of identical kiosks.
+        const edgeSeed = hashId(`${p.key}:${edge}:frontage`);
+        const groupSize = 2 + ((edgeSeed >>> 8) % 2);
+        const shopNumber = Math.floor(bay / groupSize);
+        const shopId = `${p.key}:${edge}:shop:${shopNumber}`;
+        const shopSeed = hashId(shopId);
+        const shopStyle = (shopSeed >>> 8) % STOREFRONT_STYLES.length;
+        const style = STOREFRONT_STYLES[shopStyle];
+        const hasDoor = bay % groupSize === Math.floor(groupSize / 2);
+        const boxes: StreetShowcaseBox[] = [];
         const box = (
           kind: StreetShowcaseBox['kind'],
           finish: Finish,
@@ -369,6 +451,7 @@ export function planRobsonBurrardDetails(
           y: number,
           offset: number,
           color: number,
+          pitch = 0,
         ) => {
           boxes.push({
             kind,
@@ -380,13 +463,13 @@ export function planRobsonBurrardDetails(
             y,
             z: z + uz * along + nz * offset,
             yaw,
+            pitch,
             color,
           });
         };
-        const frameColor =
-          seed % 4 === 0 ? PALETTE.bronze : PALETTE.anodizedMetal;
+        const frameColor = style.frame;
         const glassBottom = bottom + 0.36,
-          glassTop = top - 0.46,
+          glassTop = top - 0.7,
           glassHeight = glassTop - glassBottom;
         box(
           'plinth',
@@ -397,7 +480,7 @@ export function planRobsonBurrardDetails(
           0,
           bottom + 0.18,
           0.075,
-          PALETTE.limestone,
+          style.base,
         );
         box(
           'glazing',
@@ -408,7 +491,7 @@ export function planRobsonBurrardDetails(
           0,
           (glassBottom + glassTop) / 2,
           0.105,
-          PALETTE.glazing,
+          style.glass,
         );
         for (const side of [-1, 1])
           box(
@@ -422,20 +505,22 @@ export function planRobsonBurrardDetails(
             0.105,
             frameColor,
           );
-        // Two broad displays and a narrower decorative door leaf: no physical
-        // gap or collision opening is introduced into the measured body.
-        const doorU = (seed % 2 ? -1 : 1) * Math.min(0.95, width * 0.22);
-        box(
-          'post',
-          'metal',
-          0.065,
-          glassHeight,
-          0.17,
-          doorU,
-          (glassBottom + glassTop) / 2,
-          0.12,
-          frameColor,
-        );
+        // The entrance is one bay of a grouped frontage. It remains a surface
+        // treatment: there is no new physical opening or navigation target.
+        const doorU = (shopSeed & 1 ? -1 : 1) * Math.min(0.42, width * 0.16);
+        const mullions = hasDoor ? [doorU - 0.45, doorU + 0.45] : [0];
+        for (const along of mullions)
+          box(
+            'post',
+            'metal',
+            hasDoor ? 0.095 : 0.065,
+            glassHeight,
+            0.17,
+            along,
+            (glassBottom + glassTop) / 2,
+            0.12,
+            frameColor,
+          );
         box(
           'transom',
           'metal',
@@ -443,7 +528,7 @@ export function planRobsonBurrardDetails(
           0.065,
           0.18,
           0,
-          glassTop - 0.44,
+          glassBottom + glassHeight * style.transom,
           0.12,
           frameColor,
         );
@@ -469,27 +554,54 @@ export function planRobsonBurrardDetails(
           0.11,
           frameColor,
         );
-        box(
-          'handle',
-          'metal',
-          0.035,
-          0.34,
-          0.095,
-          doorU + 0.16,
-          glassBottom + 0.92,
-          0.2,
-          PALETTE.bronze,
-        );
+        if (hasDoor)
+          box(
+            'handle',
+            'metal',
+            0.035,
+            0.34,
+            0.095,
+            doorU + 0.28,
+            glassBottom + 0.92,
+            0.2,
+            PALETTE.bronze,
+          );
+        if (hasDoor) {
+          // A restrained kick plate and lintel make the single grouped
+          // entrance legible at street scale without a new opening or collider.
+          box(
+            'trim',
+            'metal',
+            0.84,
+            0.18,
+            0.08,
+            doorU,
+            glassBottom + 0.12,
+            0.2,
+            PALETTE.bronze,
+          );
+          box(
+            'trim',
+            'metal',
+            0.98,
+            0.09,
+            0.08,
+            doorU,
+            glassTop - 0.02,
+            0.2,
+            frameColor,
+          );
+        }
         box(
           'fascia',
-          'metal',
+          style.fasciaFinish,
           width + 0.06,
-          0.35,
+          0.68,
           0.19,
           0,
-          top - 0.22,
+          top - 0.34,
           0.11,
-          frameColor,
+          style.fascia,
         );
         // A narrow warm reveal gives depth without a point light per shop.
         box(
@@ -504,9 +616,12 @@ export function planRobsonBurrardDetails(
           PALETTE.warmInterior,
         );
         const canopyBottomY = Math.max(pavementY + 2.95, top - 0.45);
-        const canopy = seed % 3 !== 0 && canopyBottomY < top + 0.2;
+        const canopy = (shopSeed >>> 4) % 5 < 3 && canopyBottomY < top + 0.2;
         if (canopy) {
-          const canopyColor = PALETTE.canopy[seed % PALETTE.canopy.length];
+          const canopyColor = style.canopy;
+          // Local +Z points opposite the outward normal on CCW rings. The
+          // slope therefore follows ring winding, always descending outward.
+          const pitch = -sign * 0.16;
           box(
             'canopy',
             'canopy',
@@ -514,9 +629,10 @@ export function planRobsonBurrardDetails(
             0.1,
             1.16,
             0,
-            canopyBottomY + 0.05,
+            canopyBottomY + 0.14,
             0.57,
             canopyColor,
+            pitch,
           );
           box(
             'canopy',
@@ -537,29 +653,35 @@ export function planRobsonBurrardDetails(
               0.065,
               1.05,
               side * (width / 2 - 0.12),
-              canopyBottomY - 0.015,
+              canopyBottomY + 0.12,
               0.55,
               frameColor,
+              pitch,
             );
         }
         bays.push({
           id,
           sourceKey: p.key,
+          shopId,
+          shopStyle,
+          hasDoor,
           roadName: nearest.road.name,
           center: [x, z],
           normal: [nx, nz],
           pavementY,
           canopyBottomY: canopy ? canopyBottomY - 0.13 : Infinity,
           boxes,
-          sign: {
-            x: x + nx * 0.217,
-            y: top - 0.22,
-            z: z + nz * 0.217,
-            yaw: Math.atan2(nx, nz),
-            width: Math.min(2.3, width - 0.3),
-            height: 0.22,
-            index: seed % 4,
-          },
+          sign: hasDoor
+            ? {
+                x: x + nx * 0.217,
+                y: top - 0.34,
+                z: z + nz * 0.217,
+                yaw: Math.atan2(nx, nz),
+                width: Math.min(2.55, width - 0.3),
+                height: 0.44,
+                index: style.signs[(shopSeed >>> 14) % style.signs.length],
+              }
+            : null,
         });
       }
     }
@@ -582,18 +704,20 @@ function createSignTexture(canvas?: HTMLCanvasElement | null) {
   canvas.height = 256;
   const c = canvas.getContext('2d');
   if (!c) return null;
-  c.fillStyle = '#253b38';
-  c.fillRect(0, 0, 512, 256);
-  ['COFFEE', 'BOOKS', 'STUDIO', 'MARKET'].forEach((label, i) => {
-    const y = i * 64;
-    c.fillStyle = '#e4d7b7';
-    c.font = '600 31px sans-serif';
+  // Eight small, fictional trade labels share the original 512×256 texture.
+  // Their palettes and typography follow the frontage groups, not real POIs.
+  TRADE_SIGNS.forEach((sign, i) => {
+    const x = (i % 2) * 256,
+      y = Math.floor(i / 2) * 64;
+    c.fillStyle = sign.background;
+    c.fillRect(x, y, 256, 64);
+    c.fillStyle = sign.ink;
+    c.font = `600 29px ${sign.serif ? 'serif' : 'sans-serif'}`;
     c.textAlign = 'center';
     c.textBaseline = 'middle';
-    c.fillText(label, 256, y + 32, 460);
-    c.fillStyle = '#a89a7e';
-    c.fillRect(20, y + 13, 48, 1);
-    c.fillRect(444, y + 13, 48, 1);
+    c.fillText(sign.label, x + 128, y + 32, 212);
+    c.fillRect(x + 10, y + 14, 20, 1);
+    c.fillRect(x + 226, y + 14, 20, 1);
   });
   const texture = new THREE.CanvasTexture(canvas);
   texture.name =
@@ -636,6 +760,7 @@ export class RobsonBurrardDetails {
   private matrix = new THREE.Matrix4();
   private position = new THREE.Vector3();
   private quaternion = new THREE.Quaternion();
+  private rotation = new THREE.Euler(0, 0, 0, 'YXZ');
   private scale = new THREE.Vector3();
   private axis = new THREE.Vector3(0, 1, 0);
   private color = new THREE.Color();
@@ -729,10 +854,11 @@ export class RobsonBurrardDetails {
         float streetFacing=max(.35,abs(dot(streetEye,streetN)));
         vec2 room=clamp(vStreetGlassUv-vec2(dot(streetEye,streetT),streetEye.y)*(.10/streetFacing),0.,1.);
         float inset=smoothstep(.0,.10,room.x)*smoothstep(.0,.10,1.-room.x)*smoothstep(.0,.12,1.-room.y);
-        float shelf=(1.-smoothstep(.016,.04,abs(room.y-.30)))+(1.-smoothstep(.016,.04,abs(room.y-.58)));
+        float displayStyle=fract(dot(diffuseColor.rgb,vec3(3.17,7.39,4.63)));
+        float shelf=(1.-smoothstep(.016,.04,abs(room.y-(.26+displayStyle*.08))))+(1.-smoothstep(.016,.04,abs(room.y-(.56+displayStyle*.05))));
         float floorBand=1.-smoothstep(.12,.28,room.y);
         vec3 roomColor=mix(vec3(.15,.19,.17),vec3(.39,.32,.22),floorBand*.65);
-        roomColor*=mix(.42,1.,inset)*(1.-min(1.,shelf)*.24);
+        roomColor*=mix(.42,1.,inset)*(1.-min(1.,shelf)*.24*step(.36,displayStyle));
         diffuseColor.rgb=mix(diffuseColor.rgb*.56,roomColor,.54);
       `,
       );
@@ -922,7 +1048,11 @@ export class RobsonBurrardDetails {
           for (const b of bay.boxes) {
             const mesh = this.meshes.get(b.finish)!;
             this.position.set(b.x, b.y, b.z);
-            this.quaternion.setFromAxisAngle(this.axis, b.yaw);
+            if (b.pitch)
+              this.quaternion.setFromEuler(
+                this.rotation.set(b.pitch, b.yaw, 0, 'YXZ'),
+              );
+            else this.quaternion.setFromAxisAngle(this.axis, b.yaw);
             this.scale.set(b.width, b.height, b.depth);
             this.matrix.compose(this.position, this.quaternion, this.scale);
             const i = counts[b.finish]++;
@@ -938,9 +1068,9 @@ export class RobsonBurrardDetails {
             this.signMesh.setMatrixAt(signs, this.matrix);
             this.signRects.setXYZW(
               signs,
-              8 / 512,
-              1 - (s.index * 64 + 60) / 256,
-              496 / 512,
+              ((s.index % 2) * 256 + 4) / 512,
+              1 - (Math.floor(s.index / 2) * 64 + 60) / 256,
+              248 / 512,
               56 / 256,
             );
             signs++;

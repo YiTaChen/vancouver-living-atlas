@@ -162,7 +162,11 @@ test('finish is deterministic source-owned relief, road-facing, above pavement a
       bay.canopyBottomY - bay.pavementY >= 2.8,
       'including valance and support clearance',
     );
-    assert(bay.sign.width <= 2.3 && bay.sign.index >= 0 && bay.sign.index < 4);
+    assert.equal(Boolean(bay.sign), bay.hasDoor);
+    if (bay.sign)
+      assert(
+        bay.sign.width <= 2.55 && bay.sign.index >= 0 && bay.sign.index < 8,
+      );
     for (const b of bay.boxes) {
       for (const key of [
         'x',
@@ -172,21 +176,100 @@ test('finish is deterministic source-owned relief, road-facing, above pavement a
         'height',
         'depth',
         'yaw',
+        'pitch',
         'color',
       ])
         assert(Number.isFinite(b[key]), key);
       assert(b.width > 0 && b.height > 0 && b.depth > 0);
+      const lowestPoint =
+        b.y -
+        (b.height * Math.abs(Math.cos(b.pitch)) +
+          b.depth * Math.abs(Math.sin(b.pitch))) /
+          2;
       assert(
-        b.y - b.height / 2 >= bay.pavementY - 1e-7,
+        lowestPoint >= bay.pavementY - 1e-7,
         'no floating floor, stairs or ground-level obstructions',
       );
       if (b.depth > 0.3)
         assert(
-          b.y - b.height / 2 >= bay.pavementY + 2.8,
+          lowestPoint >= bay.pavementY + 2.8,
           'projecting canopy stays above walking clearance',
         );
+      if (b.kind === 'canopy' && b.pitch) {
+        const alongDepth = new THREE.Vector3(0, 0, 1).applyQuaternion(
+          new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(b.pitch, b.yaw, 0, 'YXZ'),
+          ),
+        );
+        assert(
+          (alongDepth.x * bay.normal[0] + alongDepth.z * bay.normal[1]) *
+            alongDepth.y <
+            0,
+          'the pitched awning slopes down toward the street',
+        );
+      }
     }
   }
+});
+
+void test('adjacent source bays form coherent, varied representative shopfront groups', () => {
+  const bays = planRobsonBurrardDetails(planHost());
+  const groups = new Map();
+  for (const bay of bays) {
+    const entries = groups.get(bay.shopId) ?? [];
+    entries.push(bay);
+    groups.set(bay.shopId, entries);
+  }
+  assert(groups.size >= 2);
+  assert([...groups.values()].some((group) => group.length > 1));
+  for (const group of groups.values()) {
+    assert(group.length <= 3);
+    assert.equal(new Set(group.map((bay) => bay.shopStyle)).size, 1);
+    assert(group.filter((bay) => bay.hasDoor).length <= 1);
+    assert(group.filter((bay) => bay.sign).length <= 1);
+    const fascia = group.map((bay) =>
+      bay.boxes.find((box) => box.kind === 'fascia'),
+    );
+    assert.equal(
+      new Set(fascia.map((box) => `${box.finish}:${box.color}`)).size,
+      1,
+    );
+    for (const bay of group) {
+      const face = bay.boxes.find((box) => box.kind === 'fascia');
+      assert.equal(face.height, 0.68);
+      if (bay.sign) {
+        assert.equal(bay.sign.height, 0.44);
+        assert(bay.sign.y - bay.sign.height / 2 >= face.y - face.height / 2);
+        assert(bay.sign.y + bay.sign.height / 2 <= face.y + face.height / 2);
+        const offset =
+          (bay.sign.x - bay.center[0]) * bay.normal[0] +
+          (bay.sign.z - bay.center[1]) * bay.normal[1];
+        assert(Math.abs(offset - 0.217) < 1e-9);
+      }
+      const entranceTrim = bay.boxes.filter(
+        (box) => box.kind === 'trim' && box.depth === 0.08,
+      );
+      assert.equal(entranceTrim.length, bay.hasDoor ? 2 : 0);
+      for (const trim of entranceTrim) {
+        const offset =
+          (trim.x - bay.center[0]) * bay.normal[0] +
+          (trim.z - bay.center[1]) * bay.normal[1];
+        assert(offset + trim.depth / 2 <= 0.25 + 1e-9);
+        assert(trim.y - trim.height / 2 > bay.pavementY);
+      }
+    }
+    const awnings = group.map((bay) =>
+      bay.boxes.find((box) => box.kind === 'canopy'),
+    );
+    assert.equal(new Set(awnings.map((awning) => Boolean(awning))).size, 1);
+    assert.equal(
+      new Set(awnings.filter(Boolean).map((awning) => awning.color)).size <= 1,
+      true,
+    );
+  }
+  assert(bays.some((bay) => bay.sign));
+  assert(bays.some((bay) => bay.hasDoor));
+  assert(bays.some((bay) => !bay.hasDoor));
 });
 
 test('party walls, elevated parts, unrelated roads, public landmarks and unsafe slopes receive no storefront skin', () => {
@@ -260,6 +343,13 @@ test('real source frontages remain bounded, stable under source reordering, and 
     a.some((b) => b.roadName === 'ROBSON ST') &&
       a.some((b) => b.roadName === 'BURRARD ST'),
   );
+  assert(new Set(a.map((bay) => bay.shopStyle)).size >= 3);
+  assert(
+    a.some((bay) =>
+      bay.boxes.some((box) => box.kind === 'canopy' && box.pitch),
+    ),
+  );
+  assert(a.filter((bay) => bay.sign).length < a.length * 0.75);
   assert.deepEqual(
     a,
     planRobsonBurrardDetails({
@@ -275,6 +365,52 @@ test('real source frontages remain bounded, stable under source reordering, and 
         streetShowcaseWeight(...b.center) >= 0.6,
     ),
   );
+});
+
+void test('fictional signs share one unchanged-size atlas without bleeding across tiles', () => {
+  const h = planHost();
+  const labels = [];
+  const context = {
+    fillRect() {},
+    fillText(label) {
+      labels.push(label);
+    },
+  };
+  const canvas = { width: 0, height: 0, getContext: () => context };
+  const host = {
+    data: {
+      buildings: h.buildings,
+      roads: h.roads,
+      buildingFoundations: h.foundations,
+      buildingProfiles: h.profiles,
+      roadRelief: () => 28.82,
+    },
+    buildings: new THREE.Group(),
+    camera: new THREE.PerspectiveCamera(),
+    settings: { quality: 'high', buildings: true },
+    renderer: { shadowMap: { needsUpdate: false } },
+    elevation: () => 30,
+  };
+  host.camera.position.set(sourceIntersection[0], 34, sourceIntersection[1]);
+  const details = new RobsonBurrardDetails(host, canvas);
+  assert.deepEqual([canvas.width, canvas.height], [512, 256]);
+  assert.equal(new Set(labels).size, 8);
+  assert.equal(details.root.userData.representativeBusinesses, true);
+  details.update(true);
+  const rects = details.signGeometry.getAttribute('showcaseSignRect');
+  assert(details.stats.signs > 0);
+  for (let i = 0; i < details.stats.signs; i++) {
+    const x = rects.getX(i),
+      y = rects.getY(i),
+      w = rects.getZ(i),
+      h = rects.getW(i);
+    assert(x >= 0 && y >= 0 && x + w <= 1 && y + h <= 1);
+    assert.equal(w, 248 / 512);
+    assert.equal(h, 56 / 256);
+    assert([4 / 512, 260 / 512].includes(x));
+    assert([4 / 256, 68 / 256, 132 / 256, 196 / 256].includes(y));
+  }
+  details.dispose();
 });
 
 test('renderer keeps six reusable pools, clears outside/high above pilot, and preserves pre-existing city resources', () => {

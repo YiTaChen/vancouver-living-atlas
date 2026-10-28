@@ -82,18 +82,21 @@ const glslPoint = (p: readonly number[]) =>
 /** Same metre-space smoothstep as streetShowcaseWeight; GLSL is generated from
  * the exact CPU constants to avoid independently drifting pilot regions. */
 export const STREET_SHOWCASE_GLSL = `
-float atlasStreetSegmentDistance(vec2 p, vec2 a, vec2 b) {
+float atlasStreetSegmentDistanceSquared(vec2 p, vec2 a, vec2 b) {
   vec2 d=b-a;
   float t=clamp(dot(p-a,d)/max(dot(d,d),.000001),0.,1.);
-  return length(p-a-d*t);
+  vec2 delta=p-a-d*t;
+  return dot(delta,delta);
 }
 float atlasStreetShowcaseWeight(vec2 worldXZ) {
   if (worldXZ.x<${STREET_SHOWCASE_BOUNDS.minX.toFixed(6)} || worldXZ.x>${STREET_SHOWCASE_BOUNDS.maxX.toFixed(6)} ||
       worldXZ.y<${STREET_SHOWCASE_BOUNDS.minZ.toFixed(6)} || worldXZ.y>${STREET_SHOWCASE_BOUNDS.maxZ.toFixed(6)}) return 0.;
-  float d=min(
-    atlasStreetSegmentDistance(worldXZ,${glslPoint(STREET_SHOWCASE_SEGMENTS[0].a)},${glslPoint(STREET_SHOWCASE_SEGMENTS[0].b)}),
-    atlasStreetSegmentDistance(worldXZ,${glslPoint(STREET_SHOWCASE_SEGMENTS[1].a)},${glslPoint(STREET_SHOWCASE_SEGMENTS[1].b)})
-  );
+  // sqrt(min(a,b)) == min(sqrt(a),sqrt(b)) for non-negative squared
+  // distances. Keep metre-space smoothstep and fade thresholds unchanged.
+  float d=sqrt(min(
+    atlasStreetSegmentDistanceSquared(worldXZ,${glslPoint(STREET_SHOWCASE_SEGMENTS[0].a)},${glslPoint(STREET_SHOWCASE_SEGMENTS[0].b)}),
+    atlasStreetSegmentDistanceSquared(worldXZ,${glslPoint(STREET_SHOWCASE_SEGMENTS[1].a)},${glslPoint(STREET_SHOWCASE_SEGMENTS[1].b)})
+  ));
   return 1.-smoothstep(${STREET_SHOWCASE_FADE.coreM.toFixed(1)},${STREET_SHOWCASE_FADE.outerM.toFixed(1)},d);
 }
 `;

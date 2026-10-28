@@ -759,7 +759,7 @@ export function nightAsphaltHeight(e: CityEngine, x: number, z: number) {
 export function wrapNightStreetMaterials(
   group: THREE.Object3D,
   lighting: NightStreetLighting,
-  options: { parkOnly?: boolean } = {},
+  options: { parkOnly?: boolean; pilotOnly?: boolean } = {},
 ) {
   group.traverse((object) => {
     if (!(object instanceof THREE.Mesh)) return;

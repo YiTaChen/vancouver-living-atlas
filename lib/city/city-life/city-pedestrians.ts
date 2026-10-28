@@ -3,7 +3,11 @@ import type { CityEngine } from '../engine';
 import type { RoadEdge, RoadGraph } from '../road-graph';
 import { GroundSurfaceIndex } from '../ground-surface';
 import { project } from '../geo';
-import { streetShowcaseWeight } from '../street-quality-profile';
+import {
+  STREET_SHOWCASE_BOUNDS,
+  streetShowcaseWeight,
+} from '../street-quality-profile';
+import type { RuntimePerformanceDiagnostics } from '../runtime-performance';
 import { PathActor } from './actor-state';
 import { SimulationClock } from './simulation-clock';
 import {
@@ -71,6 +75,19 @@ export function nearbySidewalkMeshes(
       meshes.push(o);
   });
   return meshes;
+}
+
+/** Select by the existing 600m floor cell rather than the moving camera, so
+ * crossing the pilot fade never rebuilds an otherwise unchanged local index. */
+export function pilotSidewalkFloorCell(cellX: number, cellZ: number) {
+  return (
+    Number.isSafeInteger(cellX) &&
+    Number.isSafeInteger(cellZ) &&
+    cellX * 600 <= STREET_SHOWCASE_BOUNDS.maxX &&
+    (cellX + 1) * 600 >= STREET_SHOWCASE_BOUNDS.minX &&
+    cellZ * 600 <= STREET_SHOWCASE_BOUNDS.maxZ &&
+    (cellZ + 1) * 600 >= STREET_SHOWCASE_BOUNDS.minZ
+  );
 }
 
 interface Walker {
@@ -170,6 +187,7 @@ export class CityPedestrians {
       capacity: e.compatibleGraphics ? 12 : 32,
     });
     this.renderer.group.name = 'Nearby sidewalk pedestrians';
+    this.e.preparePilotNightReceivers?.(this.renderer.group);
     this.e.scene.add(this.renderer.group);
     this.graph = e.data.roadGraph;
     if (!this.graph) return;
@@ -210,6 +228,13 @@ export class CityPedestrians {
       ),
     );
   }
+  /** Called only when the explicit performance recorder is enabled. Wrap the
+   * stable owner and renderer rather than a selector that changes with quality. */
+  installPerformanceDiagnostics(diagnostics: RuntimePerformanceDiagnostics) {
+    const owner = this as unknown as { prepareNearby: () => void };
+    diagnostics.wrap(owner, 'prepareNearby', 'pedestrian-prepare');
+    diagnostics.wrap(this.renderer, 'update', 'pedestrian-renderer');
+  }
   setHidden(hidden: boolean) {
     this.clock.setHidden(hidden);
   }
@@ -222,18 +247,23 @@ export class CityPedestrians {
     );
     return this.frustum.intersectsBox(this.bounds);
   }
-  private makeRouteRoom() {
-    if (this.routes.size < 64) return true;
+  private findStaleRoute(): [string, SidewalkRoute] | undefined {
     const active = new Set(this.selected.map((s) => s.actorId));
-    const stale = [...this.routes].find(
-      ([id, route]) =>
+    for (const [id, route] of this.routes)
+      if (
         !active.has(`${id}:0`) &&
         !active.has(`${id}:1`) &&
         Math.hypot(
           route.points[0][0] - this.center.x,
           route.points[0][2] - this.center.z,
-        ) > 180,
-    );
+        ) > 180
+      )
+        return [id, route];
+    return undefined;
+  }
+  private makeRouteRoom() {
+    if (this.routes.size < 64) return true;
+    const stale = this.findStaleRoute();
     if (!stale) return false;
     this.routes.delete(stale[0]);
     this.attempted.delete(stale[0].split(':span')[0]);
@@ -272,7 +302,13 @@ export class CityPedestrians {
     const floorCell = `${floorX},${floorZ}`;
     if (!this.floor || this.floorCell !== floorCell) {
       const meshes = nearbySidewalkMeshes(this.e.roads, floorX, floorZ);
-      this.floor = new GroundSurfaceIndex(meshes);
+      this.floor = new GroundSurfaceIndex(
+        meshes,
+        [],
+        pilotSidewalkFloorCell(floorX, floorZ)
+          ? { cacheEdgeTolerances: 'lazy' }
+          : {},
+      );
       this.floorCell = floorCell;
       this.floorMeshes = meshes.length;
       // A failed run may extend beyond the previous local floor index. Retry
@@ -281,6 +317,12 @@ export class CityPedestrians {
       for (const [key, valid] of this.attempted)
         if (!valid) this.attempted.delete(key);
     }
+    // Once all route slots are occupied, a fixed camera commonly has no stale
+    // route to evict. In that case the original ordered search cannot perform
+    // a probe: avoid collecting and sorting the same neighborhood five times a
+    // second. Keep the stale test identical to makeRouteRoom, after the floor
+    // cell reset above, so camera travel can still free the first eligible slot.
+    if (this.routes.size >= 64 && !this.findStaleRoute()) return;
     const cx = Math.floor(this.center.x / 100),
       cz = Math.floor(this.center.z / 100);
     const nearby = new Map<string, SourceWindow>();
@@ -288,13 +330,20 @@ export class CityPedestrians {
       for (let z = cz - 2; z <= cz + 2; z++)
         for (const source of this.edgeCells.get(`${x},${z}`) ?? [])
           nearby.set(`${source.edge.id}:${source.window.windowIndex}`, source);
-    const windows = [...nearby.values()].sort(
-      (a, b) =>
-        windowDistance2(a.window, this.center.x, this.center.z) -
-          windowDistance2(b.window, this.center.x, this.center.z) ||
-        a.edge.id - b.edge.id ||
-        a.window.windowIndex - b.window.windowIndex,
-    );
+    // Distances are pure for this selection and would otherwise be recomputed
+    // for each comparator invocation. Equal distances retain exactly the same
+    // source-id and window-id tie breakers as the original ordering.
+    const windows = [...nearby.values()]
+      .map((source) => ({
+        ...source,
+        distance2: windowDistance2(source.window, this.center.x, this.center.z),
+      }))
+      .sort(
+        (a, b) =>
+          a.distance2 - b.distance2 ||
+          a.edge.id - b.edge.id ||
+          a.window.windowIndex - b.window.windowIndex,
+      );
     const showcase = streetShowcaseWeight(this.center.x, this.center.z) > 0.01;
     let probes = 0;
     for (const { edge, window } of windows)
@@ -321,13 +370,10 @@ export class CityPedestrians {
         };
         let proven: SidewalkRoute[] = [];
         if (showcase)
-          proven = validatedSidewalkRuns(
-            this.graph,
-            edge,
-            side,
-            probe,
-            proofOptions,
-          );
+          proven = validatedSidewalkRuns(this.graph, edge, side, probe, {
+            ...proofOptions,
+            preflightTrunks: this.trunks,
+          });
         else {
           for (const offsetFromCurbM of [1, 0.55, 1.45]) {
             const route = validatedSidewalkRoute(

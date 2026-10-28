@@ -66,6 +66,7 @@ import { RobsonBurrardDetails } from './robson-burrard-details';
 import {
   streetPilotLightingWeight,
   streetPilotLightingMultipliers,
+  streetPilotNightViewWeight,
 } from './street-pilot-lighting';
 import { createBuildingBodies } from './building-bodies';
 import { createSkyTrainGuidewayUniforms } from './skytrain-guideway-clearance';
@@ -93,6 +94,7 @@ import { createBridgeApproaches } from './bridges';
 import { prepareCauseway } from './causeway';
 import { makeContext } from './context';
 import { StreetNavigation } from './navigation';
+import { PilotNightRoadster } from './pilot-night-roadster';
 import { MapPlacement } from './placement';
 import { CityClock, type ClockState } from './clock';
 import { createLandmarks } from './landmarks';
@@ -126,6 +128,7 @@ import {
 } from './types';
 
 export class CityEngine {
+  private pilotNightRoadster: PilotNightRoadster | null = null;
   runtimePerformance: RuntimePerformanceDiagnostics | null = null;
   soundscape: CitySoundscape | null = null;
   private soundscapeWorld: CitySoundscapeWorld | null = null;
@@ -728,8 +731,12 @@ export class CityEngine {
       this.startupQA?.phase('geometry.traffic-and-road-details');
     }
     this.traffic = createStreetDetails(this);
+    // Traffic is created after the engine may already have checked the camera.
+    // Re-evaluate now instead of relying on a changed cached camera weight.
+    this.applyStreetPilotLighting(performance.now(), true);
     this.streetFurniture = new CityStreetFurniture(this);
     this.streetShowcase = new RobsonBurrardDetails(this);
+    this.preparePilotNightReceivers(this.streetShowcase.root);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.railway');
     }
@@ -746,6 +753,12 @@ export class CityEngine {
     this.impactFeedback = new ImpactFeedback(this.scene);
     this.driftEffects = new VehicleDriftEffects(this);
     this.navigation = new StreetNavigation(this);
+    if (this.traffic)
+      this.pilotNightRoadster = new PilotNightRoadster(
+        this.navigation.car,
+        this.navigation.roadster.group,
+        this.traffic.streetLighting,
+      );
     this.travelOcclusion = new TravelOcclusion(
       [
         this.buildings,
@@ -1179,6 +1192,7 @@ export class CityEngine {
     if (this.landmarkWarmup)
       diagnostics.wrap(this.landmarkWarmup, 'tick', 'landmark-warmup');
     diagnostics.wrap(this.sceneryPreparation, 'pump', 'scenery-preparation');
+    this.pedestrians?.installPerformanceDiagnostics?.(diagnostics);
     diagnostics.setVisible(
       !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
     );
@@ -1335,6 +1349,14 @@ export class CityEngine {
         this.prepareTravelOccluders(group);
         break;
       }
+  }
+  /** The showcase and background pedestrians did not previously receive the
+   * citywide field. Their added light is restricted by both view and fragment. */
+  preparePilotNightReceivers(group: THREE.Object3D) {
+    if (this.traffic && !this.disposed)
+      wrapNightStreetMaterials(group, this.traffic.streetLighting, {
+        pilotOnly: true,
+      });
   }
   prepareTravelOccluders(group: THREE.Object3D) {
     this.travelOcclusion?.refresh([group]);
@@ -1983,6 +2005,21 @@ export class CityEngine {
    * independently of the clock so a fixed-hour trip restores the original light
    * on leaving the pilot, without generating an environment map per frame. */
   private applyStreetPilotLighting(time = performance.now(), force = false) {
+    // Prevent a one-frame leak when modes change within the 100ms interval.
+    const nightViewExcluded =
+      this.cabinDisplayActive ||
+      this.busVisit?.aboard ||
+      this.skyTrainTravel?.active ||
+      this.flight?.attached ||
+      this.rocket?.active ||
+      (this.tesla?.active &&
+        !!this.tesla.state &&
+        this.tesla.state.mode !== 'ground') ||
+      this.settings.mode === 'flight' ||
+      this.settings.mode === 'rocket' ||
+      this.settings.mode === 'boat';
+    if (nightViewExcluded)
+      this.traffic?.streetLighting.setPilotNightViewWeight(0);
     if (!force && time - this.pilotLightingCheckedAt < 100) return;
     this.pilotLightingCheckedAt = time;
     const { x, y, z } = this.camera.position;
@@ -1996,6 +2033,13 @@ export class CityEngine {
         this.interiors?.height(x, z) !== undefined)
     )
       weight = 0;
+    // This runs even when the existing atmosphere weight was cached, because
+    // changing boat/rocket mode can leave that original value unchanged.
+    this.traffic?.streetLighting.setPilotNightViewWeight(
+      nightViewExcluded
+        ? 0
+        : streetPilotNightViewWeight(weight, this.settings.mode),
+    );
     if (!force && weight === this.pilotLightingWeight) return;
     this.pilotLightingWeight = weight;
     const base = this.pilotBaseLighting;
@@ -2160,6 +2204,7 @@ export class CityEngine {
         !this.skyTrainTravel?.active
       )
         this.navigation?.update((time - this.lastTime) / 1000);
+      this.pilotNightRoadster?.update();
       this.busWorldService?.update(
         this.lastTime ? (time - this.lastTime) / 1000 : 0,
       );
@@ -2485,6 +2530,8 @@ export class CityEngine {
     this.skyTrainTravel = null;
     this.busVisit = null;
     this.navigation?.destroy();
+    this.pilotNightRoadster?.dispose();
+    this.pilotNightRoadster = null;
     this.placement?.destroy();
     this.controls?.dispose();
     this.landmarkDetails.forEach((l) => l.disposePending());

@@ -30,7 +30,8 @@ export const VEHICLE_SURFACE_ALTITUDE = Object.freeze({
 
 /** Also used by QA: source material is exact outside the appearance envelope. */
 export function vehicleSurfaceWeight(x: number, y: number, z: number) {
-  if (![x, y, z].every(Number.isFinite)) return 0;
+  if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(z))
+    return 0;
   const t = THREE.MathUtils.clamp(
     (y - VEHICLE_SURFACE_ALTITUDE.fullM) /
       (VEHICLE_SURFACE_ALTITUDE.offM - VEHICLE_SURFACE_ALTITUDE.fullM),
@@ -44,7 +45,7 @@ const finish: Record<
   Exclude<VehicleSurfaceRole, 'aircraft-batch' | 'crowd'>,
   readonly [roughness: number, metalness: number]
 > = {
-  'roadster-paint': [0.23, 0.24],
+  'roadster-paint': [0.19, 0.15],
   paint: [0.25, 0.25],
   metal: [0.25, 0.84],
   rubber: [0.94, 0],
@@ -178,11 +179,17 @@ if(atlasSurfaceWeight>0.) metalnessFactor=mix(metalnessFactor,(${surface}).y,atl
       shader.fragmentShader = shader.fragmentShader.replace(
         '#include <lights_fragment_end>',
         `#include <lights_fragment_end>
-reflectedLight.indirectSpecular*=1.+atlasSurfaceWeight*.65;`,
+reflectedLight.indirectSpecular*=1.+atlasSurfaceWeight*.65;
+${
+  local
+    ? `float atlasPaintGrazing=pow(1.-clamp(dot(normal,normalize(vViewPosition)),0.,1.),5.);
+reflectedLight.indirectSpecular*=1.+atlasSurfaceWeight*atlasPaintGrazing*.35;`
+    : ''
+}`,
       );
   };
   material.customProgramCacheKey = () =>
-    `${previousKey.call(material)}/robson-burrard-surface-v1/${role}`;
+    `${previousKey.call(material)}/robson-burrard-surface-${local ? 'v2' : 'v1'}/${role}`;
   material.userData.streetSurface = {
     role,
     sourceOutsidePilot: true,

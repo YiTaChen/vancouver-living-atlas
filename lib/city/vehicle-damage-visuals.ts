@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
+import { installRoadsterFormGeometry } from './assets/roadster-form';
 
 type Triple = readonly [number, number, number];
 export interface VehicleDamageMark {
@@ -48,6 +49,23 @@ const finiteTriple = (point: Triple) =>
 const clamp = (value: number, min = 0, max = 1) =>
   Math.max(min, Math.min(max, value));
 
+// DecalGeometry linearly clips normals with positions. Encode each source
+// vertex's scalar Y displacement as a near-vertical unit direction, then decode
+// after clipping: the resulting decal target follows the same painted triangle
+// rather than re-evaluating a nonlinear form at each newly clipped vertex.
+const FORM_ENCODING_SCALE = 10;
+function encodedFormNormals(geometry: THREE.BufferGeometry) {
+  const target = geometry.morphAttributes.position?.[0];
+  if (!target || target.count !== geometry.getAttribute('position').count)
+    throw new Error('Roadster damage requires the current body morph target');
+  const data = new Float32Array(target.count * 3);
+  for (let i = 0; i < target.count; i++) {
+    data[i * 3] = target.getY(i) / FORM_ENCODING_SCALE;
+    data[i * 3 + 1] = 1;
+  }
+  return new THREE.BufferAttribute(data, 3);
+}
+
 function bodyMesh(mesh: THREE.Mesh) {
   if (mesh instanceof THREE.InstancedMesh || mesh instanceof THREE.SkinnedMesh)
     return false;
@@ -95,6 +113,7 @@ export class VehicleDamageVisuals {
   private readonly capacity: number;
   private readonly maxDepth: number;
   private readonly filter: (mesh: THREE.Mesh) => boolean;
+  private readonly roadsterPaint?: THREE.Mesh;
   private disposed = false;
   private rebuilds = 0;
   private dentedVertices = 0;
@@ -103,6 +122,12 @@ export class VehicleDamageVisuals {
     private readonly root: THREE.Group,
     options: VehicleDamageVisualOptions = {},
   ) {
+    const roadsterPaint = root.getObjectByName('roadster/paint');
+    if (
+      roadsterPaint instanceof THREE.Mesh &&
+      roadsterPaint.geometry.morphAttributes.position?.length === 1
+    )
+      this.roadsterPaint = roadsterPaint;
     this.capacity = Math.floor(
       clamp(Number.isFinite(options.maxMarks) ? options.maxMarks! : 20, 1, 24),
     );
@@ -154,6 +179,11 @@ export class VehicleDamageVisuals {
     };
     this.material.customProgramCacheKey = () => 'vehicle-surface-damage-v1';
     this.mesh = new THREE.Mesh(new THREE.BufferGeometry(), this.material);
+    this.mesh.onBeforeRender = () => {
+      if (this.mesh.morphTargetInfluences?.length)
+        this.mesh.morphTargetInfluences[0] =
+          this.roadsterPaint?.morphTargetInfluences?.[0] ?? 0;
+    };
     this.mesh.name = 'Surface-clipped vehicle scratches';
     this.mesh.userData.excludeFromSSAO = true;
     this.mesh.receiveShadow = true;
@@ -181,6 +211,22 @@ export class VehicleDamageVisuals {
   }
 
   private project(
+    mark: VehicleDamageMark,
+    bodies: THREE.Mesh[],
+  ): Projection | null {
+    // Physical collision and the authored damage projection use the original
+    // body. Decals later receive the same native morph target as the paint.
+    const influences = this.roadsterPaint?.morphTargetInfluences;
+    const weight = influences?.[0];
+    if (influences) influences[0] = 0;
+    try {
+      return this.projectUndeformed(mark, bodies);
+    } finally {
+      if (influences && weight !== undefined) influences[0] = weight;
+    }
+  }
+
+  private projectUndeformed(
     mark: VehicleDamageMark,
     bodies: THREE.Mesh[],
   ): Projection | null {
@@ -342,7 +388,8 @@ export class VehicleDamageVisuals {
     const geometry = entry.geometry,
       attributes = Object.entries(geometry.attributes);
     if (
-      Object.keys(geometry.morphAttributes).length ||
+      (Object.keys(geometry.morphAttributes).length > 0 &&
+        mesh !== this.roadsterPaint) ||
       attributes.some(
         ([, attribute]) =>
           !(attribute instanceof THREE.BufferAttribute) ||
@@ -653,8 +700,49 @@ export class VehicleDamageVisuals {
     this.dentedVertices += dentedVertices;
     position.needsUpdate = true;
     mesh.geometry.computeVertexNormals();
-    mesh.geometry.computeBoundingBox();
-    mesh.geometry.computeBoundingSphere();
+    if (mesh === this.roadsterPaint) this.rebuildRoadsterForm(mesh, entry);
+    else {
+      mesh.geometry.computeBoundingBox();
+      mesh.geometry.computeBoundingSphere();
+    }
+  }
+
+  /** Three caches native morph data in a texture per geometry. A damage event
+   * rebuilds only the owned clone so the texture is refreshed; the immutable
+   * source geometry and the current morph weight stay intact. */
+  private rebuildRoadsterForm(mesh: THREE.Mesh, entry: DentGeometry) {
+    const previous = mesh.geometry;
+    // The paint's owned clone has private attributes. Reuse those CPU buffers
+    // across geometry identities instead of copying every attribute and the
+    // old morph arrays only to discard the latter immediately. Disposing the
+    // previous geometry also invalidates its GPU buffers and morph texture;
+    // Three uploads the borrowed attributes for the new identity on render.
+    // Unknown subclasses or additional morph layouts retain the general clone
+    // path so this optimization does not silently discard their semantics.
+    const canTransfer =
+      previous.constructor === THREE.BufferGeometry &&
+      Object.keys(previous.morphAttributes).every(
+        (name) => name === 'position' || name === 'normal',
+      );
+    let next: THREE.BufferGeometry;
+    if (canTransfer) {
+      next = new THREE.BufferGeometry();
+      next.name = previous.name;
+      next.userData = previous.userData;
+      next.setIndex(previous.index);
+      for (const [name, attribute] of Object.entries(previous.attributes))
+        next.setAttribute(name, attribute);
+      for (const group of previous.groups)
+        next.addGroup(group.start, group.count, group.materialIndex);
+      next.setDrawRange(previous.drawRange.start, previous.drawRange.count);
+    } else next = previous.clone();
+    const weight = mesh.morphTargetInfluences?.[0] ?? 0;
+    installRoadsterFormGeometry(next);
+    mesh.geometry = next;
+    entry.geometry = next;
+    mesh.updateMorphTargets();
+    if (mesh.morphTargetInfluences) mesh.morphTargetInfluences[0] = weight;
+    previous.dispose();
   }
 
   refresh() {
@@ -691,14 +779,22 @@ export class VehicleDamageVisuals {
       byMesh.get(projection.mesh)!.push(projection);
     }
     for (const [mesh, hits] of byMesh) this.dent(mesh, hits);
+    if (this.roadsterPaint && !byMesh.has(this.roadsterPaint)) {
+      const entry = this.owned.get(this.roadsterPaint);
+      if (entry) this.rebuildRoadsterForm(this.roadsterPaint, entry);
+    }
     const positions: number[] = [],
       normals: number[] = [],
       uv: number[] = [],
       marks: number[] = [],
+      formDeltas: number[] = [],
       worldToRoot = this.root.matrixWorld.clone().invert(),
       normalToRoot = new THREE.Matrix3().getNormalMatrix(worldToRoot),
       point = new THREE.Vector3(),
-      normal = new THREE.Vector3();
+      normal = new THREE.Vector3(),
+      encodedNormal = new THREE.Vector3();
+    const encoded = new Map<THREE.BufferGeometry, THREE.BufferAttribute>();
+    let hasRoadsterMarks = false;
     for (const projection of [...projections].reverse()) {
       if (positions.length >= MAX_MARK_TRIANGLES * 9) break;
       // Project along the actual body normal after deforming. An oblique narrow
@@ -736,6 +832,46 @@ export class VehicleDamageVisuals {
         p = geometry.getAttribute('position'),
         n = geometry.getAttribute('normal'),
         tex = geometry.getAttribute('uv');
+      let formGeometry: DecalGeometry | undefined;
+      let formNormals: THREE.BufferAttribute | undefined;
+      if (surface.mesh === this.roadsterPaint) {
+        hasRoadsterMarks = true;
+        const source = surface.mesh.geometry;
+        let packed = encoded.get(source);
+        if (!packed) {
+          packed = encodedFormNormals(source);
+          encoded.set(source, packed);
+        }
+        const originalNormal = source.getAttribute('normal');
+        source.setAttribute('normal', packed);
+        try {
+          formGeometry = new DecalGeometry(
+            surface.mesh,
+            worldPoint,
+            orientation,
+            new THREE.Vector3(
+              size * (surface.mark.scrape ? 1.8 : 1),
+              size * 0.65,
+              0.14,
+            ),
+          );
+        } catch (error) {
+          geometry.dispose();
+          throw error;
+        } finally {
+          source.setAttribute('normal', originalNormal);
+        }
+        formNormals = formGeometry.getAttribute(
+          'normal',
+        ) as THREE.BufferAttribute;
+        if (!formNormals || formNormals.count !== p.count) {
+          formGeometry.dispose();
+          geometry.dispose();
+          throw new Error(
+            'Roadster damage morph clipping produced incompatible geometry',
+          );
+        }
+      }
       for (let i = 0; i < p.count; i += 3) {
         if (positions.length >= MAX_MARK_TRIANGLES * 9) break;
         normal.fromBufferAttribute(n, i).applyNormalMatrix(normalToRoot);
@@ -749,6 +885,16 @@ export class VehicleDamageVisuals {
           positions.push(point.x, point.y, point.z);
           normals.push(normal.x, normal.y, normal.z);
           uv.push(tex.getX(j), tex.getY(j));
+          if (formNormals) {
+            encodedNormal
+              .fromBufferAttribute(formNormals, j)
+              .applyNormalMatrix(normalToRoot);
+            const lift =
+              Math.abs(encodedNormal.y) > 1e-8
+                ? (FORM_ENCODING_SCALE * encodedNormal.x) / encodedNormal.y
+                : 0;
+            formDeltas.push(0, lift, 0);
+          } else formDeltas.push(0, 0, 0);
           marks.push(
             surface.mark.severity,
             surface.mark.scrape ? 1 : 0,
@@ -756,6 +902,7 @@ export class VehicleDamageVisuals {
           );
         }
       }
+      formGeometry?.dispose();
       geometry.dispose();
     }
     const geometry = new THREE.BufferGeometry();
@@ -772,9 +919,16 @@ export class VehicleDamageVisuals {
       'impactMark',
       new THREE.Float32BufferAttribute(marks, 3),
     );
-    geometry.computeBoundingSphere();
+    if (hasRoadsterMarks && positions.length)
+      installRoadsterFormGeometry(geometry, new Float32Array(formDeltas));
+    else geometry.computeBoundingSphere();
     this.mesh.geometry.dispose();
     this.mesh.geometry = geometry;
+    if (hasRoadsterMarks && positions.length) this.mesh.updateMorphTargets();
+    else {
+      this.mesh.morphTargetInfluences = undefined;
+      this.mesh.morphTargetDictionary = undefined;
+    }
     this.mesh.visible = positions.length > 0;
     this.rebuilds++;
   }
@@ -792,6 +946,8 @@ export class VehicleDamageVisuals {
     this.owned.clear();
     this.mesh.geometry.dispose();
     this.mesh.geometry = new THREE.BufferGeometry();
+    this.mesh.morphTargetInfluences = undefined;
+    this.mesh.morphTargetDictionary = undefined;
     this.mesh.visible = false;
     this.dentedVertices = 0;
   }

@@ -130,7 +130,7 @@ for (const nightFirst of [true, false])
       material.onBeforeCompile(shader, {});
       assert.match(
         material.customProgramCacheKey(),
-        /atlas-night-street-v1-facade-park-v1/,
+        /atlas-night-street-v2-facade-park-v1/,
       );
       assert.match(
         shader.fragmentShader,

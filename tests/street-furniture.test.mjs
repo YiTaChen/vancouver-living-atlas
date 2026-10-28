@@ -486,7 +486,7 @@ test('live night-receiver wrapping preserves the furniture fade and creates one 
     assert(
       material.customProgramCacheKey().includes('street-furniture-fade-v1'),
     );
-    assert(material.customProgramCacheKey().includes('atlas-night-street-v1'));
+    assert(material.customProgramCacheKey().includes('atlas-night-street-v2'));
   }
   furniture.dispose();
   lighting.dispose();
