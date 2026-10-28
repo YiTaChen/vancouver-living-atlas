@@ -32,11 +32,12 @@ function matches(input: RoadInput, a: Point, b: Point) {
   );
 }
 
-/** Reuse the existing conservative tree-row evidence across two source
- * fragments of the same short pilot block. Only the display carriageway width
- * changes: the source lines, 22m corridor and tree locations stay intact. If
- * either source is trimmed, duplicated, reclassified or lacks two supported
- * tree rows, retain the existing per-source widths. */
+/** Reuse existing conservative tree-row evidence across two contiguous source
+ * fragments, but narrow only the Robson/Burrard intersection fragment. The
+ * other fragment is evidence only: a recorded building overlaps its roadway.
+ * Source lines, the 22m corridor and tree coordinates stay intact. If either
+ * source is trimmed, duplicated, reclassified or lacks two supported tree
+ * rows, retain the existing per-source widths. */
 export function applyRobsonPilotTreeBlock(
   inputs: RoadInput[],
   trees: readonly TreeCandidate[],
@@ -46,6 +47,7 @@ export function applyRobsonPilotTreeBlock(
   if (first.length !== 1 || second.length !== 1) return;
   const width = constrainCarriageway(POINTS, trees, 18).asphaltWidth;
   if (width === undefined) return;
-  first[0].width = width;
+  // The first segment has a source building overlapping the roadway. Use its
+  // trees as evidence, but do not shift that segment's visual carriageway.
   second[0].width = width;
 }
