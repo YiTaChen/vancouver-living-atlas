@@ -187,6 +187,7 @@ export class CityPedestrians {
       capacity: e.compatibleGraphics ? 12 : 32,
     });
     this.renderer.group.name = 'Nearby sidewalk pedestrians';
+    this.e.preparePilotNightReceivers?.(this.renderer.group);
     this.e.scene.add(this.renderer.group);
     this.graph = e.data.roadGraph;
     if (!this.graph) return;

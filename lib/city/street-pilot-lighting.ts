@@ -71,6 +71,18 @@ export function streetPilotLightingWeight(
   return spatial * (1 - t * t * (3 - 2 * t));
 }
 
+/** The street-bounce pilot additionally excludes vehicles whose view can be
+ * within the district while the user is on water or in a rocket. The existing
+ * camera weight already excludes flight, interiors, transit, and high altitude. */
+export function streetPilotNightViewWeight(
+  weight: number,
+  mode: string,
+): number {
+  return mode === 'boat' || mode === 'rocket' || mode === 'flight'
+    ? 0
+    : unit(weight);
+}
+
 /** Multiply the *fresh base* atmosphere sample, never the previously adjusted
  * light values. Using sampleAtmosphere's continuous night factor keeps sunrise
  * and sunset gradual; full night retains all baseline visibility fill. The

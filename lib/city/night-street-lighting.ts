@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { STREET_SHOWCASE_GLSL } from './street-quality-profile';
 
 export const NIGHT_STREET_FIELD_SIZE = 512;
 export const NIGHT_STREET_FIELD_MAX_BYTES = 1_048_576;
@@ -101,6 +102,7 @@ export class NightStreetLighting {
     uAtlasNightHeights: THREE.IUniform<THREE.Vector2>;
     uAtlasNightAmount: THREE.IUniform<number>;
     uAtlasNightActivity: THREE.IUniform<number>;
+    uAtlasPilotNightView: THREE.IUniform<number>;
   };
   private readonly size: number;
   private readonly bounds: NightStreetBounds;
@@ -332,6 +334,8 @@ export class NightStreetLighting {
       uAtlasNightHeights: { value: new THREE.Vector2(minGround, heightRange) },
       uAtlasNightAmount: { value: 0 },
       uAtlasNightActivity: { value: nightStreetActivity(23) },
+      // Fail closed until the owning engine has checked its camera and mode.
+      uAtlasPilotNightView: { value: 0 },
     };
     this.fieldStats = {
       size: this.size,
@@ -366,6 +370,15 @@ export class NightStreetLighting {
       : 0;
     this.uniforms.uAtlasNightActivity.value = nightStreetActivity(hour);
     this.park?.update(hour, nightAmount);
+  }
+
+  /** Separate from the base field: view changes never disable existing city
+   * or park illumination. Each owner has its own uniform and disposal state. */
+  setPilotNightViewWeight(weight: number) {
+    if (this.disposed) return;
+    this.uniforms.uAtlasPilotNightView.value = Number.isFinite(weight)
+      ? clamp(weight)
+      : 0;
   }
 
   /** Switch off one baked warm pool without rebuilding geometry/materials or
@@ -493,6 +506,8 @@ export class NightStreetLighting {
       facade?: boolean;
       parkOnly?: boolean;
       pilotWeight?: THREE.IUniform<number>;
+      /** Newly opted-in receivers must not gain the base field citywide. */
+      pilotOnly?: boolean;
     } = {},
   ) {
     if (this.disposed)
@@ -506,12 +521,15 @@ export class NightStreetLighting {
     const facade = options.facade === true;
     const parkOnly = options.parkOnly === true;
     const pilotWeight = options.pilotWeight;
+    const pilotOnly = options.pilotOnly === true;
+    if (pilotOnly && (facade || parkOnly || pilotWeight))
+      throw new Error('Pilot-only receivers cannot combine other receiver policies');
     const compile: Material['onBeforeCompile'] = (shader, renderer) => {
       originalCompile.call(material, shader, renderer);
-      this.installShader(shader, facade, parkOnly, pilotWeight);
+      this.installShader(shader, facade, parkOnly, pilotWeight, pilotOnly);
     };
     const key = () =>
-      `${originalKey.call(material)}|atlas-night-street-v1-${facade ? 'facade' : 'surface'}${this.park ? '-park-v1' : ''}${parkOnly ? '-park-only' : ''}${pilotWeight ? '-pilot-receiver' : ''}`;
+      `${originalKey.call(material)}|atlas-night-street-v2-${facade ? 'facade' : 'surface'}${this.park ? '-park-v1' : ''}${parkOnly ? '-park-only' : ''}${pilotWeight ? '-pilot-receiver' : ''}${pilotOnly ? '-pilot-only' : ''}`;
     const disposeListener = () => this.releaseMaterial(material);
     material.onBeforeCompile = compile;
     material.customProgramCacheKey = key;
@@ -533,6 +551,7 @@ export class NightStreetLighting {
     facade: boolean,
     parkOnly: boolean,
     pilotWeight?: THREE.IUniform<number>,
+    pilotOnly = false,
   ) {
     Object.assign(shader.uniforms, this.uniforms);
     if (pilotWeight) shader.uniforms.uAtlasPilotReceiverWeight = pilotWeight;
@@ -560,16 +579,18 @@ export class NightStreetLighting {
     shader.fragmentShader =
       `
       varying vec3 vAtlasNightStreetWorld;
+      ${STREET_SHOWCASE_GLSL.replaceAll('atlasStreet', 'atlasPilotNightStreet')}
       uniform sampler2D uAtlasNightField;
       uniform vec4 uAtlasNightBounds;
       uniform vec2 uAtlasNightHeights;
       uniform float uAtlasNightAmount, uAtlasNightActivity;
+      uniform float uAtlasPilotNightView;
       ${pilotWeight ? 'uniform float uAtlasPilotReceiverWeight;' : ''}
       vec4 atlasNightFieldSample(vec2 worldXZ) {
         // Coherent day/outside branches avoid a field lookup without creating
         // another shader variant when the clock or camera location changes.
         ${parkOnly ? 'return vec4(0.0); // Preserve existing downtown terrain reception.' : ''}
-        if (uAtlasNightAmount <= 0.001${pilotWeight ? ' || uAtlasPilotReceiverWeight <= 0.0' : ''}) return vec4(0.0);
+        if (uAtlasNightAmount <= 0.001${pilotWeight ? ' || uAtlasPilotReceiverWeight <= 0.0' : ''}${pilotOnly ? ' || uAtlasPilotNightView <= 0.0' : ''}) return vec4(0.0);
         vec2 atlasUv = (worldXZ - uAtlasNightBounds.xy) * uAtlasNightBounds.zw;
         if (any(lessThan(atlasUv, vec2(0.0))) || any(greaterThan(atlasUv, vec2(1.0)))) return vec4(0.0);
         return texture2D(uAtlasNightField, atlasUv);
@@ -581,7 +602,7 @@ export class NightStreetLighting {
       uniform vec4 uAtlasParkNightBounds;
       uniform vec2 uAtlasParkNightHeights;
       vec4 atlasParkNightFieldSample(vec2 worldXZ) {
-        if (uAtlasNightAmount <= 0.001${pilotWeight ? ' || uAtlasPilotReceiverWeight <= 0.0' : ''}) return vec4(0.0);
+        if (uAtlasNightAmount <= 0.001${pilotWeight ? ' || uAtlasPilotReceiverWeight <= 0.0' : ''}${pilotOnly ? ' || uAtlasPilotNightView <= 0.0' : ''}) return vec4(0.0);
         vec2 atlasParkUv = (worldXZ - uAtlasParkNightBounds.xy) * uAtlasParkNightBounds.zw;
         if (any(lessThan(atlasParkUv, vec2(0.0))) || any(greaterThan(atlasParkUv, vec2(1.0)))) return vec4(0.0);
         return texture2D(uAtlasParkNightField, atlasParkUv);
@@ -615,7 +636,10 @@ export class NightStreetLighting {
       vec3 atlasBounce = vec3(0.88, 0.85, 0.75) * atlasField.r * 0.16
         + vec3(1.0, 0.82, 0.60) * atlasField.g * 0.45
         + vec3(1.0, 0.76, 0.44) * atlasField.r * atlasFrontage * uAtlasNightActivity * 0.10;
-      float atlasReceiver = ${hasFacade ? '(1.0 - facadePane)' : '1.0'}${pilotWeight ? ' * uAtlasPilotReceiverWeight' : ''};
+      if (uAtlasNightAmount > 0.001 && atlasField.r > 0.001 && uAtlasPilotNightView > 0.0) {
+        atlasBounce *= 1.0 + 1.4 * uAtlasPilotNightView * atlasPilotNightStreetShowcaseWeight(vAtlasNightStreetWorld.xz);
+      }
+      float atlasReceiver = ${hasFacade ? '(1.0 - facadePane)' : '1.0'}${pilotWeight ? ' * uAtlasPilotReceiverWeight' : ''}${pilotOnly ? ' * uAtlasPilotNightView * atlasPilotNightStreetShowcaseWeight(vAtlasNightStreetWorld.xz)' : ''};
       reflectedLight.indirectDiffuse += diffuseColor.rgb * atlasBounce * atlasFacing
         * atlasHeightFade * uAtlasNightAmount * atlasReceiver;
       ${
@@ -683,6 +707,7 @@ export class NightStreetLighting {
     if (this.disposed) return;
     this.disposed = true;
     this.uniforms.uAtlasNightAmount.value = 0;
+    this.uniforms.uAtlasPilotNightView.value = 0;
     for (const material of this.wrappers.keys()) this.releaseMaterial(material);
     this.texture.dispose();
     this.park?.dispose();

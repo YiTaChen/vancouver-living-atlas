@@ -7,6 +7,7 @@ const {
   STREET_PILOT_LIGHTING_TARGETS,
   streetPilotLightingWeight,
   streetPilotLightingMultipliers,
+  streetPilotNightViewWeight,
 } = await import(cityModule('street-pilot-lighting'));
 const { STREET_SHOWCASE_SEGMENTS, STREET_SHOWCASE_BOUNDS } = await import(
   cityModule('street-quality-profile')
@@ -42,6 +43,21 @@ test('pilot lighting responds to camera movement at fixed time and fades by loca
     assert.equal(streetPilotLightingWeight(x, value, z), 0);
     assert.equal(streetPilotLightingWeight(x, 2, value), 0);
   }
+});
+
+test('night bounce follows the checked camera weight and excludes boat and rocket views', () => {
+  for (const mode of ['boat', 'rocket', 'flight']) {
+    for (const weight of [0, 0.5, 1])
+      assert.equal(streetPilotNightViewWeight(weight, mode), 0);
+  }
+  for (const mode of ['orbit', 'walk', 'drive', 'tesla']) {
+    assert.equal(streetPilotNightViewWeight(0, mode), 0);
+    assert.equal(streetPilotNightViewWeight(0.5, mode), 0.5);
+    assert.equal(streetPilotNightViewWeight(1, mode), 1);
+  }
+  for (const weight of [NaN, Infinity, -Infinity, -1])
+    assert.equal(streetPilotNightViewWeight(weight, 'walk'), 0);
+  assert.equal(streetPilotNightViewWeight(2, 'walk'), 1);
 });
 
 test('daylight redistributes existing fill and PMREM intensity without changing the atmosphere sample', () => {

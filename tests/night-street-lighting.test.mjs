@@ -31,6 +31,48 @@ const shaderFor = (material) => {
   return shader;
 };
 
+test('pilot night view starts disabled, tracks each owner independently and restores materials on disposal', () => {
+  const first = new NightStreetLighting(base);
+  const second = new NightStreetLighting(base);
+  const material = new THREE.MeshStandardMaterial();
+  // Capture method identities to check wrapper ownership on teardown.
+  // oxlint-disable-next-line typescript/unbound-method
+  const originalCompile = material.onBeforeCompile;
+  // oxlint-disable-next-line typescript/unbound-method
+  const originalKey = material.customProgramCacheKey;
+  try {
+    assert.equal(first.uniforms.uAtlasPilotNightView.value, 0);
+    assert.equal(second.uniforms.uAtlasPilotNightView.value, 0);
+    first.wrapMaterial(material);
+    const shader = shaderFor(material);
+    assert.strictEqual(shader.uniforms.uAtlasPilotNightView, first.uniforms.uAtlasPilotNightView);
+    assert.match(material.customProgramCacheKey(), /atlas-night-street-v2/);
+    assert.match(shader.fragmentShader, /uAtlasPilotNightView \* atlasPilotNightStreetShowcaseWeight/);
+    first.update(23, 1);
+    first.setPilotNightViewWeight(0.6);
+    assert.equal(shader.uniforms.uAtlasPilotNightView.value, 0.6);
+    assert.equal(second.uniforms.uAtlasPilotNightView.value, 0);
+    assert.equal(first.uniforms.uAtlasNightAmount.value, 1);
+    first.setPilotNightViewWeight(0);
+    assert.equal(first.uniforms.uAtlasNightAmount.value, 1, 'base street illumination remains enabled');
+    first.setPilotNightViewWeight(NaN);
+    assert.equal(shader.uniforms.uAtlasPilotNightView.value, 0);
+    first.setPilotNightViewWeight(2);
+    assert.equal(shader.uniforms.uAtlasPilotNightView.value, 1);
+    first.dispose();
+    first.setPilotNightViewWeight(1);
+    assert.equal(shader.uniforms.uAtlasPilotNightView.value, 0);
+    // oxlint-disable-next-line typescript/unbound-method
+    assert.strictEqual(material.onBeforeCompile, originalCompile);
+    // oxlint-disable-next-line typescript/unbound-method
+    assert.strictEqual(material.customProgramCacheKey, originalKey);
+  } finally {
+    first.dispose();
+    second.dispose();
+    material.dispose();
+  }
+});
+
 void test('pilot-only roadster receiver composes with the existing paint and restores it on disposal', () => {
   const lighting = new NightStreetLighting(base);
   const car = makeRoadster();
@@ -641,7 +683,7 @@ test('actual deferred landmarks prepare final night shaders before warmup and re
       assert(
         group.children[0].material
           .customProgramCacheKey()
-          .includes('atlas-night-street-v1'),
+          .includes('atlas-night-street-v2'),
       );
       assert.equal(
         shaderFor(group.children[0].material).uniforms.uAtlasNightAmount.value,
