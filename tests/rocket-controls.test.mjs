@@ -23,7 +23,9 @@ const compile = (module) =>
 
 // Preserve state across renders and execute the production component callbacks.
 // Scheduling and SVG icons are substituted; flight simulation stays outside UI tests.
-function setup(patch = {}, extra = {}) {
+function setup(patch = {}, extra = {}, browser = {}) {
+  browser.requestAnimationFrame ??= () => 0;
+  browser.cancelAnimationFrame ??= () => {};
   let active;
   const same = (a, b) =>
     a &&
@@ -42,6 +44,12 @@ function setup(patch = {}, extra = {}) {
             typeof next === 'function' ? next(host.slots[i].value) : next;
         },
       ];
+    },
+    useRef(value) {
+      const host = active,
+        i = host.cursor++;
+      host.slots[i] ??= { value: { current: value } };
+      return host.slots[i].value;
     },
     useCallback(callback, deps) {
       const host = active,
@@ -72,11 +80,13 @@ function setup(patch = {}, extra = {}) {
       return { jsx, jsxs: jsx, Fragment: Symbol.for('fragment') };
     if (id === 'lucide-react') return new Proxy({}, { get: () => () => null });
     if (id === './travel-joystick') return { TravelJoystick: () => null };
+    if (id === './hud-dock') return { HudDockItem: ({ children }) => children };
     if (id.endsWith('.css')) return {};
     throw new Error(`Unexpected UI import ${id}`);
   };
   vm.runInNewContext(
     `(function(require,module,exports){${compile(ts.ModuleKind.CommonJS)}\n})`,
+    browser,
   )(require, cjs, cjs.exports);
   const calls = [];
   const controller = Object.fromEntries(
@@ -971,8 +981,8 @@ function componentModule(name) {
     .outputText.replace(/import ['"][^'"]+\.css['"];?/g, '')
     .replace(/from ['"]([^'"]+)['"]/g, (_, id) => {
       const url =
-        id === './travel-joystick'
-          ? componentModule('travel-joystick')
+        id === './travel-joystick' || id === './hud-dock'
+          ? componentModule(id.slice(2))
           : id === '@/lib/city/touch-input'
             ? cityModule('touch-input')
             : import.meta.resolve(id);
@@ -1064,6 +1074,11 @@ test('minimizing rocket controls preserves input, launch and abort while snapsho
   host.render();
   assert.equal(panelButton(host, 'main').props['aria-expanded'], false);
   assert.equal(panelContent(host, 'main').props.hidden, true);
+  assert.equal(
+    all(host.tree, (node) => node.props.id === 'rocket-main')[0].props
+      .essential,
+    true,
+  );
   assert.equal(
     calls.length,
     initialCalls,
@@ -1171,6 +1186,20 @@ test('telemetry, stage and throttle minimize independently while manual flight c
     panelButton(host, section).props.onClick();
     host.render();
     assert.equal(panelContent(host, section).props.hidden, true);
+    const dock = all(
+      host.tree,
+      (node) => node.props.id === `rocket-${section}`,
+    )[0];
+    assert(dock, `${section} is assigned to the shared dock`);
+    assert.equal(dock.props.essential, section === 'throttle');
+    assert(
+      all(
+        dock,
+        (node) =>
+          node.type === 'section' &&
+          node.props.className.includes('rocket-docked'),
+      ).length,
+    );
   }
   host.render({
     ...props,
@@ -1255,4 +1284,52 @@ test('manual attitude disclosure keeps guidance input enabled and restores the l
     assert.equal(calls.length, initialCalls);
     host.unmount();
   }
+});
+
+test('keyboard focus follows the rocket disclosure into and out of the dock', () => {
+  const focused = [];
+  const browser = {
+    document: {
+      querySelector(selector) {
+        return {
+          focus: (options) => focused.push([selector, options.preventScroll]),
+        };
+      },
+    },
+    requestAnimationFrame(callback) {
+      callback();
+      return 1;
+    },
+    cancelAnimationFrame() {},
+  };
+  const { host } = setup({ phase: 'ready' }, {}, browser);
+  panelButton(host, 'main').props.onClick();
+  host.render();
+  panelButton(host, 'main').props.onClick();
+  host.render();
+  assert.deepEqual(focused, [
+    ['[aria-controls="rocket-main-content"]', true],
+    ['[aria-controls="rocket-main-content"]', true],
+  ]);
+  host.unmount();
+});
+
+test('mobile HUD visibility uses the actual hud-hidden class for essential rocket controls', () => {
+  const css = readFileSync(
+    new URL('../components/rocket-controls.css', import.meta.url),
+    'utf8',
+  );
+  assert.doesNotMatch(css, /mobile-hud-hidden/);
+  assert.match(
+    css,
+    /\.atlas\.touch-ui\.hud-hidden[\s\S]*?\.rocket-space-panel\.ui-chrome/,
+  );
+  assert.match(
+    css,
+    /\.atlas\.touch-ui\.hud-hidden[\s\S]*?\.rocket-failure-panel\.ui-chrome/,
+  );
+  assert.match(
+    css,
+    /\.atlas\.touch-ui\.hud-hidden[\s\S]*?\.hud-dock-item[\s\S]*?\.rocket-docked\.ui-chrome/,
+  );
 });

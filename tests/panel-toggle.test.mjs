@@ -29,6 +29,7 @@ const require = (id) => {
       {},
       { get: () => () => React.createElement('svg', { 'aria-hidden': true }) },
     );
+  if (id === './hud-dock') return { HudDockItem: ({ children }) => children };
   if (id === '@/lib/i18n/panels.json') return { default: messages };
   if (id.endsWith('.css')) return {};
   throw new Error(`Unexpected panel import ${id}`);
@@ -119,4 +120,41 @@ test('Space and Enter disclosure cannot leak into vehicle commands', () => {
     });
     assert.equal(stopped, key !== 'w');
   }
+});
+
+test('collapsed controls move to the dock with an icon and preserve keyboard focus', () => {
+  let toggles = 0,
+    focused = 0;
+  const icon = React.createElement('svg', { 'data-icon': 'map' });
+  const docked = PanelToggle({
+    locale: 'en',
+    title: 'Map',
+    expanded: false,
+    dockId: 'map',
+    icon,
+    onToggle: () => toggles++,
+  });
+  assert.equal(docked.props.id, 'map');
+  const button = docked.props.children;
+  assert.equal(button.props.id, 'panel-toggle-map');
+  assert.equal(button.props['aria-expanded'], false);
+  assert.match(renderToStaticMarkup(docked), /data-icon="map"/);
+  const doc = {
+    defaultView: { requestAnimationFrame: (fn) => fn() },
+    getElementById: (id) => ({
+      focus: () => {
+        assert.equal(id, 'panel-toggle-map');
+        focused++;
+      },
+    }),
+  };
+  const current = { ownerDocument: doc };
+  doc.activeElement = current;
+  button.props.onClick({ currentTarget: current, stopPropagation() {} });
+  assert.equal(toggles, 1);
+  assert.equal(focused, 1);
+  doc.activeElement = null;
+  button.props.onClick({ currentTarget: current, stopPropagation() {} });
+  assert.equal(toggles, 2);
+  assert.equal(focused, 1, 'scene focus is not stolen for a mouse click');
 });

@@ -44,6 +44,8 @@ export function TransitWorldStatus({
         aria-live="polite"
       >
         <PanelToggle
+          dockId="transit"
+          icon={trainActive ? <TrainFront size={18} /> : <BusFront size={18} />}
           locale={locale}
           title={trainActive ? t.title : panelText(locale, 'status')}
           expanded={expanded}

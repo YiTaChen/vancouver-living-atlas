@@ -180,6 +180,8 @@ export function FlightControls({
             aria-label={t('fly')}
           >
             <PanelToggle
+              dockId="flight-placement"
+              icon={<Plane size={18} />}
               locale={locale}
               title={t('fly')}
               expanded={placementExpanded}
@@ -313,6 +315,9 @@ export function FlightControls({
                 aria-label={t('help')}
               >
                 <PanelToggle
+                  dockId="flight-helm"
+                  icon={<Navigation size={18} />}
+                  essential
                   locale={locale}
                   title={t('help')}
                   expanded={helmExpanded}
