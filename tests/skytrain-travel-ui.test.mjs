@@ -105,6 +105,7 @@ function setup() {
         );
       if (id === './travel-joystick') return load('travel-joystick');
       if (id === './panel-toggle') return load('panel-toggle');
+      if (id === './hud-dock') return { HudDockItem: ({ children }) => children };
       if (id.endsWith('.css')) return {};
       if (id === 'lucide-react')
         return new Proxy({}, { get: () => () => null });
