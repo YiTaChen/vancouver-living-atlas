@@ -34,7 +34,7 @@ function componentModule(name) {
           ? componentModule(id.slice(2))
           : id === './hud-dock'
             ? dataModule(
-                'export function HudDockItem({ children }) { return children; }',
+                'export function HudDockItem({ children }) { return children; } export function restoreHudFocus() {}',
               )
             : id === '@/lib/city/touch-input'
               ? cityModule('touch-input')

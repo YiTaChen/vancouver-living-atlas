@@ -1,7 +1,7 @@
 'use client';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { HudDockItem } from './hud-dock';
+import { HudDockItem, restoreHudFocus } from './hud-dock';
 import type { Locale } from '@/lib/i18n';
 import messages from '@/lib/i18n/panels.json';
 import './panel-toggle.css';
@@ -47,19 +47,12 @@ export function PanelToggle({
       }}
       onClick={(event) => {
         event.stopPropagation();
-        // Reparenting a focused disclosure into or out of the dock replaces its
-        // DOM node. Preserve keyboard focus without stealing the scene's focus.
         const current = event.currentTarget;
-        const doc = current?.ownerDocument;
-        const restoreFocus = Boolean(
-          doc && current && doc.activeElement === current,
-        );
-        onToggle();
-        if (restoreFocus && dockId) {
-          doc.defaultView?.requestAnimationFrame(() =>
-            doc.getElementById(`panel-toggle-${dockId}`)?.focus(),
+        if (current && dockId && event.detail === 0)
+          restoreHudFocus(current, () =>
+            current.ownerDocument.getElementById(`panel-toggle-${dockId}`),
           );
-        }
+        onToggle();
       }}
     >
       {expanded ? (

@@ -78,7 +78,10 @@ function setup() {
       if (id === '@/lib/i18n/flight.json') return flightMessages;
       if (id === '@/lib/i18n/panels.json') return panelMessages;
       if (id === './hud-dock')
-        return { HudDockItem: ({ children }) => children };
+        return {
+          HudDockItem: ({ children }) => children,
+          restoreHudFocus() {},
+        };
       if (id === './panel-toggle') return load('panel-toggle');
       if (id === './ui/slider') return { Slider: () => null };
       if (id === './travel-joystick') return { TravelJoystick: () => null };

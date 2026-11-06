@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type ReactNode,
-} from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import {
   Rocket,
   X,
@@ -33,7 +27,7 @@ import {
   Square,
 } from 'lucide-react';
 import { TravelJoystick } from './travel-joystick';
-import { HudDockItem } from './hud-dock';
+import { HudDockItem, restoreHudFocus } from './hud-dock';
 import type { RocketController } from '@/lib/city/rocket-controller';
 import type { RocketSnapshot } from '@/lib/city/rocket-snapshot';
 import type { RocketKind } from '@/lib/city/rocket-state';
@@ -593,24 +587,10 @@ export function RocketControls({
   const [collapsedPanels, setCollapsedPanels] = useState<
     Partial<Record<RocketPanelSection, boolean>>
   >({});
-  const focusAfterDockMove = useRef<RocketPanelSection | null>(null);
   const [missionDetails, setMissionDetails] = useState({
     missionId: -1,
     open: false,
   });
-  useEffect(() => {
-    const section = focusAfterDockMove.current;
-    if (!section) return;
-    focusAfterDockMove.current = null;
-    const frame = requestAnimationFrame(() => {
-      document
-        .querySelector<HTMLButtonElement>(
-          `[aria-controls="rocket-${section}-content"]`,
-        )
-        ?.focus({ preventScroll: true });
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [collapsedPanels]);
   const t = (key: RocketTextKey) => rocketText(locale, key);
   const docked = (section: RocketPanelSection, panel: ReactNode) =>
     collapsedPanels[section] ? (
@@ -647,8 +627,14 @@ export function RocketControls({
       title={`${t(collapsedPanels[section] ? 'expand' : 'collapse')} · ${t(label)}`}
       aria-expanded={!collapsedPanels[section]}
       aria-controls={`rocket-${section}-content`}
-      onClick={() => {
-        focusAfterDockMove.current = section;
+      onClick={(event) => {
+        const current = event?.currentTarget;
+        if (current && event.detail === 0)
+          restoreHudFocus(current, () =>
+            current.ownerDocument.querySelector<HTMLButtonElement>(
+              `[aria-controls="rocket-${section}-content"]`,
+            ),
+          );
         setCollapsedPanels((previous) => ({
           ...previous,
           [section]: !previous[section],
