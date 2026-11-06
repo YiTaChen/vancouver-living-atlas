@@ -298,6 +298,8 @@ export function LightLabPanel({
           lang={locale.startsWith('zh') ? locale : 'en'}
         >
           <PanelToggle
+            dockId="light-lab"
+            icon={<FlaskConical size={18} />}
             locale={locale}
             title={text.title}
             expanded={hudExpanded}

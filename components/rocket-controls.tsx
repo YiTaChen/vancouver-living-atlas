@@ -1,6 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import {
   Rocket,
   X,
@@ -18,9 +24,16 @@ import {
   VolumeX,
   ChevronDown,
   Minus,
-  Plus,
+  Activity,
+  Layers3,
+  Crosshair,
+  Gauge,
+  Orbit,
+  MapPin,
+  Square,
 } from 'lucide-react';
 import { TravelJoystick } from './travel-joystick';
+import { HudDockItem } from './hud-dock';
 import type { RocketController } from '@/lib/city/rocket-controller';
 import type { RocketSnapshot } from '@/lib/city/rocket-snapshot';
 import type { RocketKind } from '@/lib/city/rocket-state';
@@ -580,11 +593,52 @@ export function RocketControls({
   const [collapsedPanels, setCollapsedPanels] = useState<
     Partial<Record<RocketPanelSection, boolean>>
   >({});
+  const focusAfterDockMove = useRef<RocketPanelSection | null>(null);
   const [missionDetails, setMissionDetails] = useState({
     missionId: -1,
     open: false,
   });
+  useEffect(() => {
+    const section = focusAfterDockMove.current;
+    if (!section) return;
+    focusAfterDockMove.current = null;
+    const frame = requestAnimationFrame(() => {
+      document
+        .querySelector<HTMLButtonElement>(
+          `[aria-controls="rocket-${section}-content"]`,
+        )
+        ?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [collapsedPanels]);
   const t = (key: RocketTextKey) => rocketText(locale, key);
+  const docked = (section: RocketPanelSection, panel: ReactNode) =>
+    collapsedPanels[section] ? (
+      <HudDockItem
+        id={`rocket-${section}`}
+        essential={[
+          'chooser',
+          'placement',
+          'main',
+          'throttle',
+          'space',
+        ].includes(section)}
+      >
+        {panel}
+      </HudDockItem>
+    ) : (
+      panel
+    );
+  const panelIcons = {
+    chooser: Rocket,
+    placement: MapPin,
+    main: Rocket,
+    stage: Layers3,
+    telemetry: Activity,
+    attitude: Crosshair,
+    throttle: Gauge,
+    space: Orbit,
+  } satisfies Record<RocketPanelSection, typeof Rocket>;
   const panelToggle = (section: RocketPanelSection, label: RocketTextKey) => (
     <button
       type="button"
@@ -593,14 +647,22 @@ export function RocketControls({
       title={`${t(collapsedPanels[section] ? 'expand' : 'collapse')} · ${t(label)}`}
       aria-expanded={!collapsedPanels[section]}
       aria-controls={`rocket-${section}-content`}
-      onClick={() =>
+      onClick={() => {
+        focusAfterDockMove.current = section;
         setCollapsedPanels((previous) => ({
           ...previous,
           [section]: !previous[section],
-        }))
-      }
+        }));
+      }}
     >
-      {collapsedPanels[section] ? <Plus size={16} /> : <Minus size={16} />}
+      {collapsedPanels[section] ? (
+        (() => {
+          const Icon = panelIcons[section];
+          return <Icon size={19} aria-hidden="true" />;
+        })()
+      ) : (
+        <Minus size={16} aria-hidden="true" />
+      )}
     </button>
   );
   const manualFlight = state.active && state.phase === 'flight' && !state.auto;
@@ -768,338 +830,220 @@ export function RocketControls({
   };
   return (
     <>
-      {choosing && (
-        <section
-          className={`rocket-placement rocket-chooser glass ui-chrome ${collapsedPanels.chooser ? 'rocket-is-collapsed' : ''}`}
-          aria-label={t('choose')}
-        >
-          <header>
-            <Rocket size={18} />
-            <strong>{t('choose')}</strong>
-            {panelToggle('chooser', 'choose')}
-            <button
-              type="button"
-              className="rocket-chooser-cancel"
-              onClick={onCloseChoosing}
-              aria-label={t('cancel')}
-            >
-              <X size={18} />
-              {t('cancel')}
-            </button>
-          </header>
-          <div
-            id="rocket-chooser-content"
-            className="rocket-chooser-body"
-            hidden={collapsedPanels.chooser}
+      {choosing &&
+        docked(
+          'chooser',
+          <section
+            className={`rocket-placement rocket-chooser glass ui-chrome ${collapsedPanels.chooser ? 'rocket-is-collapsed rocket-docked' : ''}`}
+            aria-label={t('choose')}
           >
-            <p>{t('chooseHint')}</p>
-            <div className="rocket-kind-picker">
-              {rocketChoices.map(({ kind, hint, metrics, timing }) => (
-                <button
-                  key={kind}
-                  type="button"
-                  onClick={() => choose(kind)}
-                  data-rocket-kind={kind}
-                >
-                  <RocketSilhouette kind={kind} />
-                  <strong>{t(kind)}</strong>
-                  <span>{t(hint)}</span>
-                  <span className="rocket-kind-metrics">{t(metrics)}</span>
-                  <small>{t(timing)}</small>
-                </button>
-              ))}
-            </div>
-            <small>{t('gameplay')}</small>
-          </div>
-        </section>
-      )}
-      {state.placing && !choosing && (
-        <section
-          className={`rocket-placement glass ui-chrome ${collapsedPanels.placement ? 'rocket-is-collapsed' : ''}`}
-          aria-label={t('placement')}
-        >
-          <header>
-            <Rocket size={18} />
-            <strong>{t('placement')}</strong>
-            {panelToggle('placement', 'placement')}
-            <button type="button" onClick={() => controller.cancelPlacement()}>
-              <X size={16} />
-              {t('cancel')}
-            </button>
-          </header>
-          <div id="rocket-placement-content" hidden={collapsedPanels.placement}>
-            <p>{t('placementHint')}</p>
-            {state.support && (
-              <div className={`rocket-risk ${solid ? 'safe' : ''}`}>
-                <AlertTriangle size={15} />
-                <span>{t(risk)}</span>
-              </div>
-            )}
-          </div>
-        </section>
-      )}
-      {showPanel && (
-        <section
-          className={`rocket-panel glass ui-chrome ${recoveryReady ? 'rocket-failure-panel' : ''} ${touch && optionsOpen ? 'mobile-travel-sheet' : ''} ${compactPreflight ? 'rocket-preflight-compact' : ''} ${collapsedPanels.main ? 'rocket-is-collapsed' : ''}`}
-          aria-label={t('rocket')}
-        >
-          <header>
-            <Rocket size={18} />
-            <strong>{t(state.kind)}</strong>
-            {compactPreflight && !collapsedPanels.main && (
-              <>
-                <button
-                  type="button"
-                  className="rocket-compact-action"
-                  aria-pressed={state.auto}
-                  aria-label={t('guidance')}
-                  onClick={() => controller.setAuto(!state.auto)}
-                >
-                  {t(state.auto ? 'autoShort' : 'manualShort')}
-                </button>
-                <button
-                  type="button"
-                  className="rocket-compact-action"
-                  aria-label={t('view')}
-                  onClick={() =>
-                    controller.setView(
-                      state.view === 'first' ? 'chase' : 'first',
-                    )
-                  }
-                >
-                  <Camera size={14} />
-                </button>
-              </>
-            )}
-            {panelToggle('main', 'rocket')}
-            {optionsOpen && (
+            <header>
+              <Rocket size={18} />
+              <strong>{t('choose')}</strong>
+              {panelToggle('chooser', 'choose')}
               <button
                 type="button"
-                aria-label={t('close')}
-                onClick={onCloseOptions}
+                className="rocket-chooser-cancel"
+                title={t('cancel')}
+                onClick={onCloseChoosing}
+                aria-label={t('cancel')}
               >
                 <X size={18} />
+                {t('cancel')}
               </button>
-            )}
-          </header>
-          <div
-            id="rocket-main-content"
-            className="rocket-panel-content"
-            hidden={collapsedPanels.main}
+            </header>
+            <div
+              id="rocket-chooser-content"
+              className="rocket-chooser-body"
+              hidden={collapsedPanels.chooser}
+            >
+              <p>{t('chooseHint')}</p>
+              <div className="rocket-kind-picker">
+                {rocketChoices.map(({ kind, hint, metrics, timing }) => (
+                  <button
+                    key={kind}
+                    type="button"
+                    onClick={() => choose(kind)}
+                    data-rocket-kind={kind}
+                  >
+                    <RocketSilhouette kind={kind} />
+                    <strong>{t(kind)}</strong>
+                    <span>{t(hint)}</span>
+                    <span className="rocket-kind-metrics">{t(metrics)}</span>
+                    <small>{t(timing)}</small>
+                  </button>
+                ))}
+              </div>
+              <small>{t('gameplay')}</small>
+            </div>
+          </section>,
+        )}
+      {state.placing &&
+        !choosing &&
+        docked(
+          'placement',
+          <section
+            className={`rocket-placement glass ui-chrome ${collapsedPanels.placement ? 'rocket-is-collapsed rocket-docked' : ''}`}
+            aria-label={t('placement')}
           >
-            <p className="rocket-kicker">{t(state.phase)}</p>
-            {state.phase === 'building' && (
-              <>
-                <p className="rocket-build-description">{t('buildingHint')}</p>
-                <progress
-                  className="rocket-build-progress"
-                  aria-label={t('building')}
-                  max={1}
-                  value={state.buildProgress}
-                />
-                <small>
-                  {Math.round(state.buildProgress * 100)}% ·{' '}
-                  {state.loaded ? t('ready') : t('loading')}
-                </small>
-              </>
-            )}
-            {state.loadError && (
-              <div className="rocket-risk" role="alert">
-                <AlertTriangle size={16} />
-                <span>
-                  {t('loadError')}{' '}
-                  <button type="button" onClick={() => controller.retryLoad()}>
-                    {t('retryLoad')}
-                  </button>
-                </span>
-              </div>
-            )}
-            {preflight && (
-              <>
+            <header>
+              <Rocket size={18} />
+              <strong>{t('placement')}</strong>
+              {panelToggle('placement', 'placement')}
+              <button
+                type="button"
+                aria-label={t('cancel')}
+                title={t('cancel')}
+                onClick={() => controller.cancelPlacement()}
+              >
+                <X size={16} />
+                {t('cancel')}
+              </button>
+            </header>
+            <div
+              id="rocket-placement-content"
+              hidden={collapsedPanels.placement}
+            >
+              <p>{t('placementHint')}</p>
+              {state.support && (
                 <div className={`rocket-risk ${solid ? 'safe' : ''}`}>
-                  {solid ? (
-                    <ShieldCheck size={16} />
-                  ) : (
-                    <AlertTriangle size={16} />
-                  )}
-                  <span className="rocket-risk-full">
-                    <strong>{t(supportKey(previewSupport))}</strong>
-                    <br />
-                    {t(risk)}
-                  </span>
-                  <span className="rocket-risk-compact">{t(shortRisk)}</span>
+                  <AlertTriangle size={15} />
+                  <span>{t(risk)}</span>
                 </div>
-                <p className="rocket-consequence">{t('consequence')}</p>
-                {previewSupport === 'ground' &&
-                  (state.groundSlopeGrade ?? 0) > 0.005 && (
-                    <p className="rocket-surface-condition">
-                      {state.steepSurface
-                        ? t('surfaceSteep')
-                        : `${t('surfaceLeveled')} · ${((state.groundSlopeGrade ?? 0) * 100).toFixed(1)}%`}
-                    </p>
-                  )}
-              </>
-            )}
-            {failed && (
-              <div className="rocket-risk">
-                <AlertTriangle size={16} />
-                <span>
-                  {t(
-                    foundationImpact
-                      ? 'foundationImpact'
-                      : fatalContact
-                        ? 'contactImpact'
-                        : wreckage
-                          ? failureCause
-                          : risk,
-                  )}
-                  {fatalContact && (
-                    <small className="rocket-contact-detail">
-                      {contactDescription}
-                    </small>
-                  )}
-                </span>
-              </div>
-            )}
-            {state.phase === 'ready' && (
-              <button
-                type="button"
-                className="rocket-launch"
-                disabled={!state.loaded || state.loadError}
-                onClick={() => controller.launch()}
-              >
-                <Flame size={17} />
-                {t(compactPreflight ? 'launchShort' : 'launch')}
-              </button>
-            )}
-            {!failed && (
-              <>
-                <fieldset
-                  className="rocket-segmented rocket-guidance"
-                  aria-label={t('guidance')}
-                >
+              )}
+            </div>
+          </section>,
+        )}
+      {showPanel &&
+        docked(
+          'main',
+          <section
+            className={`rocket-panel glass ui-chrome ${recoveryReady ? 'rocket-failure-panel' : ''} ${touch && optionsOpen ? 'mobile-travel-sheet' : ''} ${compactPreflight ? 'rocket-preflight-compact' : ''} ${collapsedPanels.main ? 'rocket-is-collapsed rocket-docked' : ''}`}
+            aria-label={t('rocket')}
+          >
+            <header>
+              <Rocket size={18} />
+              <strong>{t(state.kind)}</strong>
+              {compactPreflight && !collapsedPanels.main && (
+                <>
                   <button
                     type="button"
+                    className="rocket-compact-action"
                     aria-pressed={state.auto}
-                    onClick={() => controller.setAuto(true)}
+                    aria-label={t('guidance')}
+                    onClick={() => controller.setAuto(!state.auto)}
                   >
-                    <Navigation size={14} />
-                    {t('auto')}
+                    {t(state.auto ? 'autoShort' : 'manualShort')}
                   </button>
                   <button
                     type="button"
-                    aria-pressed={!state.auto}
-                    onClick={() => controller.setAuto(false)}
+                    className="rocket-compact-action"
+                    aria-label={t('view')}
+                    onClick={() =>
+                      controller.setView(
+                        state.view === 'first' ? 'chase' : 'first',
+                      )
+                    }
                   >
-                    {t('manual')}
+                    <Camera size={14} />
                   </button>
-                </fieldset>
+                </>
+              )}
+              {panelToggle('main', 'rocket')}
+              {optionsOpen && (
                 <button
                   type="button"
-                  className="rocket-system-control"
-                  aria-pressed={state.stabilize}
-                  onClick={() => controller.setStabilize(!state.stabilize)}
+                  aria-label={t('close')}
+                  onClick={onCloseOptions}
                 >
-                  <ShieldCheck size={14} />
-                  {t('stabilization')} · {t(state.stabilize ? 'on' : 'off')}
-                </button>
-                <button
-                  type="button"
-                  className="rocket-system-control"
-                  aria-pressed={!muted}
-                  onClick={toggleSound}
-                >
-                  {muted ? <VolumeX size={14} /> : <Volume2 size={14} />}
-                  {t('sound')} · {t(muted ? 'off' : 'on')}
-                </button>
-                <fieldset
-                  className="rocket-segmented rocket-camera"
-                  aria-label={t('view')}
-                >
-                  {(['first', 'chase'] as const).map((view) => (
-                    <button
-                      key={view}
-                      type="button"
-                      aria-pressed={state.view === view}
-                      onClick={() => controller.setView(view)}
-                    >
-                      <Camera size={14} />
-                      {t(view)}
-                    </button>
-                  ))}
-                </fieldset>
-              </>
-            )}
-            {(state.phase === 'countdown' ||
-              state.phase === 'ignition' ||
-              state.phase === 'flight') && (
-              <button
-                type="button"
-                className="rocket-danger"
-                onClick={() => controller.abort()}
-              >
-                {t('abort')}
-              </button>
-            )}
-            <small className="rocket-return-hint">{t('returnHint')}</small>
-            <div className="rocket-panel-actions">
-              {failed && (
-                <button type="button" onClick={rebuild}>
-                  <RotateCcw size={14} />
-                  {t('retry')}
+                  <X size={18} />
                 </button>
               )}
-              <button type="button" onClick={() => controller.returnToCity()}>
-                <Map size={14} />
-                {t(
-                  compactPreflight
-                    ? state.phase === 'building'
-                      ? 'cancelBuild'
-                      : 'cityShort'
-                    : 'city',
-                )}
-              </button>
-            </div>
-            {(failed || state.phase === 'space') && (
-              <div className="rocket-panel-actions">
-                <button type="button" onClick={() => choose(state.kind)}>
-                  <Rocket size={14} />
-                  {t('newRocket')}
-                </button>
-              </div>
-            )}
-            {(state.damaged > 0 || state.burning > 0 || state.debris > 0) && (
-              <div className="rocket-panel-actions">
-                <button
-                  type="button"
-                  title={t('resetHint')}
-                  onClick={() => controller.resetDamage()}
-                >
-                  <Wrench size={14} />
-                  {t('resetDamage')}
-                </button>
-              </div>
-            )}
-            <button
-              type="button"
-              className="rocket-help-toggle"
-              aria-expanded={help}
-              onClick={() => setHelp(!help)}
+            </header>
+            <div
+              id="rocket-main-content"
+              className="rocket-panel-content"
+              hidden={collapsedPanels.main}
             >
-              <HelpCircle size={14} />
-              {t('help')}
-            </button>
-            {help && (
-              <div className="rocket-help">
-                <p>{touch ? t('touchHint') : t('controls')}</p>
-                <p>{t('manualHint')}</p>
-                <small>{t('gameplay')}</small>
-              </div>
-            )}
-          </div>
-          {collapsedPanels.main && (
-            <div className="rocket-minimized-actions">
-              <span className="rocket-minimized-state">{t(state.phase)}</span>
+              <p className="rocket-kicker">{t(state.phase)}</p>
+              {state.phase === 'building' && (
+                <>
+                  <p className="rocket-build-description">
+                    {t('buildingHint')}
+                  </p>
+                  <progress
+                    className="rocket-build-progress"
+                    aria-label={t('building')}
+                    max={1}
+                    value={state.buildProgress}
+                  />
+                  <small>
+                    {Math.round(state.buildProgress * 100)}% ·{' '}
+                    {state.loaded ? t('ready') : t('loading')}
+                  </small>
+                </>
+              )}
+              {state.loadError && (
+                <div className="rocket-risk" role="alert">
+                  <AlertTriangle size={16} />
+                  <span>
+                    {t('loadError')}{' '}
+                    <button
+                      type="button"
+                      onClick={() => controller.retryLoad()}
+                    >
+                      {t('retryLoad')}
+                    </button>
+                  </span>
+                </div>
+              )}
+              {preflight && (
+                <>
+                  <div className={`rocket-risk ${solid ? 'safe' : ''}`}>
+                    {solid ? (
+                      <ShieldCheck size={16} />
+                    ) : (
+                      <AlertTriangle size={16} />
+                    )}
+                    <span className="rocket-risk-full">
+                      <strong>{t(supportKey(previewSupport))}</strong>
+                      <br />
+                      {t(risk)}
+                    </span>
+                    <span className="rocket-risk-compact">{t(shortRisk)}</span>
+                  </div>
+                  <p className="rocket-consequence">{t('consequence')}</p>
+                  {previewSupport === 'ground' &&
+                    (state.groundSlopeGrade ?? 0) > 0.005 && (
+                      <p className="rocket-surface-condition">
+                        {state.steepSurface
+                          ? t('surfaceSteep')
+                          : `${t('surfaceLeveled')} · ${((state.groundSlopeGrade ?? 0) * 100).toFixed(1)}%`}
+                      </p>
+                    )}
+                </>
+              )}
+              {failed && (
+                <div className="rocket-risk">
+                  <AlertTriangle size={16} />
+                  <span>
+                    {t(
+                      foundationImpact
+                        ? 'foundationImpact'
+                        : fatalContact
+                          ? 'contactImpact'
+                          : wreckage
+                            ? failureCause
+                            : risk,
+                    )}
+                    {fatalContact && (
+                      <small className="rocket-contact-detail">
+                        {contactDescription}
+                      </small>
+                    )}
+                  </span>
+                </div>
+              )}
               {state.phase === 'ready' && (
                 <button
                   type="button"
@@ -1107,11 +1051,71 @@ export function RocketControls({
                   disabled={!state.loaded || state.loadError}
                   onClick={() => controller.launch()}
                 >
-                  <Flame size={15} />
-                  {t('launchShort')}
+                  <Flame size={17} />
+                  {t(compactPreflight ? 'launchShort' : 'launch')}
                 </button>
               )}
-              {['countdown', 'ignition', 'flight'].includes(state.phase) && (
+              {!failed && (
+                <>
+                  <fieldset
+                    className="rocket-segmented rocket-guidance"
+                    aria-label={t('guidance')}
+                  >
+                    <button
+                      type="button"
+                      aria-pressed={state.auto}
+                      onClick={() => controller.setAuto(true)}
+                    >
+                      <Navigation size={14} />
+                      {t('auto')}
+                    </button>
+                    <button
+                      type="button"
+                      aria-pressed={!state.auto}
+                      onClick={() => controller.setAuto(false)}
+                    >
+                      {t('manual')}
+                    </button>
+                  </fieldset>
+                  <button
+                    type="button"
+                    className="rocket-system-control"
+                    aria-pressed={state.stabilize}
+                    onClick={() => controller.setStabilize(!state.stabilize)}
+                  >
+                    <ShieldCheck size={14} />
+                    {t('stabilization')} · {t(state.stabilize ? 'on' : 'off')}
+                  </button>
+                  <button
+                    type="button"
+                    className="rocket-system-control"
+                    aria-pressed={!muted}
+                    onClick={toggleSound}
+                  >
+                    {muted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+                    {t('sound')} · {t(muted ? 'off' : 'on')}
+                  </button>
+                  <fieldset
+                    className="rocket-segmented rocket-camera"
+                    aria-label={t('view')}
+                  >
+                    {(['first', 'chase'] as const).map((view) => (
+                      <button
+                        key={view}
+                        type="button"
+                        aria-pressed={state.view === view}
+                        onClick={() => controller.setView(view)}
+                      >
+                        <Camera size={14} />
+                        {t(view)}
+                      </button>
+                    ))}
+                  </fieldset>
+                </>
+              )}
+              {(state.phase === 'countdown' ||
+                state.phase === 'ignition' ||
+                state.phase === 'flight') && (
                 <button
                   type="button"
                   className="rocket-danger"
@@ -1120,19 +1124,114 @@ export function RocketControls({
                   {t('abort')}
                 </button>
               )}
-              {failed && (
-                <button type="button" onClick={rebuild}>
-                  {t('retry')}
+              <small className="rocket-return-hint">{t('returnHint')}</small>
+              <div className="rocket-panel-actions">
+                {failed && (
+                  <button type="button" onClick={rebuild}>
+                    <RotateCcw size={14} />
+                    {t('retry')}
+                  </button>
+                )}
+                <button type="button" onClick={() => controller.returnToCity()}>
+                  <Map size={14} />
+                  {t(
+                    compactPreflight
+                      ? state.phase === 'building'
+                        ? 'cancelBuild'
+                        : 'cityShort'
+                      : 'city',
+                  )}
                 </button>
+              </div>
+              {(failed || state.phase === 'space') && (
+                <div className="rocket-panel-actions">
+                  <button type="button" onClick={() => choose(state.kind)}>
+                    <Rocket size={14} />
+                    {t('newRocket')}
+                  </button>
+                </div>
               )}
-              <button type="button" onClick={() => controller.returnToCity()}>
-                <Map size={15} />
-                {t('cityShort')}
+              {(state.damaged > 0 || state.burning > 0 || state.debris > 0) && (
+                <div className="rocket-panel-actions">
+                  <button
+                    type="button"
+                    title={t('resetHint')}
+                    onClick={() => controller.resetDamage()}
+                  >
+                    <Wrench size={14} />
+                    {t('resetDamage')}
+                  </button>
+                </div>
+              )}
+              <button
+                type="button"
+                className="rocket-help-toggle"
+                aria-expanded={help}
+                onClick={() => setHelp(!help)}
+              >
+                <HelpCircle size={14} />
+                {t('help')}
               </button>
+              {help && (
+                <div className="rocket-help">
+                  <p>{touch ? t('touchHint') : t('controls')}</p>
+                  <p>{t('manualHint')}</p>
+                  <small>{t('gameplay')}</small>
+                </div>
+              )}
             </div>
-          )}
-        </section>
-      )}
+            {collapsedPanels.main && (
+              <div className="rocket-minimized-actions">
+                <span className="rocket-minimized-state">{t(state.phase)}</span>
+                {state.phase === 'ready' && (
+                  <button
+                    type="button"
+                    className="rocket-launch"
+                    aria-label={t('launchShort')}
+                    title={t('launchShort')}
+                    disabled={!state.loaded || state.loadError}
+                    onClick={() => controller.launch()}
+                  >
+                    <Flame size={15} />
+                    <span>{t('launchShort')}</span>
+                  </button>
+                )}
+                {['countdown', 'ignition', 'flight'].includes(state.phase) && (
+                  <button
+                    type="button"
+                    className="rocket-danger"
+                    aria-label={t('abort')}
+                    title={t('abort')}
+                    onClick={() => controller.abort()}
+                  >
+                    <Square size={15} aria-hidden="true" />
+                    <span>{t('abort')}</span>
+                  </button>
+                )}
+                {failed && (
+                  <button
+                    type="button"
+                    aria-label={t('retry')}
+                    title={t('retry')}
+                    onClick={rebuild}
+                  >
+                    <RotateCcw size={15} aria-hidden="true" />
+                    <span>{t('retry')}</span>
+                  </button>
+                )}
+                <button
+                  type="button"
+                  aria-label={t('cityShort')}
+                  title={t('cityShort')}
+                  onClick={() => controller.returnToCity()}
+                >
+                  <Map size={15} />
+                  <span>{t('cityShort')}</span>
+                </button>
+              </div>
+            )}
+          </section>,
+        )}
       {state.exists &&
         !state.active &&
         !state.placing &&
@@ -1242,9 +1341,11 @@ export function RocketControls({
             )}
           {['ignition', 'flight'].includes(state.phase) &&
             !minimal &&
-            !observingAccident && (
+            !observingAccident &&
+            docked(
+              'stage',
               <section
-                className={`rocket-stage-status glass ui-chrome ${manualFlight ? 'rocket-stage-manual' : ''} ${stageTransition ? 'separating' : ''} ${collapsedPanels.stage ? 'rocket-is-collapsed' : ''}`}
+                className={`rocket-stage-status glass ui-chrome ${manualFlight ? 'rocket-stage-manual' : ''} ${stageTransition ? 'separating' : ''} ${collapsedPanels.stage ? 'rocket-is-collapsed rocket-docked' : ''}`}
                 aria-label={t('stageFuel')}
               >
                 <header>
@@ -1286,114 +1387,122 @@ export function RocketControls({
                     </>
                   )}
                 </div>
-              </section>
+              </section>,
             )}
-          {!minimal && !observingAccident && state.phase !== 'space' && (
-            <section
-              className={`rocket-telemetry glass ui-chrome ${manualFlight ? 'rocket-manual-telemetry' : ''} ${collapsedPanels.telemetry ? 'rocket-is-collapsed' : ''}`}
-              aria-label={t('title')}
-            >
-              <header className="rocket-telemetry-heading">
-                <strong>{t('title')}</strong>
-                {panelToggle('telemetry', 'title')}
-              </header>
-              <div
-                id="rocket-telemetry-content"
-                className="rocket-telemetry-content"
-                hidden={collapsedPanels.telemetry}
+          {!minimal &&
+            !observingAccident &&
+            state.phase !== 'space' &&
+            docked(
+              'telemetry',
+              <section
+                className={`rocket-telemetry glass ui-chrome ${manualFlight ? 'rocket-manual-telemetry' : ''} ${collapsedPanels.telemetry ? 'rocket-is-collapsed rocket-docked' : ''}`}
+                aria-label={t('title')}
               >
-                <div>
-                  <small>{t('altitude')}</small>
-                  <strong>
-                    {altitude}
-                    <span>{altitudeUnit}</span>
-                  </strong>
+                <header className="rocket-telemetry-heading">
+                  <strong>{t('title')}</strong>
+                  {panelToggle('telemetry', 'title')}
+                </header>
+                <div
+                  id="rocket-telemetry-content"
+                  className="rocket-telemetry-content"
+                  hidden={collapsedPanels.telemetry}
+                >
+                  <div>
+                    <small>{t('altitude')}</small>
+                    <strong>
+                      {altitude}
+                      <span>{altitudeUnit}</span>
+                    </strong>
+                  </div>
+                  <div>
+                    <small>{t('speed')}</small>
+                    <strong>
+                      {Math.round(state.speed).toLocaleString(locale)}
+                      <span>m/s</span>
+                    </strong>
+                  </div>
+                  <div>
+                    <small>{t('fuel')}</small>
+                    <strong className={state.fuel < 0.15 ? 'danger' : ''}>
+                      {Math.round(state.fuel * 100)}
+                      <span>%</span>
+                    </strong>
+                  </div>
+                  <div>
+                    <small>{t('tilt')}</small>
+                    <strong className={state.tilt > 35 ? 'danger' : ''}>
+                      {Math.round(state.tilt)}
+                      <span>°</span>
+                    </strong>
+                  </div>
+                  <div className="rocket-wind">
+                    <small>{t('wind')}</small>
+                    <strong>
+                      {state.wind.toFixed(1)}
+                      <span>m/s</span>
+                    </strong>
+                  </div>
+                  <div className="rocket-support">
+                    <small>{t('support')}</small>
+                    <strong
+                      className={state.supportIntegrity < 0.5 ? 'danger' : ''}
+                    >
+                      {Math.round(state.supportIntegrity * 100)}
+                      <span>%</span>
+                    </strong>
+                  </div>
+                  <div className="rocket-mission-meter" title={t('mission')}>
+                    <span
+                      style={{
+                        width: `${Math.min(100, Math.max(0, state.altitude / 1000))}%`,
+                      }}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <small>{t('speed')}</small>
-                  <strong>
-                    {Math.round(state.speed).toLocaleString(locale)}
-                    <span>m/s</span>
-                  </strong>
-                </div>
-                <div>
-                  <small>{t('fuel')}</small>
-                  <strong className={state.fuel < 0.15 ? 'danger' : ''}>
-                    {Math.round(state.fuel * 100)}
-                    <span>%</span>
-                  </strong>
-                </div>
-                <div>
-                  <small>{t('tilt')}</small>
-                  <strong className={state.tilt > 35 ? 'danger' : ''}>
-                    {Math.round(state.tilt)}
-                    <span>°</span>
-                  </strong>
-                </div>
-                <div className="rocket-wind">
-                  <small>{t('wind')}</small>
-                  <strong>
-                    {state.wind.toFixed(1)}
-                    <span>m/s</span>
-                  </strong>
-                </div>
-                <div className="rocket-support">
-                  <small>{t('support')}</small>
-                  <strong
-                    className={state.supportIntegrity < 0.5 ? 'danger' : ''}
-                  >
-                    {Math.round(state.supportIntegrity * 100)}
-                    <span>%</span>
-                  </strong>
-                </div>
-                <div className="rocket-mission-meter" title={t('mission')}>
-                  <span
-                    style={{
-                      width: `${Math.min(100, Math.max(0, state.altitude / 1000))}%`,
-                    }}
-                  />
-                </div>
-              </div>
-            </section>
-          )}
-          {manualFlight && canInput && !observingAccident && (
-            <section
-              className="rocket-attitude ui-chrome"
-              aria-label={t('attitude')}
-            >
-              <header>
-                <span>{t('attitude')}</span>
-                {panelToggle('attitude', 'attitude')}
-              </header>
-              <div
-                id="rocket-attitude-content"
-                hidden={collapsedPanels.attitude}
+              </section>,
+            )}
+          {manualFlight &&
+            canInput &&
+            !observingAccident &&
+            docked(
+              'attitude',
+              <section
+                className={`rocket-attitude ui-chrome ${collapsedPanels.attitude ? 'rocket-is-collapsed rocket-docked' : ''}`}
+                aria-label={t('attitude')}
               >
-                <div className="rocket-attitude-reticle" aria-hidden="true">
-                  <span
-                    style={{
-                      transform: `translateY(${Math.max(-18, Math.min(18, pitch * 0.3))}px) rotate(${-roll}deg)`,
-                    }}
-                  />
-                  <i />
+                <header>
+                  <span>{t('attitude')}</span>
+                  {panelToggle('attitude', 'attitude')}
+                </header>
+                <div
+                  id="rocket-attitude-content"
+                  hidden={collapsedPanels.attitude}
+                >
+                  <div className="rocket-attitude-reticle" aria-hidden="true">
+                    <span
+                      style={{
+                        transform: `translateY(${Math.max(-18, Math.min(18, pitch * 0.3))}px) rotate(${-roll}deg)`,
+                      }}
+                    />
+                    <i />
+                  </div>
+                  <div className="rocket-attitude-values">
+                    <span>
+                      <small>W/S · {t('pitch')}</small>
+                      <b>{signed(pitch)}°</b>
+                    </span>
+                    <span>
+                      <small>A/D · {t('roll')}</small>
+                      <b>{signed(roll)}°</b>
+                    </span>
+                    <span>
+                      <small>{t('climb')}</small>
+                      <b>{signed(state.verticalSpeed ?? 0)} m/s</b>
+                    </span>
+                  </div>
                 </div>
-                <div className="rocket-attitude-values">
-                  <span>
-                    <small>W/S · {t('pitch')}</small>
-                    <b>{signed(pitch)}°</b>
-                  </span>
-                  <span>
-                    <small>A/D · {t('roll')}</small>
-                    <b>{signed(roll)}°</b>
-                  </span>
-                  <span>
-                    <small>{t('climb')}</small>
-                    <b>{signed(state.verticalSpeed ?? 0)} m/s</b>
-                  </span>
-                </div>
-              </div>
-            </section>
-          )}
+              </section>,
+            )}
           {state.phase === 'countdown' && !observingAccident && (
             <output className="rocket-countdown" aria-live="assertive">
               <strong>{Math.max(1, Math.ceil(state.countdown))}</strong>
@@ -1411,9 +1520,11 @@ export function RocketControls({
             !state.auto &&
             ['ready', 'countdown', 'ignition', 'flight'].includes(
               state.phase,
-            ) && (
+            ) &&
+            docked(
+              'throttle',
               <section
-                className="rocket-throttle glass ui-chrome"
+                className={`rocket-throttle glass ui-chrome ${collapsedPanels.throttle ? 'rocket-is-collapsed rocket-docked' : ''}`}
                 aria-label={t('throttle')}
               >
                 <header>
@@ -1441,7 +1552,7 @@ export function RocketControls({
                   />
                   {!touch && <kbd>R / F</kbd>}
                 </div>
-              </section>
+              </section>,
             )}
           {touch && manualFlight && canInput && !observingAccident && (
             <TravelJoystick
@@ -1527,132 +1638,137 @@ export function RocketControls({
                   : t(state.tilt > 35 ? 'unstable' : 'lowFuel')}
               </output>
             )}
-          {state.phase === 'space' && (panelVisible || minimal) && (
-            <section
-              className={`rocket-space-panel glass ui-chrome ${collapsedPanels.space ? 'rocket-is-collapsed' : ''}`}
-              aria-label={t('spaceObservation')}
-            >
-              <header>
-                <CircleCheck size={19} />
-                <div>
-                  <strong>{t('complete')}</strong>
-                  <small>
-                    {altitude} {altitudeUnit} · {t('spaceObservation')}
-                  </small>
-                </div>
-                {!collapsedPanels.space && (
-                  <button
-                    type="button"
-                    className="rocket-space-details-toggle"
-                    aria-label={t('missionDetails')}
-                    aria-expanded={detailsOpen}
-                    onClick={() =>
-                      setMissionDetails({
-                        missionId: state.missionId,
-                        open: !detailsOpen,
-                      })
-                    }
-                  >
-                    <ChevronDown size={17} />
-                  </button>
-                )}
-                {panelToggle('space', 'spaceObservation')}
-              </header>
-              <div id="rocket-space-content" hidden={collapsedPanels.space}>
-                <p>{t('observationHint')}</p>
-                <fieldset
-                  className="rocket-space-focus"
-                  aria-label={t('focus')}
-                >
-                  {(['earth', 'sun', 'moon', 'rocket'] as const).map(
-                    (focus) => (
-                      <button
-                        type="button"
-                        key={focus}
-                        data-rocket-focus={focus}
-                        aria-pressed={state.spaceFocus === focus}
-                        onClick={() => controller.setSpaceFocus(focus)}
-                      >
-                        {t(
-                          (
-                            {
-                              earth: 'focusEarth',
-                              sun: 'focusSun',
-                              moon: 'focusMoon',
-                              rocket: 'focusRocket',
-                            } as const
-                          )[focus],
-                        )}
-                      </button>
-                    ),
+          {state.phase === 'space' &&
+            (panelVisible || minimal) &&
+            docked(
+              'space',
+              <section
+                className={`rocket-space-panel glass ui-chrome ${collapsedPanels.space ? 'rocket-is-collapsed rocket-docked' : ''}`}
+                aria-label={t('spaceObservation')}
+              >
+                <header>
+                  <CircleCheck size={19} />
+                  <div>
+                    <strong>{t('complete')}</strong>
+                    <small>
+                      {altitude} {altitudeUnit} · {t('spaceObservation')}
+                    </small>
+                  </div>
+                  {!collapsedPanels.space && (
+                    <button
+                      type="button"
+                      className="rocket-space-details-toggle"
+                      aria-label={t('missionDetails')}
+                      aria-expanded={detailsOpen}
+                      onClick={() =>
+                        setMissionDetails({
+                          missionId: state.missionId,
+                          open: !detailsOpen,
+                        })
+                      }
+                    >
+                      <ChevronDown size={17} />
+                    </button>
                   )}
-                </fieldset>
-                <div className="rocket-space-actions">
-                  <button
-                    type="button"
-                    data-rocket-space-view
-                    aria-label={`${t('view')} · ${t(state.view)}`}
-                    onClick={() =>
-                      controller.setView(
-                        state.view === 'first' ? 'chase' : 'first',
-                      )
-                    }
+                  {panelToggle('space', 'spaceObservation')}
+                </header>
+                <div id="rocket-space-content" hidden={collapsedPanels.space}>
+                  <p>{t('observationHint')}</p>
+                  <fieldset
+                    className="rocket-space-focus"
+                    aria-label={t('focus')}
                   >
-                    <Camera size={14} />
-                    {t(state.view)}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => controller.returnToCity()}
-                  >
-                    <Map size={14} />
-                    {t('cityShort')}
-                  </button>
-                </div>
-                {detailsOpen && (
-                  <div className="rocket-mission-details">
-                    <div className="rocket-mission-stats">
-                      <div>
-                        <strong>
-                          {altitude} {altitudeUnit}
-                        </strong>
-                        <span>{t('peak')}</span>
+                    {(['earth', 'sun', 'moon', 'rocket'] as const).map(
+                      (focus) => (
+                        <button
+                          type="button"
+                          key={focus}
+                          data-rocket-focus={focus}
+                          aria-pressed={state.spaceFocus === focus}
+                          onClick={() => controller.setSpaceFocus(focus)}
+                        >
+                          {t(
+                            (
+                              {
+                                earth: 'focusEarth',
+                                sun: 'focusSun',
+                                moon: 'focusMoon',
+                                rocket: 'focusRocket',
+                              } as const
+                            )[focus],
+                          )}
+                        </button>
+                      ),
+                    )}
+                  </fieldset>
+                  <div className="rocket-space-actions">
+                    <button
+                      type="button"
+                      data-rocket-space-view
+                      aria-label={`${t('view')} · ${t(state.view)}`}
+                      onClick={() =>
+                        controller.setView(
+                          state.view === 'first' ? 'chase' : 'first',
+                        )
+                      }
+                    >
+                      <Camera size={14} />
+                      {t(state.view)}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => controller.returnToCity()}
+                    >
+                      <Map size={14} />
+                      {t('cityShort')}
+                    </button>
+                  </div>
+                  {detailsOpen && (
+                    <div className="rocket-mission-details">
+                      <div className="rocket-mission-stats">
+                        <div>
+                          <strong>
+                            {altitude} {altitudeUnit}
+                          </strong>
+                          <span>{t('peak')}</span>
+                        </div>
+                        <div>
+                          <strong>{state.damaged}</strong>
+                          <span>{t('damage')}</span>
+                        </div>
+                        <div>
+                          <strong>{state.burning}</strong>
+                          <span>{t('burning')}</span>
+                        </div>
+                        <div>
+                          <strong>{state.debris}</strong>
+                          <span>{t('debris')}</span>
+                        </div>
                       </div>
-                      <div>
-                        <strong>{state.damaged}</strong>
-                        <span>{t('damage')}</span>
-                      </div>
-                      <div>
-                        <strong>{state.burning}</strong>
-                        <span>{t('burning')}</span>
-                      </div>
-                      <div>
-                        <strong>{state.debris}</strong>
-                        <span>{t('debris')}</span>
-                      </div>
+                      <p>{t('completeHint')}</p>
+                      <small>{t('returnHint')}</small>
+                      <button type="button" onClick={() => choose(state.kind)}>
+                        <Rocket size={14} />
+                        {t('newRocket')}
+                      </button>
                     </div>
-                    <p>{t('completeHint')}</p>
-                    <small>{t('returnHint')}</small>
-                    <button type="button" onClick={() => choose(state.kind)}>
-                      <Rocket size={14} />
-                      {t('newRocket')}
+                  )}
+                </div>
+                {collapsedPanels.space && (
+                  <div className="rocket-minimized-actions">
+                    <button
+                      type="button"
+                      aria-label={t('cityShort')}
+                      title={t('cityShort')}
+                      onClick={() => controller.returnToCity()}
+                    >
+                      <Map size={14} />
+                      <span>{t('cityShort')}</span>
                     </button>
                   </div>
                 )}
-              </div>
-              {collapsedPanels.space && (
-                <div className="rocket-minimized-actions">
-                  <button
-                    type="button"
-                    onClick={() => controller.returnToCity()}
-                  >
-                    <Map size={14} />
-                    {t('cityShort')}
-                  </button>
-                </div>
-              )}
-            </section>
-          )}
+              </section>,
+            )}
         </>
       )}
     </>

@@ -59,6 +59,7 @@ import {
 import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
 import { CitySoundControls } from '@/components/city-sound-controls';
 import { PanelToggle, panelText } from '@/components/panel-toggle';
+import { HudDock } from '@/components/hud-dock';
 import '@/components/city-hud.css';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaController } from '@/lib/city/tesla-controller';
@@ -1085,6 +1086,7 @@ function Home() {
         </div>
       )}
       <div className="scene" ref={host} />
+      <HudDock />
       <CityInteractionOverlay
         interactions={interactionController}
         enabled={interactionInput}
@@ -1577,6 +1579,8 @@ function Home() {
             data-perspective={travelView.perspective}
           >
             <PanelToggle
+              dockId="camera"
+              icon={<Camera size={18} />}
               locale={locale}
               title={tr('travelCamera')}
               expanded={!collapsedPanels.camera}
@@ -1649,6 +1653,8 @@ function Home() {
           aria-label={tr('returnToTravel')}
         >
           <PanelToggle
+            dockId="camera"
+            icon={<Camera size={18} />}
             locale={locale}
             title={tr('returnToTravel')}
             expanded={!collapsedPanels.camera}
@@ -1736,6 +1742,8 @@ function Home() {
       >
         {!touchUI && (
           <PanelToggle
+            dockId="modes"
+            icon={<Compass size={18} />}
             locale={locale}
             title={tr('explorationMode')}
             expanded={!collapsedPanels.modes}
@@ -1845,6 +1853,11 @@ function Home() {
             )}
           >
             <PanelToggle
+              dockId="placement"
+              icon={
+                placing === 'walk' ? <Footprints size={18} /> :
+                placing === 'boat' ? <Ship size={18} /> : <Car size={18} />
+              }
               locale={locale}
               title={tr(
                 placing === 'walk'
@@ -2005,6 +2018,8 @@ function Home() {
         aria-label={tr('exploreTitle')}
       >
         <PanelToggle
+          dockId="explore"
+          icon={<Compass size={18} />}
           locale={locale}
           title={tr('exploreTitle')}
           expanded={!collapsedPanels.explore}
@@ -2057,6 +2072,8 @@ function Home() {
         aria-label={panelText(locale, 'tools')}
       >
         <PanelToggle
+          dockId="tools"
+          icon={<SlidersHorizontal size={18} />}
           locale={locale}
           title={panelText(locale, 'tools')}
           expanded={!collapsedPanels.tools}
@@ -2548,6 +2565,8 @@ function Home() {
       >
         {!touchUI && (
           <PanelToggle
+            dockId="map"
+            icon={<MapIcon size={18} />}
             locale={locale}
             title={panelText(locale, 'map')}
             expanded={!collapsedPanels.map}
@@ -2662,6 +2681,11 @@ function Home() {
             data-panel-collapsed={collapsedPanels.travel}
           >
             <PanelToggle
+              dockId="travel"
+              icon={
+                settings.mode === 'walk' ? <Footprints size={18} /> :
+                settings.mode === 'boat' ? <Ship size={18} /> : <Car size={18} />
+              }
               locale={locale}
               title={tr(
                 settings.mode === 'drive'
@@ -2819,6 +2843,8 @@ function Home() {
         data-panel-collapsed={collapsedPanels.status}
       >
         <PanelToggle
+          dockId="status"
+          icon={<MapPin size={18} />}
           locale={locale}
           title={panelText(locale, 'status')}
           expanded={!collapsedPanels.status}

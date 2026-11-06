@@ -71,3 +71,41 @@
 .tesla-panel.collapsible-panel[data-panel-collapsed='false'] > header {
   padding-right: 46px;
 }
+
+/* A portaled disclosure leaves no empty glass panel over the city. During
+   server rendering the inline fallback remains visible until the dock exists. */
+.collapsible-panel[data-panel-collapsed='true']:not(:has(> .panel-toggle)) {
+  display: none !important;
+}
+.hud-dock-item > .panel-toggle {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid rgba(168, 207, 224, 0.3);
+  border-radius: 10px;
+  background: rgba(8, 23, 36, 0.9);
+  color: #f3f7f6;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.35;
+  cursor: pointer;
+  touch-action: manipulation;
+  pointer-events: auto;
+}
+.hud-dock-item > .panel-toggle:hover {
+  background: rgba(61, 99, 109, 0.95);
+}
+.hud-dock-item > .panel-toggle:focus-visible {
+  outline: 2px solid #dce79d;
+  outline-offset: -2px;
+}
+.panel-toggle-icon {
+  display: inline-flex;
+  flex: none;
+}

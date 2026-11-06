@@ -485,6 +485,8 @@ export function DiscoveryPanel({
           lang={contentLocale}
         >
           <PanelToggle
+            dockId="discovery"
+            icon={<BookOpen size={18} />}
             locale={locale}
             title={text.title}
             expanded={hudExpanded}

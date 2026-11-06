@@ -420,17 +420,17 @@
 .rocket-compact-controls .rocket-danger {
   color: #ffb5aa;
 }
-.atlas.touch-ui.mobile-hud-hidden
+.atlas.touch-ui.hud-hidden
   .rocket-compact-controls.ui-chrome:not(.mode-switch):not(
     .touch-drive-controls
   ),
-.atlas.touch-ui.mobile-hud-hidden
+.atlas.touch-ui.hud-hidden
   .rocket-throttle.ui-chrome:not(.mode-switch):not(.touch-drive-controls) {
   display: flex !important;
 }
-.atlas.touch-ui.mobile-hud-hidden
+.atlas.touch-ui.hud-hidden
   .rocket-space-panel.ui-chrome:not(.mode-switch):not(.touch-drive-controls),
-.atlas.touch-ui.mobile-hud-hidden
+.atlas.touch-ui.hud-hidden
   .rocket-failure-panel.ui-chrome:not(.mode-switch):not(.touch-drive-controls) {
   display: block !important;
 }
@@ -1401,4 +1401,127 @@
     min-width: 42px;
     gap: 3px;
   }
+}
+
+/* A collapsed rocket section is a small dock control, not a floating panel. */
+.atlas .hud-dock-item .rocket-docked,
+.atlas.touch-ui .hud-dock-item .rocket-docked {
+  position: static;
+  inset: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: max-content;
+  max-width: none;
+  min-width: 0;
+  max-height: none;
+  padding: 0;
+  gap: 2px;
+  overflow: visible;
+  transform: none;
+  animation: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: auto;
+}
+.atlas.touch-ui.hud-hidden
+  .hud-dock-item
+  .rocket-docked.ui-chrome:not(.mode-switch):not(.touch-drive-controls) {
+  display: flex !important;
+}
+.atlas .hud-dock-item .rocket-docked > header {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  transform: none;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+}
+.atlas .hud-dock-item .rocket-docked > header > :not(button),
+.atlas .hud-dock-item .rocket-docked .rocket-minimized-state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.atlas .hud-dock-item .rocket-docked > header > svg {
+  display: none;
+}
+.atlas .hud-dock-item .rocket-docked .rocket-minimized-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+}
+.atlas .hud-dock-item .rocket-docked button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid #b1d7e33b;
+  border-radius: 9px;
+  background: #0a1d2ae8;
+  color: #deeff5;
+  pointer-events: auto;
+}
+.atlas .hud-dock-item .rocket-docked button.rocket-launch {
+  background: linear-gradient(105deg, #d87331, #98643c);
+}
+.atlas .hud-dock-item .rocket-docked button.rocket-danger {
+  color: #ffb5aa;
+  border-color: #f28b7b80;
+}
+.atlas .hud-dock-item .rocket-docked .rocket-minimized-actions button > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.atlas
+  .hud-dock-item
+  .rocket-docked.rocket-placement
+  header
+  > button:not(.rocket-panel-toggle) {
+  font-size: 0;
+}
+
+/* Keep the current stage and remaining fuel visible beside its dock icon. */
+.atlas .hud-dock-item .rocket-docked.rocket-stage-status > header {
+  padding-left: 6px;
+  border-radius: 9px;
+  background: #0a1d2ae8;
+}
+.atlas .hud-dock-item .rocket-docked.rocket-stage-status > header > output,
+.atlas .hud-dock-item .rocket-docked.rocket-stage-status > header > span {
+  position: static;
+  width: auto;
+  height: auto;
+  max-width: 110px;
+  padding: 0 3px;
+  overflow: hidden;
+  clip-path: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
 }

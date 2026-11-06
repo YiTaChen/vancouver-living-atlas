@@ -390,6 +390,8 @@ export function TeslaControls({
         >
           {!touch && (
             <PanelToggle
+              dockId="tesla"
+              icon={<FlyingCarIcon size={18} />}
               locale={locale}
               title={t('options')}
               expanded={panelExpanded}
