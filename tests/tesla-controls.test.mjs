@@ -32,15 +32,19 @@ function componentModule(name) {
       const url =
         id === './travel-joystick' || id === './panel-toggle'
           ? componentModule(id.slice(2))
-          : id === '@/lib/city/touch-input'
-            ? cityModule('touch-input')
-            : id === '@/lib/i18n/tesla.json'
-              ? dataModule(`export default ${JSON.stringify(catalogs)};`)
-              : id === '@/lib/i18n/panels.json'
-                ? dataModule(
-                    `export default ${readFileSync(new URL('../lib/i18n/panels.json', import.meta.url), 'utf8')};`,
-                  )
-                : import.meta.resolve(id);
+          : id === './hud-dock'
+            ? dataModule(
+                'export function HudDockItem({ children }) { return children; }',
+              )
+            : id === '@/lib/city/touch-input'
+              ? cityModule('touch-input')
+              : id === '@/lib/i18n/tesla.json'
+                ? dataModule(`export default ${JSON.stringify(catalogs)};`)
+                : id === '@/lib/i18n/panels.json'
+                  ? dataModule(
+                      `export default ${readFileSync(new URL('../lib/i18n/panels.json', import.meta.url), 'utf8')};`,
+                    )
+                  : import.meta.resolve(id);
       return `from '${url}'`;
     });
   const url = dataModule(code);
