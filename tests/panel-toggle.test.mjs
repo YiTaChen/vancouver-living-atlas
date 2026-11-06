@@ -29,7 +29,14 @@ const require = (id) => {
       {},
       { get: () => () => React.createElement('svg', { 'aria-hidden': true }) },
     );
-  if (id === './hud-dock') return { HudDockItem: ({ children }) => children };
+  if (id === './hud-dock')
+    return {
+      HudDockItem: ({ children }) => children,
+      restoreHudFocus: (current, getTarget) => {
+        if (current.ownerDocument.activeElement === current)
+          getTarget()?.focus();
+      },
+    };
   if (id === '@/lib/i18n/panels.json') return { default: messages };
   if (id.endsWith('.css')) return {};
   throw new Error(`Unexpected panel import ${id}`);
@@ -150,11 +157,19 @@ test('collapsed controls move to the dock with an icon and preserve keyboard foc
   };
   const current = { ownerDocument: doc };
   doc.activeElement = current;
-  button.props.onClick({ currentTarget: current, stopPropagation() {} });
+  button.props.onClick({
+    currentTarget: current,
+    detail: 0,
+    stopPropagation() {},
+  });
   assert.equal(toggles, 1);
   assert.equal(focused, 1);
   doc.activeElement = null;
-  button.props.onClick({ currentTarget: current, stopPropagation() {} });
+  button.props.onClick({
+    currentTarget: current,
+    detail: 1,
+    stopPropagation() {},
+  });
   assert.equal(toggles, 2);
   assert.equal(focused, 1, 'scene focus is not stolen for a mouse click');
 });

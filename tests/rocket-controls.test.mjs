@@ -80,7 +80,14 @@ function setup(patch = {}, extra = {}, browser = {}) {
       return { jsx, jsxs: jsx, Fragment: Symbol.for('fragment') };
     if (id === 'lucide-react') return new Proxy({}, { get: () => () => null });
     if (id === './travel-joystick') return { TravelJoystick: () => null };
-    if (id === './hud-dock') return { HudDockItem: ({ children }) => children };
+    if (id === './hud-dock')
+      return {
+        HudDockItem: ({ children }) => children,
+        restoreHudFocus: (current, getTarget) => {
+          if (current.ownerDocument.activeElement === current)
+            getTarget()?.focus({ preventScroll: true });
+        },
+      };
     if (id.endsWith('.css')) return {};
     throw new Error(`Unexpected UI import ${id}`);
   };
@@ -1303,9 +1310,17 @@ test('keyboard focus follows the rocket disclosure into and out of the dock', ()
     cancelAnimationFrame() {},
   };
   const { host } = setup({ phase: 'ready' }, {}, browser);
-  panelButton(host, 'main').props.onClick();
+  const current = { ownerDocument: browser.document };
+  browser.document.activeElement = current;
+  panelButton(host, 'main').props.onClick({
+    currentTarget: current,
+    detail: 0,
+  });
   host.render();
-  panelButton(host, 'main').props.onClick();
+  panelButton(host, 'main').props.onClick({
+    currentTarget: current,
+    detail: 0,
+  });
   host.render();
   assert.deepEqual(focused, [
     ['[aria-controls="rocket-main-content"]', true],

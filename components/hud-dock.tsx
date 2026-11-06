@@ -1,14 +1,95 @@
 'use client';
 
 import {
-  useEffect,
+  useCallback,
   useLayoutEffect,
   useRef,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
 import './hud-dock.css';
+
+// Portal items are siblings of the dock in the React tree. A small external
+// store lets them subscribe to the actual host without a post-mount setState.
+let dockRail: HTMLElement | null = null;
+const dockSubscribers = new Set<() => void>();
+function subscribeToDock(callback: () => void) {
+  dockSubscribers.add(callback);
+  return () => {
+    dockSubscribers.delete(callback);
+  };
+}
+function setDockRail(element: HTMLElement | null) {
+  if (dockRail === element) return;
+  dockRail = element;
+  for (const callback of dockSubscribers) callback();
+}
+const getDockRail = () => dockRail;
+const getServerDockRail = () => null;
+
+let pendingFocus: (() => void) | null = null;
+
+/** Restore a keyboard-operated disclosure only when its new DOM node is
+ * visible. A subsequent user action cancels the request so the city or a
+ * different control never loses focus. */
+export function restoreHudFocus(
+  current: HTMLElement,
+  getTarget: () => HTMLElement | null,
+) {
+  const doc = current.ownerDocument;
+  const view = doc.defaultView;
+  if (doc.activeElement !== current || !view) return;
+  pendingFocus?.();
+  let frame = 0;
+  const cancel = () => {
+    if (pendingFocus === cancel) {
+      pendingFocus = null;
+      focusAfterLayout = null;
+    }
+    doc.removeEventListener('pointerdown', cancel, true);
+    doc.removeEventListener('keydown', cancel, true);
+    doc.removeEventListener('focusin', cancel, true);
+    view.cancelAnimationFrame(frame);
+    view.clearTimeout(expiry);
+  };
+  const visible = (element: HTMLElement) =>
+    element.getClientRects().length > 0 &&
+    view.getComputedStyle(element).visibility !== 'hidden';
+  const attempt = () => {
+    if (pendingFocus !== cancel) return;
+    const active = doc.activeElement;
+    if (active !== current && active !== doc.body) return cancel();
+    const target = getTarget();
+    if (!target) return;
+    const rail = target.closest<HTMLElement>('[data-hud-dock-rail]');
+    const entry =
+      rail?.parentElement?.querySelector<HTMLButtonElement>(
+        '.hud-dock-overflow',
+      );
+    const destination = visible(target)
+      ? target
+      : entry && !entry.hidden && visible(entry)
+        ? entry
+        : null;
+    if (!destination) return;
+    cancel();
+    destination.focus({ preventScroll: true });
+  };
+  const expiry = view.setTimeout(cancel, 5000);
+  pendingFocus = cancel;
+  doc.addEventListener('pointerdown', cancel, true);
+  doc.addEventListener('keydown', cancel, true);
+  doc.addEventListener('focusin', cancel, true);
+  frame = view.requestAnimationFrame(attempt);
+  // The dock invokes this after it has chosen its position and visibility.
+  focusAfterLayout = attempt;
+}
+
+let focusAfterLayout: (() => void) | null = null;
+function flushHudFocus() {
+  focusAfterLayout?.();
+}
 
 /** Each disclosure owns its state and content; the dock only arranges the
  * collapsed controls. The inline fallback also keeps server rendering usable. */
@@ -21,10 +102,11 @@ export function HudDockItem({
   essential?: boolean;
   children: ReactNode;
 }) {
-  const [rail, setRail] = useState<HTMLElement | null>(null);
-  useEffect(() => {
-    setRail(document.querySelector<HTMLElement>('[data-hud-dock-rail]'));
-  }, []);
+  const rail = useSyncExternalStore(
+    subscribeToDock,
+    getDockRail,
+    getServerDockRail,
+  );
   if (!rail) return children;
   return createPortal(
     <div
@@ -149,8 +231,12 @@ export function chooseOverflowPosition(
  * HUD controls currently visible there. Scene input never belongs to the dock. */
 export function HudDock() {
   const root = useRef<HTMLDivElement>(null);
-  const rail = useRef<HTMLDivElement>(null);
+  const rail = useRef<HTMLElement>(null);
   const overflow = useRef<HTMLButtonElement>(null);
+  const attachRail = useCallback((element: HTMLElement | null) => {
+    rail.current = element;
+    setDockRail(element);
+  }, []);
   useLayoutEffect(() => {
     const host = root.current;
     const dock = rail.current;
@@ -258,6 +344,7 @@ export function HudDock() {
         dock.style.top = `${Math.round(y - frame.top)}px`;
         dock.style.maxHeight = `${Math.round(height)}px`;
         dock.style.visibility = 'visible';
+        flushHudFocus();
         return;
       }
       // If every full-width interval is blocked, shrink to one recoverable
@@ -299,20 +386,32 @@ export function HudDock() {
       dock.style.maxHeight = `${Math.round(height)}px`;
       dock.style.visibility =
         host.dataset.open === 'true' ? 'visible' : 'hidden';
+      flushHudFocus();
     };
     function schedule() {
       if (!timer && !stopped) timer = window.setTimeout(layout, 100);
     }
     const closeAfterAction = (event: MouseEvent) => {
-      if (
-        host.dataset.overflow !== 'true' ||
-        !(event.target as Element).closest('button')
-      )
-        return;
+      const button = (event.target as Element).closest('button');
+      if (host.dataset.overflow !== 'true' || !button) return;
+      const hadFocus = button === document.activeElement;
+      const id = button.id;
       host.dataset.open = 'false';
       trigger.setAttribute('aria-expanded', 'false');
       updateDockLabels(trigger, dock, false);
       dock.style.visibility = 'hidden';
+      if (hadFocus) {
+        // Disclosure controls can move out of the portal after the click.
+        // Let their own focus restoration win; otherwise return to the entry.
+        requestAnimationFrame(() => {
+          const active = document.activeElement;
+          if (active && active !== document.body && !dock.contains(active))
+            return;
+          const moved = id ? document.getElementById(id) : null;
+          if (moved && !dock.contains(moved)) moved.focus();
+          else if (!trigger.hidden) trigger.focus();
+        });
+      }
     };
     const closeOnEscape = (event: KeyboardEvent) => {
       if (
@@ -330,6 +429,11 @@ export function HudDock() {
     };
     dock.addEventListener('click', closeAfterAction);
     dock.addEventListener('keydown', closeOnEscape);
+    trigger.addEventListener('keydown', closeOnEscape);
+    const stopSceneInput = (event: Event) => event.stopPropagation();
+    dock.addEventListener('pointerdown', stopSceneInput);
+    dock.addEventListener('click', stopSceneInput);
+    dock.addEventListener('wheel', stopSceneInput);
     updateDockLabels(trigger, dock, false);
     const language = new MutationObserver(() =>
       updateDockLabels(trigger, dock, host.dataset.open === 'true'),
@@ -351,12 +455,17 @@ export function HudDock() {
     schedule();
     return () => {
       stopped = true;
+      pendingFocus?.();
       clearTimeout(timer);
       resize.disconnect();
       mutations.disconnect();
       language.disconnect();
       dock.removeEventListener('click', closeAfterAction);
       dock.removeEventListener('keydown', closeOnEscape);
+      trigger.removeEventListener('keydown', closeOnEscape);
+      dock.removeEventListener('pointerdown', stopSceneInput);
+      dock.removeEventListener('click', stopSceneInput);
+      dock.removeEventListener('wheel', stopSceneInput);
       window.removeEventListener('resize', schedule);
     };
   }, []);
@@ -402,16 +511,12 @@ export function HudDock() {
           <rect x="14" y="14" width="7" height="7" rx="1" />
         </svg>
       </button>
-      <div
+      <section
         id="hud-dock-rail"
-        ref={rail}
+        ref={attachRail}
         className="hud-dock-rail"
         data-hud-dock-rail
-        role="group"
         aria-label="Collapsed panels"
-        onPointerDown={(event) => event.stopPropagation()}
-        onClick={(event) => event.stopPropagation()}
-        onWheel={(event) => event.stopPropagation()}
       />
     </div>
   );
